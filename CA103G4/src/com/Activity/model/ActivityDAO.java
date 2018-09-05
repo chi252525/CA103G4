@@ -32,7 +32,7 @@ public class ActivityDAO implements ActivityDAO_interface{
     private static final String FINDENDED = 
 			"SELECT * FROM ACTIVITY WHERE ACT_End < SYSDATE";
     private static final String FINDONGOING = 
-			"SELECT * FROM ACTIVITY WHERE ACT_End < SYSDATE";
+			"SELECT * FROM ACTIVITY WHERE ACT_End > SYSDATE";
     private static final String FINDBFSTART = 
 			"SELECT * FROM ACTIVITY WHERE ACT_Start > SYSDATE";
 	private static final String GETALL = 
