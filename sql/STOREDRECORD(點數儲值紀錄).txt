@@ -1,4 +1,4 @@
-DROP TABLE STOREDRECORD;
+﻿DROP TABLE STOREDRECORD;
 DROP SEQUENCE storedrecord_NO_seq;
 --------------------------------------------------------
 --  for Table STOREDRECORD
