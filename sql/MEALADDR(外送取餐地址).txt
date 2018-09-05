@@ -1,0 +1,30 @@
+DROP TABLE MEALADDR;
+DROP SEQUENCE mealaddr_NO_seq;
+--------------------------------------------------------
+--  for Table MEALADDR
+--------------------------------------------------------
+CREATE TABLE MEALADDR (
+  MADDR_NO     VARCHAR2(10)  NOT NULL,
+  MEM_NO     VARCHAR2(10),
+  MADDR_CNAME     VARCHAR2(10),
+  MADDR_ADDR    VARCHAR2(50),
+  MADDR_RNAME 	VARCHAR2(50),
+  
+  CONSTRAINT MEALADDR_PK PRIMARY KEY (MADDR_NO),
+  CONSTRAINT MEALADRR_FK FOREIGN KEY (MEM_NO) REFERENCES MEMBER(MEM_NO));
+
+--------------------------------------------------------
+--  for Table FEATRUE
+CREATE SEQUENCE mealaddr_NO_seq
+INCREMENT BY 0001
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+--------------------insert a testing data------------------
+INSERT INTO MEALADDR (MADDR_NO, MEM_NO,  MADDR_CNAME, MADDR_ADDR, MADDR_RNAME)
+VALUES('A'||LPAD(to_char(mealaddr_NO_seq.NEXTVAL),6,'0'), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), '桃園市','330桃園市桃園區陽明一街57號', '王小明');
+
+
+COMMIT;

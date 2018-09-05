@@ -1,0 +1,33 @@
+DROP TABLE STOREDRECORD;
+DROP SEQUENCE storedrecord_NO_seq;
+--------------------------------------------------------
+--  for Table STOREDRECORD
+--------------------------------------------------------
+CREATE TABLE STOREDRECORD (
+  STOR_NUM     VARCHAR2(10)  NOT NULL,
+  MEM_NO     VARCHAR2(10)  NOT NULL,
+  STOR_DATE     TIMESTAMP(8) NOT NULL,
+  STOR_POINT    NUMBER(10),
+  DREW_POINT 	NUMBER(10),
+  STOR_STATUS	NUMBER(1),
+  
+  CONSTRAINT STOREDRECORD_PK PRIMARY KEY (STOR_NUM),
+  CONSTRAINT STOREDRECORD_FK FOREIGN KEY (MEM_NO) REFERENCES MEMBER(MEM_NO));
+
+--------------------------------------------------------
+--  for Table FEATRUE
+CREATE SEQUENCE storedrecord_NO_seq
+INCREMENT BY 0001
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+------------------------testing data--------------------------------------------
+INSERT INTO STOREDRECORD (STOR_NUM, MEM_NO,  STOR_DATE, STOR_POINT, STOR_STATUS)
+VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), CURRENT_TIMESTAMP, 500, 1);
+
+INSERT INTO STOREDRECORD (STOR_NUM, MEM_NO,  STOR_DATE, STOR_POINT, STOR_STATUS)
+VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), TIMESTAMP '2012-04-04 13:35:00',500, 1);
+
+commit;
