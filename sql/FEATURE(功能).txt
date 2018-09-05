@@ -1,0 +1,44 @@
+
+                                          --建立表格: FEATURE--
+----------------------------------------------------------------------------------------------------------------------------
+alter session set deferred_segment_creation=false;
+
+DROP TABLE FEATURE;
+DROP SEQUENCE feature_seq;
+
+CREATE TABLE FEATURE (
+  FEA_NO	VARCHAR2(10)	NOT NULL,
+  FEA_NAME	VARCHAR2(30)	NOT NULL,
+  CONSTRAINT FEATURE_PK PRIMARY KEY (FEA_NO));
+
+CREATE SEQUENCE feature_seq
+  INCREMENT BY 1
+  START WITH 1
+  NOMAXVALUE
+  NOCYCLE
+  NOCACHE;
+
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'關於我們資料編輯');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'分店管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'留言檢舉管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'儲值管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'餐點管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'食材項目管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'廣告活動設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'優惠卷發放設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工權限設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工資料設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'桌位配置設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送範圍設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂位紀錄管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'線上預訂位設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'候位顧客資料管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'現場座位管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'出餐管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂單管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'結帳');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訊息管理');
+
+commit;
+----------------------------------------------------------------------------------------------------------------------------

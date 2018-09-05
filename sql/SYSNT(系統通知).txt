@@ -1,0 +1,28 @@
+
+                                          --建立表格: SYSNT--
+----------------------------------------------------------------------------------------------------------------------------
+alter session set deferred_segment_creation=false;
+
+DROP TABLE SYSNT;
+DROP SEQUENCE sysnt_seq;
+
+CREATE TABLE SYSNT (
+  NT_NO		VARCHAR2(10)	NOT NULL,
+  NT_TITTLE	VARCHAR2(30),
+  NT_CONT	VARCHAR2(1000),
+  CONSTRAINT SYSNT_PK PRIMARY KEY (NT_NO));
+
+CREATE SEQUENCE sysnt_seq
+  INCREMENT BY 1
+  START WITH 1
+  NOMAXVALUE
+  NOCYCLE
+  NOCACHE;
+
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'訂位通知','親愛的顧客您好，您於本次訂位之資訊如下:RESERVATION，已預訂之座位將保留10分鐘，超過10分鐘未到者，將取消該訂位之權益，謝謝');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'訂餐通知','親愛的顧客您好，您於本次訂餐之資訊如下:ORDERINVOISE，如有訂餐方面問題煩請洽詢客服人員，謝謝');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'活動快報','ACT_CONTENT');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'優惠卷發送通知','恭喜您獲得COUCAT_NAME一張!，詳細內容可至會員中心內的優惠卷管理處查閱');
+
+commit;
+----------------------------------------------------------------------------------------------------------------------------
