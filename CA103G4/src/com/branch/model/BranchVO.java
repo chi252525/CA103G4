@@ -3,6 +3,10 @@ package com.branch.model;
 import java.io.Serializable;
 
 public class BranchVO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -13511614598800593L;
 	private String branch_No;
 	private String branch_Name;
 	private String branch_City;
