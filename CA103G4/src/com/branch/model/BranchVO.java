@@ -17,7 +17,7 @@ public class BranchVO implements Serializable {
 	private String branch_Lat;
 	private String branch_Time;
 	private Double branch_Del;
-	private Integer branch_Tel;
+	private String branch_Tel;
 	private Integer branch_Tdesk;
 	
 	
@@ -82,10 +82,10 @@ public class BranchVO implements Serializable {
 	public void setBranch_Del(Double branch_Del) {
 		this.branch_Del = branch_Del;
 	}
-	public Integer getBranch_Tel() {
+	public String getBranch_Tel() {
 		return branch_Tel;
 	}
-	public void setBranch_Tel(Integer branch_Tel) {
+	public void setBranch_Tel(String branch_Tel) {
 		this.branch_Tel = branch_Tel;
 	}
 	public Integer getBranch_Tdesk() {
