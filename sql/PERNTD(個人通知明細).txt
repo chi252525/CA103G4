@@ -1,5 +1,5 @@
-
-                                          --╚ь╔ъ╙М╝Ф: PERNTD--
+О╩©
+                                          --Е╩╨Г╚▀Х║╗Ф═╪: PERNTD--
 ----------------------------------------------------------------------------------------------------------------------------
 alter session set deferred_segment_creation=false;
 
@@ -23,11 +23,11 @@ CREATE SEQUENCE perntd_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT01','©к╥R╙╨еU╚х╠z╕n║A╠z╘С╔╩╕╦╜q╕Л╓╖╦Й╟T╕p╓U:RESERVATION║A╓w╧w╜q╓╖╝y╕Л╠N╚O╞d10╓юда║A╤W╧L10╓юда╔╪╗Л╙л║A╠N╗З╝Ь╦с╜q╕Л╓╖еv╞q║Aабаб',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT02','©к╥R╙╨еU╚х╠z╕n║A╠z╘С╔╩╕╦╜qю\╓╖╦Й╟T╕p╓U:ORDERINVOISE║A╕p╕Ё╜qю\╓Х╜╠╟щцD╥п╫п╛╒╦ъ╚х╙A╓H╜Ш║Aабаб',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT03','╪y╞╛╕к╜╥╟С╘тдя╓Q╘P╕~╪y,╕b╛║╟й╢а╤║╓╨╕э╕U╓ю╘╠╔ню\(╜╜╓╨╔н),╖Y╖K╤Oць╟e╜╧╖В╓@╔В,╛║╟й╓И╢а╠q╖Y╓И╟_╕эXX╓КXX╓И╛╟╓Н,╖O©Ы╧Lеo!',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','╝╔Ёъ╠zюР╠o╓Q╘P╕~╛Ж╘ююu╢f╗В╓@╠i!║A╦т╡с╓╨╝e╔i╕э╥|╜Ш╓╓╓ъ╓╨╙╨юu╢f╗В╨ч╡zЁB╛d╬\',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','╝╔Ёъ╠zюР╠o88╦`юu╢f╗В╓@╠i!║A╦т╡с╓╨╝e╔i╕э╥|╜Ш╓╓╓ъ╓╨╙╨юu╢f╗В╨ч╡zЁB╛d╬\',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT01','Х╕╙Ф└⌡Г └И║╖Е╝╒Ф┌╗Е╔╫О╪▄Ф┌╗Ф√╪Ф°╛Ф╛║Х╗┌Д╫█Д╧▀ХЁ┤Х╗┼Е╕┌Д╦▀:RESERVATIONО╪▄Е╥╡И═░Х╗┌Д╧▀Е╨╖Д╫█Е╟┤Д©²Г∙≥10Е┬├И░≤О╪▄Х╤┘И│▌10Е┬├И░≤Ф°╙Е┬╟Х─┘О╪▄Е╟┤Е▐√Ф╤┬Х╘╡Х╗┌Д╫█Д╧▀Ф╛┼Г⌡┼О╪▄Х╛²Х╛²',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT02','Х╕╙Ф└⌡Г └И║╖Е╝╒Ф┌╗Е╔╫О╪▄Ф┌╗Ф√╪Ф°╛Ф╛║Х╗┌И╓░Д╧▀ХЁ┤Х╗┼Е╕┌Д╦▀:ORDERINVOISEО╪▄Е╕┌Ф°┴Х╗┌И╓░Ф√╧И²╒Е∙▐И║▄Г┘╘Х╚▀Ф╢╫Х╘╒Е╝╒Ф°█Д╨╨Е⌠║О╪▄Х╛²Х╛²',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT03','Ф┘╤Г╔²Г╚╧И╒╗Е═┌Ф▀┴И╨╣Е█│Е▒╗Е╧╢Ф┘╤,Е°╗Ф╢╩Е▀∙Ф°÷И√⌠Е┘╖Х┤ЁЕ░└Е┬├Е╨≈Г■╗И╓░(И≥░Е┘╖Г■╗),Е█ЁЕ┘█Х╡╩Х╢┬И─│Иё÷Ф²░Д╦─Д╩╫,Ф╢╩Е▀∙Ф≈╔Ф°÷Е╬·Е█ЁФ≈╔Х╣╥Х┤ЁXXФ°┬XXФ≈╔Г┌╨Ф╜╒,Е┬╔И▄╞И│▌Е⌡┴!',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','Ф│╜Е√°Ф┌╗Г█╡Е╬≈Е█│Е▒╗Е╧╢Г╢─Е©╣Е└╙Ф┐═Е█╥Д╦─Е╪╣!О╪▄Х╘ЁГ╢╟Е┘╖Е╝╧Е▐╞Х┤ЁФ°┐Е⌠║Д╦╜Е©┐Е┘╖Г └Е└╙Ф┐═Е█╥Г╝║Г░├Х≥∙Ф÷╔И√╠',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','Ф│╜Е√°Ф┌╗Г█╡Е╬≈88Г╞─Е└╙Ф┐═Е█╥Д╦─Е╪╣!О╪▄Х╘ЁГ╢╟Е┘╖Е╝╧Е▐╞Х┤ЁФ°┐Е⌠║Д╦╜Е©┐Е┘╖Г └Е└╙Ф┐═Е█╥Г╝║Г░├Х≥∙Ф÷╔И√╠',to_char(sysdate,'yyyy/mm/dd'));
 
 commit;
 ----------------------------------------------------------------------------------------------------------------------------

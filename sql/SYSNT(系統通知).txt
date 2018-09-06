@@ -1,5 +1,5 @@
-
-                                          --╚ь╔ъ╙М╝Ф: SYSNT--
+О╩©
+                                          --Е╩╨Г╚▀Х║╗Ф═╪: SYSNT--
 ----------------------------------------------------------------------------------------------------------------------------
 alter session set deferred_segment_creation=false;
 
@@ -19,10 +19,10 @@ CREATE SEQUENCE sysnt_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'╜q╕ЛЁq╙╬','©к╥R╙╨еU╚х╠z╕n║A╠z╘С╔╩╕╦╜q╕Л╓╖╦Й╟T╕p╓U:RESERVATION║A╓w╧w╜q╓╖╝y╕Л╠N╚O╞d10╓юда║A╤W╧L10╓юда╔╪╗Л╙л║A╠N╗З╝Ь╦с╜q╕Л╓╖еv╞q║Aабаб');
-INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'╜qю\Ёq╙╬','©к╥R╙╨еU╚х╠z╕n║A╠z╘С╔╩╕╦╜qю\╓╖╦Й╟T╕p╓U:ORDERINVOISE║A╕p╕Ё╜qю\╓Х╜╠╟щцD╥п╫п╛╒╦ъ╚х╙A╓H╜Ш║Aабаб');
-INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'╛║╟й╖жЁЬ','ACT_CONTENT');
-INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'юu╢f╗В╣o╟eЁq╙╬','╝╔Ёъ╠zюР╠oCOUCAT_NAME╓@╠i!║A╦т╡с╓╨╝e╔i╕э╥|╜Ш╓╓╓ъ╓╨╙╨юu╢f╗В╨ч╡zЁB╛d╬\');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'Х╗┌Д╫█И─ Г÷╔','Х╕╙Ф└⌡Г └И║╖Е╝╒Ф┌╗Е╔╫О╪▄Ф┌╗Ф√╪Ф°╛Ф╛║Х╗┌Д╫█Д╧▀ХЁ┤Х╗┼Е╕┌Д╦▀:RESERVATIONО╪▄Е╥╡И═░Х╗┌Д╧▀Е╨╖Д╫█Е╟┤Д©²Г∙≥10Е┬├И░≤О╪▄Х╤┘И│▌10Е┬├И░≤Ф°╙Е┬╟Х─┘О╪▄Е╟┤Е▐√Ф╤┬Х╘╡Х╗┌Д╫█Д╧▀Ф╛┼Г⌡┼О╪▄Х╛²Х╛²');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'Х╗┌И╓░И─ Г÷╔','Х╕╙Ф└⌡Г └И║╖Е╝╒Ф┌╗Е╔╫О╪▄Ф┌╗Ф√╪Ф°╛Ф╛║Х╗┌И╓░Д╧▀ХЁ┤Х╗┼Е╕┌Д╦▀:ORDERINVOISEО╪▄Е╕┌Ф°┴Х╗┌И╓░Ф√╧И²╒Е∙▐И║▄Г┘╘Х╚▀Ф╢╫Х╘╒Е╝╒Ф°█Д╨╨Е⌠║О╪▄Х╛²Х╛²');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'Ф╢╩Е▀∙Е©╚Е═╠','ACT_CONTENT');
+INSERT INTO SYSNT VALUES ('NT'||LPAD(to_char(sysnt_seq.NEXTVAL), 2, '0'),'Е└╙Ф┐═Е█╥Г≥╪И─│И─ Г÷╔','Ф│╜Е√°Ф┌╗Г█╡Е╬≈COUCAT_NAMEД╦─Е╪╣!О╪▄Х╘ЁГ╢╟Е┘╖Е╝╧Е▐╞Х┤ЁФ°┐Е⌠║Д╦╜Е©┐Е┘╖Г └Е└╙Ф┐═Е█╥Г╝║Г░├Х≥∙Ф÷╔И√╠');
 
 commit;
 ----------------------------------------------------------------------------------------------------------------------------

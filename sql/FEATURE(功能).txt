@@ -1,5 +1,5 @@
-
-                                          --«Ø¥ßªí®æ: FEATURE--
+ï»¿
+                                          --å»ºç«‹è¡¨æ ¼: FEATURE--
 ----------------------------------------------------------------------------------------------------------------------------
 alter session set deferred_segment_creation=false;
 
@@ -18,27 +18,27 @@ CREATE SEQUENCE feature_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'Ãö©ó§Ú­Ì¸ê®Æ½s¿è');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¤À©±ºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¯d¨¥ÀËÁ|ºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'Àx­ÈºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'À\ÂIºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­¹§÷¶µ¥ØºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¼s§i¬¡°Ê³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'Àu´f¨÷µo©ñ³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­û¤uÅv­­³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­û¤u¸ê®Æ³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'®à¦ì°t¸m³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¥~°e½d³ò³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­q¦ì¬ö¿ıºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'½u¤W¹w­q¦ì³]©w');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­Ô¦ìÅU«È¸ê®ÆºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'²{³õ®y¦ìºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¥XÀ\ºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'¥~°eºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'­q³æºŞ²z');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'µ²±b');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'°T®§ºŞ²z');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'é—œæ–¼æˆ‘å€‘è³‡æ–™ç·¨è¼¯');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'åˆ†åº—ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'ç•™è¨€æª¢èˆ‰ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å„²å€¼ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'é¤é»ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'é£Ÿæé …ç›®ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å»£å‘Šæ´»å‹•è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å„ªæƒ å·ç™¼æ”¾è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å“¡å·¥æ¬Šé™è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å“¡å·¥è³‡æ–™è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'æ¡Œä½é…ç½®è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å¤–é€ç¯„åœè¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'è¨‚ä½ç´€éŒ„ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'ç·šä¸Šé è¨‚ä½è¨­å®š');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å€™ä½é¡§å®¢è³‡æ–™ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'ç¾å ´åº§ä½ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å‡ºé¤ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'å¤–é€ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'è¨‚å–®ç®¡ç†');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'çµå¸³');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'è¨Šæ¯ç®¡ç†');
 
 commit;
 ----------------------------------------------------------------------------------------------------------------------------
