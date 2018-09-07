@@ -1,4 +1,4 @@
-DROP TABLE COUPONHISTORY;
+﻿DROP TABLE COUPONHISTORY;
 
 --------------------------------------------------------
 --  for Table COUPONHISTORY
