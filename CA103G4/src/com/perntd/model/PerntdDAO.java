@@ -261,14 +261,14 @@ public class PerntdDAO implements PerntdDAO_interface{
 		PerntdVO perntdVO1 = new PerntdVO();
 		perntdVO1.setMem_No("M000001");
 		perntdVO1.setNt_No("NT01");
-		perntdVO1.setPerntd_Cont("³o¬O¤@­Ó·s³qª¾¡A³o¬O¤@­Ó·s³qª¾¡A³o¬O¤@­Ó·s³qª¾¡A³o¬O¤@­Ó·s³qª¾¡A³o¬O¤@­Ó·s³qª¾");
+		perntdVO1.setPerntd_Cont("é€™æ˜¯ä¸€å€‹æ–°é€šçŸ¥ï¼Œé€™æ˜¯ä¸€å€‹æ–°é€šçŸ¥ï¼Œé€™æ˜¯ä¸€å€‹æ–°é€šçŸ¥ï¼Œé€™æ˜¯ä¸€å€‹æ–°é€šçŸ¥ï¼Œé€™æ˜¯ä¸€å€‹æ–°é€šçŸ¥");
 		dao.insert(perntdVO1);
 		//update
 		PerntdVO perntdVO2 = new PerntdVO();
 		perntdVO2.setPerntd_No("P06");
 		perntdVO2.setMem_No("M000003");
 		perntdVO2.setNt_No("NT01");
-		perntdVO2.setPerntd_Cont("³qª¾§ó·s¤F¡A³qª¾§ó·s¤F¡A³qª¾§ó·s¤F¡A³qª¾§ó·s¤F¡A³qª¾§ó·s¤F¡A³qª¾§ó·s¤F¡A³qª¾§ó·s¤F");
+		perntdVO2.setPerntd_Cont("é€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†ï¼Œé€šçŸ¥æ›´æ–°äº†");
 		perntdVO2.setPerntd_Date("2018/01/01");
 		dao.update(perntdVO2);
 		//delete
