@@ -20,10 +20,10 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000001',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000001',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000003',2);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000005',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000002',2);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'00000001','E000000001',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'00000001','E000000001',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'00000001','E000000003',2);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'00000001','E000000005',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'00000001','E000000002',2);
 
 commit;

@@ -22,10 +22,10 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('0'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 5, '0'),'000000001',null,'000001',2);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('0'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 5, '0'),'000000001','001',null,2);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('0'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 5, '0'),'000000002','004','000002',1);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('0'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 5, '0'),'000000003','002','000003',1);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('0'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 5, '0'),'000000004','003','000004',2);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 7, '0'),'O000000001',null,'C000001',2);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 7, '0'),'O000000001','M001',null,2);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 7, '0'),'O000000002','M004','C000002',1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 7, '0'),'O000000003','M002','C000003',1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 7, '0'),'O000000004','M003','C000004',2);
 
 commit;
