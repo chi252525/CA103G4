@@ -94,7 +94,4 @@ public class BranchVO implements Serializable {
 	public void setBranch_Tdesk(Integer branch_Tdesk) {
 		this.branch_Tdesk = branch_Tdesk;
 	}
-	
-	
-	
 }
