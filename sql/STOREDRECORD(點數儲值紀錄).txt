@@ -1,4 +1,4 @@
-DROP TABLE STOREDRECORD;
+﻿DROP TABLE STOREDRECORD;
 DROP SEQUENCE storedrecord_NO_seq;
 --------------------------------------------------------
 --  for Table STOREDRECORD
@@ -25,9 +25,9 @@ NOCACHE;
 
 ------------------------testing data--------------------------------------------
 INSERT INTO STOREDRECORD (STOR_NUM, MEM_NO,  STOR_DATE, STOR_POINT, STOR_STATUS)
-VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), CURRENT_TIMESTAMP, 500, 1);
+VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M000001', CURRENT_TIMESTAMP, 500, 1);
 
 INSERT INTO STOREDRECORD (STOR_NUM, MEM_NO,  STOR_DATE, STOR_POINT, STOR_STATUS)
-VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), TIMESTAMP '2012-04-04 13:35:00',500, 1);
+VALUES(('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), 'M000001', TIMESTAMP '2012-04-04 13:35:00',500, 1);
 
 commit;

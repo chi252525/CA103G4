@@ -1,4 +1,4 @@
-DROP TABLE MEALADDR;
+﻿DROP TABLE MEALADDR;
 DROP SEQUENCE mealaddr_NO_seq;
 --------------------------------------------------------
 --  for Table MEALADDR
@@ -24,7 +24,7 @@ NOCACHE;
 
 --------------------insert a testing data------------------
 INSERT INTO MEALADDR (MADDR_NO, MEM_NO,  MADDR_CNAME, MADDR_ADDR, MADDR_RNAME)
-VALUES('A'||LPAD(to_char(mealaddr_NO_seq.NEXTVAL),6,'0'), 'M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'), '��饫','330��饫���϶����@��57��', '���p��');
+VALUES('A'||LPAD(to_char(mealaddr_NO_seq.NEXTVAL),6,'0'), 'M000001', '桃園市','330桃園市桃園區陽明一街57號', '王小明');
 
 
 COMMIT;
