@@ -1,11 +1,11 @@
-DROP TABLE DELIVERY;
+﻿DROP TABLE DELIVERY;
 DROP SEQUENCE delivery_seq;
 
 --------------------------------------------------------
 --  for Table DELIVERY 
 --------------------------------------------------------
 CREATE TABLE DELIVERY  (
-  DELIV_NO    VARCHAR2(10)  NOT NULL, 
+  DELIV_NO    VARCHAR2(15)  NOT NULL, 
   BRANCH_NO    VARCHAR2(10)   NOT NULL, 
   EMP_NO    VARCHAR2(10),
   DELIV_STATUS    NUMBER(1),
@@ -20,10 +20,10 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000001',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000001',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000003',2);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000005',1);
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'),'001','000002',2);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001',2);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001',1);
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001',2);
 
 commit;
