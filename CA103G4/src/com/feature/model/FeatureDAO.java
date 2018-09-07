@@ -223,12 +223,12 @@ public class FeatureDAO implements FeatureDAO_interface{
 		FeatureDAO dao = new FeatureDAO();
 		//insert
 		FeatureVO feaVO1 = new FeatureVO();
-		feaVO1.setFea_Name("·s¼W¥\¯à");
+		feaVO1.setFea_Name("æ–°å¢žåŠŸèƒ½");
 		dao.insert(feaVO1);
 		//update
 		FeatureVO feaVO2 = new FeatureVO();
 		feaVO2.setFea_No("F022");
-		feaVO2.setFea_Name("­×§ï¥\¯à");
+		feaVO2.setFea_Name("ä¿®æ”¹åŠŸèƒ½");
 		dao.update(feaVO2);
 		//delete
 		dao.delete("F001");

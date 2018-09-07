@@ -255,14 +255,14 @@ public class SysntDAO implements SysntDAO_interface{
 		SysntDAO dao = new SysntDAO();
 		//insert
 		SysntVO sysntVO1 = new SysntVO();
-		sysntVO1.setNt_Tittle("·s¼W³qª¾");
-		sysntVO1.setNt_Cont("¸Ì­±¦³¤@°ï¤º®e¡A¸Ì­±¦³¤@°ï¤º®e¡A¸Ì­±¦³¤@°ï¤º®e¡A¸Ì­±¦³¤@°ï¤º®e¡A¸Ì­±¦³¤@°ï¤º®e");
+		sysntVO1.setNt_Tittle("æ–°å¢é€šçŸ¥");
+		sysntVO1.setNt_Cont("è£¡é¢æœ‰ä¸€å †å…§å®¹ï¼Œè£¡é¢æœ‰ä¸€å †å…§å®¹ï¼Œè£¡é¢æœ‰ä¸€å †å…§å®¹ï¼Œè£¡é¢æœ‰ä¸€å †å…§å®¹ï¼Œè£¡é¢æœ‰ä¸€å †å…§å®¹");
 		dao.insert(sysntVO1);
 		//update
 		SysntVO sysntVO2 = new SysntVO();
 		sysntVO2.setNt_No("NT05");
-		sysntVO2.setNt_Tittle("§ó·s³qª¾");
-		sysntVO2.setNt_Cont("§ó·s¤F¤@°ï¤º®e¡A§ó·s¤F¤@°ï¤º®e¡A§ó·s¤F¤@°ï¤º®e¡A§ó·s¤F¤@°ï¤º®e¡A§ó·s¤F¤@°ï¤º®e");
+		sysntVO2.setNt_Tittle("æ›´æ–°é€šçŸ¥");
+		sysntVO2.setNt_Cont("æ›´æ–°äº†ä¸€å †å…§å®¹ï¼Œæ›´æ–°äº†ä¸€å †å…§å®¹ï¼Œæ›´æ–°äº†ä¸€å †å…§å®¹ï¼Œæ›´æ–°äº†ä¸€å †å…§å®¹ï¼Œæ›´æ–°äº†ä¸€å †å…§å®¹");
 		dao.update(sysntVO2);
 		//delete
 		dao.delete("NT06");
