@@ -20,8 +20,7 @@ public class Reply_MsgDAO implements Reply_MsgDAO_interface  {
 			"VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(REPLY_MSG_seq.NEXTVAL), 2, '0')," + 
 			"?,?,?)";
 	private static final String UPDATE_STMT = 
-			"UPDATE REPLY_MSG SET RPLY_STATUS=? WHERE RPLY_NO=?";
-	private static final String DELETE_STMT = "DELETE FROM POST WHERE RPLY_NO = ?";
+			"UPDATE REPLY_MSG SET RPLY_STATUS=? RPLY_TIME=? WHERE RPLY_NO=?";
 	private static final String GETALL = "SELECT * FROM REPLY_MSG";
 	@Override
 	public void insert(Reply_MsgVO reply_MsgVO) {
@@ -60,43 +59,6 @@ public class Reply_MsgDAO implements Reply_MsgDAO_interface  {
 	}
 
 	@Override
-	public void delete(String rply_No) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, rply_No);
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException ce) {
-			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}				
-	}
-
-	@Override
 	public void update_status(Reply_MsgVO reply_MsgVO) {
 
 		Connection con = null;
@@ -106,7 +68,8 @@ public class Reply_MsgDAO implements Reply_MsgDAO_interface  {
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, reply_MsgVO.getRply_No());
-			pstmt.setString(2, reply_MsgVO.getRply_Status());
+			pstmt.setTimestamp(6, reply_MsgVO.getRply_Time());
+			pstmt.setString(3, reply_MsgVO.getRply_Status());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
 		} catch (SQLException se) {

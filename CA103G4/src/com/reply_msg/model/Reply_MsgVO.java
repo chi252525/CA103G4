@@ -27,8 +27,6 @@ public class Reply_MsgVO {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public String getRply_No() {
 		return rply_No;
 	}
