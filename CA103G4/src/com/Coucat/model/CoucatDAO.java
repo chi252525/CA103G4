@@ -54,7 +54,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (³s½u¦¨¥\¡I)");
+			System.out.println("Connecting to database successfully!");
 			pstmt = con.prepareStatement(INSERT_VALUE_STMT );
 			pstmt.setString(1, coucatVO.getCoucat_Name());
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
@@ -66,7 +66,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			byte[] pic = getPictureByteArray("items/Bing2.jpg");
 			pstmt.setBytes(8, pic);
 			int rowCount =pstmt.executeUpdate();
-			System.out.println("·s¼W " + rowCount + " µ§¸ê®Æ");
+			System.out.println("ï¿½sï¿½W " + rowCount + " ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 			// Handle any SQL errors
 		} catch (SQLException | IOException se) {
@@ -98,7 +98,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (³s½u¦¨¥\¡I)");
+			System.out.println("Connecting to database successfully!");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, coucatVO.getCoucat_Name());
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
@@ -109,7 +109,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
 			pstmt.setString(8, coucatVO.getCoucat_No());
 			int rowCount=pstmt.executeUpdate();
-			System.out.println("­×§ï" + rowCount + " µ§¸ê®Æ");
+			System.out.println("ï¿½×§ï¿½" + rowCount + " ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
@@ -145,7 +145,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (³s½u¦¨¥\¡I)");
+			System.out.println("Connecting to database successfully!");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
 
@@ -200,7 +200,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		CoucatVO coucat =null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (³s½u¦¨¥\¡I)");
+			System.out.println("Connecting to database successfully! ");
 			pstmt = con.prepareStatement(FIND_BY_CATA);
 			pstmt.setString(1,coucat_Cata);
 			 rs =pstmt.executeQuery();
@@ -243,7 +243,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		}
 		return coucat;
 	}
-	// ¨Ï¥Îbyte[]¤è¦¡
+
 				public static byte[] getPictureByteArray(String path) throws IOException {
 					File file = new File(path);
 					FileInputStream fis = new FileInputStream(file);
@@ -252,14 +252,12 @@ public class CoucatDAO implements CoucatDAO_interface {
 					int i;
 					while ((i = fis.read(buffer)) != -1) {
 						baos.write(buffer, 0, i);
-						//write(byte[] b, int off, int len) 
-				        //?«ü©w byte ??¤¤?°¾²¾¶q off ?©lªº len ?¦r??¤J¦¹ byte ???¥X¬y¡C
+					
 					}
 					baos.close();
 					fis.close();
 
 					return baos.toByteArray();
-					//  toByteArray() Àò¨ú¼Æ¾Ú¡C
 				}
 				
 
