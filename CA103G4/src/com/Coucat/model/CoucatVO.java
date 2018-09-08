@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 
 public class CoucatVO implements java.io.Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String coucat_No;
 	private String coucat_Name;
 	private String coucat_Cata;
