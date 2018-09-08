@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 public class ActivityDAO implements ActivityDAO_interface{
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "CA103";
+	private static final String USER = "raman";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(" + 
@@ -23,16 +23,20 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"'0')," + 
 			"?,?,?,?,?,?,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?)";
 	private static final String UPDATE_STMT = 
-			"UPDATE ACTIVITY SET Coucat_No=?,ACT_NAME=?,ACT_CAT=?,ACT_START=TO_DATE(?,'yyyy-mm-dd'),ACT_END=TO_DATE(?,'yyyy-mm-dd'),ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=? WHERE ACT_NO=?";
+			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?," + 
+			"ACT_START=TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')," + 
+			"ACT_END=TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI'),ACT_USECOU=? WHERE ACT_NO=?";
     private static final String FINDBYDATEBETWEEN = 
-			"SELECT * FROM activity WHERE act_start " + 
-			"BETWEEN TO_DATE(?,'yyyy-mm-dd')AND " + 
-			"TO_DATE(?,'yyyy-mm-dd')" + 
-			"AND " + 
-			"act_End BETWEEN TO_DATE(?,'yyyy-mm-dd')" + 
-			"and TO_DATE(?,'yyyy-mm-dd')";
+    		"SELECT * FROM activity WHERE act_start " + 
+    				"BETWEEN TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')AND " + 
+    				"TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')" + 
+    				"AND " + 
+    				"act_End BETWEEN TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')" + 
+    				"and TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')";
 	private static final String GETALL = 
 			"SELECT * FROM ACTIVITY";
+	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
+			
 	static {
 		try {
 			Class.forName(DRIVER);
@@ -51,9 +55,9 @@ public class ActivityDAO implements ActivityDAO_interface{
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
 			pstmt.setString(3, activityVO.getAct_Name());
-			byte[] pic = getPictureByteArray("items/Bing2.jpg");
+			byte[] pic = getPictureByteArray("items/Bing3.jpeg");
 			pstmt.setBytes(4, pic);
-			byte[] pic2 = getPictureByteArray("items/Bing2.jpg");
+			byte[] pic2 = getPictureByteArray("items/Bing3.jpeg");
 			pstmt.setBytes(5, pic2);
 			pstmt.setString(6, activityVO.getAct_Content());
 			pstmt.setString(7, activityVO.getAct_Start());
@@ -97,17 +101,18 @@ public class ActivityDAO implements ActivityDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			pstmt.setString(9, activityVO.getAct_No());
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
 			pstmt.setString(3, activityVO.getAct_Name());
-			pstmt.setString(4, activityVO.getAct_Start());
-			pstmt.setString(5, activityVO.getAct_End());
-			byte[] pic = getPictureByteArray("items/Bing2.jpeg");
-			pstmt.setBytes(6, pic);
-			byte[] pic2 = getPictureByteArray("items/Bing2.jpeg");
-			pstmt.setBytes(7, pic2);
-			pstmt.setString(8, activityVO.getAct_Content());
+			byte[] pic = getPictureByteArray("items/Bing3.jpeg");
+			pstmt.setBytes(4, pic);
+			byte[] pic2 = getPictureByteArray("items/Bing3.jpeg");
+			pstmt.setBytes(5, pic2);
+			pstmt.setString(6, activityVO.getAct_Content());
+			pstmt.setString(7, activityVO.getAct_Start());
+			pstmt.setString(8, activityVO.getAct_End());
+			pstmt.setString(9, activityVO.getAct_Usecou());
+			pstmt.setString(10, activityVO.getAct_No());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
 
@@ -255,8 +260,57 @@ public class ActivityDAO implements ActivityDAO_interface{
  
 	@Override
 	public ActivityVO findByAct_Cata(String act_Cata) {
-		// TODO Auto-generated method stub
-		return null;
+		ActivityVO activityVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(FINDBYACTCATA);
+			pstmt.setString(1, act_Cata);
+			rs = pstmt.executeQuery();
+  
+			while (rs.next()) {
+				activityVO=new ActivityVO();
+				activityVO.setAct_No(rs.getString("act_No"));
+				activityVO.setCoucat_No(rs.getString("coucat_No"));
+				activityVO.setAct_Cat(rs.getString("act_Cat"));
+				activityVO.setAct_Name(rs.getString("act_Name"));
+				activityVO.setAct_Content(rs.getString("act_Content"));
+				activityVO.setAct_Start(rs.getString("act_Start"));
+				activityVO.setAct_End(rs.getString("act_End"));
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return activityVO;
 	}
 	// 使用byte[]方式
 			public static byte[] getPictureByteArray(String path) throws IOException {
