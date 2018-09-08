@@ -13,14 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 public class ActivityDAO implements ActivityDAO_interface{
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "raman";
+	private static final String USER = "CA103";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-	private static final String INSERT_STMT = 
-			"INSERT INTO ACTIVITY" + 
-			"(ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME, ACT_CAROUSEL, ACT_PIC,ACT_CONTENT,ACT_START,ACT_END)VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL),4,'0'),?,?,?,?,?,?,TO_DATE(?,'yyyy-mm-dd'),TO_DATE(?,'yyyy-mm-dd'))";
+	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(" + 
+			"ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME," + 
+			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)" + 
+			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
+			"'0')," + 
+			"?,?,?,?,?,?,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?)";
 	private static final String UPDATE_STMT = 
-			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_START=TO_DATE(?,'yyyy-mm-dd'),ACT_END=TO_DATE(?,'yyyy-mm-dd'),ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=? WHERE ACT_NO=?";
+			"UPDATE ACTIVITY SET Coucat_No=?,ACT_NAME=?,ACT_CAT=?,ACT_START=TO_DATE(?,'yyyy-mm-dd'),ACT_END=TO_DATE(?,'yyyy-mm-dd'),ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=? WHERE ACT_NO=?";
     private static final String FINDBYDATEBETWEEN = 
 			"SELECT * FROM activity WHERE act_start " + 
 			"BETWEEN TO_DATE(?,'yyyy-mm-dd')AND " + 
@@ -28,12 +31,6 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"AND " + 
 			"act_End BETWEEN TO_DATE(?,'yyyy-mm-dd')" + 
 			"and TO_DATE(?,'yyyy-mm-dd')";
-    private static final String FINDENDED = 
-			"SELECT * FROM ACTIVITY WHERE ACT_End < SYSDATE";
-    private static final String FINDONGOING = 
-			"SELECT * FROM ACTIVITY WHERE ACT_End < SYSDATE";
-    private static final String FINDBFSTART = 
-			"SELECT * FROM ACTIVITY WHERE ACT_Start > SYSDATE";
 	private static final String GETALL = 
 			"SELECT * FROM ACTIVITY";
 	static {
@@ -54,13 +51,14 @@ public class ActivityDAO implements ActivityDAO_interface{
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
 			pstmt.setString(3, activityVO.getAct_Name());
-			byte[] pic = getPictureByteArray("items/Bing2.jpeg");
+			byte[] pic = getPictureByteArray("items/Bing2.jpg");
 			pstmt.setBytes(4, pic);
-			byte[] pic2 = getPictureByteArray("items/Bing2.jpeg");
+			byte[] pic2 = getPictureByteArray("items/Bing2.jpg");
 			pstmt.setBytes(5, pic2);
 			pstmt.setString(6, activityVO.getAct_Content());
-			pstmt.setTimestamp(7, activityVO.getAct_Start());
-			pstmt.setTimestamp(8, activityVO.getAct_End());
+			pstmt.setString(7, activityVO.getAct_Start());
+			pstmt.setString(8, activityVO.getAct_End());
+			pstmt.setString(9, activityVO.getAct_Usecou());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
 
@@ -103,8 +101,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
 			pstmt.setString(3, activityVO.getAct_Name());
-			pstmt.setTimestamp(4, activityVO.getAct_Start());
-			pstmt.setTimestamp(5, activityVO.getAct_End());
+			pstmt.setString(4, activityVO.getAct_Start());
+			pstmt.setString(5, activityVO.getAct_End());
 			byte[] pic = getPictureByteArray("items/Bing2.jpeg");
 			pstmt.setBytes(6, pic);
 			byte[] pic2 = getPictureByteArray("items/Bing2.jpeg");
@@ -163,8 +161,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
-				activityVO.setAct_End(rs.getTimestamp("act_End"));
+				activityVO.setAct_Start(rs.getString("act_Start"));
+				activityVO.setAct_End(rs.getString("act_End"));
 			}
 
 			// Handle any SQL errors
@@ -220,64 +218,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
-				activityVO.setAct_End(rs.getTimestamp("act_End"));
-				activitylist.add(activityVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se);
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return activitylist;
-	}
-
-	@Override
-	public List<ActivityVO> findended() {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<ActivityVO> activitylist = new ArrayList<>();
-
-		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
-			pstmt = con.prepareStatement(FINDENDED);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				ActivityVO activityVO=new ActivityVO();
-				activityVO=new ActivityVO();
-				activityVO.setAct_No(rs.getString("act_No"));
-				activityVO.setCoucat_No(rs.getString("coucat_No"));
-				activityVO.setAct_Cat(rs.getString("act_Cat"));
-				activityVO.setAct_Name(rs.getString("act_Name"));
-				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
-				activityVO.setAct_End(rs.getTimestamp("act_End"));
+				activityVO.setAct_Start(rs.getString("act_Start"));
+				activityVO.setAct_End(rs.getString("act_End"));
 				activitylist.add(activityVO); // Store the row in the list
 			}
 
@@ -310,120 +252,12 @@ public class ActivityDAO implements ActivityDAO_interface{
 		}
 		return activitylist;
 	}
-
+ 
 	@Override
-	public List<ActivityVO> findonGoing() {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<ActivityVO> activitylist = new ArrayList<>();
-
-		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
-			pstmt = con.prepareStatement(FINDONGOING);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				ActivityVO activityVO=new ActivityVO();
-				activityVO=new ActivityVO();
-				activityVO.setAct_No(rs.getString("act_No"));
-				activityVO.setCoucat_No(rs.getString("coucat_No"));
-				activityVO.setAct_Cat(rs.getString("act_Cat"));
-				activityVO.setAct_Name(rs.getString("act_Name"));
-				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
-				activityVO.setAct_End(rs.getTimestamp("act_End"));
-				activitylist.add(activityVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return activitylist;
+	public ActivityVO findByAct_Cata(String act_Cata) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Override
-	public List<ActivityVO> findbfStart() {
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	List<ActivityVO> activitylist = new ArrayList<>();
-
-	try {
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
-		System.out.println("Connecting to database successfully! (連線成功！)");
-		pstmt = con.prepareStatement(FINDBFSTART);
-		rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-			ActivityVO activityVO=new ActivityVO();
-			activityVO=new ActivityVO();
-			activityVO.setAct_No(rs.getString("act_No"));
-			activityVO.setCoucat_No(rs.getString("coucat_No"));
-			activityVO.setAct_Cat(rs.getString("act_Cat"));
-			activityVO.setAct_Name(rs.getString("act_Name"));
-			activityVO.setAct_Content(rs.getString("act_Content"));
-			activityVO.setAct_Start(rs.getTimestamp("act_Start"));
-			activityVO.setAct_End(rs.getTimestamp("act_End"));
-			activitylist.add(activityVO); // Store the row in the list
-		}
-
-		// Handle any SQL errors
-	} catch (SQLException se) {
-		throw new RuntimeException("A database error occured. "
-				+ se.getMessage());
-	} finally {
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
-	}
-	return activitylist;
-	}
-	
-	
 	// 使用byte[]方式
 			public static byte[] getPictureByteArray(String path) throws IOException {
 				File file = new File(path);
@@ -442,5 +276,11 @@ public class ActivityDAO implements ActivityDAO_interface{
 				return baos.toByteArray();
 				//  toByteArray() 獲取數據。
 			}
+
+	
+
+	
+
+			
 		
 }

@@ -1,5 +1,5 @@
 package com.Activity.model;
-import java.sql.Timestamp;
+import java.sql.*;
 
 public class ActivityVO {
 	private String act_No;
@@ -9,38 +9,32 @@ public class ActivityVO {
 	private byte[] act_Carousel;
 	private byte[] act_Pic;
 	private String act_Content;
-	private Timestamp act_Start;
-	private Timestamp act_End;
-	public ActivityVO() {
-		super();
-	}
+	private String act_Start;
+	private String act_End;
+	private String act_Usecou;
 	
-	public ActivityVO(String coucat_No, String act_Cat, 
-			String act_Name, String act_Content,
-			Timestamp act_Start, Timestamp act_End) {
+	
+	
+	
+	public ActivityVO(String coucat_No, String act_Cat, String act_Name, byte[] act_Carousel, byte[] act_Pic,
+			String act_Content, String act_Start, String act_End, String act_Usecou) {
 		super();
 		this.coucat_No = coucat_No;
 		this.act_Cat = act_Cat;
 		this.act_Name = act_Name;
+		this.act_Carousel = act_Carousel;
+		this.act_Pic = act_Pic;
 		this.act_Content = act_Content;
 		this.act_Start = act_Start;
 		this.act_End = act_End;
-	}
-	
-	
-	public ActivityVO(String act_No,String coucat_No, String act_Cat, 
-			String act_Name, String act_Content,
-			Timestamp act_Start, Timestamp act_End) {
-		super();
-		this.act_No = act_No;
-		this.coucat_No = coucat_No;
-		this.act_Cat = act_Cat;
-		this.act_Name = act_Name;
-		this.act_Content = act_Content;
-		this.act_Start = act_Start;
-		this.act_End = act_End;
+		this.act_Usecou = act_Usecou;
 	}
 
+	public ActivityVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getAct_No() {
 		return act_No;
 	}
@@ -83,19 +77,26 @@ public class ActivityVO {
 	public void setAct_Content(String act_Content) {
 		this.act_Content = act_Content;
 	}
-	public Timestamp getAct_Start() {
+	public String getAct_Start() {
 		return act_Start;
 	}
-	public void setAct_Start(Timestamp act_Start) {
+	public void setAct_Start(String act_Start) {
 		this.act_Start = act_Start;
 	}
-	public Timestamp getAct_End() {
+	public String getAct_End() {
 		return act_End;
 	}
-	public void setAct_End(Timestamp act_End) {
+	public void setAct_End(String act_End) {
 		this.act_End = act_End;
 	}
-
+	public String getAct_Usecou() {
+		return act_Usecou;
+	}
+	public void setAct_Usecou(String act_Usecou) {
+		this.act_Usecou = act_Usecou;
+	}
+	
+	
 	
 	
 	
