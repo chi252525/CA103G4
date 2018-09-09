@@ -1,0 +1,25 @@
+alter session set deferred_segment_creation=false;
+DROP TABLE DESK;
+DROP SEQUENCE desk_seq;
+
+--------------------------------------------------------
+--  ®à¦ìªí®æ
+--------------------------------------------------------
+CREATE TABLE DESK (
+  DEK_NO        VARCHAR2(10)    NOT NULL, 
+  BRANCH_NO    	VARCHAR2(10)  	NOT NULL, 
+  DEK_ID  	VARCHAR2(10)    NOT NULL,
+  DEK_SET	NUMBER(1)	NOT NULL,
+  DEK_STATUS	NUMBER(1)	NOT NULL,
+  
+  CONSTRAINT DESK_PK PRIMARY KEY (DEK_NO ),
+  CONSTRAINT DESK_FK FOREIGN KEY (BRANCH_NO) REFERENCES BRANCH (BRANCH_NO));
+  
+CREATE SEQUENCE desk_seq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G1',1,1);

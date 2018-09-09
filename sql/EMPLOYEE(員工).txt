@@ -1,0 +1,31 @@
+alter session set deferred_segment_creation=false;
+
+DROP TABLE EMPLOYEE;
+DROP SEQUENCE employee_seq;
+--------------------------------------------------------
+--  員工表格
+--------------------------------------------------------
+CREATE TABLE EMPLOYEE (
+  EMP_NO       	VARCHAR2(10)  	NOT NULL, 
+  BRANCH_NO    	VARCHAR2(10),
+  EMP_ACNUM  	VARCHAR2(20)	NOT NULL,
+  EMP_PSW	VARCHAR2(20)	NOT NULL,
+  EMP_NAME	VARCHAR2(10)	NOT NULL,
+  EMP_GENDER  	VARCHAR2(10),
+  EMP_POS	VARCHAR2(10),
+  EMP_TEL     	VARCHAR2(10),
+  EMP_STATUS  	VARCHAR2(10)    DEFAULT ('E1'),
+  EMP_CREDATE 	DATE	        DEFAULT(SYSDATE),  
+  EMP_PHOTO   	BLOB        ,
+
+  CONSTRAINT EMPLOYEE_PK PRIMARY KEY (EMP_NO),
+  CONSTRAINT EMPLOYEE_FK FOREIGN KEY (BRANCH_NO) REFERENCES BRANCH (BRANCH_NO));
+	  
+CREATE SEQUENCE employee_seq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a123456','b123456','帥帥','G1','工讀生','0912345678',null);
