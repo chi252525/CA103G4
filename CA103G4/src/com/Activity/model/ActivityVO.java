@@ -1,7 +1,11 @@
 package com.Activity.model;
 import java.sql.*;
 
-public class ActivityVO {
+public class ActivityVO implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String act_No;
 	private String coucat_No;
 	private String act_Cat;
@@ -12,9 +16,6 @@ public class ActivityVO {
 	private String act_Start;
 	private String act_End;
 	private String act_Usecou;
-	
-	
-	
 	
 	public ActivityVO(String coucat_No, String act_Cat, String act_Name, byte[] act_Carousel, byte[] act_Pic,
 			String act_Content, String act_Start, String act_End, String act_Usecou) {

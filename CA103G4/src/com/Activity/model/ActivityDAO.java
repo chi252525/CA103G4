@@ -225,10 +225,10 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Content(rs.getString("act_Content"));
 				activityVO.setAct_Start(rs.getString("act_Start"));
 				activityVO.setAct_End(rs.getString("act_End"));
-				activitylist.add(activityVO); // Store the row in the list
+				activitylist.add(activityVO); 
 			}
 
-			// Handle any SQL errors
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -281,12 +281,9 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Start(rs.getString("act_Start"));
 				activityVO.setAct_End(rs.getString("act_End"));
 			}
-
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {

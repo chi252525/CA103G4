@@ -66,7 +66,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			byte[] pic = getPictureByteArray("items/Bing2.jpg");
 			pstmt.setBytes(8, pic);
 			int rowCount =pstmt.executeUpdate();
-			System.out.println("�s�W " + rowCount + " �����");
+			System.out.println("新增" + rowCount + " 筆資料");
 
 			// Handle any SQL errors
 		} catch (SQLException | IOException se) {
@@ -109,7 +109,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
 			pstmt.setString(8, coucatVO.getCoucat_No());
 			int rowCount=pstmt.executeUpdate();
-			System.out.println("�ק�" + rowCount + " �����");
+			System.out.println("修改" + rowCount + "筆資料");
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
