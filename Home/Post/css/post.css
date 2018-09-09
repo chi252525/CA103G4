@@ -1,0 +1,43 @@
+/*font */
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+
+/*listgroup */
+
+        .list-group-item.active{
+            z-index:2;
+             color:#fff;   
+            background-color: #ce0000;
+            border-color:#ce0000;
+        }
+/*card */
+    .item-card-self{
+        padding: 10px;
+        background-color: rgba(255,255,255,45%);
+            border-radius: 10px;
+      }
+      .item-card-self img{
+        width: 100%;
+        
+      }
+        .postitem{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+/* image*/
+.single-gallery-image {
+    margin-top: 10px;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 200px;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s
+}
+
+.single-gallery-image:hover {
+    opacity: .7
+}
