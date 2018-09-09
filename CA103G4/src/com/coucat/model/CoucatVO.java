@@ -1,11 +1,9 @@
-package com.Coucat.model;
+package com.coucat.model;
 
 import java.io.Serializable;
 
 
 public class CoucatVO implements java.io.Serializable{
-	
-	private static final long serialVersionUID = 1L;
 	private String coucat_No;
 	private String coucat_Name;
 	private String coucat_Cata;
@@ -17,8 +15,19 @@ public class CoucatVO implements java.io.Serializable{
 	private String coucat_Invalid;
 	private Integer coucat_Amo;
 	private byte[] coucat_Pic;
-	
-	
+	public CoucatVO(String coucat_Name, String coucat_Cata, String coucat_Cont, Integer coucat_Value,
+		 String coucat_Valid, String coucat_Invalid,
+			Integer coucat_Amo, byte[] coucat_Pic) {
+		super();
+		this.coucat_Name = coucat_Name;
+		this.coucat_Cata = coucat_Cata;
+		this.coucat_Cont = coucat_Cont;
+		this.coucat_Value = coucat_Value;
+		this.coucat_Valid = coucat_Valid;
+		this.coucat_Invalid = coucat_Invalid;
+		this.coucat_Amo = coucat_Amo;
+		this.coucat_Pic = coucat_Pic;
+	}
 	
 	public CoucatVO(String coucat_Name, String coucat_Cata, String coucat_Cont, Integer coucat_Value,
 			 String coucat_Valid, String coucat_Invalid,
@@ -32,21 +41,6 @@ public class CoucatVO implements java.io.Serializable{
 		this.coucat_Invalid = coucat_Invalid;
 		this.coucat_Amo = coucat_Amo;
 	}
-
-
-	public CoucatVO(String coucat_No, String coucat_Name, String coucat_Cata, String coucat_Cont, Integer coucat_Value,
-			String coucat_Valid, String coucat_Invalid, Integer coucat_Amo) {
-		super();
-		this.coucat_No = coucat_No;
-		this.coucat_Name = coucat_Name;
-		this.coucat_Cata = coucat_Cata;
-		this.coucat_Cont = coucat_Cont;
-		this.coucat_Value = coucat_Value;
-		this.coucat_Valid = coucat_Valid;
-		this.coucat_Invalid = coucat_Invalid;
-		this.coucat_Amo = coucat_Amo;
-	}
-
 
 	public CoucatVO() {
 		// TODO Auto-generated constructor stub

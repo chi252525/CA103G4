@@ -1,11 +1,11 @@
-package com.Activity.model;
+package com.activity.model;
 import java.sql.*;
 
 public class ActivityVO implements java.io.Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	private String act_No;
 	private String coucat_No;
 	private String act_Cat;

@@ -1,8 +1,5 @@
-package com.Coucat.model;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+package com.coucat.model;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.coupon.model.CouponDAO;
+
 
 public class CoucatDAO implements CoucatDAO_interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -21,16 +20,16 @@ public class CoucatDAO implements CoucatDAO_interface {
 			"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
 			"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
 			"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
-	private static final String INSERT_DIS_STMT  = 
-			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
-					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
-					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
-	private static final String INSERT_FREEP_STMT  = 
-			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
-					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
-					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
+//	private static final String INSERT_DIS_STMT  = 
+//			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
+//					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
+//					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
+//					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
+//	private static final String INSERT_FREEP_STMT  = 
+//			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
+//					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
+//					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
+//					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_CONT=?,COUCAT_VALUE=?," + 
 			"COUCAT_VALID=TO_TIMESTAMP(?,'YYYY-MM-DD HH24:MI')," + 
@@ -47,15 +46,20 @@ public class CoucatDAO implements CoucatDAO_interface {
 			ce.printStackTrace();
 		}
 		}
-	
 	@Override
 	public void insert(CoucatVO coucatVO) {{
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_coucat_No = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully!");
-			pstmt = con.prepareStatement(INSERT_VALUE_STMT );
+
+			con.setAutoCommit(false);
+		
+			//insert coucat record
+			int cols[] = {1};
+			pstmt = con.prepareStatement(INSERT_VALUE_STMT,cols);
 			pstmt.setString(1, coucatVO.getCoucat_Name());
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
 			pstmt.setString(3, coucatVO.getCoucat_Cont());
@@ -63,17 +67,32 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setString(5, coucatVO.getCoucat_Valid());
 			pstmt.setString(6, coucatVO.getCoucat_Invalid());
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
-			byte[] pic = getPictureByteArray("items/Bing2.jpg");
-			pstmt.setBytes(8, pic);
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("新增" + rowCount + " 筆資料");
-
+			pstmt.setBytes(8, coucatVO.getCoucat_Pic());
+			pstmt.executeUpdate();
+			// getGeneratedKeys
+						ResultSet rs = pstmt.getGeneratedKeys();
+						if (rs.next()) {
+							next_coucat_No = rs.getString(1);
+							System.out.println("自增主鍵值 = " + next_coucat_No + "(剛新增成功的優惠卷類別編號)");
+						} else {
+							System.out.println("未取得自增主鍵值");
+						}
+						
+			// insert coupon record at the same time
+						CouponDAO dao= new CouponDAO();
+						dao.insert(con,next_coucat_No,coucatVO.getCoucat_Amo());
+						con.commit();
+						con.setAutoCommit(true);
+						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
+						rs.close();
 			// Handle any SQL errors
-		} catch (SQLException | IOException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
+		} catch (SQLException  se) {
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -134,8 +153,6 @@ public class CoucatDAO implements CoucatDAO_interface {
 		}
 
 	}
-	
-	
 	@Override
 	public List<CoucatVO> getAll() {
 		Connection con = null;
@@ -244,21 +261,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		return coucat;
 	}
 
-				public static byte[] getPictureByteArray(String path) throws IOException {
-					File file = new File(path);
-					FileInputStream fis = new FileInputStream(file);
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					byte[] buffer = new byte[fis.available()];
-					int i;
-					while ((i = fis.read(buffer)) != -1) {
-						baos.write(buffer, 0, i);
-					
-					}
-					baos.close();
-					fis.close();
-
-					return baos.toByteArray();
-				}
+			
 				
 
 	

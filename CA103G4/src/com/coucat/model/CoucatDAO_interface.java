@@ -1,4 +1,4 @@
-package com.Coucat.model;
+package com.coucat.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.Activity.model;
+package com.activity.model;
 import java.util.List;
 
 public interface ActivityDAO_interface {
