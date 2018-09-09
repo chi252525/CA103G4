@@ -1,4 +1,7 @@
-package com.Coupon.model;
+package com.coupon.model;
+
+import com.coupon.model.CouponDAO;
+import com.coupon.model.CouponVO;
 
 public class CouponTest {
 //	insert  done

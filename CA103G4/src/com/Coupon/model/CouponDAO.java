@@ -1,4 +1,4 @@
-package com.Coupon.model;
+package com.coupon.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Activity.model.ActivityVO;
+import com.activity.model.ActivityVO;
 
 public class CouponDAO implements CouponDAO_interface {
 		private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -153,6 +153,49 @@ public class CouponDAO implements CouponDAO_interface {
 				}
 			}
 			return couponVO;
+		}
+
+
+
+		@Override
+		public void insert(Connection con,String coucat_No,Integer coucat_Amo) {
+			PreparedStatement pstmt = null;
+			
+			try {
+				for(int i=0;i<coucat_Amo;i++) {
+				pstmt = con.prepareStatement(INSERT_STMT);
+				pstmt.setString(1, coucat_No);
+				int rowCount =pstmt.executeUpdate();
+				System.out.println("新增 " + rowCount + " 筆資料");
+				
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				try {
+					// rollback
+					con.rollback();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+//						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}			
 		}
 
 		

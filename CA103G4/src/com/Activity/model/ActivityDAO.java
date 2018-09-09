@@ -1,4 +1,4 @@
-package com.Activity.model;
+package com.activity.model;
 import java.util.*;
 import java.util.Date;
 import java.io.ByteArrayOutputStream;
@@ -217,7 +217,6 @@ public class ActivityDAO implements ActivityDAO_interface{
 
 			while (rs.next()) {
 				ActivityVO activityVO=new ActivityVO();
-				activityVO=new ActivityVO();
 				activityVO.setAct_No(rs.getString("act_No"));
 				activityVO.setCoucat_No(rs.getString("coucat_No"));
 				activityVO.setAct_Cat(rs.getString("act_Cat"));

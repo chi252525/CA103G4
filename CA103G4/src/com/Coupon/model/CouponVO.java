@@ -1,8 +1,6 @@
-package com.Coupon.model;
+package com.coupon.model;
 
 public class CouponVO implements java.io.Serializable{
-
-	private static final long serialVersionUID = 1L;
 	private String  coup_Sn;
 	private String coucat_No;
 	private String  coup_Status;
