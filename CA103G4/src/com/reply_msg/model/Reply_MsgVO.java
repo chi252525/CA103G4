@@ -3,6 +3,7 @@ package com.reply_msg.model;
 import java.sql.Timestamp;
 
 public class Reply_MsgVO {
+	
 	private String rply_No;
 	private String mem_No;
 	private String post_No;

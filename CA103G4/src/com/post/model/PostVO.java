@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class PostVO implements java.io.Serializable{
 
-	private static final long serialVersionUID = 1L;
 	private String post_No;
 	private String mem_No;
 	private String custom_No;

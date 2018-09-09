@@ -7,7 +7,6 @@ public class Report_MsgVO implements java.io.Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private String rpt_No;
 	private String mem_No;
 	private String post_No;
@@ -76,9 +75,7 @@ public class Report_MsgVO implements java.io.Serializable{
 	public void setRpt_Time(Timestamp rpt_Time) {
 		this.rpt_Time = rpt_Time;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	
 	
 	
