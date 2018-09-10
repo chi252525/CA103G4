@@ -34,7 +34,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			"SELECT CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO FROM CUSTOMMEALS ORDER BY CUSTOM_NO";
 	private static final String FINDBYMEMNO="SELECT * FROM CUSTOMMEALS WHERE MEM_NO=?";
 	private static final String FINDBYCUSTOMNO="SELECT * FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
-	private static final String GETALL = "SELECT * FROM CUSTOMMEALS";
+
 	
 	
 @Override
@@ -103,7 +103,7 @@ public void update(CustommealsVO custommealsVO) {
 		byte[] pic = getPictureByteArray("items/Bing3.jpeg");
 		pstmt.setBytes(5, pic);
 		int rowCount =pstmt.executeUpdate();
-		System.out.println("新增 " + rowCount + " 筆資料");
+		System.out.println("修改 " + rowCount + " 筆資料");
 		
 	} catch (IOException e) {
 		e.printStackTrace();
@@ -172,55 +172,7 @@ public void delete(String Custom_No) {
 }
 	
 
-@Override
-public CustommealsVO findByMem_No(String Mem_No) {
-	CustommealsVO custommealsVO = null;
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	try {
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
-		System.out.println("Connecting to database successfully! (連線成功！)");
-		pstmt = con.prepareStatement(FINDBYMEMNO);
-		pstmt.setString(1, Mem_No);
-		rs = pstmt.executeQuery();
 
-		while (rs.next()) {
-			custommealsVO = new CustommealsVO();
-			custommealsVO.setCustom_No(rs.getString("Custom_No"));
-			custommealsVO.setMem_No(rs.getString("Mem_No"));
-			custommealsVO.setCustom_Name(rs.getString("Custom_Name"));
-			custommealsVO.setCustom_Price(rs.getInt("Custom_Price"));
-
-		}
-	} catch (SQLException se) {
-		throw new RuntimeException("A database error occured. "
-				+ se.getMessage());
-	} finally {
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
-	}
-	return custommealsVO;
-}
 
 
 
@@ -237,7 +189,7 @@ public List<CustommealsVO> getAll() {
 
 	try {
 		con = DriverManager.getConnection(URL, USER, PASSWORD);
-		pstmt = con.prepareStatement(GETALL);
+		pstmt = con.prepareStatement(SELECT_ALL_STMT);
 		rs = pstmt.executeQuery();
 
 		while (rs.next()) {
@@ -245,8 +197,8 @@ public List<CustommealsVO> getAll() {
 			custommealsVO.setCustom_No(rs.getString("CUSTOM_NO"));
 			custommealsVO.setMem_No(rs.getString("MEM_NO"));
 			custommealsVO.setCustom_Name(rs.getString("CUSTOM_NAME"));
-			custommealsVO.setCustom_Price(rs.getInt("Custom_Price"));
-			custommealsVO.setCustom_Photo(rs.getBytes("Custom_Photo"));
+			custommealsVO.setCustom_Price(rs.getInt("CUSTOM_PRICE"));
+			custommealsVO.setCustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
 			custommealsVOList.add(custommealsVO);
 		}
 
@@ -283,6 +235,58 @@ public List<CustommealsVO> getAll() {
 
 
 
+@Override
+public CustommealsVO findByPrimaryKey(String Custom_No) {
+	CustommealsVO custommealsVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	try {
+		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		System.out.println("Connecting to database successfully! (連線成功！)");
+		pstmt = con.prepareStatement(SELECT_ONE_STMT);
+		pstmt.setString(1, Custom_No);
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			custommealsVO = new CustommealsVO();
+			custommealsVO.setCustom_No(rs.getString("CUSTOM_NO"));
+			custommealsVO.setMem_No(rs.getString("MEM_NO"));
+			custommealsVO.setCustom_Name(rs.getString("CUSTOM_NAME"));
+			custommealsVO.setCustom_Price(rs.getInt("CUSTOM_PRICE"));
+			custommealsVO.setCustom_Photo(rs.getBytes("MENU_PHOTO"));
+
+		}
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. "
+				+ se.getMessage());
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return custommealsVO;
+}
+
+
 private byte[] getPictureByteArray(String path) throws IOException {
 	File file = new File(path);
 	FileInputStream fis = new FileInputStream(file);
@@ -302,8 +306,9 @@ private byte[] getPictureByteArray(String path) throws IOException {
 
 
 
+
 @Override
-public CustommealsVO findByPrimaryKey(String Custom_No) {
+public CustommealsVO findByMem_No(String Mem_No) {
 	CustommealsVO custommealsVO = null;
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -311,8 +316,8 @@ public CustommealsVO findByPrimaryKey(String Custom_No) {
 	try {
 		con = DriverManager.getConnection(URL, USER, PASSWORD);
 		System.out.println("Connecting to database successfully! (連線成功！)");
-		pstmt = con.prepareStatement(FINDBYCUSTOMNO);
-		pstmt.setString(1, Custom_No);
+		pstmt = con.prepareStatement(FINDBYMEMNO);
+		pstmt.setString(1, Mem_No);
 		rs = pstmt.executeQuery();
 
 		while (rs.next()) {

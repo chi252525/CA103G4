@@ -3,16 +3,16 @@ package com.ingredientcombination.model;
 public class IngredientCombinationVO implements java.io.Serializable{
 	
 	private String Custom_No;
-	private String Ingdt_No;
+	private String Ingdt_Id;
 	
 	public IngredientCombinationVO() {
 		super();
 	}
 	
-	public IngredientCombinationVO(String Custom_No, String Ingdt_No) {
+	public IngredientCombinationVO(String Custom_No, String Ingdt_Id) {
 		super();
 		this.Custom_No = Custom_No;
-		this.Ingdt_No = Ingdt_No;
+		this.Ingdt_Id = Ingdt_Id;
 	}
 	
 	public String getCustom_No() {
@@ -24,13 +24,13 @@ public class IngredientCombinationVO implements java.io.Serializable{
 		this.Custom_No = Custom_No;
 	}
 	
-	public String getIngdt_No() {
+	public String getIngdt_Id() {
 		// TODO Auto-generated method stub
-		return Ingdt_No;
+		return Ingdt_Id;
 	}
 	
-	public void setIngdt_No(String Ingdt_No) {
-		this.Ingdt_No = Ingdt_No;
+	public void setIngdt_Id(String Ingdt_Id) {
+		this.Ingdt_Id = Ingdt_Id;
 	}
 	
 }
