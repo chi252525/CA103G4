@@ -12,9 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.custommeals.model.CustommealsVO;
-import com.ingredients.model.IngredientsVO;
-
 public class MenuDAO implements MenuDAO_interface {
 
 
