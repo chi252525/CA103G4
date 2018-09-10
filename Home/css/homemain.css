@@ -1,0 +1,469 @@
+/*font */
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+
+/*banner*/
+.banner-content {
+    margin-top: 100px
+}
+
+.banner-content img {
+    width: 10;
+}
+
+@media (max-width: 1024px) {
+    .banner-content {
+        margin-top: 100px
+    }
+}
+
+@media (max-width: 736px) and (min-width: 415px) {
+    .banner-content {
+        margin-top: 240px
+    }
+}
+
+.banner-content h6 {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 2px
+}
+
+.banner-content h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin: 20px 0
+}
+
+@media (max-width: 767px) {
+    .banner-content h1 {
+        font-size: 40px
+    }
+}
+
+.banner-content p {
+    max-width: 515px;
+    margin-bottom: 30px
+}
+
+.banner-content .primary-btn:hover {
+    background: #222;
+    color: #fff
+}
+
+
+/*text*/
+.text-white {
+    color: #fff
+}
+.text-center {
+    text-align: center
+}
+/*primary-btn*/
+.primary-btn {
+    background: #f42f2c;
+    line-height: 42px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    position: relative
+}
+
+.primary-btn:focus {
+    outline: none
+}
+
+.primary-btn span {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    right: 30px;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s
+}
+
+.primary-btn:hover {
+    color: #fff
+}
+
+.primary-btn:hover span {
+    color: #fff;
+    right: 20px
+}
+
+.primary-btn.white {
+    border: 1px solid #fff;
+    color: #fff
+}
+
+.primary-btn.white span {
+    color: #fff
+}
+
+.primary-btn.white:hover {
+    background: #fff;
+    color: #f42f2c
+}
+
+.primary-btn.white:hover span {
+    color: #f42f2c
+}
+
+
+/*menu-area*/
+.menu-area {
+/*    background: rgb(249,249,255,0%)*/
+   
+}
+
+.menu-area .primary-btn {
+    color: #fff;
+    background-color: #f42f2c;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.filter-wrap {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 0px rgba(153, 153, 153, 0.2)
+}
+
+.menu-area .filters {
+    text-align: center
+}
+
+.menu-area .filters {
+    padding: 0;
+    overflow: hidden
+}
+
+.filter-wrap {
+    display: table
+}
+
+.filter-wrap li {
+    display: table-cell;
+    border-right: 1px solid #edf6ff
+}
+
+@media (max-width: 414px) {
+    .filter-wrap li {
+        display: block !important
+    }
+}
+
+.filter-wrap li:last-child {
+    border: none
+}
+
+.menu-area .filters li {
+    padding: 25px 0px;
+    max-width: 184px;
+    cursor:grab;
+    position:relative;
+    color: #222;
+    font-size: 18px;
+    font-weight: 500;
+    
+}
+
+@media (max-width: 768px) {
+    .menu-area .filters li {
+        padding: 20px 0px
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-area .filters li {
+        padding: 12px 0px;
+        font-size: 10px
+    }
+}
+
+@media (max-width: 414px) {
+    .menu-area .filters li {
+        max-width: 100% !important
+    }
+}
+
+.menu-area .filters li:last-child {
+    border-right: none
+}
+
+.menu-area .filters li.active {
+    color: #fff;
+    background: #ce0000
+}
+
+.menu-area .filters-content {
+    margin-top: 50px
+}
+
+.menu-area .filters-content .show {
+    opacity: 1;
+    visibility: visible;
+    transition: all 350ms
+}
+
+.menu-area .filters-content .hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 350ms
+}
+
+.menu-area .filters-content .item {
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 30px
+}
+
+.menu-area .filters-content .item img {
+    border-radius: 10px
+}
+
+.menu-area .filters-content .p-inner {
+    padding: 20px 0px;
+    text-align: center
+}
+
+.menu-area .filters-content .item .p-inner .cat {
+    font-size: 13px
+}
+
+.menu-area .filters-content .item img {
+    width: 100%
+}
+.filter-wrap {
+    display: table
+}
+
+.filter-wrap li {
+    display: table-cell;
+    border-right: 1px solid #edf6ff
+}
+
+.filter-wrap li:last-child {
+    border: none
+}
+/*section gap*/
+.section-gap {
+    padding: 50px 0
+}
+
+/*餐點介紹區域*/
+.pb-70 {
+    padding-bottom: 70px
+}
+
+.mb-10 {
+    margin-bottom: 10px
+}
+.no-padding {
+    padding: 0
+}
+
+/*homeabout*/
+.home-about-left p {
+    margin: 20px 0;
+    max-width: 490px
+}
+
+.home-about-left .primary-btn:hover {
+    box-shadow: 0px 20px 20px 0px rgba(245, 63, 81, 0.2)
+}
+
+@media (max-width: 991px) {
+    .home-about-left {
+        margin-bottom: 50px
+    }
+}
+
+/*basic*/
+.IndexBackGround {
+    height: 100%;
+    width: 100%;
+}
+
+::-moz-selection {
+    background-color: #f42f2c;
+    color: #fff
+}
+
+::selection {
+    background-color: #f42f2c;
+    color: #fff
+}
+
+::-webkit-input-placeholder {
+    color: #777777;
+    font-weight: 300
+}
+
+:-moz-placeholder {
+    color: #777777;
+    opacity: 1;
+    font-weight: 300
+}
+
+::-moz-placeholder {
+    color: #777777;
+    opacity: 1;
+    font-weight: 300
+}
+
+:-ms-input-placeholder {
+    color: #777777;
+    font-weight: 300
+}
+
+::-ms-input-placeholder {
+    color: #777777;
+    font-weight: 300
+}
+
+body {
+            background-image: url(img/woodbackground3.png);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            font-family: 'Noto Sans TC', sans-serif;;
+            font-weight: 500;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.625em;
+            position: relative
+            color:white;
+        } 
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+select {
+    display: block
+}
+
+figure {
+    margin: 0
+}
+
+a {
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s
+}
+
+iframe {
+    border: 0
+}
+
+a,
+a:focus,
+a:hover {
+    text-decoration: none;
+    outline: 0
+}
+
+/*=====================
+add css by myself
+*/
+
+
+#textLogo{
+    width:10;
+    height:10
+}
+
+
+.card-panel {
+    margin: 0;
+    padding: 60px
+}
+
+.gray-bg {
+    background: #f9f9ff
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Noto Sans TC", sans-serif;
+    color: 	#fff;
+    line-height: 1.2em !important;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 600
+}
+
+
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: "SentySnowMountain", sans-serif;
+    font-weight: 600;
+    color: #222
+}
+
+h1,
+.h1 {
+    font-size: 36px
+}
+
+h2,
+.h2 {
+    font-size: 30px
+}
+
+h3,
+.h3 {
+    font-size: 24px
+}
+
+h4,
+.h4 {
+    font-size: 18px
+}
+
+h5,
+.h5 {
+    font-size: 16px
+}
+
+h6,
+.h6 {
+    font-size: 14px;
+    color: #222
+}
+
+td,
+th {
+    border-radius: 0px
+}
