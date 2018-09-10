@@ -1,14 +1,16 @@
 package com.customers.model;
 
 public class CustomersVO {
-	private Integer cus_No;
+	private String cus_No;
 	private String cus_Name;
 	private String cus_Phone;
 	private Integer cus_People;
-	public Integer getCus_No() {
+	
+	
+	public String getCus_No() {
 		return cus_No;
 	}
-	public void setCus_No(Integer cus_No) {
+	public void setCus_No(String cus_No) {
 		this.cus_No = cus_No;
 	}
 	public String getCus_Name() {

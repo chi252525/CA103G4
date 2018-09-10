@@ -1,5 +1,6 @@
 package com.customers.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,8 +23,7 @@ public class CustomersDAO implements CustomersDAO_interface {
 		hash.put("CUS_NAME", customersvo.getCus_Name());
 		hash.put("CUS_PHONE", customersvo.getCus_Phone());
 		hash.put("CUS_PEOPLE", Integer.toString(customersvo.getCus_People()));
-		jedis.hmset(Integer.toString(customersvo.getCus_No()), hash);
-		System.out.println("新增完成!");
+		jedis.hmset(customersvo.getCus_No(), hash);
 
 		jedis.close();
 	}
@@ -33,8 +33,8 @@ public class CustomersDAO implements CustomersDAO_interface {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
 		String cus_key = Integer.toString(cus_No);
-		Long delNum = jedis.hdel("cus:"+cus_key, "CUS_NO","CUS_NAME", "CUS_PHONE", "CUS_PEOPLE");
-		if (delNum > 0&&delNum<4)
+		Long delNum = jedis.hdel( cus_key, "CUS_NO", "CUS_NAME", "CUS_PHONE", "CUS_PEOPLE");
+		if (delNum > 0 && delNum < 4)
 			System.out.println("刪除 " + delNum + " 筆屬性");
 		else if (delNum == 4)
 			System.out.println("刪除 1筆 顧客資料");
@@ -63,17 +63,19 @@ public class CustomersDAO implements CustomersDAO_interface {
 		jedis.auth(password);
 		Set<String> keySet = jedis.keys("cus:*");
 		Iterator<String> it = keySet.iterator();
+		CustomersVO customersvo = new CustomersVO();
+		List<CustomersVO> list = new ArrayList<CustomersVO>();
 		while (it.hasNext()) {
 			String Cus_No = it.next();
 			Map<String, String> map = jedis.hgetAll(Cus_No);
-			System.out.println("候位編號: " + map.get("CUS_NO"));
-			System.out.println("客人姓名: " + map.get("CUS_NAME"));
-			System.out.println("電話: " + map.get("CUS_PHONE"));
-			System.out.println("訂位人數: " + map.get("CUS_PEOPLE"));
-			System.out.println("==========================");
+			customersvo.setCus_No(map.get("CUS_NO"));
+			customersvo.setCus_No(map.get("CUS_NAME"));
+			customersvo.setCus_No(map.get("CUS_PHONE"));
+			customersvo.setCus_No(map.get("CUS_PEOPLE"));
+			list.add(customersvo);
 		}
 		jedis.close();
-		return null;
+		return list;
 	}
 
 }
