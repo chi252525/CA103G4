@@ -13,62 +13,69 @@
 		<title>Homepage</title> 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<!--HomepageCSS============================================= -->
-<link rel="stylesheet" href="css/jquery-ui.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="css/main.css">
-   <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+        <!--HomepageCSS============================================= -->
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <!--JS BS4-->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <style>
-        body{
+    body{
         background-image: url('img/about/woodbackground5.png'); 
         }
-        .bg-transparent{
-            background-color:rgba(255,255,255,0);
-        }
-        .dropdown-menu li:hover .sub-menu {visibility: visible;}
-        .dropdown:hover .dropdown-menu {display: block;}
-        .nav-link{
+       /*header*/
+    .dropdown-menu li:hover .sub-menu {visibility: visible;}
+    .dropdown:hover .dropdown-menu {display: block;}
+    .nav-link{
             font-size: 20px;
             
         }
-        .lnr-user{
+    .lnr-user{
               color: #FFF;
             font-size: 20px;
            
         }
-        .lnr-alarm{
+    .lnr-alarm{
              color: #FFF;
             font-size: 23px;
              margin-right: 10px;
         }
-        .lnr-cart{
+    .lnr-cart{
               color: #FFF;
             font-size: 23px;
              margin-right: 10px; 
         }
-        .imgicon{
+    .imgicon{
             margin-top: 10px;
         }
-
-#header.header-scrolled {
+        
+    #header.header-scrolled {
     transition: all 0.5s;
-    background-color: red;
-}
-
-#header.header-scrolled .header-top {
-    display: none
-}
-
-#header.header-scrolled .main-menu {
-    background: transparent;
+    background: black;
     border: none
-}
+      
+    }
+    /*banner*/
+        .banner-area {
+        background: url(../img/hero-bg.jpg) center center/cover;
+        background-size: cover
+    }
+
+    @media (max-width: 860px) {
+        .banner-area {
+            height: 860px !important
+        }
+    }
         </style>
 		</head>
 		<body >	
-			<header id="header">
-				<div class="header-top ">
+			<header>
+				<div class="header-top" id="header">
         <nav class="navbar-self navbar navbar-expand-lg navbar-dark bg-transparent">
 		
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -115,8 +122,11 @@
 		
             </div>
             </header>
+            
+            
+            
 				<script> $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
+        if ($(this).scrollTop() > 0) {
             $('#header').addClass('header-scrolled');
         } else {
             $('#header').removeClass('header-scrolled');
@@ -231,7 +241,7 @@
                 </div>
             </section>
             <!-- End menu-area Area -->			
-<section class="section-gap">
+    <section class="section-gap">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -319,12 +329,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             <script src="js/isotope.pkgd.min.js"></script>		
 			<script src="js/main.js"></script>	
 			
-			<!--JS BS4-->
-<!--
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
--->
+			
+
 			
 		</body>
 	</html>

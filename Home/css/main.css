@@ -2389,16 +2389,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 10px
 }
 
-.banner-area {
-    background: url(../img/hero-bg.jpg) center center/cover;
-    background-size: cover
-}
 
-@media (max-width: 860px) {
-    .banner-area {
-        height: 860px !important
-    }
-}
 
 .banner-content {
     margin-top: 100px
