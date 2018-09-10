@@ -4,7 +4,7 @@ DROP SEQUENCE storedrecord_NO_seq;
 --  for Table STOREDRECORD
 --------------------------------------------------------
 CREATE TABLE STOREDRECORD (
-  STOR_NUM     VARCHAR2(10)  NOT NULL,
+  STOR_NO     VARCHAR2(10)  NOT NULL,
   MEM_NO     VARCHAR2(10)  NOT NULL,
   STOR_DATE     TIMESTAMP(8) NOT NULL,
   STOR_POINT    NUMBER(10),
