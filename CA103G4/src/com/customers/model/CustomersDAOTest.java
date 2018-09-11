@@ -8,6 +8,11 @@ public class CustomersDAOTest {
 		CustomersVO customersvo = new CustomersVO();
 		CustomersDAO dao = new CustomersDAO();
 		// insert
+		customersvo.setCus_No("006");
+		customersvo.setCus_Name("Kevin_Cano");
+		customersvo.setCus_Phone("0909392246");
+		customersvo.setCus_People(12);
+		dao.insertOrUpdate(customersvo);
 		customersvo.setCus_No("026");
 		customersvo.setCus_Name("Kevin_Nash");
 		customersvo.setCus_Phone("0909392246");
@@ -40,8 +45,9 @@ public class CustomersDAOTest {
 		// delete
 		dao.delete("cus:006");
 		System.out.println("刪除完成!");
-		
-		// getall
+		System.out.println("================");
+		// getAll
+		System.out.println("===========候位顧客名單===============");
 		List<CustomersVO> list = dao.getAll();
 		for(int i =0 ; i < list.size(); i ++ ) {
 			CustomersVO customersvo3 = list.get(i);

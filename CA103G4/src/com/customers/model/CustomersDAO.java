@@ -55,12 +55,14 @@ public class CustomersDAO implements CustomersDAO_interface {
 		jedis.close();
 		return customersvo;
 	}
-
+		
 	@Override
 	public List<CustomersVO> getAll() {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
 		Set<String> keySet = jedis.keys("cus:*");
+		
+		
 		Iterator<String> it = keySet.iterator();
 		List<CustomersVO> list = new ArrayList<CustomersVO>();
 		while (it.hasNext()) {
