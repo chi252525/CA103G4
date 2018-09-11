@@ -8,9 +8,7 @@ public interface DeliveryDAO_interface {
 
 	public void update(DeliveryVO deliveryVO);
 
-	public void delete(String deliv_no);
-
-	public DeliveryVO findByPrimaryKey(String deliv_no);
+	public DeliveryVO findByThreeKey(String emp_no, String branch_no, String deliv_status);
 
 	public List<DeliveryVO> getAll();
 
