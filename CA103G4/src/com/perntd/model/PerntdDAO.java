@@ -8,12 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class PerntdDAO implements PerntdDAO_interface{
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "Test";
 	String passwd = "123456";
+	
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO PERNTD VALUES('P'||LPAD(to_char(perntd_seq.NEXTVAL),2,'0'),?,?,?,to_char(sysdate,'yyyy/mm/dd'))";
@@ -32,16 +48,12 @@ public class PerntdDAO implements PerntdDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userid, passwd);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, perntdVO.getMem_No());
 			pstmt.setString(2, perntdVO.getNt_No());
 			pstmt.setString(3, perntdVO.getPerntd_Cont());
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,8 +84,7 @@ public class PerntdDAO implements PerntdDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userid, passwd);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, perntdVO.getMem_No());
 			pstmt.setString(2, perntdVO.getNt_No());
@@ -81,9 +92,6 @@ public class PerntdDAO implements PerntdDAO_interface{
 			pstmt.setString(4, perntdVO.getPerntd_Date());
 			pstmt.setString(5, perntdVO.getPerntd_No());
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,14 +121,10 @@ public class PerntdDAO implements PerntdDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userid, passwd);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, perntd_No);
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,8 +156,7 @@ public class PerntdDAO implements PerntdDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userid, passwd);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, perntd_No);
 			rs = pstmt.executeQuery();
@@ -164,9 +167,6 @@ public class PerntdDAO implements PerntdDAO_interface{
 			perntdVO.setNt_No(rs.getString("NT_NO"));
 			perntdVO.setPerntd_Cont(rs.getString("PERNTD_CONT"));
 			perntdVO.setPerntd_Date(rs.getString("PERNTD_DATE"));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,8 +207,7 @@ public class PerntdDAO implements PerntdDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userid, passwd);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -220,9 +219,6 @@ public class PerntdDAO implements PerntdDAO_interface{
 				perntdVO.setPerntd_Date(rs.getString("PERNTD_DATE"));
 				list.add(perntdVO);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
