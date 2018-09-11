@@ -1,12 +1,6 @@
 package com.storedrecord.model;
 
 import java.util.*;
-import java.util.Date;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,13 +13,13 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT = "INSERT INTO STOREDRECORD (stor_NO, MEM_NO,  STOR_DATE, STOR_POINT, DREW_POINT, STOR_STATUS)"
-			+ "VALUES( ?, ?, ?, ?, ?)";
+			+ "VALUES( ?, ?, ?, ?, ?, ?)";
 
-	private static final String UPDATE_STMT = "UPDATE STOREDRECORD SET MEM_NO=?,  STOR_DATE=? , STOR_POINT=?, DREW_POINT =? STOR_STATUS =?, WHERE stor_NO=?";
+	private static final String UPDATE_STMT = "UPDATE STOREDRECORD SET MEM_NO=?, STOR_DATE=?, STOR_POINT=?, DREW_POINT=?, STOR_STATUS=? WHERE STOR_NO = ?";
 	private static final String FINDBY_stor_NO = "SELECT * FROM STOREDRECORD WHERE stor_NO = ? ";
 	private static final String GETALL = "SELECT * FROM STOREDRECORD order by stor_NO";
 	private static final String FINDBY_MEM_NO = "SELECT * FROM STOREDRECORD WHERE MEM_NO=?";
-	private static final String FINDBY_MON = "SELECT * FROM STOREDRECORD WHERE STOR_DATE BETWEEN STOR_DATE="
+	private static final String FINDBY_MON_YEAR = "SELECT * FROM STOREDRECORD WHERE extract(MONTH from STOR_DATE )=? AND extract(YEAR from STOR_DATE )=?";
 	private static final String DELETE_STMT = "DELETE FROM STOREDRECORD WHERE stor_No = ?";
 	static {
 		try {
@@ -43,11 +37,12 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, STOREDRECORD.getstor_No());
+			pstmt.setString(1, STOREDRECORD.getStor_No());
 			pstmt.setString(2, STOREDRECORD.getMem_No());
-			pstmt.setString(3, STOREDRECORD.getSTOR_DATE());
-			pstmt.setString(4, STOREDRECORD.getSTOR_POINT());
-			pstmt.setString(5, STOREDRECORD.getDREW_POINT());
+			pstmt.setTimestamp(3, STOREDRECORD.getStor_Date());
+			pstmt.setInt(4, STOREDRECORD.getStor_Point());
+			pstmt.setInt(5, STOREDRECORD.getDrew_Point());
+			pstmt.setInt(6, STOREDRECORD.getStor_Status());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
 
@@ -83,10 +78,11 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, STOREDRECORD.getMem_No());
-			pstmt.setString(2, STOREDRECORD.getSTOR_DATE());
-			pstmt.setString(3, STOREDRECORD.getSTOR_POINT());
-			pstmt.setString(4, STOREDRECORD.getDREW_POINT());
-			pstmt.setString(5, STOREDRECORD.getstor_No());
+			pstmt.setTimestamp(2, STOREDRECORD.getStor_Date());
+			pstmt.setInt(3, STOREDRECORD.getStor_Point());
+			pstmt.setInt(4, STOREDRECORD.getDrew_Point());
+			pstmt.setInt(5, STOREDRECORD.getStor_Status());
+			pstmt.setString(6, STOREDRECORD.getStor_No());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
 
@@ -127,12 +123,12 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			rs = pstmt.executeQuery();
 			rs.next();
 			STOREDRECORD = new StoredrecordVO();
-			STOREDRECORD.setstor_No(rs.getString("stor_No"));
+			STOREDRECORD.setStor_No(rs.getString("stor_No"));
 			STOREDRECORD.setMem_No(rs.getString("mem_No"));
-			STOREDRECORD.setSTOR_DATE(rs.getString("STOR_DATE"));
-			STOREDRECORD.setSTOR_POINT(rs.getString("STOR_POINT"));
-			STOREDRECORD.setDREW_POINT(rs.getString("DREW_POINT"));
-			
+			STOREDRECORD.setStor_Date(rs.getTimestamp("STOR_DATE"));
+			STOREDRECORD.setDrew_Point(rs.getInt("STOR_POINT"));
+			STOREDRECORD.setStor_Point(rs.getInt("DREW_POINT"));
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -168,7 +164,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<StoredrecordVO> STOREDRECORDivitylist = new ArrayList<>();
+		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
 
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -179,12 +175,13 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			while (rs.next()) {
 				StoredrecordVO STOREDRECORD = new StoredrecordVO();
 				STOREDRECORD = new StoredrecordVO();
-				STOREDRECORD.setstor_No(rs.getString("stor_No"));
+				STOREDRECORD.setStor_No(rs.getString("stor_No"));
 				STOREDRECORD.setMem_No(rs.getString("mem_No"));
-				STOREDRECORD.setSTOR_DATE(rs.getString("STOR_DATE"));
-				STOREDRECORD.setSTOR_POINT(rs.getString("STOR_POINT"));
-				STOREDRECORD.setDREW_POINT(rs.getString("DREW_POINT"));
-				STOREDRECORDivitylist.add(STOREDRECORD); // Store the row in the list
+				STOREDRECORD.setStor_Date(rs.getTimestamp("STOR_DATE"));
+				STOREDRECORD.setDrew_Point(rs.getInt("STOR_POINT"));
+				STOREDRECORD.setStor_Point(rs.getInt("DREW_POINT"));
+				STOREDRECORD.setStor_Status(rs.getInt("STOR_STATUS"));
+				STOREDRECORDlist.add(STOREDRECORD); // Store the row in the list
 			}
 
 			// Handle any SQL errors
@@ -213,7 +210,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 				}
 			}
 		}
-		return STOREDRECORDivitylist;
+		return STOREDRECORDlist;
 	}
 
 	@Override
@@ -231,11 +228,12 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 
 			while (rs.next()) {
 				STOREDRECORD = new StoredrecordVO();
-				STOREDRECORD.setstor_No(rs.getString("stor_No"));
+				STOREDRECORD.setStor_No(rs.getString("stor_No"));
 				STOREDRECORD.setMem_No(rs.getString("mem_No"));
-				STOREDRECORD.setSTOR_DATE(rs.getString("STOR_DATE"));
-				STOREDRECORD.setSTOR_POINT(rs.getString("STOR_POINT"));
-				STOREDRECORD.setDREW_POINT(rs.getString("DREW_POINT"));
+				STOREDRECORD.setStor_Date(rs.getTimestamp("STOR_DATE"));
+				STOREDRECORD.setDrew_Point(rs.getInt("STOR_POINT"));
+				STOREDRECORD.setStor_Point(rs.getInt("DREW_POINT"));
+				STOREDRECORD.setStor_Status(rs.getInt("STOR_STATUS"));
 				System.out.println("===================================");
 			}
 
@@ -301,9 +299,48 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	}
 
 	@Override
-	public StoredrecordVO findByMon(String Mon) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<StoredrecordVO> findByMon_Year(int Mon, int Year) {
+		StoredrecordVO storedrecordvo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
+		try {
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = conn.prepareStatement(FINDBY_MON_YEAR);
+			pstmt.setInt(1, Mon);
+			pstmt.setInt(2, Year);
+			rs = pstmt.executeQuery();
+			System.out.println("查完囉!");
+			while(rs.next()) {
+				storedrecordvo = new StoredrecordVO();
+				storedrecordvo.setStor_No(rs.getString("STOR_NO"));
+				storedrecordvo.setMem_No(rs.getString("MEM_NO"));
+				storedrecordvo.setStor_Date(rs.getTimestamp("STOR_DATE"));
+				storedrecordvo.setStor_Point(rs.getInt("STOR_POINT"));
+				storedrecordvo.setDrew_Point(rs.getInt("DREW_POINT"));
+				storedrecordvo.setStor_Status(rs.getInt("STOR_STATUS"));
+				STOREDRECORDlist.add(storedrecordvo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return STOREDRECORDlist;
 	}
 
 }

@@ -8,7 +8,7 @@ public interface StoredrecordDAO_interface {
 	StoredrecordVO findByPrimaryKey(String Storedrecord_Num);
 	List<StoredrecordVO> getAll();
 	StoredrecordVO findByMem_no(String mem_No);
-	StoredrecordVO findByMon(String Mon);
+	List<StoredrecordVO> findByMon_Year(int Mon, int Year);
 }
 
 
