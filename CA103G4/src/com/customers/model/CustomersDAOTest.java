@@ -21,6 +21,7 @@ public class CustomersDAOTest {
 		customersvo.setCus_Phone("0800091000");
 		dao.insertOrUpdate(customersvo);
 		System.out.println("修改完成!");
+		
 		//Query
 		System.out.println("查詢會員編號009,012:");
 		CustomersVO customersvo2 = dao.findByKey("cus:009");
@@ -35,9 +36,11 @@ public class CustomersDAOTest {
 		System.out.println("電話: " + customersvo2.getCus_Phone());
 		System.out.println("訂位人數: " + customersvo2.getCus_People());
 		System.out.println("查詢完成!");
+		
 		// delete
 		dao.delete("cus:006");
 		System.out.println("刪除完成!");
+		
 		// getall
 		List<CustomersVO> list = dao.getAll();
 		for(int i =0 ; i < list.size(); i ++ ) {
