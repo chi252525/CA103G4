@@ -5,37 +5,18 @@ public class ActivityVO implements java.io.Serializable{
 	/**
 	 * 
 	 */
-
 	private String act_No;
 	private String coucat_No;
 	private String act_Cat;
 	private String act_Name;
 	private byte[] act_Carousel;
+	private String act_Cmimetype;
 	private byte[] act_Pic;
+	private String act_Pmimetype;
 	private String act_Content;
 	private String act_Start;
 	private String act_End;
 	private String act_Usecou;
-	
-	public ActivityVO(String coucat_No, String act_Cat, String act_Name, byte[] act_Carousel, byte[] act_Pic,
-			String act_Content, String act_Start, String act_End, String act_Usecou) {
-		super();
-		this.coucat_No = coucat_No;
-		this.act_Cat = act_Cat;
-		this.act_Name = act_Name;
-		this.act_Carousel = act_Carousel;
-		this.act_Pic = act_Pic;
-		this.act_Content = act_Content;
-		this.act_Start = act_Start;
-		this.act_End = act_End;
-		this.act_Usecou = act_Usecou;
-	}
-
-	public ActivityVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
 	public String getAct_No() {
 		return act_No;
 	}
@@ -66,11 +47,23 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_Carousel(byte[] act_Carousel) {
 		this.act_Carousel = act_Carousel;
 	}
+	public String getAct_Cmimetype() {
+		return act_Cmimetype;
+	}
+	public void setAct_Cmimetype(String act_Cmimetype) {
+		this.act_Cmimetype = act_Cmimetype;
+	}
 	public byte[] getAct_Pic() {
 		return act_Pic;
 	}
 	public void setAct_Pic(byte[] act_Pic) {
 		this.act_Pic = act_Pic;
+	}
+	public String getAct_Pmimetype() {
+		return act_Pmimetype;
+	}
+	public void setAct_Pmimetype(String act_Pmimetype) {
+		this.act_Pmimetype = act_Pmimetype;
 	}
 	public String getAct_Content() {
 		return act_Content;
@@ -96,6 +89,8 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_Usecou(String act_Usecou) {
 		this.act_Usecou = act_Usecou;
 	}
+
+	
 	
 	
 	

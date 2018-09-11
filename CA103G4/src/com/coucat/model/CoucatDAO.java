@@ -54,8 +54,6 @@ public class CoucatDAO implements CoucatDAO_interface {
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully!");
-
-			con.setAutoCommit(false);
 		
 			//insert coucat record
 			int cols[] = {1};
@@ -68,30 +66,29 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setString(6, coucatVO.getCoucat_Invalid());
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
 			pstmt.setBytes(8, coucatVO.getCoucat_Pic());
-			pstmt.executeUpdate();
-			// getGeneratedKeys
-						ResultSet rs = pstmt.getGeneratedKeys();
-						if (rs.next()) {
-							next_coucat_No = rs.getString(1);
-							System.out.println("自增主鍵值 = " + next_coucat_No + "(剛新增成功的優惠卷類別編號)");
-						} else {
-							System.out.println("未取得自增主鍵值");
-						}
-						
-			// insert coupon record at the same time
-						CouponDAO dao= new CouponDAO();
-						dao.insert(con,next_coucat_No,coucatVO.getCoucat_Amo());
-						con.commit();
-						con.setAutoCommit(true);
-						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
-						rs.close();
+			int rowCount=pstmt.executeUpdate();
+			System.out.println("新增 " + rowCount + " 筆資料");
+//			// getGeneratedKeys
+//						ResultSet rs = pstmt.getGeneratedKeys();
+//						if (rs.next()) {
+//							next_coucat_No = rs.getString(1);
+//							System.out.println("自增主鍵值 = " + next_coucat_No + "(剛新增成功的優惠卷類別編號)");
+//						} else {
+//							System.out.println("未取得自增主鍵值");
+//						}
+//						
+//			// insert coupon record at the same time
+//						CouponDAO dao= new CouponDAO();
+//						dao.insert(con,next_coucat_No,coucatVO.getCoucat_Amo());
+//						con.commit();
+//						con.setAutoCommit(true);
+//						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
+					
 			// Handle any SQL errors
 		} catch (SQLException  se) {
-			try {
-				con.rollback();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
 			if (pstmt != null) {
 				try {
