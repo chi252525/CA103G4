@@ -4,7 +4,7 @@ public class DeliveryVO implements java.io.Serializable {
 	private String deliv_no;
 	private String branch_no;
 	private String emp_no;
-	private Integer deliv_status;
+	private String deliv_status;
 
 	public String getDeliv_no() {
 		return deliv_no;
@@ -30,11 +30,11 @@ public class DeliveryVO implements java.io.Serializable {
 		this.emp_no = emp_no;
 	}
 
-	public Integer getDeliv_status() {
+	public String getDeliv_status() {
 		return deliv_status;
 	}
 
-	public void setDeliv_status(Integer deliv_status) {
+	public void setDeliv_status(String deliv_status) {
 		this.deliv_status = deliv_status;
 	}
 }
