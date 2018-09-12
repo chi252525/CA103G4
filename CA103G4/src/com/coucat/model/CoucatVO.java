@@ -12,8 +12,8 @@ public class CoucatVO implements java.io.Serializable{
 	private Integer coucat_Value;
 	private Double coucat_Discount;
 	private Integer coucat_Freep;
-	private String coucat_Valid;
-	private String coucat_Invalid;
+	private Timestamp coucat_Valid;
+	private Timestamp coucat_Invalid;
 	private Integer coucat_Amo;
 	private byte[] coucat_Pic;
 	public String getCoucat_No() {
@@ -58,16 +58,16 @@ public class CoucatVO implements java.io.Serializable{
 	public void setCoucat_Freep(Integer coucat_Freep) {
 		this.coucat_Freep = coucat_Freep;
 	}
-	public String getCoucat_Valid() {
+	public Timestamp getCoucat_Valid() {
 		return coucat_Valid;
 	}
-	public void setCoucat_Valid(String coucat_Valid) {
+	public void setCoucat_Valid(Timestamp coucat_Valid) {
 		this.coucat_Valid = coucat_Valid;
 	}
-	public String getCoucat_Invalid() {
+	public Timestamp getCoucat_Invalid() {
 		return coucat_Invalid;
 	}
-	public void setCoucat_Invalid(String coucat_Invalid) {
+	public void setCoucat_Invalid(Timestamp coucat_Invalid) {
 		this.coucat_Invalid = coucat_Invalid;
 	}
 	public Integer getCoucat_Amo() {

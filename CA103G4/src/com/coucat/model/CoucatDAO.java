@@ -19,7 +19,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
 			"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
 			"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-			"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
+			"?,?,?,?,NULL,NULL,?,?,?,?)";
 //	private static final String INSERT_DIS_STMT  = 
 //			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
 //					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
@@ -32,8 +32,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 //					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_CONT=?,COUCAT_VALUE=?," + 
-			"COUCAT_VALID=TO_TIMESTAMP(?,'YYYY-MM-DD HH24:MI')," + 
-			"COUCAT_INVALID=TO_TIMESTAMP(?,'YYYY-MM-DD HH24:MI'),COUCAT_AMO=?" + 
+			"COUCAT_VALID=?," + 
+			"COUCAT_INVALID=?,COUCAT_AMO=?" + 
 			"WHERE COUCAT_NO=?";
 	private static final String GETALL = 
 			"SELECT * FROM COUCAT";
@@ -62,8 +62,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
 			pstmt.setString(3, coucatVO.getCoucat_Cont());
 			pstmt.setInt(4, coucatVO.getCoucat_Value());
-			pstmt.setString(5, coucatVO.getCoucat_Valid());
-			pstmt.setString(6, coucatVO.getCoucat_Invalid());
+			pstmt.setTimestamp(5, coucatVO.getCoucat_Valid());
+			pstmt.setTimestamp(6, coucatVO.getCoucat_Invalid());
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
 			pstmt.setBytes(8, coucatVO.getCoucat_Pic());
 			int rowCount=pstmt.executeUpdate();
@@ -120,8 +120,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
 			pstmt.setString(3, coucatVO.getCoucat_Cont());
 			pstmt.setInt(4, coucatVO.getCoucat_Value());
-			pstmt.setString(5, coucatVO.getCoucat_Valid());
-			pstmt.setString(6, coucatVO.getCoucat_Invalid());
+			pstmt.setTimestamp(5, coucatVO.getCoucat_Valid());
+			pstmt.setTimestamp(6, coucatVO.getCoucat_Invalid());
 			pstmt.setInt(7, coucatVO.getCoucat_Amo());
 			pstmt.setString(8, coucatVO.getCoucat_No());
 			int rowCount=pstmt.executeUpdate();
@@ -171,8 +171,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 				coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));
 				coucat.setCoucat_Cont(rs.getString("Coucat_Cont"));
 				coucat.setCoucat_Value(rs.getInt("Coucat_Value"));
-				coucat.setCoucat_Valid(rs.getString("Coucat_Valid"));
-				coucat.setCoucat_Invalid(rs.getString("Coucat_Invalid"));
+				coucat.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));
+				coucat.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
 				coucat.setCoucat_Amo(rs.getInt("Coucat_Amo"));
 				coucatlist.add(coucat); // Store the row in the list
 			}
@@ -225,8 +225,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 				coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));	
 				coucat.setCoucat_Cont(rs.getString("Coucat_Cont"));	
 				coucat.setCoucat_Value(rs.getInt("Coucat_Value"));	
-				coucat.setCoucat_Valid(rs.getString("Coucat_Valid"));	
-				coucat.setCoucat_Invalid(rs.getString("Coucat_Invalid"));	
+				coucat.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));	
+				coucat.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));	
 				coucat.setCoucat_Amo(rs.getInt("Coucat_Amo"));	
 			}
 			
