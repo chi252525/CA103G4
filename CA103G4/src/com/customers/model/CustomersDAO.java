@@ -1,6 +1,7 @@
 package com.customers.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -76,6 +77,7 @@ public class CustomersDAO implements CustomersDAO_interface {
 			customersvo.setCus_People(Integer.parseInt(map.get("CUS_PEOPLE")));
 			list.add(customersvo);
 		}
+		Collections.sort(list);
 		jedis.close();
 		return list;
 	}
