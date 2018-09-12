@@ -10,24 +10,24 @@ public class MemberDAO_test {
 
 	public static void main(String args[]) {
 //新增會員		
-//		MemberVO memVO = new MemberVO();
-//		memVO.setMem_Id("chiapao");
-//		memVO.setMem_Pw("123456");
-//		memVO.setMem_Name("富察傅恆");
-//		memVO.setMem_Gender("ms1");
-//		memVO.setMem_Bir("1991/01/29");
-//		memVO.setMem_Mail("bowbow@gmail.com");
-//		memVO.setMem_Phone("0920335770");
-//		memVO.setMem_Receiver("魏瓔珞");
-//		memVO.setMem_Repno("326");
-//		memVO.setMem_Recounty("桃園市");
-//		memVO.setMem_Retown("楊梅區");
-//		memVO.setMem_Cardnum("4312-5411-6452-3322");
-//		memVO.setMem_Carddue("04/23");
-//		memVO.setMem_Bonus(1000);
-//		
-//		MemberDAO dao = new MemberDAO();
-//		dao.insert(memVO);		
+		MemberVO memVO = new MemberVO();
+		memVO.setMem_Id("ccaaa");
+		memVO.setMem_Pw("123456");
+		memVO.setMem_Name("富察傅恆");
+		memVO.setMem_Gender("ms1");
+		memVO.setMem_Bir("1991-03-29");
+		memVO.setMem_Mail("bbbbbb@gmail.com");
+		memVO.setMem_Phone("0923333330");
+		memVO.setMem_Receiver("魏瓔珞");
+		memVO.setMem_Repno("326");
+		memVO.setMem_Recounty("桃園市");
+		memVO.setMem_Retown("楊梅區");
+		memVO.setMem_Cardnum("4312-2222-1111-5555");
+		memVO.setMem_Carddue("07/26");
+		memVO.setMem_Bonus(1000);
+		
+		MemberDAO dao = new MemberDAO();
+		dao.insert(memVO);		
 	
 //修改會員資料
 //		MemberVO memVO = new MemberVO();
@@ -60,16 +60,16 @@ public class MemberDAO_test {
 //		dao.changeStatus(memVO);
 		
 //查詢會員
-		MemberDAO dao = new MemberDAO();
-		List<MemberVO> memberlist = dao.getall();
-		for(MemberVO memVO:memberlist) {
-			System.out.println("會員資料");
-			System.out.println("編號："+memVO.getMem_No());
-			System.out.println("姓名："+memVO.getMem_Name());
-			System.out.println("電話："+memVO.getMem_Phone());
-			System.out.println("信箱："+memVO.getMem_Mail());
-			System.out.println("=============================");		
-		}
+//		MemberDAO dao = new MemberDAO();
+//		List<MemberVO> memberlist = dao.getall();
+//		for(MemberVO memVO:memberlist) {
+//			System.out.println("會員資料");
+//			System.out.println("編號："+memVO.getMem_No());
+//			System.out.println("姓名："+memVO.getMem_Name());
+//			System.out.println("電話："+memVO.getMem_Phone());
+//			System.out.println("信箱："+memVO.getMem_Mail());
+//			System.out.println("=============================");		
+//		}
 	}
 	
 }

@@ -21,9 +21,9 @@ public class MemberDAO implements MemberDAO_interface{
 	public static final String PASSWORD="CHIAPAO";
 	public static final String INSERT_STMT=
 			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS,MEM_PHOTO) " + 
-			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,to_date(?,'yyyy/mm/dd'),?,?,?,?,?,?,?,?,?,?,?)";
+			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_STMT=
-			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR = to_date(?,'yyyy/mm/dd') , MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=? , MEM_BONUS=? , MEM_PHOTO=? WHERE MEM_ID =?";
+			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR = to_date(?,'yyyy-mm-dd') , MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=? , MEM_BONUS=? , MEM_PHOTO=? WHERE MEM_ID =?";
 	public static final String CHANGESTATUS_STMT=
 			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
 	public static final String GETALL=
@@ -51,7 +51,7 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(2, memVO.getMem_Pw());
 			pstmt.setString(3, memVO.getMem_Name());
 			pstmt.setString(4, memVO.getMem_Gender());
-			pstmt.setString(5, memVO.getMem_Bir());
+			pstmt.setDate(5, java.sql.Date.valueOf(memVO.getMem_Bir()));
 			pstmt.setString(6, memVO.getMem_Mail());
 			pstmt.setString(7, memVO.getMem_Phone());
 			pstmt.setString(8, memVO.getMem_Receiver());
