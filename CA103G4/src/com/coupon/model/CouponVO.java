@@ -4,14 +4,7 @@ public class CouponVO implements java.io.Serializable{
 	private String  coup_Sn;
 	private String coucat_No;
 	private String  coup_Status;
-	
-	public CouponVO(String coup_Sn, String coucat_No, String coup_Status) {
-		super();
-		this.coup_Sn = coup_Sn;
-		this.coucat_No = coucat_No;
-		this.coup_Status = coup_Status;
-	}
-	
+
 	
 	public CouponVO() {
 		super();

@@ -17,9 +17,9 @@ public class OrderformJDBCDAO implements OrderformDAO_interface {
 //	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('0'||LPAD(to_char(oredrform_seq.NEXTVAL), 8, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform order by order_no";
-	private static final String GET_ONE_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_no = ?";
+	private static final String GET_ONE_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where ";  //修改  加上order by 欄位 DESC
 	private static final String DELETE = "DELETE FROM orderform where order_no = ?";
-	private static final String UPDATE = "UPDATE orderform set dek_no=?, mem_no=?, branch_no=?, deliv_no=?, order_type=?, order_price=?, order_status=?, deliv_addres=?, order_pstatus=? where order_no = ?";
+	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
 
 	@Override
 	public void insert(OrderformVO orderformVO) {
@@ -80,17 +80,10 @@ public class OrderformJDBCDAO implements OrderformDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setString(1, orderformVO.getDek_no());
-			pstmt.setString(2, orderformVO.getMem_no());
-			pstmt.setString(3, orderformVO.getBranch_no());
-			pstmt.setString(4, orderformVO.getDeliv_no());
-			pstmt.setInt(5, orderformVO.getOrder_type());
-			pstmt.setInt(6, orderformVO.getOrder_price());
-			pstmt.setInt(7, orderformVO.getOrder_status());
-			pstmt.setString(8, orderformVO.getDeliv_addres());
-			pstmt.setInt(9, orderformVO.getOrder_pstatus());
-			pstmt.setString(10, orderformVO.getOrder_no());
+			
+			pstmt.setInt(1, orderformVO.getOrder_status());
+			pstmt.setInt(2, orderformVO.getOrder_pstatus());
+			pstmt.setString(3, orderformVO.getOrder_no());
 
 			pstmt.executeUpdate();
 
@@ -163,23 +156,48 @@ public class OrderformJDBCDAO implements OrderformDAO_interface {
 	}
 
 	@Override
-	public OrderformVO findByPrimaryKey(String order_no) {
+	public OrderformVO findByTwoKey(int order_status, int order_pstatus) {
 
 		OrderformVO orderformVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String os ="order_status= ?";
+		String op ="order_pstatus= ?";
+		String ad =" and ";
 
 		try {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			
+			for(int i1=0; i1<4; i1++) {
+				System.out.println(i1);
+			}
+//			ORDER_STATUS=1or2，搜尋ORDER_PSTATUS=1or3
+			if ((order_status != 3) && ( order_pstatus != 2)) {
+			
+			pstmt = con.prepareStatement(GET_ONE_STMT + os + ad + op);
 
-			pstmt.setString(1, order_no);
+			pstmt.setInt(1, order_status);
+			pstmt.setInt(2, order_pstatus);
 
 			rs = pstmt.executeQuery();
-
+			
+			} else if(order_status == 1) {
+				
+			} else if((order_pstatus == 1)||(order_pstatus == 2)||(order_pstatus == 3)||(order_pstatus == 4)) {
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			while (rs.next()) {
 				// deliveryVO 也稱為 Domain objects
 				orderformVO = new OrderformVO();

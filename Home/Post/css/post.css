@@ -3,7 +3,7 @@
 
 /*listgroup */
 
-        .list-group-item.active {
+.list-group-item.active {
             z-index: 0;
             color: #fff;
             background-color: #ce0000;

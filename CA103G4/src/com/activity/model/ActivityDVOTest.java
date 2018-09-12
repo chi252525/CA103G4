@@ -1,32 +1,59 @@
 package com.activity.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class ActivityDVOTest {
 
 	public static void main(String[] args) {
 //		insert的執行 done
-		ActivityVO vo1=new ActivityVO();
-		vo1.setCoucat_No("20180908-000002");
-		vo1.setAct_Cat("a1");
-		vo1.setAct_Name("gfdgfd");
-		vo1.setAct_Content("yoyoyoy");
-		vo1.setAct_Start("2018-09-05 10:10");
-		vo1.setAct_End("2018-09-06 11:20");
-		vo1.setAct_Usecou("AU1");
+//		ActivityVO vo1=new ActivityVO();
+//		vo1.setCoucat_No("20180911-000002");
+//		vo1.setAct_Cat("a1");
+//		vo1.setAct_Name("gfdgfd");
+//		vo1.setAct_Content("yoyoyoy");
+//		vo1.setAct_Cmimetype("jpg");
+//		vo1.setAct_Pmimetype("jpg");
+//		vo1.setAct_Start("2018-09-05 10:10");
+//		vo1.setAct_End("2018-09-06 11:20");
+//		vo1.setAct_Usecou("AU1");
+//		try {
+//			byte[] pic = getPictureByteArray("items/Bing3.jpeg");
+//			byte[] pic2 = getPictureByteArray("items/Bing3.jpeg");
+//			vo1.setAct_Carousel(pic);
+//			vo1.setAct_Pic(pic2);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		ActivityDAO dao =new ActivityDAO();
-		 dao.insert(vo1);
+//		 dao.insert(vo1);
 
 		//  update的執行 done
 //		 ActivityVO vo2=new ActivityVO();
 //		 vo2.setAct_No("201809-0001");
-//		 vo2.setCoucat_No("20180908-000003");
-//		 vo2.setAct_Name("totototoot");
+//		 vo2.setCoucat_No("20180911-000002");
+//		 vo2.setAct_Name("rrrrrrrrrrrrrrrrrrrr");
 //		 vo2.setAct_Cat("a2");
-//		 vo2.setAct_Content("gghjhgjdf");
+//		 vo2.setAct_Content("gTEEEEEEEEEE");
 //		 vo2.setAct_Start("2018-09-05 10:10");
 //		 vo2.setAct_End("2018-09-06 11:20");
 //		 vo2.setAct_Usecou("AU1");
+//		 vo2.setAct_Pmimetype("gif");
+//		vo2.setAct_Cmimetype("gif");
+//			try {
+//				byte[] pic3 = getPictureByteArray("items/Bing3.jpeg");
+//				byte[] pic4 = getPictureByteArray("items/Bing3.jpeg");
+//				vo2.setAct_Carousel(pic3);
+//				vo2.setAct_Pic(pic4);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 //		 dao.update(vo2);
 		 
 //		 findByDate_between的執行 done
@@ -39,7 +66,7 @@ public class ActivityDVOTest {
 //		 System.out.println(vo3.getAct_Content());
 //		 System.out.println(vo3.getAct_Start());
 //		 System.out.println(vo3.getAct_End());
-		 
+//		 
 //		 getAll的執行done
 		
 //		 List<ActivityVO> licv=dao.getAll();
@@ -56,18 +83,34 @@ public class ActivityDVOTest {
 		 
 //		 findByAct_Cata的執行 done
 //		 
-//		 ActivityVO  vo4=dao.findByAct_Cata("CC2");
-//		 System.out.println(vo4.getAct_No());
-//		 System.out.println(vo4.getCoucat_No());
-//		 System.out.println(vo4.getAct_Cat());
-//		 System.out.println(vo4.getAct_Name());
-//		 System.out.println(vo4.getAct_Content());
-//		 System.out.println(vo4.getAct_Start());
-//		 System.out.println(vo4.getAct_End());
-//		 System.out.println("=========================");
-		
+		 ActivityVO  vo4=dao.findByAct_Cata("AC1");
+		 System.out.println(vo4.getAct_No());
+		 System.out.println(vo4.getCoucat_No());
+		 System.out.println(vo4.getAct_Cat());
+		 System.out.println(vo4.getAct_Name());
+		 System.out.println(vo4.getAct_Content());
+		 System.out.println(vo4.getAct_Start());
+		 System.out.println(vo4.getAct_End());
+		 System.out.println("=========================");
 //		 }
 //		 
 	}
+	// 使用byte[]方式
+				public static byte[] getPictureByteArray(String path) throws IOException {
+					File file = new File(path);
+					FileInputStream fis = new FileInputStream(file);
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					byte[] buffer = new byte[fis.available()];
+					int i;
+					while ((i = fis.read(buffer)) != -1) {
+						baos.write(buffer, 0, i);
+						//write(byte[] b, int off, int len) 
+				        //?指定 byte ??中?偏移量 off ?始的 len ?字??入此 byte ???出流。
+					}
+					baos.close();
+					fis.close();
 
+					return baos.toByteArray();
+					//  toByteArray() 獲取數據。
+				}
 }

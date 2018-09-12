@@ -5,9 +5,11 @@ import java.util.List;
 public interface CustomersDAO_interface {
 	void insertOrUpdate(CustomersVO customersvo);
 
-	void delete(Integer cus_No);
+	void delete(String cus_key);
 
-	CustomersVO findByPrimaryKey(Integer cus_No);
+	CustomersVO findByKey(String cus_No);
 
 	List<CustomersVO> getAll();
+	
+	
 }

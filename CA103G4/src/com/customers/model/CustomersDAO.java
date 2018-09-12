@@ -19,21 +19,20 @@ public class CustomersDAO implements CustomersDAO_interface {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
 		HashMap<String, String> hash = new HashMap<>();
-//		hash.put("CUS_NO", Integer.toString(customersvo.getCus_No()));
+		hash.put("CUS_NO", customersvo.getCus_No());
 		hash.put("CUS_NAME", customersvo.getCus_Name());
 		hash.put("CUS_PHONE", customersvo.getCus_Phone());
 		hash.put("CUS_PEOPLE", Integer.toString(customersvo.getCus_People()));
-		jedis.hmset(customersvo.getCus_No(), hash);
+		jedis.hmset("cus:" + customersvo.getCus_No(), hash);
 
 		jedis.close();
 	}
 
 	@Override
-	public void delete(Integer cus_No) {
+	public void delete(String cus_key) {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
-		String cus_key = Integer.toString(cus_No);
-		Long delNum = jedis.hdel( cus_key, "CUS_NO", "CUS_NAME", "CUS_PHONE", "CUS_PEOPLE");
+		Long delNum = jedis.hdel(cus_key, "CUS_NO", "CUS_NAME", "CUS_PHONE", "CUS_PEOPLE");
 		if (delNum > 0 && delNum < 4)
 			System.out.println("刪除 " + delNum + " 筆屬性");
 		else if (delNum == 4)
@@ -44,34 +43,37 @@ public class CustomersDAO implements CustomersDAO_interface {
 	}
 
 	@Override
-	public CustomersVO findByPrimaryKey(Integer cus_No) {
+	public CustomersVO findByKey(String cus_No) {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
-		String cus_key = Integer.toString(cus_No);
-		Map<String, String> hm = jedis.hgetAll(cus_key);
+		Map<String, String> hm = jedis.hgetAll(cus_No);
 		CustomersVO customersvo = new CustomersVO();
+		customersvo.setCus_No(hm.get("CUS_NO"));
 		customersvo.setCus_Name(hm.get("CUS_NAME"));
-		customersvo.setCus_Name(hm.get("CUS_PHONE"));
-		customersvo.setCus_Name(hm.get("CUS_PEOPLE"));
+		customersvo.setCus_Phone(hm.get("CUS_PHONE"));
+		customersvo.setCus_People(Integer.parseInt(hm.get("CUS_PEOPLE")));
 		jedis.close();
 		return customersvo;
 	}
-
+		
 	@Override
 	public List<CustomersVO> getAll() {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
 		Set<String> keySet = jedis.keys("cus:*");
+		
+		
 		Iterator<String> it = keySet.iterator();
-		CustomersVO customersvo = new CustomersVO();
 		List<CustomersVO> list = new ArrayList<CustomersVO>();
 		while (it.hasNext()) {
 			String Cus_No = it.next();
 			Map<String, String> map = jedis.hgetAll(Cus_No);
+			
+			CustomersVO customersvo = new CustomersVO();
 			customersvo.setCus_No(map.get("CUS_NO"));
-			customersvo.setCus_No(map.get("CUS_NAME"));
-			customersvo.setCus_No(map.get("CUS_PHONE"));
-			customersvo.setCus_No(map.get("CUS_PEOPLE"));
+			customersvo.setCus_Name(map.get("CUS_NAME"));
+			customersvo.setCus_Phone(map.get("CUS_PHONE"));
+			customersvo.setCus_People(Integer.parseInt(map.get("CUS_PEOPLE")));
 			list.add(customersvo);
 		}
 		jedis.close();
