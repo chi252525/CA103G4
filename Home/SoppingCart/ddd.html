@@ -21,6 +21,8 @@
     <!--your  CSS ============================================= -->
 
     <link rel="stylesheet" href="css/post.css">
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -70,8 +72,28 @@
         }
         
         label{
-            font-size: 25px;
+            font-size: 18px;
             margin-right:60px;
+        }
+        
+        select{
+            width: 50px;
+            margin-left: 30px;
+        }
+        #2 {
+            margin-left: 70px;
+        }
+        .fa fa-trash{
+             display: flex;
+            justify-content: flex-end;
+        }
+        strong{
+            width: 100px;
+        }
+        
+        input{
+            width: 35px;
+            margin-left: 40px;
         }
               
         </style>
@@ -167,15 +189,28 @@
 
                         <li class="list-group-item list-group-item-light">
                             <strong>餐點內容</strong>
+
                         </li>
-                        <li class="list-group-item list-group-item-dark">
-                            豚骨叉燒拉麵
+                        <li class="list-group-item list-group-item-dark d-flex">
+                            <strong>豚骨叉燒拉麵</strong>
+                            <input type="number" min="1" max="10" value="2">
+                            <a href="#" class="ml-auto align-self-center">
+                                <i class="fa fa-trash"></i>
+                            </a>    
                         </li>
-                        <li class="list-group-item list-group-item-light">
-                            唐楊炸雞
+                        <li class="list-group-item list-group-item-light d-flex">
+                            <strong>唐楊炸雞</strong>
+                            <input type="number" min="1" max="10" value="1">
+                            <a href="#" class="ml-auto align-self-center">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </li>
-                        <li class="list-group-item list-group-item-dark">
-                            豪華醬油拉麵
+                        <li class="list-group-item list-group-item-dark d-flex">
+                            <strong> 豪華醬油拉麵</strong>
+                            <input type="number" min="1" max="10" value="2">
+                            <a href="#" class="ml-auto align-self-center">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </li>
                         <hr>
                     </ul>
