@@ -7,7 +7,7 @@ DROP TABLE PERNTD;
 DROP SEQUENCE perntd_seq;
 
 CREATE TABLE PERNTD (
-  PERNTD_NO	VARCHAR2(10)	NOT NULL,
+  PERNTD_NO	VARCHAR2(15)	NOT NULL,
   MEM_NO	VARCHAR2(10)	NOT NULL,
   NT_NO		VARCHAR2(10),
   PERNTD_CONT	VARCHAR2(1000),
@@ -23,11 +23,11 @@ CREATE SEQUENCE perntd_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT01','親愛的顧客您好，您於本次訂位之資訊如下:RESERVATION，已預訂之座位將保留10分鐘，超過10分鐘未到者，將取消該訂位之權益，謝謝',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT02','親愛的顧客您好，您於本次訂餐之資訊如下:ORDERINVOISE，如有訂餐方面問題煩請洽詢客服人員，謝謝',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000001','NT03','慶祝竹風堂拉麵十周年慶,在活動期間內至各分店用餐(限內用),即免費贈送食材一份,活動日期從即日起至XX月XX日為止,別錯過囉!',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','恭喜您獲得十周年紀念優惠卷一張!，詳細內容可至會員中心內的優惠卷管理處查閱',to_char(sysdate,'yyyy/mm/dd'));
-INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 2, '0'),'M000002','NT04','恭喜您獲得88節優惠卷一張!，詳細內容可至會員中心內的優惠卷管理處查閱',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 6, '0'),'M000001','NT01','親愛的顧客您好，您於本次訂位之資訊如下:RESERVATION，已預訂之座位將保留10分鐘，超過10分鐘未到者，將取消該訂位之權益，謝謝',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 6, '0'),'M000001','NT02','親愛的顧客您好，您於本次訂餐之資訊如下:ORDERINVOISE，如有訂餐方面問題煩請洽詢客服人員，謝謝',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 6, '0'),'M000001','NT03','慶祝竹風堂拉麵十周年慶,在活動期間內至各分店用餐(限內用),即免費贈送食材一份,活動日期從即日起至XX月XX日為止,別錯過囉!',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 6, '0'),'M000002','NT04','恭喜您獲得十周年紀念優惠卷一張!，詳細內容可至會員中心內的優惠卷管理處查閱',to_char(sysdate,'yyyy/mm/dd'));
+INSERT INTO PERNTD VALUES ('P'||LPAD(to_char(perntd_seq.NEXTVAL), 6, '0'),'M000002','NT04','恭喜您獲得88節優惠卷一張!，詳細內容可至會員中心內的優惠卷管理處查閱',to_char(sysdate,'yyyy/mm/dd'));
 
 commit;
 ----------------------------------------------------------------------------------------------------------------------------
