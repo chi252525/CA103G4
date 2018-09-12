@@ -25,6 +25,7 @@ public class CustomersDAO implements CustomersDAO_interface {
 		hash.put("CUS_PHONE", customersvo.getCus_Phone());
 		hash.put("CUS_PEOPLE", Integer.toString(customersvo.getCus_People()));
 		jedis.hmset("cus:" + customersvo.getCus_No(), hash);
+		jedis.expire("cus:" + customersvo.getCus_No(), 3600);
 
 		jedis.close();
 	}
@@ -53,23 +54,23 @@ public class CustomersDAO implements CustomersDAO_interface {
 		customersvo.setCus_Name(hm.get("CUS_NAME"));
 		customersvo.setCus_Phone(hm.get("CUS_PHONE"));
 		customersvo.setCus_People(Integer.parseInt(hm.get("CUS_PEOPLE")));
+		System.out.printf("%d 秒後自動銷毀 " , jedis.ttl("cus:" + customersvo.getCus_No()));
 		jedis.close();
 		return customersvo;
 	}
-		
+
 	@Override
 	public List<CustomersVO> getAll() {
 		Jedis jedis = new Jedis(host, port);
 		jedis.auth(password);
 		Set<String> keySet = jedis.keys("cus:*");
-		
-		
+
 		Iterator<String> it = keySet.iterator();
 		List<CustomersVO> list = new ArrayList<CustomersVO>();
 		while (it.hasNext()) {
 			String Cus_No = it.next();
 			Map<String, String> map = jedis.hgetAll(Cus_No);
-			
+
 			CustomersVO customersvo = new CustomersVO();
 			customersvo.setCus_No(map.get("CUS_NO"));
 			customersvo.setCus_Name(map.get("CUS_NAME"));
