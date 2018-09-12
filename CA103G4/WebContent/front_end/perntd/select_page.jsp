@@ -29,6 +29,8 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+
 <table id="table-1">
    <tr><td><h3>IBM Perntd: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
@@ -53,21 +55,21 @@
   
   <li>
     <FORM METHOD="post" ACTION="perntd.do" >
-        <b>輸入員工編號 (如7001):</b>
+        <b>輸入個人通知流水號 (如P000001):</b>
         <input type="text" name="empno">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="empSvc" scope="page" class="com.perntd.model.PerntdService" />
+  <jsp:useBean id="perntdSvc" scope="page" class="com.perntd.model.PerntdService" />
    
   <li>
      <FORM METHOD="post" ACTION="perntd.do" >
-       <b>選擇員工編號:</b>
+       <b>選擇會員編號:</b>
        <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+         <c:forEach var="empVO" items="${perntdSvc.all}" > 
+          <option value="${perntdVO.mem_No}">${perntdVO.mem_No}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -75,22 +77,10 @@
     </FORM>
   </li>
   
-  <li>
-     <FORM METHOD="post" ACTION="perntd.do" >
-       <b>選擇員工姓名:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.ename}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-     </FORM>
-  </li>
 </ul>
 
 
-<h3>員工管理</h3>
+<h3>個人通知管理</h3>
 
 <ul>
   <li><a href='addPerntd.jsp'>Add</a> a new Perntd.</li>
