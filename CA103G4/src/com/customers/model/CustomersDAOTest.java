@@ -28,14 +28,14 @@ public class CustomersDAOTest {
 		System.out.println("修改完成!");
 		
 		//Query
-		System.out.println("查詢會員編號009,012:");
-		CustomersVO customersvo2 = dao.findByKey("cus:009");
+		System.out.println("查詢會員編號006,026:");
+		CustomersVO customersvo2 = dao.findByKey("cus:006");
 		System.out.println("候位編號: " + customersvo2.getCus_No());
 		System.out.println("客人姓名: " + customersvo2.getCus_Name());
 		System.out.println("電話: " + customersvo2.getCus_Phone());
 		System.out.println("訂位人數: " + customersvo2.getCus_People());
 		System.out.println("=========================");
-		customersvo2 = dao.findByKey("cus:012");
+		customersvo2 = dao.findByKey("cus:026");
 		System.out.println("候位編號: " + customersvo2.getCus_No());
 		System.out.println("客人姓名: " + customersvo2.getCus_Name());
 		System.out.println("電話: " + customersvo2.getCus_Phone());
