@@ -18,7 +18,7 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO delivery (deliv_no,branch_no,emp_no,deliv_status) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'), ?, ?, ?)";
 //	private static final String INSERT_STMT = "INSERT INTO delivery (deliv_no,branch_no,emp_no,deliv_status) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'), ?, ?, ?)"; //不開
 	private static final String GET_MORE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where ";
-	private static final String GET_ALL_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery order by deliv_no";
+	private static final String GET_ALL_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery order by deliv_no DESC";
 	private static final String GET_ONE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_no= ?";
 	private static final String UPDATE = "UPDATE delivery set deliv_status=? where deliv_no = ?";
 	// VARCHAR2 (PK not found)
@@ -108,7 +108,7 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 	}
 
 	public List<DeliveryVO> getByThreeKey(String deliv_no, String emp_no, String deliv_status) {
-		List<DeliveryVO> listm = new ArrayList<DeliveryVO>();
+		List<DeliveryVO> list = new ArrayList<DeliveryVO>();
 		DeliveryVO deliveryVO = null;
 
 		Connection con = null;
@@ -180,6 +180,10 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 				pstmt.setString(3, deliv_status);
 
 				rs = pstmt.executeQuery();
+			} else {
+				pstmt = con.prepareStatement(GET_ALL_STMT);
+				
+				rs = pstmt.executeQuery();
 			}
 			while (rs.next()) {
 				deliveryVO = new DeliveryVO();
@@ -187,7 +191,7 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 				deliveryVO.setBranch_no(rs.getString("branch_no"));
 				deliveryVO.setEmp_no(rs.getString("emp_no"));
 				deliveryVO.setDeliv_status(rs.getString("deliv_status"));
-				listm.add(deliveryVO); // Store the row in the list
+				list.add(deliveryVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -220,7 +224,7 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 				}
 			}
 		}
-		return listm;
+		return list;
 
 	}
 
@@ -283,7 +287,7 @@ public class DeliveryJDBCDAO implements DeliveryDAO_interface {
 	}
 
 	@Override
-	public DeliveryVO findByDeliv_no(String deliv_no) { // 以外送單主鍵尋找
+	public DeliveryVO findByPrimaryKey(String deliv_no) { // 以外送單主鍵尋找
 
 		DeliveryVO deliveryVO = null;
 		Connection con = null;

@@ -10,7 +10,7 @@ public interface CouponhistoryDAO_interface {
 
 	public void delete(String coup_sn);
 
-	public CouponhistoryVO findByPrimaryKey(String coup_sn);
+	public CouponhistoryVO findByCoup_sn(String coup_sn);
 
 	public List<CouponhistoryVO> getAll();
 }

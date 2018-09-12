@@ -16,12 +16,11 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 	String userid = "Pro";
 	String passwd = "123456";
 
-//	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?)";
-	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('0'||LPAD(to_char(delivery_seq.NEXTVAL), 5, '0'), ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no";
 	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where invo_no = ?";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
-	private static final String UPDATE = "UPDATE orderinvoice set order_no=?, menu_no=?, custom_no=?,invo_status=? where invo_no = ?";
+	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 
 	@Override
 	public void insert(OrderinvoiceVO orderinvoiceVO) {
@@ -78,11 +77,9 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, orderinvoiceVO.getOrder_no());
-			pstmt.setString(2, orderinvoiceVO.getMenu_no());
-			pstmt.setString(3, orderinvoiceVO.getCustom_no());
-			pstmt.setInt(4, orderinvoiceVO.getInvo_status());
-			pstmt.setString(5, orderinvoiceVO.getInvo_no());
+			pstmt.setInt(1, orderinvoiceVO.getInvo_status());
+			pstmt.setString(2, orderinvoiceVO.getInvo_no());
+			pstmt.setString(3, orderinvoiceVO.getOrder_no());
 
 			pstmt.executeUpdate();
 

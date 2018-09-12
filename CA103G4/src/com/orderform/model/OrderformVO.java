@@ -6,7 +6,7 @@ public class OrderformVO {
 	private String mem_no;
 	private String branch_no;
 	private String deliv_no;
-	private Integer order_type;
+	private String order_type;
 	private Integer order_price;
 	private Integer order_status;
 	private String deliv_addres;
@@ -41,10 +41,10 @@ public class OrderformVO {
 	public void setDeliv_no(String deliv_no) {
 		this.deliv_no = deliv_no;
 	}
-	public Integer getOrder_type() {
+	public String getOrder_type() {
 		return order_type;
 	}
-	public void setOrder_type(Integer order_type) {
+	public void setOrder_type(String order_type) {
 		this.order_type = order_type;
 	}
 	public Integer getOrder_price() {

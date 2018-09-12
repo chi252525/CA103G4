@@ -17,12 +17,11 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 	String userid = "Pro";
 	String passwd = "123456";
 
-//	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,order_no,coup_state) values (?, ?, ?, ?)";
 	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,order_no,coup_state) values (?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT coup_sn,mem_no,order_no,coup_state FROM couponhistory order by coup_sn";
-	private static final String GET_ONE_STMT = "SELECT coup_sn,mem_no,order_no,coup_state FROM couponhistory where coup_sn = ?";
+	private static final String GET_ALL_STMT = "SELECT coup_sn,coup_state FROM couponhistory order by coup_sn";
+	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_sn = ?";
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
-	private static final String UPDATE = "UPDATE couponhistory set mem_no=?, order_no=?, coup_state=? where coup_sn = ?";
+	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
 
 	@Override
 	public void insert(CouponhistoryVO couponhistoryVO) {
@@ -36,9 +35,10 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, couponhistoryVO.getMem_no());
-			pstmt.setString(2, couponhistoryVO.getOrder_no());
-			pstmt.setInt(3, couponhistoryVO.getCoup_state());
+			pstmt.setString(1, couponhistoryVO.getCoup_sn());
+			pstmt.setString(2, couponhistoryVO.getMem_no());
+			pstmt.setString(3, couponhistoryVO.getOrder_no());
+			pstmt.setInt(4, couponhistoryVO.getCoup_state());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -77,11 +77,10 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
+			
 			pstmt.setString(1, couponhistoryVO.getOrder_no());
-			pstmt.setString(2, couponhistoryVO.getMem_no());
-			pstmt.setInt(3, couponhistoryVO.getCoup_state());
-			pstmt.setString(4, couponhistoryVO.getCoup_sn());
+			pstmt.setInt(2, couponhistoryVO.getCoup_state());
+			pstmt.setString(3, couponhistoryVO.getCoup_sn());
 
 			pstmt.executeUpdate();
 
@@ -153,7 +152,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 	}
 
 	@Override
-	public CouponhistoryVO findByPrimaryKey(String coup_sn) {
+	public CouponhistoryVO findByCoup_sn(String coup_sn) {
 
 		CouponhistoryVO couponhistoryVO = null;
 		Connection con = null;
@@ -173,9 +172,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			while (rs.next()) {
 				// deliveryVO 也稱為 Domain objects
 				couponhistoryVO = new CouponhistoryVO();
-				couponhistoryVO.setCoup_sn(rs.getString("coup_no"));
-				couponhistoryVO.setMem_no(rs.getString("mem_no"));
-				couponhistoryVO.setOrder_no(rs.getString("order_no"));
+				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
 				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
 			}
 
@@ -233,9 +230,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			while (rs.next()) {
 				// empVO 也稱為 Domain objects
 				couponhistoryVO = new CouponhistoryVO();
-				couponhistoryVO.setCoup_sn(rs.getString("coup_no"));
-				couponhistoryVO.setMem_no(rs.getString("mem_no"));
-				couponhistoryVO.setOrder_no(rs.getString("order_no"));
+				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
 				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
 				list.add(couponhistoryVO); // Store the row in the list
 			}

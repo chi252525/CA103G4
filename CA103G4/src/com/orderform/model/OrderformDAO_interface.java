@@ -10,8 +10,12 @@ public interface OrderformDAO_interface {
 
 	public void delete(String order_no);
 
-	public OrderformVO findByTwoKey(int order_status, int order_pstatus);
+	public OrderformVO findByPrimaryKey(String order_no);
 
+	public List<OrderformVO> getNotOk();
+
+	public List<OrderformVO> getMore();
+	
 	public List<OrderformVO> getAll();
 
 }

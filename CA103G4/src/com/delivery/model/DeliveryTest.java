@@ -25,7 +25,7 @@ public class DeliveryTest {
 //		dao.update(deliveryVO2);
 
 //		 查詢 one
-//		DeliveryVO deliveryVO3 = dao.findByDeliv_no("D-000000002");
+//		DeliveryVO deliveryVO3 = dao.findByPrimaryKey("D-000000002");
 //		System.out.print(deliveryVO3.getDeliv_no() + ",");
 //		System.out.print(deliveryVO3.getBranch_no() + ",");
 //		System.out.print(deliveryVO3.getEmp_no() + ",");
@@ -33,14 +33,14 @@ public class DeliveryTest {
 //		System.out.println("---------------------");
 
 		// 查詢 more
-//		List<DeliveryVO> listm = dao.getByThreeKey(null,"E000000001",null);
-//		for (DeliveryVO adeliv : listm) {
-//			System.out.print(adeliv.getDeliv_no() + ",");
-//			System.out.print(adeliv.getBranch_no() + ",");
-//			System.out.print(adeliv.getEmp_no() + ",");
-//			System.out.println(adeliv.getDeliv_status() + ",");
-//			System.out.println();
-//		}
+		List<DeliveryVO> listm = dao.getByThreeKey(null,"E000000001",null);
+		for (DeliveryVO adeliv : listm) {
+			System.out.print(adeliv.getDeliv_no() + ",");
+			System.out.print(adeliv.getBranch_no() + ",");
+			System.out.print(adeliv.getEmp_no() + ",");
+			System.out.println(adeliv.getDeliv_status() + ",");
+			System.out.println();
+		}
 		
 		// 查詢 all
 //		List<DeliveryVO> list = dao.getAll();
