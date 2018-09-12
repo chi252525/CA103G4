@@ -19,7 +19,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,order_no,coup_state) values (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT coup_sn,coup_state FROM couponhistory order by coup_sn";
-	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_sn = ?";
+	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_state = ?";
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
 	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
 
@@ -152,9 +152,10 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 	}
 
 	@Override
-	public CouponhistoryVO findByCoup_sn(String coup_sn) {
-
+	public List<CouponhistoryVO> findByCoup_State(Integer coup_state) {
+		List<CouponhistoryVO> list = new ArrayList<CouponhistoryVO>();
 		CouponhistoryVO couponhistoryVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -165,7 +166,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, coup_sn);
+			pstmt.setInt(1, coup_state);
 
 			rs = pstmt.executeQuery();
 
@@ -174,6 +175,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 				couponhistoryVO = new CouponhistoryVO();
 				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
 				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
+				list.add(couponhistoryVO);
 			}
 
 			// Handle any driver errors
@@ -208,7 +210,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 				}
 			}
 		}
-		return couponhistoryVO;
+		return list;
 	}
 
 	@Override

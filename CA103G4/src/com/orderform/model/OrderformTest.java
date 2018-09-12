@@ -16,17 +16,17 @@ public class OrderformTest {
 //		orderformVO1.setMem_no("M000001");
 //		orderformVO1.setBranch_no("0001");
 //		orderformVO1.setDeliv_no("D-000000001");
-//		orderformVO1.setOrder_type("1");
+//		orderformVO1.setOrder_type(1);
 //		orderformVO1.setOrder_price(500);
-//		orderformVO1.setOrder_status("4");
+//		orderformVO1.setOrder_status(4);
 //		orderformVO1.setDeliv_addres(null);
-//		orderformVO1.setOrder_pstatus("3");
-//		dao.insert(deliveryVO1);
+//		orderformVO1.setOrder_pstatus(3);
+//		dao.insert(orderformVO1);
 
 		// 修改(完成)
 //		OrderformVO orderformVO2 = new OrderformVO();
-//		orderformVO2.setOrder_status("2");
-//		orderformVO2.setOrder_pstatus("1");
+//		orderformVO2.setOrder_status(2);
+//		orderformVO2.setOrder_pstatus(1);
 //		orderformVO2.setOrder_no("O000000005");
 //		dao.update(orderformVO2);
 
@@ -60,14 +60,18 @@ public class OrderformTest {
 //			System.out.println();
 //		}
 		
-		// 查詢 more(修改中)
-//		List<DeliveryVO> list = dao.getByThreeKey(null,"E000000001",null);
-//		for (DeliveryVO adeliv : list) {
-//			System.out.print(adeliv.getDeliv_no() + ",");
-//			System.out.print(adeliv.getBranch_no() + ",");
-//			System.out.print(adeliv.getEmp_no() + ",");
-//			System.out.println(adeliv.getDeliv_status() + ",");
-//			System.out.println();
+		// 查詢 more(完成)
+//		List<OrderformVO> list = dao.getMore(null,"D-000000001");
+//		for (OrderformVO adeliv : list) {
+//			System.out.print(adeliv.getOrder_no() + ",");
+//			System.out.print(adeliv.getDek_no() + ",");
+//			System.out.print(adeliv.getMem_no() + ",");
+//			System.out.println(adeliv.getDeliv_no() + ",");
+//			System.out.print(adeliv.getOrder_type() + ",");
+//			System.out.print(adeliv.getOrder_price() + ",");
+//			System.out.print(adeliv.getOrder_status() + ",");
+//			System.out.println(adeliv.getOrder_pstatus() + ",");
+//
 //		}
 
 		// 查詢 all (完成)

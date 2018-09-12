@@ -14,7 +14,7 @@ public interface OrderformDAO_interface {
 
 	public List<OrderformVO> getNotOk();
 
-	public List<OrderformVO> getMore();
+	public List<OrderformVO> getMore(String order_no,String delivery_no);
 	
 	public List<OrderformVO> getAll();
 

@@ -17,8 +17,8 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no";
-	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where invo_no = ?";
+	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no DESC";
+	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ?";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 
@@ -152,9 +152,10 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 	}
 
 	@Override
-	public OrderinvoiceVO findByPrimaryKey(String invo_no) {
-
+	public List<OrderinvoiceVO> findByOrder_no(String order_no) {
+		List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();
 		OrderinvoiceVO orderinvoiceVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -165,7 +166,7 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, invo_no);
+			pstmt.setString(1, order_no);
 
 			rs = pstmt.executeQuery();
 
@@ -177,7 +178,7 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 				orderinvoiceVO.setMenu_no(rs.getString("menu_no"));
 				orderinvoiceVO.setCustom_no(rs.getString("custom_no"));
 				orderinvoiceVO.setInvo_status(rs.getInt("invo_status"));
-
+				list.add(orderinvoiceVO);
 			}
 
 			// Handle any driver errors
@@ -210,7 +211,7 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 				}
 			}
 		}
-		return orderinvoiceVO;
+		return list;
 	}
 
 	@Override
