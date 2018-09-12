@@ -24,7 +24,7 @@ public class OrderinvoiceTest {
 //		orderinvoiceVO2.setOrder_no("O000000001");
 //		dao.update(orderinvoiceVO2);
 
-//		// 查詢 one (完成)
+//		// 查詢 one (完成) ?
 //		OrderinvoiceVO orderinvoiceVO3 = dao.findByPrimaryKey("IN000000005");
 //		System.out.print(orderinvoiceVO3.getInvo_no() + ",");
 //		System.out.print(orderinvoiceVO3.getOrder_no() + ",");
@@ -33,29 +33,14 @@ public class OrderinvoiceTest {
 //		System.out.print(orderinvoiceVO3.getInvo_status() + ",");
 //		System.out.println("---------------------");
 
-		// 查詢 notok(修改中)
-//		List<OrderformVO> list = dao.getNotOk(2,1);
-//		for (OrderformVO adeliv : list) {
+		// 查詢 more(完成)
+//		List<OrderinvoiceVO> list = dao.findByOrder_no("O000000003");
+//		for (OrderinvoiceVO adeliv : list) {
+//			System.out.print(adeliv.getInvo_no() + ",");
 //			System.out.print(adeliv.getOrder_no() + ",");
-//			System.out.print(adeliv.getDek_no() + ",");
-////			System.out.print(adeliv.getMem_no() + ",");
-////			System.out.println(adeliv.getBranch_no() + ",");
-//			System.out.print(adeliv.getDeliv_no() + ",");
-//			System.out.print(adeliv.getOrder_type() + ",");
-//			System.out.print(adeliv.getOrder_price() + ",");
-//			System.out.println(adeliv.getOrder_status() + ",");
-//			System.out.print(adeliv.getDeliv_addres() + ",");
-//			System.out.println(adeliv.getOrder_pstatus() + ",");
-//			System.out.println();
-//		}
-
-		// 查詢 more(修改中)
-//		List<DeliveryVO> list = dao.getByThreeKey(null,"E000000001",null);
-//		for (DeliveryVO adeliv : list) {
-//			System.out.print(adeliv.getDeliv_no() + ",");
-//			System.out.print(adeliv.getBranch_no() + ",");
-//			System.out.print(adeliv.getEmp_no() + ",");
-//			System.out.println(adeliv.getDeliv_status() + ",");
+//			System.out.print(adeliv.getMenu_no() + ",");
+//			System.out.println(adeliv.getCustom_no() + ",");
+//			System.out.println(adeliv.getInvo_status() + ",");
 //			System.out.println();
 //		}
 
