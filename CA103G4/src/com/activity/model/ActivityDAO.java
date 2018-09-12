@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 public class ActivityDAO implements ActivityDAO_interface{
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "raman";
@@ -16,19 +17,15 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"ACT_CAROUSEL,ACT_CMIMETYPE,ACT_Pic,ACT_PMIMETYPE,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)" + 
 			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
 			"'0')," + 
-			"?,?,?,?,?,?,?,?,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?)";
+			"?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_CMIMETYPE=?,ACT_PIC=?,ACT_PMIMETYPE=?,ACT_CONTENT=?," + 
-			"ACT_START=TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')," + 
-			"ACT_END=TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI'),ACT_USECOU=? WHERE ACT_NO=?";
+			"ACT_START=?," + 
+			"ACT_END=?,ACT_USECOU=? WHERE ACT_NO=?";
 	private static final String GET_ONE_STMT = "SELECT * FROM ACTIVITY WHERE ACT_NO=?";
 	private static final String FINDBYDATEBETWEEN = 
-    		"SELECT * FROM activity WHERE act_start " + 
-    				"BETWEEN TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')AND " + 
-    				"TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')" + 
-    				"AND " + 
-    				"act_End BETWEEN TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')" + 
-    				"and TO_TIMESTAMP(?,'yyyy-mm-dd HH24:MI')";
+    		"SELECT * FROM activity WHERE act_start BETWEEN ? AND ? AND " + 
+    				"act_End BETWEEN ? and ?";
 	private static final String GETALL = 
 			"SELECT * FROM ACTIVITY";
 	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
@@ -56,8 +53,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 			pstmt.setBytes(6, activityVO.getAct_Pic());
 			pstmt.setString(7, activityVO.getAct_Pmimetype());
 			pstmt.setString(8, activityVO.getAct_Content());
-			pstmt.setString(9, activityVO.getAct_Start());
-			pstmt.setString(10, activityVO.getAct_End());
+			pstmt.setTimestamp(9, activityVO.getAct_Start());
+			pstmt.setTimestamp(10, activityVO.getAct_End());
 			pstmt.setString(11, activityVO.getAct_Usecou());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
@@ -101,8 +98,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 			pstmt.setBytes(6, activityVO.getAct_Pic());
 			pstmt.setString(7, activityVO.getAct_Pmimetype());
 			pstmt.setString(8, activityVO.getAct_Content());
-			pstmt.setString(9, activityVO.getAct_Start());
-			pstmt.setString(10, activityVO.getAct_End());
+			pstmt.setTimestamp(9, activityVO.getAct_Start());
+			pstmt.setTimestamp(10, activityVO.getAct_End());
 			pstmt.setString(11, activityVO.getAct_Usecou());
 			pstmt.setString(12, activityVO.getAct_No());
 			int rowCount =pstmt.executeUpdate();
@@ -133,7 +130,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 	}
 
 	@Override
-	public ActivityVO findByDate_between(String act_Start1,String act_Start2,String act_End1,String act_End2) {
+	public ActivityVO findByDate_between(Timestamp act_Start1,Timestamp act_Start2,Timestamp act_End1,Timestamp act_End2) {
 		ActivityVO activityVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -142,10 +139,10 @@ public class ActivityDAO implements ActivityDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYDATEBETWEEN);
-			pstmt.setString(1, act_Start1);
-			pstmt.setString(2, act_Start2);
-			pstmt.setString(3, act_End1);
-			pstmt.setString(4, act_End2);
+			pstmt.setTimestamp(1, act_Start1);
+			pstmt.setTimestamp(2, act_Start2);
+			pstmt.setTimestamp(3, act_End1);
+			pstmt.setTimestamp(4, act_End2);
 			rs = pstmt.executeQuery();
   
 			while (rs.next()) {
@@ -155,8 +152,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getString("act_Start"));
-				activityVO.setAct_End(rs.getString("act_End"));
+				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
+				activityVO.setAct_End(rs.getTimestamp("act_End"));
 			}
 
 			// Handle any SQL errors
@@ -211,8 +208,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getString("act_Start"));
-				activityVO.setAct_End(rs.getString("act_End"));
+				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
+				activityVO.setAct_End(rs.getTimestamp("act_End"));
 				activitylist.add(activityVO); 
 			}
 
@@ -266,8 +263,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getString("act_Start"));
-				activityVO.setAct_End(rs.getString("act_End"));
+				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
+				activityVO.setAct_End(rs.getTimestamp("act_End"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -318,8 +315,8 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
-				activityVO.setAct_Start(rs.getString("act_Start"));
-				activityVO.setAct_End(rs.getString("act_End"));
+				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
+				activityVO.setAct_End(rs.getTimestamp("act_End"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "

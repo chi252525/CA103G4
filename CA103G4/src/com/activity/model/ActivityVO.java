@@ -14,8 +14,8 @@ public class ActivityVO implements java.io.Serializable{
 	private byte[] act_Pic;
 	private String act_Pmimetype;
 	private String act_Content;
-	private String act_Start;
-	private String act_End;
+	private Timestamp act_Start;
+	private Timestamp act_End;
 	private String act_Usecou;
 	public String getAct_No() {
 		return act_No;
@@ -71,16 +71,16 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_Content(String act_Content) {
 		this.act_Content = act_Content;
 	}
-	public String getAct_Start() {
+	public Timestamp getAct_Start() {
 		return act_Start;
 	}
-	public void setAct_Start(String act_Start) {
+	public void setAct_Start(Timestamp act_Start) {
 		this.act_Start = act_Start;
 	}
-	public String getAct_End() {
+	public Timestamp getAct_End() {
 		return act_End;
 	}
-	public void setAct_End(String act_End) {
+	public void setAct_End(Timestamp act_End) {
 		this.act_End = act_End;
 	}
 	public String getAct_Usecou() {
