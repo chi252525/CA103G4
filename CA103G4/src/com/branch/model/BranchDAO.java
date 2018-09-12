@@ -15,14 +15,14 @@ public class BranchDAO implements BranchDAO_interface {
 	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO Branch (Branch_NO, Branch_NAME, Branch_CITY, Branch_DIST, Branch_ADDR, Branch_POS, Branch_LAN, Branch_LAT, Branch_TIME, Branch_DEL, Branch_TEL, Branch_TDESK) "
-			+ "VALUES(LPAD(Branch_NO_seq.NEXTVAL,4,'0'), ?,?,?,?,?,?,?,?,?,?,?)";
+			+ "VALUES(LPAD(Branch_NO_seq.NEXTVAL,4,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String UPDATE_STMT = "UPDATE Branch SET "
-			+ "BRAN_NAME=?,Branch_CITY=?, Branch_DIST=?, Branch_ADDR=?, Branch_POS=?, Branch_LAN=?, Branch_LAT=?, Branch_TIME=?, Branch_DEL=?, Branch_TEL=?, Branch_TDESK=? WHERE Branch_NO =?";
+			+ "BRANCH_NAME=?, Branch_CITY=?, Branch_DIST=?, Branch_ADDR=?, Branch_POS=?, Branch_LAN=?, Branch_LAT=?, Branch_TIME=?, Branch_DEL=?, Branch_TEL=?, Branch_TDESK=? WHERE Branch_NO =?";
 
 	private static final String DELETE_STMT = "DELETE from Branch WHERE Branch_NO =?";
 
-	private static final String GET_ONE_STMT = "SELECT FROM Branch WHERE Branch_NO =?";
+	private static final String GET_ONE_STMT = "SELECT * FROM Branch WHERE Branch_NO =?";
 
 	private static final String GET_ALL_STMT = "SELECT * FROM Branch ORDER BY Branch_NO";
 
@@ -37,22 +37,21 @@ public class BranchDAO implements BranchDAO_interface {
 			try {
 				pstmt = con.prepareStatement(INSERT_STMT);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 
-			pstmt.setString(1, BranchVO.getBranch_No());
-			pstmt.setString(2, BranchVO.getBranch_Name());
-			pstmt.setString(3, BranchVO.getBranch_City());
-			pstmt.setString(4, BranchVO.getBranch_Dist());
-			pstmt.setString(5, BranchVO.getBranch_Addr());
-			pstmt.setString(6, BranchVO.getBranch_Pos());
-			pstmt.setString(7, BranchVO.getBranch_Lan());
-			pstmt.setString(8, BranchVO.getBranch_Lat());
-			pstmt.setString(9, BranchVO.getBranch_Time());
-			pstmt.setDouble(10, BranchVO.getBranch_Del());
-			pstmt.setString(11, BranchVO.getBranch_Tel());
-			pstmt.setInt(12, BranchVO.getBranch_Tdesk());
+			pstmt.setString(1, BranchVO.getBranch_Name());
+			pstmt.setString(2, BranchVO.getBranch_City());
+			pstmt.setString(3, BranchVO.getBranch_Dist());
+			pstmt.setString(4, BranchVO.getBranch_Addr());
+			pstmt.setString(5, BranchVO.getBranch_Pos());
+			pstmt.setString(6, BranchVO.getBranch_Lan());
+			pstmt.setString(7, BranchVO.getBranch_Lat());
+			pstmt.setString(8, BranchVO.getBranch_Time());
+			pstmt.setDouble(9, BranchVO.getBranch_Del());
+			pstmt.setString(10, BranchVO.getBranch_Tel());
+			pstmt.setInt(11, BranchVO.getBranch_Tdesk());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException ce) {
@@ -259,67 +258,5 @@ public class BranchDAO implements BranchDAO_interface {
 			}
 		}
 		return list;
-	}
-
-	public static void main(String[] args) {
-		BranchDAO dao = new BranchDAO();
-		
-		// insert
-		BranchVO BranchVO1 = new BranchVO();
-		BranchVO1.setBranch_No("0012");
-		BranchVO1.setBranch_Name("竹風堂信義2店");
-		BranchVO1.setBranch_City("台北");
-		BranchVO1.setBranch_Dist("東區");
-		BranchVO1.setBranch_Addr("信義店99號");
-		BranchVO1.setBranch_Pos("120E 35N");
-		BranchVO1.setBranch_Lan("120E");
-		BranchVO1.setBranch_Lat("35N");
-		BranchVO1.setBranch_Time("竹風堂信義店");
-		BranchVO1.setBranch_Del(10.0);
-		BranchVO1.setBranch_Tel("竹風堂信義店");
-		BranchVO1.setBranch_Tdesk(99);
-		dao.insert(BranchVO1);
-		
-		// update
-		BranchVO BranchVO2 = new BranchVO();
-		BranchVO2.setBranch_No("0013");
-		BranchVO2.setBranch_Name("竹風堂信義3店");
-		dao.update(BranchVO2);
-		
-		// delete
-		dao.delete("0013");
-		
-		// select one
-		BranchVO BranchVO3 = new BranchVO();
-		BranchVO3 = dao.findByPrimaryKey("0012");
-		System.out.print(BranchVO3.getBranch_No());
-		System.out.print(BranchVO3.getBranch_Name());
-		System.out.print(BranchVO3.getBranch_City());
-		System.out.print(BranchVO3.getBranch_Dist());
-		System.out.print(BranchVO3.getBranch_Pos());
-		System.out.print(BranchVO3.getBranch_Lan());
-		System.out.print(BranchVO3.getBranch_Lat());
-		System.out.print(BranchVO3.getBranch_Time());
-		System.out.print(BranchVO3.getBranch_Del());
-		System.out.print(BranchVO3.getBranch_Tel());
-		System.out.print(BranchVO3.getBranch_Tdesk());
-		System.out.println(BranchVO3.getBranch_Addr());
-		
-		// select all
-		List<BranchVO> list = dao.getAll();
-		for (BranchVO aBranch : list) {
-			System.out.print("Branch_No: "+aBranch.getBranch_No());
-			System.out.print("Branch_Name: "+aBranch.getBranch_Name());
-			System.out.print("Branch_City: "+aBranch.getBranch_City());
-			System.out.print("Branch_Dist: "+aBranch.getBranch_Dist());
-			System.out.print("Branch_Pos: "+aBranch.getBranch_Pos());
-			System.out.print("Branch_Lan: "+aBranch.getBranch_Lan());
-			System.out.print("Branch_Lat: "+aBranch.getBranch_Lat());
-			System.out.print("Branch_Time:"+aBranch.getBranch_Time());
-			System.out.print("Branch_Del: "+aBranch.getBranch_Del());
-			System.out.print("Branch_Tel: "+aBranch.getBranch_Tel());
-			System.out.print("Branch_Tdesk: "+aBranch.getBranch_Tdesk());
-			System.out.println("Branch_Addr: "+aBranch.getBranch_Addr());
-		}
 	}
 }
