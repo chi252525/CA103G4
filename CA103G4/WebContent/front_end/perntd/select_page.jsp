@@ -56,7 +56,7 @@
   <li>
     <FORM METHOD="post" ACTION="perntd.do" >
         <b>輸入個人通知流水號 (如P000001):</b>
-        <input type="text" name="empno">
+        <input type="text" name="perntd_No">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
@@ -66,10 +66,10 @@
    
   <li>
      <FORM METHOD="post" ACTION="perntd.do" >
-       <b>選擇會員編號:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${perntdSvc.all}" > 
-          <option value="${perntdVO.mem_No}">${perntdVO.mem_No}
+       <b>選擇個人通知流水號:</b>
+       <select size="1" name="perntd_No">
+         <c:forEach var="perntdVO" items="${perntdSvc.all}" > 
+          <option value="${perntdVO.perntd_No}">${perntdVO.perntd_No}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

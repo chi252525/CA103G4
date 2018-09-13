@@ -23,7 +23,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PerntdServlet</servlet-name>
-		<url-pattern>/perntd/perntd.do</url-pattern>
+		<url-pattern>/front_end/perntd/perntd.do</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

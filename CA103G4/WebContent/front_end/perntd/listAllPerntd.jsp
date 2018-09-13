@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="com.perntd.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    EmpService empSvc = new EmpService();
-    List<EmpVO> list = empSvc.getAll();
+    PerntdService perntdSvc = new PerntdService();
+    List<PerntdVO> list = perntdSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
 
 
 <html>
 <head>
-<title>所有員工資料 - listAllEmp.jsp</title>
+<title>所有個人通知資料 - listAllEmp.jsp</title>
 
 <style>
   table#table-1 {
@@ -51,15 +51,17 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有員工資料 - listAllEmp.jsp</h3>
+		 <h3>所有個人通知資料 - listAllEmp.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<%-- 錯誤表列 --%>
+<%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -71,37 +73,33 @@
 
 <table>
 	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>職位</th>
-		<th>雇用日期</th>
-		<th>薪水</th>
-		<th>獎金</th>
-		<th>部門</th>
+		<th>個人通知流水號</th>
+		<th>會員編號</th>
+		<th>系統通知編號</th>
+		<th>通知內容</th>
+		<th>通知建立時間</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="perntdVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${empVO.empno}</td>
-			<td>${empVO.ename}</td>
-			<td>${empVO.job}</td>
-			<td>${empVO.hiredate}</td>
-			<td>${empVO.sal}</td>
-			<td>${empVO.comm}</td> 
-			<td>${empVO.deptno}</td>
+			<td>${perntdVO.getPerntd_No()}</td>
+			<td>${perntdVO.getMem_No()}</td>
+			<td>${perntdVO.getNt_No()}</td>
+			<td>${perntdVO.getPerntd_Cont()}</td>
+			<td>${perntdVO.getPerntd_Date()}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/perntd/perntd.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="perntd_No"  value="${perntdVO.perntd_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/perntd/perntd.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="perntd_No"  value="${perntdVO.perntd_No}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

@@ -1,14 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ page import="com.emp.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.perntd.model.*"%>
+<%-- æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
-  EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), ¦s¤JreqªºempVOª«¥ó
+  PerntdVO perntdVO = (PerntdVO) request.getAttribute("perntdVO"); //PerntdServlet.java(Controller), å­˜å…¥reqçš„perntdVOç‰©ä»¶
 %>
 
 <html>
 <head>
-<title>­û¤u¸ê®Æ - listOneEmp.jsp</title>
+<title>æœƒå“¡å€‹äººé€šçŸ¥è³‡æ–™ - listOneEmp.jsp</title>
 
 <style>
   table#table-1 {
@@ -46,32 +46,30 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4>
+<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+
+<h4>æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>­û¤u¸ê®Æ - ListOneEmp.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æœƒå“¡å€‹äººé€šçŸ¥è³‡æ–™ - ListOneEmp.jsp</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>­û¤u½s¸¹</th>
-		<th>­û¤u©m¦W</th>
-		<th>Â¾¦ì</th>
-		<th>¶±¥Î¤é´Á</th>
-		<th>Á~¤ô</th>
-		<th>¼úª÷</th>
-		<th>³¡ªù</th>
+		<th>å€‹äººé€šçŸ¥æµæ°´è™Ÿ</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>ç³»çµ±é€šçŸ¥ç·¨è™Ÿ</th>
+		<th>é€šçŸ¥å…§å®¹</th>
+		<th>é€šçŸ¥å»ºç«‹æ™‚é–“</th>
 	</tr>
 	<tr>
-		<td><%=empVO.getEmpno()%></td>
-		<td><%=empVO.getEname()%></td>
-		<td><%=empVO.getJob()%></td>
-		<td><%=empVO.getHiredate()%></td>
-		<td><%=empVO.getSal()%></td>
-		<td><%=empVO.getComm()%></td>
-		<td><%=empVO.getDeptno()%></td>
+		<td><%=perntdVO.getPerntd_No()%></td>
+		<td><%=perntdVO.getMem_No()%></td>
+		<td><%=perntdVO.getNt_No()%></td>
+		<td><%=perntdVO.getPerntd_Cont()%></td>
+		<td><%=perntdVO.getPerntd_Date()%></td>
 	</tr>
 </table>
 
