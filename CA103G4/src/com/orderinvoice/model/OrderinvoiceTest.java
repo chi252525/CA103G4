@@ -10,7 +10,7 @@ public class OrderinvoiceTest {
 
 		// 新增(完成)
 //		OrderinvoiceVO orderinvoiceVO1 = new OrderinvoiceVO();
-//		orderinvoiceVO1.setInvo_no("'IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0')"); //可不寫
+////	orderinvoiceVO1.setInvo_no("'IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0')"); //可不寫
 //		orderinvoiceVO1.setOrder_no("O000000004");
 //		orderinvoiceVO1.setMenu_no("M003");
 //		orderinvoiceVO1.setCustom_no(null);
@@ -24,7 +24,7 @@ public class OrderinvoiceTest {
 //		orderinvoiceVO2.setOrder_no("O000000001");
 //		dao.update(orderinvoiceVO2);
 
-//		// 查詢 one (完成) ?
+//		// 查詢 one  ?
 //		OrderinvoiceVO orderinvoiceVO3 = dao.findByPrimaryKey("IN000000005");
 //		System.out.print(orderinvoiceVO3.getInvo_no() + ",");
 //		System.out.print(orderinvoiceVO3.getOrder_no() + ",");
@@ -34,7 +34,7 @@ public class OrderinvoiceTest {
 //		System.out.println("---------------------");
 
 		// 查詢 more(完成)
-//		List<OrderinvoiceVO> list = dao.findByOrder_no("O000000003");
+//		List<OrderinvoiceVO> list = dao.findByOrder_no("O000000001");
 //		for (OrderinvoiceVO adeliv : list) {
 //			System.out.print(adeliv.getInvo_no() + ",");
 //			System.out.print(adeliv.getOrder_no() + ",");

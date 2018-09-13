@@ -27,7 +27,7 @@ public class OrderformTest {
 //		OrderformVO orderformVO2 = new OrderformVO();
 //		orderformVO2.setOrder_status(2);
 //		orderformVO2.setOrder_pstatus(1);
-//		orderformVO2.setOrder_no("O000000005");
+//		orderformVO2.setOrder_no("O000000004");
 //		dao.update(orderformVO2);
 
 //		// 查詢 one (完成)
@@ -71,7 +71,6 @@ public class OrderformTest {
 //			System.out.print(adeliv.getOrder_price() + ",");
 //			System.out.print(adeliv.getOrder_status() + ",");
 //			System.out.println(adeliv.getOrder_pstatus() + ",");
-//
 //		}
 
 		// 查詢 all (完成)

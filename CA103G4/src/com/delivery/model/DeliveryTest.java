@@ -21,7 +21,7 @@ public class DeliveryTest {
 		// 修改
 //		DeliveryVO deliveryVO2 = new DeliveryVO();
 //		deliveryVO2.setDeliv_no("D-000000001");
-//		deliveryVO2.setDeliv_status("1");
+//		deliveryVO2.setDeliv_status("2");
 //		dao.update(deliveryVO2);
 
 //		 查詢 one

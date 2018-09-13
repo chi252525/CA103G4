@@ -11,8 +11,7 @@ public class CouponhistoryTest {
 		
 //		//新增(完成)
 //		CouponhistoryVO couponhistoryVO1 = new CouponhistoryVO();
-//
-//		couponhistoryVO1.setCoup_sn("M-00000000021"); //coupon有才能新增
+//		couponhistoryVO1.setCoup_sn("M-00000000022"); //coupon有才能新增
 //		couponhistoryVO1.setMem_no("M000002");
 //		couponhistoryVO1.setOrder_no(null);
 //		couponhistoryVO1.setCoup_state(0);
@@ -34,7 +33,7 @@ public class CouponhistoryTest {
 //		couponhistoryVO2.setCoup_sn("M-00000000020");
 //		dao.update(couponhistoryVO2);
 
-//		//查詢 one(完全)
+//		//查詢 one(完成)
 //		List<CouponhistoryVO> list = dao.findByCoup_State(0);
 //		for (CouponhistoryVO adeliv : list) {
 //		System.out.print(adeliv.getCoup_sn() + ",");
@@ -43,12 +42,10 @@ public class CouponhistoryTest {
 //		}
 
 		//查詢 more
-//		List<DeliveryVO> list = dao.getByThreeKey(null,"E000000001",null);
-//		for (DeliveryVO adeliv : list) {
-//			System.out.print(adeliv.getDeliv_no() + ",");
-//			System.out.print(adeliv.getBranch_no() + ",");
-//			System.out.print(adeliv.getEmp_no() + ",");
-//			System.out.println(adeliv.getDeliv_status() + ",");
+//		List<CouponhistoryVO> list = dao.findByCoup_State(1);
+//		for (CouponhistoryVO adeliv : list) {
+//			System.out.print(adeliv.getCoup_sn() + ",");
+//			System.out.print(adeliv.getCoup_state() + ",");
 //			System.out.println();
 //		}
 		
