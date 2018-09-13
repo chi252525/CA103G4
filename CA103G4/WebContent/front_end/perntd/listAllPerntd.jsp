@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.perntd.model.*"%>
-<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%-- æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
     PerntdService perntdSvc = new PerntdService();
@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>©Ò¦³­Ó¤H³qª¾¸ê®Æ - listAllEmp.jsp</title>
+<title>æ‰€æœ‰å€‹äººé€šçŸ¥è³‡æ–™ - listAllEmp.jsp</title>
 
 <style>
   table#table-1 {
@@ -53,17 +53,17 @@
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 
-<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>©Ò¦³­Ó¤H³qª¾¸ê®Æ - listAllEmp.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æ‰€æœ‰å€‹äººé€šçŸ¥è³‡æ–™ - listAllEmp.jsp</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
-<%-- ¿ù»~¦Cªí --%>
+<%-- éŒ¯èª¤åˆ—è¡¨ --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -73,13 +73,13 @@
 
 <table>
 	<tr>
-		<th>­Ó¤H³qª¾¬y¤ô¸¹</th>
-		<th>·|­û½s¸¹</th>
-		<th>¨t²Î³qª¾½s¸¹</th>
-		<th>³qª¾¤º®e</th>
-		<th>³qª¾«Ø¥ß®É¶¡</th>
-		<th>­×§ï</th>
-		<th>§R°£</th>
+		<th>å€‹äººé€šçŸ¥æµæ°´è™Ÿ</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>ç³»çµ±é€šçŸ¥ç·¨è™Ÿ</th>
+		<th>é€šçŸ¥å…§å®¹</th>
+		<th>é€šçŸ¥å»ºç«‹æ™‚é–“</th>
+		<th>ä¿®æ”¹</th>
+		<th>åˆªé™¤</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="perntdVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -91,14 +91,14 @@
 			<td>${perntdVO.getPerntd_Cont()}</td>
 			<td>${perntdVO.getPerntd_Date()}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/perntd/perntd.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï">
+			  <FORM METHOD="post" ACTION="perntd.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="ä¿®æ”¹">
 			     <input type="hidden" name="perntd_No"  value="${perntdVO.perntd_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/perntd/perntd.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="§R°£">
+			  <FORM METHOD="post" ACTION="perntd.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="åˆªé™¤">
 			     <input type="hidden" name="perntd_No"  value="${perntdVO.perntd_No}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
