@@ -2,7 +2,7 @@ package com.custommeals.model;
 
 import java.util.List;
 
-public class CustommealsJDBCDAO {
+public class CustommealsTest {
 	
 	public static void main(String[] args) {
 		CustommealsDAO dao = new CustommealsDAO();

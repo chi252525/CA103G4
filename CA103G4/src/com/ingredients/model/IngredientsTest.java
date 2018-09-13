@@ -2,7 +2,7 @@ package com.ingredients.model;
 
 import java.util.List;
 
-public class IngredientsJDBCDAO {
+public class IngredientsTest {
 
 	public static void main(String[] args) {
 		IngredientsDAO dao = new IngredientsDAO();

@@ -2,7 +2,7 @@ package com.menu.model;
 
 import java.util.List;
 
-public class MenuJDBCDAO {
+public class MenuTest {
 
 	public static void main(String[] args) {
 		MenuDAO dao = new MenuDAO();

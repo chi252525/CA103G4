@@ -2,7 +2,7 @@ package com.ingclass.model;
 
 import java.util.List;
 
-public class IngclassJDBCDAO {
+public class IngclassTest {
 
 	public static void main(String[] args) {
 		IngclassDAO dao = new IngclassDAO();

@@ -2,7 +2,7 @@ package com.ingredientcombination.model;
 
 import java.util.List;
 
-public class IngredientCombinationJDBCDAO {
+public class IngredientCombinationTest {
 
 	public static void main(String[] args) {
 		IngredientCombinationDAO dao = new IngredientCombinationDAO();
