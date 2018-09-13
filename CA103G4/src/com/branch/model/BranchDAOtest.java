@@ -6,7 +6,7 @@ public class BranchDAOtest {
 
 	public static void main(String[] args) {
 		BranchDAO dao = new BranchDAO();
-
+		int row = 0;
 		// insert
 		BranchVO BranchVO1 = new BranchVO();
 		BranchVO1.setBranch_No("0012");
@@ -19,20 +19,20 @@ public class BranchDAOtest {
 		BranchVO1.setBranch_Lat("35N");
 		BranchVO1.setBranch_Time("竹風堂信義店");
 		BranchVO1.setBranch_Del(10.0);
-		BranchVO1.setBranch_Tel("竹風堂信義店");
+		BranchVO1.setBranch_Tel("0909392246");
 		BranchVO1.setBranch_Tdesk(99);
-		dao.insert(BranchVO1);
-		System.out.println("新增完畢");
+		row = dao.insert(BranchVO1);
+		System.out.println("新增完畢:新增"+ row +"筆資料");
 		System.out.println("===============================");
 		// update 
 		BranchVO1.setBranch_No("0014");
 		BranchVO1.setBranch_Name("竹風堂信義3店");
-		dao.update(BranchVO1);
-		System.out.println("修改完畢");
+		row = dao.update(BranchVO1);
+		System.out.println("修改完畢: 修改"+ row +"筆資料");
 		System.out.println("===============================");
 		// delete
-		dao.delete("0015");
-		System.out.println("刪除完畢015");
+		row = dao.delete("0015");
+		System.out.println("刪除完畢: 刪了"+ row +"筆資料");
 		System.out.println("===============================");
 		// select one
 		BranchVO BranchVO3 = new BranchVO();

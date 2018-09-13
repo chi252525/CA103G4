@@ -27,9 +27,10 @@ public class BranchDAO implements BranchDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT * FROM Branch ORDER BY Branch_NO";
 
 	@Override
-	public void insert(BranchVO BranchVO) {
+	public int insert(BranchVO BranchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int row =0;
 
 		try {
 			Class.forName(driver);
@@ -53,7 +54,7 @@ public class BranchDAO implements BranchDAO_interface {
 			pstmt.setString(10, BranchVO.getBranch_Tel());
 			pstmt.setInt(11, BranchVO.getBranch_Tdesk());
 
-			pstmt.executeUpdate();
+			row = pstmt.executeUpdate();
 		} catch (ClassNotFoundException ce) {
 			ce.printStackTrace();
 		} catch (SQLException se) {
@@ -67,13 +68,15 @@ public class BranchDAO implements BranchDAO_interface {
 				}
 			}
 		}
+		return row;
 
 	}
 
 	@Override
-	public void update(BranchVO BranchVO) {
+	public int update(BranchVO BranchVO) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		int row = 0;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, userid, passwd);
@@ -90,7 +93,7 @@ public class BranchDAO implements BranchDAO_interface {
 			pstmt.setString(10, BranchVO.getBranch_Tel());
 			pstmt.setInt(11, BranchVO.getBranch_Tdesk());
 			pstmt.setString(12, BranchVO.getBranch_No());
-			pstmt.executeUpdate();
+			row = pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -111,18 +114,20 @@ public class BranchDAO implements BranchDAO_interface {
 				}
 			}
 		}
+		return row;
 	}
 
 	@Override
-	public void delete(String Branch_No) {
+	public int delete(String Branch_No) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		int row = 0;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, Branch_No);
-			pstmt.executeUpdate();
+			row = pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -143,6 +148,7 @@ public class BranchDAO implements BranchDAO_interface {
 				}
 			}
 		}
+		return row;
 	}
 
 	@Override
