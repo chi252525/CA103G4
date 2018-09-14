@@ -32,9 +32,9 @@ public class PerntdServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String perntd_No  = req.getParameter("perntd_No").trim();
 				//無輸入
-				String perntd_No  = req.getParameter("perntd_No");
-				if(perntd_No == null || (perntd_No.trim()).length() == 0) {
+				if(perntd_No == null || perntd_No.length() == 0) {
 					errorMsgs.add("請輸入個人通知流水號");
 				}
 				if(!errorMsgs.isEmpty()) {
@@ -83,7 +83,7 @@ public class PerntdServlet extends HttpServlet{
 			
 			try {
 				/***************************1.接收請求參數****************************************/
-				String perntd_No = req.getParameter("perntd_No");
+				String perntd_No = req.getParameter("perntd_No").trim();
 				
 				/***************************2.開始查詢資料****************************************/
 				PerntdService perntdSvc = new PerntdService();
@@ -103,7 +103,68 @@ public class PerntdServlet extends HttpServlet{
 		}
 		
 		if("insert".equals(action)){  // 來自addPerntd.jsp的請求  
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			
+			try {
+				/***************************1.接收請求參數****************************************/
+				
+				//無輸入OR格式錯誤
+				String mem_No = req.getParameter("mem_No").trim();
+				if(mem_No == null || mem_No.length() == 0) {
+					errorMsgs.add("會員編號:請勿空白");
+				} else if(!(mem_No.matches("M\\d{6}"))) {
+					errorMsgs.add("會員編號:格式不正確 ");
+				}
+				
+				//無輸入OR格式錯誤
+				String nt_No = req.getParameter("nt_No").trim();
+				if(nt_No == null || nt_No.length() == 0) {
+					errorMsgs.add("系統通知編號:請勿空白");
+				} else if(!(nt_No.matches("NT\\d{2}"))) {
+					errorMsgs.add("系統通知編號:格式不正確 ");
+				}
+				
+				//長度超出範圍
+				String perntd_Cont = req.getParameter("perntd_Cont").trim();
+				if(perntd_Cont == null || perntd_Cont.length() == 0) {
+					errorMsgs.add("通知內容:請勿空白");
+				} else if(perntd_Cont.length() >= 1000) {
+					errorMsgs.add("通知內容:長度需小於1000個字元");
+				}
+				
+				
+				//日期格式錯誤
+				String perntd_Date = req.getParameter("perntd_Date");
+				
+				PerntdVO perntdVO = new PerntdVO();
+				perntdVO.setMem_No(mem_No);
+				perntdVO.setNt_No(nt_No);
+				perntdVO.setPerntd_Cont(perntd_Cont);
+				perntdVO.setPerntd_Date(perntd_Date);
+				
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("perntdVO", perntdVO);  // 含有輸入格式錯誤的perntdVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/perntd/addPerntd.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				/***************************2.開始新增資料****************************************/
+				PerntdService perntdSvc = new PerntdService();
+				perntdVO = perntdSvc.addPerntd(mem_No, nt_No, perntd_Cont, perntd_Date);
+								
+				/***************************3.新增完成,準備轉交(Send the Success view)************/
+				req.setAttribute("perntdVO", perntdVO);  // 資料庫新增成功後,正確的的perntdVO物件,存入req
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/perntd/listAllPerntd.jsp");
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("資料新增失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/perntd/addPerntd.jsp");
+				failuerView.forward(req, res);
+			}
 		}
 		
 		if("update".equals(action)) {  // 來自update_perntd_input.jsp的請求
@@ -114,44 +175,41 @@ public class PerntdServlet extends HttpServlet{
 			
 			try {
 				/***************************1.接收請求參數****************************************/
-				String perntd_No = req.getParameter("perntd_No");
+				String perntd_No = req.getParameter("perntd_No").trim();
 				
 				//無輸入OR格式錯誤
 				String mem_No = req.getParameter("mem_No").trim();
-				if(mem_No == null || (mem_No.trim()).length() == 0) {
+				if(mem_No == null || mem_No.length() == 0) {
 					errorMsgs.add("會員編號:請勿空白");
-				} else if(!(mem_No.matches("NT\\d{2}"))) {
+				} else if(!(mem_No.matches("M\\d{6}"))) {
 					errorMsgs.add("會員編號:格式不正確 ");
 				}
 				
 				//無輸入OR格式錯誤
 				String nt_No = req.getParameter("nt_No").trim();
-				if(nt_No == null || (nt_No.trim()).length() == 0) {
+				if(nt_No == null || nt_No.length() == 0) {
 					errorMsgs.add("系統通知編號:請勿空白");
-				} else if(!(mem_No.matches("NT\\d{2}"))) {
+				} else if(!(nt_No.matches("NT\\d{2}"))) {
 					errorMsgs.add("系統通知編號:格式不正確 ");
 				}
 				
 				//長度超出範圍
 				String perntd_Cont = req.getParameter("perntd_Cont").trim();
-				if(perntd_Cont.length() >= 1000)
+				if(perntd_Cont == null || perntd_Cont.length() == 0) {
+					errorMsgs.add("通知內容:請勿空白");
+				} else if(perntd_Cont.length() >= 1000) {
 					errorMsgs.add("通知內容:長度需小於1000個字元");
+				}
 				
 				//日期格式錯誤
-				java.sql.Date perntd_Date = null;
-				try {
-					perntd_Date = java.sql.Date.valueOf(req.getParameter("perntd_Date").trim());
-				} catch (IllegalArgumentException e) {
-					perntd_Date = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
-				}
+				String perntd_Date = req.getParameter("perntd_Date");
 				
 				PerntdVO perntdVO = new PerntdVO();
 				perntdVO.setPerntd_No(perntd_No);
 				perntdVO.setMem_No(mem_No);
 				perntdVO.setNt_No(nt_No);
 				perntdVO.setPerntd_Cont(perntd_Cont);
-//				perntdVO.setPerntd_Date(perntd_Date);
+				perntdVO.setPerntd_Date(perntd_Date);
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("perntdVO", perntdVO);  // 含有輸入格式錯誤的perntdVO物件,也存入req
@@ -162,11 +220,11 @@ public class PerntdServlet extends HttpServlet{
 				
 				/***************************2.開始修改資料****************************************/
 				PerntdService perntdSvc = new PerntdService();
-//				perntdVO = perntdSvc.updatePerntd(perntd_No, mem_No, nt_No, perntd_Cont, perntd_Date);
+				perntdVO = perntdSvc.updatePerntd(perntd_No, mem_No, nt_No, perntd_Cont, perntd_Date);
 								
-				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				/***************************3.修改完成,準備轉交(Send the Success view)************/
 				req.setAttribute("perntdVO", perntdVO);  // 資料庫update成功後,正確的的perntdVO物件,存入req
-				RequestDispatcher successView = req.getRequestDispatcher("");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/perntd/listOnePerntd.jsp");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
@@ -185,14 +243,15 @@ public class PerntdServlet extends HttpServlet{
 			try {
 				/***************************1.接收請求參數****************************************/
 				String perntd_No = req.getParameter("perntd_No");
+				String whichPage = req.getParameter("whichPage");
 				
 				/***************************2.開始刪除資料****************************************/
 				PerntdService perntdSvc = new PerntdService();
 				perntdSvc.deletePerntd(perntd_No);
 								
-				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				/***************************3.刪除完成,準備轉交(Send the Success view)************/
 				req.setAttribute("perntd_No", perntd_No);
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/perntd/listAllPerntd.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/perntd/listAllPerntd.jsp?"+whichPage);
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/

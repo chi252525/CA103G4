@@ -3,13 +3,14 @@
 <%@ page import="com.perntd.model.*"%>
 
 <%
-  PerntdVO perntdVO = (PerntdVO) request.getAttribute("perntdVO");
+//PerntdServlet.java (Concroller) 存入req的perntdVO物件 (包括輸入資料錯誤時的perntdVO物件)
+  PerntdVO perntdVO = (PerntdVO)request.getAttribute("perntdVO");
 %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料新增 - addEmp.jsp</title>
+<title>資料新增 - addPerntd.jsp</title>
 
 <style>
   table#table-1 {
@@ -46,9 +47,11 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料新增 - addEmp.jsp</h3></td><td>
+		 <h3>資料新增 - addPerntd.jsp</h3></td><td>
 		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,49 +68,39 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="perntd.do" name="form1">
 <table>
+	<!-- 這邊的DAO之後需改成Service -->
+	<jsp:useBean id="memberDAO" scope="page" class="com.perntd.model.MemberDAO" />
 	<tr>
-		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" 
-			 value="<%= (perntdVO==null)? "吳永志" : perntdVO.getPerntd_Cont()%>" /></td>
+		<td>會員編號:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="mem_No">
+			<c:forEach var="memberVO" items="${memberDAO.all}">
+				<option value="${memberVO.mem_No}" ${(perntdVO.mem_No==memberVO.mem_No)?'selected':'' } >${memberVO.mem_No}
+			</c:forEach>
+		</select></td>
+	</tr>
+	<!-- 這邊的DAO之後需改成Service -->
+	<jsp:useBean id="sysntDAO" scope="page" class="com.sysnt.model.SysntDAO" />
+	<tr>
+		<td>通知標題:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="nt_No">
+			<c:forEach var="sysntVO" items="${sysntDAO.all}">
+				<option value="${sysntVO.nt_No}" ${(perntdVO.nt_No==sysntVO.nt_No)?'selected':'' } >${sysntVO.nt_Tittle}
+			</c:forEach>
+		</select></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"
-			 value="<%= (perntdVO==null)? "MANAGER" : perntdVO.getPerntd_Cont()%>" /></td>
+		<td>通知內容:</td>
+		<td><input type="TEXT" name="perntd_Cont" size="45"	value="<%=(perntdVO==null)?"請輸入內容":perntdVO.getPerntd_Cont()%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text"></td>
+		<td>通知建立時間:</td>
+		<td><input name="perntd_Date" id="f_date1" type="text" ></td>
 	</tr>
-	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"
-			 value="<%= (perntdVO==null)? "10000" : perntdVO.getPerntd_Cont()%>" /></td>
-	</tr>
-	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45"
-			 value="<%= (perntdVO==null)? "100" : perntdVO.getPerntd_Cont()%>" /></td>
-	</tr>
-
-<%--
-<jsp:useBean id="deptSvc" scope="page" class="com.sysnt.model.SysntService" />
-<tr>
-	<td>部門:<font color=red><b>*</b></font></td>
-	<td><select size="1" name="deptno">
-		<c:forEach var="deptVO" items="${deptSvc.all}">
-			<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname}
-		</c:forEach>
-	</select></td>
-</tr>
---%>
-
-
-	
 
 </table>
+
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
@@ -117,16 +110,19 @@
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
+	<!-- 當第一次進入到addPerntd頁面時，因為在程式一開始宣告的perntdVO並未取到值，所以會產生例外直接進入catch區塊執行該段程式碼 -->
+	<!-- 而controller檢查到錯誤返回處理時，則會因為perntdVO已取到值而執行try區塊裡的程式碼-->
 <% 
 	java.sql.Date perntdDate = null;
-	
-	String dateStr = perntdVO.getPerntd_Date();
-	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
-	java.util.Date date = sdf.parse(dateStr);
-  
+
 	try {
+		//字串先轉java.util.Date型態後再轉java.sql.Date型態
+		String dateStr = perntdVO.getPerntd_Date();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
+		java.util.Date date = sdf.parse(dateStr);
 		perntdDate = new java.sql.Date(date.getTime());
 	} catch (Exception e) {
+		//取得當前日期
 		perntdDate = new java.sql.Date(System.currentTimeMillis());
 	}
 %>

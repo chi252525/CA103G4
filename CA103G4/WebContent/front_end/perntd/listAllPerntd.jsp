@@ -75,7 +75,7 @@
 	<tr>
 		<th>個人通知流水號</th>
 		<th>會員編號</th>
-		<th>系統通知編號</th>
+		<th>通知標題</th>
 		<th>通知內容</th>
 		<th>通知建立時間</th>
 		<th>修改</th>
@@ -99,7 +99,9 @@
 			<td>
 			  <FORM METHOD="post" ACTION="perntd.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="perntd_No"  value="${perntdVO.perntd_No}">
+			     <!-- 從page1.file取得的參數，藉由hidden value傳到下個頁面，可以在刪除一筆資料後繼續停留在該頁面 -->
+			     <input type="hidden" name="whichPage" value="<%=whichPage%>">
+			     <input type="hidden" name="perntd_No" value="${perntdVO.perntd_No}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

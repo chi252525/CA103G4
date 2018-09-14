@@ -8,23 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-public class FeatureDAO implements FeatureDAO_interface{
+public class FeatureJDBCDAO implements FeatureDAO_interface{
 	
-	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "Test";
+	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO FEATURE VALUES('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),?)";
@@ -43,10 +32,13 @@ public class FeatureDAO implements FeatureDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, feaVO.getFea_Name());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -73,11 +65,14 @@ public class FeatureDAO implements FeatureDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, feaVO.getFea_Name());
 			pstmt.setString(2, feaVO.getFea_No());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -103,10 +98,13 @@ public class FeatureDAO implements FeatureDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, fea_No);
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -134,7 +132,8 @@ public class FeatureDAO implements FeatureDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, fea_No);
 			rs = pstmt.executeQuery();
@@ -142,6 +141,8 @@ public class FeatureDAO implements FeatureDAO_interface{
 			feaVO = new FeatureVO();
 			feaVO.setFea_No(rs.getString("FEA_NO"));
 			feaVO.setFea_Name(rs.getString("FEA_NAME"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -178,7 +179,8 @@ public class FeatureDAO implements FeatureDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -187,6 +189,8 @@ public class FeatureDAO implements FeatureDAO_interface{
 				feaVO.setFea_Name(rs.getString("FEA_NAME"));
 				list.add(feaVO);
 			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -214,4 +218,32 @@ public class FeatureDAO implements FeatureDAO_interface{
 		}
 		return list;
 	}
+	
+	public static void main(String[] args) {
+		FeatureDAO dao = new FeatureDAO();
+		//insert
+		FeatureVO feaVO1 = new FeatureVO();
+		feaVO1.setFea_Name("新增功能");
+		dao.insert(feaVO1);
+		//update
+		FeatureVO feaVO2 = new FeatureVO();
+		feaVO2.setFea_No("F022");
+		feaVO2.setFea_Name("修改功能");
+		dao.update(feaVO2);
+		//delete
+		dao.delete("F001");
+		//select one
+		FeatureVO feaVO3 = new FeatureVO();
+		feaVO3 = dao.findByPrimaryKey("F002");
+		System.out.println(feaVO3.getFea_No());
+		System.out.println(feaVO3.getFea_Name());
+		//select all
+		List<FeatureVO> list = dao.getAll();
+		for(FeatureVO aFea : list) {
+			System.out.print(aFea.getFea_No()+" ");
+			System.out.println(aFea.getFea_Name());
+		}
+		
+	}
+	
 }
