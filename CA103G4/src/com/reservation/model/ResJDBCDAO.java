@@ -292,7 +292,7 @@ public class ResJDBCDAO implements ResDAO_interface{
 	public static void main(String[] args){
 		ResJDBCDAO dao = new ResJDBCDAO();
 //		Format sfm1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		//�s�W
+		//新增
 		ResVO resVO1 = new ResVO();
 		resVO1.setMem_no("M000001");
 		resVO1.setDek_no("D000000001");
@@ -302,7 +302,7 @@ public class ResJDBCDAO implements ResDAO_interface{
 		resVO1.setRes_status(1);
 		dao.insert(resVO1);
 		
-		//�ק�
+		//修改
 		ResVO resVO2 = new ResVO();
 		resVO2.setMem_no("M000002");
 		resVO2.setDek_no("D000000002");
@@ -314,7 +314,7 @@ public class ResJDBCDAO implements ResDAO_interface{
 		dao.update(resVO2);	
 		System.out.println("SUCCESS");
 		
-		// �d��
+		//刪除
 		ResVO resVO3 = dao.findByPrimaryKey("R000000001");
 		System.out.println(resVO3.getRes_no()+ ",");
 		System.out.println(resVO3.getMem_no()+ ",");
@@ -326,7 +326,7 @@ public class ResJDBCDAO implements ResDAO_interface{
 		System.out.println(resVO3.getRes_status());
 		System.out.println("---------------------");
 				
-		//�d�ߥ���
+		//查詢
 		List<ResVO> list = dao.getAll();
 		for(ResVO aEmp : list) {
 		System.out.println(aEmp.getRes_no()+ ",");

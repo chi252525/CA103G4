@@ -234,7 +234,7 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		DeskJDBCDAO dao = new DeskJDBCDAO();
 		
 		
-		//�s�W
+		//新增
 		DeskVO deskVO1 = new DeskVO();
 		deskVO1.setBranch_no("0002");
 		deskVO1.setDek_id("G2");
@@ -242,7 +242,7 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		deskVO1.setDek_status(2);
 		dao.insert(deskVO1);
 		
-		//�ק�
+		//修改
 		DeskVO deskVO2 = new DeskVO();
 		deskVO2.setDek_no("D000000001");
 		deskVO2.setBranch_no("0001");
@@ -251,7 +251,7 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		deskVO2.setDek_status(2);
 		dao.update(deskVO2);	
 		
-		// �d��
+		// 查詢
 		DeskVO deskVO3 = dao.findByPrimaryKey("D000000001");
 		System.out.println(deskVO3.getDek_no()+ ",");
 		System.out.println(deskVO3.getBranch_no()+ ",");
@@ -260,7 +260,7 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		System.out.println(deskVO3.getDek_status()+ ",");
 		System.out.println("---------------------");
 				
-		//�d�ߥ���
+		//查詢
 		List<DeskVO> list = dao.getAll();
 		for(DeskVO aEmp : list) {
 		System.out.println(aEmp.getDek_no()+ ",");
