@@ -22,7 +22,7 @@ public class IngclassDAO implements IngclassDAO_interface{
 					+"(INGDTC_ID, INGDTC_NAME)"
 					+"VALUES(('T'||LPAD(to_char(MENU_seq.NEXTVAL),4,'0')),?)";
 	private static final String UPDATE_STMT =
-			"UPDATE INGCLASS SET, INGDTC_NAME=? WHERE INGDTC_ID=?";
+			"UPDATE INGCLASS SET INGDTC_NAME=? WHERE INGDTC_ID=?";
 	private static final String DELETE_STMT =
 			"DELETE FROM INGCLASS WHERE INGDTC_ID=?";
 	private static final String SELECT_ONE_STMT=
@@ -41,8 +41,8 @@ public class IngclassDAO implements IngclassDAO_interface{
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(INSERT_STMT);
 
-				pstmt.setString(1, ingclassVO.getIngdtc_Id());
-				pstmt.setString(2, ingclassVO.getIngdtc_Name());
+//				pstmt.setString(1, ingclassVO.getIngdtc_Id());
+				pstmt.setString(1, ingclassVO.getIngdtc_Name());
 				
 				int rowCount =pstmt.executeUpdate();
 				System.out.println("新增 " + rowCount + " 筆資料");
@@ -79,9 +79,12 @@ public class IngclassDAO implements IngclassDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
-
-			pstmt.setString(1, ingclassVO.getIngdtc_Id());
-			pstmt.setString(2, ingclassVO.getIngdtc_Name());
+			
+			pstmt.setString(1, ingclassVO.getIngdtc_Name());
+			pstmt.setString(2, ingclassVO.getIngdtc_Id());
+			
+			
+			
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改 " + rowCount + " 筆資料");

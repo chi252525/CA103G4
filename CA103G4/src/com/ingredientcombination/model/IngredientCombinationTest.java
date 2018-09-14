@@ -7,32 +7,32 @@ public class IngredientCombinationTest {
 	public static void main(String[] args) {
 		IngredientCombinationDAO dao = new IngredientCombinationDAO();
 	
-		//æ–°å¢ž
-		IngredientCombinationVO ingdt1 = new IngredientCombinationVO();
-		ingdt1.setCustom_No("C000001");
-		ingdt1.setIngdt_Id("I0001");
-
-		dao.insert(ingdt1);
+//		//?–°å¢?
+//		IngredientCombinationVO ingdt1 = new IngredientCombinationVO();
+//		ingdt1.setCustom_No("C0000000006");
+//		ingdt1.setIngdt_Id("I0006");
+//
+//		dao.insert(ingdt1);
 		
 		//ä¿®æ”¹
 		IngredientCombinationVO ingdt2 = new IngredientCombinationVO();
-		ingdt2.setCustom_No("C000004");
-		ingdt2.setIngdt_Id("I0004");
+		ingdt2.setCustom_No("C0000000005");
+		ingdt2.setIngdt_Id("I0002");
 
 		dao.update(ingdt2);
-		
-		//åˆªé™¤
-		dao.delete("C000004");
-		
-		//æŸ¥è©¢
-		List<IngredientCombinationVO> list = dao.getAll();
-		for (IngredientCombinationVO ingdt : list) {
-			System.out.print(ingdt.getCustom_No() + ",");
-			System.out.print(ingdt.getIngdt_Id() + ",");
-
-			System.out.println();
-		}
-		
+//		
+//		//?ˆª?™¤
+//		dao.delete("C0000000006");
+//		
+//		//?Ÿ¥è©?
+//		List<IngredientCombinationVO> list = dao.getAll();
+//		for (IngredientCombinationVO ingdt : list) {
+//			System.out.print(ingdt.getCustom_No() + ",");
+//			System.out.print(ingdt.getIngdt_Id() + ",");
+//
+//			System.out.println();
+//		}
+//		
 	}
 	
 	

@@ -7,31 +7,31 @@ public class IngclassTest {
 	public static void main(String[] args) {
 		IngclassDAO dao = new IngclassDAO();
 	
-		//Êñ∞Â¢û
-		IngclassVO ingdtc1 = new IngclassVO();
-		ingdtc1.setIngdtc_Id("T0001");
-		ingdtc1.setIngdtc_Name("È∫µÊ¢ù");
-
-		dao.insert(ingdtc1);
+//		//?ñ∞Â¢?
+//		IngclassVO ingdtc1 = new IngclassVO();
+//		ingdtc1.setIngdtc_Id("T0001");
+//		ingdtc1.setIngdtc_Name("È∫µÊ??");
+//
+//		dao.insert(ingdtc1);
 		
 		//‰øÆÊîπ
 		IngclassVO ingdtc2 = new IngclassVO();
-		ingdtc2.setIngdtc_Id("T0004");
-		ingdtc2.setIngdtc_Name("ÈôÑÈ§ê");
+		ingdtc2.setIngdtc_Id("T0011");
+		ingdtc2.setIngdtc_Name("RR");
 
 		dao.update(ingdtc2);
-		
-		//Âà™Èô§
-		dao.delete("T0004");
-		
-		//Êü•Ë©¢
-		List<IngclassVO> list = dao.getAll();
-		for (IngclassVO ingdtc : list) {
-			System.out.print(ingdtc.getIngdtc_Id() + ",");
-			System.out.print(ingdtc.getIngdtc_Name() + ",");
-
-			System.out.println();
-		}
+//		
+		//?à™?ô§
+//		dao.delete("T0004");
+//		
+//		//?ü•Ë©?
+//		List<IngclassVO> list = dao.getAll();
+//		for (IngclassVO ingdtc : list) {
+//			System.out.print(ingdtc.getIngdtc_Id() + ",");
+//			System.out.print(ingdtc.getIngdtc_Name() + ",");
+//
+//			System.out.println();
+//		}
 		
 	}
 }

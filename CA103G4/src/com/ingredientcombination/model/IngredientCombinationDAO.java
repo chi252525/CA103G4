@@ -20,7 +20,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 		        		+"(CUSTOM_NO, INGDT_ID) VALUES(?,?)";
 		
 		private static final String UPDATE_STMT =
-				"UPDATE INGREDIENTCOMBINATION SET, INGDT_ID=? WHERE CUSTOM_NO=?";
+				"UPDATE INGREDIENTCOMBINATION SET INGDT_ID=? WHERE CUSTOM_NO=?";
 		private static final String DELETE_STMT =
 				"DELETE FROM INGREDIENTCOMBINATION WHERE CUSTOM_NO=?";
 		private static final String SELECT_ONE_STMT=
@@ -73,9 +73,9 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(UPDATE_STMT);
-
-				pstmt.setString(1, ingredientCombinationVO.getCustom_No());
-				pstmt.setString(2, ingredientCombinationVO.getIngdt_Id());
+				pstmt.setString(1, ingredientCombinationVO.getIngdt_Id());
+				pstmt.setString(2, ingredientCombinationVO.getCustom_No());
+				
 				
 				int rowCount =pstmt.executeUpdate();
 				System.out.println("修改" + rowCount + " 筆資料");
@@ -101,6 +101,8 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 				}
 			}
 		}
+		
+		
 		@Override
 		public void delete(String Custom_No) {
 			Connection con = null;

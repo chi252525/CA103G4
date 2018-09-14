@@ -19,7 +19,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			"INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE)"
 					+"VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),?,?,?,?,?,?)";
 	private static final String UPDATE_STMT =
-			"UPDATE INGREDIENTS SET, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE WHERE INGDT_ID=?";
+			"UPDATE INGREDIENTS SET INGDTC_ID=?, INGDT_NAME=?, INGDT_STATUS=?, INGDT_POINT=?, INGDT_UNIT=?, INGDT_PRICE=? WHERE INGDT_ID=?";
 	private static final String DELETE_STMT =
 			"DELETE FROM INGREDIENTS WHERE INGDT_ID=?";
 	private static final String SELECT_ONE_STMT=
@@ -41,13 +41,13 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, ingredientsVO.getIngdt_Id());
-			pstmt.setString(2, ingredientsVO.getIngdtc_Id());
-			pstmt.setString(3, ingredientsVO.getIngdt_Name());
-			pstmt.setInt(4, ingredientsVO.getIngdt_Status());
-			pstmt.setString(5, ingredientsVO.getIngdt_Point());
-			pstmt.setString(6, ingredientsVO.getIngdt_Unit());
-			pstmt.setInt(7, ingredientsVO.getIngdt_Price());
+//			pstmt.setString(1, ingredientsVO.getIngdt_Id());
+			pstmt.setString(1, ingredientsVO.getIngdtc_Id());
+			pstmt.setString(2, ingredientsVO.getIngdt_Name());
+			pstmt.setInt(3, ingredientsVO.getIngdt_Status());
+			pstmt.setString(4, ingredientsVO.getIngdt_Point());
+			pstmt.setString(5, ingredientsVO.getIngdt_Unit());
+			pstmt.setInt(6, ingredientsVO.getIngdt_Price());
 			
 			
 			int rowCount =pstmt.executeUpdate();
@@ -85,13 +85,14 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, ingredientsVO.getIngdt_Id());
-			pstmt.setString(2, ingredientsVO.getIngdtc_Id());
-			pstmt.setString(3, ingredientsVO.getIngdt_Name());
-			pstmt.setInt(4, ingredientsVO.getIngdt_Status());
-			pstmt.setString(5, ingredientsVO.getIngdt_Point());
-			pstmt.setString(6, ingredientsVO.getIngdt_Unit());
-			pstmt.setInt(7, ingredientsVO.getIngdt_Price());
+			
+			pstmt.setString(1, ingredientsVO.getIngdtc_Id());
+			pstmt.setString(2, ingredientsVO.getIngdt_Name());
+			pstmt.setInt(3, ingredientsVO.getIngdt_Status());
+			pstmt.setString(4, ingredientsVO.getIngdt_Point());
+			pstmt.setString(5, ingredientsVO.getIngdt_Unit());
+			pstmt.setInt(6, ingredientsVO.getIngdt_Price());
+			pstmt.setString(7, ingredientsVO.getIngdt_Id());
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
