@@ -7,7 +7,7 @@ public class IngredientCombinationTest {
 	public static void main(String[] args) {
 		IngredientCombinationDAO dao = new IngredientCombinationDAO();
 	
-//		//?–°å¢?
+//		//æ–°å¢ž
 //		IngredientCombinationVO ingdt1 = new IngredientCombinationVO();
 //		ingdt1.setCustom_No("C0000000006");
 //		ingdt1.setIngdt_Id("I0006");
@@ -21,10 +21,10 @@ public class IngredientCombinationTest {
 
 		dao.update(ingdt2);
 //		
-//		//?ˆª?™¤
+//		//åˆªé™¤
 //		dao.delete("C0000000006");
 //		
-//		//?Ÿ¥è©?
+//		//æŸ¥è©¢
 //		List<IngredientCombinationVO> list = dao.getAll();
 //		for (IngredientCombinationVO ingdt : list) {
 //			System.out.print(ingdt.getCustom_No() + ",");
