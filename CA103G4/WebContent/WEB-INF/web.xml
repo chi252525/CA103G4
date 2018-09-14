@@ -9,21 +9,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <resource-ref>
-		<description>DB Connection</description>
-		<res-ref-name>jdbc/TestDB</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
-
-	<servlet>
-		<servlet-name>PerntdServlet</servlet-name>
-		<servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PerntdServlet</servlet-name>
-		<url-pattern>/front_end/perntd/perntd.do</url-pattern>
-	</servlet-mapping>
-	
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/TestDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <servlet>
+    <servlet-name>PerntdServlet</servlet-name>
+    <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PerntdServlet</servlet-name>
+    <url-pattern>/front_end/perntd/perntd.do</url-pattern>
+  </servlet-mapping>
 </web-app>
