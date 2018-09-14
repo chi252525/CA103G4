@@ -2,12 +2,12 @@ package com.orderform.model;
 
 import java.util.List;
 
-import com.delivery.model.DeliveryJDBCDAO;
+import com.delivery.model.DeliveryDAO;
 
 public class OrderformTest {
 	public static void main(String[] args) {
 		
-		OrderformJDBCDAO dao = new OrderformJDBCDAO();
+		OrderformDAO dao = new OrderformDAO();
 		
 		// 新增(完成)
 //		OrderformVO orderformVO1 = new OrderformVO();
@@ -31,18 +31,18 @@ public class OrderformTest {
 //		dao.update(orderformVO2);
 
 //		// 查詢 one (完成)
-//		OrderformVO orderformVO3 = dao.findByPrimaryKey("O000000002");
-//		System.out.print(orderformVO3.getOrder_no() + ",");
-//		System.out.print(orderformVO3.getDek_no() + ",");
-//		System.out.print(orderformVO3.getMem_no() + ",");
-//		System.out.println(orderformVO3.getBranch_no() + ",");
-//		System.out.print(orderformVO3.getDeliv_no() + ",");
-//		System.out.print(orderformVO3.getOrder_type() + ",");
-//		System.out.print(orderformVO3.getOrder_price() + ",");
-//		System.out.println(orderformVO3.getOrder_status() + ",");
-//		System.out.print(orderformVO3.getDeliv_addres() + ",");
-//		System.out.println(orderformVO3.getOrder_pstatus() + ",");
-//		System.out.println("---------------------");
+		OrderformVO orderformVO3 = dao.findByPrimaryKey("O000000002");
+		System.out.print(orderformVO3.getOrder_no() + ",");
+		System.out.print(orderformVO3.getDek_no() + ",");
+		System.out.print(orderformVO3.getMem_no() + ",");
+		System.out.println(orderformVO3.getBranch_no() + ",");
+		System.out.print(orderformVO3.getDeliv_no() + ",");
+		System.out.print(orderformVO3.getOrder_type() + ",");
+		System.out.print(orderformVO3.getOrder_price() + ",");
+		System.out.println(orderformVO3.getOrder_status() + ",");
+		System.out.print(orderformVO3.getDeliv_addres() + ",");
+		System.out.println(orderformVO3.getOrder_pstatus() + ",");
+		System.out.println("---------------------");
 
 		// 查詢 notok(完成)
 //		List<OrderformVO> lists = dao.getNotOk();
