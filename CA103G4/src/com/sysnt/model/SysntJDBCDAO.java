@@ -8,23 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-public class SysntDAO implements SysntDAO_interface{
+public class SysntJDBCDAO implements SysntDAO_interface{
 	
-	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "Test";
+	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO SYSNT VALUES('NT'||LPAD(to_char(sysnt_seq.NEXTVAL),2,'0'),?,?)";
@@ -44,11 +33,15 @@ public class SysntDAO implements SysntDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, ntVO.getNt_Tittle());
 			pstmt.setString(2, ntVO.getNt_Cont());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,12 +73,16 @@ public class SysntDAO implements SysntDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, ntVO.getNt_Tittle());
 			pstmt.setString(2, ntVO.getNt_Cont());
 			pstmt.setString(3, ntVO.getNt_No());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,10 +112,14 @@ public class SysntDAO implements SysntDAO_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, nt_No);
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,7 +151,8 @@ public class SysntDAO implements SysntDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, nt_No);
 			rs = pstmt.executeQuery();
@@ -160,6 +162,9 @@ public class SysntDAO implements SysntDAO_interface{
 			ntVO.setNt_Tittle(rs.getString("NT_TITTLE"));
 			ntVO.setNt_Cont(rs.getString("NT_CONT"));
 			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,7 +205,8 @@ public class SysntDAO implements SysntDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
 			pstmt = conn.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -210,6 +216,9 @@ public class SysntDAO implements SysntDAO_interface{
 				ntVO.setNt_Cont(rs.getString("NT_CONT"));
 				list.add(ntVO);
 			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -240,5 +249,36 @@ public class SysntDAO implements SysntDAO_interface{
 		}
 		
 		return list;
+	}
+	
+	public static void main(String[] args) {
+		SysntDAO dao = new SysntDAO();
+		//insert
+		SysntVO sysntVO1 = new SysntVO();
+		sysntVO1.setNt_Tittle("新增通知");
+		sysntVO1.setNt_Cont("裡面有一堆內容，裡面有一堆內容，裡面有一堆內容，裡面有一堆內容，裡面有一堆內容");
+		dao.insert(sysntVO1);
+		//update
+		SysntVO sysntVO2 = new SysntVO();
+		sysntVO2.setNt_No("NT05");
+		sysntVO2.setNt_Tittle("更新通知");
+		sysntVO2.setNt_Cont("更新了一堆內容，更新了一堆內容，更新了一堆內容，更新了一堆內容，更新了一堆內容");
+		dao.update(sysntVO2);
+		//delete
+		dao.delete("NT06");
+		//select one
+		SysntVO sysntVO3 = new SysntVO();
+		sysntVO3 = dao.findByPrimaryKey("NT01");
+		System.out.print(sysntVO3.getNt_No()+" ");
+		System.out.print(sysntVO3.getNt_Tittle()+" ");
+		System.out.println(sysntVO3.getNt_Cont());
+		//select all
+		List<SysntVO> list = new ArrayList<>();
+		list = dao.getAll();
+		for(SysntVO ntVO : list) {
+			System.out.print(ntVO.getNt_No()+" ");
+			System.out.print(ntVO.getNt_Tittle()+" ");
+			System.out.println(ntVO.getNt_Cont());
+		}
 	}
 }

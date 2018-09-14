@@ -68,19 +68,31 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="perntd.do" name="form1">
 <table>
 	<tr>
 		<td>個人通知流水號:<font color=red><b>*</b></font></td>
 		<td><%=perntdVO.getPerntd_No()%></td>
 	</tr>
+	<!-- 這邊的DAO之後需改成Service -->
+	<jsp:useBean id="memberDAO" scope="page" class="com.perntd.model.MemberDAO" />
 	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_No" size="45" value="<%=perntdVO.getMem_No()%>" /></td>
+		<td>會員編號:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="mem_No">
+			<c:forEach var="memberVO" items="${memberDAO.all}">
+				<option value="${memberVO.mem_No}" ${(perntdVO.mem_No==memberVO.mem_No)?'selected':'' } >${memberVO.mem_No}
+			</c:forEach>
+		</select></td>
 	</tr>
+	<!-- 這邊的DAO之後需改成Service -->
+	<jsp:useBean id="sysntDAO" scope="page" class="com.sysnt.model.SysntDAO" />
 	<tr>
-		<td>系統通知編號:</td>
-		<td><input type="TEXT" name="nt_No" size="45"	value="<%=perntdVO.getNt_No()%>" /></td>
+		<td>通知標題:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="nt_No">
+			<c:forEach var="sysntVO" items="${sysntDAO.all}">
+				<option value="${sysntVO.nt_No}" ${(perntdVO.nt_No==sysntVO.nt_No)?'selected':'' } >${sysntVO.nt_Tittle}
+			</c:forEach>
+		</select></td>
 	</tr>
 	<tr>
 		<td>通知內容:</td>
@@ -90,17 +102,6 @@
 		<td>通知建立時間:</td>
 		<td><input name="perntd_Date" id="f_date1" type="text" ></td>
 	</tr>
-
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-	
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
 
 </table>
 <br>
@@ -112,20 +113,6 @@
 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<% 
-	java.sql.Date perntdDate = null;
-	
-	String dateStr = perntdVO.getPerntd_Date();
-	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
-	java.util.Date date = sdf.parse(dateStr);
-  
-	try {
-		perntdDate = new java.sql.Date(date.getTime());
-	} catch (Exception e) {
-		perntdDate = new java.sql.Date(System.currentTimeMillis());
-	}
-%>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
@@ -147,7 +134,7 @@
  	       timepicker:false,       //timepicker:true,
  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y/m/d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=perntdDate%>', // value:   new Date(),
+ 		   value: '<%=perntdVO.getPerntd_Date()%>', // value:   new Date(),
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

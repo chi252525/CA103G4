@@ -15,11 +15,6 @@ import javax.sql.DataSource;
 
 public class PerntdDAO implements PerntdDAO_interface{
 	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "Test";
-	String passwd = "123456";
-	
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
@@ -32,7 +27,7 @@ public class PerntdDAO implements PerntdDAO_interface{
 	}
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO PERNTD VALUES('P'||LPAD(to_char(perntd_seq.NEXTVAL),2,'0'),?,?,?,to_char(sysdate,'yyyy/mm/dd'))";
+			"INSERT INTO PERNTD VALUES('P'||LPAD(to_char(perntd_seq.NEXTVAL),6,'0'),?,?,?,?)";
 	private static final String UPDATE_STMT =
 			"UPDATE PERNTD SET MEM_NO=?,NT_NO=?,PERNTD_CONT=?,PERNTD_DATE=? WHERE PERNTD_NO=?";
 	private static final String DELETE_STMT =
@@ -53,6 +48,7 @@ public class PerntdDAO implements PerntdDAO_interface{
 			pstmt.setString(1, perntdVO.getMem_No());
 			pstmt.setString(2, perntdVO.getNt_No());
 			pstmt.setString(3, perntdVO.getPerntd_Cont());
+			pstmt.setString(4, perntdVO.getPerntd_Date());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -250,43 +246,4 @@ public class PerntdDAO implements PerntdDAO_interface{
 		
 		return list;
 	}
-	
-	public static void main(String[] args) {
-		PerntdDAO dao = new PerntdDAO();
-		//insert
-		PerntdVO perntdVO1 = new PerntdVO();
-		perntdVO1.setMem_No("M000001");
-		perntdVO1.setNt_No("NT01");
-		perntdVO1.setPerntd_Cont("這是一個新通知，這是一個新通知，這是一個新通知，這是一個新通知，這是一個新通知");
-		dao.insert(perntdVO1);
-		//update
-		PerntdVO perntdVO2 = new PerntdVO();
-		perntdVO2.setPerntd_No("P06");
-		perntdVO2.setMem_No("M000003");
-		perntdVO2.setNt_No("NT01");
-		perntdVO2.setPerntd_Cont("通知更新了，通知更新了，通知更新了，通知更新了，通知更新了，通知更新了，通知更新了");
-		perntdVO2.setPerntd_Date("2018/01/01");
-		dao.update(perntdVO2);
-		//delete
-		dao.delete("P07");
-		//select one
-		PerntdVO perntdVO3 = new PerntdVO();
-		perntdVO3 = dao.findByPrimaryKey("P01");
-		System.out.print(perntdVO3.getPerntd_No()+" ");
-		System.out.print(perntdVO3.getMem_No()+" ");
-		System.out.print(perntdVO3.getNt_No()+" ");
-		System.out.print(perntdVO3.getPerntd_Cont()+" ");
-		System.out.println(perntdVO3.getPerntd_Date()+" ");
-		//select all
-		List<PerntdVO> list = new ArrayList<>();
-		list = dao.getAll();
-		for(PerntdVO perntdVO : list) {
-			System.out.print(perntdVO.getPerntd_No()+" ");
-			System.out.print(perntdVO.getMem_No()+" ");
-			System.out.print(perntdVO.getNt_No()+" ");
-			System.out.print(perntdVO.getPerntd_Cont()+" ");
-			System.out.println(perntdVO.getPerntd_Date()+" ");
-		}
-	}
-
 }
