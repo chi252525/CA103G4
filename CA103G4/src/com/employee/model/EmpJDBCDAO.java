@@ -277,33 +277,33 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 //		long long1 = du.getTime();
 //		java.sql.Date ds1 = new java.sql.Date (long1);
 		
-		//�s�W
+		//新增
 		EmpVO empVO1 = new EmpVO();
 		empVO1.setBranch_no("0001");
 		empVO1.setEmp_acnum("65987");
 		empVO1.setEmp_psw("95753");
-		empVO1.setEmp_name("�֥d�C");
+		empVO1.setEmp_name("帥帥");
 		empVO1.setEmp_gender("G1");
-		empVO1.setEmp_pos("�g�z");
+		empVO1.setEmp_pos("工讀生");
 		empVO1.setEmp_tel("0976100100");
 		empVO1.setEmp_photo(getPictureByteArray("img/000.jpg"));
 		dao.insert(empVO1);
 		
-		//�ק�
+		//修改
 		EmpVO empVO2 = new EmpVO();
 		empVO2.setEmp_no("E000000008");
 		empVO2.setBranch_no("0002");
 		empVO2.setEmp_acnum("6598700");
 		empVO2.setEmp_psw("9575300");
-		empVO2.setEmp_name("�d�d");
+		empVO2.setEmp_name("藍藍");
 		empVO2.setEmp_gender("G2");
-		empVO2.setEmp_pos("�g�z");
+		empVO2.setEmp_pos("經理");
 		empVO2.setEmp_tel("0976100100");
 		empVO2.setEmp_status("E2");
 		empVO2.setEmp_photo(getPictureByteArray("img/001.png"));
 		dao.update(empVO2);	
 		
-		// �d��
+		// 查詢
 		EmpVO empVO3 = dao.findByPrimaryKey("E000000001");
 		System.out.println(empVO3.getEmp_no()+ ",");
 		System.out.println(empVO3.getBranch_no()+ ",");
@@ -318,7 +318,7 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		System.out.println(empVO3.getEmp_photo());
 		System.out.println("---------------------");
 				
-		//�d�ߥ���
+		//查詢
 		List<EmpVO> list = dao.getAll();
 		for(EmpVO aEmp : list) {
 			System.out.println(aEmp.getEmp_no()+ ",");
