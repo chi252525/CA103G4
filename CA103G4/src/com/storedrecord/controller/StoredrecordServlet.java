@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.storedrecord.model.StoredrecordService;
+import com.storedrecord.model.StoredrecordVO;
 
 /**
  * Servlet implementation class storedrecordServlet
  */
-@WebServlet("front_end/storedrecord/storedrecord.do")
+@WebServlet("/front_end/storedrecord/storedrecord.do")
 public class StoredrecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,20 +43,32 @@ public class StoredrecordServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 
 			req.setAttribute("error", errorMsgs);
-			
-			String Mem_No = new String(req.getParameter("mem_No").trim()); 
+
 			String stor_No = new String(req.getParameter("stor_No").trim());
-			Timestamp stor_Date = new Timestamp(req.getParameter("stor_Date").trim());
-			
-			
-			
-			
+			String mem_No = new String(req.getParameter("mem_No").trim());
+			Timestamp stor_Date = null;
+			Integer stor_Point = new Integer(req.getParameter("stor_Point").trim());
+			Integer drew_Point = new Integer(req.getParameter("drew_Point").trim());
+			Integer stor_Status = new Integer(req.getParameter("stor_Status").trim());
+
+			try {
+				stor_Date = Timestamp.valueOf(req.getParameter("stor_Date").trim());
+			} catch (IllegalArgumentException ie) {
+				stor_Date = new Timestamp(System.currentTimeMillis());
+			}
+
+			StoredrecordVO srVO = new StoredrecordVO();
+			srVO.setStor_No(stor_No);
+			srVO.setMem_No(mem_No);
+			srVO.setStor_Date(stor_Date);
+			srVO.setStor_Point(stor_Point);
+			srVO.setDrew_Point(drew_Point);
+			srVO.setStor_Status(stor_Status);
+
+			// ===================開始查詢==============================
+
+			StoredrecordService srs = new StoredrecordService();
+			srVO = srs.getOneStoredrecord(stor_No);
 		}
-
-		// ===================開始查詢==============================
-
-		StoredrecordService srs = new StoredrecordService();
-
 	}
-
 }
