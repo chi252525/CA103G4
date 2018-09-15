@@ -32,13 +32,18 @@
         background-repeat: no-repeat !important;
         background-position: center center !important;
         background-size: cover !important;
-        height: 200px;
+        height: 500px;
         -webkit-transition: all 0.3s ease 0s;
-        -moz-transition: all 0.3s ease 0s;
-        -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s
+/*        -moz-transition: all 0.3s ease 0s;*/
+/*        -o-transition: all 0.3s ease 0s;*/
+/*        transition: all 0.3s ease 0s*/
     }
 
     .single-gallery-image:hover {
-        opacity: .7
+        opacity: .8
     }
+/*icon*/
+.lnr-bookmark{
+    font-size: 30px;
+    
+}
