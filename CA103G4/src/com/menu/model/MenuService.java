@@ -10,11 +10,10 @@ public class MenuService {
 		dao = new MenuDAO();
 	}
 
-	public MenuVO addMenu(String menu_no, String menu_id, String menu_type, Integer menu_price, String menu_intro ,byte[] menu_photo, Integer menu_status) {
+	public MenuVO addMenu(String menu_id, String menu_type, Integer menu_price, String menu_intro ,byte[] menu_photo, Integer menu_status) {
 
 		MenuVO menuVO = new MenuVO();
 
-		menuVO.setMenu_No(menu_no);
 		menuVO.setMenu_Id(menu_id);
 		menuVO.setMenu_Type(menu_type);
 		menuVO.setMenu_Price(menu_price);

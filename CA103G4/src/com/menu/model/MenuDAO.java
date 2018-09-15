@@ -12,13 +12,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class MenuDAO implements MenuDAO_interface {
 
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+		private static DataSource ds = null;
+		static {
+			try {
+				Context ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		}
 
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "CA103";
-	private static final String PASSWORD = "123456";
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private static final String USER = "Test";
+//	private static final String PASSWORD = "123456";
+//	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT=		
 			"INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)"
 					+"VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),?,?,?,?,?,?)";	
@@ -39,8 +54,9 @@ public class MenuDAO implements MenuDAO_interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 //			pstmt.setString(1, menuVO.getMenu_No());
@@ -51,7 +67,7 @@ public class MenuDAO implements MenuDAO_interface {
 			pstmt.setBytes(5, menuVO.getMenu_Photo());
 			pstmt.setInt(6, menuVO.getMenu_Status());
 			int rowCount =pstmt.executeUpdate();
-			System.out.println("新增 " + rowCount + " 筆資料");
+//			System.out.println("新增 " + rowCount + " 筆資料");
 			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " 
@@ -84,8 +100,9 @@ public class MenuDAO implements MenuDAO_interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			
@@ -98,7 +115,7 @@ public class MenuDAO implements MenuDAO_interface {
 			pstmt.setString(7, menuVO.getMenu_No());
 			
 			int rowCount =pstmt.executeUpdate();
-			System.out.println("修改 " + rowCount + " 筆資料");
+//			System.out.println("修改 " + rowCount + " 筆資料");
 			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " 
@@ -127,18 +144,20 @@ public class MenuDAO implements MenuDAO_interface {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
-
-				Class.forName(DRIVER);
-				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = ds.getConnection();
+//				Class.forName(DRIVER);
+//				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				pstmt = con.prepareStatement(DELETE_STMT);
 				pstmt.setString(1, Menu_No);
 				pstmt.executeUpdate();
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException ce) {
-				throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
+			} 
+//			  catch (ClassNotFoundException ce) {
+//				throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+//				// Handle any SQL errors
+//			} 
+			  catch (SQLException se) {
 				throw new RuntimeException("A database error occured. " + se.getMessage());
 				// Clean up JDBC resources
 			} finally {
@@ -166,8 +185,9 @@ public class MenuDAO implements MenuDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, Menu_No);
 			rs = pstmt.executeQuery();
@@ -221,7 +241,8 @@ public class MenuDAO implements MenuDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 
