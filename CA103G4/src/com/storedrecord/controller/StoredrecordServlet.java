@@ -41,11 +41,11 @@ public class StoredrecordServlet extends HttpServlet {
 
 		if ("findByPrimaryKey".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-
+			
 			req.setAttribute("error", errorMsgs);
 
-			String stor_No = new String(req.getParameter("stor_No").trim());
-			String mem_No = new String(req.getParameter("mem_No").trim());
+			String stor_No = req.getParameter("stor_No").trim();
+			String mem_No = req.getParameter("mem_No").trim();
 			Timestamp stor_Date = null;
 			Integer stor_Point = new Integer(req.getParameter("stor_Point").trim());
 			Integer drew_Point = new Integer(req.getParameter("drew_Point").trim());
@@ -57,6 +57,33 @@ public class StoredrecordServlet extends HttpServlet {
 				stor_Date = new Timestamp(System.currentTimeMillis());
 			}
 
+			
+
+			// ===================開始查詢=====================
+
+			StoredrecordService srSv = new StoredrecordService();
+			StoredrecordVO srVO = srSv.getOneStoredrecord(stor_No);
+			if (srVO == null) {
+				errorMsgs.add("查無資料");
+			}
+			// error display...
+
+			/* ==================轉交查詢結果====================== */
+			req.setAttribute("srVO", srVO);
+			req.getRequestDispatcher("/storedrecord/listOneStoredrecord.jsp").forward(req, res);
+			//======================================================
+			
+			
+			
+			
+			
+		}
+		if("getOne_For_Update".equals(action)) {
+			
+			
+			
+			
+			
 			StoredrecordVO srVO = new StoredrecordVO();
 			srVO.setStor_No(stor_No);
 			srVO.setMem_No(mem_No);
@@ -64,11 +91,7 @@ public class StoredrecordServlet extends HttpServlet {
 			srVO.setStor_Point(stor_Point);
 			srVO.setDrew_Point(drew_Point);
 			srVO.setStor_Status(stor_Status);
-
-			// ===================開始查詢==============================
-
-			StoredrecordService srs = new StoredrecordService();
-			srVO = srs.getOneStoredrecord(stor_No);
 		}
+		
 	}
 }

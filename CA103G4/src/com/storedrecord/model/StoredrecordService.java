@@ -48,4 +48,12 @@ public class StoredrecordService {
 	public List<StoredrecordVO> getAll(){
 		return dao.getAll();
 	}	
+	
+	public void delete(String stor_No) {
+		dao.delete(stor_No);
+	}
+	
+	public List<StoredrecordVO> findByMon_Year(int Mon, int Year){
+		return dao.findByMon_Year(Mon, Year);
+	}
 }

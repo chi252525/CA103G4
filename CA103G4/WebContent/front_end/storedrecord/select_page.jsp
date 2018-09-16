@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Emp: Home</title>
+<title>儲值查詢</title>
 
 <style>
   table#table-1 {
@@ -30,7 +30,7 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>儲值記錄查詢</h3><h4>( MVC )</h4></td></tr>
 </table>
 
 <p>This is the Home page for IBM Emp: Home</p>
@@ -52,18 +52,18 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="emp.do" >
-        <b>輸入員工編號 (如7001):</b>
-        <input type="text" name="empno">
-        <input type="hidden" name="action" value="getOne_For_Display">
+    <FORM METHOD="post" ACTION="storedrecord.do" >
+        <b>輸入儲值流水單號 (如BXXXXXXXXX):</b>
+        <input type="text" name="stor_No">
+        <input type="hidden" name="action" value="findByPrimaryKey">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+  <jsp:useBean id="srSv" scope="page" class="com.storedrecord.model.StoredrecordService" />
    
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
+     <FORM METHOD="post" ACTION="storedrecord.do" >
        <b>選擇員工編號:</b>
        <select size="1" name="empno">
          <c:forEach var="empVO" items="${empSvc.all}" > 
