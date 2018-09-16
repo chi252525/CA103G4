@@ -92,7 +92,7 @@
 			<td>${menuVO.getMenu_Type()}</td>
 			<td>${menuVO.getMenu_Price()}</td>
 			<td>${menuVO.getMenu_Intro()}</td>
-			<td><img src="DBGifReader?menu_No=${menuVO.getMenu_No()}"></td>
+			<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td>
 			<td>${menuVO.getMenu_Status()}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;">

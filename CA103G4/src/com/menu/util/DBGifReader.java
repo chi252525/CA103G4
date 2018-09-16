@@ -7,10 +7,11 @@ import java.sql.*;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
-
+@MultipartConfig
 public class DBGifReader extends HttpServlet {
 
 	Connection con;
@@ -20,12 +21,10 @@ public class DBGifReader extends HttpServlet {
 
     req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
-		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		ServletOutputStream out = res.getOutputStream();
 		try {
 			Statement stmt = con.createStatement();
 			String menu_No = req.getParameter("menu_No").trim();
-			System.out.println(menu_No);
 			ResultSet rs = stmt.executeQuery(
 				"SELECT menu_Photo FROM menu WHERE menu_No='"+menu_No+"'");
 
