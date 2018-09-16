@@ -1,16 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.perntd.model.*"%>
+<%@ page import="com.menu.model.*"%>
 
 <%
 //PerntdServlet.java (Concroller) 存入req的perntdVO物件 (包括幫忙取出的perntdVO, 也包括輸入資料錯誤時的perntdVO物件)
-  PerntdVO perntdVO = (PerntdVO) request.getAttribute("perntdVO");
+  MenuVO menuVO = (MenuVO) request.getAttribute("menuVO");
 %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>資料修改 - update_perntd_input.jsp</title>
+
+<!--     Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!-- Latest compiled and minified JavaScript -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<title>資料修改 - update_menu_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -44,6 +53,39 @@
   }
 </style>
 
+<script type="text/javascript">
+
+$(document).ready(function (){
+
+    function format_float(num, pos)
+    {
+        var size = Math.pow(10, pos);
+        return Math.round(num * size) / size;
+    }
+
+    function preview(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var index = 0//input.name.slice(-1);
+            reader.onload = function (e) {
+                $('.preview:eq('+index+')').attr('src', e.target.result);
+                var KB = format_float(e.total / 1024,2);
+                $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    }
+
+    $("body").on("change", ".menu_Photo", function (){
+        preview(this);
+    })
+    
+})
+</script>
+
 </head>
 <body bgcolor='white'>
 
@@ -51,7 +93,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>資料修改 - update_perntd_input.jsp</h3>
+		 <h3>資料修改 - update_menu_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -68,45 +110,51 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="perntd.do" name="form1">
+<FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
-		<td>個人通知流水號:<font color=red><b>*</b></font></td>
-		<td><%=perntdVO.getPerntd_No()%></td>
-	</tr>
-	<!-- 這邊的DAO之後需改成Service -->
-	<jsp:useBean id="memberDAO" scope="page" class="com.perntd.model.MemberDAO" />
-	<tr>
-		<td>會員編號:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="mem_No">
-			<c:forEach var="memberVO" items="${memberDAO.all}">
-				<option value="${memberVO.mem_No}" ${(perntdVO.mem_No==memberVO.mem_No)?'selected':'' } >${memberVO.mem_No}
-			</c:forEach>
-		</select></td>
-	</tr>
-	<!-- 這邊的DAO之後需改成Service -->
-	<jsp:useBean id="sysntDAO" scope="page" class="com.sysnt.model.SysntDAO" />
-	<tr>
-		<td>通知標題:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="nt_No">
-			<c:forEach var="sysntVO" items="${sysntDAO.all}">
-				<option value="${sysntVO.nt_No}" ${(perntdVO.nt_No==sysntVO.nt_No)?'selected':'' } >${sysntVO.nt_Tittle}
-			</c:forEach>
-		</select></td>
+		<td>餐點編號:<font color=red><b>*</b></font></td>
+		<td><%=menuVO.getMenu_No()%></td>
 	</tr>
 	<tr>
-		<td>通知內容:</td>
-		<td><input type="TEXT" name="perntd_Cont" size="45"	value="<%=perntdVO.getPerntd_Cont()%>" /></td>
+		<td>餐點名稱:</td>
+		<td><input type="TEXT" name="menu_Id" size="45"	value="<%=menuVO.getMenu_Id()%>" /></td>
 	</tr>
 	<tr>
-		<td>通知建立時間:</td>
-		<td><input name="perntd_Date" id="f_date1" type="text" ></td>
+		<td>餐點類型:</td>
+		<td><input type="TEXT" name="menu_Type" size="45"	value="<%=menuVO.getMenu_Type()%>" /></td>
 	</tr>
-
+	<tr>
+		<td>餐點價格:</td>
+		<td><input type="TEXT" name="menu_Price" size="45"	value="<%=menuVO.getMenu_Price()%>" /></td>
+	</tr>
+	<tr>
+		<td>餐點介紹:</td>
+		<td><input type="TEXT" name="menu_Intro" size="45"	value="<%=menuVO.getMenu_Intro()%>" /></td>
+	</tr>
+	
+	<tr>
+		<td>餐點圖片:</td>
+		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td>
+	</tr>
+	
+	<tr>
+		<td>餐點狀態:</td>
+		<td><input type="TEXT" name="menu_Status" size="45"	value="<%=menuVO.getMenu_Status()%>" /></td>
+	</tr>
+	<tr>
+		<td>
+	        <p>ImgPreview</p>
+	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
+	        <div class="size"></div>
+		</td>
+	</tr>
+	
 </table>
+
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="perntd_No" value="<%=perntdVO.getPerntd_No()%>">
+<input type="hidden" name="menu_No" value="<%=menuVO.getMenu_No()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -134,7 +182,7 @@
  	       timepicker:false,       //timepicker:true,
  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y/m/d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=perntdVO.getPerntd_Date()%>', // value:   new Date(),
+ 		   value: '<%="2018/10/19"%>', // value:   new Date(),
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

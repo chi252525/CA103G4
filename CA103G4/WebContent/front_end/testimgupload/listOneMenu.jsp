@@ -1,14 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.perntd.model.*"%>
+<%@ page import="com.menu.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  PerntdVO perntdVO = (PerntdVO) request.getAttribute("perntdVO"); //PerntdServlet.java(Controller), 存入req的perntdVO物件
+  MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); //MenuServlet.java(Controller), 存入req的menuVO物件
 %>
 
 <html>
 <head>
-<title>會員個人通知資料 - listOneEmp.jsp</title>
+<title>餐點資料 - listOneMenu.jsp</title>
 
 <style>
   table#table-1 {
@@ -51,25 +51,29 @@
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>會員個人通知資料 - ListOneEmp.jsp</h3>
+		 <h3>餐點資料 - ListOneMenu.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>個人通知流水號</th>
-		<th>會員編號</th>
-		<th>系統通知編號</th>
-		<th>通知內容</th>
-		<th>通知建立時間</th>
+		<th>餐點編號</th>
+		<th>餐點名稱</th>
+		<th>餐點類型</th>
+		<th>餐點價格</th>
+		<th>餐點介紹</th>
+		<th>餐點圖片</th>
+		<th>餐點狀態</th>
 	</tr>
 	<tr>
-		<td><%=perntdVO.getPerntd_No()%></td>
-		<td><%=perntdVO.getMem_No()%></td>
-		<td><%=perntdVO.getNt_No()%></td>
-		<td><%=perntdVO.getPerntd_Cont()%></td>
-		<td><%=perntdVO.getPerntd_Date()%></td>
+		<td><%=menuVO.getMenu_No()%></td>
+		<td><%=menuVO.getMenu_Id()%></td>
+		<td><%=menuVO.getMenu_Type()%></td>
+		<td><%=menuVO.getMenu_Price()%></td>
+		<td><%=menuVO.getMenu_Intro()%></td>
+		<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td>
+		<td><%=menuVO.getMenu_Status()%></td>
 	</tr>
 </table>
 

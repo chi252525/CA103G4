@@ -30,16 +30,6 @@ public class MenuServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-//****************************** imgtest *******************************************
-		
-		Part part = req.getPart("menu_Photo");
-		InputStream in = part.getInputStream();
-		byte[] menu_Photo = new byte[in.available()];
-		in.read(menu_Photo);
-		in.close();
-		
-//****************************** imgtest *******************************************
-		
 		if("getOne_For_Display".equals(action)) {  // 來自select_page.jsp的請求
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -121,7 +111,6 @@ public class MenuServlet extends HttpServlet{
 		if("insert".equals(action)){  // 來自addMenu.jsp的請求  
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
-//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 			try {
 				/***************************1.接收請求參數****************************************/
 				
@@ -159,11 +148,15 @@ public class MenuServlet extends HttpServlet{
 				} else if(menu_Intro.length() >= 100) {
 					errorMsgs.add("通知內容:長度需小於100個字元");
 				}
-//****************************** imgtest *******************************************
+//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 				
-//				byte[] menu_Photo = null;
+				Part part = req.getPart("menu_Photo");
+				InputStream in = part.getInputStream();
+				byte[] menu_Photo = new byte[in.available()];
+				in.read(menu_Photo);
+				in.close();
 				
-//****************************** imgtest *******************************************
+//***********************************************************************************************
 				
 				//無輸入OR格式不正確
 				str = req.getParameter("menu_Status");
@@ -186,7 +179,7 @@ public class MenuServlet extends HttpServlet{
 				menuVO.setMenu_Status(menu_Status);
 				
 				if(!errorMsgs.isEmpty()) {
-					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的perntdVO物件,也存入req
+					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
@@ -197,7 +190,7 @@ public class MenuServlet extends HttpServlet{
 				menuVO = menuSvc.addMenu(menu_Id, menu_Type, menu_Price, menu_Intro, menu_Photo, menu_Status);
 								
 				/***************************3.新增完成,準備轉交(Send the Success view)************/
-				req.setAttribute("menuVO", menuVO);  // 資料庫新增成功後,正確的的perntdVO物件,存入req
+				req.setAttribute("menuVO", menuVO);  // 資料庫新增成功後,正確的的menuVO物件,存入req
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
 				successView.forward(req, res);
 				
@@ -209,76 +202,105 @@ public class MenuServlet extends HttpServlet{
 			}
 		}
 		
-		if("update".equals(action)) {  // 來自update_perntd_input.jsp的請求
+		if("update".equals(action)) {  // 來自update_menu_input.jsp的請求
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
 				/***************************1.接收請求參數****************************************/
 				String menu_No = req.getParameter("menu_No").trim();
 				
-				//無輸入OR格式錯誤
-				String mem_No = req.getParameter("mem_No").trim();
-				if(mem_No == null || mem_No.length() == 0) {
-					errorMsgs.add("會員編號:請勿空白");
-				} else if(!(mem_No.matches("M\\d{6}"))) {
-					errorMsgs.add("會員編號:格式不正確 ");
+				//無輸入OR長度超出範圍
+				String menu_Id = req.getParameter("menu_Id").trim();
+				if(menu_Id == null || menu_Id.length() == 0) {
+					errorMsgs.add("餐點名稱:請勿空白");
+				}  else if(menu_Id.length() >= 50) {
+					errorMsgs.add("餐點名稱:長度需小於50個字元");
 				}
 				
-				//無輸入OR格式錯誤
-				String nt_No = req.getParameter("nt_No").trim();
-				if(nt_No == null || nt_No.length() == 0) {
-					errorMsgs.add("系統通知編號:請勿空白");
-				} else if(!(nt_No.matches("NT\\d{2}"))) {
-					errorMsgs.add("系統通知編號:格式不正確 ");
+				//無輸入OR長度超出範圍
+				String menu_Type = req.getParameter("menu_Type").trim();
+				if(menu_Type == null || menu_Type.length() == 0) {
+					errorMsgs.add("餐點類型:請勿空白");
+				} else if(menu_Type.length() >= 20) {
+					errorMsgs.add("餐點類型:長度需小於20個字元 ");
+				}
+				//無輸入OR格式不正確
+				String str = req.getParameter("menu_Price");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入餐點價格");
+				}
+				Integer menu_Price = null;
+				try {
+					menu_Price = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("餐點價格格式不正確");
 				}
 				
-				//長度超出範圍
-				String perntd_Cont = req.getParameter("perntd_Cont").trim();
-				if(perntd_Cont == null || perntd_Cont.length() == 0) {
+				//無輸入OR長度超出範圍
+				String menu_Intro = req.getParameter("menu_Intro").trim();
+				if(menu_Intro == null || menu_Intro.length() == 0) {
 					errorMsgs.add("通知內容:請勿空白");
-				} else if(perntd_Cont.length() >= 1000) {
-					errorMsgs.add("通知內容:長度需小於1000個字元");
+				} else if(menu_Intro.length() >= 100) {
+					errorMsgs.add("通知內容:長度需小於100個字元");
 				}
+//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 				
-				//日期格式錯誤
-				String perntd_Date = req.getParameter("perntd_Date");
+				Part part = req.getPart("menu_Photo");
+				InputStream in = part.getInputStream();
+				byte[] menu_Photo = new byte[in.available()];
+				in.read(menu_Photo);
+				in.close();
+				
+//***********************************************************************************************
+				
+				//無輸入OR格式不正確
+				str = req.getParameter("menu_Status");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入餐點狀態");
+				}
+				Integer menu_Status = null;
+				try {
+					menu_Status = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("餐點狀態格式不正確");
+				}
 				
 				MenuVO menuVO = new MenuVO();
-//				MenuVO.setPerntd_No(perntd_No);
-//				MenuVO.setMem_No(mem_No);
-//				MenuVO.setNt_No(nt_No);
-//				MenuVO.setPerntd_Cont(perntd_Cont);
-//				MenuVO.setPerntd_Date(perntd_Date);
+				menuVO.setMenu_No(menu_No);
+				menuVO.setMenu_Id(menu_Id);
+				menuVO.setMenu_Type(menu_Type);
+				menuVO.setMenu_Price(menu_Price);
+				menuVO.setMenu_Intro(menu_Intro);
+				menuVO.setMenu_Photo(menu_Photo);
+				menuVO.setMenu_Status(menu_Status);
 				
 				if(!errorMsgs.isEmpty()) {
-					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的perntdVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/update_menu_input.jsp");
+					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
 				
 				/***************************2.開始修改資料****************************************/
 				MenuService menuSvc = new MenuService();
-//				menuVO = menuSvc.updateMenu(menu_No, mem_No, nt_No, perntd_Cont, perntd_Date);
+				menuVO = menuSvc.updateMenu(menu_No, menu_Id, menu_Type, menu_Price, menu_Intro, menu_Photo, menu_Status);
 								
 				/***************************3.修改完成,準備轉交(Send the Success view)************/
-				req.setAttribute("menuVO", menuVO);  // 資料庫update成功後,正確的的perntdVO物件,存入req
+				req.setAttribute("menuVO", menuVO);  // 資料庫修改成功後,正確的的menuVO物件,存入req
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listOneMenu.jsp");
 				successView.forward(req, res);
-
+				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
-				errorMsgs.add("修改資料失敗" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/update_menu_input.jsp");
-				failureView.forward(req, res);
+				errorMsgs.add("資料修改失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
+				failuerView.forward(req, res);
 			}
-			
 		}
 		
-		if("delete".equals(action)) {  // 來自listAllPerntd.jsp
+		if("delete".equals(action)) {  // 來自listAllMenu.jsp
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			

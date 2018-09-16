@@ -197,11 +197,11 @@ public class MenuDAO implements MenuDAO_interface {
 				menuVO.setMenu_No(rs.getString("MENU_NO"));
 				menuVO.setMenu_Id(rs.getString("MENU_ID"));
 				menuVO.setMenu_Type(rs.getString("MENU_TYPE"));
-				menuVO.setMenu_Price(rs.getInt("MENY_PRICE"));
-				menuVO.setMenu_Intro(rs.getString("MENU_PRICE"));
+				menuVO.setMenu_Price(rs.getInt("MENU_PRICE"));
+				menuVO.setMenu_Intro(rs.getString("MENU_INTRO"));
 				menuVO.setMenu_Photo(rs.getBytes("MENU_PHOTO"));
 				menuVO.setMenu_Status(rs.getInt("MENU_STATUS"));
-
+				
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "

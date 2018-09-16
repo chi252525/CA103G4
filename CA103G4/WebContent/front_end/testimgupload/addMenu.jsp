@@ -152,12 +152,6 @@ $(document).ready(function (){
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
 
-<FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data">
-
-
-
-</FORM>
-
 </body>
 
 
@@ -167,7 +161,7 @@ $(document).ready(function (){
 	<!-- 當第一次進入到addPerntd頁面時，因為在程式一開始宣告的perntdVO並未取到值，所以會產生例外直接進入catch區塊執行該段程式碼 -->
 	<!-- 而controller檢查到錯誤返回處理時，則會因為perntdVO已取到值而執行try區塊裡的程式碼-->
 <% 
-	java.sql.Date perntdDate = null;
+// 	java.sql.Date perntdDate = null;
 
 // 	try {
 // 		//字串先轉java.util.Date型態後再轉java.sql.Date型態
@@ -177,7 +171,7 @@ $(document).ready(function (){
 // 		perntdDate = new java.sql.Date(date.getTime());
 // 	} catch (Exception e) {
 // 		//取得當前日期
-		perntdDate = new java.sql.Date(System.currentTimeMillis());
+// 		perntdDate = new java.sql.Date(System.currentTimeMillis());
 // 	}
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -200,7 +194,7 @@ $(document).ready(function (){
 	       timepicker:false,       //timepicker:true,
 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
 	       format:'Y/m/d',         //format:'Y-m-d H:i:s',
-		   value: '<%=perntdDate%>', // value:   new Date(),
+		   value: '<%="2018/10/19"%>', // value:   new Date(),
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Perntd: Home</title>
+<title>IBM Menu: Home</title>
 
 <style>
   table#table-1 {
@@ -32,10 +32,10 @@
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 
 <table id="table-1">
-   <tr><td><h3>IBM Perntd: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM Menu: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Perntd: Home</p>
+<p>This is the Home page for IBM Menu: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -50,7 +50,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllMenu.jsp'>List</a> all Perntds.  <br><br></li>
+  <li><a href='listAllMenu.jsp'>List</a> all Menus.  <br><br></li>
   
   
   <li>
@@ -83,7 +83,7 @@
 <h3>餐點管理</h3>
 
 <ul>
-  <li><a href='addMenu.jsp'>Add</a> a new Perntd.</li>
+  <li><a href='addMenu.jsp'>Add</a> a new Menu.</li>
 </ul>
 
 </body>

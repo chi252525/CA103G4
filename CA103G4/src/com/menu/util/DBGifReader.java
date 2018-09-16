@@ -38,7 +38,7 @@ public class DBGifReader extends HttpServlet {
 				in.close();
 			} else {
 				//res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/NoData/no.png");
+				InputStream in = getServletContext().getResourceAsStream("/NoData/null.png");
 				byte[] buf = new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
