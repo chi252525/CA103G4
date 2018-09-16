@@ -1,19 +1,23 @@
 package com.menu.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.menu.model.*;
 
 @WebServlet("/front_end/testimgupload/menu.do")
+@MultipartConfig
 public class MenuServlet extends HttpServlet{
 
 	@Override
@@ -25,6 +29,16 @@ public class MenuServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+//****************************** imgtest *******************************************
+		
+		Part part = req.getPart("menu_Photo");
+		InputStream in = part.getInputStream();
+		byte[] menu_Photo = new byte[in.available()];
+		in.read(menu_Photo);
+		in.close();
+		
+//****************************** imgtest *******************************************
 		
 		if("getOne_For_Display".equals(action)) {  // 來自select_page.jsp的請求
 			// Store this set in the request scope, in case we need to
@@ -107,7 +121,7 @@ public class MenuServlet extends HttpServlet{
 		if("insert".equals(action)){  // 來自addMenu.jsp的請求  
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
-System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 			try {
 				/***************************1.接收請求參數****************************************/
 				
@@ -145,9 +159,11 @@ System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 				} else if(menu_Intro.length() >= 100) {
 					errorMsgs.add("通知內容:長度需小於100個字元");
 				}
-//imgtest				
-				byte[] menu_Photo = null;
+//****************************** imgtest *******************************************
 				
+//				byte[] menu_Photo = null;
+				
+//****************************** imgtest *******************************************
 				
 				//無輸入OR格式不正確
 				str = req.getParameter("menu_Status");

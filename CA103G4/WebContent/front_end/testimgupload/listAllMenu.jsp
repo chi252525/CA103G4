@@ -92,7 +92,7 @@
 			<td>${menuVO.getMenu_Type()}</td>
 			<td>${menuVO.getMenu_Price()}</td>
 			<td>${menuVO.getMenu_Intro()}</td>
-			<td>${menuVO.getMenu_Photo()}</td>
+			<td><img src="DBGifReader?menu_No=${menuVO.getMenu_No()}"></td>
 			<td>${menuVO.getMenu_Status()}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;">
@@ -109,6 +109,7 @@
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>
+		
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>

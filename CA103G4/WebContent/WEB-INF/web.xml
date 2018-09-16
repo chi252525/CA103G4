@@ -23,4 +23,14 @@
     <servlet-name>PerntdServlet</servlet-name>
     <url-pattern>/front_end/perntd/perntd.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>DBGifReader</servlet-name>
+	<servlet-class>com.menu.util.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>DBGifReader</servlet-name>
+	<url-pattern>/DBGifReader</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

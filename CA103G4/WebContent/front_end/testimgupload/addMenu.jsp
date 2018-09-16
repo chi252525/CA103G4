@@ -13,7 +13,11 @@
 
 <!--     Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <title>資料新增 - addmenu.jsp</title>
 
@@ -63,7 +67,7 @@ $(document).ready(function (){
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            var index = input.name.slice(-1);
+            var index = 0//input.name.slice(-1);
             reader.onload = function (e) {
                 $('.preview:eq('+index+')').attr('src', e.target.result);
                 var KB = format_float(e.total / 1024,2);
@@ -75,7 +79,7 @@ $(document).ready(function (){
 
     }
 
-    $("body").on("change", ".upfile", function (){
+    $("body").on("change", ".menu_Photo", function (){
         preview(this);
     })
     
@@ -90,13 +94,11 @@ $(document).ready(function (){
 <table id="table-1">
 	<tr><td>
 		 <h3>資料新增 - addMenu.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="50" height="50" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<h3>資料新增:</h3>
-
-<%-- 錯誤表列 --%>
+<%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -125,25 +127,24 @@ $(document).ready(function (){
 		<td><input type="TEXT" name="menu_Intro" size="45"	value="<%=(menuVO==null)?"川味麻辣湯頭，搭配辣味肉燥與叉燒肉":menuVO.getMenu_Intro()%>" /></td>
 	</tr>
 	
-	
 	<tr>
 		<td>餐點圖片:</td>
-		<td><input type="file" name="menu_Photo" size="45">" /></td>
-<!-- 		<td> -->
-<!-- 			<div class="col-md-2"> -->
-<!-- 	        <p>preview 1</p> -->
-<!-- 		        <img class="preview" style="max-width: 200px; max-height: 200px;"> -->
-<!-- 		        <div class="size"></div> -->
-<!-- 	    	</div> -->
-<!-- 		</td> -->
+		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td>
 	</tr>
-	
 	
 	<tr>
 		<td>餐點狀態:</td>
 		<td><input type="TEXT" name="menu_Status" size="45"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" /></td>
 	</tr>
-
+	<tr>
+		<td>
+	        <p>ImgPreview</p>
+	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
+	        <div class="size"></div>
+		</td>
+	</tr>
+		
+	
 </table>
 
 
