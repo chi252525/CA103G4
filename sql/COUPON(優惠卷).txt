@@ -24,5 +24,9 @@ INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
 
 COMMIT;
