@@ -29,7 +29,7 @@ public class MemberVO {
 	public MemberVO(String mem_No, String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
 			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
-			Date mem_Credate, String mem_Status, byte[] mem_photo) {
+			Date mem_Credate, String mem_Status, byte[] mem_Photo) {
 		super();
 		this.mem_No = mem_No;
 		this.mem_Id = mem_Id;
@@ -49,7 +49,7 @@ public class MemberVO {
 		this.mem_Bonus = mem_Bonus;
 		this.mem_Credate = mem_Credate;
 		this.mem_Status = mem_Status;
-		this.mem_photo = mem_photo;
+		this.mem_photo = mem_Photo;
 	}
 	
 	
@@ -166,10 +166,10 @@ public class MemberVO {
 	public void setMem_Status(String mem_Status) {
 		this.mem_Status = mem_Status;
 	}
-	public byte[] getMem_photo() {
+	public byte[] getMem_Photo() {
 		return mem_photo;
 	}
-	public void setMem_photo(byte[] mem_photo) {
+	public void setMem_Photo(byte[] mem_Photo) {
 		this.mem_photo = mem_photo;
 	}
 	

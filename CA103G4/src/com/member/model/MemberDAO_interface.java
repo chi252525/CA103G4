@@ -7,6 +7,6 @@ public interface MemberDAO_interface {
 	public void insert(MemberVO memVO);
 	public void update(MemberVO memVO);
 	public void changeStatus(MemberVO memVO);
-	public List<MemberVO> getall();
+	public List<MemberVO> getAll();
 	
 }

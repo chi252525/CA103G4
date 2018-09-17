@@ -20,10 +20,10 @@ public class MemberDAO implements MemberDAO_interface{
 	public static final String USER="CHIAPAO";
 	public static final String PASSWORD="CHIAPAO";
 	public static final String INSERT_STMT=
-			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS,MEM_PHOTO) " + 
+			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
 			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_STMT=
-			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR =? , MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=? , MEM_BONUS=? , MEM_PHOTO=? WHERE MEM_ID =?";
+			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR = to_date(?,'yyyy-mm-dd') , MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=? , MEM_BONUS=? , MEM_PHOTO=? WHERE MEM_ID =?";
 	public static final String CHANGESTATUS_STMT=
 			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
 	public static final String GETALL=
@@ -61,12 +61,10 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(12, memVO.getMem_Readdr());
 			pstmt.setString(13, memVO.getMem_Cardnum());
 			pstmt.setString(14, memVO.getMem_Carddue());
-			pstmt.setInt(15, memVO.getMem_Bonus());
-			byte[] pic = getPictureByte("img/test1.jpeg");
-			pstmt.setBytes(16,pic);
+			pstmt.setBytes(15,memVO.getMem_Photo());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("新增 "+rowCount+" 會員資料");
-		} catch (SQLException | IOException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -104,7 +102,7 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(1, memVO.getMem_Pw());
 			pstmt.setString(2, memVO.getMem_Name());
 			pstmt.setString(3, memVO.getMem_Gender());
-			pstmt.setDate(4, java.sql.Date.valueOf(memVO.getMem_Bir()));
+			pstmt.setString(4, memVO.getMem_Bir());
 			pstmt.setString(5, memVO.getMem_Mail());
 			pstmt.setString(6, memVO.getMem_Phone());
 			pstmt.setString(7, memVO.getMem_Receiver());
@@ -115,8 +113,9 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(12, memVO.getMem_Cardnum());
 			pstmt.setString(13, memVO.getMem_Carddue());
 			pstmt.setInt(14, memVO.getMem_Bonus());
-			byte[] pic = getPictureByte("img/test2.jpg");
-			pstmt.setBytes(15, pic);
+//			byte[] pic = getPictureByte("img/test2.jpg");
+//			pstmt.setBytes(15, pic);
+			pstmt.setBytes(15,memVO.getMem_Photo());
 			pstmt.setString(16, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("修改 "+rowCount+" 筆資料");
@@ -124,9 +123,9 @@ public class MemberDAO implements MemberDAO_interface{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 		} finally{
 			if(pstmt!=null) {
 				try {
@@ -190,7 +189,7 @@ public class MemberDAO implements MemberDAO_interface{
 	}
 
 	@Override
-	public List<MemberVO> getall() {
+	public List<MemberVO> getAll() {
 		// TODO Auto-generated method stub
 		
 		Connection con = null;

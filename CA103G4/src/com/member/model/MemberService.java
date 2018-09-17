@@ -4,14 +4,14 @@ public class MemberService {
 	
 	private MemberDAO_interface dao;
 	
-	private MemberService() {
+	public MemberService() {
 		dao = new MemberDAO();
 	}
 	
 	public MemberVO addMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
-			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
-			 byte[] mem_photo) {
+			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue,
+			 byte[] mem_Photo) {
 		
 		MemberVO memVO = new MemberVO();
 		memVO.setMem_Id(mem_Id);
@@ -28,7 +28,7 @@ public class MemberService {
 		memVO.setMem_Retown(mem_Readdr);
 		memVO.setMem_Cardnum(mem_Cardnum);
 		memVO.setMem_Carddue(mem_Carddue);
-		memVO.setMem_Bonus(mem_Bonus);
+		memVO.setMem_Photo(mem_Photo);
 		
 		dao.insert(memVO);	
 			
@@ -38,7 +38,7 @@ public class MemberService {
 	public  MemberVO updateMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
 			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
-			 byte[] mem_photo) {
+			 byte[] mem_Photo) {
 		
 		MemberVO memVO = new MemberVO();
 		

@@ -1,0 +1,93 @@
+/*font */
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+    html {
+        height: 100%;           
+    }
+    body {
+        background-image: url(img/woodbackground3.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        font-family: 'Noto Sans TC', sans-serif;;
+        font-weight: 400;
+    } 
+/*listgroup */
+
+    .list-group-item.active {
+            z-index: 0;
+            color: #fff;
+            background-color: #ce0000;
+            border-color: #ce0000;
+        }
+
+
+/* image*/
+    .single-gallery-image {
+        margin-top: 10px;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        background-size: cover !important;
+        height: 200px;
+        -webkit-transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s
+    }
+
+    .single-gallery-image:hover {
+        opacity: .7
+    }
+
+    #back {
+        background-color: #dc3545;
+        margin-top: 40px;
+        margin-bottom: 50px;
+        border-radius: 2rem
+        
+    }
+
+    .td1{
+        width: 10%;
+        text-align:center;
+    }
+    .td2{
+        width: 40%;
+        text-align:center;
+    }
+    .td2.mem_Gender{
+        text-align:center;
+        padding-top: 6px;
+    }
+    .td3{
+        width: 10%;
+        text-align:center;
+    }
+    .td4{
+        width: 40%;
+        text-align:center;
+    }
+    .tdbtn{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .btn{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 2px;
+    }
+    #mem_Bir{
+        width: 208px;
+    }
+
+    .custom-img{
+            border-radius: 5rem;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+    }
+    #img-td{
+    text-align: center;
+    }
