@@ -1,6 +1,7 @@
-	<!DOCTYPE html>
-	<html >
-	<head>
+<!DOCTYPE html>
+<html>
+
+<head>
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
@@ -83,10 +84,7 @@
         #2 {
             margin-left: 70px;
         }
-        .fa fa-trash{
-             display: flex;
-            justify-content: flex-end;
-        }
+        
         strong{
             width: 100px;
             margin-left: 40px;
@@ -95,6 +93,9 @@
         input{
             width: 35px;
             margin-left: 40px;
+        }
+        #del{
+            font-size: 10px;         
         }
               
         </style>
@@ -189,28 +190,29 @@
                     <ul class="list-group">
 
                         <li class="list-group-item list-group-item-light d-flex">
-                            <strong>餐點內容</strong>  <strong>數量</strong>
+                            <strong>餐點內容</strong> <strong>數量</strong>
 
                         </li>
                         <li class="list-group-item list-group-item-dark d-flex">
                             <strong>豚骨叉燒拉麵</strong>
                             <input type="number" min="1" max="10" value="2">
-                            <a href="#" class="ml-auto align-self-center">
-                                <i class="fa fa-trash" style="font-size: 25px;color: firebrick"></i>
-                            </a>    
+                            <button id="del" class="ml-auto align-self-center">
+                                <i class="fa fa-trash ml-auto" style="font-size: 25px;color: firebrick"></i>
+                            </button>
                         </li>
                         <li class="list-group-item list-group-item-light d-flex">
                             <strong>唐楊炸雞</strong>
                             <input type="number" min="1" max="10" value="1">
-                            <a href="#" class="ml-auto align-self-center">
+                            <button id="del" class="ml-auto align-self-center">
                                 <i class="fa fa-trash" style="font-size: 25px;color: firebrick"></i>
-                            </a>
+                            </button>
                         </li>
                         <li class="list-group-item list-group-item-dark d-flex">
                             <strong> 豪華醬油拉麵</strong>
                             <input type="number" min="1" max="10" value="2">
-                            <a href="#" class="ml-auto align-self-center">
+                            <button id="del" class="ml-auto align-self-center">
                                 <i class="fa fa-trash" style="font-size: 25px;color: firebrick"></i>
+                            </button>
                             </a>
                         </li>
                         <hr>
@@ -254,5 +256,8 @@
         </footer>
     </section>
     <!-- Footer -->
+
+
 </body>
-	</html>
+
+</html>
