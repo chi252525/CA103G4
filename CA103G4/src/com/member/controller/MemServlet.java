@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.member.model.*;
-@WebServlet("/mem.do")
+
 @MultipartConfig
 public class MemServlet extends HttpServlet{
 	
