@@ -85,7 +85,7 @@
 	<c:forEach var="custommealsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${custommealsVO.getcCustom_No()}</td>
+			<td>${custommealsVO.getCustom_No()}</td>
 			<td>${custommealsVO.getMem_No()}</td>
 			<td>${custommealsVO.getCustom_Name()}</td>
 			<td>${custommealsVO.getCustom_Price()}</td>

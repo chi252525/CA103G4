@@ -121,16 +121,16 @@ $(document).ready(function (){
 		<td><input type="TEXT" name="mem_No" size="45"	value="<%=custommealsVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
-		<td>餐點類型:</td>
+		<td>自訂餐點名稱:</td>
 		<td><input type="TEXT" name="custom_Name" size="45"	value="<%=custommealsVO.getCustom_Name()%>" /></td>
 	</tr>
 	<tr>
-		<td>餐點價格:</td>
-		<td><input type="TEXT" name="custom_Price" size="45"	value="<%=custommealsVO.getCustom_Price()%>" /></td>
+		<td>自訂餐點價格:</td>
+		<td><input type="TEXT" name="custom_Price" size="45" value="<%=custommealsVO.getCustom_Price()%>" /></td>
 	</tr>
 	
 	<tr>
-		<td>餐點圖片:</td>
+		<td>自訂餐點圖片:</td>
 		<td><input type="file" class="custom_Photo" name="custom_Photo" size="45"></td>
 	</tr>
 	
@@ -146,7 +146,7 @@ $(document).ready(function (){
 
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="custommeals_No" value="<%=custommealsVO.getCustom_No()%>">
+<input type="hidden" name="custom_No" value="<%=custommealsVO.getCustom_No()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

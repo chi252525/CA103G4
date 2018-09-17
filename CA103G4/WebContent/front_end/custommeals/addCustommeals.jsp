@@ -3,8 +3,8 @@
 <%@ page import="com.custommeals.model.*"%>
 
 <%
-//PerntdServlet.java (Concroller) 存入req的perntdVO物件 (包括輸入資料錯誤時的perntdVO物件)
-  CustommealsVO custommealsVO = (CustommealsVO)request.getAttribute("custommealsVO");
+//CustommealsServlet.java (Concroller) 存入req的custommealsVO物件 (包括輸入資料錯誤時的custommealsVO物件)
+  CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO");
 %>
 
 <html>
@@ -93,7 +93,7 @@ $(document).ready(function (){
 
 <table id="table-1">
 	<tr><td>
-		 <h3>新增客製化餐點 - addcustommeals.jsp</h3></td><td>
+		 <h3>新增客製化餐點 - addCustommeals.jsp</h3></td><td>
 		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="50" height="50" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -108,20 +108,23 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="custommeals.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="custommeals.do" name="form1">
 <table>
 
 	<tr>
 		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_no" size="45"	value="<%=(custommealsVO==null)?"M000001":custommealsVO.getMem_No()%>" /></td>
+		<td><input type="TEXT" name="mem_no" size="45"	
+			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點名稱:</td>
-		<td><input type="TEXT" name="custom_name" size="45"	value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getCustom_Name()%>" /></td>
+		<td><input type="TEXT" name="custom_name" size="45"	
+			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getCustom_Name()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-		<td><input type="TEXT" name="custom_price" size="45"	value="<%=(custommealsVO==null)?"480":custommealsVO.getCustom_Price()%>" /></td>
+		<td><input type="TEXT" name="custom_price" size="45"	
+			value="<%=(custommealsVO==null)?"480":custommealsVO.getCustom_Price()%>" /></td>
 	</tr>
 	
 	<tr>
@@ -149,24 +152,7 @@ $(document).ready(function (){
 
 
 
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-	<!-- 當第一次進入到addPerntd頁面時，因為在程式一開始宣告的perntdVO並未取到值，所以會產生例外直接進入catch區塊執行該段程式碼 -->
-	<!-- 而controller檢查到錯誤返回處理時，則會因為perntdVO已取到值而執行try區塊裡的程式碼-->
-<% 
-// 	java.sql.Date perntdDate = null;
-
-// 	try {
-// 		//字串先轉java.util.Date型態後再轉java.sql.Date型態
-// 		String dateStr = perntdVO.getPerntd_Date();
-// 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
-// 		java.util.Date date = sdf.parse(dateStr);
-// 		perntdDate = new java.sql.Date(date.getTime());
-// 	} catch (Exception e) {
-// 		//取得當前日期
-// 		perntdDate = new java.sql.Date(System.currentTimeMillis());
-// 	}
-%>
+ 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -197,4 +183,5 @@ $(document).ready(function (){
        
         
 </script>
+-->
 </html>

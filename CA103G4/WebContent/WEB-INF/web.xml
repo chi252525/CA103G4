@@ -36,7 +36,7 @@
   </servlet-mapping>
   
   
-    <servlet>
+  <servlet>
     <servlet-name>CustommealsServlet</servlet-name>
     <servlet-class>com.custommeals.controller.CustommealsServlet</servlet-class>
   </servlet>

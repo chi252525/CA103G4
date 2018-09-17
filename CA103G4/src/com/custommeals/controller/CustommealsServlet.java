@@ -38,20 +38,19 @@ public class CustommealsServlet extends HttpServlet{
 				req.setAttribute("errorMsgs", errorMsgs);
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-					String custom_No  = req.getParameter("custom_No").trim();
-					//無輸入
-					if(custom_No == null || custom_No.length() == 0) {
-						errorMsgs.add("請輸入餐點編號");
+					String custom_No = req.getParameter("custom_No").trim();
+					if (custom_No == null || custom_No.length() == 0) {
+						errorMsgs.add("請輸入自訂餐點編號");
 					}
-					if(!errorMsgs.isEmpty()) {
+					if (!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/custommeals/select_page.jsp");
 						failureView.forward(req, res);
-						return; //程式中斷
+						return;//程式中斷
 					}
 					
 					//格式錯誤
-					if(!(custom_No.matches("M\\d{3}")))
-						errorMsgs.add("餐點編號格式不正確");
+					if(!(custom_No.matches("C\\d{10}")))
+						errorMsgs.add("自訂餐點編號格式不正確");
 					if(!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/custommeals/select_page.jsp");
 						failureView.forward(req, res);
@@ -224,13 +223,7 @@ public class CustommealsServlet extends HttpServlet{
 						errorMsgs.add("自訂餐點價格格式不正確");
 					}
 					
-//					//無輸入OR長度超出範圍
-//					String menu_Intro = req.getParameter("menu_Intro").trim();
-//					if(menu_Intro == null || menu_Intro.length() == 0) {
-//						errorMsgs.add("通知內容:請勿空白");
-//					} else if(menu_Intro.length() >= 100) {
-//						errorMsgs.add("通知內容:長度需小於100個字元");
-//					}
+
 	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 					
 					Part part = req.getPart("custom_Photo");
@@ -241,17 +234,6 @@ public class CustommealsServlet extends HttpServlet{
 					
 	//***********************************************************************************************
 					
-//					//無輸入OR格式不正確
-//					str = req.getParameter("menu_Status");
-//					if (str == null || (str.trim()).length() == 0) {
-//						errorMsgs.add("請輸入餐點狀態");
-//					}
-//					Integer menu_Status = null;
-//					try {
-//						menu_Status = new Integer(str);
-//					} catch (Exception e) {
-//						errorMsgs.add("餐點狀態格式不正確");
-//					}
 					
 					CustommealsVO custommealsVO = new CustommealsVO();
 					custommealsVO.setCustom_No(custom_No);
@@ -262,8 +244,8 @@ public class CustommealsServlet extends HttpServlet{
 					
 					
 					if(!errorMsgs.isEmpty()) {
-						req.setAttribute("custommealsVO", custommealsVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
-						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/addCustommeals.jsp");
+						req.setAttribute("custommealsVO", custommealsVO);  // 含有輸入格式錯誤的custommealsVO物件,也存入req
+						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
 						failureView.forward(req, res);
 						return; //程式中斷
 					}
@@ -274,13 +256,13 @@ public class CustommealsServlet extends HttpServlet{
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫修改成功後,正確的的menuVO物件,存入req
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listOneCustommeals.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listOneCustommeals.jsp");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
 				} catch(Exception e) {
 					errorMsgs.add("資料修改失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/testimgupload/addCustommeals.jsp");
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
 					failuerView.forward(req, res);
 				}
 			}
@@ -295,19 +277,19 @@ public class CustommealsServlet extends HttpServlet{
 					String whichPage = req.getParameter("whichPage");
 					
 					/***************************2.開始刪除資料****************************************/
-					CustommealsService menuSvc = new CustommealsService();
-					menuSvc.deleteCustommeals(custom_No);
+					CustommealsService custommealsSvc = new CustommealsService();
+					custommealsSvc.deleteCustommeals(custom_No);
 									
 					/***************************3.刪除完成,準備轉交(Send the Success view)************/
 					req.setAttribute("custom_No", custom_No);
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllCustommeals.jsp?"+whichPage);
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp?"+whichPage);
 					successView.forward(req, res);
 
 					/***************************其他可能的錯誤處理**********************************/
 					
 				} catch(Exception e) {
 					errorMsgs.add("刪除資料失敗" + e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/listAllCustommeals.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
 					failureView.forward(req, res);
 				}
 			}
