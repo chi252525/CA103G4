@@ -26,6 +26,15 @@
     <url-pattern>/front_end/perntd/perntd.do</url-pattern>
   </servlet-mapping>
   
+  	<servlet>
+		<servlet-name>SearchMenuServlet</servlet-name>
+		<servlet-class>com.menu.controller.SearchMenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchMenuServlet</servlet-name>
+		<url-pattern>/SearchMenuServlet</url-pattern>
+	</servlet-mapping>
+  
   <servlet>
     <servlet-name>DeliveryServlet</servlet-name>
     <servlet-class>com.delivery.controller.DeliveryServlet</servlet-class>
