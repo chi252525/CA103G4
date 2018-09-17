@@ -120,7 +120,16 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		String em = "emp_no= ?";
 		String dt = "deliv_status= ?";
 		String ad = " and ";
-
+		
+		
+		if (deliv_no != null || emp_no != null || deliv_status != null) {
+			if (deliv_no.trim().length() == 0  || emp_no.trim().length() == 0 || deliv_status.trim().length() == 0) {
+			deliv_no = null;
+			emp_no = null;
+			deliv_status = null;
+			}
+		}
+		
 		try {
 
 			
