@@ -68,7 +68,7 @@
 		<td><%=SrVO.getMem_No()%></td>
 		<td><%=SrVO.getStor_Date()%></td>
 		<td><%=SrVO.getStor_Point()%></td>
-		<td><%=SrVO.getStor_Point()%></td>
+		<td><%=SrVO.getDrew_Point()%></td>
 		<td><%=SrVO.getStor_Status()%></td>
 	</tr>
 </table>
