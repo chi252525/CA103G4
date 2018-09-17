@@ -26,6 +26,15 @@
     <url-pattern>/front_end/perntd/perntd.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>DeliveryServlet</servlet-name>
+    <servlet-class>com.delivery.controller.DeliveryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeliveryServlet</servlet-name>
+    <url-pattern>/front_end/delivery/delivery.do</url-pattern>
+  </servlet-mapping>
+  
  
   <servlet>
 	<servlet-name>DBGifReader</servlet-name>

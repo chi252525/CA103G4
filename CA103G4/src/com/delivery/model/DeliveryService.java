@@ -21,10 +21,11 @@ public class DeliveryService {
 		return deliveryVO;
 	}
 	
-	public DeliveryVO updateDelivery(String deliv_status, String deliv_no) {
+	public DeliveryVO updateDelivery(String emp_no,String deliv_status, String deliv_no) {
 		
 		DeliveryVO deliveryVO = new DeliveryVO();
 		
+		deliveryVO.setDeliv_status(emp_no);
 		deliveryVO.setDeliv_status(deliv_status);
 		deliveryVO.setDeliv_no(deliv_no);
 		dao.update(deliveryVO);

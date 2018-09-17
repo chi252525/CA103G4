@@ -12,6 +12,8 @@ public interface DeliveryDAO_interface {
 
 	public List<DeliveryVO> getByThreeKey(String deliv_no, String emp_no, String deliv_status);
 
+	public List<DeliveryVO> getByStatus();
+	
 	public List<DeliveryVO> getAll();
 
 }
