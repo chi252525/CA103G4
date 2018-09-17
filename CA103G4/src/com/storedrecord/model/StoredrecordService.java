@@ -25,11 +25,11 @@ public class StoredrecordService {
 		return srVO;	
 	}
 	
-	public StoredrecordVO updateStoredrecord(String stor_No,String mem_No, Timestamp stor_Date_No, Integer stor_Point, Integer drew_Point,Integer stor_Status) {
+	public StoredrecordVO updateStoredrecord(String stor_No,String mem_No, Timestamp stor_Date, Integer stor_Point, Integer drew_Point,Integer stor_Status) {
 		StoredrecordVO srVO  = new StoredrecordVO();
 		srVO.setStor_No(stor_No);
 		srVO.setMem_No(mem_No);
-		srVO.setStor_Date(stor_Date_No);
+		srVO.setStor_Date(stor_Date);
 		srVO.setDrew_Point(drew_Point);
 		srVO.setStor_Point(stor_Point);
 		srVO.setStor_Status(stor_Status);
