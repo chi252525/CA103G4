@@ -53,6 +53,15 @@
     <servlet-name>CustommealsServlet</servlet-name>
     <url-pattern>/front_end/custommeals/custommeals.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>IngredientsServlet</servlet-name>
+    <servlet-class>com.ingredients.controller.IngredientsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IngredientsServlet</servlet-name>
+    <url-pattern>/front_end/ingredients/ingredients.do</url-pattern>
+  </servlet-mapping>
 
  
   <servlet>
@@ -72,6 +81,16 @@
 	<servlet-name>DBGifReader2</servlet-name>
 	<url-pattern>/DBGifReader2</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>DBGifReader3</servlet-name>
+	<servlet-class>com.ingredients.util.DBGifReader3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>DBGifReader3</servlet-name>
+	<url-pattern>/DBGifReader3</url-pattern>
+  </servlet-mapping>
+  
   
   <servlet>
 		<servlet-name>MemServlet</servlet-name>

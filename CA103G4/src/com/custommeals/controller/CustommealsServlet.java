@@ -194,7 +194,7 @@ public class CustommealsServlet extends HttpServlet{
 			
 			
 			if("insert".equals(action)){  // 來自addCustommeals.jsp的請求  
-				List<String> errorMsgs = new LinkedList<String>();
+				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 //				try {
 					/***************************1.接收請求參數****************************************/

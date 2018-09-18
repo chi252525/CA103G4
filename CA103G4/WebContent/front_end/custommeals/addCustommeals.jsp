@@ -122,17 +122,17 @@ $(document).ready(function (){
 	<tr>
 		<td>會員編號:</td>
 		<td><input type="TEXT" name="mem_No" size="45"	
-			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getMem_No()%>" /></td>
+			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點名稱:</td>
 		<td><input type="TEXT" name="custom_Name" size="45"	
-			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getCustom_Name()%>" /></td>
+			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getcustom_Name()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
 		<td><input type="TEXT" name="custom_Price" size="45"	
-			value="<%=(custommealsVO==null)?"480":custommealsVO.getCustom_Price()%>" /></td>
+			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
 	</tr>
 	
 	<tr>

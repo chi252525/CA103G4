@@ -11,46 +11,47 @@ public class IngredientsService {
 		dao = new IngredientsDAO();
 	}
 
-	public IngredientsVO addIngredients(String ingdt_id, String ingdtc_id, String ingdt_name, Integer ingdt_status, String ingdt_point, String ingdt_unit, Integer ingdt_price) {
+	public IngredientsVO addIngredients(String ingdtc_Id, String ingdt_Name, Integer ingdt_Status, String ingdt_Point, String ingdt_Unit, Integer ingdt_Price, byte[] ingdt_Photo) {
 
 		IngredientsVO ingredientsVO = new IngredientsVO();
 
-		ingredientsVO.setIngdt_Id(ingdt_id);
-		ingredientsVO.setIngdtc_Id(ingdtc_id);
-		ingredientsVO.setIngdt_Name(ingdt_name);
-		ingredientsVO.setIngdt_Status(ingdt_status);
-		ingredientsVO.setIngdt_Point(ingdt_point);
-		ingredientsVO.setIngdt_Unit(ingdt_unit);
-		ingredientsVO.setIngdt_Price(ingdt_price);
+		ingredientsVO.setingdtc_Id(ingdtc_Id);
+		ingredientsVO.setingdt_Name(ingdt_Name);
+		ingredientsVO.setingdt_Status(ingdt_Status);
+		ingredientsVO.setingdt_Point(ingdt_Point);
+		ingredientsVO.setingdt_Unit(ingdt_Unit);
+		ingredientsVO.setingdt_Price(ingdt_Price);
+		ingredientsVO.setingdt_Photo(ingdt_Photo);
 
 		dao.insert(ingredientsVO);
 
 		return ingredientsVO;
 	}
 
-	public IngredientsVO updateIngredients(String ingdt_id, String ingdtc_id, String ingdt_name, Integer ingdt_status, String ingdt_point, String ingdt_unit, Integer ingdt_price) {
+	public IngredientsVO updateIngredients(String ingdt_Id, String ingdtc_Id, String ingdt_Name, Integer ingdt_Status, String ingdt_Point, String ingdt_Unit, Integer ingdt_Price, byte[] ingdt_Photo) {
 
 		IngredientsVO ingredientsVO = new IngredientsVO();
 
-		ingredientsVO.setIngdt_Id(ingdt_id);
-		ingredientsVO.setIngdtc_Id(ingdtc_id);
-		ingredientsVO.setIngdt_Name(ingdt_name);
-		ingredientsVO.setIngdt_Status(ingdt_status);
-		ingredientsVO.setIngdt_Point(ingdt_point);
-		ingredientsVO.setIngdt_Unit(ingdt_unit);
-		ingredientsVO.setIngdt_Price(ingdt_price);
+		ingredientsVO.setingdt_Id(ingdt_Id);
+		ingredientsVO.setingdtc_Id(ingdtc_Id);
+		ingredientsVO.setingdt_Name(ingdt_Name);
+		ingredientsVO.setingdt_Status(ingdt_Status);
+		ingredientsVO.setingdt_Point(ingdt_Point);
+		ingredientsVO.setingdt_Unit(ingdt_Unit);
+		ingredientsVO.setingdt_Price(ingdt_Price);
+		ingredientsVO.setingdt_Photo(ingdt_Photo);
 
 		dao.update(ingredientsVO);
 
 		return ingredientsVO;
 	}
 
-	public void deleteIngredients(String ingdt_id) {
-		dao.delete(ingdt_id);
+	public void deleteIngredients(String ingdt_Id) {
+		dao.delete(ingdt_Id);
 	}
 
-	public IngredientsVO getOneIngredients(String ingdt_id) {
-		return dao.findByPrimaryKey(ingdt_id);
+	public IngredientsVO getOneIngredients(String ingdt_Id) {
+		return dao.findByPrimaryKey(ingdt_Id);
 	}
 
 	public List<IngredientsVO> getAll() {

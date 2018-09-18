@@ -2,85 +2,95 @@ package com.ingredients.model;
 
 public class IngredientsVO implements java.io.Serializable{
 
-	private String Ingdt_Id;
-	private String Ingdtc_Id;
-	private String Ingdt_Name;
-	private Integer Ingdt_Status;
-	private String Ingdt_Point;
-	private String Ingdt_Unit;
-	private Integer Ingdt_Price;
+	private String ingdt_Id;
+	private String ingdtc_Id;
+	private String ingdt_Name;
+	private Integer ingdt_Status;
+	private String ingdt_Point;
+	private String ingdt_Unit;
+	private Integer ingdt_Price;
+	private byte[] ingdt_Photo;
 	
 	public IngredientsVO() {
 		super();
 	}
 	
-	public IngredientsVO(String Ingdt_Id, String Ingdtc_Id, String Ingdt_Name, Integer Ingdt_Status, String Ingdt_Point,String Ingdt_Unit, Integer Ingdt_Price) {
+	public IngredientsVO(String ingdt_Id, String ingdtc_Id, String ingdt_Name, Integer ingdt_Status, String ingdt_Point,String ingdt_Unit, Integer ingdt_Price, byte[] ingdt_Photo) {
 		super();
-		this.Ingdt_Id = Ingdt_Id;
-		this.Ingdtc_Id = Ingdtc_Id;
-		this.Ingdt_Name = Ingdt_Name;
-		this.Ingdt_Status = Ingdt_Status;
-		this.Ingdt_Point = Ingdt_Point;
-		this.Ingdt_Unit = Ingdt_Unit;
-		this.Ingdt_Price = Ingdt_Price;
+		this.ingdt_Id = ingdt_Id;
+		this.ingdtc_Id = ingdtc_Id;
+		this.ingdt_Name = ingdt_Name;
+		this.ingdt_Status = ingdt_Status;
+		this.ingdt_Point = ingdt_Point;
+		this.ingdt_Unit = ingdt_Unit;
+		this.ingdt_Price = ingdt_Price;
+		this.ingdt_Photo = ingdt_Photo;
 	}
 	
 	
 	
-	public String getIngdt_Id() {
-		return Ingdt_Id;
+	public String getingdt_Id() {
+		return ingdt_Id;
 	}
 
-	public void setIngdt_Id(String ingdt_Id) {
-		Ingdt_Id = ingdt_Id;
+	public void setingdt_Id(String ingdt_Id) {
+		this.ingdt_Id = ingdt_Id;
 	}
 
-	public String getIngdtc_Id() {
-		return Ingdtc_Id;
+	public String getingdtc_Id() {
+		return ingdtc_Id;
 	}
 
-	public void setIngdtc_Id(String ingdtc_Id) {
-		Ingdtc_Id = ingdtc_Id;
+	public void setingdtc_Id(String ingdtc_Id) {
+		this.ingdtc_Id = ingdtc_Id;
 	}
 
-	public String getIngdt_Name() {
-		return Ingdt_Name;
+	public String getingdt_Name() {
+		return ingdt_Name;
 	}
 
-	public void setIngdt_Name(String ingdt_Name) {
-		Ingdt_Name = ingdt_Name;
+	public void setingdt_Name(String ingdt_Name) {
+		this.ingdt_Name = ingdt_Name;
 	}
 
-	public Integer getIngdt_Status() {
-		return Ingdt_Status;
+	public Integer getingdt_Status() {
+		return ingdt_Status;
 	}
 
-	public void setIngdt_Status(Integer ingdt_Status) {
-		Ingdt_Status = ingdt_Status;
+	public void setingdt_Status(Integer ingdt_Status) {
+		this.ingdt_Status = ingdt_Status;
 	}
 
-	public String getIngdt_Point() {
-		return Ingdt_Point;
+	public String getingdt_Point() {
+		return ingdt_Point;
 	}
 
-	public void setIngdt_Point(String ingdt_Point) {
-		Ingdt_Point = ingdt_Point;
+	public void setingdt_Point(String ingdt_Point) {
+		this.ingdt_Point = ingdt_Point;
 	}
 
-	public String getIngdt_Unit() {
-		return Ingdt_Unit;
+	public String getingdt_Unit() {
+		return ingdt_Unit;
 	}
 
-	public void setIngdt_Unit(String ingdt_Unit) {
-		Ingdt_Unit = ingdt_Unit;
+	public void setingdt_Unit(String ingdt_Unit) {
+		this.ingdt_Unit = ingdt_Unit;
 	}
 
-	public Integer getIngdt_Price() {
-		return Ingdt_Price;
+	public Integer getingdt_Price() {
+		return ingdt_Price;
 	}
 
-	public void setIngdt_Price(Integer ingdt_Price) {
-		Ingdt_Price = ingdt_Price;
+	public void setingdt_Price(Integer ingdt_Price) {
+		this.ingdt_Price = ingdt_Price;
+	}
+	
+	public byte[] getingdt_Photo() {
+		return ingdt_Photo;
+	}
+	
+	public void setingdt_Photo(byte[] ingdt_Photo) {
+		this.ingdt_Photo = ingdt_Photo;
 	}
 
 
