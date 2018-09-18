@@ -98,13 +98,13 @@
 			<td><img src="/CA103G4/DBGifReader?custom_No=${custommealsVO.getCustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
 			
 			<td>
-			  <FORM METHOD="post" ACTION="custommeals.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="custom_No"  value="${custommealsVO.custom_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="custommeals.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <!-- 從page1.file取得的參數，藉由hidden value傳到下個頁面，可以在刪除一筆資料後繼續停留在該頁面 -->
 			     <input type="hidden" name="whichPage" value="<%=whichPage%>">

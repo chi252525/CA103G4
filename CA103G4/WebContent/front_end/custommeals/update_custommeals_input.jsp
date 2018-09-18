@@ -150,6 +150,8 @@ $(document).ready(function (){
 		</td>
 	</tr>
 	
+	<jsp:useBean id="custommealsSvc" scope="page" class="com.custommeals.model.CustommealsService" />
+	
 </table>
 
 <br>
