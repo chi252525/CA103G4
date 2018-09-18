@@ -8,5 +8,6 @@ public interface MemberDAO_interface {
 	public void update(MemberVO memVO);
 	public void changeStatus(MemberVO memVO);
 	public List<MemberVO> getAll();
+	public MemberVO findByPrimaryKey(String mem_No);
 	
 }

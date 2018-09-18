@@ -18,18 +18,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class MemberDAO_JNDI implements MemberDAO_interface{
+public class MemberJDBCDAO implements MemberDAO_interface{
 	
-	private static DataSource ds = null;
-	
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String USER = "CA103";
+	private static final String PASSWORD = "123456";
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	public static final String INSERT_STMT=
 			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
 			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -39,6 +33,7 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
 	public static final String GETALL=
 			"SELECT * FROM MEMBER";
+	public static final String GET_ONE_MEMBER="SELECT * FROM MEMBER WHERE MEM_NO=?";
 	
 
 
@@ -48,7 +43,7 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, memVO.getMem_Id());
@@ -100,7 +95,7 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			System.out.println("連線成功");
 			pstmt.setString(1, memVO.getMem_Pw());
@@ -159,7 +154,7 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 		PreparedStatement pstmt=null;
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(CHANGESTATUS_STMT);
 			System.out.println("連線成功");
 			pstmt.setString(1, memVO.getMem_Status());
@@ -201,7 +196,7 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 		List<MemberVO> memberlist = new ArrayList<>();
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GETALL);
 			System.out.println("連線成功");
 			ResultSet rs = pstmt.executeQuery();
@@ -254,6 +249,69 @@ public class MemberDAO_JNDI implements MemberDAO_interface{
 			fis.close();
 		return baos.toByteArray();
 		
+	}
+
+	@Override
+	public MemberVO findByPrimaryKey(String mem_No) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(GET_ONE_MEMBER);
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+  
+			while (rs.next()) {
+				memVO = new MemberVO();
+				memVO.setMem_Id(rs.getString("mem_Id"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
+				memVO.setMem_Name(rs.getString("mem_Name"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_photo"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
 	}
 	
 	

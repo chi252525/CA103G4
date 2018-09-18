@@ -1,11 +1,13 @@
 package com.member.model;
 
+import com.post.model.PostVO;
+
 public class MemberService {
 	
 	private MemberDAO_interface dao;
 	
 	public MemberService() {
-		dao = new MemberDAO_JNDI();
+		dao = new MemberDAO();
 	}
 	
 	public MemberVO addMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
@@ -83,5 +85,9 @@ public class MemberService {
 		
 		
 		return memVO;
+	}
+	/*Ning add getOneMember*/
+	public MemberVO getOne_Member(String mem_No) {
+		return dao.findByPrimaryKey(mem_No);
 	}
 }
