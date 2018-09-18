@@ -44,8 +44,8 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, deliveryVO.getBranch_no());
-			pstmt.setString(2, null);
-			pstmt.setString(3, "1");
+			pstmt.setString(2, deliveryVO.getEmp_no());
+			pstmt.setString(3, deliveryVO.getDeliv_status());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -128,13 +128,17 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		String dt = "deliv_status= ?";
 		String ad = " and ";
 
-		if (deliv_no != null || emp_no != null || deliv_status != null) {
-			if (deliv_no.trim().length() == 0 || emp_no.trim().length() == 0 || deliv_status.trim().length() == 0) {
+	
+			if (deliv_no.trim().length() == 0) {
 				deliv_no = null;
+			}
+			if (emp_no.trim().length() == 0) {
 				emp_no = null;
+			}
+			if (deliv_status.trim().length() == 0) {
 				deliv_status = null;
 			}
-		}
+	
 
 		try {
 
