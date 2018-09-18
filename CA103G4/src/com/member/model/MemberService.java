@@ -5,7 +5,7 @@ public class MemberService {
 	private MemberDAO_interface dao;
 	
 	public MemberService() {
-		dao = new MemberDAO();
+		dao = new MemberDAO_JNDI();
 	}
 	
 	public MemberVO addMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
