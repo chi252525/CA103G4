@@ -64,9 +64,14 @@
 	<url-pattern>/DBGifReader</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
 		<servlet-name>MemServlet</servlet-name>
 		<servlet-class>com.member.controller.MemServlet</servlet-class>
+		<multipart-config>
+        <max-file-size>10485760</max-file-size>
+        <max-request-size>20971520</max-request-size>
+        <file-size-threshold>5242880</file-size-threshold>
+    	</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MemServlet</servlet-name>
