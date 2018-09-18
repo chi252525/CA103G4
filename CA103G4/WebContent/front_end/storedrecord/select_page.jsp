@@ -83,7 +83,7 @@
           <option value="${storedrecordVO.mem_No}">${storedrecordVO.mem_No}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="findByPrimaryKey">
+       <input type="hidden" name="action" value="findByMem_no">
        <input type="submit" value="°e¥X">
      </FORM>
   </li>
