@@ -1,4 +1,5 @@
-	<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+	<%@page import="java.sql.Timestamp"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.storedrecord.model.*"%>
 
@@ -9,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料新增 - addEmp.jsp</title>
+<title>員工資料新增 - addStoredrecord.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,7 +49,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料新增 - addEmp.jsp</h3></td><td>
+		 <h3>儲值紀錄資料新增 - addstoredrecord.jsp</h3></td><td>
 		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,40 +66,37 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="storedrecord.do" name="form1">
 <table>
-	<tr>
-		<td>儲值流水單號:</td>
-		<td><input type="TEXT" name="ename" size="45" 
-			 value="<%= (StrVO==null)? "吳永志" : StrVO.getStor_No%>" /></td>
-	</tr>
+	
 	<tr>
 		<td>會員編號:</td>
-		<td><input type="TEXT" name="job" size="45"
-			 value="<%= (StrVO==null)? "MANAGER" : StrVO.getMem_No()%>" /></td>
+		<td><input type="TEXT" name="mem_No" size="45"
+			 value="<%= (StrVO==null)? "M000003" : StrVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
 		<td>儲值日期:</td>
-		<td><input name="stor_date" id="f_date1" type="text"></td>
+		
+		<td><input name="stor_Date" id="f_date1" type="text" 
+		value="<%= (StrVO==null)? new Timestamp(System.currentTimeMillis()) : StrVO.getStor_Date()%>"/></td>
 	</tr>
 	<tr>
 		<td>儲值點數:</td>
-		<td><input type="TEXT" name="sal" size="45"
-			 value="<%= (StrVO==null)? "10000" : StrVO.getStor_Point%>" /></td>
+		<td><input type="TEXT" name="stor_Point" size="45"
+			 value="<%= (StrVO==null)? 500 : StrVO.getStor_Point()%>" /></td>
 	</tr>
 	<tr>
-		<td>回饋紅利點數(竹幣):</td>
-		<td><input type="TEXT" name="comm" size="45"
-			 value="<%= (StrVO==null)? "100" : StrVO.getComm()%>" /></td>
+		<td	>回饋竹幣:</td>
+		<td><input type="TEXT" name="drew_Point" size="45"
+			 value="<%= (StrVO==null)? "100" : StrVO.getDrew_Point()%>" /></td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.storedrecord.model.StoredrecordService" />
+<%-- 	<jsp:useBean id="strSvc" scope="page" class="com.storedrecord.model.StoredrecordService" /> --%>
 	<tr>
 		<td>儲值完成狀態:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
-			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(StoredrecordVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname}
-			</c:forEach>
+		<td><select size="1" name="stor_Status">
+			<option value=1 selected>1
+			<option value=0 >0
 		</select></td>
 	</tr>
 
@@ -113,11 +111,12 @@
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
 <% 
-  java.sql.Date hiredate = null;
+  java.sql.Timestamp Stor_Date = null;
   try {
-	    hiredate = StoredrecordVO.getHiredate();
+	  Stor_Date = StrVO.getStor_Date();
+	    
    } catch (Exception e) {
-	    hiredate = new java.sql.Date(System.currentTimeMillis());
+	   Stor_Date = new java.sql.Timestamp(System.currentTimeMillis());
    }
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -134,13 +133,13 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=hiredate%>', // value:   new Date(),
+//         $.datetimepicker.setLocale('zh');
+//         $('#f_date1').datetimepicker({
+// 	       theme: '',              //theme: 'dark',
+// 	       timepicker:false,       //timepicker:true,
+// 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+// 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+<%-- 		   value: '<%=Stor_Date%>', // value:   new Date(), --%>
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

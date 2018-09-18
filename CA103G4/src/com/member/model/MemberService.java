@@ -1,5 +1,7 @@
 package com.member.model;
 
+import java.util.List;
+
 public class MemberService {
 	
 	private MemberDAO_interface dao;
@@ -83,5 +85,9 @@ public class MemberService {
 		
 		
 		return memVO;
+	}
+	
+	public List<MemberVO> getAll(){
+		return dao.getAll();
 	}
 }

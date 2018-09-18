@@ -47,13 +47,13 @@ public class StoredrecordServlet extends HttpServlet {
 				// ==================輸入檢驗====================
 				String stor_No = req.getParameter("stor_No");
 				String mem_No = req.getParameter("mem_No");
-				String regexMem = "^M\\d{5}$";
+				String regexMem = "^M\\d{6}$";
 				String regexStor = "^B\\d{9}$";
 				Boolean x = stor_No.matches(regexStor);// test for regular expression
 				if (stor_No == null || stor_No.trim().length() == 0) {
 					errorMsgs.add("請輸入儲值流水單號");
 				} else if (stor_No == null && !mem_No.matches(regexMem)) {
-					errorMsgs.add("格式錯誤:會員帳號格式必須是大寫英文字母M加上5個數字");
+					errorMsgs.add("格式錯誤:會員編號格式必須是大寫英文字母M加上5個數字");
 				} else if (mem_No == null && !stor_No.matches(regexStor)) {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母B加上9個數字");
 				}
@@ -63,7 +63,6 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 
 				// ===================開始查詢=====================
-
 				StoredrecordService srSv = new StoredrecordService();
 				StoredrecordVO srVO = srSv.getOneStoredrecord(stor_No);
 				if (srVO == null) {
@@ -72,7 +71,6 @@ public class StoredrecordServlet extends HttpServlet {
 					return;// 有錯誤,返回
 				}
 				// error display...
-
 				/* ==================轉交查詢結果====================== */
 				req.setAttribute("srVO", srVO);
 				req.getRequestDispatcher("/front_end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
@@ -82,10 +80,9 @@ public class StoredrecordServlet extends HttpServlet {
 				errorMsgs.add("無法取得資料" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/select_page.jsp").forward(req, res);
 			}
-
 		}
 //			==================查點擊的儲值紀錄====================
-		if ("update".equals(action)) {
+		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 
 			req.setAttribute("error", errorMsgs);
@@ -101,9 +98,8 @@ public class StoredrecordServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-
 		// =================修改單筆儲值紀錄=======================
-		if ("getOne_For_Update".equals(action)) {
+		if ("Update".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 
@@ -111,7 +107,7 @@ public class StoredrecordServlet extends HttpServlet {
 			try {
 				String stor_No = req.getParameter("stor_No");
 
-				String regexStor = "^[A-Z]{1}d{9}$";
+				String regexStor = "^B\\d{9}$";
 				if (stor_No == null || stor_No.trim().length() == 0) {
 					errorMsgs.add("請輸入儲值流水單號");
 				} else if (!stor_No.matches(regexStor)) {
@@ -119,12 +115,12 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 
 				String mem_No = req.getParameter("mem_No").trim();
-				String regexMem = "^[A-Z]{1}d{5}$";
+				String regexMem = "^M\\d{6}$";
 
 				if (stor_No == null || stor_No.trim().length() == 0) {
-					errorMsgs.add("請輸入會員帳號");
+					errorMsgs.add("請輸入會員編號");
 				} else if (!stor_No.matches(regexMem)) {
-					errorMsgs.add("會員帳號必須是大寫英文字母A-Z加上5個數字");
+					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
 				}
 
 				Timestamp stor_Date = null;
@@ -192,57 +188,47 @@ public class StoredrecordServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String stor_No = req.getParameter("stor_No");
-
-				String regexStor = "^[A-Z]{1}d{9}$";
-				if (stor_No == null || stor_No.trim().length() == 0) {
-					errorMsgs.add("請輸入儲值流水單號");
-				} else if (!stor_No.matches(regexStor)) {
-					errorMsgs.add("儲值流水單號必須是大寫英文字母A-Z加上9個數字");
-				}
-
 				String mem_No = req.getParameter("mem_No").trim();
-				String regexMem = "^[A-Z]{1}d{5}$";
+				String regexMem = "^M\\d{6}$";
 
-				if (stor_No == null || stor_No.trim().length() == 0) {
-					errorMsgs.add("請輸入會員帳號");
-				} else if (!stor_No.matches(regexMem)) {
-					errorMsgs.add("會員帳號必須是大寫英文字母A-Z加上5個數字");
+				if (mem_No == null || mem_No	.trim().length() == 0) {
+					errorMsgs.add("請輸入會員編號");
+				} else if (!mem_No.matches(regexMem)) {
+					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
 				}
 				Timestamp stor_Date = null;
 				try {
 					stor_Date = Timestamp.valueOf(req.getParameter("stor_Date").trim());
 				} catch (IllegalArgumentException ie) {
-
+					stor_Date = new Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請選取日期");
 				}
 				Integer stor_Point = null;
 				try {
 					stor_Point = new Integer(req.getParameter("stor_Point").trim());
 				} catch (NumberFormatException ne) {
-					errorMsgs.add("請輸入數字");
+					errorMsgs.add("點數請輸入數字");
 				}
 
 				Integer drew_Point = null;
 				try {
 					drew_Point = Integer.parseInt(req.getParameter("drew_Point").trim());
 				} catch (NumberFormatException ne) {
-					errorMsgs.add("請輸入數字");
+					errorMsgs.add("點數請輸入數字");
 				}
 				Integer stor_Status = null;
 				try {
 					stor_Status = Integer.parseInt(req.getParameter("stor_Status").trim());
-					if (stor_Status != 1 || stor_Status != 0) {
+					if (stor_Status != 1 && stor_Status != 0) {
 						stor_Status = 0;
 						errorMsgs.add("請輸入1或0");
 					}
 				} catch (NumberFormatException ne) {
 					stor_Status = 0;
-					errorMsgs.add("請輸入1或0");
+					errorMsgs.add("狀態請輸入1或0");
 				}
 
-				StoredrecordVO srVO = new StoredrecordVO();
-				srVO.setStor_No(stor_No);
+				StoredrecordVO srVO = new StoredrecordVO();				
 				srVO.setMem_No(mem_No);
 				srVO.setStor_Date(stor_Date);
 				srVO.setStor_Point(stor_Point);
@@ -250,21 +236,19 @@ public class StoredrecordServlet extends HttpServlet {
 				srVO.setStor_Status(stor_Status);
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("storedrecordVO", srVO);
-					req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
-					return;// 有錯誤,返回
+					req.setAttribute("StoredrecordVO", srVO);// 含有輸入格式錯誤的empVO物件,也存入req
+					req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
+					return;// 有錯誤,返回addStoredrecord
 				}
 				// =============開始新增====================
 				StoredrecordService stsvc = new StoredrecordService();
-				StoredrecordVO srVo = stsvc.updateStoredrecord(stor_No, mem_No, stor_Date, stor_Point, drew_Point,
-						stor_Status);
+				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, drew_Point, stor_Status);
 				// ================改完，轉交===================
-				req.setAttribute("storedrecordVO", srVo);
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
+				// =====================其他可能錯誤=========================
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
-
 			}
 		}
 
@@ -277,10 +261,8 @@ public class StoredrecordServlet extends HttpServlet {
 				String stor_No = req.getParameter("stor_No");
 				StoredrecordService strSvc = new StoredrecordService();
 				strSvc.delete(stor_No);
-
 				// ===============轉交=======================
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
-
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);

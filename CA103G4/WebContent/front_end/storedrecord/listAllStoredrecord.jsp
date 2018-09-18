@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>所有員工資料 - listAllEmp.jsp</title>
+<title>所有儲值紀錄資料 - listAllStoredRecord.jsp</title>
 
 <style>
   table#table-1 {
@@ -54,7 +54,7 @@
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有員工資料 - listAllEmp.jsp</h3>
+		 <h3>所有儲值紀錄資料 - listAllEmp.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -71,35 +71,31 @@
 
 <table>
 	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>職位</th>
-		<th>雇用日期</th>
-		<th>薪水</th>
-		<th>獎金</th>
-		<th>部門</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>儲值流水單號</th>
+		<th>會員編號</th>
+		<th>儲值日期</th>
+		<th>儲值點數</th>
+		<th>回饋紅利點數(竹幣)</th>
+		<th>儲值完成狀態</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="StoredrecordVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${StoredrecordVO.empno}</td>
-			<td>${StoredrecordVO.ename}</td>
-			<td>${StoredrecordVO.job}</td>
-			<td>${StoredrecordVO.hiredate}</td>
-			<td>${StoredrecordVO.sal}</td>
-			<td>${StoredrecordVO.comm}</td> 
-			<td>${StoredrecordVO.deptno}</td>
+			<td>${StoredrecordVO.stor_No}</td>
+			<td>${StoredrecordVO.mem_No}</td>
+			<td>${StoredrecordVO.stor_Date}</td>
+			<td>${StoredrecordVO.stor_Point}</td>
+			<td>${StoredrecordVO.drew_Point}</td>
+			<td>${StoredrecordVO.stor_Status}</td> 
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="storedrecord.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="stor_No"  value="${StoredrecordVO.stor_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="storedrecord.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="stor_No"  value="${StoredrecordVO.stor_No}">
 			     <input type="hidden" name="action" value="delete"></FORM>
