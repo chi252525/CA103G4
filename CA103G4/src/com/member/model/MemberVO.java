@@ -21,7 +21,7 @@ public class MemberVO {
 	private Integer mem_Bonus;
 	private Date  mem_Credate;
 	private String mem_Status;
-	private byte[] mem_photo;
+	private byte[] mem_Photo;
 	
 	
 	
@@ -49,7 +49,7 @@ public class MemberVO {
 		this.mem_Bonus = mem_Bonus;
 		this.mem_Credate = mem_Credate;
 		this.mem_Status = mem_Status;
-		this.mem_photo = mem_Photo;
+		this.mem_Photo = mem_Photo;
 	}
 	
 	
@@ -167,10 +167,10 @@ public class MemberVO {
 		this.mem_Status = mem_Status;
 	}
 	public byte[] getMem_Photo() {
-		return mem_photo;
+		return mem_Photo;
 	}
 	public void setMem_Photo(byte[] mem_Photo) {
-		this.mem_photo = mem_photo;
+		this.mem_Photo = mem_Photo;
 	}
 	
 	
