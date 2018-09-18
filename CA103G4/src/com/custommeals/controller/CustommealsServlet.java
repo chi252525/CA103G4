@@ -255,7 +255,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO = custommealsSvc.updateCustommeals(custom_No, mem_No, custom_Name, custom_Price, custom_Photo);
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
-					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫修改成功後,正確的的menuVO物件,存入req
+					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫修改成功後,正確的custommealsVO物件,存入req
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listOneCustommeals.jsp");
 					successView.forward(req, res);
 					
