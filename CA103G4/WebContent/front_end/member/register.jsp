@@ -22,9 +22,6 @@
         <link rel="stylesheet" href="/CA103G4/front_end/css/branchfooter.css">
         <!--your  CSS ============================================= -->
         <script src="/CA103G4/front_end/js/selectmemphoto.js"></script>
-      
-
-
         <link rel="stylesheet" href="/CA103G4/front_end/css/register.css">
        <!--Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
