@@ -116,22 +116,22 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="custommeals.do" name="form1">
+<FORM METHOD="post" ACTION="custommeals.do" name="form1" enctype="multipart/form-data">
 <table>
 
 	<tr>
 		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_no" size="45"	
+		<td><input type="TEXT" name="mem_No" size="45"	
 			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點名稱:</td>
-		<td><input type="TEXT" name="custom_name" size="45"	
+		<td><input type="TEXT" name="custom_Name" size="45"	
 			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getCustom_Name()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-		<td><input type="TEXT" name="custom_price" size="45"	
+		<td><input type="TEXT" name="custom_Price" size="45"	
 			value="<%=(custommealsVO==null)?"480":custommealsVO.getCustom_Price()%>" /></td>
 	</tr>
 	

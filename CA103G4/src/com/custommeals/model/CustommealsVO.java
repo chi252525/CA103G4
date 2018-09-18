@@ -2,71 +2,70 @@ package com.custommeals.model;
 
 public class CustommealsVO implements java.io.Serializable{
 
-	private String Custom_No;
-	private String Mem_No;
-	private String Custom_Name;
-	private Integer Custom_Price;
-	private byte[] Custom_Photo;
+	private String custom_No;
+	private String mem_No;
+	private String custom_Name;
+	private Integer custom_Price;
+	private byte[] custom_Photo;
 
 	public CustommealsVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CustommealsVO(String Custom_No, String Mem_No, String Custom_Name, Integer Custom_Price, byte[] Custom_Photo) {
+	public CustommealsVO(String custom_No, String mem_No, String custom_Name, Integer custom_Price, byte[] custom_Photo) {
 		super();
-		this.Custom_No = Custom_No;
-		this.Mem_No = Mem_No;
-		this.Custom_Name = Custom_Name;
-		this.Custom_Price = Custom_Price;
-		this.Custom_Photo = Custom_Photo;
+		this.custom_No = custom_No;
+		this.mem_No = mem_No;
+		this.custom_Name = custom_Name;
+		this.custom_Price = custom_Price;
+		this.custom_Photo = custom_Photo;
 	}
 
 	
-	public String getCustom_No() {
+	public String getcustom_No() {
 		// TODO Auto-generated method stub
-		return Custom_No;
+		return custom_No;
 	}
 	
-	public void setCustom_No(String Custom_No) {
-		this.Custom_No = Custom_No;
+	public void setcustom_No(String custom_No) {
+		this.custom_No = custom_No;
 	}
 
-	public String getMem_No() {
+	public String getmem_No() {
 		// TODO Auto-generated method stub
-		return Mem_No;
+		return mem_No;
 	}
 	
-	public void setMem_No(String Mem_No) {
-		this.Mem_No = Mem_No;
+	public void setmem_No(String mem_No) {
+		this.mem_No = mem_No;
 	}
 	
-	public String getCustom_Name() {
+	public String getcustom_Name() {
 		// TODO Auto-generated method stub
-		return Custom_Name;
+		return custom_Name;
 	}
 	
-	public void setCustom_Name(String Custom_Name) {
-		this.Custom_Name = Custom_Name;
+	public void setcustom_Name(String custom_Name) {
+		this.custom_Name = custom_Name;
 	}
 
-	public int getCustom_Price() {
+	public int getcustom_Price() {
 		// TODO Auto-generated method stub
-		return Custom_Price;
+		return custom_Price;
 	}
 	
-	public void setCustom_Price(Integer Custom_Price) {
-		this.Custom_Price = Custom_Price;
+	public void setcustom_Price(Integer custom_Price) {
+		this.custom_Price = custom_Price;
 	}
 	
-
-	public byte[] getCustom_Photo() {
-		// TODO Auto-generated method stub
-		return null;
+;
+	public byte[] getcustom_Photo() {
+		return custom_Photo;
 	}
 	
-	public void setCustom_Photo(byte[] Custom_Photo) {
-		this.Custom_Photo = Custom_Photo;
+	public void setcustom_Photo(byte[] custom_Photo) {
+		this.custom_Photo = custom_Photo;
 	}
 	
 

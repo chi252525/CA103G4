@@ -65,6 +65,15 @@
   </servlet-mapping>
   
   <servlet>
+	<servlet-name>DBGifReader2</servlet-name>
+	<servlet-class>com.custommeals.util.DBGifReader2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>DBGifReader2</servlet-name>
+	<url-pattern>/DBGifReader2</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
 		<servlet-name>MemServlet</servlet-name>
 		<servlet-class>com.member.controller.MemServlet</servlet-class>
 		<multipart-config>

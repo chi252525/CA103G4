@@ -12,14 +12,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 
 
 
 public class CustommealsDAO implements CustommealsDAO_interface{
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "CA103";
-	private static final String PASSWORD = "123456";
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private static final String USER = "CA103";
+//	private static final String PASSWORD = "123456";
+//	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT = 
 			"INSERT INTO CUSTOMMEALS" 
 	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO)"
@@ -41,16 +56,17 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-//			pstmt.setString(1, custommealsVO.getCustom_No());
-			pstmt.setString(1, custommealsVO.getMem_No());
-			pstmt.setString(2, custommealsVO.getCustom_Name());
-			pstmt.setInt(3, custommealsVO.getCustom_Price());
-			pstmt.setBytes(4, custommealsVO.getCustom_Photo());
-			
+//			pstmt.setString(1, custommealsVO.getcustom_No());
+			pstmt.setString(1, custommealsVO.getmem_No());
+			pstmt.setString(2, custommealsVO.getcustom_Name());
+			pstmt.setInt(3, custommealsVO.getcustom_Price());
+			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
+			System.out.println("custommealsVO.getcustom_Photo()=" + custommealsVO.getcustom_Photo());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
 			
@@ -80,16 +96,17 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			
-			pstmt.setString(1, custommealsVO.getMem_No());
-			pstmt.setString(2, custommealsVO.getCustom_Name());
-			pstmt.setInt(3, custommealsVO.getCustom_Price());
-			pstmt.setBytes(4, custommealsVO.getCustom_Photo());
-			pstmt.setString(5, custommealsVO.getCustom_No());
+			pstmt.setString(1, custommealsVO.getmem_No());
+			pstmt.setString(2, custommealsVO.getcustom_Name());
+			pstmt.setInt(3, custommealsVO.getcustom_Price());
+			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
+			pstmt.setString(5, custommealsVO.getcustom_No());
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改 " + rowCount + " 筆資料");
@@ -120,18 +137,20 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			Class.forName(DRIVER);
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, Custom_No);
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException ce) {
-			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException ce) {
+//			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -158,7 +177,8 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, Custom_No);
@@ -166,11 +186,11 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 
 			while (rs.next()) {
 				custommealsVO = new CustommealsVO();
-				custommealsVO.setCustom_No(rs.getString("CUSTOM_NO"));
-				custommealsVO.setMem_No(rs.getString("MEM_NO"));
-				custommealsVO.setCustom_Name(rs.getString("CUSTOM_NAME"));
-				custommealsVO.setCustom_Price(rs.getInt("CUSTOM_PRICE"));
-				custommealsVO.setCustom_Photo(rs.getBytes("MENU_PHOTO"));
+				custommealsVO.setcustom_No(rs.getString("CUSTOM_NO"));
+				custommealsVO.setmem_No(rs.getString("MEM_NO"));
+				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
+				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
 
 			}
 		} catch (SQLException se) {
@@ -210,17 +230,18 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				custommealsVO = new CustommealsVO();
-				custommealsVO.setCustom_No(rs.getString("CUSTOM_NO"));
-				custommealsVO.setMem_No(rs.getString("MEM_NO"));
-				custommealsVO.setCustom_Name(rs.getString("CUSTOM_NAME"));
-				custommealsVO.setCustom_Price(rs.getInt("CUSTOM_PRICE"));
-				custommealsVO.setCustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+				custommealsVO.setcustom_No(rs.getString("CUSTOM_NO"));
+				custommealsVO.setmem_No(rs.getString("MEM_NO"));
+				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
+				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
 				custommealsVOList.add(custommealsVO);
 			}
 

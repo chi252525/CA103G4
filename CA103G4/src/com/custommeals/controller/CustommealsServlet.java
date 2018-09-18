@@ -16,7 +16,7 @@ import javax.servlet.http.Part;
 
 import com.custommeals.model.*;
 
-
+@MultipartConfig
 public class CustommealsServlet extends HttpServlet{
 
 	@Override
@@ -89,13 +89,13 @@ public class CustommealsServlet extends HttpServlet{
 				
 				try {
 					/***************************1.接收請求參數****************************************/
-					String custom_no = req.getParameter("custom_no").trim();
+					String custom_No = req.getParameter("custom_No").trim();
 					
 					
 					
 					/***************************2.開始查詢資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();
-					CustommealsVO custommealsVO = custommealsSvc.getOneCustommeals(custom_no);
+					CustommealsVO custommealsVO = custommealsSvc.getOneCustommeals(custom_No);
 									
 					/***************************3.查詢完成,準備轉交(Send the Success view)************/
 					req.setAttribute("custommealsVO", custommealsVO);
@@ -118,31 +118,31 @@ public class CustommealsServlet extends HttpServlet{
 				req.setAttribute("errorMsgs", errorMsgs);
 				try {
 					/***************************1.接收請求參數****************************************/
-					String custom_no = req.getParameter("custom_no").trim();
+					String custom_No = req.getParameter("custom_No").trim();
 					
 					//無輸入OR長度超出範圍
-					String mem_no = req.getParameter("mem_no").trim();
-					if(mem_no == null || mem_no.length() == 0) {
+					String mem_No = req.getParameter("mem_No").trim();
+					if(mem_No == null || mem_No.length() == 0) {
 						errorMsgs.add("會員編號:請勿空白");
-					}  else if(mem_no.length() >= 10) {
+					}  else if(mem_No.length() >= 10) {
 						errorMsgs.add("會員編號格式不符");
 					}
 					
 					//無輸入OR長度超出範圍
-					String custom_name = req.getParameter("custom_name").trim();
-					if(custom_name == null || custom_name.length() == 0) {
+					String custom_Name = req.getParameter("custom_Name").trim();
+					if(custom_Name == null || custom_Name.length() == 0) {
 						errorMsgs.add("自訂餐點名稱:請勿空白");
-					} else if(custom_name.length() >= 20) {
+					} else if(custom_Name.length() >= 20) {
 						errorMsgs.add("自訂餐點名稱長度過長");
 					}
 					//無輸入OR格式不正確
-					String str = req.getParameter("custom_price");
+					String str = req.getParameter("custom_Price");
 					if (str == null || (str.trim()).length() == 0) {
 						errorMsgs.add("請輸入自訂餐點價格");
 					}
-					Integer custom_price = null;
+					Integer custom_Price = null;
 					try {
-						custom_price = new Integer(str);
+						custom_Price = new Integer(str);
 					} catch (Exception e) {
 						errorMsgs.add("自訂餐點價格格式不正確");
 					}
@@ -150,21 +150,21 @@ public class CustommealsServlet extends HttpServlet{
 
 	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 					
-					Part part = req.getPart("custom_photo");
+					Part part = req.getPart("custom_Photo");
 					InputStream in = part.getInputStream();
-					byte[] custom_photo = new byte[in.available()];
-					in.read(custom_photo);
+					byte[] custom_Photo = new byte[in.available()];
+					in.read(custom_Photo);
 					in.close();
 					
 	//***********************************************************************************************
 					
 					
 					CustommealsVO custommealsVO = new CustommealsVO();
-					custommealsVO.setCustom_No(custom_no);
-					custommealsVO.setMem_No(mem_no);
-					custommealsVO.setCustom_Name(custom_name);
-					custommealsVO.setCustom_Price(custom_price);
-					custommealsVO.setCustom_Photo(custom_photo);
+					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setmem_No(mem_No);
+					custommealsVO.setcustom_Name(custom_Name);
+					custommealsVO.setcustom_Price(custom_Price);
+					custommealsVO.setcustom_Photo(custom_Photo);
 					
 					// Send the use back to the form, if there were errors
 					if(!errorMsgs.isEmpty()) {
@@ -176,7 +176,7 @@ public class CustommealsServlet extends HttpServlet{
 					
 					/***************************2.開始修改資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();
-					custommealsVO = custommealsSvc.updateCustommeals(custom_no, mem_no, custom_name, custom_price, custom_photo);
+					custommealsVO = custommealsSvc.updateCustommeals(custom_No, mem_No, custom_Name, custom_Price, custom_Photo);
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫修改成功後,正確的custommealsVO物件,存入req
@@ -196,33 +196,33 @@ public class CustommealsServlet extends HttpServlet{
 			if("insert".equals(action)){  // 來自addCustommeals.jsp的請求  
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				try {
+//				try {
 					/***************************1.接收請求參數****************************************/
 					
 					//無輸入OR長度超出範圍
-					String mem_no = req.getParameter("mem_no").trim();
-					if(mem_no == null || mem_no.length() == 0) {
+					String mem_No = req.getParameter("mem_No").trim();
+					if(mem_No == null || mem_No.length() == 0) {
 						errorMsgs.add("會員編號:請勿空白");
-					}  else if(mem_no.length() >= 10) {
+					}  else if(mem_No.length() >= 10) {
 						errorMsgs.add("會員編號格式不符");
 					}
 					
 										
 					//無輸入OR長度超出範圍
-					String custom_name = req.getParameter("custom_name").trim();
-					if(custom_name == null || custom_name.length() == 0) {
+					String custom_Name = req.getParameter("custom_Name").trim();
+					if(custom_Name == null || custom_Name.length() == 0) {
 						errorMsgs.add("自訂餐點名稱:請勿空白");
-					} else if(custom_name.length() >= 20) {
+					} else if(custom_Name.length() >= 20) {
 						errorMsgs.add("自訂餐點名稱長度過長");
 					}
 					//無輸入OR格式不正確
-					String str = req.getParameter("custom_price");
+					String str = req.getParameter("custom_Price");
 					if (str == null || (str.trim()).length() == 0) {
 						errorMsgs.add("請輸入自訂餐點價格");
 					}
-					Integer custom_price = null;
+					Integer custom_Price = null;
 					try {
-						custom_price = new Integer(str);
+						custom_Price = new Integer(str);
 					} catch (Exception e) {
 						errorMsgs.add("自訂餐點價格格式不正確");
 					}
@@ -232,21 +232,22 @@ public class CustommealsServlet extends HttpServlet{
 					
 	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 					
-					Part part = req.getPart("custom_photo");
+					Part part = req.getPart("custom_Photo");
 					InputStream in = part.getInputStream();
-					byte[] custom_photo = new byte[in.available()];
-					in.read(custom_photo);
+					System.out.println("in.available()="+in.available());
+					byte[] custom_Photo = new byte[in.available()];
+					in.read(custom_Photo);
 					in.close();
 					
 	//***********************************************************************************************
 					
-					String custom_no = new String(req.getParameter("custom_no").trim());
+
 					
 					CustommealsVO custommealsVO = new CustommealsVO();
-					custommealsVO.setMem_No(mem_no);
-					custommealsVO.setCustom_Name(custom_name);
-					custommealsVO.setCustom_Price(custom_price);
-					custommealsVO.setCustom_Photo(custom_photo);
+					custommealsVO.setmem_No(mem_No);
+					custommealsVO.setcustom_Name(custom_Name);
+					custommealsVO.setcustom_Price(custom_Price);
+					custommealsVO.setcustom_Photo(custom_Photo);
 					
 					
 					if(!errorMsgs.isEmpty()) {
@@ -258,19 +259,19 @@ public class CustommealsServlet extends HttpServlet{
 					
 					/***************************2.開始新增資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();
-					custommealsVO = custommealsSvc.addCustommeals(mem_no, custom_name, custom_price, custom_photo);
+					custommealsVO = custommealsSvc.addCustommeals(mem_No, custom_Name, custom_Price, custom_Photo);
 									
 					/***************************3.新增完成,準備轉交(Send the Success view)************/
-//					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
-				} catch(Exception e) {
-					errorMsgs.add("資料新增失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
-					failuerView.forward(req, res);
-				}
+//				} catch(Exception e) {
+//					errorMsgs.add("資料新增失敗"+e.getMessage());
+//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
+//					failuerView.forward(req, res);
+//				}
 			}
 			
 			

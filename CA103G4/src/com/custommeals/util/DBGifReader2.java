@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 @MultipartConfig
-public class DBGifReader extends HttpServlet {
+public class DBGifReader2 extends HttpServlet {
 
 	Connection con;
 
@@ -25,8 +25,9 @@ public class DBGifReader extends HttpServlet {
 		try {
 			Statement stmt = con.createStatement();
 			String custom_No = req.getParameter("custom_No").trim();
+System.out.println(custom_No);
 			ResultSet rs = stmt.executeQuery(
-				"SELECT custom_Photo FROM custom WHERE custom_No='"+custom_No+"'");
+				"SELECT custom_Photo FROM custommeals WHERE custom_No='"+custom_No+"'");
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("custom_Photo"));
