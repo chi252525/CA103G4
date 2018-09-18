@@ -25,7 +25,7 @@ public class MemberService {
 		memVO.setMem_Repno(mem_Repno);
 		memVO.setMem_Recounty(mem_Recounty);
 		memVO.setMem_Retown(mem_Retown);
-		memVO.setMem_Retown(mem_Readdr);
+		memVO.setMem_Readdr(mem_Readdr);
 		memVO.setMem_Cardnum(mem_Cardnum);
 		memVO.setMem_Carddue(mem_Carddue);
 		memVO.setMem_Photo(mem_Photo);

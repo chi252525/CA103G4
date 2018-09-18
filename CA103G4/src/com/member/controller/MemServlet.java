@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 
 import com.member.model.*;
 
-@MultipartConfig
+@MultipartConfig(fileSizeThreshold=1024*1024)
 public class MemServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
@@ -24,13 +24,7 @@ public class MemServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-//***********************getimg***********************************************************		
-		Part part = req.getPart("mem_Photo");
-		InputStream in = part.getInputStream();
-		byte[] mem_Photo = new byte[in.available()];
-		
-		
+				
 		if("insert".equals(action)){  // 來自register.jsp的請求  
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -54,7 +48,7 @@ public class MemServlet extends HttpServlet{
 				} 
 				//姓名驗證
 				String mem_Name = req.getParameter("mem_Name");
-				String mem_NameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]$";
+				String mem_NameReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
 				if (mem_Name == null || (mem_Name.trim()).length() == 0) {
 					errorMsgs.add("尚未填寫姓名");
 				}else if(!mem_Name.trim().matches(mem_NameReg)) {
@@ -81,7 +75,7 @@ public class MemServlet extends HttpServlet{
 				
 				//手機驗證
 				String mem_Phone = req.getParameter("mem_Phone");
-				String mem_PhoneReg = "^[(0-9)]$";
+				String mem_PhoneReg = "^[(0-9)]+$";
 				if(mem_Phone == null || mem_Phone.trim().isEmpty()) {
 					errorMsgs.add("尚未填寫電話");			
 				}else if (!(mem_Phone.trim().matches(mem_PhoneReg))) {
@@ -89,19 +83,19 @@ public class MemServlet extends HttpServlet{
 				}
 				//預設收件人驗證
 				String mem_Receiver = req.getParameter("mem_Receiver");
-				String mem_ReceiverReg = "[(\\u4e00-\\u9fa5)(a-zA-Z0-9)]$";
+				String mem_ReceiverReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
 				if(mem_Receiver.isEmpty()) {				
 				}
-				else if(!(mem_ReceiverReg.trim().matches(mem_ReceiverReg))) {
+				else if(!(mem_Receiver.trim().matches(mem_ReceiverReg))) {
 					errorMsgs.add("收件人僅能填寫中文與英文");
 				}
 				
 				//預設收件人電話驗證
 				String mem_Repno = req.getParameter("mem_Repno");
-				String mem_RepnoReg = "^[0-9]$";
+				String mem_RepnoReg = "^[0-9]+$";
 				if(mem_Repno.isEmpty()) {
 					
-				}else if(!(mem_Repno.trim().matches("mem_RepnoReg"))) {
+				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
 					errorMsgs.add("電話僅能輸入數字");
 				}
 				
@@ -120,28 +114,48 @@ public class MemServlet extends HttpServlet{
 				//預設信用卡截止日
 				String mem_Carddue = req.getParameter("mem_Carddue");
 				
+				//照片處理
+				Part part = req.getPart("mem_Photo");
+				InputStream in = part.getInputStream();
+				byte[] mem_Photo = new byte[in.available()];
+				in.read(mem_Photo);
+				in.close();
+				
+				
 				
 				MemberVO memVO = new MemberVO();
 				memVO.setMem_Id(mem_Id);
+				System.out.println("memID="+memVO.getMem_Id());
 				memVO.setMem_Name(mem_Name);
+				System.out.println("memName="+memVO.getMem_Name());
 				memVO.setMem_Pw(mem_Pw);
+				System.out.println("memPw="+memVO.getMem_Pw());
 				memVO.setMem_Bir(mem_Bir);
+				System.out.println("memBir="+memVO.getMem_Bir());
 				memVO.setMem_Gender(mem_Gender);
+				System.out.println("memGender="+memVO.getMem_Gender());
 				memVO.setMem_Mail(mem_Mail);
+				System.out.println("memMail="+memVO.getMem_Mail());
 				memVO.setMem_Phone(mem_Phone);
+				System.out.println("memPhone="+memVO.getMem_Phone());
 				memVO.setMem_Receiver(mem_Receiver);
+				System.out.println("memReceiver="+memVO.getMem_Receiver());
 				memVO.setMem_Repno(mem_Repno);
+				System.out.println("memRepno="+memVO.getMem_Repno());
 				memVO.setMem_Recounty(mem_Recounty);
+				System.out.println("memRecounty="+memVO.getMem_Recounty());
 				memVO.setMem_Retown(mem_Retown);
+				System.out.println("memRetown="+memVO.getMem_Retown());
 				memVO.setMem_Readdr(mem_Readdr);
+				System.out.println("memRaddr="+memVO.getMem_Readdr());
 				memVO.setMem_Cardnum(mem_Cardnum);
+				System.out.println("memCardnum="+memVO.getMem_Cardnum());
 				memVO.setMem_Carddue(mem_Carddue);
+				System.out.println("memCarddue="+memVO.getMem_Carddue());
 				memVO.setMem_Photo(mem_Photo);
-				
-				
-				
-				
-
+				System.out.println("memPhoto="+memVO.getMem_Photo());
+								
+							
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);  // 含有輸入格式錯誤的memVO物件,也存入req

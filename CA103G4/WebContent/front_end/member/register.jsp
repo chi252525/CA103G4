@@ -19,13 +19,13 @@
         <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
         <!-- h&f CSS -->
         <link rel="stylesheet" href="/CA103G4/front_end/css/branchheader.css">
-        <link rel="stylesheet" href="/CA103G4//front_end/css/branchfooter.css">
+        <link rel="stylesheet" href="/CA103G4/front_end/css/branchfooter.css">
         <!--your  CSS ============================================= -->
-        <script src="/CA103G4//front_end/js/selectmemphoto.js"></script>
+        <script src="/CA103G4/front_end/js/selectmemphoto.js"></script>
       
 
 
-        <link rel="stylesheet" href="/CA103G4//front_end/css/register.css">
+        <link rel="stylesheet" href="/CA103G4/front_end/css/register.css">
        <!--Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -114,11 +114,11 @@
 		</c:forEach>
 	</ul>
 </c:if>
-	<form method="POST" action="<%=request.getContextPath()%>/member/MemServlet.do" enctype="multipart/form-data">
+	<form method="post" action="<%=request.getContextPath()%>/member/MemServlet.do" enctype="multipart/form-data" id="registForm">
     <table  id="back">
         <tr>
             <td colspan="4" id="img-td">
-                <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)" name="mem_Photo">
+                <input type="file" id="fileElem"  accept="image/*" style="display:none"  onchange="handleFiles()" name="mem_Photo">
                 <a href="javascript:doClick()" style="color:black">選一張照片吧~</a>
                 <div id="fileList">
                 </div>
@@ -165,7 +165,7 @@
             <td colspan="4" class="tdbtn">
             <input type="button" class="btn btn-warning btn-sm " align="right" value="取消">
             <input type="hidden" name="action" value="insert">
-            <input type="submit" class="btn btn-warning btn-sm " align="right" value="確認">
+            <input type="submit" class="btn btn-warning btn-sm " align="right" id="send"value="確認">
             
             </td>
         </tr>
