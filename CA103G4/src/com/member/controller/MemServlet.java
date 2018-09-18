@@ -159,7 +159,7 @@ public class MemServlet extends HttpServlet{
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);  // 含有輸入格式錯誤的memVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/register.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/member/register.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -176,7 +176,7 @@ public class MemServlet extends HttpServlet{
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("資料新增失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/register.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/register.jsp");
 				failuerView.forward(req, res);
 			}
 		}
