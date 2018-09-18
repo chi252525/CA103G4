@@ -111,7 +111,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-	<form method="post" action="<%=request.getContextPath()%>/member/MemServlet.do" enctype="multipart/form-data" id="registForm">
+	<form method="post" action="member.do" enctype="multipart/form-data" id="registForm">
     <table  id="back">
         <tr>
             <td colspan="4" id="img-td">
