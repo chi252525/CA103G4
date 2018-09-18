@@ -17,7 +17,7 @@
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #ffe66f;
     border: 2px solid black;
     text-align: center;
   }
@@ -35,9 +35,10 @@
 <style>
   table {
 	width: 800px;
-	background-color: white;
+	background-color: #fff8d7;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -46,10 +47,15 @@
     padding: 5px;
     text-align: center;
   }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 
@@ -57,7 +63,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有客製化餐點 - listAllCustommeals.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -77,7 +83,7 @@
 		<th>會員編號</th>
 		<th>自訂餐點名稱</th>
 		<th>自訂餐點價格</th>
-		<th>餐點圖片</th>
+		<th>自訂餐點圖片</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
@@ -85,20 +91,20 @@
 	<c:forEach var="custommealsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${custommealsVO.getcCustom_No()}</td>
+			<td>${custommealsVO.getCustom_No()}</td>
 			<td>${custommealsVO.getMem_No()}</td>
 			<td>${custommealsVO.getCustom_Name()}</td>
 			<td>${custommealsVO.getCustom_Price()}</td>
 			<td><img src="/CA103G4/DBGifReader?custom_No=${custommealsVO.getCustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
 			
 			<td>
-			  <FORM METHOD="post" ACTION="custommeals.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="custom_No"  value="${custommealsVO.custom_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="custommeals.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <!-- 從page1.file取得的參數，藉由hidden value傳到下個頁面，可以在刪除一筆資料後繼續停留在該頁面 -->
 			     <input type="hidden" name="whichPage" value="<%=whichPage%>">

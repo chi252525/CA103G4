@@ -7,12 +7,8 @@
 
 <style>
   table#table-1 {
-	width: 650px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 80px;
+	background-color: #ffe66f;
+    border: 2px solid black;
     text-align: center;
   }
   table#table-1 h4 {
@@ -25,6 +21,29 @@
     display: inline;
   }
 </style>
+
+<style>
+  table {
+	width: 800px;
+	background-color: #fff8d7;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
+</style>
+
 
 </head>
 <body bgcolor='white'>

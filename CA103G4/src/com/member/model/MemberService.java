@@ -1,6 +1,10 @@
 package com.member.model;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import com.post.model.PostVO;
+>>>>>>> 76aa15b3fa8d21ffacc893f9093fd2232f3cd8a8
 
 public class MemberService {
 	
@@ -27,7 +31,7 @@ public class MemberService {
 		memVO.setMem_Repno(mem_Repno);
 		memVO.setMem_Recounty(mem_Recounty);
 		memVO.setMem_Retown(mem_Retown);
-		memVO.setMem_Retown(mem_Readdr);
+		memVO.setMem_Readdr(mem_Readdr);
 		memVO.setMem_Cardnum(mem_Cardnum);
 		memVO.setMem_Carddue(mem_Carddue);
 		memVO.setMem_Photo(mem_Photo);
@@ -86,8 +90,14 @@ public class MemberService {
 		
 		return memVO;
 	}
+<<<<<<< HEAD
 	
 	public List<MemberVO> getAll(){
 		return dao.getAll();
+=======
+	/*Ning add getOneMember*/
+	public MemberVO getOne_Member(String mem_No) {
+		return dao.findByPrimaryKey(mem_No);
+>>>>>>> 76aa15b3fa8d21ffacc893f9093fd2232f3cd8a8
 	}
 }

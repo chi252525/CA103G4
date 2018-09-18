@@ -3,6 +3,7 @@ package com.delivery.controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,49 +42,46 @@ public class DeliveryServlet extends HttpServlet {
 				String stre = req.getParameter("emp_no");
 				String strs = req.getParameter("deliv_status");
 
-				String strdReg = "^[(D0-9-)]{11,11}$";
-				String streReg = "^[(E0-9)]{10,10}$";
-				String strsReg = "^[(1-2)]{1,1}$";
 
-				if (strd != strdReg) {
+				String strdReg = "^D[-]{1}[0-9]{9}$";
+				String streReg = "^E{1}[0-9)]{9}$";
+				String strsReg = "^[12]$";
+
+				if (strd.trim().length() != 0 && !strd.matches(strdReg))
 					errorMsgs.add("請檢查派送單編號的格式是否正確。");
-//						break;
-				} else if (stre != streReg) {
+				if (stre.trim().length() != 0 && !stre.matches(streReg)) 
 					errorMsgs.add("請檢查員工編號的格式是否正確。");
-//						break;
-				} else if (strs != strsReg) {
+				if (strs.trim().length() != 0 && !strs.matches(strsReg)) 
 					errorMsgs.add("請檢查派送單狀態的格式是否正確。");
-//						break;
-				}
 
+				
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/delivery/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
-
+				
 				/*************************** 2.開始查詢資料 *****************************************/
 				DeliveryService delSvc = new DeliveryService();
-				List<DeliveryVO> delVO = delSvc.getSelect(strd, stre, strs);
-				if (delVO == null) {
+				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
+				if (delVOList.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
-
+				
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/delivery/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("delVO", delVO);
-				String url = "/emp/select_page.jsp"; // !!!!!!!!!!!!!!!!這裡要改
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				req.setAttribute("get_By_Key", delVOList);
+				String url = "select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/delivery/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -158,6 +156,62 @@ public class DeliveryServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 
+		}
+
+		if ("listAllDelivery".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				DeliveryService deltSvc = new DeliveryService();
+				List<DeliveryVO> list = deltSvc.getAll();
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("listAllDelivery", list); // 資料庫取出的set物件,存入request
+
+				String url = null;
+				if ("listAllDelivery".equals(action))
+					url = "select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+
+		if ("listNotOk".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				DeliveryService deltSvc = new DeliveryService();
+				List<DeliveryVO> list = deltSvc.getNotOk();
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("listNotOk", list); // 資料庫取出的set物件,存入request
+
+				String url = null;
+				if ("listNotOk".equals(action))
+					url = "select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
 		}
 
 	}

@@ -33,14 +33,14 @@ public class DeliveryTest {
 //		System.out.println("---------------------");
 
 		// 查詢 more
-		List<DeliveryVO> listm = dao.getByThreeKey(null,"E000000001",null);
-		for (DeliveryVO adeliv : listm) {
-			System.out.print(adeliv.getDeliv_no() + ",");
-			System.out.print(adeliv.getBranch_no() + ",");
-			System.out.print(adeliv.getEmp_no() + ",");
-			System.out.println(adeliv.getDeliv_status() + ",");
-			System.out.println();
-		}
+//		List<DeliveryVO> listm = dao.getByThreeKey(null,"E000000001",null);
+//		for (DeliveryVO adeliv : listm) {
+//			System.out.print(adeliv.getDeliv_no() + ",");
+//			System.out.print(adeliv.getBranch_no() + ",");
+//			System.out.print(adeliv.getEmp_no() + ",");
+//			System.out.println(adeliv.getDeliv_status() + ",");
+//			System.out.println();
+//		}
 		
 		// 查詢 all
 //		List<DeliveryVO> list = dao.getAll();
@@ -51,6 +51,8 @@ public class DeliveryTest {
 //			System.out.println(adeliv.getDeliv_status() + ",");
 //			System.out.println();
 //		}
+		
+		
 		
 	}
 }
