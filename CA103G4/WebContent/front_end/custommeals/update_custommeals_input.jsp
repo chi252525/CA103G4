@@ -3,7 +3,7 @@
 <%@ page import="com.custommeals.model.*"%>
 
 <%
-//PerntdServlet.java (Concroller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
+//CustommealsServlet.java (Concroller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
   CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO");
 %>
 
@@ -23,7 +23,7 @@
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #ffe66f;
     border: 2px solid black;
     text-align: center;
   }
@@ -33,25 +33,33 @@
     margin-bottom: 1px;
   }
   h4 {
-    color: blue;
+    color: #642100;
     display: inline;
   }
 </style>
 
 <style>
   table {
-	width: 650px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
+	width: 800px;
+	background-color: #fff8d7;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
   }
   table, th, td {
-    border: 0px solid #CCCCFF;
+    border: 1px solid #CCCCFF;
   }
   th, td {
-    padding: 1px;
+    padding: 5px;
+    text-align: center;
   }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
 </style>
+
 
 <script type="text/javascript">
 
@@ -94,7 +102,7 @@ $(document).ready(function (){
 <table id="table-1">
 	<tr><td>
 		 <h3>資料修改 - update_custommeals_input.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -110,7 +118,7 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="custommeals.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="custommeals.do" name="form1">
 <table>
 	<tr>
 		<td>自訂餐點編號:<font color=red><b>*</b></font></td>

@@ -17,7 +17,7 @@
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #ffe66f;
     border: 2px solid black;
     text-align: center;
   }
@@ -35,9 +35,10 @@
 <style>
   table {
 	width: 800px;
-	background-color: white;
+	background-color: #fff8d7;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -46,10 +47,15 @@
     padding: 5px;
     text-align: center;
   }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 
@@ -57,7 +63,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有客製化餐點 - listAllCustommeals.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -77,7 +83,7 @@
 		<th>會員編號</th>
 		<th>自訂餐點名稱</th>
 		<th>自訂餐點價格</th>
-		<th>餐點圖片</th>
+		<th>自訂餐點圖片</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>

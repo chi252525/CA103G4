@@ -23,7 +23,7 @@
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #ffe66f;
     border: 2px solid black;
     text-align: center;
   }
@@ -33,25 +33,33 @@
     margin-bottom: 1px;
   }
   h4 {
-    color: blue;
+    color: brown;
     display: inline;
   }
 </style>
 
 <style>
   table {
-	width: 650px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
+	width: 800px;
+	background-color: #fff8d7;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
   }
   table, th, td {
-    border: 0px solid #CCCCFF;
+    border: 1px solid #CCCCFF;
   }
   th, td {
-    padding: 1px;
+    padding: 5px;
+    text-align: center;
   }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
 </style>
+
 
 <script type="text/javascript">
 
@@ -94,7 +102,7 @@ $(document).ready(function (){
 <table id="table-1">
 	<tr><td>
 		 <h3>新增客製化餐點 - addCustommeals.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="50" height="50" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

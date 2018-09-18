@@ -17,7 +17,6 @@ import javax.servlet.http.Part;
 import com.custommeals.model.*;
 
 
-
 public class CustommealsServlet extends HttpServlet{
 
 	@Override
@@ -39,6 +38,7 @@ public class CustommealsServlet extends HttpServlet{
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 					String custom_No = req.getParameter("custom_No").trim();
+					//無輸入
 					if (custom_No == null || custom_No.length() == 0) {
 						errorMsgs.add("請輸入自訂餐點編號");
 					}
@@ -175,7 +175,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO = custommealsSvc.addCustommeals(mem_No, custom_Name, custom_Price, custom_Photo);
 									
 					/***************************3.新增完成,準備轉交(Send the Success view)************/
-					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的的custommealsVO物件,存入req
+					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
 					successView.forward(req, res);
 					
