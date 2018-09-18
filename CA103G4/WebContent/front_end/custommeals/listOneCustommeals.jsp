@@ -12,7 +12,7 @@
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #ffe66f;
     border: 2px solid black;
     text-align: center;
   }
@@ -29,10 +29,11 @@
 
 <style>
   table {
-	width: 600px;
-	background-color: white;
+	width: 800px;
+	background-color: #fff8d7;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -41,7 +42,13 @@
     padding: 5px;
     text-align: center;
   }
+  
+  body{
+	background-image:url("images/woodbackground3.png")
+}
+
 </style>
+
 
 </head>
 <body bgcolor='white'>
@@ -62,7 +69,7 @@
 		<th>會員編號</th>
 		<th>自訂餐點名稱</th>
 		<th>自訂餐點價格</th>
-		<th>餐點圖片</th>
+		<th>自訂餐點圖片</th>
 	</tr>
 	<tr>
 		<td><%=custommealsVO.getCustom_No()%></td>

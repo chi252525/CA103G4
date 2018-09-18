@@ -45,7 +45,7 @@
   </servlet-mapping>
   
   
-    <servlet>
+  <servlet>
     <servlet-name>CustommealsServlet</servlet-name>
     <servlet-class>com.custommeals.controller.CustommealsServlet</servlet-class>
   </servlet>
@@ -53,7 +53,7 @@
     <servlet-name>CustommealsServlet</servlet-name>
     <url-pattern>/front_end/custommeals/custommeals.do</url-pattern>
   </servlet-mapping>
-  
+
  
   <servlet>
 	<servlet-name>DBGifReader</servlet-name>
