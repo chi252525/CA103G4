@@ -84,8 +84,8 @@
     <style>
         @font-face {
             font-family: 'Senty Golden Bell';
-            src: url(/EddyTest/res/fonts/SentyGoldenBell.woff2) format('woff2'),
-                url(/EddyTest/res/fonts/SentyGoldenBell.woff) format('woff');
+            src: url(/CA103G4/fonts/SentyGoldenBell.woff2) format('woff2'),
+                url(/CA103G4/fonts/SentyGoldenBell.woff) format('woff');
             font-weight: normal;
             font-style: normal;
         }
@@ -93,8 +93,8 @@
 
         @font-face {
             font-family: 'SentyWen';
-            src: url(/EddyTest/res/fonts/SentyWen.woff2) format('woff2'),
-                url(/EddyTest/res/fonts/SentyWen.woff) format('woff');
+            src: url(/CA103G4/fonts/SentyWen.woff2) format('woff2'),
+                url(/CA103G4/fonts/SentyWen.woff) format('woff');
             font-weight: normal;
             font-style: normal;
         }
@@ -108,26 +108,26 @@
         
 <!--      col-12 col-md-3  -->
        <div class="col-12 col-md-3  setting">
-            <div><img src="/EddyTest/res/img/Image_5d63021.gif" width="60%" class="rounded mx-auto d-block"></div>
+            <div><img src="/CA103G4/back_end/images/Image_5d63021.gif" width="60%" class="rounded mx-auto d-block"></div>
             <div><h1 id="title">
-                <b>竹風堂</b><img src="/EddyTest/res/img/baboo.png" width="15%">
+                <b>竹風堂</b><img src="/CA103G4/back_end/images/baboo.png" width="15%">
             </h1></div>
             &nbsp;
 
 <!--   first page       -->
             
             <div class="list-group" id="first-page" >
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" ><img src="/EddyTest/res/img/pen'.png" width="17%">&nbsp;訂單管理</a>
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" ><img src="/CA103G4/back_end/images/pen'.png" width="17%">&nbsp;訂單管理</a>
                 
-                <a href="#" id="btn1" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/EddyTest/res/img/table.png" width="17%">&nbsp;訂位管理</a>
+                <a href="#" id="btn1" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/images/table.png" width="17%">&nbsp;訂位管理</a>
                 
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/EddyTest/res/img/deliver.png" width="17%">&nbsp;外送管理</a>
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/images/deliver.png" width="17%">&nbsp;外送管理</a>
                 
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/EddyTest/res/img/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/images/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
                 
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/EddyTest/res/img/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/images/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
                 
-                <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/EddyTest/res/img/00.png" width="18%">&nbsp;收營結帳管理</a>
+                <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/images/00.png" width="18%">&nbsp;收營結帳管理</a>
             </div>
             
 <!--     second page    -->
@@ -171,11 +171,11 @@
                        <div style="margin-left:auto;"><b>Hello~</b></div>&nbsp;
                        <i class="fas fa-chevron-left"></i><div><span><b>店長</b></span></div><i class="fas fa-chevron-right"></i>
                        <div><span><b>呂竹</b></span></div>&nbsp;
-                       <div ><img src="/EddyTest/res/img/drew.jpg" class="drew"></div>
+                       <div ><img src="/CA103G4/back_end/images/drew.jpg" class="drew"></div>
                      
                     </nav>
 <!--   旋轉拉麵  -->
-                    <a class="ramei" ><img src="/EddyTest/res/img/ramei.png" width="125" height="125"></a>
+                    <a class="ramei" ><img src="/CA103G4/back_end/images/ramei.png" width="125" height="125"></a>
 <!--         收尋欄     -->
                 &nbsp;              
                 <form action="" style="padding-top: 20px;font-family: 'SentyWen'" >
