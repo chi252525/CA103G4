@@ -1,9 +1,9 @@
 	<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="com.storedrecord.model.*"%>
 
 <%
-  EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+  StoredrecordVO StrVO= (StoredrecordVO) request.getAttribute("StoredrecordVO");
 %>
 
 <html>
@@ -68,36 +68,36 @@
 <FORM METHOD="post" ACTION="emp.do" name="form1">
 <table>
 	<tr>
-		<td>員工姓名:</td>
+		<td>儲值流水單號:</td>
 		<td><input type="TEXT" name="ename" size="45" 
-			 value="<%= (empVO==null)? "吳永志" : empVO.getEname()%>" /></td>
+			 value="<%= (StrVO==null)? "吳永志" : StrVO.getStor_No%>" /></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
+		<td>會員編號:</td>
 		<td><input type="TEXT" name="job" size="45"
-			 value="<%= (empVO==null)? "MANAGER" : empVO.getJob()%>" /></td>
+			 value="<%= (StrVO==null)? "MANAGER" : StrVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text"></td>
+		<td>儲值日期:</td>
+		<td><input name="stor_date" id="f_date1" type="text"></td>
 	</tr>
 	<tr>
-		<td>薪水:</td>
+		<td>儲值點數:</td>
 		<td><input type="TEXT" name="sal" size="45"
-			 value="<%= (empVO==null)? "10000" : empVO.getSal()%>" /></td>
+			 value="<%= (StrVO==null)? "10000" : StrVO.getStor_Point%>" /></td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
+		<td>回饋紅利點數(竹幣):</td>
 		<td><input type="TEXT" name="comm" size="45"
-			 value="<%= (empVO==null)? "100" : empVO.getComm()%>" /></td>
+			 value="<%= (StrVO==null)? "100" : StrVO.getComm()%>" /></td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
+	<jsp:useBean id="deptSvc" scope="page" class="com.storedrecord.model.StoredrecordService" />
 	<tr>
-		<td>部門:<font color=red><b>*</b></font></td>
+		<td>儲值完成狀態:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="deptno">
 			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname}
+				<option value="${deptVO.deptno}" ${(StoredrecordVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname}
 			</c:forEach>
 		</select></td>
 	</tr>
@@ -115,7 +115,7 @@
 <% 
   java.sql.Date hiredate = null;
   try {
-	    hiredate = empVO.getHiredate();
+	    hiredate = StoredrecordVO.getHiredate();
    } catch (Exception e) {
 	    hiredate = new java.sql.Date(System.currentTimeMillis());
    }

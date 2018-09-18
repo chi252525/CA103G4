@@ -63,11 +63,11 @@
   <jsp:useBean id="srSv" scope="page" class="com.storedrecord.model.StoredrecordService" />
    
   <li>
-     <FORM METHOD="post" ACTION="storedrecord.do" >
+     <FORM METHOD="post" ACTION="front_end/storedrecord.do" >
        <b>選擇員工編號:</b>
        <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+         <c:forEach var="storedrecordVO" items="${Storedrecord.all}" > 
+          <option value="${storedrecordVO.stor_No}">${storedrecordVO.stor_No}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -76,7 +76,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
+     <FORM METHOD="post" ACTION="front_end/storedrecord.do" >
        <b>選擇員工姓名:</b>
        <select size="1" name="empno">
          <c:forEach var="empVO" items="${empSvc.all}" > 
@@ -93,7 +93,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
+  <li><a href='addStoredrecord.jsp'>Add</a> a new StoredRecord.</li>
 </ul>
 
 </body>

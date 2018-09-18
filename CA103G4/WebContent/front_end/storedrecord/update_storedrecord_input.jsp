@@ -68,31 +68,31 @@
 <FORM METHOD="post" ACTION="emp.do" name="form1">
 <table>
 	<tr>
-		<td>員工編號:<font color=red><b>*</b></font></td>
-		<td><%=StoredrecordVO.()%></td>
+		<td>儲值流水單號:<font color=red><b>*</b></font></td>
+		<td><%=storVO.getStor_No()%></td>
 	</tr>
 	<tr>
-		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" value="<%=StoredrecordVO.getEname()%>" /></td>
+		<td>會員編號:</td>
+		<td><input type="TEXT" name="ename" size="45" value="<%=storVO.getMem_No()%>" /></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"	value="<%=StoredrecordVO.getJob()%>" /></td>
+		<td>儲值日期:</td>
+		<td><input type="TEXT" name="job" size="45"	value="<%=storVO.getStor_Date%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
+		<td>儲值點數:</td>
 		<td><input name="hiredate" id="f_date1" type="text" ></td>
 	</tr>
 	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=StoredrecordVO.getSal()%>" /></td>
+		<td>回饋紅利點數(竹幣):</td>
+		<td><input type="TEXT" name="sal" size="45"	value="<%=storVO.getDrew_Point()%>" /></td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=StoredrecordVO.getComm()%>" /></td>
+		<td>儲值完成狀態:</td>
+		<td><input type="TEXT" name="comm" size="45" value="<%=storVO.getStor_Point()%>" /></td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
+	<jsp:useBean id="StrSvc" scope="page" class="com.storedrecord.model.StoredrecordService" />
 	<tr>
 		<td>部門:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="deptno">
@@ -105,7 +105,7 @@
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=StoredrecordVO.getEmpno()%>">
+<input type="hidden" name="stor_No" value="<%=StoredrecordVO.getStor_No()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
