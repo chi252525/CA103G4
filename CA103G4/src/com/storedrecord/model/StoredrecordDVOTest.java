@@ -8,7 +8,7 @@ public class StoredrecordDVOTest {
 	public static void main(String[] args) {
 		//insert
 		StoredrecordVO storedrecordvo = new StoredrecordVO();
-		storedrecordvo.setStor_No("B000000001");
+//		storedrecordvo.setStor_No("B000000001");
 		storedrecordvo.setMem_No("M000002");
 		storedrecordvo.setStor_Date(new Timestamp(2018,5,20,50,20,0, 0));
 		storedrecordvo.setStor_Point(500);

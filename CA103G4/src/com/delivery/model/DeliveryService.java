@@ -41,6 +41,9 @@ public class DeliveryService {
 		return dao.getByThreeKey(deliv_no, emp_no, deliv_status);
 	}
 	
+	public List<DeliveryVO> getNotOk() {
+		return dao.getByStatus();
+	}
 	
 	public List<DeliveryVO> getAll(){
 		return dao.getAll();

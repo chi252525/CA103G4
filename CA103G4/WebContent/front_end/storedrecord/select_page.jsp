@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllEmp.jsp'>List</a> all Emps.  <br><br></li>
+  <li><a href='listAllStoredrecord.jsp'>List</a> all StoredRecord.  <br><br></li>
   
   
   <li>
@@ -63,34 +63,34 @@
   <jsp:useBean id="srSv" scope="page" class="com.storedrecord.model.StoredrecordService" />
    
   <li>
-     <FORM METHOD="post" ACTION="front_end/storedrecord.do" >
-       <b>選擇員工編號:</b>
-       <select size="1" name="empno">
-         <c:forEach var="storedrecordVO" items="${Storedrecord.all}" > 
+     <FORM METHOD="post" ACTION="storedrecord.do" >
+       <b>選擇儲值流水單號:</b>
+       <select size="1" name="stor_No">
+         <c:forEach var="storedrecordVO" items="${srSv.all}" > 
           <option value="${storedrecordVO.stor_No}">${storedrecordVO.stor_No}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="findByPrimaryKey">
        <input type="submit" value="送出">
     </FORM>
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="front_end/storedrecord.do" >
-       <b>選擇員工姓名:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.ename}
+     <FORM METHOD="post" ACTION="MemServlet.do" >
+       <b>選擇會員編號:</b>
+       <select size="1" name="stor_No">
+         <c:forEach var="storedrecordVO" items="${srSv.all}" > 
+          <option value="${storedrecordVO.mem_No}">${storedrecordVO.mem_No}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="findByMem_no">
        <input type="submit" value="送出">
      </FORM>
   </li>
 </ul>
 
 
-<h3>員工管理</h3>
+<h3>儲值紀錄管理</h3>
 
 <ul>
   <li><a href='addStoredrecord.jsp'>Add</a> a new StoredRecord.</li>

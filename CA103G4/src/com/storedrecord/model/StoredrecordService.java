@@ -11,11 +11,10 @@ public class StoredrecordService {
 		dao =new StoredrecordDAO();
 	}
 	
-	public StoredrecordVO addStoredrecord(String stor_No,String mem_No, Timestamp stor_Date_No, Integer stor_Point, Integer drew_Point,Integer stor_Status) {
+	public StoredrecordVO addStoredrecord(String mem_No, Timestamp stor_Date_No, Integer stor_Point, Integer drew_Point,Integer stor_Status) {
 		
 		StoredrecordVO srVO  = new StoredrecordVO();
 		
-		srVO.setStor_No(stor_No);
 		srVO.setMem_No(mem_No);
 		srVO.setStor_Date(stor_Date_No);
 		srVO.setDrew_Point(drew_Point);
