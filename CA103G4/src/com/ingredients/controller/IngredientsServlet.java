@@ -18,8 +18,8 @@ import com.ingredients.model.*;
 
 
 
-@MultipartConfig
-public class IngredientsServlet extends HttpServlet{
+@MultipartConfig                   //上傳三要素 第二步 加上@MultipartConfig 的 @annotation註解
+public class IngredientsServlet extends HttpServlet{      //Ingredients的控制器Servlet繼承自HttpServlet類別，並覆寫doGet()和doPost()方法
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class IngredientsServlet extends HttpServlet{
 	}
 
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {    ////上傳三要素 第三步  doPost方法
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
@@ -40,12 +40,12 @@ public class IngredientsServlet extends HttpServlet{
 
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-					String ingdt_Id = req.getParameter("ingdt_Id").trim();
+					String ingdt_Id = req.getParameter("ingdt_Id").trim();           //利用主鍵ingdt_Id 傳入請求參數  指定給ingdt_Id變數
 					//無輸入
 					if (ingdt_Id == null || ingdt_Id.length() == 0) {
 						errorMsgs.add("請輸入自訂餐點編號");
 					}
-					if (!errorMsgs.isEmpty()) {
+					if (!errorMsgs.isEmpty()) {               //請求的遞送者             forward 到   select_page頁面
 						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/ingredients/select_page.jsp");
 						failureView.forward(req, res);
 						return;//程式中斷
@@ -54,24 +54,24 @@ public class IngredientsServlet extends HttpServlet{
 					//格式錯誤
 					if(!(ingdt_Id.matches("I\\d{4}")))
 						errorMsgs.add("自訂餐點編號格式不正確");
-					if(!errorMsgs.isEmpty()) {
+					if(!errorMsgs.isEmpty()) {                            
 						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/ingredients/select_page.jsp");
 						failureView.forward(req, res);
 						return; //程式中斷
 					}
 					
 					/***************************2.開始查詢資料*****************************************/
-					IngredientsService ingredientsSvc = new IngredientsService();
-					IngredientsVO ingredientsVO = ingredientsSvc.getOneIngredients(ingdt_Id);
+					IngredientsService ingredientsSvc = new IngredientsService();              //ingredientsService呼叫getOneIngredients()方法
+					IngredientsVO ingredientsVO = ingredientsSvc.getOneIngredients(ingdt_Id);  //用主鍵ingdt_Id當作參數傳入 ，指定給ingredientsVO物件
 					if(ingredientsVO == null)
 						errorMsgs.add("查無資料");
-					if(!errorMsgs.isEmpty()) {
+					if(!errorMsgs.isEmpty()) {                                   
 						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/ingredients/select_page.jsp");
 						failureView.forward(req, res);
 						return; //程式中斷
 					}
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-					req.setAttribute("ingredientsVO", ingredientsVO);
+					req.setAttribute("ingredientsVO", ingredientsVO);   //將ingredientsVO物件,存入req             頁面導向listOneIngredients
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listOneIngredients.jsp");
 					successView.forward(req, res);
 					
@@ -93,16 +93,14 @@ public class IngredientsServlet extends HttpServlet{
 				
 				try {
 					/***************************1.接收請求參數****************************************/
-					String ingdt_Id = req.getParameter("ingdt_Id").trim();
-					
-					
+					String ingdt_Id = req.getParameter("ingdt_Id").trim();                    //利用主鍵ingdt_Id 傳入請求參數  指定給ingdt_Id變數
 					
 					/***************************2.開始查詢資料****************************************/
-					IngredientsService ingredientsSvc = new IngredientsService();
-					IngredientsVO ingredientsVO = ingredientsSvc.getOneIngredients(ingdt_Id);
+					IngredientsService ingredientsSvc = new IngredientsService();             //ingredientsService呼叫getOneIngredients()方法
+					IngredientsVO ingredientsVO = ingredientsSvc.getOneIngredients(ingdt_Id); //用主鍵ingdt_Id當作參數傳入 ，指定給ingredientsVO物件
 									
 					/***************************3.查詢完成,準備轉交(Send the Success view)************/
-					req.setAttribute("ingredientsVO", ingredientsVO);
+					req.setAttribute("ingredientsVO", ingredientsVO);      //將ingredientsVO物件,存入req       頁面導向update_ingredients_input
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/update_ingredients_input.jsp");
 					successView.forward(req, res);
 
@@ -187,8 +185,8 @@ public class IngredientsServlet extends HttpServlet{
 					
 	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 					//食材照片
-					Part part = req.getPart("ingdt_Photo");
-					InputStream in = part.getInputStream();
+					Part part = req.getPart("ingdt_Photo");                 //用req.getPart(String name)方法 上傳檔案	，傳回一個Part物件
+					InputStream in = part.getInputStream();                 //用part物件呼叫 getInputStream() 方法，把檔案送進資料庫
 					byte[] ingdt_Photo = new byte[in.available()];
 					in.read(ingdt_Photo);
 					in.close();
@@ -196,7 +194,7 @@ public class IngredientsServlet extends HttpServlet{
 	//***********************************************************************************************
 					
 					
-					IngredientsVO ingredientsVO = new IngredientsVO();
+					IngredientsVO ingredientsVO = new IngredientsVO();  //用ingredientsVO物件呼叫set方法
 					ingredientsVO.setingdt_Id(ingdt_Id);
 					ingredientsVO.setingdtc_Id(ingdtc_Id);
 					ingredientsVO.setingdt_Name(ingdt_Name);
@@ -216,11 +214,11 @@ public class IngredientsServlet extends HttpServlet{
 					}
 					
 					/***************************2.開始修改資料****************************************/
-					IngredientsService ingredientsSvc = new IngredientsService();
+					IngredientsService ingredientsSvc = new IngredientsService();  //ingredientsService呼叫updateIngredients()方法
 					ingredientsVO = ingredientsSvc.updateIngredients(ingdt_Id, ingdtc_Id, ingdt_Name, ingdt_Status, ingdt_Point, ingdt_Unit, ingdt_Price, ingdt_Photo);
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
-					req.setAttribute("ingredientsVO", ingredientsVO);  // 資料庫修改成功後,正確的ingredientsVO物件,存入req
+					req.setAttribute("ingredientsVO", ingredientsVO);    // 資料庫修改成功後,正確的ingredientsVO物件,存入req
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listOneIngredients.jsp");
 					successView.forward(req, res);
 					

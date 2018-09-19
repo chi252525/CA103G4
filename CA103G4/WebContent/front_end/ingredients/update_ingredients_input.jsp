@@ -4,7 +4,7 @@
 
 <%
 //IngredientsServlet.java (Controller) 存入req的ingredientsVO物件 (包括幫忙取出的ingredientsVO, 也包括輸入資料錯誤時的ingredientsVO物件)
-  IngredientsVO ingredientsVO = (IngredientsVO) request.getAttribute("ingredientsVO");
+  IngredientsVO ingredientsVO = (IngredientsVO) request.getAttribute("ingredientsVO");      //從Request取出  IngredientsVO 裡面的物件
 %>
 
 <html>

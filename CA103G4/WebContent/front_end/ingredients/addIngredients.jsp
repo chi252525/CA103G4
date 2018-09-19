@@ -1,10 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!--     告知瀏覽器 編碼                                                   告知伺服器 編碼 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.ingredients.model.*"%>
 
 <%
 //IngredientsServlet.java (Controller) 存入req的ingredientsVO物件 (包括輸入資料錯誤時的ingredientsVO物件)
-  IngredientsVO ingredientsVO = (IngredientsVO) request.getAttribute("ingredientsVO");
+  IngredientsVO ingredientsVO = (IngredientsVO) request.getAttribute("ingredientsVO");    //從Request取出  IngredientsVO 裡面的物件
 %>
 
 <html>
@@ -115,14 +116,16 @@ $(document).ready(function (){
 		</c:forEach>
 	</ul>
 </c:if>
-
-<FORM METHOD="post" ACTION="ingredients.do" name="form1" enctype="multipart/form-data">
+					<!--進行上傳工作之Servlet -->
+<FORM METHOD="post" ACTION="ingredients.do" name="form1" enctype="multipart/form-data">       
+															<!-- 上傳三要素第一步 用post方法，表單標籤內加上enctype="multipart/form-data -->
 <table>
 
 	<tr>
 		<td>食材類別編號:</td>
 		<td><input type="TEXT" name="ingdtc_Id" size="45"	
 			value="<%=(ingredientsVO==null)?"T0001":ingredientsVO.getingdtc_Id()%>" /></td>
+<!-- 			如果ingredientsVO是空值，則填入T0001的預設值 -->
 	</tr>
 	<tr>
 		<td>食材名稱:</td>
