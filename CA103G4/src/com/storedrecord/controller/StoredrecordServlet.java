@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.storedrecord.model.StoredrecordService;
 import com.storedrecord.model.StoredrecordVO;
 
@@ -187,14 +189,22 @@ public class StoredrecordServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+
 			try {
 				String mem_No = req.getParameter("mem_No").trim();
 				String regexMem = "^M\\d{6}$";
-
-				if (mem_No == null || mem_No	.trim().length() == 0) {
+				MemberService memsrv = new MemberService();
+				List<MemberVO> memlist = memsrv.getAll();
+			
+				if (mem_No == null || mem_No.trim().length() == 0) {
 					errorMsgs.add("請輸入會員編號");
 				} else if (!mem_No.matches(regexMem)) {
 					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
+				}
+				MemberVO memVO = memsrv.getOne_Member(mem_No);
+				//判斷member 資料庫裡是否有輸入的會員編號mem_No
+				if (!memlist.contains(memVO)) {
+					errorMsgs.add("會員編號不存在");
 				}
 				Timestamp stor_Date = null;
 				try {
@@ -228,7 +238,7 @@ public class StoredrecordServlet extends HttpServlet {
 					errorMsgs.add("狀態請輸入1或0");
 				}
 
-				StoredrecordVO srVO = new StoredrecordVO();				
+				StoredrecordVO srVO = new StoredrecordVO();
 				srVO.setMem_No(mem_No);
 				srVO.setStor_Date(stor_Date);
 				srVO.setStor_Point(stor_Point);
@@ -266,6 +276,24 @@ public class StoredrecordServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
+			}
+		}
+
+		if ("findByMem_no".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				String mem_No = req.getParameter("mem_No");
+
+				// =========query=========================
+				StoredrecordService srvc = new StoredrecordService();
+				List<StoredrecordVO>strlist = srvc.findByMem_no(mem_No);
+
+				// ==========forward result===============
+				req.setAttribute("memVO", strlist);
+				req.getRequestDispatcher("frot_end/storedrecord/xxxx.jsp").forward(req, res);
+			} catch (Exception e) {
+
 			}
 		}
 	}

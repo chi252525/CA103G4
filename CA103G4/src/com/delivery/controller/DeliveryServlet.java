@@ -42,7 +42,6 @@ public class DeliveryServlet extends HttpServlet {
 				String stre = req.getParameter("emp_no");
 				String strs = req.getParameter("deliv_status");
 
-
 				String strdReg = "^D[-]{1}[0-9]{9}$";
 				String streReg = "^E{1}[0-9)]{9}$";
 				String strsReg = "^[12]$";
@@ -74,7 +73,7 @@ public class DeliveryServlet extends HttpServlet {
 					return;// 程式中斷
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("get_By_Key", delVOList);
+				req.getSession().setAttribute("get_By_Key", delVOList);
 				String url = "select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

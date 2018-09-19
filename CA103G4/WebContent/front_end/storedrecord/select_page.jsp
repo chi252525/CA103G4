@@ -78,7 +78,7 @@
   <li>
      <FORM METHOD="post" ACTION="MemServlet.do" >
        <b>選擇會員編號:</b>
-       <select size="1" name="stor_No">
+       <select size="1" name="mem_No">
          <c:forEach var="storedrecordVO" items="${srSv.all}" > 
           <option value="${storedrecordVO.mem_No}">${storedrecordVO.mem_No}
          </c:forEach>   

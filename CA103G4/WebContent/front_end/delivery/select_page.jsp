@@ -46,31 +46,22 @@ h4 {
 
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
-		id="a" name="First">
+		id="a">
 		<input type="submit" value="未完成的外送單"> <input type="hidden"
 			name="deptno" value="10"> <input type="hidden" name="action"
 			value="listNotOk">
 	</FORM>
 	
-	<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-	</c:if>
-
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
-		id="a">
+		id="a" name="First">
 派送單編號:<input type="text" name="deliv_no"> 
   員工編號: <input type="text" name="emp_no"> 
 派送單狀態:<input type="text" name="deliv_status"> 
 		<input type="hidden" name="action" value="get_By_Key"> 
 		<input type="submit" value="開始搜尋">
 	</FORM>
-
+	<br>
 
 
 	<%
@@ -86,10 +77,10 @@ h4 {
 	<%
 		}
 	%>
-
-
+	
 	<%
 		if (request.getAttribute("listAllDelivery") != null) {
+			session.removeAttribute("get_By_Key");
 	%>
 	<jsp:include page="listAllDelivery.jsp" />
 	<%
@@ -99,6 +90,7 @@ h4 {
 
 	<%
 		if (request.getAttribute("listNotOk") != null) {
+			session.removeAttribute("get_By_Key");
 	%>
 	<jsp:include page="listNotOk.jsp" />
 	<%
@@ -106,14 +98,12 @@ h4 {
 	%>
 
 	<%
-		if (request.getAttribute("get_By_Key") != null) {
+		if (session.getAttribute("get_By_Key") != null) {
 	%>
 	<jsp:include page="listByKey.jsp" />
 	<%
 		}
 	%>
-
-
 
 </body>
 </html>

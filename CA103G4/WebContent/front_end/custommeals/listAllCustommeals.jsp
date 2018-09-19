@@ -91,11 +91,11 @@
 	<c:forEach var="custommealsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${custommealsVO.getCustom_No()}</td>
-			<td>${custommealsVO.getMem_No()}</td>
-			<td>${custommealsVO.getCustom_Name()}</td>
-			<td>${custommealsVO.getCustom_Price()}</td>
-			<td><img src="/CA103G4/DBGifReader?custom_No=${custommealsVO.getCustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
+			<td>${custommealsVO.getcustom_No()}</td>
+			<td>${custommealsVO.getmem_No()}</td>
+			<td>${custommealsVO.getcustom_Name()}</td>
+			<td>${custommealsVO.getcustom_Price()}</td>
+			<td><img src="/CA103G4/DBGifReader2?custom_No=${custommealsVO.getcustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
