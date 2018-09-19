@@ -34,7 +34,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			"INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)"
 					+"VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT =
-			"UPDATE INGREDIENTS SET INGDTC_ID=?, INGDT_NAME=?, INGDT_STATUS=?, INGDT_POINT=?, INGDT_UNIT=?, INGDT_PRICE=?, INGDT_PHOTO WHERE INGDT_ID=?";
+			"UPDATE INGREDIENTS SET INGDTC_ID=?, INGDT_NAME=?, INGDT_STATUS=?, INGDT_POINT=?, INGDT_UNIT=?, INGDT_PRICE=?, INGDT_PHOTO=? WHERE INGDT_ID=?";
 	private static final String DELETE_STMT =
 			"DELETE FROM INGREDIENTS WHERE INGDT_ID=?";
 	private static final String SELECT_ONE_STMT=
@@ -64,6 +64,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			pstmt.setString(4, ingredientsVO.getingdt_Point());
 			pstmt.setString(5, ingredientsVO.getingdt_Unit());
 			pstmt.setInt(6, ingredientsVO.getingdt_Price());
+			pstmt.setBytes(7, ingredientsVO.getingdt_Photo());
 			System.out.println("ingredientsVO.getingdt_Photo()=" + ingredientsVO.getingdt_Photo());
 			
 			
@@ -71,8 +72,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			System.out.println("新增 " + rowCount + " 筆資料");
 			
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " 
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
