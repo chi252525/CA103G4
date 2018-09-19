@@ -287,11 +287,11 @@ public class StoredrecordServlet extends HttpServlet {
 
 				// =========query=========================
 				StoredrecordService srvc = new StoredrecordService();
-				List<StoredrecordVO>strlist = srvc.findByMem_no(mem_No);
+				List<StoredrecordVO>list = srvc.findByMem_no(mem_No);
 
 				// ==========forward result===============
-				req.setAttribute("memVO", strlist);
-				req.getRequestDispatcher("frot_end/storedrecord/xxxx.jsp").forward(req, res);
+				req.setAttribute("list", list);
+				req.getRequestDispatcher("/front_end/storedrecord/ListAll_storBy_mem.jsp").forward(req, res);
 			} catch (Exception e) {
 
 			}
