@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.storedrecord.model.*"%>
 
 <%
-	
+	List<StoredrecordVO> list = (List<StoredrecordVO>) request.getAttribute("list");
+	pageContext.setAttribute("list",list);
 %>
 
 <html>
@@ -68,7 +69,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 contenteditable="true" class="d-flex justify-content-start">å„²å€¼ç®¡ç†</h1>
+						<h1 contenteditable="true" class="d-flex justify-content-start">Àx­ÈºŞ²z</h1>
 					</div>
 				</div>
 			</div>
@@ -78,9 +79,8 @@
 				<div class="row ">
 					<div class="col-md-12 d-flex">
 						<input id="stor_No" class="form-control" type="text" name="mem_No"
-							placeholder="å„²å€¼å–®è™Ÿ ,æœƒå“¡ç·¨è™Ÿ"> <input type="hidden"
-							name="action" value="findByMem_no">
-						<button type="submit" class="btn btn-sm align-items-center"
+							placeholder="Àx­È³æ¸¹ ,·|­û½s¸¹">
+						<button class="btn btn-sm align-items-center"
 							style="height: 35px; width: 35px; background-color: antiquewhite;">
 							<i class="fas fa-search" style="font-size: 20px; color: grey"></i>
 						</button>
@@ -115,29 +115,30 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>#å„²å€¼æµæ°´å–®è™Ÿ</th>
-									<th>æœƒå“¡ç·¨è™Ÿ</th>
-									<th>å„²å€¼æ—¥æœŸ</th>
-									<th>å„²å€¼é»æ•¸</th>
-									<th>å›é¥‹ç«¹å¹£</th>
-									<th>å„²å€¼å®Œæˆç‹€æ…‹</th>
+									<th>#Àx­È¬y¤ô³æ¸¹</th>
+									<th>·|­û½s¸¹</th>
+									<th>Àx­È¤é´Á</th>
+									<th>Àx­ÈÂI¼Æ</th>
+									<th>¦^õX¦Ë¹ô</th>
+									<th>Àx­È§¹¦¨ª¬ºA</th>
 								</tr>
 							</thead>
-							<%-- 							<%@ include file="page1.file"%> --%>
+							<%@ include file="page1.file"%>
 							<tbody>
-								<%-- 								<c:forEach var="StoredrecordVO" items="${list}" --%>
-								<%-- 									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-								<!-- 									<tr> -->
-								<%-- 										<td>${StoredrecordVO.stor_No}</td> --%>
-								<%-- 										<td>${StoredrecordVO.mem_No}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Date}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Point}</td> --%>
-								<%-- 										<td>${StoredrecordVO.drew_Point}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Status}</td> --%>
-								<!-- 									</tr> -->
-								<%-- 								</c:forEach> --%>
+								<c:forEach var="StoredrecordVO" items="${list}"
+									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+									<tr>
+										<td>${StoredrecordVO.stor_No}</td>
+										<td>${StoredrecordVO.mem_No}</td>
+										<td>${StoredrecordVO.stor_Date}</td>
+										<td>${StoredrecordVO.stor_Point}</td>
+										<td>${StoredrecordVO.drew_Point}</td>
+										<td>${StoredrecordVO.stor_Status}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
+						<%@ include file="page2.file"%>
 					</div>
 				</div>
 			</div>
