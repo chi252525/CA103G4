@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllStoredrecord.jsp'>List</a> all StoredRecord.  <br><br></li>
+  <li><a href='Account_Balance_History.jsp'>List</a> all StoredRecord.  <br><br></li>
   
   
   <li>
