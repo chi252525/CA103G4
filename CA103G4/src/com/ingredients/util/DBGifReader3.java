@@ -25,7 +25,7 @@ public class DBGifReader3 extends HttpServlet {
 		try {
 			Statement stmt = con.createStatement();
 			String ingdt_Id = req.getParameter("ingdt_Id").trim();
-System.out.println(ingdt_Id);
+
 			ResultSet rs = stmt.executeQuery(
 				"SELECT ingdt_Photo FROM ingredients WHERE ingdt_Id='"+ingdt_Id+"'");
 

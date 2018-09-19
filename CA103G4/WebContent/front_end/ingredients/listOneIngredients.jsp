@@ -76,7 +76,8 @@
 
 	</tr>
 	<tr>
-		<td><%=ingredientsVO.getingdt_Id()%></td>
+<!-- 	由ingredientsVO去呼叫各個參數對應的方法，取得每個欄位在資料庫的值 -->
+		<td><%=ingredientsVO.getingdt_Id()%></td>       
 		<td><%=ingredientsVO.getingdtc_Id()%></td>
 		<td><%=ingredientsVO.getingdt_Name()%></td>
 		<td><%=ingredientsVO.getingdt_Status()%></td>
