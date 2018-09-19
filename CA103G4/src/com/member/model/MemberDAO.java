@@ -118,8 +118,6 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(12, memVO.getMem_Cardnum());
 			pstmt.setString(13, memVO.getMem_Carddue());
 			pstmt.setInt(14, memVO.getMem_Bonus());
-//			byte[] pic = getPictureByte("img/test2.jpg");
-//			pstmt.setBytes(15, pic);
 			pstmt.setBytes(15,memVO.getMem_Photo());
 			pstmt.setString(16, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
@@ -128,9 +126,6 @@ public class MemberDAO implements MemberDAO_interface{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
 		} finally{
 			if(pstmt!=null) {
 				try {
@@ -210,9 +205,25 @@ public class MemberDAO implements MemberDAO_interface{
 			while(rs.next()) {
 				MemberVO memVO = new MemberVO();
 				memVO.setMem_No(rs.getString("mem_No"));
+				memVO.setMem_Id(rs.getString("mem_Id"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
-				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
 				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_Photo"));
+								
 				memberlist.add(memVO);
 			}
 			
@@ -289,7 +300,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
 				memVO.setMem_Credate(rs.getDate("mem_Credate"));
 				memVO.setMem_Status(rs.getString("mem_Status"));
-				memVO.setMem_Photo(rs.getBytes("mem_photo"));
+				memVO.setMem_Photo(rs.getBytes("mem_Photo"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
