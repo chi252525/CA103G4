@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-//@WebServlet("/AndroidEmployeeServlet")
+
 public class AndroidEmployeeServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 

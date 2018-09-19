@@ -37,6 +37,7 @@ public class IngredientsServlet extends HttpServlet{
 				// send the ErrorPage view.
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
+System.out.println("fffffff");
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();
@@ -71,7 +72,7 @@ public class IngredientsServlet extends HttpServlet{
 					}
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("ingredientsVO", ingredientsVO);
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listOneIingredients.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listOneIngredients.jsp");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理*************************************/
@@ -90,7 +91,7 @@ public class IngredientsServlet extends HttpServlet{
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				
-//				try {
+				try {
 					/***************************1.接收請求參數****************************************/
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();
 					
@@ -107,12 +108,12 @@ public class IngredientsServlet extends HttpServlet{
 
 					/***************************其他可能的錯誤處理**********************************/
 				} 
-//				  catch(Exception e) {
-//					errorMsgs.add("無法取得要修改的資料" + e.getMessage());
-//					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/ingredients/listAllIngredients.jsp");
-//					failureView.forward(req, res);
-//				}
-//			}
+				  catch(Exception e) {
+					errorMsgs.add("無法取得要修改的資料" + e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/ingredients/listAllIngredients.jsp");
+					failureView.forward(req, res);
+				}
+			}
 			
 			
 			if("update".equals(action)) {  // 來自update_ingredients_input.jsp的請求
@@ -122,7 +123,7 @@ public class IngredientsServlet extends HttpServlet{
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				
-//				try {
+				try {
 					/***************************1.接收請求參數****************************************/
 					//(食材編號)
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();
@@ -225,19 +226,19 @@ public class IngredientsServlet extends HttpServlet{
 					
 					/***************************其他可能的錯誤處理**********************************/
 				} 
-//				 catch(Exception e) {
-//					errorMsgs.add("資料修改失敗"+e.getMessage());
-//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/update_ingredients_input.jsp");
-//					failuerView.forward(req, res);
-//				}
-//			}
+				 catch(Exception e) {
+					errorMsgs.add("資料修改失敗"+e.getMessage());
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/update_ingredients_input.jsp");
+					failuerView.forward(req, res);
+				}
+			}
 			
 			
 			
 			if("insert".equals(action)){  // 來自addIngredients.jsp的請求  
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
-//				try {
+				try {
 					/***************************1.接收請求參數****************************************/
 					
 				//無輸入OR長度超出範圍(食材類別編號)
@@ -339,11 +340,11 @@ public class IngredientsServlet extends HttpServlet{
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
-//				} catch(Exception e) {
-//					errorMsgs.add("資料新增失敗"+e.getMessage());
-//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/addIngredients.jsp");
-//					failuerView.forward(req, res);
-//				}
+				} catch(Exception e) {
+					errorMsgs.add("資料新增失敗"+e.getMessage());
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/addIngredients.jsp");
+					failuerView.forward(req, res);
+				}
 			}
 			
 			

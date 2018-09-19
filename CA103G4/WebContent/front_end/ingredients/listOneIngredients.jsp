@@ -73,8 +73,7 @@
 		<th>食材單位</th>
 		<th>食材價格</th>
 		<th>食材圖片</th>
-		<th>修改</th>
-		<th>刪除</th>
+
 	</tr>
 	<tr>
 		<td><%=ingredientsVO.getingdt_Id()%></td>

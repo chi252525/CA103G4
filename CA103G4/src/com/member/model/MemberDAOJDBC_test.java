@@ -71,19 +71,36 @@ public class MemberDAOJDBC_test {
 //			System.out.println("=============================");		
 //		}
 		
-		MemberJDBCDAO dao1 = new MemberJDBCDAO();
-		MemberVO m1=dao1.findByPrimaryKey("M000001");
-		System.out.println(m1.getMem_Bir());
-		System.out.println(m1.getMem_Carddue());
-		System.out.println(m1.getMem_Cardnum());
-		System.out.println(m1.getMem_Gender());
-		System.out.println(m1.getMem_Id());
-		System.out.println(m1.getMem_Mail());
-		System.out.println(m1.getMem_Name());
-		System.out.println(m1.getMem_Phone());
-		System.out.println(m1.getMem_Pw());
-		System.out.println(m1.getMem_Readdr());
-		System.out.println(m1.getMem_Receiver());
+//		MemberJDBCDAO dao1 = new MemberJDBCDAO();
+//		MemberVO m1=dao1.findByPrimaryKey("M000001");
+//		System.out.println(m1.getMem_Bir());
+//		System.out.println(m1.getMem_Carddue());
+//		System.out.println(m1.getMem_Cardnum());
+//		System.out.println(m1.getMem_Gender());
+//		System.out.println(m1.getMem_Id());
+//		System.out.println(m1.getMem_Mail());
+//		System.out.println(m1.getMem_Name());
+//		System.out.println(m1.getMem_Phone());
+//		System.out.println(m1.getMem_Pw());
+//		System.out.println(m1.getMem_Readdr());
+//		System.out.println(m1.getMem_Receiver());
+		
+		MemberJDBCDAO dao = new MemberJDBCDAO();
+		MemberVO memVO = dao.findById("JJJJJJ44");
+		System.out.println(memVO.getMem_No());
+		System.out.println(memVO.getMem_Bir());
+		System.out.println(memVO.getMem_Carddue());
+		System.out.println(memVO.getMem_Cardnum());
+		System.out.println(memVO.getMem_Gender());		
+		System.out.println(memVO.getMem_Id());
+		System.out.println(memVO.getMem_Mail());
+		System.out.println(memVO.getMem_Name());
+		System.out.println(memVO.getMem_Phone());
+		System.out.println(memVO.getMem_Pw());
+		System.out.println(memVO.getMem_Readdr());
+		System.out.println(memVO.getMem_Receiver());
+	
+	
 	}
 	
 }
