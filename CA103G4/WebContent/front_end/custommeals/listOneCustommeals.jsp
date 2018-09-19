@@ -3,7 +3,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("CustommealsVO"); //CustommealsServlet.java(Controller), 存入req的custommealsVO物件
+	CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO"); //CustommealsServlet.java(Controller), 存入req的custommealsVO物件
 %>
 
 <html>
@@ -72,11 +72,11 @@
 		<th>自訂餐點圖片</th>
 	</tr>
 	<tr>
-		<td><%=custommealsVO.getCustom_No()%></td>
-		<td><%=custommealsVO.getMem_No()%></td>
-		<td><%=custommealsVO.getCustom_Name()%></td>
-		<td><%=custommealsVO.getCustom_Price()%></td>
-		<td><img src="/CA103G4/DBGifReader?custom_No=${custommealsVO.getCustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
+		<td><%=custommealsVO.getcustom_No()%></td>
+		<td><%=custommealsVO.getmem_No()%></td>
+		<td><%=custommealsVO.getcustom_Name()%></td>
+		<td><%=custommealsVO.getcustom_Price()%></td>
+		<td><img src="/CA103G4/DBGifReader2?custom_No=${custommealsVO.getcustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
 		
 	</tr>
 </table>

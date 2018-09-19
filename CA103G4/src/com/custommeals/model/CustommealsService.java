@@ -14,10 +14,10 @@ public class CustommealsService {
 
 		CustommealsVO custommealsVO = new CustommealsVO();
 
-		custommealsVO.setMem_No(mem_no);
-		custommealsVO.setCustom_Name(custom_name);
-		custommealsVO.setCustom_Price(custom_price);
-		custommealsVO.setCustom_Photo(custom_photo);
+		custommealsVO.setmem_No(mem_no);
+		custommealsVO.setcustom_Name(custom_name);
+		custommealsVO.setcustom_Price(custom_price);
+		custommealsVO.setcustom_Photo(custom_photo);
 
 		dao.insert(custommealsVO);
 
@@ -28,11 +28,11 @@ public class CustommealsService {
 
 		CustommealsVO custommealsVO = new CustommealsVO();
 
-		custommealsVO.setCustom_No(custom_no);
-		custommealsVO.setMem_No(mem_no);
-		custommealsVO.setCustom_Name(custom_name);
-		custommealsVO.setCustom_Price(custom_price);
-		custommealsVO.setCustom_Photo(custom_photo);
+		custommealsVO.setcustom_No(custom_no);
+		custommealsVO.setmem_No(mem_no);
+		custommealsVO.setcustom_Name(custom_name);
+		custommealsVO.setcustom_Price(custom_price);
+		custommealsVO.setcustom_Photo(custom_photo);
 
 		dao.update(custommealsVO);
 
