@@ -290,6 +290,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Credate(rs.getDate("mem_Credate"));
 				memVO.setMem_Status(rs.getString("mem_Status"));
 				memVO.setMem_Photo(rs.getBytes("mem_photo"));
+				memVO.setMem_No(rs.getString("mem_No"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "

@@ -217,11 +217,12 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	}
 
 	@Override
-	public StoredrecordVO findByMem_no(String mem_No) {
+	public List<StoredrecordVO> findByMem_no(String mem_No) {
 		StoredrecordVO STOREDRECORD = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
@@ -237,6 +238,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 				STOREDRECORD.setDrew_Point(rs.getInt("STOR_POINT"));
 				STOREDRECORD.setStor_Point(rs.getInt("DREW_POINT"));
 				STOREDRECORD.setStor_Status(rs.getInt("STOR_STATUS"));
+				STOREDRECORDlist.add(STOREDRECORD);
 				System.out.println("===================================");
 			}
 
@@ -267,7 +269,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 				}
 			}
 		}
-		return STOREDRECORD;
+		return STOREDRECORDlist;
 	}
 
 	@Override

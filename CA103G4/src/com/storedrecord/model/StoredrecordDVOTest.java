@@ -46,14 +46,14 @@ public class StoredrecordDVOTest {
 		}
 
 //		 findByMem_No的執行 done 
-		StoredrecordVO storedrecordvo4 = dao.findByMem_no("M000002");
+		List<StoredrecordVO> storedrecordvo4 = dao.findByMem_no("M000002");
 		System.out.println("mem_no為M000002的資料為: ");
-		System.out.println("儲值編號 : "+storedrecordvo4.getStor_No());
-		System.out.println("會員編號 : "+storedrecordvo4.getMem_No());
-		System.out.println("儲值日期 : "+storedrecordvo4.getStor_Date());
-		System.out.println("點數 : "+storedrecordvo4.getStor_Point());
-		System.out.println("竹幣 : "+storedrecordvo4.getDrew_Point());
-		System.out.println("狀態 : "+storedrecordvo4.getStor_Status());
+		System.out.println("儲值編號 : "+storedrecordvo4.get(0).getStor_No());
+		System.out.println("會員編號 : "+storedrecordvo4.get(0).getMem_No());
+		System.out.println("儲值日期 : "+storedrecordvo4.get(0).getStor_Date());
+		System.out.println("點數 : "+storedrecordvo4.get(0).getStor_Point());
+		System.out.println("竹幣 : "+storedrecordvo4.get(0).getDrew_Point());
+		System.out.println("狀態 : "+storedrecordvo4.get(0).getStor_Status());
 		System.out.println("=========================");
 		
 //		 }

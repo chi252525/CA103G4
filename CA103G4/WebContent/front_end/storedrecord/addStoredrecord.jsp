@@ -93,7 +93,7 @@
 
 <%-- 	<jsp:useBean id="strSvc" scope="page" class="com.storedrecord.model.StoredrecordService" /> --%>
 	<tr>
-		<td>Àx­È§¹¦¨ª¬ºA:<font color=red><b>*</b></font></td>
+		<td>Àx­Èª¬ºA:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="stor_Status">
 			<option value=1 selected>1
 			<option value=0 >0
