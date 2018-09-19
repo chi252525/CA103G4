@@ -87,7 +87,7 @@ $(document).ready(function (){
 
     }
 
-    $("body").on("change", ".custom_Photo", function (){
+    $("body").on("change", ".ingdt_Photo", function (){
         preview(this);
     })
     

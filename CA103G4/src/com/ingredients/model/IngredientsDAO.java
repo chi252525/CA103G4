@@ -117,8 +117,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			System.out.println("修改" + rowCount + " 筆資料");
 			
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " 
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. "+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {

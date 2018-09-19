@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.custommeals.model.*;
-import com.ingredients.model.IngredientsService;
-import com.ingredients.model.IngredientsVO;
+import com.ingredients.model.*;
+
 
 
 @MultipartConfig
@@ -123,7 +122,7 @@ public class IngredientsServlet extends HttpServlet{
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				
-				try {
+//				try {
 					/***************************1.接收請求參數****************************************/
 					//(食材編號)
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();
@@ -226,12 +225,12 @@ public class IngredientsServlet extends HttpServlet{
 					
 					/***************************其他可能的錯誤處理**********************************/
 				} 
-				 catch(Exception e) {
-					errorMsgs.add("資料修改失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/update_ingredients_input.jsp");
-					failuerView.forward(req, res);
-				}
-			}
+//				 catch(Exception e) {
+//					errorMsgs.add("資料修改失敗"+e.getMessage());
+//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/ingredients/update_ingredients_input.jsp");
+//					failuerView.forward(req, res);
+//				}
+//			}
 			
 			
 			
