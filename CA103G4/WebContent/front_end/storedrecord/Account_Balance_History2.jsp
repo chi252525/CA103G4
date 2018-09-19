@@ -37,7 +37,7 @@ html {
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 body {
-/*	background-image: url(images/woodbackground3.png);*/
+	/*	background-image: url(images/woodbackground3.png);*/
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -49,9 +49,9 @@ body {
 .form-control:focus {
 	color: #495057;
 	background-color: #fff;
-	border-color: chocolate;
+	border-color: chocolate !important;
 	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgba(255, 153, 102, .25);
+	box-shadow: 0 0 0 0.2rem rgba(255, 153, 102, .25) !important;
 }
 
 #stor_No {
@@ -66,14 +66,22 @@ body {
 	margin: 5px;
 }
 
-td{
-    font-size: 12px;
-    
+td {
+	font-size: 12px;
 }
 
-        h1{
-            font-weight:bolder;
-        }
+h1 {
+	font-weight: bolder;
+}
+
+th {
+	color: sienna;
+}
+
+.datatable tr:hover {
+	background-color: #fcf4e8;
+	color: black;
+}
 </style>
 </head>
 
@@ -91,7 +99,7 @@ td{
         <div class="py-1" style="">
             <div class="container">
                 <div class="row ">
-                    <div class="col-md-12 d-flex" style="margin-top:10px">
+                    <div class="col-md-12 d-flex" style="margin-top: 10px">
                         <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="儲值單號 ,會員編號">
                         <button class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
                             <i class="fas fa-search" style="font-size: 20px; color: grey"></i>
@@ -100,7 +108,7 @@ td{
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest" >
+                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                                             <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
 
                                             <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
@@ -121,7 +129,7 @@ td{
             <div class="container">
                 <div class="row">
                     <div class="col-md-12" style="">
-                        <table class="table">
+                        <table class="table datatable">
                             <thead>
                                 <tr>
                                     <th>#儲值流水單號</th>
@@ -129,7 +137,7 @@ td{
                                     <th>儲值日期</th>
                                     <th>儲值點數</th>
                                     <th>回饋竹幣</th>
-                                    <th>儲值完成狀態</th>
+                                    <th>儲值狀態</th>
                                 </tr>
                             </thead>
                             <%@ include file="page1.file"%>
@@ -180,13 +188,14 @@ td{
         </div>
         <jsp:include page="/front_end/footer.jsp" />
         <!--Timestampicker-->
-        <script type="text/javascript">
+        <script>
             $(function() {
                 $('#datetimepicker2').datetimepicker({
-                    locale: 'ru'
+                    locale: 'zh'
                 });
             });
         </script>
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
