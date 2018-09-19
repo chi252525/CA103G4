@@ -43,6 +43,17 @@
 		<servlet-name>AndroidEmployeeServlet</servlet-name>
 		<url-pattern>/AndroidEmployeeServlet</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>AndroidMenuServlet</servlet-name>
+		<servlet-class>android.com.menu.controller.AndroidMenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AndroidMenuServlet</servlet-name>
+		<url-pattern>/AndroidMenuServlet</url-pattern>
+	</servlet-mapping>
+	
+	
   
   
   <servlet>
