@@ -37,7 +37,7 @@ public class IngredientsServlet extends HttpServlet{
 				// send the ErrorPage view.
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
-System.out.println("fffffff");
+
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();

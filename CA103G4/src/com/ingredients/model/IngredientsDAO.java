@@ -110,8 +110,8 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			pstmt.setString(4, ingredientsVO.getingdt_Point());
 			pstmt.setString(5, ingredientsVO.getingdt_Unit());
 			pstmt.setInt(6, ingredientsVO.getingdt_Price());
-			pstmt.setString(7, ingredientsVO.getingdt_Id());
-			pstmt.setBytes(8, ingredientsVO.getingdt_Photo());
+			pstmt.setBytes(7, ingredientsVO.getingdt_Photo());
+			pstmt.setString(8, ingredientsVO.getingdt_Id());
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
