@@ -60,7 +60,7 @@
 <section>
 <header id="header-whole">
     <div class="header-top" id="header">
-        <nav class="navbar-self navbar navbar-expand-lg navbar-dark bg-black">
+        <nav class="navbar-self navbar navbar-expand-lg navbar-dark bg-black fixed-top">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -79,9 +79,10 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">線上預約訂位</a>
-
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">餐點評分分享</a>
+                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp">餐點分享</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">活動快訊</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">線上客服</a>
                     </li>
@@ -98,15 +99,7 @@
 
     </div>
 </header>
-        <!--header js-->                     
-        <script> $(window).scroll(function() {
-                if ($(this).scrollTop() > 0) {
-                    $('#header').addClass('header-scrolled');
-                } else {
-                    $('#header').removeClass('header-scrolled');
-                }
-            });
-        </script>
+      
         <!--background image-->
     <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="">  
 </section>
