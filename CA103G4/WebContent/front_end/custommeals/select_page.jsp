@@ -102,7 +102,7 @@
 <h3>新增客製化餐點</h3>
 
 <ul>
-  <li><a href='addCustommeals.jsp'>Add</a> a new Menu.</li>
+  <li><a href='addCustommeals.jsp'>Add</a> a new Custommeals.</li>
 </ul>
 
 </body>

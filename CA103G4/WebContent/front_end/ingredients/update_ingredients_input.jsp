@@ -134,7 +134,7 @@ $(document).ready(function (){
 	</tr>
 	<tr>
 		<td>食材狀態:</td>
-		<td><input type="TEXT" name="ingdt_Status" size="45"	value="<%=ingredientsVO.getingdt_Status()%>" /></td>
+		<td><input type="TEXT" name="ingdt_Status" size="45" value="<%=ingredientsVO.getingdt_Status()%>" /></td>
 	</tr>
 	<tr>
 		<td>食材兌換點數:</td>
