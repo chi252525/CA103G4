@@ -1,7 +1,7 @@
 package com.member.model;
 
 import java.util.List;
-import com.post.model.PostVO;
+
 
 public class MemberService {
 
