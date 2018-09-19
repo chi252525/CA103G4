@@ -3,7 +3,7 @@
 <%@ page import="com.custommeals.model.*"%>
 
 <%
-//CustommealsServlet.java (Concroller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
+//CustommealsServlet.java (Controller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
   CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO");
 %>
 

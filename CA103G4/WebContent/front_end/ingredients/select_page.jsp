@@ -102,7 +102,7 @@
 <h3>新增食材</h3>
 
 <ul>
-  <li><a href='addIngredients.jsp'>Add</a> a new Menu.</li>
+  <li><a href='addIngredients.jsp'>Add</a> a new Ingredients.</li>
 </ul>
 
 </body>

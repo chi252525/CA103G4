@@ -1,7 +1,7 @@
 package com.member.model;
 
 import java.util.List;
-import com.post.model.PostVO;
+
 
 public class MemberService {
 
@@ -94,5 +94,11 @@ public class MemberService {
 	/* Ning add getOneMember */
 	public MemberVO getOne_Member(String mem_No) {
 		return dao.findByPrimaryKey(mem_No);
+	}
+	
+	/*ChiaPao add getOneMember By mem_Id for login */
+	public MemberVO getOneMem_Id(String mem_Id) {
+		
+		return dao.findById(mem_Id);
 	}
 }
