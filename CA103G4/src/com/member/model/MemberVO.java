@@ -53,6 +53,16 @@ public class MemberVO {
 	}
 	
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MemberVO) {
+			MemberVO membervo = (MemberVO)obj;
+			return this.mem_No.equals(membervo.mem_No);
+		}
+		return super.equals(obj);
+	}
+
+
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 public class MemberJDBCDAO implements MemberDAO_interface{
 	
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "CA103";
+	private static final String USER = "testG4";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	public static final String INSERT_STMT=
@@ -34,6 +34,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 	public static final String GETALL=
 			"SELECT * FROM MEMBER";
 	public static final String GET_ONE_MEMBER="SELECT * FROM MEMBER WHERE MEM_NO=?";
+	public static final String GET_ONE_BY_ID="SELECT * FROM MEMBER WHERE MEM_ID=?";
 	
 
 
@@ -311,6 +312,54 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 				}
 			}
 		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findById(String mem_Id) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		MemberVO memVO = null;
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ONE_BY_ID);
+			
+			pstmt.setString(1, mem_Id);
+			ResultSet rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+
+				memVO = new MemberVO();
+				
+				memVO.setMem_Id(rs.getString("mem_No"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
+				memVO.setMem_Name(rs.getString("mem_Name"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_photo"));				
+												
+			}
+						
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		return memVO;
 	}
 	
