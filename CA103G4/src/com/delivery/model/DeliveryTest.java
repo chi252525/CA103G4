@@ -51,8 +51,11 @@ public class DeliveryTest {
 //			System.out.println(adeliv.getDeliv_status() + ",");
 //			System.out.println();
 //		}
+		String branchno = "0001";
+		String branchnoReg = "^[0-9]{4}$";
 		
-		
-		
+		if (branchno.matches(branchnoReg)) {
+			System.out.println("對");
+		}
 	}
 }

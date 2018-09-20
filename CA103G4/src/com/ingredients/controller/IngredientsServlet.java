@@ -125,6 +125,7 @@ public class IngredientsServlet extends HttpServlet{      //Ingredients的控制
 					/***************************1.接收請求參數****************************************/
 					//(食材編號)
 					String ingdt_Id = req.getParameter("ingdt_Id").trim();
+					String whichPage = req.getParameter("whichPage");
 					
 					//無輸入OR長度超出範圍(食材類別編號)
 					String ingdtc_Id = req.getParameter("ingdtc_Id").trim();
@@ -219,7 +220,7 @@ public class IngredientsServlet extends HttpServlet{      //Ingredients的控制
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
 					req.setAttribute("ingredientsVO", ingredientsVO);    // 資料庫修改成功後,正確的ingredientsVO物件,存入req
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listOneIngredients.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listAllIngredients.jsp?\"+whichPage");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/

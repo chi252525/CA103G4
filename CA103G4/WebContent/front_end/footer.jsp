@@ -47,7 +47,7 @@
     <!-- Footer -->
 <section>
    <body >
-  <div class="text-white bg-self">
+  <div class="text-white bg-self fixed-bottom">
     <div class="container">
       <div class="row">
         <div class="col-md-12  mt-4 mb-2">
