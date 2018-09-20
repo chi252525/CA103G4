@@ -9,13 +9,11 @@ public class DeliveryService {
 		dao = new DeliveryDAO();
 	}
 
-	public DeliveryVO addDelivery(String branch_no, String emp_no, String deliv_status) {
+	public DeliveryVO addDelivery(String branch_no) {
 		
 		DeliveryVO deliveryVO = new DeliveryVO();
 		
 		deliveryVO.setBranch_no(branch_no);
-		deliveryVO.setBranch_no(emp_no);
-		deliveryVO.setBranch_no(deliv_status);
 		dao.insert(deliveryVO);
 		
 		return deliveryVO;

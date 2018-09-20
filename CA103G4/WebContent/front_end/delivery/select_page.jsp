@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.delivery.model.*"%>
+
+
+
 <html>
 <head>
 <meta charset="BIG5">
@@ -36,34 +40,46 @@ h4 {
 
 </head>
 <body bgcolor='white'>
-
+	<%--
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a">
-		<input type="submit" value="¥ş³¡¥~°e³æ"><input type="hidden"
+		<input type="submit" value="å…¨éƒ¨å¤–é€å–®"><input type="hidden"
 			name="action" value="listAllDelivery">
 	</FORM>
 
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a">
-		<input type="submit" value="¥¼§¹¦¨ªº¥~°e³æ"> <input type="hidden"
+		<input type="submit" value="æœªå®Œæˆçš„å¤–é€å–®"> <input type="hidden"
 			name="deptno" value="10"> <input type="hidden" name="action"
 			value="listNotOk">
 	</FORM>
-	
+--%>
+
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a" name="First">
-¬£°e³æ½s¸¹:<input type="text" name="deliv_no"> 
-  ­û¤u½s¸¹: <input type="text" name="emp_no"> 
-¬£°e³æª¬ºA:<input type="text" name="deliv_status"> 
-		<input type="hidden" name="action" value="get_By_Key"> 
-		<input type="submit" value="¶}©l·j´M">
+		æ´¾é€å–®ç·¨è™Ÿ:<input type="text" name="deliv_no"> å“¡å·¥ç·¨è™Ÿ: <input
+			type="text" name="emp_no"> æ´¾é€å–®ç‹€æ…‹:<input type="text"
+			name="deliv_status"> <input type="hidden" name="action"
+			value="get_By_Key"> <input type="submit" value="é–‹å§‹æœå°‹">
+	</FORM>
+	<br>
+	<FORM METHOD="post"
+		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
+		id="b">
+		<input type="text" name="branch_no"> <input type="submit"
+			value="+æ–°å¢å¤–é€æ´¾é€å–®"> <input type="hidden" name="action"
+			value="insert">
 	</FORM>
 	<br>
 
 
+
+
+
+	<%-- 
 	<%
 		if (request.getAttribute("listNotOk") == null && request.getAttribute("listAllDelivery") == null && request.getAttribute("errorMsgs") == null) {
 	%>
@@ -77,7 +93,9 @@ h4 {
 	<%
 		}
 	%>
-	
+--%>
+
+	<%-- 
 	<%
 		if (request.getAttribute("listAllDelivery") != null) {
 			session.removeAttribute("get_By_Key");
@@ -86,8 +104,9 @@ h4 {
 	<%
 		}
 	%>
+--%>
 
-
+	<%-- 
 	<%
 		if (request.getAttribute("listNotOk") != null) {
 			session.removeAttribute("get_By_Key");
@@ -96,6 +115,7 @@ h4 {
 	<%
 		}
 	%>
+--%>
 
 	<%
 		if (session.getAttribute("get_By_Key") != null) {
@@ -104,6 +124,22 @@ h4 {
 	<%
 		}
 	%>
+
+
+	<%
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null) {
+	%>
+	<script>
+		function myFunction() {
+			document.getElementsByName("First")[0].submit();
+		}
+
+		$(document).ready(myFunction);
+	</script>
+	<%
+		}	
+	%>
+	
 
 </body>
 </html>
