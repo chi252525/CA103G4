@@ -25,9 +25,10 @@
 <style>
   table {
 	width: 800px;
-	background-color: #fff8d7;
+	background-color: rgba(255, 255, 255, 0.35);
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
 	
   }
   table, th, td {
