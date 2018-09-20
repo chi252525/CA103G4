@@ -50,4 +50,9 @@ public class CustommealsService {
 	public List<CustommealsVO> getAll() {
 		return dao.getAll();
 	}
+	
+	//add by Ning
+		public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
+			return dao.getMealByMemBuyed(mem_No);
+		}
 }

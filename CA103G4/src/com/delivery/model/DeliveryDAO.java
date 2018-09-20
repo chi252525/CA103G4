@@ -23,7 +23,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO delivery (deliv_no,branch_no,emp_no,deliv_status) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'), ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO delivery (deliv_no,branch_no,emp_no,deliv_status) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'), ?, null, 1)";
 	private static final String GET_MORE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where ";
 	private static final String GET_ALL_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery order by deliv_no DESC";
 	private static final String GET_NOTOK_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_status= 1 order by deliv_no DESC";
@@ -44,8 +44,6 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, deliveryVO.getBranch_no());
-			pstmt.setString(2, deliveryVO.getEmp_no());
-			pstmt.setString(3, deliveryVO.getDeliv_status());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -127,7 +125,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		String em = "emp_no= ?";
 		String dt = "deliv_status= ?";
 		String ad = " and ";
-
+		String od = " order by deliv_no DESC";
 	
 			if (deliv_no.trim().length() == 0) {
 				deliv_no = null;
@@ -147,7 +145,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 
 			if (deliv_no != null && emp_no == null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + od);
 
 				pstmt.setString(1, deliv_no);
 
@@ -155,42 +153,42 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 
 			} else if (deliv_no == null && emp_no != null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + em);
+				pstmt = con.prepareStatement(GET_MORE_STMT + em + od);
 
 				pstmt.setString(1, emp_no);
 
 				rs = pstmt.executeQuery();
 
 			} else if (deliv_no == null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dt + od);
 
 				pstmt.setString(1, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no != null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, emp_no);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no == null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt + od);
 
 				pstmt.setString(1, emp_no);
 				pstmt.setString(2, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, emp_no);

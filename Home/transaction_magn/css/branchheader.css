@@ -1,0 +1,41 @@
+
+/*navbar*/
+.lnr-user {
+    color: #FFF;
+    font-size: 20px;
+
+}
+
+.lnr-alarm {
+    color: #FFF;
+    font-size: 23px;
+    margin-right: 10px;
+}
+
+.lnr-cart {
+    color: #FFF;
+    font-size: 23px;
+    margin-right: 10px;
+}
+
+.imgicon {
+    margin-top: 10px;
+}
+
+
+.bg-black{
+            background-color:#000000 ;
+        }
+#header.header-scrolled {
+    position:fixed;
+    width:100%;
+    transition: all 0.5s;
+    background: black;
+    border: none;
+    z-index:1;
+    
+    }
+.nav-link{
+            font-size: 20px; 
+        }
+

@@ -195,14 +195,14 @@ public class StoredrecordServlet extends HttpServlet {
 				String regexMem = "^M\\d{6}$";
 				MemberService memsrv = new MemberService();
 				List<MemberVO> memlist = memsrv.getAll();
-			
+
 				if (mem_No == null || mem_No.trim().length() == 0) {
 					errorMsgs.add("請輸入會員編號");
 				} else if (!mem_No.matches(regexMem)) {
 					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
 				}
 				MemberVO memVO = memsrv.getOne_Member(mem_No);
-				//判斷member 資料庫裡是否有輸入的會員編號mem_No
+				// 判斷member 資料庫裡是否有輸入的會員編號mem_No
 				if (!memlist.contains(memVO)) {
 					errorMsgs.add("會員編號不存在");
 				}
@@ -287,13 +287,14 @@ public class StoredrecordServlet extends HttpServlet {
 
 				// =========query=========================
 				StoredrecordService srvc = new StoredrecordService();
-				List<StoredrecordVO>list = srvc.findByMem_no(mem_No);
+				List<StoredrecordVO> list = srvc.findByMem_no(mem_No);
 
 				// ==========forward result===============
 				req.setAttribute("list", list);
-				req.getRequestDispatcher("/front_end/storedrecord/ListAll_storBy_mem.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/storedrecord/Account_Balance_History2.jsp").forward(req, res);
 			} catch (Exception e) {
-
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				req.getRequestDispatcher("/front_end/storedrecord/Account_Balance_History.jsp").forward(req, res);
 			}
 		}
 	}

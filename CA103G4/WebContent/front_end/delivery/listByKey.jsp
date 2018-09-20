@@ -1,12 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
 
 <%-- <jsp:useBean id="delSvc" scope="page" class="com.delivery.model.DeliveryService" /> --%>
 
 
+
+
 <html>
-<head><title>©Ò¦³³¡ªù - listByKey.jsp</title>
+<head><title>æ‰€æœ‰éƒ¨é–€ - listByKey.jsp</title>
 
 <style>
   table#table-1 {
@@ -44,9 +46,9 @@
 </head>
 <body>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -56,11 +58,12 @@
 
 <table>
 	<tr>
-		<th>¬£°e³æ½s¸¹</th>
-		<th>¤À©±½s¸¹</th>
-		<th>­û¤u½s¸¹</th>
-		<th>¬£°e³æª¬ºA</th>
+		<th>æ´¾é€å–®ç·¨è™Ÿ</th>
+		<th>åˆ†åº—ç·¨è™Ÿ</th>
+		<th>å“¡å·¥ç·¨è™Ÿ</th>
+		<th>æ´¾é€å–®ç‹€æ…‹</th>
 	</tr>
+
 	<c:forEach var="deliveryVO" items="${get_By_Key}">
 		<tr>
 			<td>${deliveryVO.deliv_no}</td>
@@ -70,6 +73,7 @@
 		</tr>
 	</c:forEach>
 </table>
+
 
 </body>
 </html>
