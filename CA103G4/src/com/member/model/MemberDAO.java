@@ -379,7 +379,7 @@ public class MemberDAO implements MemberDAO_interface{
 		}
 		
 		
-		return null;
+		return memVO;
 	}
 	
 	
