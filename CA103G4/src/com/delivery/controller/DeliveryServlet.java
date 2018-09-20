@@ -128,39 +128,34 @@ public class DeliveryServlet extends HttpServlet {
 
 		}
 
-		if ("insert".equals(action)) { //
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
+		if ("insert".equals(action)) {
+			
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				String branchno = new String(req.getParameter("branch_no").trim());
-				String emp = null;
-				String status = null;
+				String branchno = req.getParameter("branch_no").trim();
 
+//				DeliveryVO delVO = new DeliveryVO();
+//				delVO.setBranch_no(branchno);
+//				delVO.setEmp_no(emp);
+//				delVO.setDeliv_status(status);
+				
 				/*************************** 2.開始新增資料 ***************************************/
-				DeliveryVO delVO = new DeliveryVO();
 				DeliveryService delSvc = new DeliveryService();
-				delVO = delSvc.addDelivery(branchno, emp, status);
+				delSvc.addDelivery(branchno);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/delivery/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);
+//				String url = "/delivery/select_page.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/delivery/select_page.jsp");
-				failureView.forward(req, res);
-			}
+			
 
 		}
 
 		if ("listAllDelivery".equals(action)) {
-
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
+//
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
@@ -186,9 +181,9 @@ public class DeliveryServlet extends HttpServlet {
 		}
 
 		if ("listNotOk".equals(action)) {
-
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
+//
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/

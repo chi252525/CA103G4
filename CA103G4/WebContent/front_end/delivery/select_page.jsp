@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.delivery.model.*"%>
+
+
+
 <html>
 <head>
 <meta charset="BIG5">
@@ -40,14 +44,14 @@ h4 {
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a">
-		<input type="submit" value="¥þ³¡¥~°e³æ"><input type="hidden"
+		<input type="submit" value="å…¨éƒ¨å¤–é€å–®"><input type="hidden"
 			name="action" value="listAllDelivery">
 	</FORM>
 
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a">
-		<input type="submit" value="¥¼§¹¦¨ªº¥~°e³æ"> <input type="hidden"
+		<input type="submit" value="æœªå®Œæˆçš„å¤–é€å–®"> <input type="hidden"
 			name="deptno" value="10"> <input type="hidden" name="action"
 			value="listNotOk">
 	</FORM>
@@ -55,13 +59,25 @@ h4 {
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a" name="First">
-¬£°e³æ½s¸¹:<input type="text" name="deliv_no"> 
-  ­û¤u½s¸¹: <input type="text" name="emp_no"> 
-¬£°e³æª¬ºA:<input type="text" name="deliv_status"> 
+æ´¾é€å–®ç·¨è™Ÿ:<input type="text" name="deliv_no"> 
+  å“¡å·¥ç·¨è™Ÿ: <input type="text" name="emp_no"> 
+æ´¾é€å–®ç‹€æ…‹:<input type="text" name="deliv_status"> 
 		<input type="hidden" name="action" value="get_By_Key"> 
-		<input type="submit" value="¶}©l·j´M">
+		<input type="submit" value="é–‹å§‹æœå°‹">
 	</FORM>
 	<br>
+	<FORM METHOD="post"
+		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
+		id="a">
+		<input type="text" name="branch_no">
+		<input type="submit" value="+æ–°å¢žå¤–é€æ´¾é€å–®">
+		<input type="hidden" name="action" value="insert">
+	</FORM>
+	<br>
+
+
+
+
 
 
 	<%
