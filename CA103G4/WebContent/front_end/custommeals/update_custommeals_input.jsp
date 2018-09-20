@@ -3,7 +3,7 @@
 <%@ page import="com.custommeals.model.*"%>
 
 <%
-//CustommealsServlet.java (Concroller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
+//CustommealsServlet.java (Controller) 存入req的custommealsVO物件 (包括幫忙取出的custommealsVO, 也包括輸入資料錯誤時的custommealsVO物件)
   CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO");
 %>
 
@@ -118,23 +118,23 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="custommeals.do" name="form1">
+<FORM METHOD="post" ACTION="custommeals.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>自訂餐點編號:<font color=red><b>*</b></font></td>
-		<td><%=custommealsVO.getCustom_No()%></td>
+		<td><%=custommealsVO.getcustom_No()%></td>
 	</tr>
 	<tr>
 		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_No" size="45"	value="<%=custommealsVO.getMem_No()%>" /></td>
+		<td><input type="TEXT" name="mem_No" size="45"	value="<%=custommealsVO.getmem_No()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點名稱:</td>
-		<td><input type="TEXT" name="custom_Name" size="45"	value="<%=custommealsVO.getCustom_Name()%>" /></td>
+		<td><input type="TEXT" name="custom_Name" size="45"	value="<%=custommealsVO.getcustom_Name()%>" /></td>
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-		<td><input type="TEXT" name="custom_Price" size="45" value="<%=custommealsVO.getCustom_Price()%>" /></td>
+		<td><input type="TEXT" name="custom_Price" size="45" value="<%=custommealsVO.getcustom_Price()%>" /></td>
 	</tr>
 	
 	<tr>
@@ -150,13 +150,13 @@ $(document).ready(function (){
 		</td>
 	</tr>
 	
-	<jsp:useBean id="custommealsSvc" scope="page" class="com.custommeals.model.CustommealsService" />
+
 	
 </table>
 
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="custom_No" value="<%=custommealsVO.getCustom_No()%>">
+<input type="hidden" name="custom_No" value="<%=custommealsVO.getcustom_No()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

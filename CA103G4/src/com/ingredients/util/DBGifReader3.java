@@ -1,4 +1,4 @@
-package com.custommeals.util;
+package com.ingredients.util;
 
 import java.io.*;
 
@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 @MultipartConfig
-public class DBGifReader extends HttpServlet {
+public class DBGifReader3 extends HttpServlet {
 
 	Connection con;
 
@@ -24,12 +24,13 @@ public class DBGifReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 		try {
 			Statement stmt = con.createStatement();
-			String custom_No = req.getParameter("custom_No").trim();
+			String ingdt_Id = req.getParameter("ingdt_Id").trim();
+
 			ResultSet rs = stmt.executeQuery(
-				"SELECT custom_Photo FROM custom WHERE custom_No='"+custom_No+"'");
+				"SELECT ingdt_Photo FROM ingredients WHERE ingdt_Id='"+ingdt_Id+"'");
 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("custom_Photo"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("ingdt_Photo"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {

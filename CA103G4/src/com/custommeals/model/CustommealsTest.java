@@ -9,20 +9,20 @@ public class CustommealsTest {
 		
 //		//新增
 //		CustommealsVO custom1 = new CustommealsVO();
-//		custom1.setCustom_No("C0000000001");
-//		custom1.setMem_No("M000001");
-//		custom1.setCustom_Name("海陸雙拼大餐");
-//		custom1.setCustom_Price(480);
-//		custom1.setCustom_Photo(null);
+//		custom1.setcustom_No("C0000000001");
+//		custom1.setmem_No("M000001");
+//		custom1.setcustom_Name("海陸雙拼大餐");
+//		custom1.setcustom_Price(480);
+//		custom1.setcustom_Photo(null);
 //		dao.insert(custom1);
 		
 //		//修改
 //		CustommealsVO custom2 = new CustommealsVO();
-//		custom2.setCustom_No("C0000000006");
-//		custom2.setMem_No("M000006");
-//		custom2.setCustom_Name("咖哩龍蝦拉麵");
-//		custom2.setCustom_Price(490);
-//		custom2.setCustom_Photo(null);
+//		custom2.setcustom_No("C0000000006");
+//		custom2.setmem_No("M000006");
+//		custom2.setcustom_Name("咖哩龍蝦拉麵");
+//		custom2.setcustom_Price(490);
+//		custom2.setcustom_Photo(null);
 //		dao.update(custom2);
 //		
 //		//刪除
@@ -31,11 +31,11 @@ public class CustommealsTest {
 		//查詢
 		List<CustommealsVO> list = dao.getAll();
 		for (CustommealsVO custom : list) {
-			System.out.print(custom.getCustom_No() + ",");
-			System.out.print(custom.getMem_No() + ",");
-			System.out.print(custom.getCustom_Name() + ",");
-			System.out.print(custom.getCustom_Price() + ",");
-			System.out.print(custom.getCustom_Photo() + ",");
+			System.out.print(custom.getcustom_No() + ",");
+			System.out.print(custom.getmem_No() + ",");
+			System.out.print(custom.getcustom_Name() + ",");
+			System.out.print(custom.getcustom_Price() + ",");
+			System.out.print(custom.getcustom_Photo() + ",");
 
 			System.out.println();
 		}

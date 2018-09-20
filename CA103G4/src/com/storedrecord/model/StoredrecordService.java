@@ -40,7 +40,7 @@ public class StoredrecordService {
 		return dao.findByPrimaryKey(stor_No);
 	}
 	
-	public StoredrecordVO findByMem_no(String mem_No) {
+	public List<StoredrecordVO> findByMem_no(String mem_No) {
 		return dao.findByMem_no(mem_No);
 	}
 	

@@ -28,13 +28,13 @@ public class EmpDAO implements EmpDAO_interface{
 	}
 	
 	private static final String INSERT_STMT = 
-		"insert into EMPLOYEE(EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) VALUES ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),?,?,?,?,?,?,?,?)";
+		"insert into EMPLOYEE(EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) VALUES ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = 
 		"select EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_STATUS,to_char(EMP_CREDATE,'yyyy-mm-dd') EMP_CREDATE,EMP_PHOTO from EMPLOYEE order by EMP_NO";
 	private static final String GET_ONE_STMT = 
 		"select EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_STATUS,to_char(EMP_CREDATE,'yyyy-mm-dd') EMP_CREDATE,EMP_PHOTO from EMPLOYEE where EMP_NO = ?";
 	private static final String UPDATE =
-		"UPDATE EMPLOYEE set BRANCH_NO=? ,EMP_ACNUM=? ,EMP_PSW=? ,EMP_NAME=? ,EMP_GENDER=? ,EMP_POS=? ,EMP_TEL=? ,EMP_STATUS=? ,EMP_PHOTO=? where EMP_NO = ?";
+		"UPDATE EMPLOYEE set BRANCH_NO=? ,EMP_ACNUM=? ,EMP_PSW=? ,EMP_NAME=? ,EMP_GENDER=? ,EMP_POS=? ,EMP_TEL=? ,EMP_STATUS=? where EMP_NO = ?";
 	private static final String FIND_BY_ID_PASWD =
 		"SELECT * FROM EMPLOYEE WHERE EMP_ACNUM = ? AND EMP_PSW = ?";
 	
@@ -143,7 +143,7 @@ public class EmpDAO implements EmpDAO_interface{
 			pstmt.setString(6, empVO.getEmp_pos());
 			pstmt.setString(7, empVO.getEmp_tel()); 
 			pstmt.setString(8, empVO.getEmp_status()); 
-			pstmt.setString(10, empVO.getEmp_no());
+			pstmt.setString(9, empVO.getEmp_no());
 			
 
 			pstmt.executeUpdate();

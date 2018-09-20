@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllStoredrecord.jsp'>List</a> all StoredRecord.  <br><br></li>
+  <li><a href='Account_Balance_History.jsp'>List</a> all StoredRecord.  <br><br></li>
   
   
   <li>
@@ -75,12 +75,14 @@
     </FORM>
   </li>
   
+  <jsp:useBean id="memSv" scope="page" class="com.member.model.MemberService" />
+  
   <li>
-     <FORM METHOD="post" ACTION="MemServlet.do" >
+     <FORM METHOD="post" ACTION="storedrecord.do" >
        <b>選擇會員編號:</b>
-       <select size="1" name="stor_No">
-         <c:forEach var="storedrecordVO" items="${srSv.all}" > 
-          <option value="${storedrecordVO.mem_No}">${storedrecordVO.mem_No}
+       <select size="1" name="mem_No">
+         <c:forEach var="memVO" items="${memSv.all}" > 
+          <option value="${memVO.mem_No}">${memVO.mem_No}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="findByMem_no">
