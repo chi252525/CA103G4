@@ -125,7 +125,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		String em = "emp_no= ?";
 		String dt = "deliv_status= ?";
 		String ad = " and ";
-
+		String od = " order by deliv_no DESC";
 	
 			if (deliv_no.trim().length() == 0) {
 				deliv_no = null;
@@ -145,7 +145,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 
 			if (deliv_no != null && emp_no == null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + od);
 
 				pstmt.setString(1, deliv_no);
 
@@ -153,42 +153,42 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 
 			} else if (deliv_no == null && emp_no != null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + em);
+				pstmt = con.prepareStatement(GET_MORE_STMT + em + od);
 
 				pstmt.setString(1, emp_no);
 
 				rs = pstmt.executeQuery();
 
 			} else if (deliv_no == null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dt + od);
 
 				pstmt.setString(1, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no != null && deliv_status == null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, emp_no);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no == null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt + od);
 
 				pstmt.setString(1, emp_no);
 				pstmt.setString(2, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else if (deliv_no != null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt + od);
 
 				pstmt.setString(1, deliv_no);
 				pstmt.setString(2, emp_no);

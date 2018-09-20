@@ -40,7 +40,7 @@ h4 {
 
 </head>
 <body bgcolor='white'>
-
+	<%--
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a">
@@ -55,23 +55,23 @@ h4 {
 			name="deptno" value="10"> <input type="hidden" name="action"
 			value="listNotOk">
 	</FORM>
-	
+--%>
+
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a" name="First">
-派送單編號:<input type="text" name="deliv_no"> 
-  員工編號: <input type="text" name="emp_no"> 
-派送單狀態:<input type="text" name="deliv_status"> 
-		<input type="hidden" name="action" value="get_By_Key"> 
-		<input type="submit" value="開始搜尋">
+		派送單編號:<input type="text" name="deliv_no"> 員工編號: <input
+			type="text" name="emp_no"> 派送單狀態:<input type="text"
+			name="deliv_status"> <input type="hidden" name="action"
+			value="get_By_Key"> <input type="submit" value="開始搜尋">
 	</FORM>
 	<br>
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
-		id="a">
-		<input type="text" name="branch_no">
-		<input type="submit" value="+新增外送派送單">
-		<input type="hidden" name="action" value="insert">
+		id="b">
+		<input type="text" name="branch_no"> <input type="submit"
+			value="+新增外送派送單"> <input type="hidden" name="action"
+			value="insert">
 	</FORM>
 	<br>
 
@@ -79,7 +79,7 @@ h4 {
 
 
 
-
+	<%-- 
 	<%
 		if (request.getAttribute("listNotOk") == null && request.getAttribute("listAllDelivery") == null && request.getAttribute("errorMsgs") == null) {
 	%>
@@ -93,7 +93,9 @@ h4 {
 	<%
 		}
 	%>
-	
+--%>
+
+	<%-- 
 	<%
 		if (request.getAttribute("listAllDelivery") != null) {
 			session.removeAttribute("get_By_Key");
@@ -102,8 +104,9 @@ h4 {
 	<%
 		}
 	%>
+--%>
 
-
+	<%-- 
 	<%
 		if (request.getAttribute("listNotOk") != null) {
 			session.removeAttribute("get_By_Key");
@@ -112,6 +115,7 @@ h4 {
 	<%
 		}
 	%>
+--%>
 
 	<%
 		if (session.getAttribute("get_By_Key") != null) {
@@ -120,6 +124,22 @@ h4 {
 	<%
 		}
 	%>
+
+
+	<%
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null) {
+	%>
+	<script>
+		function myFunction() {
+			document.getElementsByName("First")[0].submit();
+		}
+
+		$(document).ready(myFunction);
+	</script>
+	<%
+		}	
+	%>
+	
 
 </body>
 </html>

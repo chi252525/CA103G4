@@ -48,25 +48,24 @@ public class DeliveryServlet extends HttpServlet {
 
 				if (strd.trim().length() != 0 && !strd.matches(strdReg))
 					errorMsgs.add("請檢查派送單編號的格式是否正確。");
-				if (stre.trim().length() != 0 && !stre.matches(streReg)) 
+				if (stre.trim().length() != 0 && !stre.matches(streReg))
 					errorMsgs.add("請檢查員工編號的格式是否正確。");
-				if (strs.trim().length() != 0 && !strs.matches(strsReg)) 
+				if (strs.trim().length() != 0 && !strs.matches(strsReg))
 					errorMsgs.add("請檢查派送單狀態的格式是否正確。");
 
-				
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
-				
+
 				/*************************** 2.開始查詢資料 *****************************************/
 				DeliveryService delSvc = new DeliveryService();
 				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
 				if (delVOList.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
-				
+
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 					failureView.forward(req, res);
@@ -129,26 +128,42 @@ public class DeliveryServlet extends HttpServlet {
 		}
 
 		if ("insert".equals(action)) {
-			
-				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				String branchno = req.getParameter("branch_no").trim();
 
-//				DeliveryVO delVO = new DeliveryVO();
-//				delVO.setBranch_no(branchno);
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String branchno = req.getParameter("branch_no").trim();
+			String branchnoReg = "^[0-9]{4}$";
+			
+			if (branchno.trim().length() != 0 && !branchno.matches(branchnoReg)) {
+				errorMsgs.add("請填寫正確資料");
+			} else if (branchno.trim().length() == 0) {
+				errorMsgs.add("請填寫資料");
+			}
+
+			DeliveryVO delVO = new DeliveryVO();
+//			delVO.setBranch_no(branchno);
 //				delVO.setEmp_no(emp);
 //				delVO.setDeliv_status(status);
-				
-				/*************************** 2.開始新增資料 ***************************************/
-				DeliveryService delSvc = new DeliveryService();
-				delSvc.addDelivery(branchno);
 
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-//				String url = "/delivery/select_page.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-//				successView.forward(req, res);
-
-				/*************************** 其他可能的錯誤處理 **********************************/
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+			/*************************** 2.開始新增資料 ***************************************/
+			DeliveryService delSvc = new DeliveryService();
+			delVO = delSvc.addDelivery(branchno);
 			
+			req.setAttribute("insert",delVO);
+
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			String url = "select_page.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+			successView.forward(req, res);
+
+			/*************************** 其他可能的錯誤處理 **********************************/
 
 		}
 
