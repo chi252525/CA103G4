@@ -17,7 +17,7 @@
 
 <style>
   table#table-1 {
-	background-color: #ffe66f;
+	background-color: rgba(255, 255, 255, 0.45);
     border: 2px solid black;
     text-align: center;
   }
@@ -27,21 +27,23 @@
     margin-bottom: 1px;
   }
   h4 {
-    color: blue;
+    color: white;
     display: inline;
   }
 </style>
 
 <style>
   table {
-	width: 800px;
-	background-color: #fff8d7;
+    
+	width: 960px;
+	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
-	
+	margin-left:580px;
   }
   table, th, td {
-    border: 1px solid #CCCCFF;
+    border: 2px solid #ffffff;
+    text-align: center;
   }
   th, td {
     padding: 5px;
