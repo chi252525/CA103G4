@@ -49,6 +49,11 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			"SELECT CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO FROM CUSTOMMEALS ORDER BY CUSTOM_NO";
 //	private static final String FINDBYMEMNO="SELECT * FROM CUSTOMMEALS WHERE MEM_NO=?";
 //	private static final String FINDBYCUSTOMNO="SELECT * FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
+	
+	private static final String SELECT_MEAL_BY_MEMBUYED="SELECT * FROM CUSTOMMEALS LEFT JOIN ORDERINVOICE\r\n" + 
+			"ON CUSTOMMEALS.CUSTOM_NO=orderinvoice.custom_no " + 
+			"WHERE orderinvoice.custom_no IS NOT NULL AND " + 
+			"mem_no=?";
 	@Override
 	public void insert(CustommealsVO custommealsVO) {
 		// TODO Auto-generated method stub
@@ -273,7 +278,58 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		}
 		return custommealsVOList;
 	}
+	@Override
+	public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
+		List<CustommealsVO> custommealsVOList = new ArrayList<>();
+		CustommealsVO custommealsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_MEAL_BY_MEMBUYED);
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				custommealsVO = new CustommealsVO();
+				custommealsVO.setcustom_No(rs.getString("CUSTOM_NO"));
+				custommealsVO.setmem_No(rs.getString("MEM_NO"));
+				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
+				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+				custommealsVOList.add(custommealsVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " 
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return custommealsVOList;
+	}
 	
 
 }

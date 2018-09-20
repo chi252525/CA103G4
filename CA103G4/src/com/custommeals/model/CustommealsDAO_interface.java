@@ -8,5 +8,5 @@ public interface CustommealsDAO_interface {
 	public void delete(String custommeals_No);
 	public CustommealsVO findByPrimaryKey(String custommeals_No);
 	public List<CustommealsVO> getAll();
-
+	public List<CustommealsVO> getMealByMemBuyed(String mem_No);
 }
