@@ -7,7 +7,8 @@
 <%
 	
 %>
-
+<!-- header -->
+<jsp:include page="/front_end/header.jsp" />
 <html>
 
 <head>
@@ -38,37 +39,18 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
-<style>
-.form-control:focus {
-	color: #495057;
-	background-color: #fff;
-	border-color: chocolate;
-	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgba(255, 153, 102, .25);
-}
+<!-- My <css></css> for transaction page-->
+<link rel="stylesheet" href="css/transaction_css.css">
 
-#stor_No {
-	margin: 5px;
-	border-radius: 20px;
-	height: 30px;
-	width: auto;
-	"
-}
-
-#datepicker {
-	width: auto;
-	margin: 5px;
-}
-</style>
 </head>
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
 	<form method="post" action="storedrecord.do">
-		<div class="py-5" style="box-shadow: 0px 0px 4px black;">
-			<div class="container">
+		<div id="div_shadow" class="py-5"">
+			<div class=" container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 contenteditable="true" class="d-flex justify-content-start">儲值管理</h1>
+						<h1 class="d-flex justify-content-start">儲值管理</h1>
 					</div>
 				</div>
 			</div>
@@ -76,7 +58,7 @@
 		<div class="py-1" style="">
 			<div class="container">
 				<div class="row ">
-					<div class="col-md-12 d-flex">
+					<div id="div1" class="col-md-12 d-flex">
 						<input id="stor_No" class="form-control" type="text" name="mem_No"
 							placeholder="儲值單號 ,會員編號"> <input type="hidden"
 							name="action" value="findByMem_no">
@@ -92,7 +74,6 @@
 											data-target-input="nearest">
 											<input type="text" class="form-control datetimepicker-input"
 												data-target="#datetimepicker2" />
-
 											<div class="input-group-append"
 												data-target="#datetimepicker2" data-toggle="datetimepicker">
 												<div class="input-group-text">
@@ -112,7 +93,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12" style="">
-						<table class="table">
+						<table class="table datatable">
 							<thead>
 								<tr>
 									<th>#儲值流水單號</th>
@@ -123,52 +104,31 @@
 									<th>儲值完成狀態</th>
 								</tr>
 							</thead>
-							<%-- 							<%@ include file="page1.file"%> --%>
+
 							<tbody>
-								<%-- 								<c:forEach var="StoredrecordVO" items="${list}" --%>
-								<%-- 									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-								<!-- 									<tr> -->
-								<%-- 										<td>${StoredrecordVO.stor_No}</td> --%>
-								<%-- 										<td>${StoredrecordVO.mem_No}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Date}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Point}</td> --%>
-								<%-- 										<td>${StoredrecordVO.drew_Point}</td> --%>
-								<%-- 										<td>${StoredrecordVO.stor_Status}</td> --%>
-								<!-- 									</tr> -->
-								<%-- 								</c:forEach> --%>
+								<c:if test="${not empty errorMsgs}">
+									<c:forEach var="errorObj" items="${errorMsgs}">
+										<tr valign="middle">
+											<td class="text-center" colspan="6" rowspan="6"
+												style="vertical-align: middle;font-size:20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
+										</tr>
+									</c:forEach>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+								</c:if>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="py-5 text-center" style="">
-			<div class="container">
-				<div class="row">
-					<div class="mx-auto col-md-4">
-						<p class="mb-3 lead">Follow us</p>
-						<div class="row">
-							<div
-								class="col-md-12 d-flex align-items-center justify-content-between">
-								<a href="#"> <i
-									class="d-block fa fa-twitter text-muted fa-2x"></i>
-								</a> <a href="#"> <i
-									class="d-block fa fa-google-plus-official text-muted fa-2x"></i>
-								</a> <a href="#"> <i
-									class="d-block fa fa-instagram text-muted fa-2x"></i>
-								</a> <a href="#"> <i
-									class="d-block fa fa-pinterest-p text-muted fa-2x"></i>
-								</a> <a href="#"> <i
-									class="d-block fa fa-reddit text-muted fa-2x"></i>
-								</a> <a href="#"> <i
-									class="d-block fa fa-facebook-official text-muted fa-2x"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- footer -->
+		<jsp:include page="/front_end/footer.jsp" />
 		<!--Timestampicker-->
 		<script type="text/javascript">
 			$(function() {

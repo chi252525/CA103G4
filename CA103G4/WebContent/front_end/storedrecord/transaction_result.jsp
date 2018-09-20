@@ -19,79 +19,28 @@
     <link rel="stylesheet" href="theme.css" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
+
     <!-- Bootsraps-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <!-- datepicker-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
-    <style>
-        /* 請複製這一段到你自己的CSS*/
-html {
-	height: 100%;
-}
-/*font */
-@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-
-body {
-	/*	background-image: url(images/woodbackground3.png);*/
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-	background-size: cover;
-	font-family: 'Noto Sans TC', sans-serif;;
-	font-weight: 400;
-}
-/*---------------------------------- */
-.form-control:focus {
-	color: #495057;
-	background-color: #fff;
-	border-color: chocolate !important;
-	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgba(255, 153, 102, .25) !important;
-}
-
-#stor_No {
-	margin: 5px;
-	border-radius: 20px;
-	height: 30px;
-	width: auto;
-}
-
-#datepicker {
-	width: auto;
-	margin: 5px;
-}
-
-td {
-	font-size: 12px;
-}
-
-h1 {
-	font-weight: bolder;
-}
-
-th {
-	color: sienna;
-}
-
-.datatable tr:hover {
-	background-color: #fcf4e8;
-	color: black;
-}
-</style>
+    <!-- My css for transaction page-->
+    <link rel="stylesheet" href="css/transaction_css.css">
 </head>
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
     <form method="post" action="storedrecord.do">
-        <div class="py-5" style="box-shadow: 0px 0px 4px black;">
+        <div id="div_shadow" class="py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="d-flex justify-content-start" style="font-weight: bolder;">儲值管理</h1>
+                        <a id="a1" href="transaction_mang.jsp" "><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">儲值管理</h1></a>
                     </div>
                 </div>
             </div>
@@ -99,8 +48,8 @@ th {
         <div class="py-1" style="">
             <div class="container">
                 <div class="row ">
-                    <div class="col-md-12 d-flex" style="margin-top: 10px">
-                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="儲值單號 ,會員編號">
+                    <div id="div1" class="col-md-12 d-flex" style="margin-top: 10px">
+                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="儲值單號 ,會員編號"><input type="hidden" name="action" value="findByMem_no">
                         <button class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
                             <i class="fas fa-search" style="font-size: 20px; color: grey"></i>
                         </button>
@@ -109,7 +58,7 @@ th {
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2">
 
                                             <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                                 <div class="input-group-text">
@@ -166,26 +115,7 @@ th {
                 </div>
             </div>
         </div>
-        <div class="py-5 text-center" style="">
-            <div class="container">
-                <div class="row">
-                    <div class="mx-auto col-md-4">
-                        <p class="mb-3 lead">Follow us</p>
-                        <div class="row">
-                            <div class="col-md-12 d-flex align-items-center justify-content-between">
-                                <a href="#"> <i class="d-block fa fa-twitter text-muted fa-2x"></i>
-                                </a> <a href="#"> <i class="d-block fa fa-google-plus-official text-muted fa-2x"></i>
-                                </a> <a href="#"> <i class="d-block fa fa-instagram text-muted fa-2x"></i>
-                                </a> <a href="#"> <i class="d-block fa fa-pinterest-p text-muted fa-2x"></i>
-                                </a> <a href="#"> <i class="d-block fa fa-reddit text-muted fa-2x"></i>
-                                </a> <a href="#"> <i class="d-block fa fa-facebook-official text-muted fa-2x"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <jsp:include page="/front_end/footer.jsp" />
         <!--Timestampicker-->
         <script>
@@ -194,6 +124,7 @@ th {
                     locale: 'zh'
                 });
             });
+
         </script>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
