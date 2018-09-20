@@ -54,9 +54,9 @@
 			
 			
 			
-			<ul>
-			  <li><a href='addRes.jsp'>Add</a> a new Res.</li>
-			</ul>
+<!-- 			<ul> -->
+<!-- 			  <li><a href='addRes.jsp'>Add</a> a new Res.</li> -->
+<!-- 			</ul> -->
 
 
 <%@ include file="/front_end/PostFooter.jsp" %> 
