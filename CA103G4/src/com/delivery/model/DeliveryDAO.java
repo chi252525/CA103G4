@@ -143,9 +143,9 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_MORE_STMT);
 
-			if (deliv_no != null && emp_no == null && deliv_status == null) {
+			if (deliv_no != null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + od);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn);
 
 				pstmt.setString(1, deliv_no);
 
@@ -165,34 +165,11 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 				pstmt.setString(1, deliv_status);
 
 				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no != null && deliv_status == null) {
-
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, emp_no);
-
-				rs = pstmt.executeQuery();
 			} else if (deliv_no == null && emp_no != null && deliv_status != null) {
 				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt + od);
 
 				pstmt.setString(1, emp_no);
 				pstmt.setString(2, deliv_status);
-
-				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, deliv_status);
-
-				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, emp_no);
-				pstmt.setString(3, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else {

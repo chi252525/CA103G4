@@ -65,12 +65,14 @@
 	</tr>
 
 	<c:forEach var="deliveryVO" items="${get_By_Key}">
+	
 		<tr>
 			<td>${deliveryVO.deliv_no}</td>
 			<td>${deliveryVO.branch_no}</td>
 			<td>${deliveryVO.emp_no}</td>
 			<td>${deliveryVO.deliv_status}</td>
 		</tr>
+		
 	</c:forEach>
 </table>
 
