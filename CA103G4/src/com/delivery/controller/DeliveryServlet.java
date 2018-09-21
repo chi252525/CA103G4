@@ -86,44 +86,42 @@ public class DeliveryServlet extends HttpServlet {
 
 		if ("update".equals(action)) { // 更新派送單狀態
 
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
+	
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				
 				String deliv = new String(req.getParameter("deliv_no"));
-				String status = null;
+				String emp = new String(req.getParameter("emp_no"));
+				String status = new String(req.getParameter("deliv_status"));
 
-				status = new String(req.getParameter("deliv_status").trim());
-				if ("1".equals(status)) {
-					status = "2";
-				} else if ("2".equals(status)) {
+				
+				if (status.equals("2")) {
 					status = "3";
 				}
-
-				String emp = null;
-
-				if ("1".equals(status)) {
-					emp = new String(req.getParameter("emp_no").trim());
+				
+				 if (status.equals("1")) {
+					status = "2";
 				}
+				
+
+				DeliveryVO delVO = new DeliveryVO();
+				delVO.setEmp_no(emp);
+				delVO.setDeliv_status(status);
+				delVO.setDeliv_no(deliv);
+				
 
 				/*************************** 2.開始修改資料 ***************************************/
-				DeliveryVO delVO = new DeliveryVO();
 				DeliveryService delSvc = new DeliveryService();
 				delVO = delSvc.updateDelivery(emp, status, deliv);
-
+				
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				req.setAttribute("delVO", delVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/delivery/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				req.setAttribute("update",delVO);
+				
+				String url = "select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/delivery/select_page.jsp");
-				failureView.forward(req, res);
-			}
+		
 
 		}
 
@@ -137,24 +135,34 @@ public class DeliveryServlet extends HttpServlet {
 			String branchnoReg = "^[0-9]{4}$";
 			
 			if (branchno.trim().length() != 0 && !branchno.matches(branchnoReg)) {
-				errorMsgs.add("請填寫正確資料");
+				errorMsgs.add("請確認格式");
 			} else if (branchno.trim().length() == 0) {
 				errorMsgs.add("請填寫資料");
-			}
-
-			DeliveryVO delVO = new DeliveryVO();
-//			delVO.setBranch_no(branchno);
-//				delVO.setEmp_no(emp);
-//				delVO.setDeliv_status(status);
+			} 
 
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
+			
+			DeliveryVO delVO = new DeliveryVO();
+//			delVO.setBranch_no(branchno);
+//				delVO.setEmp_no(emp);
+//				delVO.setDeliv_status(status);
+
 			/*************************** 2.開始新增資料 ***************************************/
-			DeliveryService delSvc = new DeliveryService();
-			delVO = delSvc.addDelivery(branchno);
+			try {
+				DeliveryService delSvc = new DeliveryService();
+				delVO = delSvc.addDelivery(branchno);	
+			} catch(Exception e) {
+				errorMsgs.add("請確定是否有此分店編號！");
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+			}
 			
 			req.setAttribute("insert",delVO);
 

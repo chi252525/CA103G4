@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
 
-
-
 <html>
 <head>
 <meta charset="BIG5">
@@ -77,8 +75,6 @@ h4 {
 
 
 
-
-
 	<%-- 
 	<%
 		if (request.getAttribute("listNotOk") == null && request.getAttribute("listAllDelivery") == null && request.getAttribute("errorMsgs") == null) {
@@ -116,6 +112,7 @@ h4 {
 		}
 	%>
 --%>
+
 
 	<%
 		if (session.getAttribute("get_By_Key") != null) {
