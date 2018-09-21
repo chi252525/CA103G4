@@ -43,10 +43,8 @@
 </head>
 <body>
 
-  <!--以下勿動-->
-    <!-- Footer -->
-<section>
-   <body >
+   <footer>
+		<div id="nav-bar-footer">
   <div class="text-white bg-self fixed-bottom">
     <div class="container">
       <div class="row">
@@ -62,9 +60,7 @@
       </div>
     </div>
   </div>
-</body>
-</section>
-
-
+    </div>
+  </footer>
 </body>
 </html>

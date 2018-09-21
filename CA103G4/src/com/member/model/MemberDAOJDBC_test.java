@@ -85,7 +85,7 @@ public class MemberDAOJDBC_test {
 //		System.out.println(m1.getMem_Readdr());
 //		System.out.println(m1.getMem_Receiver());
 		
-		MemberJDBCDAO dao = new MemberJDBCDAO();
+		MemberDAO dao = new MemberDAO();
 		MemberVO memVO = dao.findById("JJJJJJ44");
 		System.out.println(memVO.getMem_No());
 		System.out.println(memVO.getMem_Bir());
