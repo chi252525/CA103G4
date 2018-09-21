@@ -50,14 +50,7 @@
 			<div class=" container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="d-flex justify-content-start">儲值管理</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="py-1" style="">
-			<div class="container">
-				<div class="row ">
+						 <a id="a1" href="transaction_mang.jsp" "><h1 class="d-flex justify-content-start">儲值紀錄</h1></a>
 					<div id="div1" class="col-md-12 d-flex">
 						<input id="stor_No" class="form-control" type="text" name="mem_No"
 							placeholder="儲值單號 ,會員編號"> <input type="hidden"

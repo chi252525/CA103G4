@@ -66,7 +66,7 @@ public class BranchServlet extends HttpServlet {
 
 				// ===================開始查詢=====================
 				BranchService brsvc = new BranchService();
-				BranchVO srVO = brsvc.getOnebranch(branch_No);
+				BranchVO srVO = brsvc.findByBranch_No(branch_No);
 				if (srVO == null) {
 					errorMsgs.add("查無資料");
 					req.getRequestDispatcher("/front_end/branch/select_page.jsp").forward(req, res);
@@ -93,8 +93,8 @@ public class BranchServlet extends HttpServlet {
 
 				// 查點擊的儲值紀錄
 				BranchService brsvc = new BranchService();
-				BranchVO stvo = brsvc.getOnebranch(branch_No);
-				req.setAttribute("BranchVO", stvo);
+				BranchVO brvo = brsvc.findByBranch_No(branch_No);
+				req.setAttribute("BranchVO", brvo);
 				req.getRequestDispatcher("/front_end/branch/update_branch_input.jsp").forward(req, res);
 			} catch (Exception e) {
 				throw new ServletException(e);

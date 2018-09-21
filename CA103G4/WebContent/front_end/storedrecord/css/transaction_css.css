@@ -50,7 +50,7 @@ th {
     color: sienna;
 }
 
-.datatable tr:hover {
+.tbody tr:hover {
     background-color: #fcf4e8;
     color: black;
 }
