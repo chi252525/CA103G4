@@ -128,6 +128,11 @@
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/front_end/img/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
                 
                 <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/front_end/img/00.png" width="18%">&nbsp;收營結帳管理</a>
+                
+                <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/front_end/img/branch.png" width="18%">&nbsp;分店管理</a>
+                
+                <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/front_end/img/transaction.png" width="18%">&nbsp;儲值管理</a>
+                
             </div>
             
 <!--     second page    -->
