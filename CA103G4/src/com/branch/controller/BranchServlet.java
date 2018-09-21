@@ -1,4 +1,4 @@
-package com.storedrecord.controller;
+package com.branch.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
-import com.storedrecord.model.StoredrecordService;
-import com.storedrecord.model.StoredrecordVO;
+import com.branch.model.BranchService;
+import com.branch.model.BranchVO;
 
 /**
- * Servlet implementation class storedrecordServlet
+ * Servlet implementation class BranchServlet
  */
-@WebServlet("/front_end/storedrecord/storedrecord.do")
-public class StoredrecordServlet extends HttpServlet {
+@WebServlet("/front_end/branch/branch.do")
+public class BranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -47,40 +47,40 @@ public class StoredrecordServlet extends HttpServlet {
 
 			try {
 				// ==================輸入檢驗====================
-				String stor_No = req.getParameter("stor_No");
-				String mem_No = req.getParameter("mem_No");
+				String branch_No = req.getParameter("branch_No");
+				String branch_City = req.getParameter("branch_City");
 				String regexMem = "^M\\d{6}$";
 				String regexStor = "^B\\d{9}$";
-				Boolean x = stor_No.matches(regexStor);// test for regular expression
-				if (stor_No == null || stor_No.trim().length() == 0) {
+				Boolean x = branch_No.matches(regexStor);// test for regular expression
+				if (branch_No == null || branch_No.trim().length() == 0) {
 					errorMsgs.add("請輸入儲值流水單號");
-				} else if (stor_No == null && !mem_No.matches(regexMem)) {
+				} else if (branch_No == null && !branch_City.matches(regexMem)) {
 					errorMsgs.add("格式錯誤:會員編號格式必須是大寫英文字母M加上5個數字");
-				} else if (mem_No == null && !stor_No.matches(regexStor)) {
+				} else if (branch_City == null && !branch_No.matches(regexStor)) {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母B加上9個數字");
 				}
 				if (!errorMsgs.isEmpty()) {
-					req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
+					req.getRequestDispatcher("/front_end/branch/select_page.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 
 				// ===================開始查詢=====================
-				StoredrecordService srSv = new StoredrecordService();
-				StoredrecordVO srVO = srSv.getOneStoredrecord(stor_No);
+				BranchService brsvc = new BranchService();
+				BranchVO srVO = brsvc.getOnebranch(branch_No);
 				if (srVO == null) {
 					errorMsgs.add("查無資料");
-					req.getRequestDispatcher("/front_end/storedrecord/select_page.jsp").forward(req, res);
+					req.getRequestDispatcher("/front_end/branch/select_page.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 				// error display...
 				/* ==================轉交查詢結果====================== */
 				req.setAttribute("srVO", srVO);
-				req.getRequestDispatcher("/front_end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/listOnebranch.jsp").forward(req, res);
 
 				// ====================錯誤處理===========================
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/select_page.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/select_page.jsp").forward(req, res);
 			}
 		}
 //			==================查點擊的儲值紀錄====================
@@ -89,13 +89,13 @@ public class StoredrecordServlet extends HttpServlet {
 
 			req.setAttribute("error", errorMsgs);
 			try {
-				String stor_No = req.getParameter("stor_No");
+				String branch_No = req.getParameter("branch_No");
 
 				// 查點擊的儲值紀錄
-				StoredrecordService stsvc = new StoredrecordService();
-				StoredrecordVO stvo = stsvc.getOneStoredrecord(stor_No);
-				req.setAttribute("StoredrecordVO", stvo);
-				req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
+				BranchService brsvc = new BranchService();
+				BranchVO stvo = brsvc.getOnebranch(branch_No);
+				req.setAttribute("BranchVO", stvo);
+				req.getRequestDispatcher("/front_end/branch/update_branch_input.jsp").forward(req, res);
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
@@ -107,21 +107,21 @@ public class StoredrecordServlet extends HttpServlet {
 
 			req.setAttribute("error", errorMsgs);
 			try {
-				String stor_No = req.getParameter("stor_No");
+				String branch_No = req.getParameter("branch_No");
 
 				String regexStor = "^B\\d{9}$";
-				if (stor_No == null || stor_No.trim().length() == 0) {
+				if (branch_No == null || branch_No.trim().length() == 0) {
 					errorMsgs.add("請輸入儲值流水單號");
-				} else if (!stor_No.matches(regexStor)) {
+				} else if (!branch_No.matches(regexStor)) {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母A-Z加上9個數字");
 				}
 
-				String mem_No = req.getParameter("mem_No").trim();
+				String branch_City = req.getParameter("branch_City").trim();
 				String regexMem = "^M\\d{6}$";
 
-				if (stor_No == null || stor_No.trim().length() == 0) {
+				if (branch_No == null || branch_No.trim().length() == 0) {
 					errorMsgs.add("請輸入會員編號");
-				} else if (!stor_No.matches(regexMem)) {
+				} else if (!branch_No.matches(regexMem)) {
 					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
 				}
 
@@ -158,32 +158,32 @@ public class StoredrecordServlet extends HttpServlet {
 					errorMsgs.add("請輸入1或0");
 				}
 
-				StoredrecordVO srVO = new StoredrecordVO();
-				srVO.setStor_No(stor_No);
-				srVO.setMem_No(mem_No);
+				BranchVO srVO = new BranchVO();
+				srVO.setbranch_No(branch_No);
+				srVO.setbranch_City(branch_City);
 				srVO.setStor_Date(stor_Date);
 				srVO.setStor_Point(stor_Point);
 				srVO.setDrew_Point(drew_Point);
 				srVO.setStor_Status(stor_Status);
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("storedrecordVO", srVO);
-					req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
+					req.setAttribute("BranchVO", srVO);
+					req.getRequestDispatcher("/front_end/branch/update_branch_input.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 
 //				======================開始修改=========================
-				StoredrecordService stsvc = new StoredrecordService();
-				StoredrecordVO srVo = stsvc.updateStoredrecord(stor_No, mem_No, stor_Date, stor_Point, drew_Point,
+				BranchService brsvc = new BranchService();
+				BranchVO srVo = brsvc.updatebranch(branch_No, branch_City, stor_Date, stor_Point, drew_Point,
 						stor_Status);
 
 				// ================改完，轉交===================
-				req.setAttribute("storedrecordVO", srVo);
-				req.getRequestDispatcher("front-end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
+				req.setAttribute("BranchVO", srVo);
+				req.getRequestDispatcher("front-end/branch/listOnebranch.jsp").forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/update_branch_input.jsp").forward(req, res);
 			}
 		}
 		if ("insert".equals(action)) {
@@ -191,18 +191,18 @@ public class StoredrecordServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				String mem_No = req.getParameter("mem_No").trim();
+				String branch_City = req.getParameter("branch_City").trim();
 				String regexMem = "^M\\d{6}$";
 				MemberService memsrv = new MemberService();
 				List<MemberVO> memlist = memsrv.getAll();
 
-				if (mem_No == null || mem_No.trim().length() == 0) {
+				if (branch_City == null || branch_City.trim().length() == 0) {
 					errorMsgs.add("請輸入會員編號");
-				} else if (!mem_No.matches(regexMem)) {
+				} else if (!branch_City.matches(regexMem)) {
 					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
 				}
-				MemberVO memVO = memsrv.getOne_Member(mem_No);
-				// 判斷member 資料庫裡是否有輸入的會員編號mem_No
+				MemberVO memVO = memsrv.getOne_Member(branch_City);
+				// 判斷member 資料庫裡是否有輸入的會員編號branch_City
 				if (!memlist.contains(memVO)) {
 					errorMsgs.add("會員編號不存在");
 				}
@@ -238,73 +238,67 @@ public class StoredrecordServlet extends HttpServlet {
 					errorMsgs.add("狀態請輸入1或0");
 				}
 
-				StoredrecordVO srVO = new StoredrecordVO();
-				srVO.setMem_No(mem_No);
+				BranchVO srVO = new BranchVO();
+				srVO.setbranch_City(branch_City);
 				srVO.setStor_Date(stor_Date);
 				srVO.setStor_Point(stor_Point);
 				srVO.setDrew_Point(drew_Point);
 				srVO.setStor_Status(stor_Status);
-
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("StoredrecordVO", srVO);// 含有輸入格式錯誤的empVO物件,也存入req
-					req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
-					return;// 有錯誤,返回addStoredrecord
+					req.setAttribute("BranchVO", srVO);// 含有輸入格式錯誤的empVO物件,也存入req
+					req.getRequestDispatcher("/front_end/branch/addbranch.jsp").forward(req, res);
+					return;// 有錯誤,返回addbranch
 				}
 				// =============開始新增====================
-				StoredrecordService stsvc = new StoredrecordService();
-				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, drew_Point, stor_Status);
+				BranchService brsvc = new BranchService();
+				brsvc.addbranch(branch_City, stor_Date, stor_Point, drew_Point, stor_Status);
 				// ================改完，轉交===================
-				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/listAllbranch.jsp").forward(req, res);
 				// =====================其他可能錯誤=========================
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/addbranch.jsp").forward(req, res);
 			}
 		}
-
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			try {
 				// ===============開始刪除==================
-				String stor_No = req.getParameter("stor_No");
-				StoredrecordService strSvc = new StoredrecordService();
-				strSvc.delete(stor_No);
+				String branch_No = req.getParameter("branch_No");
+				BranchService strSvc = new BranchService();
+				strSvc.delete(branch_No);
 				
 				if(errorMsgs.isEmpty()) {
-					
-				}
+									}
 				// ===============轉交=======================
-				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/listAllbranch.jsp").forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/listAllbranch.jsp").forward(req, res);
 			}
 		}
-
-		if ("findByMem_no".equals(action)) {
+		if ("findBybranch_NO".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String mem_No = req.getParameter("mem_No");
+				String branch_City = req.getParameter("branch_City");
 
 				// =========query=========================
-				StoredrecordService srvc = new StoredrecordService();
-				List<StoredrecordVO> list = srvc.findByMem_no(mem_No);
+				BranchService brvc = new BranchService();
+				List<BranchVO> list = brvc.findBy_City(branch_City);
 				if (list.size() == 0) {
-					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
+					errorMsgs.add("無符合的分店");
 					//req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
-					req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
-					return;// 有錯誤,返回addStoredrecord
+					req.getRequestDispatcher("/front_end/branch/transaction_mang.jsp").forward(req, res);
+					return;// 有錯誤,返回addbranch
 				}
-
 				// ==========forward result===============
 				req.setAttribute("list", list);
-				req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/transaction_result.jsp").forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/branch/transaction_mang.jsp").forward(req, res);
 			}
 		}
 	}

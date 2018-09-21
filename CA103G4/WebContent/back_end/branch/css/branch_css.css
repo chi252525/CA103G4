@@ -1,0 +1,73 @@
+/* 請複製這一段到你自己的CSS*/
+html {
+	height: 100%;
+}
+
+/*font */
+@import url( //fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+body {
+	/*	background-image: url(images/woodbackground3.png);*/
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	font-family: 'Noto Sans TC', sans-serif;;
+	font-weight: 400;
+}
+
+/*---------------------------------- */
+.form-control:focus {
+	color: #495057;
+	background-color: #fff;
+	border-color: chocolate !important;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(255, 153, 102, .25) !important;
+}
+
+#stor_No {
+	margin: 5px;
+	border-radius: 20px;
+	height: 30px;
+	width: auto;
+}
+
+#datepicker {
+	width: auto;
+	margin: 5px;
+}
+
+td {
+	font-size: 12px;
+}
+
+h1 {
+	font-weight: bolder;
+}
+
+th {
+	color: sienna;
+}
+
+tbody>tr:hover {
+	background-color: #fcf4e8;
+	color: black;
+}
+
+#div1 {
+	margin-top: 10px;
+}
+
+#div_shadow {
+	box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+#a1, #a1:link, a:visited {
+	color: black;
+	text-decoration: none
+}
+
+#a1:hover {
+	color: black;
+	text-decoration: none;
+}
