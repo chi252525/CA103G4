@@ -10,13 +10,6 @@
 <%@ include file="/back_end/PostHeader.jsp" %> 
 
 
-
-
-
-
-
-
-
 <%@ include file="/back_end/PostFooter.jsp" %> 
 </body>
 </html>

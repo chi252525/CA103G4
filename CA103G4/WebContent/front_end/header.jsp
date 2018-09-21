@@ -27,11 +27,11 @@
 		.lnr-cart {
 		    color: #FFF;
 		    font-size: 23px;
-		    margin-right: 10px;
+		    margin-right: 15px;
 		}
 		
 		.imgicon {
-		    margin-top: 10px;
+		    margin-top: 5px;
 		}
 		
 		
@@ -69,15 +69,16 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav nav-fill mx-auto">
                     <li class="nav-item active"><a class="nav-link" href="#">分店資訊
-							<span class="sr-only">(current)</span>
-					</a></li>
+							<span class="sr-only">(current)</span></a>
+					</li>
                     <li class="nav-item"><a class="nav-link" href="#">餐點介紹</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 客製化拉麵 </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">經典餐點</a> 
+                            <a class="dropdown-item" href="#">客製化餐點</a> 
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">線上預約訂位</a>
@@ -91,9 +92,16 @@
                     <li>&nbsp;</li>
                     <li>&nbsp;</li>
                     <li>&nbsp;</li>
-                    <li class="imgicon"><a href="..."><span class="lnr lnr-cart"></span></a></li>
-                    <li class="imgicon"><a href="gallery.html"></a><span class="lnr lnr-alarm"></span></li>
-                    <li class="imgicon"><a href="gallery.html"></a><span class="lnr lnr-user"></span></li>
+                    <li class="nav-link imgicon"><a href="..."><span class="lnr lnr-cart"></span></a></li>
+                    <li class="nav-link imgicon"><a href="gallery.html"></a><span class="lnr lnr-alarm"></span></li>
+                     <li class="nav-item dropdown imgicon">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="lnr lnr-user"></span> </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">儲值管理</a> 
+                            <a class="dropdown-item" href="#">訂單查詢</a> 
+                            <a class="dropdown-item" href="#">會員中心</a>
+                        </div>
+                    </li>
 
                 </ul>
             </div>
