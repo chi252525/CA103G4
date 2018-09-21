@@ -46,10 +46,6 @@
 	font-size: 20px;
 }
 
-* {
-	font-size: 20px;
-}
-
 html {
 	height: 100%;
 	font-family: 'PT Sans', Microsoft JhengHei, sans-serif;
