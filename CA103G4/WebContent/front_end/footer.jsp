@@ -24,17 +24,6 @@ footer {
 	margin-bottom: 0px;
 	margin-top:200px;
 }
-
-.row-pagewhole {
-	margin-top: 30px;
-}
-
-.btn-pos {
-	position: relative;
-	left: 180px;
-	top: 0px;
-}
-
 .bg-self {
 	background-color: black;
 }
@@ -57,7 +46,6 @@ footer {
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
 	<footer>
 		<div id="nav-bar-footer">
 			<div class="text-white bg-self">
