@@ -33,4 +33,22 @@ VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVA
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
 'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000001','只還有肉吃 就沒問題！');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000003','請問中壢店也會有和牛嗎，感謝~~');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000003','限量29碗吧，一碗留給我21:00下班後吧');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','認真 衝一波');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','希望煮干沾麵能再出現，這次等了好久阿~~~~~~');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','剛剛經過貴店門前嚇到，長長的人龍！');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','會變成常設的菜單嗎，之前去沒吃到很傷心~');
 commit;
