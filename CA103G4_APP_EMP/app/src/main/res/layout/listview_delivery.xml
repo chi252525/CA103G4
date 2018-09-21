@@ -2,33 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="35dp" >
+    android:layout_height="wrap_content" >
 
     <TextView
-        android:id="@+id/Invo_No"
-        android:text="01"
-        android:textColor="@color/colorRed"
+        android:id="@+id/deliv_No"
+        android:text="派送單編號"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:padding="6dp" />
 
     <TextView
-        android:id="@+id/Menu_Id"
-        android:text="餐點名稱"
-        android:textColor="@color/colorBlue"
+        android:id="@+id/branch_No"
+        android:text="分店編號"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/Invo_No"
+        android:layout_toRightOf="@+id/deliv_No"
         android:padding="6dp" />
 
-    <ImageView
-        android:id="@+id/ivDelete"
+    <TextView
+        android:id="@+id/emp_No"
+        android:text="員工編號"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/branch_No"
         android:padding="6dp" />
+
+    <Button
+        android:id="@+id/deliv_Status"
+        android:text="派送單狀態"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/emp_No"
+        android:padding="6dp" />
+
 
 </RelativeLayout>
