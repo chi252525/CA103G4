@@ -8,7 +8,8 @@ CREATE TABLE POST(
   POST_CONT  CLOB, 
   POST_EVA  number(1), 
   POST_PHOTO  BLOB, 
-  POST_TIME TIMESTAMP default systimestamp,
+  POST_TIME TIMESTAMP DEFAULT systimestamp,
+  POST_VIEWS number(38),
   CONSTRAINT POST_PK PRIMARY KEY (POST_NO),
   CONSTRAINT POST_FK1 FOREIGN KEY (CUSTOM_NO) REFERENCES CUSTOMMEALS (CUSTOM_NO),
   CONSTRAINT POST_FK2 FOREIGN KEY (MEM_NO) REFERENCES MEMBER (MEM_NO)
@@ -23,12 +24,105 @@ NOCYCLE
 NOCACHE;
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
-POST_EVA,POST_PHOTO,POST_TIME) 
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
 'M000001',
 'C0000000001',
-'柑橘奶油塩味拉麵夏至',
+'這是一款很適合中午熱時不想吃油膩熱食的選擇
+，沾湯部分味道不算濃厚，那芥末推薦加入沾湯裡增味，
+沾湯裡有著一小點柑橘皮帶點清爽，
+如果覺得沒什麼味道可以加點桌上的番茄醋增味，
+比起伊比利豬我更偏好鴨胸，價格上算略高但也吃得出用心，
+缺點大概就是沒有碗公大的香菜可以加點。',
 5,
 NULL,
-SYSDATE);
+SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000002',
+'C0000000002',
+'麵好吃，湯溫不燙
+但是今晚加點的肉增量（角煮）第一次吃到是冷的，與以往大不相同，
+詢問後告知是冷的沒錯，讓人感到意外',
+5,
+NULL,
+SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000003',
+'分享一下前幾天坐隔壁日本仔的吃法，他真的是巷子內的。
+就是這款組合
+1. 點一份王董
+2. 點白飯
+3. 加點和牛放白飯上。
+4. 吃麵
+5. 牛肉夾白飯吃
+6. 麵吃完白飯倒湯裡',
+5,
+NULL,
+SYSDATE,NULL);
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000004',
+'C0000000004',
+'沒想到週六晚上去還吃的到限定版，我點特製麵加大　麵有點像卷卷麵 
+很好吃，黑胡椒調味的舒肥叉燒也很讚！我的沾麵吃法是夾適量的麵 
+完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，值得',
+5,
+NULL,
+SYSDATE,NULL);
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000005',
+'C0000000005',
+'鹽味拉麵
+使用大量的魚跟雞骨經過10個小時以上的微火熬煮，櫻花蝦跟干貝各種
+海鮮的清新香味層次分明的浮現，搭配精選的細麵，清香又豐潤的湯頭及麵條清爽的口感保證對味！',
+5,
+NULL,
+SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'麵吃完 沾汁還有8、9成滿，內場高湯加的太少 一喝超鹹...要求再加，
+東北新瀉的口味比較重鹹 上次點的特製清湯醬油 對我來說太Hard core了....
+這次晚上大老遠跑去值得了',
+5,
+NULL,
+SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'每次看著熬湯的鍋子在冒煙，發出徹徹徹聲，
+像是看著蒸汽小火車奔跑很療癒感謝招待',
+4,
+NULL,
+SYSDATE,NULL);
+
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，
+也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
+ 醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
+4,
+NULL,
+SYSDATE,NULL);
+
 COMMIT;

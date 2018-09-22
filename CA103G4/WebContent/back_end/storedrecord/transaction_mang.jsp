@@ -40,17 +40,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
 <!-- My <css></css> for transaction page-->
-<link rel="stylesheet" href="css/branch_css.css">
+<link rel="stylesheet" href="css/transaction_css.css">
 
 </head>
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
-	<form method="post" action="branch.do">
+	<form method="post" action="storedrecord.do">
 		<div id="div_shadow" class="py-5"">
 			<div class=" container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="d-flex justify-content-start">分店管理</h1>
+						<h1 class="d-flex justify-content-start">儲值管理</h1>
 					</div>
 				</div>
 			</div>
@@ -59,49 +59,49 @@
 			<div class="container">
 				<div class="row ">
 					<div id="div1" class="col-md-12 d-flex">
-						<jsp:useBean id="branchSvc" scope="page"
-							class="com.branch.model.BranchService" />
-
-						<FORM METHOD="post" ACTION="storedrecord.do">
-							<div class="input-group" style="width:250px;">
-								<b>分店編號:</b>
-								 <select class="custom-select align-items-center"
-									id="inputGroupSelect04"
-									aria-label="Example select with button addon" size="1"
-									name="mem_No" id="stor_No">
-									<c:forEach var="brVO" items="${branchSvc.all}">
-										<option value="${brVO.branch_No}">${brVO.branch_No}
-									</c:forEach>
-								</select> <input type="hidden" name="action" value="findBybranch_NO">
-								<div class="input-group-append">
-									<button type="submit" class="btn btn-sm align-items-center"
-										style="height: 35px; width: 35px; background-color: antiquewhite;">
-										<i class="fas fa-search" style="font-size: 20px; color: grey"></i>
-									</button>
+						<input id="stor_No" class="form-control" type="text" name="mem_No"
+							placeholder="儲值單號 ,會員編號"> <input type="hidden"
+							name="action" value="findByMem_no">
+						<button type="submit" class="btn btn-sm align-items-center"
+							style="height: 35px; width: 35px; background-color: antiquewhite;">
+							<i class="fas fa-search" style="font-size: 20px; color: grey"></i>
+						</button>
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="input-group date" id="datetimepicker2"
+											data-target-input="nearest">
+											<input type="text" class="form-control datetimepicker-input"
+												data-target="#datetimepicker2" />
+											<div class="input-group-append"
+												data-target="#datetimepicker2" data-toggle="datetimepicker">
+												<div class="input-group-text">
+													<i class="fa fa-calendar"></i>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-
-						</FORM>
-
-
-
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="shadow p-1">
+		<div class="shadow p-2">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12" style="">
 						<table class="table datatable">
 							<thead>
 								<tr>
-									<th>#分店編號</th>
-									<th>分店名稱</th>
-									<th>分店所在縣市</th>
-									<th>分店所在區域</th>
-									<th>分店所在地址</th>
-									<th>分店電話</th>
+									<th>#儲值流水單號</th>
+									<th>會員編號</th>
+									<th>儲值日期</th>
+									<th>儲值點數</th>
+									<th>回饋竹幣</th>
+									<th>儲值完成狀態</th>
 								</tr>
 							</thead>
 
@@ -110,17 +110,16 @@
 									<c:forEach var="errorObj" items="${errorMsgs}">
 										<tr valign="middle">
 											<td class="text-center" colspan="6" rowspan="6"
-												style="vertical-align: middle; font-size: 20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
+												style="vertical-align: middle;font-size:20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
 										</tr>
 									</c:forEach>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
+									<tr style="height:30px;"></tr>
 								</c:if>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-
 
 							</tbody>
 						</table>

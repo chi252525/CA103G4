@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <a id="a1" href="transaction_mang.jsp" "><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">Àx­È¬ö¿ý</h1></a>
+                        <a id="a1" href="transaction_mang.jsp" "><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">Àx­ÈºÞ²z</h1></a>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                     <th>Àx­Èª¬ºA</th>
                                 </tr>
                             </thead>
-                            <%@ include file="page1.file"%>
+                            <%@ include file="pages/page1.file"%>
                             <tbody>
                                 <c:forEach var="StoredrecordVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                                     <tr>
@@ -110,7 +110,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <%@ include file="page2.file"%>
+                        <%@ include file="pages/page2.file"%>
                     </div>
                 </div>
             </div>
