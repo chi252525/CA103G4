@@ -88,4 +88,41 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 5,
 NULL,
 SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'麵吃完 沾汁還有8、9成滿，內場高湯加的太少 一喝超鹹...要求再加，
+東北新瀉的口味比較重鹹 上次點的特製清湯醬油 對我來說太Hard core了....
+這次晚上大老遠跑去值得了',
+5,
+NULL,
+SYSDATE,NULL);
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'每次看著熬湯的鍋子在冒煙，發出徹徹徹聲，
+像是看著蒸汽小火車奔跑很療癒感謝招待',
+4,
+NULL,
+SYSDATE,NULL);
+
+
+INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
+POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
+'M000003',
+'C0000000006',
+'完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，
+也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
+ 醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
+4,
+NULL,
+SYSDATE,NULL);
+
 COMMIT;
