@@ -1,0 +1,81 @@
+
+        
+        body{
+        	
+        	background-image: url("/CA103G4/front_end/img/woodbackground3.png");
+        }
+
+
+
+#back {
+	background-color: rgba(255, 255, 255, 0.45);
+	margin-top: 40px;
+	margin-bottom: 40px;
+	border-radius: 2rem;
+	
+}
+
+input{
+	width:200px;
+	border-radius: 0.5rem;
+}
+
+.td1 {
+	width: 10%;
+	text-align: center;
+}
+
+.td2 {
+	width: 40%;
+	text-align: center;
+}
+
+.td2.mem_Gender {
+	text-align: center;
+	padding-top: 6px;
+}
+
+#mem_Gender1{
+	width:30px;
+}
+
+#mem_Gender2{
+	width:30px;
+}
+
+.td3 {
+	width: 10%;
+	text-align: center;
+}
+
+.td4 {
+	width: 40%;
+	text-align: center;
+}
+
+.tdbtn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 2px;
+	width:50px;
+}
+
+
+#img {
+	border-radius: 5rem;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	height: 200px;
+	width: 200px;
+	margin-left: 60px;
+}
+
+#img-td {
+	text-align: legt;
+}
