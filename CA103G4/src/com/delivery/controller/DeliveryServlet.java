@@ -89,16 +89,15 @@ public class DeliveryServlet extends HttpServlet {
 	
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				
-				String deliv = new String(req.getParameter("deliv_no"));
 				String emp = new String(req.getParameter("emp_no"));
 				String status = new String(req.getParameter("deliv_status"));
-
+				String deliv = new String(req.getParameter("deliv_no"));				
 				
-				if (status.equals("2")) {
+				if ("2".equals(status)) {
 					status = "3";
 				}
 				
-				 if (status.equals("1")) {
+				 if ("1".equals(status)) {
 					status = "2";
 				}
 				
@@ -107,7 +106,6 @@ public class DeliveryServlet extends HttpServlet {
 				delVO.setEmp_no(emp);
 				delVO.setDeliv_status(status);
 				delVO.setDeliv_no(deliv);
-				
 
 				/*************************** 2.開始修改資料 ***************************************/
 				DeliveryService delSvc = new DeliveryService();

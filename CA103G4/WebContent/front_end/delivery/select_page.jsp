@@ -124,7 +124,7 @@ h4 {
 
 
 	<%
-		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null) {
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null||request.getAttribute("update") != null) {
 	%>
 	<script>
 		function myFunction() {
