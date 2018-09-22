@@ -14,6 +14,10 @@ public interface DeliveryDAO_interface {
 
 	public List<DeliveryVO> getByStatus();
 	
+	public List<DeliveryVO> getByEmpNo(String emp_no);
+	
+	public List<DeliveryVO> getByDelivNo(String deliv_no);
+	
 	public List<DeliveryVO> getAll();
 
 }
