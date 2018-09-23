@@ -11,8 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter(filterName = "setCharacterEncoding", urlPatterns = {}, servletNames = {
-		"StoredrecordServlet" }, initParams = { @WebInitParam(name = "encoding", value = "UTF-8") })
+@WebFilter(filterName = "setCharacterEncoding", urlPatterns = {"/*"}, servletNames = {"*"}, initParams = { @WebInitParam(name = "encoding", value = "UTF-8") })
 
 
 public class SetCharacterEncodingFilter implements Filter {

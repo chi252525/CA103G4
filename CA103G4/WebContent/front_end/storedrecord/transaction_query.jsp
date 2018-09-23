@@ -50,7 +50,7 @@
 			<div class=" container">
 				<div class="row">
 					<div class="col-md-12">
-						 <a id="a1" href="transaction_mang.jsp" "><h1 class="d-flex justify-content-start">儲值紀錄</h1></a>
+						 <a id="a1" href="transaction_query.jsp" "><h1 class="d-flex justify-content-start">儲值紀錄</h1></a>
 					<div id="div1" class="col-md-12 d-flex">
 						<input id="stor_No" class="form-control" type="text" name="mem_No"
 							placeholder="儲值單號 ,會員編號"> <input type="hidden"

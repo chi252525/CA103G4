@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.storedrecord.model.*"%>
+<%@ page import="com.branch.model.*"%>
 
 <%
-	
+	//BranchVO brVO = (BranchVO) request.getAttribute("brVO");
+	//List<BranchVO> list = (List<BranchVO>) request.getAttribute("list");
+	//pageContext.setAttribute("list", list);
 %>
 <!-- header -->
 <jsp:include page="/front_end/header.jsp" />
@@ -50,7 +52,8 @@
 			<div class=" container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="d-flex justify-content-start">分店管理</h1>
+						<a id="a1" href="branch_mang.jsp"><h1
+								class="d-flex justify-content-start">分店管理</h1></a>
 					</div>
 				</div>
 			</div>
@@ -61,34 +64,45 @@
 					<div id="div1" class="col-md-12 d-flex">
 						<jsp:useBean id="branchSvc" scope="page"
 							class="com.branch.model.BranchService" />
-
-						<FORM METHOD="post" ACTION="storedrecord.do">
-							<div class="input-group" style="width:250px;">
-								<b>分店編號:</b>
-								 <select class="custom-select align-items-center"
-									id="inputGroupSelect04"
+						<div class="input-group d-flex" style="width: 480px;">
+							<FORM METHOD="post" ACTION="branch.do">
+								<b>分店編號:</b> 
+								<select class="custom-select align-items-center"
+									id="inputGroupSelect04 stor_No"
 									aria-label="Example select with button addon" size="1"
-									name="mem_No" id="stor_No">
-									<c:forEach var="brVO" items="${branchSvc.all}">
-										<option value="${brVO.branch_No}">${brVO.branch_No}
-									</c:forEach>
-								</select> <input type="hidden" name="action" value="findBybranch_NO">
+									name="branch_No" style="margin-left: 5px !important;width:100px;" onchange="submit()">
+									<option selected>請選擇
+										<c:forEach var="brVO" items="${branchSvc.all}">
+											<option value="${brVO.branch_No}">${brVO.branch_No}
+										</c:forEach>
+								</select> <input type="hidden" name="action" value="getOne_For_Display">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-sm align-items-center"
 										style="height: 35px; width: 35px; background-color: antiquewhite;">
 										<i class="fas fa-search" style="font-size: 20px; color: grey"></i>
 									</button>
 								</div>
-							</div>
-
-						</FORM>
-
-
-
+							</FORM>
+							<FORM METHOD="post" ACTION="branch.do">
+								<b>所在城市:</b>
+								 <select class="custom-select align-items-center"
+									id="inputGroupSelect04 stor_No"
+									aria-label="Example select with button addon" size="1"
+									name="branch_City" style="margin-left: 5px !important;width:100px;"
+									onchange="submit()">
+									<option selected>請選擇
+										<c:forEach var="brCity" items="${branchSvc.city}">
+											<option value="${brCity}">${brCity}
+										</c:forEach>
+								</select> <input type="hidden" name="action" value="findBybranch_City">
+							</FORM>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 		<div class="shadow p-1">
 			<div class="container">
 				<div class="row">
@@ -113,15 +127,37 @@
 												style="vertical-align: middle; font-size: 20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
 										</tr>
 									</c:forEach>
+									<tr style="height: 40px;"></tr>
+									<tr style="height: 40px;"></tr>
+									<tr style="height: 40px;"></tr>
+									<tr style="height: 40px;"></tr>
+									<tr style="height: 40px;"></tr>
+									<tr style="height: 40px;"></tr>
 								</c:if>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-								<tr style="height: 40px;"></tr>
-
-
+								<!-- display for one object query -->
+								<c:if test="${not empty brVO}">
+									<tr>
+										<td>${brVO.branch_No}
+										<td>${brVO.branch_Name}
+										<td>${brVO.branch_City}
+										<td>${brVO.branch_Dist}
+										<td>${brVO.branch_Addr}
+										<td>${brVO.branch_Tel}
+									</tr>
+								</c:if>
+								<!-- display for multi objects query -->
+								<c:if test="${not empty list}">
+									<c:forEach var="brVO" items="${list}">
+										<tr>
+											<td>${brVO.branch_No}
+											<td>${brVO.branch_Name}
+											<td>${brVO.branch_City}
+											<td>${brVO.branch_Dist}
+											<td>${brVO.branch_Addr}
+											<td>${brVO.branch_Tel}</td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 					</div>

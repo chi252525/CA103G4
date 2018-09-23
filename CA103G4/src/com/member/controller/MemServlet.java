@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -16,6 +17,21 @@ import com.member.model.*;
 public class MemServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
+		
+		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		
+		//登出區塊
+		String logout = req.getParameter("logout");
+		if("out".equals(logout)) {
+			try {
+				session.invalidate();
+				System.out.println("登出囉");
+				res.sendRedirect(req.getContextPath()+"/front_end/header.jsp");
+			}catch(Exception e) {
+				
+			}
+		}
 		
 		doPost(req,res);
 	}
@@ -168,10 +184,9 @@ public class MemServlet extends HttpServlet{
 				MemberService memSvc = new MemberService();
 				memVO = memSvc.addMem(mem_Id, mem_Pw, mem_Name, mem_Gender, mem_Bir, mem_Mail, mem_Phone, mem_Receiver, mem_Repno, mem_Recounty, mem_Retown, mem_Readdr, mem_Cardnum, mem_Carddue, mem_Photo);
 								
-				/***************************3.新增完成,準備轉交(Send the Success view)************/
-//				req.setAttribute("memVO", menuVO);  // 資料庫新增成功後,正確的的perntdVO物件,存入req
-//				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
-//				successView.forward(req, res);
+				/***************************3.新增完成,重新登入(Send the Success view)************/
+				
+				res.sendRedirect(req.getContextPath()+"/front_end/member/login.jsp");
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
@@ -179,6 +194,78 @@ public class MemServlet extends HttpServlet{
 				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/register.jsp");
 				failuerView.forward(req, res);
 			}
+		}
+		
+		//登入區塊-chiapao
+		
+		if("loginhandler".equals(action)){  // 來自register.jsp的請求  
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數****************************************/
+				
+				//帳號驗證				
+				String mem_Id = req.getParameter("mem_Id").trim();
+				String mem_Pw = req.getParameter("mem_Pw").trim();
+				
+				System.out.println("mem_Id="+mem_Id);
+				System.out.println("mem_Pw="+mem_Pw);
+				MemberVO memVO;
+				MemberService memSvc = new MemberService();
+				memVO = memSvc.getOneMem_Id(mem_Id); //找輸入帳號的資料，若無此帳號memVO為空值;
+				
+								
+				if(mem_Id.trim().isEmpty() || mem_Pw.trim().isEmpty()) {
+					errorMsgs.add("尚未輸入帳號或密碼");
+				}else if(memVO != null){
+					System.out.println(memVO.getMem_Pw());
+					if(memVO.getMem_Pw().equals(mem_Id)) {
+						errorMsgs.add("密碼錯誤");
+					}
+				}else {
+					errorMsgs.add("無此帳號");
+				}
+					
+				
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("memVO", memVO);  // 含有輸入格式錯誤的memVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/member/login.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				/***************************2.帳號密碼皆正確****************************************/
+				System.out.println("帳密都沒錯");
+				HttpSession session = req.getSession();
+				session.setAttribute("memVO", memVO);				
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)************/
+				
+				
+					try {
+						String location = (String) session.getAttribute("location");
+							if(location != null) {
+								session.removeAttribute("location");
+								res.sendRedirect(location);            
+						        return;//程式中斷
+							}
+						
+					}catch(Exception ignored) {}
+				
+				res.sendRedirect(req.getContextPath()+"/front_end/header.jsp");
+								
+				
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("SQL錯誤"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/member/loginSusess.jsp");
+				failuerView.forward(req, res);
+			}
+		
+		
+		
 		}
 		
 	}
