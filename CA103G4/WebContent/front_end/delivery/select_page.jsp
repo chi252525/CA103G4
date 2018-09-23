@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
 
-<%-- s分頁 --%>
 <jsp:useBean id="get_By_Key" scope="session" type="java.util.List<DeliveryVO>" />
 
 <html>

@@ -88,7 +88,7 @@
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}">
 				<input type="hidden" name="deliv_status"  value="${deliveryVO.deliv_status}">
-				<input type="hidden" name="whichPage"	value="<%=request.getParameter("whichPage")%>">
+				<input type="hidden" name="whichPage"	value="<%=whichPage%>">
 				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 				<input type="submit" value="指派外送員">
 			</form>	

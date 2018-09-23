@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
@@ -133,10 +134,16 @@ public class DeliveryServlet extends HttpServlet {
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("update", delVO);
 			
-			String requestURL = req.getParameter("requestURL");
-			System.out.println(requestURL);
-			String url = requestURL;
-//			String url = "select_page.jsp";
+//			String requestURL = req.getParameter("requestURL");
+			
+			String page = req.getParameter("whichPage");
+			req.setAttribute("whichPage",page);
+			
+//	System.out.println(requestURL);
+			
+			
+//			String url = requestURL;
+			String url = "select_page.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 			successView.forward(req, res);
 
