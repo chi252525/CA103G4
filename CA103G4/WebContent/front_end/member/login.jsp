@@ -23,7 +23,7 @@
 <jsp:include page="/front_end/header.jsp"></jsp:include>
 
 <!--以下為login區塊-->
-<div class="container col-3 loginarea" style="padding-bottom:40px;">	
+<div class="container col-3 loginarea" style="padding-bottom:30px;">	
 
 				<c:if test="${not empty errorMsgs}">
 					<font style="color:red;" >請修正以下錯誤:</font>
@@ -38,8 +38,8 @@
             <div class="tablebg" >
 				<table >					
 					<tr class="tr1">
-						<td class="td1">帳號</td> 
-						<td class="td2">
+						<td class="td1" style="padding-top:20px;">帳號</td> 
+						<td class="td2" style="padding-top:20px;">
 							<input class="form-control-sm custom-input" type=text size=15 name="mem_Id">
 						</td>
 					</tr>

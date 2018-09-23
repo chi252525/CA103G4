@@ -184,10 +184,9 @@ public class MemServlet extends HttpServlet{
 				MemberService memSvc = new MemberService();
 				memVO = memSvc.addMem(mem_Id, mem_Pw, mem_Name, mem_Gender, mem_Bir, mem_Mail, mem_Phone, mem_Receiver, mem_Repno, mem_Recounty, mem_Retown, mem_Readdr, mem_Cardnum, mem_Carddue, mem_Photo);
 								
-				/***************************3.新增完成,準備轉交(Send the Success view)************/
-//				req.setAttribute("memVO", menuVO);  // 資料庫新增成功後,正確的的perntdVO物件,存入req
-//				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
-//				successView.forward(req, res);
+				/***************************3.新增完成,重新登入(Send the Success view)************/
+				
+				res.sendRedirect(req.getContextPath()+"/front_end/member/login.jsp");
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
@@ -238,9 +237,11 @@ public class MemServlet extends HttpServlet{
 				
 				/***************************2.帳號密碼皆正確****************************************/
 				System.out.println("帳密都沒錯");
-				
 				HttpSession session = req.getSession();
-				session.setAttribute("memVO", memVO);
+				session.setAttribute("memVO", memVO);				
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)************/
+				
 				
 					try {
 						String location = (String) session.getAttribute("location");
@@ -254,11 +255,6 @@ public class MemServlet extends HttpServlet{
 				
 				res.sendRedirect(req.getContextPath()+"/front_end/header.jsp");
 								
-				/***************************3.新增完成,準備轉交(Send the Success view)************/
-//				req.setAttribute("memVO", menuVO);  // 資料庫新增成功後,正確的的perntdVO物件,存入req
-//				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
-//				successView.forward(req, res);
-				
 				
 				
 				/***************************其他可能的錯誤處理**********************************/
