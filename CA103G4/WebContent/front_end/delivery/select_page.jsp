@@ -3,9 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
 
+<jsp:useBean id="get_By_Key" scope="session" type="java.util.List<DeliveryVO>" />
+
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Delivery: Home</title>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
@@ -55,6 +57,8 @@ h4 {
 	</FORM>
 --%>
 
+
+	<%-- s以下是複合查詢列 --%>
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="a" name="First">
@@ -64,6 +68,7 @@ h4 {
 			value="get_By_Key"> <input type="submit" value="開始搜尋">
 	</FORM>
 	<br>
+	<%-- s以下是新增外送派送單 --%>
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
 		id="b">
@@ -72,7 +77,7 @@ h4 {
 			value="insert">
 	</FORM>
 	<br>
-
+	
 
 
 	<%-- 
@@ -113,7 +118,7 @@ h4 {
 	%>
 --%>
 
-
+	<%-- s查詢出來的表格 --%>
 	<%
 		if (session.getAttribute("get_By_Key") != null) {
 	%>
@@ -122,9 +127,9 @@ h4 {
 		}
 	%>
 
-
+	<%-- s當做出某件事情時會刷新表格，一開始會跑出查詢所有的表格 --%>
 	<%
-		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null||request.getAttribute("update") != null) {
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null || request.getAttribute("update") != null) {
 	%>
 	<script>
 		function myFunction() {

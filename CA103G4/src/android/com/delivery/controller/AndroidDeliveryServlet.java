@@ -41,7 +41,18 @@ public class AndroidDeliveryServlet extends HttpServlet {
 		if ("getAll".equals(action)) {
 			List<DeliveryVO> deliveryList = dao.getAll();
 			writeText(res, gson.toJson(deliveryList));
+		}
+		else if ("getEmpNo".equals(action)) {
+			String emp_no = jsonObject.get("emp_no").getAsString();
+			List<DeliveryVO> deliveryList = dao.getByEmpNo(emp_no);
+			writeText(res, gson.toJson(deliveryList));
 		} 
+		else if ("getDelivNo".equals(action)) {
+			String deliv_no = jsonObject.get("deliv_no").getAsString();
+			List<DeliveryVO> deliveryList = dao.getByDelivNo(deliv_no);
+			writeText(res, gson.toJson(deliveryList));
+		} 
+		
 		else {
 			writeText(res, "");
 		}

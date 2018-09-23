@@ -30,8 +30,121 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_no= ?";
 	private static final String UPDATE = "UPDATE delivery set deliv_status=? where deliv_no = ?";
 	private static final String UPDATE2 = "UPDATE delivery set emp_no=?,deliv_status=? where deliv_no = ?";
+	private static final String GET_EMP_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where emp_no= ? order by deliv_no DESC";
 	// VARCHAR2 (PK not found)
+	
+	@Override
+	public List<DeliveryVO> getByDelivNo(String deliv_no) {
+		List<DeliveryVO> list = new ArrayList<DeliveryVO>();
+		DeliveryVO deliveryVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt.setString(1, deliv_no);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				deliveryVO = new DeliveryVO();
+				deliveryVO.setDeliv_no(rs.getString("deliv_no"));
+				deliveryVO.setBranch_no(rs.getString("branch_no"));
+				deliveryVO.setEmp_no(rs.getString("emp_no"));
+				deliveryVO.setDeliv_status(rs.getString("deliv_status"));
+				list.add(deliveryVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<DeliveryVO> getByEmpNo(String emp_no) {
+		List<DeliveryVO> list = new ArrayList<DeliveryVO>();
+		DeliveryVO deliveryVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_EMP_STMT);
+			pstmt.setString(1, emp_no);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				deliveryVO = new DeliveryVO();
+				deliveryVO.setDeliv_no(rs.getString("deliv_no"));
+				deliveryVO.setBranch_no(rs.getString("branch_no"));
+				deliveryVO.setEmp_no(rs.getString("emp_no"));
+				deliveryVO.setDeliv_status(rs.getString("deliv_status"));
+				list.add(deliveryVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	@Override
 	public void insert(DeliveryVO deliveryVO) {
 

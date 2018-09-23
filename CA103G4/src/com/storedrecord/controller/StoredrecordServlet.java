@@ -60,7 +60,7 @@ public class StoredrecordServlet extends HttpServlet {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母B加上9個數字");
 				}
 				if (!errorMsgs.isEmpty()) {
-					req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 
@@ -271,10 +271,6 @@ public class StoredrecordServlet extends HttpServlet {
 				String stor_No = req.getParameter("stor_No");
 				StoredrecordService strSvc = new StoredrecordService();
 				strSvc.delete(stor_No);
-				
-				if(errorMsgs.isEmpty()) {
-					
-				}
 				// ===============轉交=======================
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
 			} catch (Exception e) {
@@ -294,8 +290,8 @@ public class StoredrecordServlet extends HttpServlet {
 				List<StoredrecordVO> list = srvc.findByMem_no(mem_No);
 				if (list.size() == 0) {
 					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
-					//req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
-					req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
+					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 					return;// 有錯誤,返回addStoredrecord
 				}
 
@@ -304,7 +300,7 @@ public class StoredrecordServlet extends HttpServlet {
 				req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/transaction_mang.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 			}
 		}
 	}

@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <a id="a1" href="transaction_mang.jsp" "><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">Àx­È¬ö¿ý</h1></a>
+                        <a id="a1" href="transaction_query.jsp"><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">Àx­È¬ö¿ý</h1></a>
                     </div>
                 </div>
             </div>
