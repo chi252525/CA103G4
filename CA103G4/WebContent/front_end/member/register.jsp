@@ -36,7 +36,7 @@
  <body>
 	<jsp:include page="/front_end/header.jsp"></jsp:include>
 
-<!--以下為register區塊-->
+<!--your html   start==================================================================================-->
 <div class="container col-5 rounded ">
 	<form method="post" action="member.do" enctype="multipart/form-data" >
     <table id="back">

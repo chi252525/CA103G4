@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="com.member.model.*"%>
+<% MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,17 +115,29 @@ body {
 									class="lnr lnr-cart"></span></a></li>
 							<li class="nav-link imgicon"><a href="gallery.html"></a><span
 								class="lnr lnr-alarm"></span></li>
-							<li class="nav-item dropdown imgicon"><a
-								class="nav-link dropdown-toggle" href="#"
-								id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"><span
-									class="lnr lnr-user"></span> </a>
+							<li class="nav-item dropdown imgicon">
+							
+							<!-- 無登入狀態 點選人頭示意圖將導入Login.jsp -->
+
+								<a
+								class="nav-link dropdown-toggle" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
+								id="navbarDropdownMenuLink" role="button" ${(memVO.mem_Name == null )? '' : 'data-toggle=\"dropdown\"'}
+								aria-haspopup="true" aria-expanded="false"> ${(memVO.mem_Name == null )? '':memVO.mem_Name}
+								
+							<!--有登入狀態圖示改為會員照片小圖 -->
+								<span class="lnr lnr-user" style="display: ${(memVO.mem_Name == null )? '': 'none'} "></span>
+								</a>
+								
+							<!-- 有登入狀態才會有這裏的會員相關資料 -->
 								<div class="dropdown-menu"
-									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">儲值管理</a> <a
-										class="dropdown-item" href="#">訂單查詢</a> <a
-										class="dropdown-item" href="#">會員中心</a>
-								</div></li>
+									aria-labelledby="navbarDropdownMenuLink" style="display: ${(memVO.mem_Name == null )? 'none': ''} ">
+							<!-- 以下可以自己新增相關會員附屬功能 -->
+									<a class="dropdown-item" href="#">儲值管理</a> 
+									<a class="dropdown-item" href="#">訂單查詢</a> 
+									<a class="dropdown-item" href="#">修改會員</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/member.do?logout=out" >登出</a>
+								</div>
+							</li>
 
 						</ul>
 					</div>
