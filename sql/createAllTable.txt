@@ -611,7 +611,7 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a123456','b123456','帥帥','G1','工讀生','0912345678',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a','a','帥帥','G1','工讀生','0912345678',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','b123456','0000000','陳永志','G1','服務生','0966666666',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','c123456','6666666','林冠宏','G1','客服人員','0987654321',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','d123456','a123456','懂懂','G1','經理','0930165789',null);
@@ -724,7 +724,41 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G1',1,1);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G1',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G2',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G3',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G4',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G5',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G6',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G7',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G8',0,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G9',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G10',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G11',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G12',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G13',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G14',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G15',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G16',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G17',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G18',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G19',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G20',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G21',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G22',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G23',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G24',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G25',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G26',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G27',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G28',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G29',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G30',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G31',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G32',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G33',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G34',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','G35',1,0);
 Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0002','G2',1,1);
 Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0003','G3',1,1);
 

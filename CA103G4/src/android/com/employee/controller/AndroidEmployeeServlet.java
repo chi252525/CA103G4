@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class AndroidEmployeeServlet extends HttpServlet {
@@ -23,7 +24,8 @@ public class AndroidEmployeeServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+//		Gson gson = new Gson();
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
 		String line = null;
@@ -37,8 +39,9 @@ public class AndroidEmployeeServlet extends HttpServlet {
 
 		if (action.equals("isEmployee")) {
 			String emp_Acnum = jsonObject.get("emp_Acnum").getAsString();
-			String emp_Pwd = jsonObject.get("emp_Psw").getAsString();
-			writeText(res,	String.valueOf(empDAO.isEmployee(emp_Acnum, emp_Pwd)));
+			String emp_Psw = jsonObject.get("emp_Psw").getAsString();
+			EmpVO empVO = empDAO.isEmployee(emp_Acnum, emp_Psw);
+			writeText(res, empVO == null ? "" : gson.toJson(empVO));
 		} 
 //		else if (action.equals("isUserIdExist")) {
 //			String userId = jsonObject.get("userId").getAsString();
