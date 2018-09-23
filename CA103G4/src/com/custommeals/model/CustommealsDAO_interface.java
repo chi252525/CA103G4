@@ -9,4 +9,5 @@ public interface CustommealsDAO_interface {
 	public CustommealsVO findByPrimaryKey(String custommeals_No);
 	public List<CustommealsVO> getAll();
 	public List<CustommealsVO> getMealByMemBuyed(String mem_No);
+	public List<CustommealsVO> getMealByMem(String mem_No);
 }
