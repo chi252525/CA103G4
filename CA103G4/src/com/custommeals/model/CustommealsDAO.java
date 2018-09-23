@@ -357,7 +357,6 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
 				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
 				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
-				.setcustom_Photo(rs.getString("INGT_ID"));
 				custommealsVOList.add(custommealsVO);
 			}
 
