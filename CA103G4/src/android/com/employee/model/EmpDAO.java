@@ -39,19 +39,32 @@ public class EmpDAO implements EmpDAO_interface{
 		"SELECT * FROM EMPLOYEE WHERE EMP_ACNUM = ? AND EMP_PSW = ?";
 	
 	@Override
-	public boolean isEmployee(String emp_Acnum, String emp_Psw) {
+	public EmpVO isEmployee(String emp_Acnum, String emp_Psw) {
 		
+		EmpVO empVO = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		boolean isEmployee = false;
+		ResultSet rs = null;
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(FIND_BY_ID_PASWD);
 			pstmt.setString(1, emp_Acnum);
 			pstmt.setString(2, emp_Psw);
-			ResultSet rs = pstmt.executeQuery();
-			isEmployee = rs.next();
-			return isEmployee;
+			rs = pstmt.executeQuery();
+			
+		    rs.next();
+	    	empVO = new EmpVO();
+	    	empVO.setEmp_no(rs.getString("emp_no"));
+	    	empVO.setBranch_no(rs.getString("branch_no"));
+			empVO.setEmp_acnum(rs.getString("emp_acnum"));
+			empVO.setEmp_psw(rs.getString("emp_psw"));
+			empVO.setEmp_name(rs.getString("emp_name"));
+			empVO.setEmp_gender(rs.getString("emp_gender"));
+			empVO.setEmp_pos(rs.getString("emp_pos"));
+			empVO.setEmp_tel(rs.getString("emp_tel"));      	
+			empVO.setEmp_status(rs.getString("emp_status"));  	
+			empVO.setEmp_credate(rs.getDate("emp_credate"));
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -66,7 +79,7 @@ public class EmpDAO implements EmpDAO_interface{
 				e.printStackTrace();
 			}
 		}
-		return isEmployee;
+		return empVO;
 	}
 	@Override
 	public void insert(EmpVO empVO) {

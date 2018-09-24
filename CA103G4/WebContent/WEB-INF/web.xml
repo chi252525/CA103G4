@@ -43,6 +43,15 @@
 				<servlet-name>AndroidDeliveryServlet</servlet-name>
 				<url-pattern>/AndroidDeliveryServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidDeskServlet</servlet-name>
+				<servlet-class>android.com.desk.controller.AndroidDeskServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidDeskServlet</servlet-name>
+				<url-pattern>/AndroidDeskServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>
