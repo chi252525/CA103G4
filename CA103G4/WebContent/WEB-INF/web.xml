@@ -125,6 +125,25 @@
 		<url-pattern>/front_end/member/member.do</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>PostServlet</servlet-name>
+		<servlet-class>com.post.controller.PostServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostServlet</servlet-name>
+		<url-pattern>/post/postServlet.do</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>PostShowImage</servlet-name>
+		<servlet-class>com.post.controller.PostShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostShowImage</servlet-name>
+		<url-pattern>/post/postshowimage.do</url-pattern>
+	</servlet-mapping>
+	
+	
 	
 	<filter>
 	  <filter-name>loginFilter</filter-name>

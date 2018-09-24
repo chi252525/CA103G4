@@ -18,18 +18,13 @@ import javax.sql.DataSource;
 
 import com.reply_msg.model.ReplyVO;
 
-public class PostDAO implements PostDAO_interface{
+public class PostJDBCDAO implements PostDAO_interface{
 	
-
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String USER = "CA103";
+	private static final String PASSWORD = "123456";
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	
 	// 新增一個貼文
 	private static final String INSERT_STMT=
 			"INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT," + 
@@ -65,7 +60,7 @@ public class PostDAO implements PostDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 			
-			con = ds.getConnection();
+			con =DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("insert Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, postVO.getMem_No());
@@ -106,7 +101,7 @@ public class PostDAO implements PostDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con =DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("update Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, postVO.getMem_No());
@@ -149,7 +144,7 @@ public class PostDAO implements PostDAO_interface{
 		try {
 
 			
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, post_No);
 			pstmt.executeUpdate();
@@ -183,7 +178,7 @@ public class PostDAO implements PostDAO_interface{
 		ResultSet rs = null;
 		List<PostVO> postlist = new ArrayList<>();
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("findbyMem_No Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYMEMNO);
 			pstmt.setString(1, mem_No);
@@ -238,7 +233,7 @@ public class PostDAO implements PostDAO_interface{
 		List<PostVO> postlist = new ArrayList<>();
 
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("findbyCustom_No Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYCUSTOMNO);
 			pstmt.setString(1, custom_No);
@@ -293,7 +288,7 @@ public class PostDAO implements PostDAO_interface{
 		List<PostVO> postlist = new ArrayList<>();
 
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("getAll Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
@@ -347,7 +342,7 @@ public class PostDAO implements PostDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("findByPrimaryKey Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_POST);
 			pstmt.setString(1, post_No);
@@ -399,7 +394,7 @@ public class PostDAO implements PostDAO_interface{
 		ResultSet rs = null;
 		List<PostVO> postlist = new ArrayList<>();
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("findbyYearandMonth Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBY_YEAR_AND_MON);
 			pstmt.setString(1, year);
@@ -453,7 +448,7 @@ public class PostDAO implements PostDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_POST_VIEWS_STMT);
 			pstmt.setString(1, post_No);
 
@@ -488,7 +483,7 @@ public class PostDAO implements PostDAO_interface{
 		ReplyVO rplyVO = null;
 
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("getOnePost_AllRplys Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_POST_ALLRPLYS);
 			pstmt.setString(1, post_No);

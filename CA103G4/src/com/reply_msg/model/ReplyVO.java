@@ -2,7 +2,7 @@ package com.reply_msg.model;
 
 import java.sql.Timestamp;
 
-public class Reply_MsgVO {
+public class ReplyVO {
 	
 	private String rply_No;
 	private String mem_No;
@@ -12,18 +12,7 @@ public class Reply_MsgVO {
 	private String rply_Status;
 	
 	
-	public Reply_MsgVO(String rply_No, String mem_No, String post_No, String rply_Cont, Timestamp rply_Time,
-			String rply_Status) {
-		super();
-		this.rply_No = rply_No;
-		this.mem_No = mem_No;
-		this.post_No = post_No;
-		this.rply_Cont = rply_Cont;
-		this.rply_Time = rply_Time;
-		this.rply_Status = rply_Status;
-	}
-	
-	public Reply_MsgVO() {
+	public ReplyVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

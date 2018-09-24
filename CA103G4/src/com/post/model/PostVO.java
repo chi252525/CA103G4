@@ -11,24 +11,7 @@ public class PostVO implements java.io.Serializable{
 	private Integer post_Eva;
 	private byte[] post_Photo;
 	private Timestamp post_Time;
-	
-	
-	public PostVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public PostVO(String post_No, String mem_No, String custom_No, String post_Cont, Integer post_Eva,
-			byte[] post_Photo, Timestamp post_Time) {
-		super();
-		this.post_No = post_No;
-		this.mem_No = mem_No;
-		this.custom_No = custom_No;
-		this.post_Cont = post_Cont;
-		this.post_Eva = post_Eva;
-		this.post_Photo = post_Photo;
-		this.post_Time = post_Time;
-	}
+	private Integer post_Views;
 	
 	
 	public String getPost_No() {
@@ -49,6 +32,7 @@ public class PostVO implements java.io.Serializable{
 	public void setCustom_No(String custom_No) {
 		this.custom_No = custom_No;
 	}
+	
 	public String getPost_Cont() {
 		return post_Cont;
 	}
@@ -73,5 +57,15 @@ public class PostVO implements java.io.Serializable{
 	public void setPost_Time(Timestamp post_Time) {
 		this.post_Time = post_Time;
 	}
+	public Integer getPost_Views() {
+		return post_Views;
+	}
+	public void setPost_Views(Integer post_Views) {
+		this.post_Views = post_Views;
+	}
+	
+	
+	
+	
 	
 }
