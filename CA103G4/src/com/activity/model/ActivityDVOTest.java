@@ -73,30 +73,30 @@ public class ActivityDVOTest {
 //		 
 //		 getAll的執行done
 		
-//		 List<ActivityVO> licv=dao.getAll();
-//		 for(ActivityVO vo3:licv) {
-//		 SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
-//			 System.out.println(vo3.getAct_No());
-//			 System.out.println(vo3.getCoucat_No());
-//			 System.out.println(vo3.getAct_Cat());
-//			 System.out.println(vo3.getAct_Name());
-//			 System.out.println(vo3.getAct_Content());
-//			 System.out.println(fmt2.format(vo3.getAct_Start()));
-//			 System.out.println(fmt2.format(vo3.getAct_End()));
-//			 System.out.println("=========================");
-//		 }
+		 List<ActivityVO> licv=dao.getAll();
+		 for(ActivityVO vo3:licv) {
+		 SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
+			 System.out.println(vo3.getAct_No());
+			 System.out.println(vo3.getCoucat_No());
+			 System.out.println(vo3.getAct_Cat());
+			 System.out.println(vo3.getAct_Name());
+			 System.out.println(vo3.getAct_Content());
+			 System.out.println(fmt2.format(vo3.getAct_Start()));
+			 System.out.println(fmt2.format(vo3.getAct_End()));
+			 System.out.println("=========================");
+		 }
 		 
 //		 findByAct_Cata的執行 done
-		 SimpleDateFormat fmt3=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
-		 ActivityVO  vo4=dao.findByAct_Cata("AC1");
-		 System.out.println(vo4.getAct_No());
-		 System.out.println(vo4.getCoucat_No());
-		 System.out.println(vo4.getAct_Cat());
-		 System.out.println(vo4.getAct_Name());
-		 System.out.println(vo4.getAct_Content());
-		 System.out.println(fmt3.format(vo4.getAct_Start()));
-		 System.out.println(fmt3.format(vo4.getAct_End()));
-		 System.out.println("========================="); 	 
+//		 SimpleDateFormat fmt3=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
+//		 ActivityVO  vo4=dao.findByAct_Cata("AC1");
+//		 System.out.println(vo4.getAct_No());
+//		 System.out.println(vo4.getCoucat_No());
+//		 System.out.println(vo4.getAct_Cat());
+//		 System.out.println(vo4.getAct_Name());
+//		 System.out.println(vo4.getAct_Content());
+//		 System.out.println(fmt3.format(vo4.getAct_Start()));
+//		 System.out.println(fmt3.format(vo4.getAct_End()));
+//		 System.out.println("========================="); 	 
 	}
 	// 使用byte[]方式
 				public static byte[] getPictureByteArray(String path) throws IOException {

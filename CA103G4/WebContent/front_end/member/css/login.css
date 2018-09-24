@@ -1,0 +1,55 @@
+
+/*font */
+
+        body{       	
+        	background-image: url("/chiapao/front_end/img/woodbackground3.png");
+        }
+
+
+/*login css*/
+
+.td1{
+	width:10%;
+	text-align: center;
+}
+
+ .td2{
+ 	width: 25%;
+ 	text-align: center;
+ }
+
+
+ .custom-input {
+ 	width: 250px;
+ 	border-radius: 0.5rem;
+
+ }
+
+ td{
+ 	height: 50px;	
+ }
+
+
+
+ .custom-btn{
+ 	
+ 	margin-bottom: 5px;
+ 	margin-right: 20px;
+ 	border-radius: 0.5rem;
+ }
+
+ .loginarea{
+ 	margin-top: 200px;
+ 
+ }
+
+ .tablebg{
+ 	background-color:rgba(255,255,255,0.45);
+ 	border-radius: 1rem;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    border-radius: 2rem;
+    opacity: 0.8;
+          
+ }
+

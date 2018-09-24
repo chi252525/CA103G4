@@ -28,8 +28,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery order by deliv_no DESC";
 	private static final String GET_NOTOK_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_status= 1 order by deliv_no DESC";
 	private static final String GET_ONE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_no= ?";
-	private static final String UPDATE = "UPDATE delivery set deliv_status=? where deliv_no = ?";
-	private static final String UPDATE2 = "UPDATE delivery set emp_no=?,deliv_status=? where deliv_no = ?";
+	private static final String UPDATE = "UPDATE delivery set emp_no=?,deliv_status=? where deliv_no = ?";
 	// VARCHAR2 (PK not found)
 
 	@Override
@@ -77,18 +76,11 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			if (deliveryVO.getDeliv_status() == "1") {
-				pstmt = con.prepareStatement(UPDATE2);
+				pstmt = con.prepareStatement(UPDATE);
 
 				pstmt.setString(1, deliveryVO.getEmp_no());
 				pstmt.setString(2, deliveryVO.getDeliv_status());
 				pstmt.setString(3, deliveryVO.getDeliv_no());
-			} else {
-				pstmt = con.prepareStatement(UPDATE);
-
-				pstmt.setString(1, deliveryVO.getDeliv_status());
-				pstmt.setString(2, deliveryVO.getDeliv_no());
-			}
 
 			pstmt.executeUpdate();
 
@@ -143,9 +135,9 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_MORE_STMT);
 
-			if (deliv_no != null && emp_no == null && deliv_status == null) {
+			if (deliv_no != null) {
 
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + od);
+				pstmt = con.prepareStatement(GET_MORE_STMT + dn);
 
 				pstmt.setString(1, deliv_no);
 
@@ -165,34 +157,11 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 				pstmt.setString(1, deliv_status);
 
 				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no != null && deliv_status == null) {
-
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, emp_no);
-
-				rs = pstmt.executeQuery();
 			} else if (deliv_no == null && emp_no != null && deliv_status != null) {
 				pstmt = con.prepareStatement(GET_MORE_STMT + em + ad + dt + od);
 
 				pstmt.setString(1, emp_no);
 				pstmt.setString(2, deliv_status);
-
-				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no == null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, deliv_status);
-
-				rs = pstmt.executeQuery();
-			} else if (deliv_no != null && emp_no != null && deliv_status != null) {
-				pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt + od);
-
-				pstmt.setString(1, deliv_no);
-				pstmt.setString(2, emp_no);
-				pstmt.setString(3, deliv_status);
 
 				rs = pstmt.executeQuery();
 			} else {

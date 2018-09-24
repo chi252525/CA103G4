@@ -1,6 +1,6 @@
 package android.com.delivery.controller;
 
-import android.com.menu.model.*;
+import android.com.delivery.model.*;
 import android.com.main.ImageUtil;
 
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class AndroidDeliveryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		ServletContext context = getServletContext();
-		MenuDAO_interface dao = new MenuDAO();
+		DeliveryDAO_interface dao = new DeliveryDAO();
 		Gson gson = new Gson();
 
 		BufferedReader br = req.getReader();
@@ -39,34 +39,20 @@ public class AndroidDeliveryServlet extends HttpServlet {
 		String action = jsonObject.get("action").getAsString();
 
 		if ("getAll".equals(action)) {
-			List<MenuVO> menuList = dao.getAll();
-			writeText(res, gson.toJson(menuList));
-		} 
-//		else if ("findByCategory".equals(action)) {
-//			int cid = Integer.parseInt(jsonObject.get("cid").getAsString());
-//			List<Book> bookList = dao.findByCategory(cid);
-//			writeText(res, gson.toJson(bookList));
-//			
-//		} 
-		// 圖片請求
-		else if ("getImage".equals(action)) {
-			OutputStream os = res.getOutputStream();
-			String pk = jsonObject.get("pk").getAsString();
-			int imageSize = jsonObject.get("imageSize").getAsInt();
-			byte[] image = dao.getImage(pk);
-			if (image != null) {
-				// 縮圖 in server side
-				image = ImageUtil.shrink(image, imageSize);
-				res.setContentType("image/jpeg");
-				res.setContentLength(image.length);
-			}
-			try {
-				os.write(image);
-			} catch (NullPointerException ne) {
-				System.out.println(pk+" : No Picture!");
-			}
-
+			List<DeliveryVO> deliveryList = dao.getAll();
+			writeText(res, gson.toJson(deliveryList));
 		}
+		else if ("getEmpNo".equals(action)) {
+			String emp_no = jsonObject.get("emp_no").getAsString();
+			List<DeliveryVO> deliveryList = dao.getByEmpNo(emp_no);
+			writeText(res, gson.toJson(deliveryList));
+		} 
+		else if ("getDelivNo".equals(action)) {
+			String deliv_no = jsonObject.get("deliv_no").getAsString();
+			List<DeliveryVO> deliveryList = dao.getByDelivNo(deliv_no);
+			writeText(res, gson.toJson(deliveryList));
+		} 
+		
 		else {
 			writeText(res, "");
 		}
@@ -83,9 +69,9 @@ public class AndroidDeliveryServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		MenuDAO_interface dao = new MenuDAO();
-		List<MenuVO> menuList = dao.getAll();
-		writeText(res, new Gson().toJson(menuList));
+		DeliveryDAO_interface dao = new DeliveryDAO();
+		List<DeliveryVO> deliveryList = dao.getAll();
+		writeText(res, new Gson().toJson(deliveryList));
 	}
 
 }

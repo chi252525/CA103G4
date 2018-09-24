@@ -23,7 +23,7 @@ public class DeliveryService {
 		
 		DeliveryVO deliveryVO = new DeliveryVO();
 		
-		deliveryVO.setDeliv_status(emp_no);
+		deliveryVO.setEmp_no(emp_no);
 		deliveryVO.setDeliv_status(deliv_status);
 		deliveryVO.setDeliv_no(deliv_no);
 		dao.update(deliveryVO);

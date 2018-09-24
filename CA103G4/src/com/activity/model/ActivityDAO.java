@@ -1,6 +1,11 @@
 package com.activity.model;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,10 +13,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 public class ActivityDAO implements ActivityDAO_interface{
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "raman";
-	private static final String PASSWORD = "123456";
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(" + 
 			"ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME," + 
 			"ACT_CAROUSEL,ACT_CMIMETYPE,ACT_Pic,ACT_PMIMETYPE,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)" + 
@@ -30,19 +40,13 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"SELECT * FROM ACTIVITY";
 	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
 			
-	static {
-		try {
-			Class.forName(DRIVER);
-		}catch(ClassNotFoundException ce) {
-			ce.printStackTrace();
-		}
-		}
+
 	@Override
 	public void insert(ActivityVO activityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, activityVO.getCoucat_No());
@@ -87,7 +91,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, activityVO.getCoucat_No());
@@ -136,7 +140,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYDATEBETWEEN);
 			pstmt.setTimestamp(1, act_Start1);
@@ -196,7 +200,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		List<ActivityVO> activitylist = new ArrayList<>();
 
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
@@ -207,9 +211,11 @@ public class ActivityDAO implements ActivityDAO_interface{
 				activityVO.setCoucat_No(rs.getString("coucat_No"));
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
+				activityVO.setAct_Pic(rs.getBytes("act_Pic"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
 				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
 				activityVO.setAct_End(rs.getTimestamp("act_End"));
+				activityVO.setAct_Usecou(rs.getString("act_Usecou"));
 				activitylist.add(activityVO); 
 			}
 
@@ -250,7 +256,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYACTCATA);
 			pstmt.setString(1, act_Cata);
@@ -302,7 +308,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, act_No);
