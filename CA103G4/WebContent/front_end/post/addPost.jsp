@@ -95,12 +95,8 @@ body {
 	width="100%">
 	<!--your html start==================================================================================-->
 	<jsp:include page="/front_end/header.jsp" flush="true" />
-	<div class="container container-margin">
-		<div class="row">
-			<div class="col-sm-8 blog-main">
-				<div class="row d-flex flex-wrap justify-content-center postitem">
-					<div class="col-md-12 col-sm-12 ">
-						<%-- 錯誤表列 --%>
+	<div class="container my-5">
+					<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
 							<ul>
@@ -109,11 +105,70 @@ body {
 								</c:forEach>
 							</ul>
 						</c:if>
+			<!-- */會員訂過的餐點 -->
+		   <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>分享餐點</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 my-4">
+          <div class="card">
 
-						<form method="post"
+<%@ page import="com.custommeals.model.*"%>
+<%String mem_No="M000001"; %>
+<%
+	CustommealsService cusmealSvc = new CustommealsService();
+	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(mem_No);
+	pageContext.setAttribute("list", list);
+%>
+            <div class="card-header text-primary p-3">我訂過的餐點</div>
+          </div>
+          	<div class="card-body px-0 py-0 id="myDIV" onscroll="myFunction()">
+          <ul class="list-group">
+            <!-- 訂過的List -->
+            <c:forEach var="custommealsVO" items="${list}">
+            <li class="list-group-item d-flex justify-content-between align-items-center">              
+              ${custommealsVO.custom_Name}
+              <button type="submit" class="btn sharebtn btn-outline-info btn-xs ${custommealsVO.custom_No}" >分享</button>
+            	<script>
+				$(document).ready(function() {
+					$(".${custommealsVO.custom_No}").click(function() {
+						$("#custom_No").val("${custommealsVO.custom_No}");
+						$("#custom_Name").val("${custommealsVO.custom_Name}");
+
+					});
+				});
+			</script>
+            </li> 	
+            </c:forEach>
+            
+          </ul>
+           </div>
+        </div>
+      </div>
+		
+			<script>
+
+				function myFunction() {
+					var elmnt = document.getElementById("myDIV");
+					var y = elmnt.scrollTop;
+				}
+			</script>
+		<!-- */會員訂過的餐點 -->
+      
+      
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-3">
+            <div class="card-header text-primary"> 分享你最獨特的組合! </div>
+            <div class="card-body m-2">
+             <form method="post"
 							action="<%=request.getContextPath()%>/post/postServlet.do"
 							name="insertform" enctype="multipart/form-data">
-							<h3>分享你最獨特的組合!</h3>
+			
 
 							<div class="form-group">
 								<label>我的組合餐名</label> <input type="text" id="custom_Name"
@@ -124,7 +179,7 @@ body {
 							
 							
 							<div class="form-group">
-								<label for="img_input2" id="img_label2">餐點照片 <i
+								<label for="img_input2" id="img_label2">選個封面照片! <i
 									class="fa fa-plus fa-lg"></i></label> <input type="file"
 									id="img_input2" name="post_Photo" class="form-control"
 									accept="image/*" />
@@ -160,11 +215,12 @@ body {
 								href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp"
 								class="btn btn-dark ">放棄編輯</a>
 						</form>
-					</div>
-				</div>
-
-			</div>
-			<!-- /.blog-post -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+		
 
 			<script>
 				CKEDITOR.replace('post_Cont', {
@@ -195,72 +251,7 @@ body {
 
 
 
-<%@ page import="com.custommeals.model.*"%>
-<%String mem_No="M000001"; %>
-<%
-	CustommealsService cusmealSvc = new CustommealsService();
-	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(mem_No);
-	pageContext.setAttribute("list", list);
-%>
-
-	<!-- blog-sidebar -->
-	<!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-          <!-- Search Widget -->
-          <div class="card my-2">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for Some food...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-		<!-- Categories Widget -->
-		<div class="card my-3">
-			<h5 class="card-header">我訂過的餐點</h5>
-			<div class="card-body id="myDIV" onscroll="myFunction()">
-				<div class="row ">
-					<div id="content">
-						<div class="col-12 py-2  custoitem ">
-							<c:forEach var="custommealsVO" items="${list}">
-								<a href="#" class="item active">${custommealsVO.custom_Name}</a>
-								<button type="submit" class="btn sharebtn btn-outline-dark btn-xs ${custommealsVO.custom_No}" >分享</button>
-							<script>
-						
-							$(document).ready(function() {
-							    $(".${custommealsVO.custom_No}").click(function() {
-							                        
-							    $("#custom_No").val("${custommealsVO.custom_No}");
-							    $("#custom_Name").val("${custommealsVO.custom_Name}");
-							               
-							    });
-							   });
-							
-							</script>
-							
-							
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-			</div>
-			<script>
-
-				
-			
-				function myFunction() {
-					var elmnt = document.getElementById("myDIV");
-					var y = elmnt.scrollTop;
-				}
-			</script>
+   
 	
 	</div>
 	<!-- /.blog-sidebar end-->
