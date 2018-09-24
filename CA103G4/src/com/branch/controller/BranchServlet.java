@@ -23,8 +23,7 @@ public class BranchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		doPost(req, res);
 	}
@@ -353,8 +352,12 @@ public class BranchServlet extends HttpServlet {
 				// ===============開始刪除==================
 				String branch_No = req.getParameter("branch_No");
 				BranchService strSvc = new BranchService();
-				int x = strSvc.delete(branch_No);
-
+				String delrow = Integer.toString(strSvc.delete(branch_No));
+				if(delrow.equals("0")) {
+					delrow="刪除失敗，請聯絡管理員";
+				}else {
+					delrow="刪除成功";
+				}
 				if (!errorMsgs.isEmpty()) {
 					errorMsgs.add("刪除失敗，請聯絡管理員");
 					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
@@ -362,7 +365,15 @@ public class BranchServlet extends HttpServlet {
 					return;// 有錯誤,返回addbranch
 				}
 				// ===============轉交=======================
-				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				res.setCharacterEncoding("UTF-8");
+				res.getWriter().print(new StringBuilder("<tr valign=\"middle\">")
+						.append("<td class=\"text-center\" colspan=\"6\" rowspan=\"6\"\r\n"
+								+ "style=\"vertical-align: middle; font-size: 20px; color: sienna; padding-top: 20px; font-weight: bold;\"> "+ delrow +" </td>\r\n"
+								+ "</tr>")
+						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>")
+						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>")
+						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>"));
+				//req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);

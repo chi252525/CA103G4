@@ -162,18 +162,23 @@
 										<td>${brVO.branch_Tel}</td>
 
 										<td>
+											<FORM id="upform" method="post" action="branch.do">
 												<input id="update" type="button"
 													class="update btn btn-warning btn-sm" value="修改"
-													style="display: none">
-													<input type="hidden" name="action" value="delete"> 
-											<input type="hidden" name="branch_No" value="${brVO.branch_No}">
-											</td>
+													style="display: none"> 
+												<input type="hidden"
+													name="action" value="update"> 
+												<input id="branch_No"
+													type="hidden" name="branch_No" value="${brVO.branch_No}">
+											</FORM>
+										</td>
 										<td>
-										<FORM id="delform" method="post" action="branch.do">
-											<input type="button" class="del btn btn-danger btn-sm" value="刪除 "style="display: none"> 
-											<input type="hidden" name="action" value="delete"> 
-											<input type="hidden" name="branch_No" value="${brVO.branch_No}">
-										</FORM>
+											<FORM id="delform" method="post" action="branch.do">
+												<input type="button" class="del btn btn-danger btn-sm"
+													value="刪除 " style="display: none"> <input
+													type="hidden" name="action" value="delete"> <input
+													type="hidden" name="branch_No" value="${brVO.branch_No}">
+											</FORM>
 										</td>
 
 									</tr>
@@ -233,10 +238,13 @@
 					}//xhr.status == 200
 				};//onload 
 				xhr.open("POST", "branch.do", true);
-				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xhr.setRequestHeader("Content-Type",
+						"application/x-www-form-urlencoded");//若無設定此header, servlet getParameter將取不到值
 				//送出請求 
-				xhr.send("action="+document.getElementById("allbranch").value);
-// 				alert(document.getElementById("allbranch").value);
+				xhr
+						.send("action="
+								+ document.getElementById("allbranch").value);
+				// 				alert(document.getElementById("allbranch").value);
 			}
 			//顯示修改刪除按鈕
 			var updateBtn;//修改按鈕
@@ -250,26 +258,32 @@
 					updateBtn[i].style.display = "table-cell";//顯示修改按鈕
 					updateBtn[i].onclick = function() {//註冊點擊事件
 						if (confirm("確定修改分店?")) {
-							submit();
+							document.getElementById("upform").submit();
 						}
 					}
 					delBtn[i].onclick = function() {
-						if (confirm("確定刪除分店?")) {
-							document.getElementById("delform").submit();
-						}
+						del();
 					}
 					delBtn[i].style.display = "table-cell";//顯示刪除按鈕
 
 					//console.log(x[i]);
 				}
 			}
-
-			function delcfm() {
-				if (del) {
-					window.event.returnvalue = true;
-				} else {
-					window.event.returnvalue = false;
-				}
+			function del() {
+				if (confirm("確定刪除分店?"))
+					var xhr = new XMLHttpRequest();
+				xhr.onload = function() {
+					if (xhr.status == 200) {
+						document.getElementById("tbody").innerHTML = xhr.responseText;
+					} else {
+						alert(xhr.status);
+					}
+				};
+				xhr.open("post", "branch.do", true);
+				xhr.setRequestHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+				xhr.send("action=delete&branch_No="
+						+ document.getElementById("branch_No").value);
 			}
 		</script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
