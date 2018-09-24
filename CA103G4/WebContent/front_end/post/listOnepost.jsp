@@ -186,13 +186,13 @@ body {
 			<c:set var="listReplybypost_No" value="${postVO.post_No}"/>		
 		<%
  				ReplyService rplySvc = new ReplyService(); 
- 				String listReplybypost_No = (String)pageContext.getAttribute("post_No");
+ 				String listReplybypost_No = postVO.getPost_No();
  				System.out.println("listReplybypost_No"+listReplybypost_No);
  				List<ReplyVO>  rplyList = rplySvc.getByPostNo(listReplybypost_No) ;
  				pageContext.setAttribute("rplyList",rplyList); 
 			%>			
 		<div class="content">
-						<span class="right floated">${rplyList.size()}個留言</span> 
+						<span class="right floated"><%=rplyList.size()%>個留言</span> 
 					</div>
 		
 		<!-- Comment  comments -->
