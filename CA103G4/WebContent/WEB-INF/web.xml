@@ -152,6 +152,34 @@
 		<url-pattern>/post/postshowimage.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ActivityServlet</servlet-name>
+		<servlet-class>com.emp.controller.ActivityServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ActivityServlet</servlet-name>
+		<url-pattern>/activity/activity.do</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ActivityShowImage</servlet-name>
+		<servlet-class>com.activity.controller.ActivityShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ActivityShowImage</servlet-name>
+		<url-pattern>/activity/activityshowimage.do</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ReplyServlet</servlet-name>
+		<servlet-class>com.reply.controller.ReplyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReplyServlet</servlet-name>
+		<url-pattern>/reply/replyServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	
 	
 	
 	<filter>

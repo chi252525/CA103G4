@@ -33,7 +33,7 @@ public class PostShowImage extends HttpServlet{
 			out.write(image);
 //			System.out.println("成功寫出圖片");
 		}	catch (Exception e){
-			InputStream in = getServletContext().getResourceAsStream("/res/img/post/post_no_photo.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/res/img/post_no_photo.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);
