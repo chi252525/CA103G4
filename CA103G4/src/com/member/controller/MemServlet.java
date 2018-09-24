@@ -1,21 +1,27 @@
 package com.member.controller;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.naming.Context;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.sql.DataSource;
 
 import com.member.model.*;
 
 @MultipartConfig(fileSizeThreshold=1024*1024)
 public class MemServlet extends HttpServlet{
-	
+	Connection con;
 	public void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
 		
 		req.setCharacterEncoding("UTF-8");
@@ -32,6 +38,33 @@ public class MemServlet extends HttpServlet{
 				
 			}
 		}
+		
+		//登入顯示大頭照
+		ServletOutputStream out = res.getOutputStream();
+		res.setContentType("image/gif");
+			try {
+				Context ctx = new javax.naming.InitialContext();
+				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+				con = ds.getConnection();
+				String mem_Id = req.getParameter("mem_Id").trim();
+		System.out.println(mem_Id);
+				Statement stmt = con.createStatement();
+	
+				ResultSet rs = stmt.executeQuery(
+					"SELECT MEM_PHOTO FROM MEMBER WHERE MEM_ID='"+mem_Id+"'");
+				if (rs.next()) {
+					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("MEM_PHOTO"));
+					byte[] buf = new byte[4 * 1024]; // 4K buffer
+					int len;
+					while ((len = in.read(buf)) != -1) {
+						out.write(buf, 0, len);
+					}
+				in.close();
+				}
+					
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		
 		doPost(req,res);
 	}
@@ -259,8 +292,8 @@ public class MemServlet extends HttpServlet{
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
-				errorMsgs.add("SQL錯誤"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/member/loginSusess.jsp");
+				errorMsgs.add("登入失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/member/login.jsp");
 				failuerView.forward(req, res);
 			}
 		

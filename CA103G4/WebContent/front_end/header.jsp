@@ -122,10 +122,14 @@ body {
 								<a
 								class="nav-link dropdown-toggle" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
 								id="navbarDropdownMenuLink" role="button" ${(memVO.mem_Name == null )? '' : 'data-toggle=\"dropdown\"'}
-								aria-haspopup="true" aria-expanded="false"> ${(memVO.mem_Name == null )? '':memVO.mem_Name}
+								aria-haspopup="true" aria-expanded="false" style="padding-top:${(memVO.mem_Name == null )? '': '3px'} "> 
+									${(memVO.mem_Name == null )? 'Log in':memVO.mem_Name}
 								
 							<!--有登入狀態圖示改為會員照片小圖 -->
 								<span class="lnr lnr-user" style="display: ${(memVO.mem_Name == null )? '': 'none'} "></span>
+								<span class="lnr nav-link" style="display:inline;">
+									<img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_Id=${(memVO.mem_Id == null)?' ':memVO.mem_Id}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;">
+								</span>
 								</a>
 								
 							<!-- 有登入狀態才會有這裏的會員相關資料 -->
