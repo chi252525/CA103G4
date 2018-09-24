@@ -62,8 +62,8 @@ public class BranchService {
 		return dao.getAll();
 	}
 
-	public void delete(String stor_No) {
-		dao.delete(stor_No);
+	public int delete(String stor_No) {
+		return dao.delete(stor_No);
 	}
 
 	public List<BranchVO> findBy_City(String city) {

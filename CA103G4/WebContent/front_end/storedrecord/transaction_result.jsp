@@ -98,14 +98,7 @@
                                         <td>${StoredrecordVO.stor_Date}</td>
                                         <td>${StoredrecordVO.stor_Point}</td>
                                         <td>${StoredrecordVO.drew_Point}</td>
-                                        <c:choose>
-                                            <c:when test="${StoredrecordVO.stor_Status==1}">
-                                                <td>成功</td>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <td>失敗</td>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <td>${(StoredrecordVO.stor_Status==1)?'成功':'失敗'}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

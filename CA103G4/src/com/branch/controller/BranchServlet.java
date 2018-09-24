@@ -23,10 +23,10 @@ public class BranchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		doPost(request, response);
+		doPost(req, res);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class BranchServlet extends HttpServlet {
 			try {
 				// ==================輸入檢驗 select menu doesnt need====================
 				String branch_No = req.getParameter("branch_No");
-				
+
 				if (!errorMsgs.isEmpty()) {
 					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 					return;// 有錯誤,返回
@@ -336,7 +336,8 @@ public class BranchServlet extends HttpServlet {
 				}
 				// =============開始新增====================
 				BranchService brsvc = new BranchService();
-				brsvc.addBranch(branch_Name, branch_City,  branch_Dist, branch_Addr, branch_Pos, branch_Lan, branch_Lat, branch_Time, branch_Del, branch_Tel, branch_Tdesk);
+				brsvc.addBranch(branch_Name, branch_City, branch_Dist, branch_Addr, branch_Pos, branch_Lan, branch_Lat,
+						branch_Time, branch_Del, branch_Tel, branch_Tdesk);
 				// ================改完，轉交===================
 				req.getRequestDispatcher("/back_end/branch/listAllbranch.jsp").forward(req, res);
 				// =====================其他可能錯誤=========================
@@ -352,9 +353,13 @@ public class BranchServlet extends HttpServlet {
 				// ===============開始刪除==================
 				String branch_No = req.getParameter("branch_No");
 				BranchService strSvc = new BranchService();
-				strSvc.delete(branch_No);
+				int x = strSvc.delete(branch_No);
 
-				if (errorMsgs.isEmpty()) {
+				if (!errorMsgs.isEmpty()) {
+					errorMsgs.add("刪除失敗，請聯絡管理員");
+					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
+					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+					return;// 有錯誤,返回addbranch
 				}
 				// ===============轉交=======================
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
@@ -363,6 +368,7 @@ public class BranchServlet extends HttpServlet {
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 			}
 		}
+		
 		if ("findBybranch_City".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -381,6 +387,43 @@ public class BranchServlet extends HttpServlet {
 				// ==========forward result===============
 				req.setAttribute("list", list);
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+			}
+		}
+
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				// =========query=========================
+				BranchService brvc = new BranchService();
+				List<BranchVO> list = brvc.getAll();
+				if (list.size() == 0) {
+					errorMsgs.add("一間分店都沒有");
+					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
+					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+					return;// 有錯誤,返回addbranch
+				}
+				// ==========forward result===============
+				req.setAttribute("list", list);
+				// req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req,
+				// res);
+				//=============print to web page=====================
+				StringBuilder htmlstr = new StringBuilder();
+				for (BranchVO brVO : list) {
+					htmlstr.append("<tr><td>" + brVO.getBranch_No() + "</td>")
+							.append("<td>" + brVO.getBranch_Name() + "</td>")
+							.append("<td>" + brVO.getBranch_City() + "</td>")
+							.append("<td>" + brVO.getBranch_Dist() + "</td>")
+							.append("<td>" + brVO.getBranch_Addr() + "</td>")
+							.append("<td>" + brVO.getBranch_Tel() + "</td>")
+							.append("<td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"></td>")
+							.append("<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"></td>");
+				}
+				res.setCharacterEncoding("UTF-8");
+				res.getWriter().print(htmlstr);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
