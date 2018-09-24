@@ -33,9 +33,38 @@ public class DeskDAO implements DeskDAO_interface{
 		"UPDATE DESK set BRANCH_NO=?,DEK_ID=?,DEK_SET=?,DEK_STATUS=? where DEK_NO =?";
 	private static final String GET_BRANCH_STMT = 
 		"SELECT * FROM DESK WHERE Branch_NO =?";
+	private static final String UPDATE_STATUS =
+		"UPDATE DESK set DEK_STATUS=? where DEK_NO =?";
 	
 	
+	@Override
+	public void updateDekStatus(String dek_no, Connection con) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		try {
+			
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			pstmt.setInt(1, 1);
+			pstmt.setString(2, dek_no);
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
 	
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
 	@Override
 	public List<DeskVO> getByBranchNo(String branch_No) {
 		List<DeskVO> list = new ArrayList<DeskVO>();

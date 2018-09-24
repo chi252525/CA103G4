@@ -52,6 +52,15 @@
 				<servlet-name>AndroidDeskServlet</servlet-name>
 				<url-pattern>/AndroidDeskServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidOrderformServlet</servlet-name>
+				<servlet-class>android.com.orderform.controller.AndroidOrderformServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidOrderformServlet</servlet-name>
+				<url-pattern>/AndroidOrderformServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>
