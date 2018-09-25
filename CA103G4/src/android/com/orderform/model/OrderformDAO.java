@@ -33,7 +33,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String DELETE = "DELETE FROM orderform where order_no = ?";
 	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
 	private static final String INSERT_ORDERTYPE0_STMT = "INSERT INTO orderform(order_no,dek_no,branch_no,order_type,order_price,order_status,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=?,order_status=? order by dek_no";
+	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=? and order_status=? order by dek_no";
 	
 	
 	@Override
@@ -52,7 +52,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setInt(1, order_type);
 			pstmt.setInt(2, order_status);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_no"));
