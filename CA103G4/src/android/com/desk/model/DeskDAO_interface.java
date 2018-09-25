@@ -11,5 +11,6 @@ public interface DeskDAO_interface {
     public DeskVO findByPrimaryKey(String dek_no);
     public List<DeskVO> getAll();
     public List<DeskVO> getByBranchNo(String branch_no);
+    public List<DeskVO> getByDekNo(String deck_no);
     
 }

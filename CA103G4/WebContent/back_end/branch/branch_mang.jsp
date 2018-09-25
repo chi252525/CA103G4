@@ -105,14 +105,11 @@
 							</FORM>
 						</div>
 						<div class="d-flex ml-auto">
-
 							<button id="allbranch"
 								class="align-self-center btn btn-light btn-xs" type="button"
 								name="action" value="listAll" onclick="getAll()">
 								<i class="fas fa-globe-asia">全部分店</i>
 							</button>
-
-
 						</div>
 					</div>
 				</div>
@@ -195,7 +192,8 @@
 											<td><input id="update" type="button"
 												class="update btn btn-warning btn-sm" value="修改"
 												style="display: none"></td>
-											<td><input type="button"
+											<td><input type="button" data-toggle="modal"
+												data-target="#exampleModalCenter"
 												class="del btn btn-danger btn-sm" value="刪除 "
 												style="display: none"></td>
 										</tr>
@@ -217,7 +215,38 @@
 			</div>
 		</div>
 		<!--add & update-->
-		
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#exampleModalCenter">Launch demo modal</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Modal
+							title</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">...</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">否</button>
+						<FORM method="post" action="branch.do">
+							<button type="button" class="btn btn-primary" name="action"
+								value="update">是</button>
+						</FORM>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<!-- footer -->
 		<jsp:include page="/front_end/footer.jsp" />
 		<!--Timestampicker-->
