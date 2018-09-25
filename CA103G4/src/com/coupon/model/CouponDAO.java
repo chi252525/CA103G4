@@ -16,8 +16,8 @@ public class CouponDAO implements CouponDAO_interface {
 		private static final String PASSWORD = "123456";
 		private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 		private static final String INSERT_STMT = 
-				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO)"
-				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?)";
+				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
+				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?,'CP1')";
 		private static final String UPDATESTATUS_FALSE="UPDATE COUPON SET COUP_STATUS='CP0' WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=?";
@@ -154,6 +154,54 @@ public class CouponDAO implements CouponDAO_interface {
 			}
 			return couponVO;
 		}
+
+
+
+		@Override
+		public void insert(Connection con,String coucat_No,Integer coucat_Amo) {
+			PreparedStatement pstmt = null;
+			
+			try {
+				for(int i=0;i<coucat_Amo;i++) {
+				pstmt = con.prepareStatement(INSERT_STMT);
+				pstmt.setString(1, coucat_No);
+				int rowCount =pstmt.executeUpdate();
+				System.out.println("新增 " + rowCount + " 筆資料");
+				
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				try {
+					// rollback
+					con.rollback();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+//						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}			
+		}
+
+		
+		
+		
+		
 		
 		
 }
