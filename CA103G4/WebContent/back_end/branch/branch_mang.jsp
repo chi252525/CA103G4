@@ -165,10 +165,8 @@
 											<FORM id="upform" method="post" action="branch.do">
 												<input id="update" type="button"
 													class="update btn btn-warning btn-sm" value="修改"
-													style="display: none"> 
-												<input type="hidden"
-													name="action" value="update"> 
-												<input id="branch_No"
+													style="display: none"> <input type="hidden"
+													name="action" value="update"> <input id="branch_No"
 													type="hidden" name="branch_No" value="${brVO.branch_No}">
 											</FORM>
 										</td>
@@ -218,6 +216,8 @@
 				</div>
 			</div>
 		</div>
+		<!--add & update-->
+		
 		<!-- footer -->
 		<jsp:include page="/front_end/footer.jsp" />
 		<!--Timestampicker-->
@@ -235,11 +235,11 @@
 						document.getElementById("tbody").innerHTML = xhr.responseText;
 					} else {
 						alert(xhr.status);
-					}//xhr.status == 200
-				};//onload 
+					} //xhr.status == 200
+				}; //onload 
 				xhr.open("POST", "branch.do", true);
 				xhr.setRequestHeader("Content-Type",
-						"application/x-www-form-urlencoded");//若無設定此header, servlet getParameter將取不到值
+						"application/x-www-form-urlencoded"); //若無設定此header, servlet getParameter將取不到值
 				//送出請求 
 				xhr
 						.send("action="
@@ -247,16 +247,16 @@
 				// 				alert(document.getElementById("allbranch").value);
 			}
 			//顯示修改刪除按鈕
-			var updateBtn;//修改按鈕
-			var update;//確定修改布林值
-			var delBtn;//刪除按鈕
-			var del;//確定刪除布林值
+			var updateBtn; //修改按鈕
+			var update; //確定修改布林值
+			var delBtn; //刪除按鈕
+			var del; //確定刪除布林值
 			function mytoggle() {
 				updateBtn = document.getElementsByClassName("update");
 				delBtn = document.getElementsByClassName("del");
 				for (var i = 0; i < delBtn.length; i++) {
-					updateBtn[i].style.display = "table-cell";//顯示修改按鈕
-					updateBtn[i].onclick = function() {//註冊點擊事件
+					updateBtn[i].style.display = "table-cell"; //顯示修改按鈕
+					updateBtn[i].onclick = function() { //註冊點擊事件
 						if (confirm("確定修改分店?")) {
 							document.getElementById("upform").submit();
 						}
@@ -264,11 +264,12 @@
 					delBtn[i].onclick = function() {
 						del();
 					}
-					delBtn[i].style.display = "table-cell";//顯示刪除按鈕
+					delBtn[i].style.display = "table-cell"; //顯示刪除按鈕
 
 					//console.log(x[i]);
 				}
 			}
+
 			function del() {
 				if (confirm("確定刪除分店?"))
 					var xhr = new XMLHttpRequest();
