@@ -12,8 +12,9 @@
 
 <style>
   table#table-1 {
-	background-color: #ffe66f;
-    border: 2px solid black;
+	background-color: rgba(255, 255, 255, 0.45);
+/*     border: 2px solid black; */
+	border-radius: 15px;
     text-align: center;
   }
   table#table-1 h4 {
@@ -22,32 +23,41 @@
     margin-bottom: 1px;
   }
   h4 {
-    color: blue;
+    color: white;
     display: inline;
   }
 </style>
 
 <style>
   table {
-	width: 800px;
-	background-color: #fff8d7;
+    
+	width: 1280px;
+	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
-	
+	margin-left:400px;
+	font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
+    font-size: 20;
   }
   table, th, td {
-    border: 1px solid #CCCCFF;
+/*     border: 2px solid rgba(255, 255, 255, 0.8); */
+    border-radius: 15px;
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
   }
   th, td {
     padding: 5px;
     text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
   }
-  
-  body{
-	background-image:url("images/woodbackground3.png")
-}
+  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+  body{background-image:url("images/woodbackground3.png");}
 
 </style>
+
 
 
 </head>
