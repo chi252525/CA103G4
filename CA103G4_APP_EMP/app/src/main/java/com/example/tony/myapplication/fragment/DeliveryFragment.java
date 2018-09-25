@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,16 +29,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DeliveryFragment extends Fragment {
 
     private RecyclerView rvDelivery;
-    private Button btnSearch;
     private Spinner spDeliverySearchMode,spDeliverySearchOption;
     private final static String TAG = "DeliveryFragment";
-    private View view;
+//    private View view;
     private CommonTask getDeliveryTask;
+    private List<DeliveryVO> deliveryList = null;
 
     public DeliveryFragment() {
         // Required empty public constructor
@@ -50,16 +55,86 @@ public class DeliveryFragment extends Fragment {
             return null;
         }
 
-        view = inflater.inflate(R.layout.fragment_delivery, container, false);
+        View view = inflater.inflate(R.layout.fragment_delivery, container, false);
+        rvDelivery = view.findViewById(R.id.rvDelivery);
+        rvDelivery.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rvDelivery.setLayoutManager(layoutManager);
+        rvDelivery.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         spDeliverySearchMode = view.findViewById(R.id.spDeliverySearchMode);
-        spDeliverySearchOption = view.findViewById(R.id.spDeliverySearchOption);
-        btnSearch = view.findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
+        spDeliverySearchMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String searchMode = spDeliverySearchMode.getSelectedItem().toString();
+                Set<String> set = new LinkedHashSet<>();
+                ArrayAdapter<String> adapter;
+                switch (searchMode) {
+                    case "員工編號":
+
+                        for(DeliveryVO deliveryVO : deliveryList) {
+                            if(deliveryVO.getEmp_no() != null)
+                                set.add(deliveryVO.getEmp_no());
+                        }
+                        String[] empNo = set.toArray(new String[set.size()]);
+
+                        // ArrayAdapter用來管理整個選項的內容與樣式，android.R.layout.simple_spinner_item為內建預設樣式
+                        adapter = new ArrayAdapter<>
+                                (getActivity(), android.R.layout.simple_spinner_item, empNo);
+//                        // android.R.layout.simple_spinner_dropdown_item為內建下拉選單樣式
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spDeliverySearchOption.setAdapter(adapter);
+                        spDeliverySearchOption.setSelection(0, true);
+                        break;
+                    case "派送單編號":
+
+                        for(DeliveryVO deliveryVO : deliveryList)
+                                set.add(deliveryVO.getDeliv_no());
+                        String[] deliveryNo = set.toArray(new String[set.size()]);
+
+                        // ArrayAdapter用來管理整個選項的內容與樣式，android.R.layout.simple_spinner_item為內建預設樣式
+                        adapter = new ArrayAdapter<>
+                                (getActivity(), android.R.layout.simple_spinner_item, deliveryNo);
+//                        // android.R.layout.simple_spinner_dropdown_item為內建下拉選單樣式
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spDeliverySearchOption.setAdapter(adapter);
+                        spDeliverySearchOption.setSelection(0, true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // nothing to do
+            }
+
+        });
+
+        spDeliverySearchOption = view.findViewById(R.id.spDeliverySearchOption);
+        spDeliverySearchOption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String searchMode = spDeliverySearchMode.getSelectedItem().toString();
+                String searchOption = spDeliverySearchOption.getSelectedItem().toString();
+                JsonObject jsonObject = new JsonObject();
+                if("員工編號".equals(searchMode)) {
+                    Log.e(TAG,searchMode);
+                    jsonObject.addProperty("action", "getEmpNo");
+                    jsonObject.addProperty("emp_no", searchOption);
+                }
+                else if("派送單編號".equals(searchMode)) {
+                    jsonObject.addProperty("action", "getDelivNo");
+                    jsonObject.addProperty("deliv_no", searchOption);
+                }
+                String jsonOut = jsonObject.toString();
+                updateUI(jsonOut);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // nothing to do
             }
         });
+
 
         // check if the device connect to the network
         if (Util.networkConnected(getActivity())) {
@@ -70,7 +145,6 @@ public class DeliveryFragment extends Fragment {
             String jsonOut = jsonObject.toString();
             getDeliveryTask = new CommonTask(Util.URL + "AndroidDeliveryServlet", jsonOut);
 
-            List<DeliveryVO> deliveryList = null;
             try {
 
                 //將getDeliveryTask回傳的result重新轉型回List<DeliveryVO>物件
@@ -78,14 +152,12 @@ public class DeliveryFragment extends Fragment {
                 Type listType = new TypeToken<List<DeliveryVO>>() {
                 }.getType();
                 deliveryList = new Gson().fromJson(jsonIn, listType);
+
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-            if (deliveryList == null || deliveryList.isEmpty()) {
+            if (deliveryList == null || deliveryList.isEmpty())
                 Util.showToast(getActivity(), R.string.msg_DeliveryNotFound);
-            } else {
-                showResult(deliveryList);
-            }
 
         } else {
             Util.showToast(getActivity(), R.string.msg_NoNetwork);
@@ -112,15 +184,15 @@ public class DeliveryFragment extends Fragment {
                 branch_No = view.findViewById(R.id.branch_No);
                 emp_No = view.findViewById(R.id.emp_No);
                 deliv_Status = view.findViewById(R.id.deliv_Status);
-                deliv_Status.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
-                        Bundle bundle = new Bundle();
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                });
+//                deliv_Status.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
+//                    }
+//                });
             }
         }
 
@@ -138,11 +210,11 @@ public class DeliveryFragment extends Fragment {
             String status = "";
             switch (delivery.getDeliv_status()) {
                 case "1":
-                    status = "等待派送";
+                    status = "尚未分配";
+                    holder.deliv_Status.setEnabled(false);
                     break;
                 case "2":
-                    status = "已派送";
-                    holder.deliv_Status.setEnabled(false);
+                    status = "開始派送";
                     break;
                 case "3":
                     status = "派送完成";
@@ -154,6 +226,17 @@ public class DeliveryFragment extends Fragment {
             holder.branch_No.setText(delivery.getBranch_no());
             holder.emp_No.setText(delivery.getEmp_no());
             holder.deliv_Status.setText(status);
+            holder.deliv_Status.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("delivNo",delivery.getDeliv_no());
+                    bundle.putString("empNo",delivery.getEmp_no());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -162,14 +245,30 @@ public class DeliveryFragment extends Fragment {
         }
     }
 
-    public void showResult(List<DeliveryVO> result) {
 
-        rvDelivery = view.findViewById(R.id.rvDelivery);
-        rvDelivery.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvDelivery.setLayoutManager(layoutManager);
-        rvDelivery.setAdapter(new DeliveryAdapter(result));
+//    public void showResult(List<DeliveryVO> result) {
+//
+//
+//        rvDelivery.setAdapter(new DeliveryAdapter(result));
+//
+//    }
 
+    private void updateUI(String jsonOut) {
+        getDeliveryTask = new CommonTask(Util.URL + "AndroidDeliveryServlet", jsonOut);
+        List<DeliveryVO> deliveryList = null;
+        try {
+            String jsonIn = getDeliveryTask.execute().get();
+            Type listType = new TypeToken<List<DeliveryVO>>() {
+            }.getType();
+            deliveryList = new Gson().fromJson(jsonIn, listType);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if (deliveryList == null || deliveryList.isEmpty()) {
+            Util.showToast(getActivity(), R.string.msg_DeliveryNotFound);
+        } else {
+            rvDelivery.setAdapter(new DeliveryAdapter(deliveryList));
+        }
     }
 
     @Override

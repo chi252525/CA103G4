@@ -39,11 +39,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import static com.google.android.gms.location.LocationServices.API;
 
@@ -52,8 +55,9 @@ public class DeliveryDetailActivity extends AppCompatActivity implements
         LocationListener {
 
     private RecyclerView rvOrderDetail;
+    private TextView tvDelivNo,tvEmpName;
     private final static String TAG = "DeliveryDetailActivity";
-    private View view;
+//    private View view;
     private CommonTask getDeliveryTask;
 
     private static final int MY_REQUEST_CODE = 0;
@@ -68,11 +72,19 @@ public class DeliveryDetailActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_detail);
+        tvDelivNo = findViewById(R.id.tvDelivNo);
+        tvEmpName = findViewById(R.id.tvEmpName);
+
+        Bundle bundle = this.getIntent().getExtras();
+        String DelivNo = bundle.getString("delivNo");
+        String empNo = bundle.getString("empNo");
+        tvDelivNo.setText(DelivNo);
+        tvEmpName.setText(empNo);
 
         // check if the device connect to the network
         if (Util.networkConnected(this)) {
 
-            //宣告JasonObject物件，利用getMenuTask非同步任務連線到Servlet的 if ("getAll".equals(action))
+            //宣告JasonObject物件，利用getDeliveryTask非同步任務連線到Servlet的 if ("getAll".equals(action))
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
@@ -152,6 +164,9 @@ public class DeliveryDetailActivity extends AppCompatActivity implements
     public void onDirectClick(View view) {
 
         StringBuilder sb = new StringBuilder();
+        float[] results = new float[1];
+        Map<Float, String> map = new TreeMap<>();
+//        int count = 0;
 
         // 取得自己位置的緯經度
         sb.append(location.getLatitude()+","+location.getLongitude()+"/");
@@ -169,9 +184,21 @@ public class DeliveryDetailActivity extends AppCompatActivity implements
                 return;
             }
 
-            //  取得派送單內所有訂單的送餐位置緯經度
-            sb.append(address.getLatitude()+","+address.getLongitude()+"/");
+            // 計算自己位置與送餐位置，此2點間的距離(公尺)，結果會存入results[0]
+            Location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                    address.getLatitude(), address.getLongitude(), results);
+            String distance = NumberFormat.getInstance().format(results[0]);
+            Log.e(TAG,distance);
 
+            //  取得送餐位置緯經度並與距離參數一起加入map之中
+            map.put(results[0],address.getLatitude()+","+address.getLongitude()+"/");
+
+        }
+
+        // 利用treemap特性將key值(距離參數)作升序排序
+        for (Map.Entry<Float, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+            sb.append(entry.getValue());
         }
 
         direct(sb.toString());
