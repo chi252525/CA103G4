@@ -1,6 +1,7 @@
 package android.com.orderform.controller;
 
 import android.com.orderform.model.*;
+import android.com.desk.model.DeskDAO_interface;
 import android.com.main.ImageUtil;
 
 import java.io.BufferedReader;
@@ -53,6 +54,16 @@ public class AndroidOrderformServlet extends HttpServlet {
 				orderformVO.setOrderList(orderList);
 			}
 			writeText(res, gson.toJson(orderformVO));
+		}
+		else if("getDeskByOrderTypeAndStatus".equals(action)) {
+			String orderType = jsonObject.get("orderType").getAsString();
+			String orderStatus = jsonObject.get("orderStatus").getAsString();
+			List<OrderformVO> orderList = dao.findByOrderTypeAndStatus(Integer.parseInt(orderType), Integer.parseInt(orderStatus));
+			DeskDAO_interface ddao = new DeskDAO();
+			for(OrderformVO orderformVO : orderList) {
+				ddao.getByDekNo(orderformVO.getDek_no());
+			}
+			writeText(res, gson.toJson(orderList));
 		}
 //		else if ("getEmpNo".equals(action)) {
 //			String emp_no = jsonObject.get("emp_no").getAsString();
