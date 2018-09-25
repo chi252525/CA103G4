@@ -47,7 +47,7 @@ footer {
 </head>
 <body>
 	<footer>
-		<div id="nav-bar-footer">
+		<div id="nav-bar-footer" style="margin-top:400px">
 			<div class="text-white bg-self">
 				<div class="container">
 					<div class="row">
