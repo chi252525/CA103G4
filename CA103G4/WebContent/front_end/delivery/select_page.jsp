@@ -66,6 +66,7 @@ h4 {
 			type="text" name="emp_no"> 派送單狀態:<input type="text"
 			name="deliv_status"> <input type="hidden" name="action"
 			value="get_By_Key"> <input type="submit" value="開始搜尋">
+			
 	</FORM>
 	<br>
 	<%-- s以下是新增外送派送單 --%>

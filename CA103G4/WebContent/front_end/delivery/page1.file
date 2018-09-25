@@ -22,27 +22,11 @@
 <%! int w = 1;%>
 
 <%  try { 
-       
-       whichPage = Integer.parseInt(request.getParameter("whichPage"));       
-       
-       if (count != 0) {
-       w = whichPage;
-       }
-       
-       
+       whichPage = Integer.parseInt(request.getParameter("whichPage"));
        pageIndex=pageIndexArray[whichPage-1];
     } catch (NumberFormatException e) { //第一次執行的時候
- System.out.println("request.getParameter('whichPage')2222 :"+request.getParameter("whichPage"));
-         
-	   if (count == 0){
-	       count++ ;
-	       whichPage=1;
-       	   pageIndex=0;
-	   } else if (count != 0) {
-	       whichPage = w;
-	        pageIndex=pageIndexArray[whichPage-1];
-	   }
-	   
+       whichPage=1;
+       pageIndex=0;
     } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
          if (pageNumber>0){
               whichPage=pageNumber;

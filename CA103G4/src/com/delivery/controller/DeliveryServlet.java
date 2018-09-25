@@ -138,10 +138,7 @@ public class DeliveryServlet extends HttpServlet {
 			
 			String page = req.getParameter("whichPage");
 			req.setAttribute("whichPage",page);
-			
-//	System.out.println(requestURL);
-			
-			
+				
 //			String url = requestURL;
 			String url = "select_page.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
