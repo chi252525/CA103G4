@@ -188,6 +188,17 @@
 		<url-pattern>/reply/replyServlet.do</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>ResServlet</servlet-name>
+		<servlet-class>com.reservation.controller.ResServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>ResServlet</servlet-name>
+	    <url-pattern>/front_end/res/res.do</url-pattern>
+	  </servlet-mapping>
+  
+
+	
 	
 	
 	

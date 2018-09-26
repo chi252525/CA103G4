@@ -30,11 +30,11 @@ public class ResServlet extends HttpServlet {
 			try {
 				String str = req.getParameter("res_no");
 				if(str == null || (str.trim()).length() == 0){
-					errorMsgs.add("�п�J�q��y����");
+					errorMsgs.add("請輸入訂位流水號");
 				}
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView =req
-							.getRequestDispatcher("/res/research_page.jsp");
+							.getRequestDispatcher("/front_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -42,12 +42,12 @@ public class ResServlet extends HttpServlet {
 				try {
 					res_no = new String(str);
 				}catch(Exception e) {
-					errorMsgs.add("�q��y�����榡�����T");
+					errorMsgs.add("訂位流水號格式不正確");
 				}
 				
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/res/research_page.jsp");
+							.getRequestDispatcher("/front_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -55,23 +55,23 @@ public class ResServlet extends HttpServlet {
 				ResService resSvc = new ResService();
 				ResVO resVO = resSvc.getOneRes(res_no);
 				if(resVO == null) {
-					errorMsgs.add("�d�L���");
+					errorMsgs.add("查無資料");
 				}
 				
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView =req
-							.getRequestDispatcher("/res/research_page.jsp");
+							.getRequestDispatcher("/front_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				req.setAttribute("resVO", resVO);
-				String url ="/res/listOneRes.jsp";
+				String url ="/front_end/res/listOneRes.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 				successView.forward(req, res);
 			}catch(Exception e) {
-				errorMsgs.add("�L�k���o���:"+ e.getMessage());
+				errorMsgs.add("無法取得資料:"+ e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/res/research_page.jsp");
+						.getRequestDispatcher("/front_end/res/research_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -90,7 +90,7 @@ public class ResServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}catch(Exception e) {
-			errorMsgs.add("�L�k���o���:"+ e.getMessage());
+			errorMsgs.add("無法取得資料:"+ e.getMessage());
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("/000/012.JSP");
 			failureView.forward(req, res);
