@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/front_end/menu/noddleShop.jsp=UTF-8
 encoding//src/com/branch/model=UTF-8
 encoding//src/com/delivery/model=UTF-8
 encoding//src/com/delivery/model/DeliveryJDBCDAO.java=UTF-8

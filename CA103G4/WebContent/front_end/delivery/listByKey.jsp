@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.delivery.model.*"%>
-
+<%
+  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache");        //HTTP 1.0
+  response.setDateHeader ("Expires", 0);
+%>
 <%-- <jsp:useBean id="delSvc" scope="page" class="com.delivery.model.DeliveryService" /> --%>
 
 <%-- s分頁 --%>
@@ -49,6 +53,7 @@
 
 </head>
 <body>
+
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
