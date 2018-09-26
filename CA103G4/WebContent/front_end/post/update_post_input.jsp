@@ -130,9 +130,9 @@ padding-bottom:20px;
 
 	<div class="container container-margin">
 		<div class="row">
-			<div class="col-sm-8 blog-main">
+			<div class="col-sm-12">
 				<div class="row d-flex flex-wrap justify-content-center postitem">
-					<div class="col-md-10 col-sm-12 ">
+					<div class="col-md-12 col-sm-12 ">
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
@@ -146,9 +146,18 @@ padding-bottom:20px;
 							action="<%=request.getContextPath()%>/post/postServlet.do"
 							name="updateform" enctype="multipart/form-data">
 							<h3>分享你最獨特的組合!</h3>
+					
 							
 							<div class="form-group">
-								<label>我的組合餐名</label> <input type="text" id="custom_No"
+								<label>我的組合餐名</label> 
+								<input type="text" id="custom_Name"
+									name="custom_Name" value="${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}" class="form-control"
+									required />
+									<input type="text" id="member_Buyed"
+									name="member_Buyed" value="${cusmealSvc1.getOneCustommeals(postVO.custom_No).mem_No}" class="form-control"
+									required />
+								
+								<input type="hidden" id="custom_No"
 									name="custom_No" value="<%=postVO.getCustom_No()%>" class="form-control"
 									required />
 							</div>

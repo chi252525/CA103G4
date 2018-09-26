@@ -5,13 +5,19 @@
 <%@ page import="com.post.model.*"%>
 <%@ page import="com.custommeals.model.*"%>
 <%@ page import="com.member.model.*"%>
-<jsp:useBean id="cusmealSvc" scope="page" class="com.custommeals.model.CustommealsService" />
-<jsp:useBean id="IngCSvc" scope="page"	class="com.ingredientcombination.model.IngredientCombinationService" />
-
+<jsp:useBean id="cusmealSvc" scope="page"
+	class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="IngCSvc" scope="page"
+	class="com.ingredientcombination.model.IngredientCombinationService" />
 <%
 	PostService postSvc = new PostService();
-	List<PostVO> list = postSvc.getAll();
+	List<PostVO>list = postSvc.getMem_Post("M000001");
 	pageContext.setAttribute("list", list);
+	
+	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
+	if(memberVO == null){
+		memberVO = (MemberVO)session.getAttribute("memberVO");
+	}
 %>
 
 
@@ -90,7 +96,6 @@ body {
 	<jsp:include page="/front_end/header.jsp" flush="true" />
 
 
-
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<div class="modal fade" id="errorModal_Ning">
@@ -113,55 +118,29 @@ body {
 		</div>
 	</c:if>
 	<%-- 錯誤表列 --%>
+
 	<div class="container my-5">
 		<div class="container">
 			<div class="row">
-				<!-- 查詢BAR -->
-				<div class="col-md-6">
-					<div class="card">
-						<div class="card-header">查詢貼文</div>
-						<div class="card-body">
-							<form METHOD="post"
-								ACTION="<%=request.getContextPath()%>/post/postServlet.do">
-								<div class="input-group my-1">
-									<input type="month" name="bdaymonth" value="date"
-										class="form-control mr-3 my-1 w-25 " size="10"
-										id="inlineFormInputGroup" required="required">
-								</div>
-								<input type="hidden" name="action"
-									value="getYear_and_Month_Post">
-								<button type="submit" class="btn btn-danger">送出</button>
-							</form>
-							<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/post/postServlet.do">
-								<jsp:useBean id="postSvc1" scope="page"
-									class="com.post.model.PostService" />
-								<b><font color=orange>選擇貼文:</font></b> <select size="1"
-									name="post_No">
-									<c:forEach var="postVO" items="${postSvc1.all}">
-										<option value="${postVO.post_No}">${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}
-									</c:forEach>
-								</select> <button type="submit" class="btn btn-danger">送出</button><input type="hidden"
-									name="action" value="getOne_For_Display">
-							</FORM>
-						</div>
-					</div>
-				</div>
-				<!-- */查詢BAR -->
 				
-				<!-- 分享按鈕 -->
 				<div class="col-md-6">
-					<a class="btn btn-info btn-lg px-3 btn-block mt-5"
+			
+						<div class="display-4">我的貼文</div>
+				
+				</div>
+		
+				
+				<div class="col-md-12">
+					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
 				</div>
-				<!-- /*分享按鈕 -->
 				
 			</div>
 			<div class="row">
 				<div class="col-md-12 mt-3">
 					<!-- 共幾篇貼文 -->
 					<c:if test="${not empty list}">
-				共 <span>${list.size()}</span> 篇
+				查詢的結果共 <span>${list.size()}</span> 篇
 				</c:if><%@ include file="pages/page1.file"%>
 					<!-- /*共幾篇貼文 -->
 				</div>
@@ -184,36 +163,31 @@ body {
 						<div class="card px-2">
 							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
 							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							
-							<span class="label label-default">Default Label</span>
-							
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
-							<!-- 查看單一貼文action -->
-							<FORM METHOD="post"
+							<!-- 會員可以修改及刪除的按紐 -->
+							<a
+								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
+								class="btn lnr lnr-pencil btn-warning">修改</a>
+
+
+							<FORM ETHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
 								<input type="hidden" name="post_No" value="${postVO.post_No}">
-								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<!-- 查單一貼文 -->
-								<input type="hidden" name="action" value="getOne_For_Display">
-								<!-- 同時查單一貼文的所有留言 -->
-								<input type="hidden" name="action" value="listReplybyPostNo">
-								<input type="hidden" name="action" value="addviews">
-								<button type="submit" 
-									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>
-							</FORM>
-							<FORM>
-								<input type="hidden" name="post_No" value="${postVO.post_No}">
-								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<input type="hidden" name="action" value="listReplybyPostNo">
-								<button type="submit" value="viewreply"
-									class="btn btn-secondary btn-sm btn-block">查看留言 &raquo;</button>
+								<input type="hidden" name="action" value="delete">
+								<button type="submit" value="delete"
+									class="btn  btn-sm btn-danger btn-block"
+									onclick="deleteConfirm()">
+									<i class="far fa-trash-alt"></i> 刪除
+								</button>
 							</FORM>
 
 						</div>
+						
+						
 					</div>
 				</c:forEach>
 
@@ -221,7 +195,16 @@ body {
 			<%@ include file="pages/page2.file"%>
 		</div>
 	</div>
+<script type="text/javascript">
+function deleteConfirm(){
+	if(window.confirm('確定刪除嗎?')){
+	return true;
+	}else{
+	return false;}
 
+	}
+
+</script>
 
 	<jsp:include page="/front_end/footer.jsp" flush="true" />
 

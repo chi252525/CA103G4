@@ -7,6 +7,10 @@
 
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
+	if (memberVO == null) {
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+	}
 %>
 
 <jsp:useBean id="cusmealSvc1" scope="page"
@@ -256,11 +260,6 @@ body {
 	</div>
 	<!-- /.blog-sidebar end-->
 
-
-
-
-		</div>
-	</div>
 
 
 
