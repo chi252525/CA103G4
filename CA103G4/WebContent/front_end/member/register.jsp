@@ -95,7 +95,7 @@
         </tr>
         <tr>
             <td colspan="4" class="tdbtn">
-            <input type="button" class="btn btn-warning btn-sm " align="right" value="取消">
+            <a href="<%=request.getContextPath() %>/front_end/header.jsp" class="btn btn-warning btn-sm " align="right">取消</a>
             <input type="hidden" name="action" value="insert">
             <input type="submit" class="btn btn-warning btn-sm " align="right" id="send"value="確認">
             
