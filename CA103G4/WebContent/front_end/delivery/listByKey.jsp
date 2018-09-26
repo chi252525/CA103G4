@@ -131,5 +131,9 @@
 <%-- s分頁 --%>
 <%@ include file="page2.file" %>
 
+
+
+
+
 </body>
 </html>

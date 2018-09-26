@@ -52,7 +52,7 @@
                             <a href="<%= request.getContextPath() %>/front_end/member/register.jsp" class="custom-btn btn btn-warning btn-sm"  style="margin-left: 30px;" >註冊</a>
                         </td>
                         <td align="right">
-							<input class="custom-btn btn btn-warning btn-sm" type="button" value="取消">
+							<a href="<%=request.getContextPath() %>/front_end/header.jsp" class="custom-btn btn btn-warning btn-sm" align="right">取消</a>
 							<input type="hidden" name="action" value="loginhandler">
                             <input class="custom-btn btn btn-warning btn-sm" type="submit" value="確認" > 
 						</td>

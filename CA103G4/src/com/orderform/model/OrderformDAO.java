@@ -12,6 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.delivery.model.DeliveryVO;
+import com.orderinvoice.model.*;
+
 public class OrderformDAO implements OrderformDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -39,7 +42,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -85,7 +87,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
@@ -126,7 +127,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
@@ -167,7 +167,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
@@ -232,7 +231,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 //		 order_status=? and order_pstatus= ?
 		try {
 
-			
 			con = ds.getConnection();
 
 			pstmt = con.prepareStatement(GET_NOTOK_STMT);
@@ -298,7 +296,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 
 			if (order_no != null && delivery_no == null) {
@@ -341,7 +338,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			}
 
 			// Handle any SQL errors
-		}  catch (SQLException se) {
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -382,7 +379,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -432,6 +428,90 @@ public class OrderformDAO implements OrderformDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			con.setAutoCommit(false);
+
+			String cols[] = { "ORDER_NO" };
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
+
+			pstmt.setString(1, orderformVO.getDek_no());
+			pstmt.setString(2, orderformVO.getMem_no());
+			pstmt.setString(3, orderformVO.getBranch_no());
+			pstmt.setString(4, orderformVO.getDeliv_no());
+			pstmt.setInt(5, orderformVO.getOrder_type());
+			pstmt.setInt(6, orderformVO.getOrder_price());
+			pstmt.setInt(7, orderformVO.getOrder_status());
+			pstmt.setString(8, orderformVO.getDeliv_addres());
+			pstmt.setInt(9, orderformVO.getOrder_pstatus());
+
+			pstmt.executeUpdate();
+
+			String next_orderno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_orderno = rs.getString(1);
+				System.out.println("有取得自增主鍵。");
+			} else {
+				System.out.println("未取得自增主鍵。");
+			}
+
+			rs.close();
+
+			// 同時新增訂單明細
+			OrderinvoiceDAO dao = new OrderinvoiceDAO();
+			for (OrderinvoiceVO aOin : list) {
+				aOin.setOrder_no(new String(next_orderno));
+				dao.insert2(aOin, con);
+			}
+
+			con.commit();
+			con.setAutoCommit(true);
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void updateWithDelivery(OrderformVO orderformVO, List<DeliveryVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		
+
 	}
 
 }

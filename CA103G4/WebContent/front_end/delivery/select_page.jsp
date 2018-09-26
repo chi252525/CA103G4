@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
 
-<jsp:useBean id="get_By_Key" scope="session" type="java.util.List<DeliveryVO>" />
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -130,7 +128,7 @@ h4 {
 
 	<%-- s當做出某件事情時會刷新表格，一開始會跑出查詢所有的表格 --%>
 	<%
-		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null || request.getAttribute("update") != null) {
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null) {
 	%>
 	<script>
 		function myFunction() {
@@ -143,6 +141,24 @@ h4 {
 		}	
 	%>
 	
+	
+	
+	<%
+	if (request.getAttribute("update") != null) {
+		String a =${};
+		String b =${};
+		String c =${};
+	%>
+	<script>
+		function myFunction() {
+			document.getElementsByName("First")[0].submit();
+		}
+		document.getElementById("First").value = "";
+		$(document).ready(myFunction);
+	</script>
+	<%
+		}	
+	%>
 
 </body>
 </html>

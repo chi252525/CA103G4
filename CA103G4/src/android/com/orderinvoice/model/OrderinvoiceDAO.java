@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import android.com.menu.model.*;
+
 public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -29,6 +31,72 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 	
+	
+	
+	@Override
+	public List<OrderinvoiceVO> findByOrder_no_withMenu(String order_no) {
+		List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();
+		OrderinvoiceVO orderinvoiceVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+
+			pstmt.setString(1, order_no);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				MenuDAO_interface menudao = new MenuDAO();
+				MenuVO menuVO = menudao.findByPrimaryKey(rs.getString("menu_no"));
+				// deliveryVO 也稱為 Domain objects
+				orderinvoiceVO = new OrderinvoiceVO();
+				orderinvoiceVO.setInvo_no(rs.getString("invo_no"));
+				orderinvoiceVO.setOrder_no(rs.getString("order_no"));
+				orderinvoiceVO.setMenu_no(rs.getString("menu_no"));
+				orderinvoiceVO.setCustom_no(rs.getString("custom_no"));
+				orderinvoiceVO.setInvo_status(rs.getInt("invo_status"));
+				orderinvoiceVO.setMenuVO(menuVO);
+				list.add(orderinvoiceVO);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	@Override
 	public void insert(OrderinvoiceVO orderinvoiceVO, Connection con) {
 

@@ -13,7 +13,7 @@
 
 <%@ include file="/front_end/PostHeader.jsp" %> 
 
-     		<div >
+     	<div >
      			<b>所有訂位紀錄 - listAllRes.jsp</b>
      			<hr>
      		</div>
@@ -87,6 +87,7 @@
                      </div>
                 </div>
              </div>
+
 
 	
 <%@ include file="/front_end/PostFooter.jsp" %> 	
