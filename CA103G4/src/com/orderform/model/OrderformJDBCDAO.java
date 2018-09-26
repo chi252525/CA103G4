@@ -456,7 +456,7 @@ public class OrderformJDBCDAO implements OrderformDAO_interface {
 	}
 
 	@Override
-	public void insertWithDelivery(OrderformVO orderformVO, List<DeliveryVO> list) {
+	public void updateWithDelivery(OrderformVO orderformVO, Connection con) {
 		// TODO Auto-generated method stub
 		
 	}

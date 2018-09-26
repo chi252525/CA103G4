@@ -1,5 +1,6 @@
 package com.orderform.model;
 
+import java.sql.Connection;
 import java.util.*;
 
 import com.orderinvoice.model.*;
@@ -23,6 +24,6 @@ public interface OrderformDAO_interface {
 	
 	public void insertWithInvoice(OrderformVO orderformVO , List<OrderinvoiceVO> list);
 
-	public void updateWithDelivery(OrderformVO orderformVO , List<DeliveryVO> list);
+	public void updateWithDelivery(OrderformVO orderformVO , Connection con);
 	
 }

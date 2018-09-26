@@ -506,10 +506,14 @@ public class OrderformDAO implements OrderformDAO_interface {
 	}
 
 	@Override
-	public void updateWithDelivery(OrderformVO orderformVO, List<DeliveryVO> list) {
-		Connection con = null;
+	public void updateWithDelivery(OrderformVO orderformVO, Connection con) {
+
 		PreparedStatement pstmt = null;
 		
+		try {
+			pstmt = con.prepareStatement(UPDATE);
+		
+		}
 		
 
 	}
