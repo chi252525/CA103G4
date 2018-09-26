@@ -33,9 +33,73 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String DELETE = "DELETE FROM orderform where order_no = ?";
 	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
 	private static final String INSERT_ORDERTYPE0_STMT = "INSERT INTO orderform(order_no,dek_no,branch_no,order_type,order_price,order_status,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=?,order_status=? order by dek_no";
+	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=? and order_status=? order by dek_no";
+	private static final String GET_ONE_FROM_DEKNOANDSTATUS_STMT = "SELECT * FROM orderform where dek_no=? and order_status=?";
 	
-	
+	@Override
+	public OrderformVO findByDekNoAndOrderStatus(String dek_no, Integer order_status) {
+		OrderformVO orderformVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_FROM_DEKNOANDSTATUS_STMT);
+
+			pstmt.setString(1, dek_no);
+			pstmt.setInt(2, order_status);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// deliveryVO 也稱為 Domain objects
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setDek_no(rs.getString("dek_no"));
+				orderformVO.setMem_no(rs.getString("mem_no"));
+				orderformVO.setBranch_no(rs.getString("branch_no"));
+				orderformVO.setDeliv_no(rs.getString("deliv_no"));
+				orderformVO.setOrder_type(rs.getInt("order_type"));
+				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_status(rs.getInt("order_status"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
+
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return orderformVO;
+	}
+
 	@Override
 	public List<OrderformVO> findByOrderTypeAndStatus(Integer order_type, Integer order_status) {
 		List<OrderformVO> list = new ArrayList<OrderformVO>();
@@ -52,7 +116,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setInt(1, order_type);
 			pstmt.setInt(2, order_status);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_no"));

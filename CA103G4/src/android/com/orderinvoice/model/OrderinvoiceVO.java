@@ -1,11 +1,25 @@
 package android.com.orderinvoice.model;
 
+import java.util.List;
+
+import android.com.menu.model.MenuVO;
+
 public class OrderinvoiceVO {
 	private String invo_no;
 	private String order_no;
 	private String menu_no;
 	private String custom_no;
 	private Integer invo_status;
+	
+	private MenuVO menuVO;
+	
+	public MenuVO getMenuVO() {
+		return menuVO;
+	}
+
+	public void setMenuVO(MenuVO menuVO) {
+		this.menuVO = menuVO;
+	}
 
 	public String getInvo_no() {
 		return invo_no;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.delivery.model.DeliveryVO;
+import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformJDBCDAO implements OrderformDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -446,6 +447,18 @@ public class OrderformJDBCDAO implements OrderformDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateWithDelivery(OrderformVO orderformVO, Connection con) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

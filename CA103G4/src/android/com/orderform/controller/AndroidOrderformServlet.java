@@ -1,6 +1,7 @@
 package android.com.orderform.controller;
 
 import android.com.orderform.model.*;
+import android.com.orderinvoice.model.*;
 import android.com.desk.model.*;
 import android.com.main.ImageUtil;
 
@@ -60,17 +61,17 @@ public class AndroidOrderformServlet extends HttpServlet {
 			String orderStatus = jsonObject.get("orderStatus").getAsString();
 			List<OrderformVO> orderList = dao.findByOrderTypeAndStatus(Integer.parseInt(orderType), Integer.parseInt(orderStatus));
 			DeskDAO_interface ddao = new DeskDAO();
-			List<DeskVO> deskList;
-			for(OrderformVO orderformVO : orderList) {
-				ddao.getByDekNo(orderformVO.getDek_no());
-			}
-			writeText(res, gson.toJson(orderList));
+			List<DeskVO> deskList = ddao.getByDekNo(orderList);
+			writeText(res, gson.toJson(deskList));
 		}
-//		else if ("getEmpNo".equals(action)) {
-//			String emp_no = jsonObject.get("emp_no").getAsString();
-//			List<DeliveryVO> deliveryList = dao.getByEmpNo(emp_no);
-//			writeText(res, gson.toJson(deliveryList));
-//		} 
+		else if("getOrderNoByDekNoAndOrderStatus".equals(action)) {
+			String dekNo = jsonObject.get("dekNo").getAsString();
+			String orderStatus = jsonObject.get("orderStatus").getAsString();
+			OrderformVO orderformVO = dao.findByDekNoAndOrderStatus(dekNo, Integer.parseInt(orderStatus));
+			OrderinvoiceDAO_interface oidao = new OrderinvoiceDAO();
+			List<OrderinvoiceVO> orderinvoiceList = oidao.findByOrder_no_withMenu(orderformVO.getOrder_no());
+			writeText(res, gson.toJson(orderinvoiceList));
+		}
 //		else if ("getDelivNo".equals(action)) {
 //			String deliv_no = jsonObject.get("deliv_no").getAsString();
 //			List<DeliveryVO> deliveryList = dao.getByDelivNo(deliv_no);

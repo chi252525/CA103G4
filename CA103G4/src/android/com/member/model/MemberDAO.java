@@ -13,12 +13,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class MemberDAO implements MemberDAO_interface{
 	
-	public static final String DRIVER ="oracle.jdbc.driver.OracleDriver";
-	public static final String URL="jdbc:oracle:thin:@localhost:1521:XE";
-	public static final String USER="CHIAPAO";
-	public static final String PASSWORD="CHIAPAO";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static final String INSERT_STMT=
 			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
 			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -29,22 +40,13 @@ public class MemberDAO implements MemberDAO_interface{
 	public static final String GETALL=
 			"SELECT * FROM MEMBER";
 	
-	static {
-		try {
-			Class.forName(DRIVER);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void insert(MemberVO memVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, memVO.getMem_Id());
@@ -96,7 +98,7 @@ public class MemberDAO implements MemberDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con=DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			System.out.println("連線成功");
 			pstmt.setString(1, memVO.getMem_Pw());
@@ -155,7 +157,7 @@ public class MemberDAO implements MemberDAO_interface{
 		PreparedStatement pstmt=null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(CHANGESTATUS_STMT);
 			System.out.println("連線成功");
 			pstmt.setString(1, memVO.getMem_Status());
@@ -197,7 +199,7 @@ public class MemberDAO implements MemberDAO_interface{
 		List<MemberVO> memberlist = new ArrayList<>();
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GETALL);
 			System.out.println("連線成功");
 			ResultSet rs = pstmt.executeQuery();

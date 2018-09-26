@@ -136,8 +136,9 @@ body {
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink" style="display: ${(memVO.mem_Name == null )? 'none': ''} ">
 							<!-- 以下可以自己新增相關會員附屬功能 -->
-									<a class="dropdown-item" href="#">儲值管理</a> 
+									<a class="dropdown-item" href="#">儲值紀錄</a> 
 									<a class="dropdown-item" href="#">訂單查詢</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
 									<a class="dropdown-item" href="#">修改會員</a>
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/member.do?logout=out" >登出</a>
 								</div>
@@ -150,10 +151,7 @@ body {
 			</div>
 		</header>
 
-		<!--background image-->
-		<img
-			src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
-			width="100%" height="" alt="">
+	
 	</section>
 </body>
 </html>

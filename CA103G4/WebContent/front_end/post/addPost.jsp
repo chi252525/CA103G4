@@ -7,6 +7,10 @@
 
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
+	if (memberVO == null) {
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+	}
 %>
 
 <jsp:useBean id="cusmealSvc1" scope="page"
@@ -117,10 +121,10 @@ body {
           <div class="card">
 
 <%@ page import="com.custommeals.model.*"%>
-<%String mem_No="M000001"; %>
+
 <%
 	CustommealsService cusmealSvc = new CustommealsService();
-	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(mem_No);
+	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed("M000001");
 	pageContext.setAttribute("list", list);
 %>
             <div class="card-header text-primary p-3">我訂過的餐點</div>
@@ -208,7 +212,7 @@ body {
 					            </textarea>
 							<!-- //編輯器區塊 -->
 							<br>
-							<input type="hidden" id="mem_No" name="mem_No" value="M000001" />
+							<input type="hidden" id="mem_No" name="mem_No" value="${memVO.mem_No} " />
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-success">確認分享</button>
 							<a
@@ -256,11 +260,6 @@ body {
 	</div>
 	<!-- /.blog-sidebar end-->
 
-
-
-
-		</div>
-	</div>
 
 
 

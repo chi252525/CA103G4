@@ -13,4 +13,6 @@ public interface OrderinvoiceDAO_interface {
 	public List<OrderinvoiceVO> findByOrder_no(String order_no);
 
 	public List<OrderinvoiceVO> getAll();
+	
+	 public void insert2 (OrderinvoiceVO orderinvoiceVO , java.sql.Connection con);
 }
