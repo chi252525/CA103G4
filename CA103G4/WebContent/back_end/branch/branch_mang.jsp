@@ -105,14 +105,11 @@
 							</FORM>
 						</div>
 						<div class="d-flex ml-auto">
-
 							<button id="allbranch"
 								class="align-self-center btn btn-light btn-xs" type="button"
 								name="action" value="listAll" onclick="getAll()">
 								<i class="fas fa-globe-asia">全部分店</i>
 							</button>
-
-
 						</div>
 					</div>
 				</div>
@@ -162,21 +159,21 @@
 										<td>${brVO.branch_Tel}</td>
 
 										<td>
-											<FORM id="upform" method="post" action="branch.do">
+											
 												<input id="update" type="button"
 													class="update btn btn-warning btn-sm" value="修改"
 													style="display: none"> <input type="hidden"
 													name="action" value="update"> <input id="branch_No"
 													type="hidden" name="branch_No" value="${brVO.branch_No}">
-											</FORM>
+											
 										</td>
 										<td>
-											<FORM id="delform" method="post" action="branch.do">
+											
 												<input type="button" class="del btn btn-danger btn-sm"
 													value="刪除 " style="display: none"> <input
 													type="hidden" name="action" value="delete"> <input
 													type="hidden" name="branch_No" value="${brVO.branch_No}">
-											</FORM>
+											
 										</td>
 
 									</tr>
@@ -192,12 +189,24 @@
 											<td>${brVO.branch_Dist}</td>
 											<td>${brVO.branch_Addr}</td>
 											<td>${brVO.branch_Tel}</td>
-											<td><input id="update" type="button"
-												class="update btn btn-warning btn-sm" value="修改"
-												style="display: none"></td>
-											<td><input type="button"
-												class="del btn btn-danger btn-sm" value="刪除 "
-												style="display: none"></td>
+											<td>
+												<FORM id="delform" method="post" action="branch.do">
+													<input id="update" type="button"
+														class="update btn btn-warning btn-sm" value="修改"
+														style="display: none">
+
+												</FORM>
+											</td>
+											<td>
+												<FORM id="delform" method="post" action="branch.do">
+													<input type="button" data-toggle="modal"
+														data-target="#exampleModalCenter"
+														class="del btn btn-danger btn-sm" value="刪除 "
+														style="display: none"><input type="hidden"
+													name="action" value="update"> <input id="branch_No"
+													type="hidden" name="branch_No" value="${brVO.branch_No}">
+												</FORM>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -217,14 +226,40 @@
 			</div>
 		</div>
 		<!--add & update-->
+		<!-- Button trigger modal -->
 		
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Modal
+							title</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">確定刪除分店?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">否</button>
+<!-- 						<form method="post" action="branch.do"> -->
+							<button id="boots" type="button" class="btn btn-primary" 
+								name="action" value="delete">是</button>
+<!-- 						</form> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- footer -->
 		<jsp:include page="/front_end/footer.jsp" />
 		<!--Timestampicker-->
-		<!-- 		<script type="text/javascript"> -->
-		// $(function() { // $('#datetimepicker2').datetimepicker({ // locale
-		: 'ru' // }); // });
-		<!-- 		</script> -->
+		
 		<script>
 			//Ajax查全部分店資料
 			function getAll() {
@@ -241,9 +276,7 @@
 				xhr.setRequestHeader("Content-Type",
 						"application/x-www-form-urlencoded"); //若無設定此header, servlet getParameter將取不到值
 				//送出請求 
-				xhr
-						.send("action="
-								+ document.getElementById("allbranch").value);
+				xhr.send("action="+ document.getElementById("allbranch").value);
 				// 				alert(document.getElementById("allbranch").value);
 			}
 			//顯示修改刪除按鈕
@@ -261,17 +294,17 @@
 							document.getElementById("upform").submit();
 						}
 					}
-					delBtn[i].onclick = function() {
-						del();
+					document.getElementById("boots").onclick = function() {
+ 						del();
 					}
 					delBtn[i].style.display = "table-cell"; //顯示刪除按鈕
 
 					//console.log(x[i]);
 				}
 			}
-
+			//sne delete request function
 			function del() {
-				if (confirm("確定刪除分店?"))
+// 				if (confirm("確定刪除分店?"))
 					var xhr = new XMLHttpRequest();
 				xhr.onload = function() {
 					if (xhr.status == 200) {
@@ -286,6 +319,7 @@
 				xhr.send("action=delete&branch_No="
 						+ document.getElementById("branch_No").value);
 			}
+			
 		</script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
