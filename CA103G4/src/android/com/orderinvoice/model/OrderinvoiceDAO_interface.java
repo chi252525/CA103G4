@@ -14,6 +14,8 @@ public interface OrderinvoiceDAO_interface {
 	public void delete(String orderinvoiceVO);
 
 	public List<OrderinvoiceVO> findByOrder_no(String order_no);
+	
+	public List<OrderinvoiceVO> findByOrder_no_withMenu(String order_no);
 
 	public List<OrderinvoiceVO> getAll();
 }
