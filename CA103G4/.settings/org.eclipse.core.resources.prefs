@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebContent/front_end/shoppingCart/EShop.jsp=UTF-8
 encoding//src/com/branch/model=UTF-8
 encoding//src/com/delivery/model=UTF-8
 encoding//src/com/delivery/model/DeliveryJDBCDAO.java=UTF-8
 encoding//src/com/orderform/model=UTF-8
+encoding//src/com/shopping/controller=UTF-8
 encoding/<project>=UTF-8
