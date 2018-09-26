@@ -1,0 +1,53 @@
+      
+body{      	
+	background-image: url("/chiapao/front_end/img/woodbackground3.png");
+	font-family: Montserrat, Arial, "·L³n¥¿¶ÂÅé", "Microsoft JhengHei" !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+
+
+
+#back {
+	background-color: rgba(255, 255, 255, 0.45);
+	margin-top: 350px;
+	border-radius: 1rem;
+	width:400px;
+	hight:200px;
+	
+	
+}
+
+/* form{ */
+/* 	margin-top:auto; */
+/* 	margin-bottom:auto; */
+/* 	margin-left:auto; */
+/* 	margin-right:auto; */
+/* } */
+
+input{
+	width:200px;
+	border-radius: 0.5rem;
+}
+
+
+.tb1{
+	margin-top:20px;
+	text-align: center;
+}
+
+.tdbtn {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 2px;
+	width:50px;
+}
+

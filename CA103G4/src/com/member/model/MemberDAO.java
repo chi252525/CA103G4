@@ -352,7 +352,7 @@ public class MemberDAO implements MemberDAO_interface{
 
 				memVO = new MemberVO();
 				
-				memVO.setMem_Id(rs.getString("mem_Id"));
+				memVO.setMem_No(rs.getString("mem_No"));
 				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
 				memVO.setMem_Gender(rs.getString("mem_Gender"));

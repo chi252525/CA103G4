@@ -101,4 +101,14 @@ public class MemberService {
 		
 		return dao.findById(mem_Id);
 	}
+	
+	public MemberVO memChangeStatus(String mem_Id, String mem_Status) {
+
+		MemberVO memVO = new MemberVO();
+
+		memVO.setMem_Id(mem_Id);
+		memVO.setMem_Status(mem_Status);
+		dao.changeStatus(memVO);
+		return memVO;
+	}
 }
