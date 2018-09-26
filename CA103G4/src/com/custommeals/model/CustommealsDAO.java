@@ -432,7 +432,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			System.out.println("list.size()-A="+list.size());
 			for (IngredientCombinationVO ingredientCombinationVO : list) {
 				ingredientCombinationVO.setCustom_No(new String(next_custom_No)) ;
-				dao. insert2( ingredientCombinationVO, con);
+				dao.insert2( ingredientCombinationVO, con);
 			}
 
 			// 2●設定於 pstm.executeUpdate()之後

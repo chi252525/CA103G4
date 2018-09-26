@@ -147,55 +147,55 @@
 	<tr>
 		<td>食材選擇:</td>
 		<td>麵條&nbsp
-			<input  type="checkbox" name="noodle" value="I0001"> 細拉麵
-		    <input  type="checkbox" name="noodle" value="I0002"> 烏龍麵
-    		<input  type="checkbox" name="noodle" value="I0003"> 刀削麵
-    		<input  type="checkbox" name="noodle" value="I0004"> 蕎麥麵
-   			<input  type="checkbox" name="noodle" value="I0005"> 墨魚麵
-     		<input  type="checkbox" name="noodle" value="I0006"> 蔬菜麵
+			<input  type="checkbox" name="ingredients" value="I0001"> 細拉麵
+		    <input  type="checkbox" name="ingredients" value="I0002"> 烏龍麵
+    		<input  type="checkbox" name="ingredients" value="I0003"> 刀削麵
+    		<input  type="checkbox" name="ingredients" value="I0004"> 蕎麥麵
+   			<input  type="checkbox" name="ingredients" value="I0005"> 墨魚麵
+     		<input  type="checkbox" name="ingredients" value="I0006"> 蔬菜麵
      		<br>
      		湯頭&nbsp
-     		<input  type="checkbox" name="soup01"> 醬油湯
-		    <input  type="checkbox" name="soup02"> 泡菜湯
-    		<input  type="checkbox" name="soup03"> 牛肉湯
-    		<input  type="checkbox" name="soup04"> 麻辣湯
-   			<input  type="checkbox" name="soup05"> 番茄湯
-     		<input  type="checkbox" name="soup06"> 雞湯
-     		<input  type="checkbox" name="soup07"> 豚骨湯
-   			<input  type="checkbox" name="soup08"> 味增湯
-     		<input  type="checkbox" name="soup09"> 咖哩湯<br>
+     		<input  type="checkbox" name="ingredients" value=""> 醬油湯
+		    <input  type="checkbox" name="ingredients" value=""> 泡菜湯
+    		<input  type="checkbox" name="ingredients" value=""> 牛肉湯
+    		<input  type="checkbox" name="ingredients" value=""> 麻辣湯
+   			<input  type="checkbox" name="ingredients" value=""> 番茄湯
+     		<input  type="checkbox" name="ingredients" value=""> 雞湯
+     		<input  type="checkbox" name="ingredients" value=""> 豚骨湯
+   			<input  type="checkbox" name="ingredients" value=""> 味增湯
+     		<input  type="checkbox" name="ingredients" value=""> 咖哩湯<br>
      		主餐&nbsp
-     		<input  type="checkbox" name="main01"> 叉燒肉
-		    <input  type="checkbox" name="main02"> 炸豬排
-    		<input  type="checkbox" name="main03"> 炸雞柳
-    		<input  type="checkbox" name="main04"> 唐揚雞塊
-   			<input  type="checkbox" name="main05"> 鮮蝦
-     		<input  type="checkbox" name="main06"> 龍蝦
-     		<input  type="checkbox" name="main07"> 櫻花蝦
-   			<input  type="checkbox" name="main08"> 鴨胸
-   			<input  type="checkbox" name="main09"> 魷魚圈
-   			<input  type="checkbox" name="main10"> 蛤蠣
-     		<input  type="checkbox" name="main11"> 虱目魚<br>
+     		<input  type="checkbox" name="ingredients" value=""> 叉燒肉
+		    <input  type="checkbox" name="ingredients" value=""> 炸豬排
+    		<input  type="checkbox" name="ingredients" value=""> 炸雞柳
+    		<input  type="checkbox" name="ingredients" value=""> 唐揚雞塊
+   			<input  type="checkbox" name="ingredients" value=""> 鮮蝦
+     		<input  type="checkbox" name="ingredients" value=""> 小龍蝦
+     		<input  type="checkbox" name="ingredients" value=""> 櫻花蝦
+   			<input  type="checkbox" name="ingredients" value=""> 鴨胸
+   			<input  type="checkbox" name="ingredients" value=""> 魷魚圈
+   			<input  type="checkbox" name="ingredients" value=""> 蛤蠣
+     		<input  type="checkbox" name="ingredients" value=""> 虱目魚<br>
      		副餐&nbsp
-     		<input  type="checkbox" name="side01"> 荷包蛋
-     		<input  type="checkbox" name="side02"> 溫泉蛋
-     		<input  type="checkbox" name="side03"> 滷蛋
-   			<input  type="checkbox" name="side04"> 貢丸
-   			<input  type="checkbox" name="side05"> 豆皮
-   			<input  type="checkbox" name="sdie06"> 筍乾
-     		<input  type="checkbox" name="sdie07"> 小魚乾<br>
+     		<input  type="checkbox" name="ingredients" value=""> 荷包蛋
+     		<input  type="checkbox" name="ingredients" value=""> 溫泉蛋
+     		<input  type="checkbox" name="ingredients" value=""> 滷蛋
+   			<input  type="checkbox" name="ingredients" value=""> 貢丸
+   			<input  type="checkbox" name="ingredients" value=""> 豆皮
+   			<input  type="checkbox" name="ingredients" value=""> 筍乾
+     		<input  type="checkbox" name="ingredients" value=""> 小魚乾<br>
      		配料&nbsp
-     		<input  type="checkbox" name="third01"> 韓式泡菜
-   			<input  type="checkbox" name="third02"> 台式泡菜
-   			<input  type="checkbox" name="third03"> 海帶
-   			<input  type="checkbox" name="third04"> 海苔
-     		<input  type="checkbox" name="third05"> 燙青菜<br>
+     		<input  type="checkbox" name="ingredients" value=""> 韓式泡菜
+   			<input  type="checkbox" name="ingredients" value=""> 台式泡菜
+   			<input  type="checkbox" name="ingredients" value=""> 海帶
+   			<input  type="checkbox" name="ingredients" value=""> 海苔
+     		<input  type="checkbox" name="ingredients" value=""> 燙青菜<br>
      		調味&nbsp
-     		<input  type="checkbox" name="seasoning01"> 蔥花
-   			<input  type="checkbox" name="seasoning02"> 柴魚
-   			<input  type="checkbox" name="seasoning03"> 胡椒
-   			<input  type="checkbox" name="seasoning04"> 辣椒
-     		<input  type="checkbox" name="seasoning05"> 玫瑰鹽<br>
+     		<input  type="checkbox" name="ingredients" value=""> 蔥花
+   			<input  type="checkbox" name="ingredients" value=""> 柴魚
+   			<input  type="checkbox" name="ingredients" value=""> 胡椒
+   			<input  type="checkbox" name="ingredients" value=""> 辣椒
+     		<input  type="checkbox" name="ingredients" value=""> 玫瑰鹽<br>
 		</td>
 	</tr>
 	
