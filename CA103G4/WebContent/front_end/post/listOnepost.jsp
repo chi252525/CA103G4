@@ -9,15 +9,11 @@
 <%@ page import="com.member.model.*"%>
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
-
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 	if (memberVO == null) {
 		memberVO = (MemberVO) session.getAttribute("memberVO");
 	}
 %>
-
-
-
 
 <jsp:useBean id="postSvc" scope="page"
 	class="com.post.model.PostService" />
@@ -188,7 +184,7 @@ body {
 								</div>
 								<input type="hidden" id="post_No" name="post_No"
 									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
-									name="mem_No" value="${postVO.mem_No}" /> <input type="hidden"
+									name="mem_No" value="${memberVO.mem_No}" /> <input type="hidden"
 									name="action" value="insert">
 								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>

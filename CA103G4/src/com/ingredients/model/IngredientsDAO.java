@@ -41,8 +41,8 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS WHERE INGDT_ID=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS ORDER BY INGDT_ID";
-
-
+	private static final String GET_ONE_COSTOMNO_ALL_INGT=
+	"SELECT * FROM ingredients RIGHT JOIN ingredientCombination ON ingredientCombination.ingdt_id=ingredients.ingdt_id WHERE ingredientCombination.custom_No=?";
 	
 
 	@Override
