@@ -26,7 +26,7 @@
 
 <c:forEach var="menuVO" items="${menuSvc.all}">
 <c:if test="${menuVO.menu_Status == 1}">
-  <form name="shoppingForm" action="<%=request.getContextPath()%>" method="POST">
+  <form name="shoppingForm" action="ShoppingServlet.do" method="POST">
   
     <table>
     <tr><div>圖片</div></tr>
