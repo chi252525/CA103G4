@@ -1,0 +1,58 @@
+h1 {
+/* 	margin-top: 60px; */
+font-weight: bolder;
+}
+
+span {
+	margin-right: 60px;
+}
+
+.myfieldset {
+	border: 2px groove(internal value);
+	border: 1px groove #000 !important;
+	padding: 0 1.4em 1.4em 1.4em !important;
+	margin: 0 0 1.5em 0 !important;
+	-webkit-box-shadow: 0px 0px 0px 0px #000;
+	box-shadow: 0px 0px 0px 0px #000;
+	height: 150px;
+}
+
+.mylegend {
+	width: auto;
+}
+
+.footer-copyright {
+	height: 129px;
+}
+
+label {
+	font-size: 18px;
+	margin-right: 60px;
+}
+
+select {
+	width: 50px;
+	margin-left: 30px;
+}
+
+#2 {
+	margin-left: 70px;
+}
+
+strong {
+	width: 100px;
+	margin-left: 40px;
+}
+
+input {
+	width: 35px;
+	margin-left: 40px;
+}
+
+#del {
+	
+}
+
+body {
+	background-image: url(/CA103G4/front_end/img/woodbackground3.png);
+}

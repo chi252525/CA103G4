@@ -255,7 +255,7 @@ public class MenuDAO implements MenuDAO_interface {
 				menuVO.setMenu_Intro(rs.getString("MENU_INTRO"));
 				menuVO.setMenu_Photo(rs.getBytes("MENU_PHOTO"));
 				menuVO.setMenu_Status(rs.getInt("MENU_STATUS"));	
-				
+				System.out.println(rs.getString("MENU_NO"));
 				menuVOList.add(menuVO);
 			}
 

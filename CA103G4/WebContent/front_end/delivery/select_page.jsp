@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.delivery.model.*"%>
-
+<%
+  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache");        //HTTP 1.0
+  response.setDateHeader ("Expires", 0);
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -128,7 +132,7 @@ h4 {
 
 	<%-- s當做出某件事情時會刷新表格，一開始會跑出查詢所有的表格 --%>
 	<%
-		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null)||request.getAttribute("insert") != null || request.getAttribute("update") != null) {
+		if ((session.getAttribute("get_By_Key") == null && request.getAttribute("errorMsgs") == null) || request.getAttribute("insert") != null) {
 	%>
 	<script>
 		function myFunction() {
