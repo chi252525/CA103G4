@@ -9,15 +9,17 @@
 	class="com.custommeals.model.CustommealsService" />
 <jsp:useBean id="IngCSvc" scope="page"
 	class="com.ingredientcombination.model.IngredientCombinationService" />
+	
 <%
+
 	PostService postSvc = new PostService();
-	List<PostVO>list = postSvc.getMem_Post("M000001");
-	pageContext.setAttribute("list", list);
 	
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
 	if(memberVO == null){
-		memberVO = (MemberVO)session.getAttribute("memberVO");
+		memberVO = (MemberVO)session.getAttribute("memVO");
 	}
+	List<PostVO>list = postSvc.getMem_Post(memberVO.getMem_No());
+	pageContext.setAttribute("list", list);
 %>
 
 
@@ -125,11 +127,9 @@ body {
 				
 				<div class="col-md-6">
 			
-						<div class="display-4">我的貼文</div>
-				
+						<div class="display-4">我的貼文${memVO.mem_Name}</div>
 				</div>
-		
-				
+			
 				<div class="col-md-12">
 					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>

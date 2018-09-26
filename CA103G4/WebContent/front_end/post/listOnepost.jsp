@@ -190,7 +190,7 @@ body {
 									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
 									name="mem_No" value="${postVO.mem_No}" /> <input type="hidden"
 									name="action" value="insert">
-								<button type="submit" class="btn btn-primary btn-sm ">送出</button>
+								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>
 						</div>
 					</div>
