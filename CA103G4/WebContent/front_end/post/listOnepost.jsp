@@ -7,13 +7,21 @@
 <%@ page import="com.reply_msg.model.*"%>
 <%@ page import="com.ingredients.model.*"%>
 <%@ page import="com.member.model.*"%>
+
 <%
-	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	PostVO postVO = (PostVO) session.getAttribute("postVO");
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 	if (memberVO == null) {
 		memberVO = (MemberVO) session.getAttribute("memberVO");
 	}
+	
+	IngredientsService ingtSvc=(IngredientsService)new  IngredientsService();
+	List<IngredientsVO> tags = ingtSvc.findIngtByCustomNo(postVO.getCustom_No());
+	pageContext.setAttribute("tags", tags);
+	
+
 %>
+
 
 <jsp:useBean id="postSvc" scope="page"
 	class="com.post.model.PostService" />
@@ -21,6 +29,9 @@
 	class="com.member.model.MemberService" />
 <jsp:useBean id="cusmealSvc" scope="page"
 	class="com.custommeals.model.CustommealsService" />
+
+
+
 
 
 <!DOCTYPE html>
@@ -106,7 +117,8 @@ body {
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
 	<!--your html start==================================================================================-->
-
+	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 	<div class="container container-margin">
 		<div class="row">
 
@@ -122,19 +134,18 @@ body {
 							pattern="yyyy年MM月dd日 HH:mm:ss發表" />
 						<br> by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 					</p>
-
-
-
 					<p></p>
 					<hr>
 					<img id="img"
 						src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
 						class="img-fluid single-gallery-image img-responsive"
 						style="display: block; margin: auto;" alt="Responsive image">
-
 					<hr>
 					<p>餐點推薦度</p>
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+						<c:forEach var="ingredientsVO" items="${tags}" >
+						<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
+						</c:forEach>
 					<p>${postVO.post_Cont}</p>
 					<div class="btn-group">
 						<a
@@ -184,7 +195,7 @@ body {
 								</div>
 								<input type="hidden" id="post_No" name="post_No"
 									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
-									name="mem_No" value="${memberVO.mem_No}" /> <input type="hidden"
+									name="mem_No" value="M000001" /> <input type="hidden"
 									name="action" value="insert">
 								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>
@@ -192,7 +203,9 @@ body {
 					</div>
 				</form>
 				<!-- /*新增留言區塊 -->
+<script type="text/javascript">
 
+</script>
 
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
@@ -226,8 +239,8 @@ body {
 							src="<%=request.getContextPath()%>/front_end/readPic?action=member&id=${replyVO.mem_No}"
 							style="width: 50px; height: 50px;">
 						<div class="my-0 ">
-							<h5 class="my-0  ">${memSvc.getOne_Member(replyVO.mem_No).mem_Name}</h5>
-							${replyVO.rply_Cont}
+							<h5 class="my-0 ">${memSvc.getOne_Member(replyVO.mem_No).mem_Name}</h5>
+							<p id="rply_Cont">${replyVO.rply_Cont}</p>
 							<div class="mt-0 mb-2 mr-2">
 
 								<fmt:formatDate value="${replyVO.rply_Time}"

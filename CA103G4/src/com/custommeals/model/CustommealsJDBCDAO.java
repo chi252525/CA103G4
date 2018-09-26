@@ -20,31 +20,21 @@ import javax.sql.DataSource;
 
 
 
-public class CustommealsDAO implements CustommealsDAO_interface{
+public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-//	private static final String USER = "CA103";
-//	private static final String PASSWORD = "123456";
-//	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String USER = "CA103";
+	private static final String PASSWORD = "123456";
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT = 
 			"INSERT INTO CUSTOMMEALS" 
 	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO)"
 	                +"VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),?,?,?,?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE CUSTOMMEALS SET MEM_NO=?, CUSTOM_NAME=?, CUSTOM_PRICE=?, CUSTOM_PHOTO=? WHERE CUSTOM_NO=?";
-	
-	//只修改名稱
 	private static final String UPDATE_NAME_STMT = 
-			"UPDATE CUSTOMMEALS SET  CUSTOM_NAME=? WHERE CUSTOM_NO=?";
+			"UPDATE CUSTOMMEALS SET CUSTOM_NAME=? WHERE CUSTOM_NO=?";
 	private static final String DELETE_STMT =
 			"DELETE FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
 	private static final String SELECT_ONE_STMT=
@@ -65,7 +55,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
@@ -105,7 +95,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
@@ -146,7 +136,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 //			Class.forName(DRIVER);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(DELETE_STMT);
@@ -186,7 +176,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
@@ -239,7 +229,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -291,7 +281,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_MEAL_BY_MEMBUYED);
 			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
@@ -335,18 +325,17 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		return custommealsVOList;
 	}
 	@Override
-	public void updateNameOnly(String custom_Name,String custom_No) {
+	public void updateNameOnly( String custom_Name,String custom_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_NAME_STMT);
-			
 			pstmt.setString(1, custom_Name);
 			pstmt.setString(2, custom_No);
+			
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("updateNameOnly 修改 " + rowCount + " 筆資料");
