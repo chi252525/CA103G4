@@ -275,4 +275,10 @@ public class OrderinvoiceJDBCDAO implements OrderinvoiceDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void insert2(OrderinvoiceVO orderinvoiceVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
