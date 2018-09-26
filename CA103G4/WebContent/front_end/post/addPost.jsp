@@ -7,9 +7,9 @@
 
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
-	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
-	if(memberVO == null){
-		memberVO = (MemberVO)session.getAttribute("memVO");
+	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
+	if (memberVO == null) {
+		memberVO = (MemberVO) session.getAttribute("memberVO");
 	}
 %>
 
@@ -124,7 +124,7 @@ body {
 
 <%
 	CustommealsService cusmealSvc = new CustommealsService();
-	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(memberVO.getMem_No());
+	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed("M000001");
 	pageContext.setAttribute("list", list);
 %>
             <div class="card-header text-primary p-3">我訂過的餐點</div>

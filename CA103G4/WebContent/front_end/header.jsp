@@ -152,10 +152,7 @@ body {
 			</div>
 		</header>
 
-		<!--background image-->
-		<img
-			src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
-			width="100%" height="" alt="">
+	
 	</section>
 </body>
 </html>

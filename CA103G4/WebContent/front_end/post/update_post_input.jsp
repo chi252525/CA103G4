@@ -42,6 +42,8 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+<script
+	src="<%=request.getContextPath()%>/front_end/blog_ckeditor/ckeditor.js"></script>
 
 <style>
 /* 請複製這一段到你自己的CSS*/
@@ -201,6 +203,12 @@ padding-bottom:20px;
 								<textarea class="form-control" id="textarea" name="post_Cont" rows="6" 
 									 required></textarea>
 							</div>
+							
+							<!-- 編輯器區塊 -->
+							<textarea name="post_Cont">
+					            	<%=postVO.getPost_Cont()%>
+					            </textarea>
+							<!-- //編輯器區塊 -->
 							<script>
 							$(function(){
 								$("#textarea").val('<%=postVO.getPost_Cont()%>');
