@@ -129,7 +129,8 @@ padding-bottom:20px;
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
 	<!--your html start==================================================================================-->
-
+	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 	<div class="container container-margin">
 		<div class="row">
 			<div class="col-sm-12">
@@ -176,17 +177,17 @@ padding-bottom:20px;
 							<div class="form-group">
 								<p>餐點推薦度</p>
 								<fieldset class="starability-slot">
-									<input type="radio" id="no-rate" class="input-no-rate"
-										name="post_Eva" value="0" checked aria-label="No rating." />
-									<input type="radio" id="rate1" name="post_Eva" value="<%=postVO.getPost_Eva()%>" /> <label
-										for="rate1">1 star.</label> <input type="radio" id="rate2"
-										name="post_Eva" value="<%=postVO.getPost_Eva()%>" /> <label for="rate2">2
-										stars.</label> <input type="radio" id="rate3" name="post_Eva"
-										value="<%=postVO.getPost_Eva()%>" /> <label for="rate3">3 stars.</label> <input
-										type="radio" id="rate4" name="post_Eva" value="<%=postVO.getPost_Eva()%>" /> <label
-										for="rate4">4 stars.</label> <input type="radio" id="rate5"
-										name="post_Eva" value="<%=postVO.getPost_Eva()%>" /> <label for="rate5">5
-										stars.</label> <span class="starability-focus-ring"></span>
+									<input type="radio" id="no-rate" class="input-no-rate"	name="post_Eva" value="0" checked aria-label="No rating." />
+									<input type="radio" id="rate1" name="post_Eva" value="" /> 
+									<label	for="rate1">1 star.</label>
+									<input type="radio" id="rate2"	name="post_Eva" value="" /> 
+									<label for="rate2">2stars.</label> 
+									<input type="radio" id="rate3" name="post_Eva" value="" /> 
+									<label for="rate3">3 stars.</label> 
+									<input	type="radio" id="rate4" name="post_Eva" value="" /> 
+									<label	for="rate4">4 stars.</label> 
+									<input type="radio" id="rate5"	name="post_Eva" value="" /> 
+									<label for="rate5">5 stars.</label> <span class="starability-focus-ring"></span>
 								</fieldset>
 							</div>
 							
@@ -196,23 +197,15 @@ padding-bottom:20px;
 								value="<%=postVO.getPost_Eva()%>" name="post_Eva" class="form-control" required />
 							</div>
 							
-							
-							
-							<div class="form-group">
-								<label>想說什麼?</label>
-								<textarea class="form-control" id="textarea" name="post_Cont" rows="6" 
-									 required></textarea>
-							</div>
-							
 							<!-- 編輯器區塊 -->
 							<textarea name="post_Cont">
-					            	<%=postVO.getPost_Cont()%>
+					             <%= (postVO==null)? "" : postVO.getPost_Cont()%>
 					            </textarea>
 							<!-- //編輯器區塊 -->
 							<script>
 							$(function(){
-								$("#textarea").val('<%=postVO.getPost_Cont()%>');
-							})
+								$("#post_Cont").val('<%=postVO.getPost_Cont()%>');
+							});
 							
 							</script>
 							<input type="hidden" id="post_No" name="post_No" value="${postVO.post_No}" />
@@ -240,8 +233,6 @@ padding-bottom:20px;
 										$("#preview_box2").empty().append(img);
 									}
 								});
-				
-				
 				 function onLoadBinaryFile() {
 			            var theFile = document.getElementById("getPicture");
 
@@ -262,8 +253,28 @@ padding-bottom:20px;
 			                alert("error");
 			            }
 			        }
+				 
+				 $(function(){
+					 var rate = parseInt("<%=postVO.getPost_Eva()%>");
+					 for(var i = 1; i <= 5; i++){
+						 if(i <= rate)
+					 		$("#rate"+i).prop("checked", true); 
+					 }
+				 });
 			</script>
-		
+		 <!-- //editorJS -->
+    <script>
+        CKEDITOR.replace('post_Cont', {
+            extraPlugins: 'base64image',
+            removePlugins: 'image',
+            removePlugins: 'resize',
+            height: 700,
+            removeDialogTabs: 'image:advanced;link:advanced',
+        });
+        //            extraPlugins: 'autogrow',
+        //            autoGrow_minHeight: 500,
+    </script>
+    <!-- //editorJS -->
 		</div>
 	</div>
 

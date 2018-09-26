@@ -44,7 +44,15 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE)"
 	                +"VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),?,?,?)";
 	private static final String UPDATE_STMT = 
+<<<<<<< HEAD
 			"UPDATE CUSTOMMEALS SET MEM_NO=?, CUSTOM_NAME=?, CUSTOM_PRICE=? WHERE CUSTOM_NO=?";
+=======
+			"UPDATE CUSTOMMEALS SET MEM_NO=?, CUSTOM_NAME=?, CUSTOM_PRICE=?, CUSTOM_PHOTO=? WHERE CUSTOM_NO=?";
+	
+	//只修改名稱
+	private static final String UPDATE_NAME_STMT = 
+			"UPDATE CUSTOMMEALS SET  CUSTOM_NAME=? WHERE CUSTOM_NO=?";
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 	private static final String DELETE_STMT =
 			"DELETE FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
 	private static final String SELECT_ONE_STMT=
@@ -53,16 +61,10 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			"SELECT CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE FROM CUSTOMMEALS ORDER BY CUSTOM_NO";
 
 	
-	//依會員查他訂過的自訂餐點
 	private static final String SELECT_MEAL_BY_MEMBUYED="SELECT * FROM CUSTOMMEALS LEFT JOIN ORDERINVOICE\r\n" + 
 			"ON CUSTOMMEALS.CUSTOM_NO=orderinvoice.custom_no " + 
 			"WHERE orderinvoice.custom_no IS NOT NULL AND " + 
 			"mem_no=?";
-	
-	//依會員查他的所有自訂餐點
-	private static final String SELECT_ALLMEAL_BY_MEMNO="SELECT *  FROM CUSTOMMEALS  LEFT JOIN INGREDIENTCOMBINATION" + 
-	"ON CUSTOMMEALS.CUSTOM_NO=INGREDIENTCOMBINATION.CUSTOM_NO WHERE CUSTOMMEALS.mem_no=?";
-	
 	@Override
 	public void insert(CustommealsVO custommealsVO) {
 		// TODO Auto-generated method stub
@@ -340,15 +342,13 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		return custommealsVOList;
 	}
 	@Override
-	public List<CustommealsVO> getMealByMem(String mem_No) {
-		List<CustommealsVO> custommealsVOList = new ArrayList<>();
-		CustommealsVO custommealsVO = null;
+	public void updateNameOnly(String custom_Name,String custom_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
+		
 		try {
 			con = ds.getConnection();
+<<<<<<< HEAD
 			pstmt = con.prepareStatement(SELECT_ALLMEAL_BY_MEMNO);
 			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
@@ -363,17 +363,23 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 				custommealsVOList.add(custommealsVO);
 			}
 
+=======
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(UPDATE_NAME_STMT);
+			
+			pstmt.setString(1, custom_Name);
+			pstmt.setString(2, custom_No);
+			
+			int rowCount =pstmt.executeUpdate();
+			System.out.println("updateNameOnly 修改 " + rowCount + " 筆資料");
+			
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " 
 					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -389,8 +395,9 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 				}
 			}
 		}
-		return custommealsVOList;
+		
 	}
+
 	
 	
 	@Override

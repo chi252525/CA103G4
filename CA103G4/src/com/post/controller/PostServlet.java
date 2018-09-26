@@ -4,6 +4,9 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
+import com.custommeals.model.CustommealsService;
+import com.custommeals.model.CustommealsVO;
 import com.post.model.*;
 import com.reply_msg.model.ReplyService;
 import com.reply_msg.model.ReplyVO;
@@ -19,14 +22,14 @@ public class PostServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
-		System.out.println("跳到Servlet+action ="+action );
+		String action = req.getParameter("action");// 判斷做什麼動作
+		String orderby = req.getParameter("orderby"); // 判斷排列方式
 		
 		//顯示單一貼文
 		 if ("getOne_For_Display".equals(action)) { 
 	        	List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("跳進getOne_For_Display");
+//				System.out.println("跳進getOne_For_Display");
 				try {
 					/***************************1.接收請求參數  取得單一貼文**********************/
 									
@@ -58,6 +61,7 @@ public class PostServlet extends HttpServlet{
 					
 					postSvc.updatePostViews(post_No);
 					req.setAttribute("postVO", postVO);
+					req.getSession().setAttribute("postVO", postVO);
 					String url = "/front_end/post/listOnepost.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 					successView.forward(req, res);
@@ -105,6 +109,9 @@ public class PostServlet extends HttpServlet{
 				try {
 					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 					String post_No = req.getParameter("post_No");
+					System.out.println("post_No="+post_No);
+					String custom_Name = req.getParameter("custom_Name");
+					System.out.println("custom_Name="+custom_Name);
 					if (post_No == null || (post_No.trim()).length() == 0) {
 						errorMsgs.add("請輸入貼文編號");
 					}
@@ -169,7 +176,7 @@ public class PostServlet extends HttpServlet{
 					
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
-						req.setAttribute("postVO", postVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						req.setAttribute("postVO", postVO); 
 						RequestDispatcher failureView = req
 								.getRequestDispatcher("/front_end/post/update_post_input.jsp");
 						failureView.forward(req, res);
@@ -179,13 +186,18 @@ public class PostServlet extends HttpServlet{
 					/***************************2.開始修改資料*****************************************/
 					PostService postSvc = new PostService();
 					System.out.println("開始修改資料");
+					/*同時修改餐點名稱*/
+					CustommealsService custoSvc =new CustommealsService();
+					custoSvc.updateNameOnly(custom_Name,custom_No);
+					
+					/*同時修改Post*/
 					postVO=postSvc.updatePost(post_No, mem_No, custom_No, post_Cont, post_Eva, post_Photo, post_Time);
 					System.out.println("修改完成"+postVO);
 					
 					/***************************3.修改完成,準備轉交(Send the Success view)*************/
-					req.setAttribute("postVO", postVO); // 資料庫update成功後,正確的的empVO物件,存入req
+					req.setAttribute("postVO", postVO); 
 					System.out.println("req.setAttribute"+postVO);
-					String url = "/front_end/post/listAllpost.jsp";
+					String url = "/front_end/post/listPostByMember.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 					successView.forward(req, res);
 					/***************************其他可能的錯誤處理*************************************/
@@ -263,6 +275,8 @@ public class PostServlet extends HttpServlet{
         	System.out.println("delete開始");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			String whichPage = req.getParameter("whichPage");  
 			try {
 				/***************************1.接收請求參數***************************************/
 				String post_No = req.getParameter("post_No");
@@ -272,7 +286,7 @@ public class PostServlet extends HttpServlet{
 				postSvc.deletePost(post_No);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/front_end/post/listAllpost.jsp";
+				String url = requestURL+"?whichPage="+whichPage; // 送出刪除的來源網頁的第幾頁
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 			
@@ -357,13 +371,42 @@ public class PostServlet extends HttpServlet{
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("listReplybyPostNo", rplyset);
 				System.out.println("req.setAttribute"+rplyset);
-				String url = "/front_end/post/listPostByQuery.jsp";
+				String url = "/front_end/post/listOnepost.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				
+			}catch (NullPointerException e) {
+				System.out.println("此篇貼文沒有留言");
 			}catch (Exception e) {
 				throw new ServletException(e);
+			}
+        	
+        }
+        if("addviews".equals(action)) {
+        	List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+
+				/*************************** 1.接收請求參數 ***************************************/
+				System.out.println("跳進addviews");
+				String post_No = req.getParameter("post_No");
+				/*************************** 2.開始增加瀏覽次數 ***************************************/
+				PostService postSvc= new PostService();
+				postSvc.updatePostViews(post_No);
+				
+				/*************************** 3.更新完成，準備轉交(Send the Success view) ***********/
+				System.out.println("updatePostViews="+post_No);
+				req.setAttribute("post_No", post_No);
+				String url = "/front_end/post/listOnepost.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}catch (Exception e) {
+				errorMsgs.add("找不到該篇貼文:" + e.getMessage());
+				String url = "/front_end/post/listAllpost.jsp";
+				RequestDispatcher failureView = req.getRequestDispatcher(url);
+				failureView.forward(req, res);
+			}
+				
 			}
         	
         }
@@ -372,7 +415,7 @@ public class PostServlet extends HttpServlet{
         	
         
     
-	}
+	
 
 	public String getFileName(Part part) {
 		Collection headername = part.getHeaderNames();

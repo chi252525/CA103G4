@@ -69,8 +69,17 @@ public class AndroidOrderformServlet extends HttpServlet {
 			String orderStatus = jsonObject.get("orderStatus").getAsString();
 			OrderformVO orderformVO = dao.findByDekNoAndOrderStatus(dekNo, Integer.parseInt(orderStatus));
 			OrderinvoiceDAO_interface oidao = new OrderinvoiceDAO();
-			List<OrderinvoiceVO> orderinvoiceList = oidao.findByOrder_no_withMenu(orderformVO.getOrder_no());
+			List<OrderinvoiceVO> orderinvoiceList = oidao.findByOrder_no_withMenu(orderformVO.getOrder_no(), 1);
 			writeText(res, gson.toJson(orderinvoiceList));
+		}
+		else if("updateInvoStatus".equals(action)) {
+			String invoJson = jsonObject.get("updateStatusList").getAsString();
+			List<String> updateStatusList = gson.fromJson(invoJson, List.class);
+			OrderinvoiceDAO_interface oidao = new OrderinvoiceDAO();
+			for(String str : updateStatusList) {
+				oidao.updateStatus(str);
+			}
+			writeText(res, gson.toJson("OK"));
 		}
 //		else if ("getDelivNo".equals(action)) {
 //			String deliv_no = jsonObject.get("deliv_no").getAsString();

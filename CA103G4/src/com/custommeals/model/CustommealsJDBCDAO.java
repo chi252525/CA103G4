@@ -18,11 +18,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
+<<<<<<< HEAD
 import com.ingredientcombination.model.IngredientCombinationDAO;
 import com.ingredientcombination.model.IngredientCombinationJDBCDAO;
 import com.ingredientcombination.model.IngredientCombinationVO;
 
 
+=======
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 
 
 public class CustommealsJDBCDAO implements CustommealsDAO_interface{
@@ -34,6 +37,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT = 
 			"INSERT INTO CUSTOMMEALS" 
+<<<<<<< HEAD
 	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE)"
 	                +"VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),?,?,?)";
 	private static final String UPDATE_STMT = 
@@ -47,15 +51,35 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 
 	
 	//依會員查他訂過的自訂餐點
+=======
+	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO)"
+	                +"VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),?,?,?,?)";
+	private static final String UPDATE_STMT = 
+			"UPDATE CUSTOMMEALS SET MEM_NO=?, CUSTOM_NAME=?, CUSTOM_PRICE=?, CUSTOM_PHOTO=? WHERE CUSTOM_NO=?";
+	private static final String UPDATE_NAME_STMT = 
+			"UPDATE CUSTOMMEALS SET CUSTOM_NAME=? WHERE CUSTOM_NO=?";
+	private static final String DELETE_STMT =
+			"DELETE FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
+	private static final String SELECT_ONE_STMT=
+			"SELECT CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
+	private static final String SELECT_ALL_STMT=
+			"SELECT CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO FROM CUSTOMMEALS ORDER BY CUSTOM_NO";
+//	private static final String FINDBYMEMNO="SELECT * FROM CUSTOMMEALS WHERE MEM_NO=?";
+//	private static final String FINDBYCUSTOMNO="SELECT * FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
+	
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 	private static final String SELECT_MEAL_BY_MEMBUYED="SELECT * FROM CUSTOMMEALS LEFT JOIN ORDERINVOICE\r\n" + 
 			"ON CUSTOMMEALS.CUSTOM_NO=orderinvoice.custom_no " + 
 			"WHERE orderinvoice.custom_no IS NOT NULL AND " + 
 			"mem_no=?";
+<<<<<<< HEAD
 	
 	//依會員查他的所有自訂餐點
 	private static final String SELECT_ALLMEAL_BY_MEMNO="SELECT *  FROM CUSTOMMEALS  LEFT JOIN INGREDIENTCOMBINATION" + 
 	"ON CUSTOMMEALS.CUSTOM_NO=INGREDIENTCOMBINATION.CUSTOM_NO WHERE CUSTOMMEALS.mem_no=?";
 	
+=======
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 	@Override
 	public void insert(CustommealsVO custommealsVO) {
 		// TODO Auto-generated method stub
@@ -64,6 +88,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 		
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+<<<<<<< HEAD
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -73,6 +98,18 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 			pstmt.setInt(3, custommealsVO.getcustom_Price());
 //			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
 //			System.out.println("custommealsVO.getcustom_Photo()=" + custommealsVO.getcustom_Photo());
+=======
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(INSERT_STMT);
+
+//			pstmt.setString(1, custommealsVO.getcustom_No());
+			pstmt.setString(1, custommealsVO.getmem_No());
+			pstmt.setString(2, custommealsVO.getcustom_Name());
+			pstmt.setInt(3, custommealsVO.getcustom_Price());
+			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
+			System.out.println("custommealsVO.getcustom_Photo()=" + custommealsVO.getcustom_Photo());
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
 			
@@ -103,6 +140,10 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 		
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+<<<<<<< HEAD
+=======
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
@@ -110,8 +151,13 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 			pstmt.setString(1, custommealsVO.getmem_No());
 			pstmt.setString(2, custommealsVO.getcustom_Name());
 			pstmt.setInt(3, custommealsVO.getcustom_Price());
+<<<<<<< HEAD
 //			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
 			pstmt.setString(4, custommealsVO.getcustom_No());
+=======
+			pstmt.setBytes(4, custommealsVO.getcustom_Photo());
+			pstmt.setString(5, custommealsVO.getcustom_No());
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改 " + rowCount + " 筆資料");
@@ -142,8 +188,14 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
+<<<<<<< HEAD
 //			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+=======
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			Class.forName(DRIVER);
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, Custom_No);
 			pstmt.executeUpdate();
@@ -182,6 +234,10 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 		ResultSet rs = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+<<<<<<< HEAD
+=======
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, Custom_No);
@@ -193,7 +249,11 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				custommealsVO.setmem_No(rs.getString("MEM_NO"));
 				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
 				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+<<<<<<< HEAD
 //				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+=======
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 
 			}
 		} catch (SQLException se) {
@@ -234,6 +294,10 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+<<<<<<< HEAD
+=======
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -243,7 +307,11 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				custommealsVO.setmem_No(rs.getString("MEM_NO"));
 				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
 				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+<<<<<<< HEAD
 //				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+=======
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 				custommealsVOList.add(custommealsVO);
 			}
 
@@ -295,6 +363,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				custommealsVO.setmem_No(rs.getString("MEM_NO"));
 				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
 				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
+<<<<<<< HEAD
 //				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
 				custommealsVOList.add(custommealsVO);
 			}
@@ -348,6 +417,9 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
 				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
 //				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+=======
+				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 				custommealsVOList.add(custommealsVO);
 			}
 
@@ -379,6 +451,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 		}
 		return custommealsVOList;
 	}
+<<<<<<< HEAD
 	
 	
 	@Override
@@ -444,6 +517,26 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				}
 			}
 			throw new RuntimeException("A database error occured. "
+=======
+	@Override
+	public void updateNameOnly( String custom_Name,String custom_No) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(UPDATE_NAME_STMT);
+			pstmt.setString(1, custom_Name);
+			pstmt.setString(2, custom_No);
+			
+			
+			int rowCount =pstmt.executeUpdate();
+			System.out.println("updateNameOnly 修改 " + rowCount + " 筆資料");
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " 
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -462,10 +555,16 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				}
 			}
 		}
+<<<<<<< HEAD
 
 	}
 	
 	
+=======
+		
+	}
+
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 	
 
 }

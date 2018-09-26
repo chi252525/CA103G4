@@ -48,6 +48,15 @@ public class CustommealsTest {
 //		custom2.setcustom_Price(490);		
 //		dao.update(custom2);
 //		
+		
+//		//只修改餐點名
+		CustommealsVO custom2 = new CustommealsVO();
+		custom2.setcustom_No("C0000000006");
+		custom2.setcustom_Name("咖哩龍蝦拉麵");
+		dao.updateNameOnly("咖哩龍蝦拉麵","C0000000001");
+		
+		
+		
 //		//刪除
 //		dao.delete("C0000000004");
 
@@ -58,6 +67,10 @@ public class CustommealsTest {
 //			System.out.print(custom.getmem_No() + ",");
 //			System.out.print(custom.getcustom_Name() + ",");
 //			System.out.print(custom.getcustom_Price() + ",");
+<<<<<<< HEAD
+=======
+//			System.out.print(custom.getcustom_Photo() + ",");
+>>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 //
 //			System.out.println();
 //		}

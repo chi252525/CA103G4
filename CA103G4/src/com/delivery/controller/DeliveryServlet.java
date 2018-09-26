@@ -24,6 +24,10 @@ import com.delivery.model.DeliveryVO;
 @WebServlet("/DeliveryServlet")
 public class DeliveryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String dn;
+	String en;
+	String ds;
+
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -78,6 +82,15 @@ public class DeliveryServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				DeliveryService delSvc = new DeliveryService();
 				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
+				
+				if (req.getParameter("update") != null) {
+					delVOList = delSvc.getSelect(dn, en, ds);
+				}
+				
+				dn = strd;
+				en = stre;
+				ds = strs;
+				
 				if (delVOList.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
@@ -89,9 +102,6 @@ public class DeliveryServlet extends HttpServlet {
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.getSession().setAttribute("get_By_Key", delVOList);
-				req.setAttribute("deln", strd);
-				req.setAttribute("empn", stre);
-				req.setAttribute("dels", strs);
 
 				
 				
@@ -130,6 +140,9 @@ public class DeliveryServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 ***************************************/
 			DeliveryService delSvc = new DeliveryService();
 			delVO = delSvc.updateDelivery(emp, status, deliv);
+			deliv = dn;
+			emp = en;
+			status = ds;
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("update", delVO);
@@ -140,7 +153,7 @@ public class DeliveryServlet extends HttpServlet {
 			req.setAttribute("whichPage",page);
 				
 //			String url = requestURL;
-			String url = "select_page.jsp";
+			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 			successView.forward(req, res);
 

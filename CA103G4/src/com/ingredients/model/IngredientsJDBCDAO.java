@@ -14,22 +14,12 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
-public class IngredientsDAO implements IngredientsDAO_interface{
+public class IngredientsJDBCDAO implements IngredientsDAO_interface{
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-//	private static final String USER = "CA103";
-//	private static final String PASSWORD = "123456";
-//	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String USER = "CA103";
+	private static final String PASSWORD = "123456";
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT=		
 			"INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)"
 					+"VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),?,?,?,?,?,?,?)";
@@ -41,10 +31,9 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS WHERE INGDT_ID=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS ORDER BY INGDT_ID";
-//	//查一個餐點名稱的內含那些食材
 	private static final String GET_ONE_COSTOMNO_INGTS=
-	"SELECT * FROM ingredients RIGHT JOIN ingredientCombination ON ingredientCombination.ingdt_id=ingredients.ingdt_id WHERE ingredientCombination.custom_No=?";
-	
+			"SELECT * FROM ingredients RIGHT JOIN ingredientCombination ON ingredientCombination.ingdt_id=ingredients.ingdt_id WHERE ingredientCombination.custom_No=?";
+			
 
 	@Override
 	public void insert(IngredientsVO ingredientsVO) {
@@ -53,8 +42,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -99,8 +87,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
@@ -144,9 +131,8 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
 //			Class.forName(DRIVER);
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, ingdt_Id);
 			pstmt.executeUpdate();
@@ -184,8 +170,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, ingdt_Id);
@@ -243,8 +228,7 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -298,13 +282,11 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ONE_COSTOMNO_INGTS);
 			pstmt.setString(1, custom_No);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				ingredientsVO = new IngredientsVO();
 				ingredientsVO.setingdt_Id(rs.getString("INGDT_ID"));
@@ -317,7 +299,6 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 				ingredientsVO.setingdt_Photo(rs.getBytes("INGDT_PHOTO"));	
 				ingredientsVOList.add(ingredientsVO);
 			}
-
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " 
 					+ se.getMessage());
