@@ -15,7 +15,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>addPost</title>
+<title>Backend_All_Post</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -38,11 +38,12 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+<%@ include file="/front_end/PostHeader.jsp" %> 
 <div class="container-fluid">
     <div class="row">
             </div>
            
-            <div class="col-sm-12 col-9 col-lg-9">
+            <div class="col-sm-12 col-12 col-lg-12">
                 <h1>廣告活動設定</h1>
                   <div class="float-right"><button type="button" class="btn btn-primary">新增</button></div><br>
                  <h4>查詢:</h4>
@@ -131,7 +132,7 @@
             </div>
            
     </div>
-</div>
+<%@ include file="/front_end/PostFooter.jsp" %> 
 	
 </body>
 </html>

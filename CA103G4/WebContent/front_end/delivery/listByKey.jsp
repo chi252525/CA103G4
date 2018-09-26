@@ -95,7 +95,11 @@
 		</c:if>
 						
 		<c:if test="${deliveryVO.emp_no != null}">			
-					${deliveryVO.emp_no}
+					<c:forEach var="empVO" items="${empDao.all}">
+					<c:if test="${deliveryVO.emp_no==empVO.emp_no}">
+					${empVO.emp_no}-${empVO.emp_name}
+					</c:if>
+					</c:forEach>
 		</c:if>
 		</td>
 			

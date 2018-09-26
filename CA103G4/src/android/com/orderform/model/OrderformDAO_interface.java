@@ -20,5 +20,7 @@ public interface OrderformDAO_interface {
 	public List<OrderformVO> getAll();
 	
 	String addWithOrderItem(OrderformVO orderformVO, List<OrderInvoiceVO> orderList);
+	
+	public List<OrderformVO> findByOrderTypeAndStatus(Integer order_type, Integer order_status);
 
 }

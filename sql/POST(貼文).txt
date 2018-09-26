@@ -1,6 +1,7 @@
 ﻿
-DROP TABLE POST;
-DROP SEQUENCE POST_seq;
+--------------------------------------------------------
+--  for Table POST
+--------------------------------------------------------
 CREATE TABLE POST(
   POST_NO    VARCHAR2(15) NOT NULL, 
   MEM_NO     VARCHAR2(7)  NOT NULL, 
@@ -36,7 +37,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 缺點大概就是沒有碗公大的香菜可以加點。',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -48,7 +49,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 詢問後告知是冷的沒錯，讓人感到意外',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -65,7 +66,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 6. 麵吃完白飯倒湯裡',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
@@ -76,7 +77,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，值得',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,13);
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
@@ -87,7 +88,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 海鮮的清新香味層次分明的浮現，搭配精選的細麵，清香又豐潤的湯頭及麵條清爽的口感保證對味！',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,14);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -99,7 +100,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 這次晚上大老遠跑去值得了',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,15);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -110,7 +111,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 像是看著蒸汽小火車奔跑很療癒感謝招待',
 4,
 NULL,
-SYSDATE,NULL);
+SYSDATE,18);
 
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -123,6 +124,6 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
 4,
 NULL,
-SYSDATE,NULL);
+SYSDATE,50);
 
 COMMIT;

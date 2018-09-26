@@ -3,6 +3,7 @@ package android.com.desk.model;
 import java.sql.Connection;
 import java.util.*;
 import android.com.branch.model.BranchVO;
+import android.com.orderform.model.OrderformVO;
 
 public interface DeskDAO_interface {
 	public void insert(DeskVO deskVO);
@@ -11,5 +12,6 @@ public interface DeskDAO_interface {
     public DeskVO findByPrimaryKey(String dek_no);
     public List<DeskVO> getAll();
     public List<DeskVO> getByBranchNo(String branch_no);
+    public List<DeskVO> getByDekNo(List<OrderformVO> orderList);
     
 }

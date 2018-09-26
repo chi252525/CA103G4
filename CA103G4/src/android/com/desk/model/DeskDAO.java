@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import android.com.branch.model.BranchVO;
+import android.com.orderform.model.OrderformVO;
 
 
 public class DeskDAO implements DeskDAO_interface{
@@ -35,8 +36,65 @@ public class DeskDAO implements DeskDAO_interface{
 		"SELECT * FROM DESK WHERE Branch_NO =?";
 	private static final String UPDATE_STATUS =
 		"UPDATE DESK set DEK_STATUS=? where DEK_NO =?";
+	private static final String GET_DEKID_STMT = 
+		"SELECT * FROM DESK WHERE DEK_NO =?";
 	
 	
+	
+	@Override
+	public List<DeskVO> getByDekNo(List<OrderformVO> orderList) {
+		List<DeskVO> list = new ArrayList<DeskVO>();
+		DeskVO deskVO = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(GET_DEKID_STMT);
+			
+			for(OrderformVO orderformVO : orderList) {
+				pstmt.setString(1, orderformVO.getDek_no());
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				deskVO = new DeskVO();				
+				deskVO.setDek_no(rs.getString("dek_no"));
+				deskVO.setBranch_no(rs.getString("branch_no"));
+				deskVO.setDek_id(rs.getString("dek_id"));
+				deskVO.setDek_set(rs.getInt("dek_set"));
+				deskVO.setDek_status(rs.getInt("dek_status"));
+				list.add(deskVO);
+				pstmt.clearParameters();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	@Override
 	public void updateDekStatus(String dek_no, Connection con) {
 		// TODO Auto-generated method stub

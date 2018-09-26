@@ -195,7 +195,6 @@ VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),'M000004','咖哩豬
 INSERT INTO CUSTOMMEALS (CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO)
 VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),'M000005','今天吃素拉麵',480, null); 
 commit;
-
 --------------------------------------------------------
 --  for Table POST
 --------------------------------------------------------
@@ -234,7 +233,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 缺點大概就是沒有碗公大的香菜可以加點。',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -246,7 +245,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 詢問後告知是冷的沒錯，讓人感到意外',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -263,7 +262,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 6. 麵吃完白飯倒湯裡',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,12);
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
@@ -274,7 +273,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，值得',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,13);
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
@@ -285,7 +284,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 海鮮的清新香味層次分明的浮現，搭配精選的細麵，清香又豐潤的湯頭及麵條清爽的口感保證對味！',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,14);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -297,7 +296,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 這次晚上大老遠跑去值得了',
 5,
 NULL,
-SYSDATE,NULL);
+SYSDATE,15);
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS) 
@@ -308,7 +307,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 像是看著蒸汽小火車奔跑很療癒感謝招待',
 4,
 NULL,
-SYSDATE,NULL);
+SYSDATE,18);
 
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -321,7 +320,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
 4,
 NULL,
-SYSDATE,NULL);
+SYSDATE,50);
 
 COMMIT;
 
@@ -372,7 +371,7 @@ VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVA
 'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000003','限量29碗吧，一碗留給我21:00下班後吧');
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','認真 衝一波');
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000005','認真 衝一波');
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
 'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','希望煮干沾麵能再出現，這次等了好久阿~~~~~~');
@@ -382,19 +381,18 @@ VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVA
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','會變成常設的菜單嗎，之前去沒吃到很傷心~');
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000001','會變成常設的菜單嗎，之前去沒吃到很傷心~');
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','「拉麵粉」「打擾了！ 本店專售歐美日韓服飾，全部貨品均以優惠價發售，歡迎選購，謝謝！」');
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000002','「拉麵粉」「打擾了！ 本店專售歐美日韓服飾，全部貨品均以優惠價發售，歡迎選購，謝謝！」');
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','好女不過百！瘦不瘦由你選擇！毋須節食！教你瘦到90斤！QQ：xxxx」');
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000004','好女不過百！瘦不瘦由你選擇！毋須節食！教你瘦到90斤！QQ：xxxx」');
 
 
 commit;
-
 --------------------------------------------------------
 --  for Table REPORT_Msg
 --------------------------------------------------------
@@ -1084,6 +1082,7 @@ CREATE TABLE ORDERFORM (
   ORDER_PRICE     NUMBER(10)  NOT NULL,
   ORDER_STATUS      NUMBER(1),
   DELIV_ADDRES    VARCHAR2(100),
+  ORDER_DATE    DATE    DEFAULT(SYSDATE),
   ORDER_PSTATUS      NUMBER(1),
   CONSTRAINT ORDERFOR_FK1 FOREIGN KEY (DEK_NO) REFERENCES DESK (DEK_NO),
   CONSTRAINT ORDERFOR_FK2 FOREIGN KEY (MEM_NO) REFERENCES MEMBER (MEM_NO),
