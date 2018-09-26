@@ -288,6 +288,7 @@
                                 "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
                                 "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
                         }
+                        document.getElementById("allbranch").disabled=true;
                     },
                     error: function() {
                         alert("error!")

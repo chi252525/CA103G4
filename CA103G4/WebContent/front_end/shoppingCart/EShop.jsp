@@ -15,7 +15,6 @@
 			<th width="200">餐點內容</th>
 			<th width="100">價格</th>
 			<th width="100">數量</th>
-			<th width="100">價格</th>
 			<th width="120">小記</th>
 			<th width="120"><img src="images/shopping-cart.png" width="45px"
 				height="35px"></th>
@@ -145,7 +144,6 @@
 
 
 	<p>
-<%-- 		<jsp:include page="/front_end/shoppingCart/shoppingCart.jsp" --%>
-<%-- 			flush="true" /> --%>
+		<jsp:include page="/front_end/shoppingCart/Cart.jsp" flush="true" /> 
 </body>
 </html>
