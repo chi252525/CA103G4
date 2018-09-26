@@ -5,7 +5,7 @@ import java.util.List;
 public class CustommealsTest {
 	
 	public static void main(String[] args) {
-		CustommealsDAO dao = new CustommealsDAO();
+		CustommealsJDBCDAO dao = new CustommealsJDBCDAO();
 		
 //		//新增
 //		CustommealsVO custom1 = new CustommealsVO();
@@ -25,20 +25,29 @@ public class CustommealsTest {
 //		custom2.setcustom_Photo(null);
 //		dao.update(custom2);
 //		
+		
+//		//只修改餐點名
+		CustommealsVO custom2 = new CustommealsVO();
+		custom2.setcustom_No("C0000000006");
+		custom2.setcustom_Name("咖哩龍蝦拉麵");
+		dao.updateNameOnly("咖哩龍蝦拉麵","C0000000001");
+		
+		
+		
 //		//刪除
 //		dao.delete("C0000000004");
 
 		//查詢
-		List<CustommealsVO> list = dao.getAll();
-		for (CustommealsVO custom : list) {
-			System.out.print(custom.getcustom_No() + ",");
-			System.out.print(custom.getmem_No() + ",");
-			System.out.print(custom.getcustom_Name() + ",");
-			System.out.print(custom.getcustom_Price() + ",");
-			System.out.print(custom.getcustom_Photo() + ",");
-
-			System.out.println();
-		}
+//		List<CustommealsVO> list = dao.getAll();
+//		for (CustommealsVO custom : list) {
+//			System.out.print(custom.getcustom_No() + ",");
+//			System.out.print(custom.getmem_No() + ",");
+//			System.out.print(custom.getcustom_Name() + ",");
+//			System.out.print(custom.getcustom_Price() + ",");
+//			System.out.print(custom.getcustom_Photo() + ",");
+//
+//			System.out.println();
+//		}
 		
 	}
 }

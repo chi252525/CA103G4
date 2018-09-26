@@ -7,18 +7,16 @@
 <%@ page import="com.member.model.*"%>
 <jsp:useBean id="cusmealSvc" scope="page"
 	class="com.custommeals.model.CustommealsService" />
-<jsp:useBean id="IngCSvc" scope="page"
-	class="com.ingredientcombination.model.IngredientCombinationService" />
+
 	
 <%
 
 	PostService postSvc = new PostService();
-	
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
 	if(memberVO == null){
 		memberVO = (MemberVO)session.getAttribute("memVO");
 	}
-	List<PostVO>list = postSvc.getMem_Post(memberVO.getMem_No());
+	List<PostVO>list = postSvc.getMem_Post("M000001");
 	pageContext.setAttribute("list", list);
 %>
 
@@ -96,7 +94,8 @@ body {
 	width="100%">
 	<!--your html start==================================================================================-->
 	<jsp:include page="/front_end/header.jsp" flush="true" />
-
+	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -130,10 +129,11 @@ body {
 						<div class="display-4">我的貼文${memVO.mem_Name}</div>
 				</div>
 			
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
 				</div>
+				
 				
 			</div>
 			<div class="row">
@@ -171,12 +171,12 @@ body {
 							<a
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
 								class="btn lnr lnr-pencil btn-warning">修改</a>
-
-
 							<FORM ETHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
 								<input type="hidden" name="post_No" value="${postVO.post_No}">
+								<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			     				<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 								<input type="hidden" name="action" value="delete">
 								<button type="submit" value="delete"
 									class="btn  btn-sm btn-danger btn-block"
@@ -184,7 +184,6 @@ body {
 									<i class="far fa-trash-alt"></i> 刪除
 								</button>
 							</FORM>
-
 						</div>
 						
 						

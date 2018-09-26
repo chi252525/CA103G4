@@ -58,4 +58,9 @@ public class IngredientsService {
 		return dao.getAll();
 	}
 	
+	public List<IngredientsVO> findIngtByCustomNo(String custom_No) {
+		return dao.findIngtByCustomNo(custom_No);
+	}
+	
+	
 }

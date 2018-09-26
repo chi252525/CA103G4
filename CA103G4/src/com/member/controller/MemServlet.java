@@ -82,7 +82,7 @@ public class MemServlet extends HttpServlet{
 				in.read(b);
 				out.write(b);
 				in.close();
-			}			
+			}				
 						
 //		doPost(req,res);
 	}

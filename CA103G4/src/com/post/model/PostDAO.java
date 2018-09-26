@@ -66,7 +66,7 @@ public class PostDAO implements PostDAO_interface{
 		try {
 			
 			con = ds.getConnection();
-			System.out.println("insert Connecting to database successfully! (連線成功！)");
+//			System.out.println("insert Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, postVO.getMem_No());
 			pstmt.setString(2, postVO.getCustom_No());
@@ -107,7 +107,7 @@ public class PostDAO implements PostDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("update Connecting to database successfully! (連線成功！)");
+//			System.out.println("update Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, postVO.getMem_No());
 			pstmt.setString(2, postVO.getCustom_No());
@@ -184,7 +184,7 @@ public class PostDAO implements PostDAO_interface{
 		List<PostVO> postlist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-			System.out.println("findbyMem_No Connecting to database successfully! (連線成功！)");
+//			System.out.println("findbyMem_No Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYMEMNO);
 			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
@@ -197,6 +197,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 				postlist.add(postVO); 
 			}
 
@@ -239,7 +240,7 @@ public class PostDAO implements PostDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			System.out.println("findbyCustom_No Connecting to database successfully! (連線成功！)");
+//			System.out.println("findbyCustom_No Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYCUSTOMNO);
 			pstmt.setString(1, custom_No);
 			rs = pstmt.executeQuery();
@@ -252,6 +253,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 				postlist.add(postVO); 
 			}
 
@@ -294,7 +296,7 @@ public class PostDAO implements PostDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			System.out.println("getAll Connecting to database successfully! (連線成功！)");
+//			System.out.println("getAll Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
 
@@ -307,6 +309,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 				postlist.add(postVO); 
 			}
 
@@ -348,7 +351,7 @@ public class PostDAO implements PostDAO_interface{
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("findByPrimaryKey Connecting to database successfully! (連線成功！)");
+//			System.out.println("findByPrimaryKey Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_POST);
 			pstmt.setString(1, post_No);
 			rs = pstmt.executeQuery();
@@ -362,6 +365,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -400,7 +404,7 @@ public class PostDAO implements PostDAO_interface{
 		List<PostVO> postlist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-			System.out.println("findbyYearandMonth Connecting to database successfully! (連線成功！)");
+//			System.out.println("findbyYearandMonth Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBY_YEAR_AND_MON);
 			pstmt.setString(1, year);
 			pstmt.setString(2, month);
@@ -414,6 +418,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 				postlist.add(postVO); 
 			}
 
@@ -489,7 +494,7 @@ public class PostDAO implements PostDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			System.out.println("getOnePost_AllRplys Connecting to database successfully! (連線成功！)");
+//			System.out.println("getOnePost_AllRplys Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_POST_ALLRPLYS);
 			pstmt.setString(1, post_No);
 			rs = pstmt.executeQuery();
