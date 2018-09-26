@@ -30,12 +30,9 @@
   
     <table>
     <tr><div>圖片</div></tr>
-      <tr><div>${menuVO.menu_No}</div></tr>
-      <tr><div>${menuVO.menu_Id}</div></tr>
-      <tr><div>${menuVO.menu_Type}</div></tr>
-      <tr><div>${menuVO.menu_Price}</div></tr>
-      <tr><div>${menuVO.menu_Intro}</div></tr>
-      <tr><div>${menuVO.menu_Status}</div></tr>
+      <tr><div><h3>${menuVO.menu_Id}</h3></div></tr>
+      <tr><div>餐點價格：${menuVO.menu_Price}</div></tr>
+      <tr><div>餐點介紹：${menuVO.menu_Intro}</div></tr>
       <tr><div>數量：<input type="text" name="quantity" size="3" value=1></div></tr>
       <tr><div>     <input type="submit" class="button" value="放入購物車"> </div></tr>
    </table>
