@@ -14,23 +14,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
-public class IngredientCombinationDAO implements IngredientCombinationDAO_interface{
+public class IngredientCombinationJDBCDAO implements IngredientCombinationDAO_interface{
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+
 	
-	
-//		private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-//		private static final String USER = "CA103";
-//		private static final String PASSWORD = "123456";
-//		private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+		private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+		private static final String USER = "CA103";
+		private static final String PASSWORD = "123456";
+		private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 		private static final String INSERT_STMT=		
 				"INSERT INTO INGREDIENTCOMBINATION" 
 		        		+"(CUSTOM_NO, INGDT_ID) VALUES(?,?)";
@@ -49,8 +40,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			PreparedStatement pstmt = null;
 			
 			try {
-				con = ds.getConnection();
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -87,8 +77,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			PreparedStatement pstmt = null;
 			
 			try {
-				con = ds.getConnection();
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(UPDATE_STMT);
 				pstmt.setString(1, ingredientCombinationVO.getIngdt_Id());
@@ -126,9 +115,8 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
-				con = ds.getConnection();
 //				Class.forName(DRIVER);
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				pstmt = con.prepareStatement(DELETE_STMT);
 				pstmt.setString(1, Custom_No);
 				pstmt.executeUpdate();
@@ -161,8 +149,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				con = ds.getConnection();
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(SELECT_ONE_STMT);
 				pstmt.setString(1, Custom_No);
@@ -210,8 +197,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			ResultSet rs = null;
 
 			try {
-				con = ds.getConnection();
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				pstmt = con.prepareStatement(SELECT_ALL_STMT);
 				rs = pstmt.executeQuery();
 
@@ -254,8 +240,7 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			PreparedStatement pstmt = null;
 			
 			try {
-				con = ds.getConnection();
-//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(INSERT_STMT);
 

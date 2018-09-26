@@ -2,6 +2,8 @@ package com.custommeals.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.custommeals.model.*;
+import com.ingredientcombination.model.IngredientCombinationVO;
 
 @MultipartConfig
 public class CustommealsServlet extends HttpServlet{
@@ -116,7 +119,7 @@ public class CustommealsServlet extends HttpServlet{
 				// send the ErrorPage view.
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				try {
+//				try {
 					/***************************1.接收請求參數****************************************/
 					String custom_No = req.getParameter("custom_No").trim();
 					
@@ -150,11 +153,11 @@ public class CustommealsServlet extends HttpServlet{
 
 	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
 					
-					Part part = req.getPart("custom_Photo");
-					InputStream in = part.getInputStream();
-					byte[] custom_Photo = new byte[in.available()];
-					in.read(custom_Photo);
-					in.close();
+//					Part part = req.getPart("custom_Photo");
+//					InputStream in = part.getInputStream();
+//					byte[] custom_Photo = new byte[in.available()];
+//					in.read(custom_Photo);
+//					in.close();
 					
 	//***********************************************************************************************
 					
@@ -164,7 +167,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setmem_No(mem_No);
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
-					custommealsVO.setcustom_Photo(custom_Photo);
+					
 					
 					// Send the use back to the form, if there were errors
 					if(!errorMsgs.isEmpty()) {
@@ -176,7 +179,7 @@ public class CustommealsServlet extends HttpServlet{
 					
 					/***************************2.開始修改資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();
-					custommealsVO = custommealsSvc.updateCustommeals(custom_No, mem_No, custom_Name, custom_Price, custom_Photo);
+					custommealsVO = custommealsSvc.updateCustommeals(custom_No, mem_No, custom_Name, custom_Price);
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫修改成功後,正確的custommealsVO物件,存入req
@@ -184,11 +187,11 @@ public class CustommealsServlet extends HttpServlet{
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
-				} catch(Exception e) {
-					errorMsgs.add("資料修改失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/update_custommeals_input.jsp");
-					failuerView.forward(req, res);
-				}
+//				} catch(Exception e) {
+//					errorMsgs.add("資料修改失敗"+e.getMessage());
+//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/update_custommeals_input.jsp");
+//					failuerView.forward(req, res);
+//				}
 			}
 			
 			
@@ -227,27 +230,11 @@ public class CustommealsServlet extends HttpServlet{
 						errorMsgs.add("自訂餐點價格格式不正確");
 					}
 					
-				
-				
-					
-	//******************* img要存入Database需先取得part物件，轉成inputstream後再放入byte[] *******************
-					
-					Part part = req.getPart("custom_Photo");
-					InputStream in = part.getInputStream();
-					System.out.println("in.available()="+in.available());
-					byte[] custom_Photo = new byte[in.available()];
-					in.read(custom_Photo);
-					in.close();
-					
-	//***********************************************************************************************
-					
-
 					
 					CustommealsVO custommealsVO = new CustommealsVO();
 					custommealsVO.setmem_No(mem_No);
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
-					custommealsVO.setcustom_Photo(custom_Photo);
 					
 					
 					if(!errorMsgs.isEmpty()) {
@@ -256,22 +243,42 @@ public class CustommealsServlet extends HttpServlet{
 						failureView.forward(req, res);
 						return; //程式中斷
 					}
+					List<IngredientCombinationVO> list = new ArrayList();
+					IngredientCombinationVO ingt =new 	IngredientCombinationVO();
+							
+							
+							Enumeration en = req.getParameterNames();
+							while (en.hasMoreElements()) {
+								String noodle = (String) en.nextElement();
+								String values[] = req.getParameterValues(noodle);
+								if (values != null) {
+									for (int i = 0; i < values.length; i++) {
+										System.out.println(noodle + " [" + i + "]: " + values[i]);
+										ingt.setIngdt_Id(values[i]);
+										list.add(ingt);
+										
+									}
+								}
+
+								/***************************2.開始新增資料****************************************/
+								CustommealsService custommealsSvc = new CustommealsService();
+								custommealsVO = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price,list);
+												
+								/***************************3.新增完成,準備轉交(Send the Success view)************/
+								req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+								RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
+								successView.forward(req, res);
+								
+								/***************************其他可能的錯誤處理**********************************/
+//							} catch(Exception e) {
+//								errorMsgs.add("資料新增失敗"+e.getMessage());
+//								RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
+//								failuerView.forward(req, res);
+//							}
 					
-					/***************************2.開始新增資料****************************************/
-					CustommealsService custommealsSvc = new CustommealsService();
-					custommealsVO = custommealsSvc.addCustommeals(mem_No, custom_Name, custom_Price, custom_Photo);
-									
-					/***************************3.新增完成,準備轉交(Send the Success view)************/
-					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
-					successView.forward(req, res);
-					
-					/***************************其他可能的錯誤處理**********************************/
-//				} catch(Exception e) {
-//					errorMsgs.add("資料新增失敗"+e.getMessage());
-//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
-//					failuerView.forward(req, res);
-//				}
+			}
+			
+				
 			}
 			
 			

@@ -172,6 +172,7 @@ $(document).ready(function (){
 	</tr>
 	
 	<tr>
+		<td></td>
 		<td>
 	        <p>ImgPreview</p>
 	     	<img class="preview" style="max-width: 200px; max-height: 200px;">

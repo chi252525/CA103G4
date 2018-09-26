@@ -61,7 +61,7 @@
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 
 <table id="table-1">
-   <tr><td><h3>IBM Ingredients: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM Ingredients: Home</h3><h4></h4></td></tr>
 </table>
 
 <p>This is the Home page for IBM Ingredients: Home</p>

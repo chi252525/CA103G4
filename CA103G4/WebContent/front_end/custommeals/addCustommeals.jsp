@@ -54,13 +54,13 @@
   table, th, td {
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
-    text-align: center;
+/*     text-align: center; */
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
   th, td {
     padding: 5px;
-    text-align: center;
+/*     text-align: center; */
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
@@ -70,38 +70,38 @@
 </style>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript"> -->
 
-$(document).ready(function (){
+// $(document).ready(function (){
 
-    function format_float(num, pos)
-    {
-        var size = Math.pow(10, pos);
-        return Math.round(num * size) / size;
-    }
+//     function format_float(num, pos)
+//     {
+//         var size = Math.pow(10, pos);
+//         return Math.round(num * size) / size;
+//     }
 
-    function preview(input) {
+//     function preview(input) {
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            var index = 0//input.name.slice(-1);
-            reader.onload = function (e) {
-                $('.preview:eq('+index+')').attr('src', e.target.result);
-                var KB = format_float(e.total / 1024,2);
-                $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
-            }
+//         if (input.files && input.files[0]) {
+//             var reader = new FileReader();
+//             var index = 0//input.name.slice(-1);
+//             reader.onload = function (e) {
+//                 $('.preview:eq('+index+')').attr('src', e.target.result);
+//                 var KB = format_float(e.total / 1024,2);
+//                 $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
+//             }
 
-            reader.readAsDataURL(input.files[0]);
-        }
+//             reader.readAsDataURL(input.files[0]);
+//         }
 
-    }
+//     }
 
-    $("body").on("change", ".custom_Photo", function (){
-        preview(this);
-    })
+//     $("body").on("change", ".custom_Photo", function (){
+//         preview(this);
+//     })
     
-})
-</script>
+// })
+<!-- </script> -->
 
 </head>
 <body bgcolor='white'>
@@ -145,18 +145,97 @@ $(document).ready(function (){
 	</tr>
 	
 	<tr>
-		<td>餐點圖片:</td>
-		<td><input type="file" class="custom_Photo" name="custom_Photo" size="45"></td>
-	</tr>
-	
-	<tr>
-		<td></td>
-		<td>
-	        <p>ImgPreview</p>
-	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
-	        <div class="size"></div>
+		<td>食材選擇:</td>
+		<td>麵條&nbsp
+			<input  type="checkbox" name="noodle" value="I0001"> 細拉麵
+		    <input  type="checkbox" name="noodle" value="I0002"> 烏龍麵
+    		<input  type="checkbox" name="noodle" value="I0003"> 刀削麵
+    		<input  type="checkbox" name="noodle" value="I0004"> 蕎麥麵
+   			<input  type="checkbox" name="noodle" value="I0005"> 墨魚麵
+     		<input  type="checkbox" name="noodle" value="I0006"> 蔬菜麵
+     		<br>
+     		湯頭&nbsp
+     		<input  type="checkbox" name="soup01"> 醬油湯
+		    <input  type="checkbox" name="soup02"> 泡菜湯
+    		<input  type="checkbox" name="soup03"> 牛肉湯
+    		<input  type="checkbox" name="soup04"> 麻辣湯
+   			<input  type="checkbox" name="soup05"> 番茄湯
+     		<input  type="checkbox" name="soup06"> 雞湯
+     		<input  type="checkbox" name="soup07"> 豚骨湯
+   			<input  type="checkbox" name="soup08"> 味增湯
+     		<input  type="checkbox" name="soup09"> 咖哩湯<br>
+     		主餐&nbsp
+     		<input  type="checkbox" name="main01"> 叉燒肉
+		    <input  type="checkbox" name="main02"> 炸豬排
+    		<input  type="checkbox" name="main03"> 炸雞柳
+    		<input  type="checkbox" name="main04"> 唐揚雞塊
+   			<input  type="checkbox" name="main05"> 鮮蝦
+     		<input  type="checkbox" name="main06"> 龍蝦
+     		<input  type="checkbox" name="main07"> 櫻花蝦
+   			<input  type="checkbox" name="main08"> 鴨胸
+   			<input  type="checkbox" name="main09"> 魷魚圈
+   			<input  type="checkbox" name="main10"> 蛤蠣
+     		<input  type="checkbox" name="main11"> 虱目魚<br>
+     		副餐&nbsp
+     		<input  type="checkbox" name="side01"> 荷包蛋
+     		<input  type="checkbox" name="side02"> 溫泉蛋
+     		<input  type="checkbox" name="side03"> 滷蛋
+   			<input  type="checkbox" name="side04"> 貢丸
+   			<input  type="checkbox" name="side05"> 豆皮
+   			<input  type="checkbox" name="sdie06"> 筍乾
+     		<input  type="checkbox" name="sdie07"> 小魚乾<br>
+     		配料&nbsp
+     		<input  type="checkbox" name="third01"> 韓式泡菜
+   			<input  type="checkbox" name="third02"> 台式泡菜
+   			<input  type="checkbox" name="third03"> 海帶
+   			<input  type="checkbox" name="third04"> 海苔
+     		<input  type="checkbox" name="third05"> 燙青菜<br>
+     		調味&nbsp
+     		<input  type="checkbox" name="seasoning01"> 蔥花
+   			<input  type="checkbox" name="seasoning02"> 柴魚
+   			<input  type="checkbox" name="seasoning03"> 胡椒
+   			<input  type="checkbox" name="seasoning04"> 辣椒
+     		<input  type="checkbox" name="seasoning05"> 玫瑰鹽<br>
 		</td>
 	</tr>
+	
+<!-- 	<tr> -->
+<!-- 		<select name="s1" multiple>  -->
+<!-- 			<option value="111">111</option>  -->
+<!-- 			<option value="222">222</option>  -->
+<!-- 			<option value="333">333</option>  -->
+<!-- 			<option value="444">444</option>  -->
+<!-- 			<option value="555">555</option>  -->
+<!-- 		</select>  -->
+<!-- 		<input type="button" value="test" onclick="test()">  -->
+<!-- 	</tr> -->
+	
+	<script> 
+		function test() { 
+			var arr = new Array();
+			var s = document.forms[0].s1; 
+			for(var i=0;i<s.options.length;i++) 
+				if(s.options[i].selected) 
+					arr.push(s.options[i].value);
+			alert(arr.join());	 
+		} 
+	</script>
+	
+	
+	
+<!-- 	<tr> -->
+<!-- 		<td>餐點圖片:</td> -->
+<!-- 		<td><input type="file" class="custom_Photo" name="custom_Photo" size="45"></td> -->
+<!-- 	</tr> -->
+	
+<!-- 	<tr> -->
+<!-- 		<td></td> -->
+<!-- 		<td> -->
+<!-- 	        <p>ImgPreview</p> -->
+<!-- 	     	<img class="preview" style="max-width: 200px; max-height: 200px;"> -->
+<!-- 	        <div class="size"></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 		
 	
 </table>
@@ -164,7 +243,8 @@ $(document).ready(function (){
 
 <br>
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input type="submit" value="送出新增">
+</FORM>
 
 </body>
 

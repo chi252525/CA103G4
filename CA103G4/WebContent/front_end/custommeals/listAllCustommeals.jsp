@@ -92,7 +92,6 @@
 		<th>會員編號</th>
 		<th>自訂餐點名稱</th>
 		<th>自訂餐點價格</th>
-		<th>自訂餐點圖片</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
@@ -104,7 +103,7 @@
 			<td>${custommealsVO.getmem_No()}</td>
 			<td>${custommealsVO.getcustom_Name()}</td>
 			<td>${custommealsVO.getcustom_Price()}</td>
-			<td><img src="/CA103G4/DBGifReader2?custom_No=${custommealsVO.getcustom_No()}" style="max-width: 200px; max-height: 200px;"></td>
+<%-- 			<td><img src="/CA103G4/DBGifReader2?custom_No=${custommealsVO.getcustom_No()}" style="max-width: 200px; max-height: 200px;"></td> --%>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do" style="margin-bottom: 0px;">
