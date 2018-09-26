@@ -1,6 +1,8 @@
 package com.branch.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -8,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.branch.model.BranchService;
 import com.branch.model.BranchVO;
@@ -424,18 +429,36 @@ public class BranchServlet extends HttpServlet {
 				// res);
 				//=============print to web page=====================
 				StringBuilder htmlstr = new StringBuilder();
+				JSONArray jsonarr = new JSONArray();
+										
+					
 				for (BranchVO brVO : list) {
-					htmlstr.append("<tr><td>" + brVO.getBranch_No() + "</td>")
-							.append("<td>" + brVO.getBranch_Name() + "</td>")
-							.append("<td>" + brVO.getBranch_City() + "</td>")
-							.append("<td>" + brVO.getBranch_Dist() + "</td>")
-							.append("<td>" + brVO.getBranch_Addr() + "</td>")
-							.append("<td>" + brVO.getBranch_Tel() + "</td>")
-							.append("<td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"></td>")
-							.append("<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"></td>");
+					 JSONObject jso = new  JSONObject();
+					 jso.put("branch_No", brVO.getBranch_No());
+					 jso.put("branch_Name", brVO.getBranch_Name());
+					 jso.put("branch_City", brVO.getBranch_City());
+					 jso.put("branch_Dist", brVO.getBranch_Dist());
+					 jso.put("branch_Addr", brVO.getBranch_Addr());
+					 jso.put("branch_Tel", brVO.getBranch_Tel());
+//					htmlstr.append("<tr><td>" + brVO.getBranch_No() + "</td>")
+//							.append("<td>" + brVO.getBranch_Name() + "</td>")
+//							.append("<td>" + brVO.getBranch_City() + "</td>")
+//							.append("<td>" + brVO.getBranch_Dist() + "</td>")
+//							.append("<td>" + brVO.getBranch_Addr() + "</td>")
+//							.append("<td>" + brVO.getBranch_Tel() + "</td>")
+//							.append("<td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>")
+//							.append("<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
+					 jsonarr.put(jso);
 				}
+				
+				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");
-				res.getWriter().print(htmlstr);
+				
+				PrintWriter out = res.getWriter();
+				out.print(jsonarr);
+				System.out.println(jsonarr);
+				out.flush();
+				out.close();
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
