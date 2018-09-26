@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.menu.model.MenuVO;
-@WebServlet("front_end/shoppingCart/ShoppingServlet.do")
+@WebServlet("/front_end/shoppingCart/ShoppingServlet.do")
 public class ShoppingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
