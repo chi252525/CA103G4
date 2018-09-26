@@ -30,11 +30,10 @@ public class ReportDAO implements ReportDAO_interface {
 		}
 	}
 
-	// 新增一個貼文被檢舉
+	// 新增一個留言被檢舉
 	private static final String INSERT_STMT =
 			"INSERT INTO REPORT_MSG (MEM_NO,RPLY_NO,RPT_RSM,RPT_TIME,RPT_STATUS) VALUES(?,?,?,SYSDATE,'RS0')";
-	
-	// 修改貼文留言檢舉狀態
+	// 修改留言檢舉狀態
 	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS=?, WHERE MEM_NO=? AND RPLY_NO=?";
 	// 傳回全部根據檢舉處理狀況排序，未處理的排上面
 		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS";

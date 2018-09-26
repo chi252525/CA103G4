@@ -163,7 +163,7 @@
 	
 	<servlet>
 		<servlet-name>ActivityServlet</servlet-name>
-		<servlet-class>com.emp.controller.ActivityServlet</servlet-class>
+		<servlet-class>com.activity.controller.ActivityServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ActivityServlet</servlet-name>
@@ -186,6 +186,15 @@
 	<servlet-mapping>
 		<servlet-name>ReplyServlet</servlet-name>
 		<url-pattern>/reply/replyServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ReportServlet</servlet-name>
+		<servlet-class>com.report.controller.ReportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/report.do</url-pattern>
 	</servlet-mapping>
 	
 		<servlet>
