@@ -47,7 +47,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 			pstmt.setString(1, invo_no);
 
 			pstmt.executeUpdate();
-System.out.println(invo_no);
+			
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -305,13 +305,15 @@ System.out.println(invo_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// deliveryVO 也稱為 Domain objects
+				MenuDAO_interface menudao = new MenuDAO();
+				MenuVO menuVO = menudao.findByPrimaryKey(rs.getString("menu_no"));
 				orderinvoiceVO = new OrderinvoiceVO();
 				orderinvoiceVO.setInvo_no(rs.getString("invo_no"));
 				orderinvoiceVO.setOrder_no(rs.getString("order_no"));
 				orderinvoiceVO.setMenu_no(rs.getString("menu_no"));
 				orderinvoiceVO.setCustom_no(rs.getString("custom_no"));
 				orderinvoiceVO.setInvo_status(rs.getInt("invo_status"));
+				orderinvoiceVO.setMenuVO(menuVO);
 				list.add(orderinvoiceVO);
 			}
 

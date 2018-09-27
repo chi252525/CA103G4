@@ -152,9 +152,15 @@ ul li {
 /* 	position:fixed; */
 }
 
+#choicearea {
+	background: rgba(255,255,0,0.5);
+	
+}
+
 .column-button {
-  text-align: center;
+  text-align: right;
   padding: 0.1rem;
+  vertical-align: middle;
 }
 
 .button {

@@ -25,7 +25,6 @@ public class AndroidEmployeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-//		Gson gson = new Gson();
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
 		String line = null;
@@ -41,6 +40,7 @@ public class AndroidEmployeeServlet extends HttpServlet {
 			String emp_Acnum = jsonObject.get("emp_Acnum").getAsString();
 			String emp_Psw = jsonObject.get("emp_Psw").getAsString();
 			EmpVO empVO = empDAO.isEmployee(emp_Acnum, emp_Psw);
+			// 查不到該員工回傳空字串，轉成Json格式字串為{}
 			writeText(res, empVO == null ? "" : gson.toJson(empVO));
 		} 
 //		else if (action.equals("isUserIdExist")) {

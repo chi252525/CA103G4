@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 public class MemberDAO implements MemberDAO_interface{
 	
 	private static DataSource ds = null;
+	
 	static {
 		try {
 			Context ctx = new InitialContext();
@@ -29,7 +30,6 @@ public class MemberDAO implements MemberDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	
 	public static final String INSERT_STMT=
 			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
 			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -39,7 +39,11 @@ public class MemberDAO implements MemberDAO_interface{
 			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
 	public static final String GETALL=
 			"SELECT * FROM MEMBER";
+	public static final String GET_ONE_MEMBER="SELECT * FROM MEMBER WHERE MEM_NO=?";
+	public static final String GET_ONE_BY_ID="SELECT * FROM MEMBER WHERE MEM_ID=?";
 	
+
+
 	@Override
 	public void insert(MemberVO memVO) {
 		// TODO Auto-generated method stub
@@ -115,8 +119,6 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(12, memVO.getMem_Cardnum());
 			pstmt.setString(13, memVO.getMem_Carddue());
 			pstmt.setInt(14, memVO.getMem_Bonus());
-//			byte[] pic = getPictureByte("img/test2.jpg");
-//			pstmt.setBytes(15, pic);
 			pstmt.setBytes(15,memVO.getMem_Photo());
 			pstmt.setString(16, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
@@ -125,9 +127,6 @@ public class MemberDAO implements MemberDAO_interface{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
 		} finally{
 			if(pstmt!=null) {
 				try {
@@ -207,9 +206,25 @@ public class MemberDAO implements MemberDAO_interface{
 			while(rs.next()) {
 				MemberVO memVO = new MemberVO();
 				memVO.setMem_No(rs.getString("mem_No"));
+				memVO.setMem_Id(rs.getString("mem_Id"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
-				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
 				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_Photo"));
+								
 				memberlist.add(memVO);
 			}
 			
@@ -252,6 +267,116 @@ public class MemberDAO implements MemberDAO_interface{
 			fis.close();
 		return baos.toByteArray();
 		
+	}
+	//Ning add
+	public MemberVO findByPrimaryKey(String mem_No) {
+		MemberVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_MEMBER);
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+  
+			while (rs.next()) {
+				memVO = new MemberVO();
+				memVO.setMem_Id(rs.getString("mem_Id"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
+				memVO.setMem_Name(rs.getString("mem_Name"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_Photo"));
+				memVO.setMem_No(rs.getString("mem_No"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	
+	//chiapao add for member login
+	public MemberVO findById(String mem_Id) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		MemberVO memVO = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_BY_ID);
+			
+			pstmt.setString(1, mem_Id);
+			ResultSet rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+
+				memVO = new MemberVO();
+				
+				memVO.setMem_No(rs.getString("mem_No"));
+				memVO.setMem_Pw(rs.getString("mem_Pw"));
+				memVO.setMem_Name(rs.getString("mem_Name"));
+				memVO.setMem_Gender(rs.getString("mem_Gender"));
+				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Mail(rs.getString("mem_Mail"));
+				memVO.setMem_Phone(rs.getString("mem_Phone"));
+				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
+				memVO.setMem_Repno(rs.getString("mem_Repno"));
+				memVO.setMem_Recounty(rs.getString("mem_Recounty"));
+				memVO.setMem_Retown(rs.getString("mem_Retown"));
+				memVO.setMem_Readdr(rs.getString("mem_Readdr"));
+				memVO.setMem_Cardnum(rs.getString("mem_Cardnum"));
+				memVO.setMem_Carddue(rs.getString("mem_Carddue"));
+				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
+				memVO.setMem_Credate(rs.getDate("mem_Credate"));
+				memVO.setMem_Status(rs.getString("mem_Status"));
+				memVO.setMem_Photo(rs.getBytes("mem_photo"));				
+												
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return memVO;
 	}
 	
 	

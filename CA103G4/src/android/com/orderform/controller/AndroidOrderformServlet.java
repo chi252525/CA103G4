@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class AndroidOrderformServlet extends HttpServlet {
@@ -28,7 +29,7 @@ public class AndroidOrderformServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		ServletContext context = getServletContext();
 		OrderformDAO_interface dao = new OrderformDAO();
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
@@ -80,6 +81,13 @@ public class AndroidOrderformServlet extends HttpServlet {
 				oidao.updateStatus(str);
 			}
 			writeText(res, gson.toJson("OK"));
+		}
+		else if("getOrderByDelivNo".equals(action)) {
+			String delivNo = jsonObject.get("delivNo").getAsString();
+			List<OrderformVO> orderList = dao.findByDeliveryNo(delivNo);
+			
+			
+			writeText(res, gson.toJson(orderList));
 		}
 //		else if ("getDelivNo".equals(action)) {
 //			String deliv_no = jsonObject.get("deliv_no").getAsString();

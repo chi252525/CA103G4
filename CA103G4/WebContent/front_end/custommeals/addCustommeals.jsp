@@ -125,7 +125,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="custommeals.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="custommeals.do" name="form1" class="sum">
 <table>
 
 	<tr>
@@ -140,19 +140,26 @@
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-		<td><input type="TEXT" name="custom_Price" size="45"	
-			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
+		<td>	  
+			<div class="result-area">
+		    <span class="cb-count">0</span>元
+		    <p class="result-text"></p>
+		  	</div>
+	    </td>	
+<!-- 		<td><input type="TEXT" name="custom_Price" size="45"	 -->
+<%-- 			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td> --%>
 	</tr>
 	
 	<tr>
 		<td>食材選擇:</td>
 		<td>麵條&nbsp
-			<input  type="checkbox" name="ingredients" value="I0001"> 細拉麵
-		    <input  type="checkbox" name="ingredients" value="I0002"> 烏龍麵
-    		<input  type="checkbox" name="ingredients" value="I0003"> 刀削麵
-    		<input  type="checkbox" name="ingredients" value="I0004"> 蕎麥麵
-   			<input  type="checkbox" name="ingredients" value="I0005"> 墨魚麵
-     		<input  type="checkbox" name="ingredients" value="I0006"> 蔬菜麵
+			<input id="I0001" type="checkbox" name="ingredients"> 細拉麵
+			<input id="I0001" type="hidden" name="ingredients" value="10"> 
+		    <input  type="checkbox" name="ingredients" value="20"> 烏龍麵
+    		<input  type="checkbox" name="ingredients" value="30"> 刀削麵
+    		<input  type="checkbox" name="ingredients" value="40"> 蕎麥麵
+   			<input  type="checkbox" name="ingredients" value="55"> 墨魚麵
+     		<input  type="checkbox" name="ingredients" value="25"> 蔬菜麵
      		<br>
      		湯頭&nbsp
      		<input  type="checkbox" name="ingredients" value=""> 醬油湯
@@ -198,6 +205,12 @@
      		<input  type="checkbox" name="ingredients" value=""> 玫瑰鹽<br>
 		</td>
 	</tr>
+	<tr>
+	  <div class="result-area">
+	    <span class="cb-count">0</span>元
+	    <p class="result-text"></p>
+	  </div>
+	</tr>		
 	
 <!-- 	<tr> -->
 <!-- 		<select name="s1" multiple>  -->
@@ -219,6 +232,29 @@
 					arr.push(s.options[i].value);
 			alert(arr.join());	 
 		} 
+		
+		
+		
+        jQuery(function($) {
+        	var count = 0;
+        	var check = $('.sum').find('input[type="checkbox"]');
+        	$('.result-text'); 
+          check.prop('checked', false); 
+
+        	
+        	check.on('change', function() {
+        		if($(this).prop('checked')) {
+        			count = count + parseInt($(this).val());
+        		} else {
+        			count = count - parseInt($(this).val());
+        		}
+        		$('.cb-count').text(count);
+
+
+        	})
+        });
+		
+		
 	</script>
 	
 	

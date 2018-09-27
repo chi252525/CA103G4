@@ -13,6 +13,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import android.com.orderinvoice.model.*;
 import android.com.desk.model.*;
+import android.com.member.model.*;
+import android.com.menu.model.*;
 
 public class OrderformDAO implements OrderformDAO_interface {
 	private static DataSource ds = null;
@@ -35,7 +37,79 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String INSERT_ORDERTYPE0_STMT = "INSERT INTO orderform(order_no,dek_no,branch_no,order_type,order_price,order_status,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=? and order_status=? order by dek_no";
 	private static final String GET_ONE_FROM_DEKNOANDSTATUS_STMT = "SELECT * FROM orderform where dek_no=? and order_status=?";
+	private static final String GET_ALL_FROM_DELIVNO_STMT = "SELECT * FROM orderform where deliv_no=? ";
 	
+	
+	
+	
+	@Override
+	public List<OrderformVO> findByDeliveryNo(String delivery_no) {
+		List<OrderformVO> list = new ArrayList<OrderformVO>();
+		OrderformVO orderformVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_FROM_DELIVNO_STMT);
+			pstmt.setString(1, delivery_no);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				orderformVO = new OrderformVO();
+				OrderinvoiceDAO_interface oidao = new OrderinvoiceDAO();
+				List<OrderinvoiceVO> orderList = oidao.findByOrder_no(rs.getString("order_no"));
+					
+				MemberDAO_interface mdao = new MemberDAO();
+				MemberVO memVO = mdao.findByPrimaryKey(rs.getString("mem_no"));
+				
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setDek_no(rs.getString("dek_no"));
+				orderformVO.setMem_no(rs.getString("mem_no"));
+				orderformVO.setBranch_no(rs.getString("branch_no"));
+				orderformVO.setDeliv_no(rs.getString("deliv_no"));
+				orderformVO.setOrder_type(rs.getInt("order_type"));
+				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_status(rs.getInt("order_status"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
+				orderformVO.setOrderList2(orderList);
+				orderformVO.setMemVO(memVO);
+				list.add(orderformVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	@Override
 	public OrderformVO findByDekNoAndOrderStatus(String dek_no, Integer order_status) {
 		OrderformVO orderformVO = null;
