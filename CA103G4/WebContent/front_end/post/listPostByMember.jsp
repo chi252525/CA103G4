@@ -142,7 +142,6 @@ body {
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 					<div class="col-md-4 px-2 py-4">
-
 						<div class="card">
 							<img class="card-img img-fluid"
 								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"

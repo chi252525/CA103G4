@@ -284,6 +284,7 @@ public class PostServlet extends HttpServlet{
 				postSvc.deletePost(post_No);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				
 				String url = "/front_end/post/listAllpost.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);

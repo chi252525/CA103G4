@@ -10,9 +10,9 @@
 
 <%
 	PostVO postVO = (PostVO) session.getAttribute("postVO");
-	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
-	if (memberVO == null) {
-		memberVO = (MemberVO) session.getAttribute("memberVO");
+	MemberVO memVO = (MemberVO) request.getAttribute("memVO");
+	if (memVO == null) {
+		memVO = (MemberVO) session.getAttribute("memVO");
 	}
 	
 	IngredientsService ingtSvc=(IngredientsService)new  IngredientsService();
@@ -191,8 +191,9 @@ body {
 										required></textarea>
 								</div>
 								<input type="hidden" id="post_No" name="post_No"
-									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
-									name="mem_No" value="M000001" /> <input type="hidden"
+									value="${postVO.post_No}" /> 
+									<input type="hidden" id="mem_No"
+									name="mem_No" value="${memVO.mem_Name}" /> <input type="hidden"
 									name="action" value="insert">
 								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>

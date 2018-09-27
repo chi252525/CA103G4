@@ -136,15 +136,52 @@ padding-bottom:20px;
 			<div class="col-sm-12">
 				<div class="row d-flex flex-wrap justify-content-center postitem">
 					<div class="col-md-12 col-sm-12 ">
+					
+					
+					
+					
 						<%-- 錯誤表列 --%>
-						<c:if test="${not empty errorMsgs}">
+						
 							<font style="color: red">請修正以下錯誤:</font>
 							<ul>
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
 								</c:forEach>
 							</ul>
+
+					<%-- 錯誤表列 --%>
+						<c:if test="${not empty errorMsgs}">
+							<div class="modal fade" id="errorMsgs" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalCenterTitle"
+								aria-hidden="true" data-target="#exampleModalCenter">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">請修正以下錯誤:</h5>
+										</div>
+										<div class="modal-body">
+											<ul>
+												<c:forEach var="message" items="${errorMsgs}">
+													<li style="color: red">${message}</li>
+												</c:forEach>
+											</ul>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
 						</c:if>
+
+
+
+
+
+
 						<form method="post"
 							action="<%=request.getContextPath()%>/post/postServlet.do"
 							name="updateform" enctype="multipart/form-data">
