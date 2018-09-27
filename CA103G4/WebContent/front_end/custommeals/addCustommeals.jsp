@@ -140,26 +140,25 @@
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-		<td>	  
-			<div class="result-area">
-		    <span class="cb-count">0</span>元
-		    <p class="result-text"></p>
-		  	</div>
-	    </td>	
-<!-- 		<td><input type="TEXT" name="custom_Price" size="45"	 -->
-<%-- 			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td> --%>
+<!-- 		<td>	   -->
+<!-- 			<div class="result-area"> -->
+<!-- 		    <span class="cb-count">0</span>元 -->
+<!-- 		    <p class="result-text"></p> -->
+<!-- 		  	</div> -->
+<!-- 	    </td>	 -->
+		<td><input type="TEXT" name="custom_Price" size="45"	
+			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
 	</tr>
 	
 	<tr>
 		<td>食材選擇:</td>
 		<td>麵條&nbsp
-			<input id="I0001" type="checkbox" name="ingredients"> 細拉麵
-			<input id="I0001" type="hidden" name="ingredients" value="10"> 
-		    <input  type="checkbox" name="ingredients" value="20"> 烏龍麵
-    		<input  type="checkbox" name="ingredients" value="30"> 刀削麵
-    		<input  type="checkbox" name="ingredients" value="40"> 蕎麥麵
-   			<input  type="checkbox" name="ingredients" value="55"> 墨魚麵
-     		<input  type="checkbox" name="ingredients" value="25"> 蔬菜麵
+			<input id="I0001" type="checkbox" name="ingredients" value="10"> 細拉麵
+		    <input id="I0002" type="checkbox" name="ingredients" value="20"> 烏龍麵
+    		<input id="I0003" type="checkbox" name="ingredients" value="30"> 刀削麵
+    		<input id="I0004" type="checkbox" name="ingredients" value="40"> 蕎麥麵
+   			<input id="I0005" type="checkbox" name="ingredients" value="55"> 墨魚麵
+     		<input id="I0006" type="checkbox" name="ingredients" value="25"> 蔬菜麵
      		<br>
      		湯頭&nbsp
      		<input  type="checkbox" name="ingredients" value=""> 醬油湯

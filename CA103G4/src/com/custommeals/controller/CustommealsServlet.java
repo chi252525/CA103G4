@@ -319,27 +319,27 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
 					
-					List<IngredientCombinationVO> list = new ArrayList();
-					String id[] = req.getParameterValues("ingredients");
-					if (id != null) {
-						for (int i = 0; i < id.length; i++) {
-							System.out.println(id[i]);
-							IngredientCombinationVO ingt = new IngredientCombinationVO();
-							ingt.setIngdt_Id(id[i]);
-							list.add(ingt);
-						}
-					}
-
 //					List<IngredientCombinationVO> list = new ArrayList();
-//					String values[] = req.getParameterValues("ingredients");
-//					if (values != null) {
-//						for (int i = 0; i < values.length; i++) {
-//							System.out.println(values[i]);
+//					String id[] = req.getParameterValues("ingredients");
+//					if (id != null) {
+//						for (int i = 0; i < id.length; i++) {
+//							System.out.println(id[i]);
 //							IngredientCombinationVO ingt = new IngredientCombinationVO();
-//							ingt.setIngdt_Id(values[i]);
+//							ingt.setIngdt_Id(id[i]);
 //							list.add(ingt);
 //						}
 //					}
+
+					List<IngredientCombinationVO> list = new ArrayList();
+					String values[] = req.getParameterValues("ingredients");
+					if (values != null) {
+						for (int i = 0; i < values.length; i++) {
+							System.out.println(values[i]);
+							IngredientCombinationVO ingt = new IngredientCombinationVO();
+							ingt.setIngdt_Id(values[i]);
+							list.add(ingt);
+						}
+					}
 	
 					
 					/***************************2.開始新增資料****************************************/

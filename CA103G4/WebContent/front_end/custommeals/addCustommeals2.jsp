@@ -7,8 +7,7 @@
   CustommealsVO custommealsVO = (CustommealsVO) request.getAttribute("custommealsVO");
 %>
 
-<!DOCTYPE html>
-<html lang="en" >
+<html>
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" charset="UTF-8">
@@ -317,18 +316,18 @@
 								      <ul class="task-list" id="combination">
 								      </ul>
 								  
-									  會員編號	
-									  <input type="TEXT" name="mem_No" size="45"	
-											value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /><br>
+<!-- 									  會員編號	 -->
+<!-- 									  <input type="TEXT" name="mem_No" size="45"	 -->
+<%-- 											value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /><br> --%>
 									  
-									  自訂餐點名稱	
-									  <input type="TEXT" name="custom_Name" size="45"	
-											value="<%=(custommealsVO==null)?"海陸":custommealsVO.getcustom_Name()%>" /><br>
+<!-- 									  自訂餐點名稱	 -->
+<!-- 									  <input type="TEXT" name="custom_Name" size="45"	 -->
+<%-- 											value="<%=(custommealsVO==null)?"海陸":custommealsVO.getcustom_Name()%>" /><br> --%>
 									  	
 								  
-								 	  自訂餐點價格	
-								 	  <input type="TEXT" name="custom_Price" size="45"	
-											value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /><br>
+<!-- 								 	  自訂餐點價格	 -->
+<!-- 								 	  <input type="TEXT" name="custom_Price" size="45"	 -->
+<%-- 											value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /><br> --%>
 								  
 	
 							      <div class="column-button">
@@ -340,10 +339,10 @@
 							        <button class="button confirm-button confirmBtn">確認組合</button>
 							      </div>
 							      
-							      <div class="result-area">
-										あなたは今<span class="cb-count">0</span>点です。
-										<p class="result-text"></p>
-								 </div>
+<!-- 							      <div class="result-area"> -->
+<!-- 										あなたは今<span class="cb-count">0</span>点です。 -->
+<!-- 										<p class="result-text"></p> -->
+<!-- 								 </div> -->
 							<!--      </form>-->
 								
 						    </li>
@@ -475,21 +474,21 @@
     <table>
     
     
-<!--     <tr> -->
-<!-- 		<td>會員編號:</td> -->
-<!-- 		<td><input type="TEXT" name="mem_No" size="45"	 -->
-<%-- 			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>自訂餐點名稱:</td> -->
-<!-- 		<td><input type="TEXT" name="custom_Name" size="45"	 -->
-<%-- 			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getcustom_Name()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>自訂餐點價格:</td> -->
-<!-- 		<td><input type="TEXT" name="custom_Price" size="45"	 -->
-<%-- 			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td> --%>
-<!-- 	</tr> -->
+    <tr>
+		<td>會員編號:</td>
+		<td><input type="TEXT" name="mem_No" size="45"	
+			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /></td>
+	</tr>
+	<tr>
+		<td>自訂餐點名稱:</td>
+		<td><input type="TEXT" name="custom_Name" size="45"	
+			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getcustom_Name()%>" /></td>
+	</tr>
+	<tr>
+		<td>自訂餐點價格:</td>
+		<td><input type="TEXT" name="custom_Price" size="45"	
+			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
+	</tr>
     
     
     <tr style="display: block;">
@@ -497,13 +496,12 @@
             <td>食材選擇:</td>
             <td>
             	 麵條
-                <input id="I0001" type="checkbox" name="ingredients" value="I0001" > 細拉麵
-                <input id="I0001" type="hidden" name="ingredients" value="20"> 
-                <input id="I0002" type="checkbox" name="ingredients" value="I0002" value="20"> 烏龍麵
-                <input id="I0003" type="checkbox" name="ingredients" value="I0003" value="20"> 刀削麵
-                <input id="I0004" type="checkbox" name="ingredients" value="I0004" value="20"> 蕎麥麵
-                <input id="I0005" type="checkbox" name="ingredients" value="I0005" value="30"> 墨魚麵
-                <input id="I0006" type="checkbox" name="ingredients" value="I0006" value="20"> 蔬菜麵
+                <input id="I0001" type="checkbox" name="ingredients" value="I0001"> 細拉麵
+                <input id="I0002" type="checkbox" name="ingredients" value="I0002"> 烏龍麵
+                <input id="I0003" type="checkbox" name="ingredients" value="I0003"> 刀削麵
+                <input id="I0004" type="checkbox" name="ingredients" value="I0004"> 蕎麥麵
+                <input id="I0005" type="checkbox" name="ingredients" value="I0005"> 墨魚麵
+                <input id="I0006" type="checkbox" name="ingredients" value="I0006"> 蔬菜麵
                 <br>
                	 湯頭
                 <input id="I0007" type="checkbox" name="ingredients" value="I0007"> 醬油湯
@@ -515,8 +513,8 @@
                 <input id="I0013" type="checkbox" name="ingredients" value="I0013"> 豚骨湯
                 <input id="I0014" type="checkbox" name="ingredients" value="I0014"> 味增湯
                 <input id="I0015" type="checkbox" name="ingredients" value="I0015"> 咖哩湯
-                <input id="I0015-1" type="checkbox" name="ingredients" value="I0015-1"> 鹽味湯
-                <input id="I0015-2" type="checkbox" name="ingredients" value="I0015-2"> 海鮮湯
+<!--                 <input id="I0015-1" type="checkbox" name="ingredients" value="I0015-1"> 鹽味湯 -->
+<!--                 <input id="I0015-2" type="checkbox" name="ingredients" value="I0015-2"> 海鮮湯 -->
                 <br>
 				主餐
                 <input id="I0016" type="checkbox" name="ingredients" value="I0016"> 叉燒肉
@@ -537,7 +535,7 @@
                 <input id="I0029" type="checkbox" name="ingredients" value="I0029"> 滷蛋
                 <input id="I0030" type="checkbox" name="ingredients" value="I0030"> 貢丸
                 <input id="I0031" type="checkbox" name="ingredients" value="I0031"> 豆皮
-<!--                 <input id="I0032" type="checkbox" name="ingredients" value="I0032"> 筍乾 -->
+                <input id="I0032" type="checkbox" name="ingredients" value="I0032"> 筍乾
                 <input id="I0033" type="checkbox" name="ingredients" value="I0033"> 小魚乾
                 <br>
 				配料
@@ -594,7 +592,7 @@
         jQuery(function($) {
         	var count = 0;
         	var check = $('.sum').find('input[type="checkbox"]');
-        	$('.result-text').text('ここに結果が表示されます。'); 
+        	$('.result-text'); 
           check.prop('checked', false); 
 
         	
