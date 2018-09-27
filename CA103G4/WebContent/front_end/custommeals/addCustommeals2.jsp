@@ -310,21 +310,42 @@
 				
 						  <ul class="columns">
 						  	<li class="column trash-column">
-						      <div class="column-header2">
-						        <h4>組合區</h4>
-						      </div>
-						      <ul class="task-list" id="combination">
-						
-						      </ul>
-						      <div class="column-button">
-						        <button class="button delete-button" onclick="emptyTrash()">重新選擇</button>
-						      </div>
-						<!--      <form id="sform" action="submit">-->
-						      <div class="column-button">
-						<!--       	<input type="button" name="action" value="insert" class="button confirm-button confirmBtn"> -->
-						        <button class="button confirm-button confirmBtn">確認組合</button>
-						      </div>
-						<!--      </form>-->
+							  	
+							      <div class="column-header2">
+							        <h4>組合區</h4>
+							      </div>
+								      <ul class="task-list" id="combination">
+								      </ul>
+								  
+									  會員編號	
+									  <input type="TEXT" name="mem_No" size="45"	
+											value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /><br>
+									  
+									  自訂餐點名稱	
+									  <input type="TEXT" name="custom_Name" size="45"	
+											value="<%=(custommealsVO==null)?"海陸":custommealsVO.getcustom_Name()%>" /><br>
+									  	
+								  
+								 	  自訂餐點價格	
+								 	  <input type="TEXT" name="custom_Price" size="45"	
+											value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /><br>
+								  
+	
+							      <div class="column-button">
+							        <button class="button delete-button" onclick="emptyTrash()">重新選擇</button>
+							      </div>
+							<!--      <form id="sform" action="submit">-->
+							      <div class="column-button">
+							<!--       	<input type="button" name="action" value="insert" class="button confirm-button confirmBtn"> -->
+							        <button class="button confirm-button confirmBtn">確認組合</button>
+							      </div>
+							      
+							      <div class="result-area">
+										あなたは今<span class="cb-count">0</span>点です。
+										<p class="result-text"></p>
+								 </div>
+							<!--      </form>-->
+								
 						    </li>
 						  	<li class="column ingdt_4-column">
 						      <div class="column-header">
@@ -449,26 +470,26 @@
  
 
 <!-- <div class="right-sidebar"> -->
-<form METHOD="post" id="sform" action="custommeals.do" name="form1">
+<form METHOD="post" id="sform" action="custommeals.do" name="form1" class="sum">
 	<input type="hidden" name ="action" value="insert">
     <table>
     
     
-    <tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_No" size="45"	
-			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /></td>
-	</tr>
-	<tr>
-		<td>自訂餐點名稱:</td>
-		<td><input type="TEXT" name="custom_Name" size="45"	
-			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getcustom_Name()%>" /></td>
-	</tr>
-	<tr>
-		<td>自訂餐點價格:</td>
-		<td><input type="TEXT" name="custom_Price" size="45"	
-			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
-	</tr>
+<!--     <tr> -->
+<!-- 		<td>會員編號:</td> -->
+<!-- 		<td><input type="TEXT" name="mem_No" size="45"	 -->
+<%-- 			value="<%=(custommealsVO==null)?"M000001":custommealsVO.getmem_No()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>自訂餐點名稱:</td> -->
+<!-- 		<td><input type="TEXT" name="custom_Name" size="45"	 -->
+<%-- 			value="<%=(custommealsVO==null)?"海陸雙拼大餐":custommealsVO.getcustom_Name()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>自訂餐點價格:</td> -->
+<!-- 		<td><input type="TEXT" name="custom_Price" size="45"	 -->
+<%-- 			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td> --%>
+<!-- 	</tr> -->
     
     
     <tr style="display: block;">
@@ -476,12 +497,13 @@
             <td>食材選擇:</td>
             <td>
             	 麵條
-                <input id="I0001" type="checkbox" name="ingredients" value="I0001"> 細拉麵
-                <input id="I0002" type="checkbox" name="ingredients" value="I0002"> 烏龍麵
-                <input id="I0003" type="checkbox" name="ingredients" value="I0003"> 刀削麵
-                <input id="I0004" type="checkbox" name="ingredients" value="I0004"> 蕎麥麵
-                <input id="I0005" type="checkbox" name="ingredients" value="I0005"> 墨魚麵
-                <input id="I0006" type="checkbox" name="ingredients" value="I0006"> 蔬菜麵
+                <input id="I0001" type="checkbox" name="ingredients" value="I0001" > 細拉麵
+                <input id="I0001" type="hidden" name="ingredients" value="20"> 
+                <input id="I0002" type="checkbox" name="ingredients" value="I0002" value="20"> 烏龍麵
+                <input id="I0003" type="checkbox" name="ingredients" value="I0003" value="20"> 刀削麵
+                <input id="I0004" type="checkbox" name="ingredients" value="I0004" value="20"> 蕎麥麵
+                <input id="I0005" type="checkbox" name="ingredients" value="I0005" value="30"> 墨魚麵
+                <input id="I0006" type="checkbox" name="ingredients" value="I0006" value="20"> 蔬菜麵
                 <br>
                	 湯頭
                 <input id="I0007" type="checkbox" name="ingredients" value="I0007"> 醬油湯
@@ -566,6 +588,26 @@
                 }
                 $('#sform').submit();
             });
+        });
+        
+     
+        jQuery(function($) {
+        	var count = 0;
+        	var check = $('.sum').find('input[type="checkbox"]');
+        	$('.result-text').text('ここに結果が表示されます。'); 
+          check.prop('checked', false); 
+
+        	
+        	check.on('change', function() {
+        		if($(this).prop('checked')) {
+        			count = count + parseInt($(this).val());
+        		} else {
+        			count = count - parseInt($(this).val());
+        		}
+        		$('.cb-count').text(count);
+
+
+        	})
         });
     </script>
 
