@@ -26,7 +26,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, null, ?, ?, ?, ?, ?)";
 	private static final String GET_MORE_STMT = "SELECT order_no,dek_no,mem_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where ";
 	private static final String GET_NOTOK_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_status= 1 and order_pstatus!= 2";
 	private static final String GET_ALL_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform order by order_no Desc";
@@ -447,7 +447,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setString(1, orderformVO.getDek_no());
 			pstmt.setString(2, orderformVO.getMem_no());
 			pstmt.setString(3, orderformVO.getBranch_no());
-			pstmt.setString(4, orderformVO.getDeliv_no());
 			pstmt.setInt(5, orderformVO.getOrder_type());
 			pstmt.setInt(6, orderformVO.getOrder_price());
 			pstmt.setInt(7, orderformVO.getOrder_status());

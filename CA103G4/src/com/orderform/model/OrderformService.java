@@ -1,8 +1,6 @@
 package com.orderform.model;
 
 import java.util.List;
-
-import com.delivery.model.DeliveryVO;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformService {
@@ -18,7 +16,7 @@ public class OrderformService {
 		
 		dao.insertWithInvoice(orderformVO,list);
 	
-		return orderformVO;
+		return orderformInVO;
 	}
 	
 	
