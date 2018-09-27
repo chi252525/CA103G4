@@ -33,13 +33,9 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/post/css/starability-all.min.css" />
 <!--for star rating============================================= -->
-<link
-	href="<%=request.getContextPath()%>/front_end/post/css/starability.css"
-	media="all" rel="stylesheet" type="text/css" />
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front_end/post/js/star-rating.js"
-	type="text/javascript"></script>
+
 <!--Bootstrap JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -186,8 +182,6 @@ body {
 						<div class="card px-2">
 							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
 							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							
-						
 							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
@@ -197,12 +191,12 @@ body {
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
-								<input type="hidden" name="post_No" value="${postVO.post_No}">
+								<input type="hidden" name="post_No" value="${postVO.post_No}"/>
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
 								<!-- 查單一貼文 -->
-								<input type="hidden" name="action" value="getOne_For_Display">
+								<input type="hidden" name="action" value="getOne_For_Display"/>
 								<!-- 同時查單一貼文的所有留言 -->
-								<input type="hidden" name="action" value="listReplybyPostNo">
+								<input type="hidden" name="action" value="listReplybyPostNo"/>
 								<input type="hidden" name="action" value="addviews">
 								<button type="submit" 
 									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>

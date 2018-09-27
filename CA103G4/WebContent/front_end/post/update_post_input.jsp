@@ -178,15 +178,15 @@ padding-bottom:20px;
 								<p>餐點推薦度</p>
 								<fieldset class="starability-slot">
 									<input type="radio" id="no-rate" class="input-no-rate"	name="post_Eva" value="0" checked aria-label="No rating." />
-									<input type="radio" id="rate1" name="post_Eva" value="" /> 
+									<input type="radio" id="rate1" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
 									<label	for="rate1">1 star.</label>
-									<input type="radio" id="rate2"	name="post_Eva" value="" /> 
+									<input type="radio" id="rate2"	name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
 									<label for="rate2">2stars.</label> 
-									<input type="radio" id="rate3" name="post_Eva" value="" /> 
+									<input type="radio" id="rate3" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
 									<label for="rate3">3 stars.</label> 
-									<input	type="radio" id="rate4" name="post_Eva" value="" /> 
+									<input	type="radio" id="rate4" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
 									<label	for="rate4">4 stars.</label> 
-									<input type="radio" id="rate5"	name="post_Eva" value="" /> 
+									<input type="radio" id="rate5"	name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
 									<label for="rate5">5 stars.</label> <span class="starability-focus-ring"></span>
 								</fieldset>
 							</div>
@@ -202,12 +202,7 @@ padding-bottom:20px;
 					             <%= (postVO==null)? "" : postVO.getPost_Cont()%>
 					            </textarea>
 							<!-- //編輯器區塊 -->
-							<script>
-							$(function(){
-								$("#post_Cont").val('<%=postVO.getPost_Cont()%>');
-							});
-							
-							</script>
+						
 							<input type="hidden" id="post_No" name="post_No" value="${postVO.post_No}" />
 							<input type="hidden" id="mem_No" name="mem_No" value="${postVO.mem_No}" />
 							<input type="hidden" name="action" value="update">

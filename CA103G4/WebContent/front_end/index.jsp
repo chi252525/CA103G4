@@ -97,7 +97,7 @@
 	line-height: 0.5em;
 }
 .p-self{
-padding:8rem!important;
+padding:11rem!important;
 
 }
 </style>

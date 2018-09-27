@@ -26,15 +26,13 @@ public class PostShowImage extends HttpServlet{
 		ServletOutputStream out = res.getOutputStream();
 	
 		try{
+			System.out.println("in PostShowImage");
 			String post_No = req.getParameter("post_No");
-//			System.out.println("req.getParameter post_No="+post_No);
 			PostService postSvc = new PostService();
 			byte[] image = postSvc.getOne_Post(post_No).getPost_Photo();
 			out.write(image);
-
 		}	catch (Exception e){
-			InputStream in = getServletContext().getResourceAsStream("/res/img/post/post_no_photo.jpg");
-//			System.out.println("成功寫出圖片");
+			InputStream in = getServletContext().getResourceAsStream("/res/img/post_no_photo.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);
