@@ -21,6 +21,8 @@
 <body>
 <!-- header勿動 -->
 <jsp:include page="/front_end/header.jsp"></jsp:include>
+	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 
 <!--以下為login區塊-->
 <div class="container col-3 loginarea" style="padding-bottom:30px;">	

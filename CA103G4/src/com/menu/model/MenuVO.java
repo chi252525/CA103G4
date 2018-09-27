@@ -9,13 +9,13 @@ public class MenuVO implements java.io.Serializable{
 	private String Menu_Intro;
 	private byte[] Menu_Photo;
 	private Integer Menu_Status;
-
+	private Integer Menu_quantity;
 	
 	public MenuVO() {
 		super();
 	}
 	
-	public MenuVO(String Menu_No, String Menu_Id, String Menu_Type, Integer Menu_Price, String Menu_Intro, byte[] Menu_Photo, Integer Menu_Status) {
+	public MenuVO(String Menu_No, String Menu_Id, String Menu_Type, Integer Menu_Price, String Menu_Intro, byte[] Menu_Photo, Integer Menu_Status,Integer Menu_quantity) {
 		super();
 		this.Menu_No = Menu_No;
 		this.Menu_Id = Menu_Id;
@@ -24,6 +24,25 @@ public class MenuVO implements java.io.Serializable{
 		this.Menu_Intro = Menu_Intro;
 		this.Menu_Photo = Menu_Photo;
 		this.Menu_Status = Menu_Status;
+		this.Menu_quantity = Menu_quantity;
+	}
+
+	public Integer getMenu_quantity() {
+		return Menu_quantity;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		MenuVO menuVO = (MenuVO)obj;
+		if(this.getMenu_No().equals(menuVO.Menu_No)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public void setMenu_quantity(Integer menu_quantity) {
+		Menu_quantity = menu_quantity;
 	}
 
 	public String getMenu_No() {

@@ -2,6 +2,7 @@ package com.member.controller;
 
 import java.io.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -82,7 +83,7 @@ public class MemServlet extends HttpServlet{
 				in.read(b);
 				out.write(b);
 				in.close();
-			}				
+			}			
 						
 //		doPost(req,res);
 	}
@@ -141,7 +142,7 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				//生日驗證
-				String mem_Bir = req.getParameter("mem_Bir");
+				Date mem_Bir = java.sql.Date.valueOf(req.getParameter("mem_Bir"));
 				if(mem_Bir == null) {
 					errorMsgs.add("尚未填寫生日");
 				}
@@ -261,7 +262,7 @@ public class MemServlet extends HttpServlet{
 					
 					String to = memVO.getMem_Mail();
 					String subject = "竹風堂認證信";
-					String messageText = "HI！" +memVO.getMem_Name()+ "\n驗證碼："+authCode  ;
+					String messageText = "HI！ " +memVO.getMem_Name()+" 歡迎你加入竹風堂會員以下為驗證碼，請於網頁中輸入並完成註冊。"+ "\n驗證碼："+authCode  ;
 					ms.sendMail(to, subject, messageText);		
 					
 					//連線Jedis
@@ -405,6 +406,8 @@ System.out.println("我已經改完囉");
 
 				HttpSession session = req.getSession();
 				session.setAttribute("memVO", memVO);
+				session.setAttribute("mem_Id", mem_Id);
+				
 				
 					try {
 						String location = (String) session.getAttribute("location");

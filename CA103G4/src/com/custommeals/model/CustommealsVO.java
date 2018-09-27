@@ -6,20 +6,20 @@ public class CustommealsVO implements java.io.Serializable{
 	private String mem_No;
 	private String custom_Name;
 	private Integer custom_Price;
-	private byte[] custom_Photo;
+//	private byte[] custom_Photo;
 
 	public CustommealsVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CustommealsVO(String custom_No, String mem_No, String custom_Name, Integer custom_Price, byte[] custom_Photo) {
+	public CustommealsVO(String custom_No, String mem_No, String custom_Name, Integer custom_Price) {
 		super();
 		this.custom_No = custom_No;
 		this.mem_No = mem_No;
 		this.custom_Name = custom_Name;
 		this.custom_Price = custom_Price;
-		this.custom_Photo = custom_Photo;
+//		this.custom_Photo = custom_Photo;
 	}
 
 	
@@ -60,13 +60,13 @@ public class CustommealsVO implements java.io.Serializable{
 	}
 	
 ;
-	public byte[] getcustom_Photo() {
-		return custom_Photo;
-	}
-	
-	public void setcustom_Photo(byte[] custom_Photo) {
-		this.custom_Photo = custom_Photo;
-	}
+//	public byte[] getcustom_Photo() {
+//		return custom_Photo;
+//	}
+//	
+//	public void setcustom_Photo(byte[] custom_Photo) {
+//		this.custom_Photo = custom_Photo;
+//	}
 	
 
 }

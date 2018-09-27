@@ -26,19 +26,22 @@ public class ActivityShowImage extends HttpServlet{
 		res.setCharacterEncoding("UTF-8");	
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
-	
+		System.out.println("跳到activityshowimage");
 		try{
 			String act_No = req.getParameter("act_No");
-			System.out.println("req.getParameter act_No="+act_No);
+			System.out.println("ActivityShowImage +req.getParameter act_No="+act_No);
 			ActivityService actSvc = new ActivityService();
-			byte[] image = actSvc.getOneActivity(act_No).getAct_Pic();
+			byte[] image = actSvc.getOneActivity(act_No).getAct_Carousel();
+			
 			out.write(image);
-//			System.out.println("成功寫出圖片");
+			System.out.println("成功寫出圖片");
 		}	catch (Exception e){
-			InputStream in = getServletContext().getResourceAsStream("/res/img/post/post_no_photo.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
 			byte[] b = new byte[in.available()];
+			
 			in.read(b);
 			out.write(b);
+			System.out.println("寫出no_photo");
 			in.close();
 		}
 	
