@@ -41,6 +41,7 @@ public class MemberDAO implements MemberDAO_interface{
 			"SELECT * FROM MEMBER";
 	public static final String GET_ONE_MEMBER="SELECT * FROM MEMBER WHERE MEM_NO=?";
 	public static final String GET_ONE_BY_ID="SELECT * FROM MEMBER WHERE MEM_ID=?";
+//	public static final String COMPARE_ID = "SELECT MEM_ID FROM MEMBER WHERE MEM_ID LIKE ?";
 	
 
 
@@ -57,7 +58,7 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(2, memVO.getMem_Pw());
 			pstmt.setString(3, memVO.getMem_Name());
 			pstmt.setString(4, memVO.getMem_Gender());
-			pstmt.setDate(5, java.sql.Date.valueOf(memVO.getMem_Bir()));
+			pstmt.setDate(5, memVO.getMem_Bir());
 			pstmt.setString(6, memVO.getMem_Mail());
 			pstmt.setString(7, memVO.getMem_Phone());
 			pstmt.setString(8, memVO.getMem_Receiver());
@@ -108,7 +109,7 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(1, memVO.getMem_Pw());
 			pstmt.setString(2, memVO.getMem_Name());
 			pstmt.setString(3, memVO.getMem_Gender());
-			pstmt.setString(4, memVO.getMem_Bir());
+			pstmt.setDate(4, memVO.getMem_Bir());
 			pstmt.setString(5, memVO.getMem_Mail());
 			pstmt.setString(6, memVO.getMem_Phone());
 			pstmt.setString(7, memVO.getMem_Receiver());
@@ -210,7 +211,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
 				memVO.setMem_Gender(rs.getString("mem_Gender"));
-				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Bir(rs.getDate("mem_Bir"));
 				memVO.setMem_Mail(rs.getString("mem_Mail"));
 				memVO.setMem_Phone(rs.getString("mem_Phone"));
 				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
@@ -288,7 +289,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
 				memVO.setMem_Gender(rs.getString("mem_Gender"));
-				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Bir(rs.getDate("mem_Bir"));
 				memVO.setMem_Mail(rs.getString("mem_Mail"));
 				memVO.setMem_Phone(rs.getString("mem_Phone"));
 				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
@@ -343,8 +344,8 @@ public class MemberDAO implements MemberDAO_interface{
 		MemberVO memVO = null;
 		try {
 			con = ds.getConnection();
+			System.out.println("連線成功");
 			pstmt = con.prepareStatement(GET_ONE_BY_ID);
-			
 			pstmt.setString(1, mem_Id);
 			ResultSet rs= pstmt.executeQuery();
 			
@@ -356,7 +357,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
 				memVO.setMem_Gender(rs.getString("mem_Gender"));
-				memVO.setMem_Bir(rs.getString("mem_Bir"));
+				memVO.setMem_Bir(rs.getDate("mem_Bir"));
 				memVO.setMem_Mail(rs.getString("mem_Mail"));
 				memVO.setMem_Phone(rs.getString("mem_Phone"));
 				memVO.setMem_Receiver(rs.getString("mem_Receiver"));
@@ -376,11 +377,32 @@ public class MemberDAO implements MemberDAO_interface{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 		
 		
 		return memVO;
 	}
+
+//	@Override
+//	public MemberVO compareMemId(String mem_Id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	
 }

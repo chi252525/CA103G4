@@ -1,5 +1,6 @@
 package com.member.model;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -11,7 +12,7 @@ public class MemberService {
 		dao = new MemberDAO();
 	}
 
-	public MemberVO addMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
+	public MemberVO addMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, Date mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
 			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, byte[] mem_Photo) {
 
@@ -37,7 +38,7 @@ public class MemberService {
 		return memVO;
 	}
 
-	public MemberVO updateMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
+	public MemberVO updateMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, Date mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
 			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
 			byte[] mem_Photo) {
@@ -65,15 +66,13 @@ public class MemberService {
 		return memVO;
 	}
 
-	public MemberVO memVO(String mem_Id, String mem_Status) {
+	public MemberVO memChangeStatus(String mem_Id, String mem_Status) {
 
 		MemberVO memVO = new MemberVO();
 
 		memVO.setMem_Id(mem_Id);
 		memVO.setMem_Status(mem_Status);
-
 		dao.changeStatus(memVO);
-
 		return memVO;
 	}
 
@@ -96,19 +95,9 @@ public class MemberService {
 		return dao.findByPrimaryKey(mem_No);
 	}
 	
-	/*ChiaPao add getOneMember By mem_Id for login */
+	
 	public MemberVO getOneMem_Id(String mem_Id) {
 		
 		return dao.findById(mem_Id);
-	}
-	
-	public MemberVO memChangeStatus(String mem_Id, String mem_Status) {
-
-		MemberVO memVO = new MemberVO();
-
-		memVO.setMem_Id(mem_Id);
-		memVO.setMem_Status(mem_Status);
-		dao.changeStatus(memVO);
-		return memVO;
 	}
 }
