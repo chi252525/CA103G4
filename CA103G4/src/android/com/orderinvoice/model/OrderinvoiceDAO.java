@@ -30,11 +30,49 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ?";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
-	
+	private static final String GET_ONE_FROM_ORDERNO_AND_INVOSTATUS_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ? and invo_status = ?";
+	private static final String UPDATE_STATUS = "UPDATE orderinvoice set invo_status='2' where invo_no = ?";
 	
 	
 	@Override
-	public List<OrderinvoiceVO> findByOrder_no_withMenu(String order_no) {
+	public void updateStatus(String invo_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+
+			pstmt.setString(1, invo_no);
+
+			pstmt.executeUpdate();
+System.out.println(invo_no);
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public List<OrderinvoiceVO> findByOrder_no_withMenu(String order_no, Integer invo_status) {
 		List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();
 		OrderinvoiceVO orderinvoiceVO = null;
 
@@ -47,16 +85,16 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 			
 			con = ds.getConnection();
 			
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GET_ONE_FROM_ORDERNO_AND_INVOSTATUS_STMT);
 
 			pstmt.setString(1, order_no);
+			pstmt.setInt(2, invo_status);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				MenuDAO_interface menudao = new MenuDAO();
 				MenuVO menuVO = menudao.findByPrimaryKey(rs.getString("menu_no"));
-				// deliveryVO 也稱為 Domain objects
 				orderinvoiceVO = new OrderinvoiceVO();
 				orderinvoiceVO.setInvo_no(rs.getString("invo_no"));
 				orderinvoiceVO.setOrder_no(rs.getString("order_no"));

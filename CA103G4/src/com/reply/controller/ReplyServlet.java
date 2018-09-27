@@ -5,7 +5,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-import com.post.model.*;
 import com.reply_msg.model.ReplyService;
 import com.reply_msg.model.ReplyVO;
 
@@ -21,7 +20,7 @@ public class ReplyServlet extends HttpServlet{
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println("跳到Servlet+action ="+action );
+//		System.out.println("跳到Servlet+action ="+action );
 		 /***********************新增留言*************************/	
         if ("insert".equals(action)) {
         	List<String> errorMsgs =new LinkedList<String>();
@@ -47,7 +46,6 @@ public class ReplyServlet extends HttpServlet{
 				rplyVO=rplySvc.addReply(rply_No,mem_No,post_No,rply_Cont);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/front_end/post/listOnepost.jsp";
-				
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);	
         	}catch (Exception e) {
@@ -57,6 +55,7 @@ public class ReplyServlet extends HttpServlet{
 				failureView.forward(req, res);
 			}
         }
-	
+        
+        	
 	}
 	}

@@ -6,9 +6,8 @@
 <%@ page import="com.custommeals.model.*"%>
 <%@ page import="com.member.model.*"%>
 <jsp:useBean id="cusmealSvc" scope="page" class="com.custommeals.model.CustommealsService" />
-<jsp:useBean id="IngCSvc" scope="page"	class="com.ingredientcombination.model.IngredientCombinationService" />
-
-<%
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
+<% 
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
 	pageContext.setAttribute("list", list);
@@ -33,7 +32,6 @@
 <!-- star 評分 套件-->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/post/css/starability-all.min.css" />
-
 <!--for star rating============================================= -->
 <link
 	href="<%=request.getContextPath()%>/front_end/post/css/starability.css"
@@ -91,7 +89,6 @@ body {
 	<!--background image-->
 		<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
 			width="100%" height="" alt="">
-
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -157,7 +154,10 @@ body {
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
 				</div>
 				<!-- /*分享按鈕 -->
-				
+				<div class="col-md-6">
+					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
+						href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 mt-3">
@@ -187,8 +187,8 @@ body {
 							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
 							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
 							
-							<span class="label label-default">Default Label</span>
-							
+						
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
@@ -218,7 +218,6 @@ body {
 						</div>
 					</div>
 				</c:forEach>
-
 			</div>
 			<%@ include file="pages/page2.file"%>
 		</div>

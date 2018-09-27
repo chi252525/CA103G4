@@ -41,7 +41,8 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS WHERE INGDT_ID=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO FROM INGREDIENTS ORDER BY INGDT_ID";
-	private static final String GET_ONE_COSTOMNO_ALL_INGT=
+//	//查一個餐點名稱的內含那些食材
+	private static final String GET_ONE_COSTOMNO_INGTS=
 	"SELECT * FROM ingredients RIGHT JOIN ingredientCombination ON ingredientCombination.ingdt_id=ingredients.ingdt_id WHERE ingredientCombination.custom_No=?";
 	
 
@@ -288,6 +289,63 @@ public class IngredientsDAO implements IngredientsDAO_interface{
 			}
 		}
 		return ingredientsVOList;
+	}
+
+	@Override
+	public List<IngredientsVO> findIngtByCustomNo(String custom_No) {
+		List<IngredientsVO> ingredientsVOList = new ArrayList<>();
+		IngredientsVO ingredientsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_COSTOMNO_INGTS);
+			pstmt.setString(1, custom_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ingredientsVO = new IngredientsVO();
+				ingredientsVO.setingdt_Id(rs.getString("INGDT_ID"));
+				ingredientsVO.setingdtc_Id(rs.getString("INGDTC_ID"));
+				ingredientsVO.setingdt_Name(rs.getString("INGDT_NAME"));
+				ingredientsVO.setingdt_Status(rs.getInt("INGDT_STATUS"));
+				ingredientsVO.setingdt_Point(rs.getString("INGDT_POINT"));
+				ingredientsVO.setingdt_Unit(rs.getString("INGDT_UNIT"));
+				ingredientsVO.setingdt_Price(rs.getInt("INGDT_PRICE"));
+				ingredientsVO.setingdt_Photo(rs.getBytes("INGDT_PHOTO"));	
+				ingredientsVOList.add(ingredientsVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " 
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return ingredientsVOList;
+	
 	}
 
 }

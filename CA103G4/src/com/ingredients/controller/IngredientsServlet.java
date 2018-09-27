@@ -220,7 +220,7 @@ public class IngredientsServlet extends HttpServlet{      //Ingredients的控制
 									
 					/***************************3.修改完成,準備轉交(Send the Success view)************/
 					req.setAttribute("ingredientsVO", ingredientsVO);    // 資料庫修改成功後,正確的ingredientsVO物件,存入req
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listAllIngredients.jsp?\"+whichPage");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/ingredients/listAllIngredients.jsp?"+whichPage);
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/

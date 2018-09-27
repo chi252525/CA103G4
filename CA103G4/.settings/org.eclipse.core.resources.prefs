@@ -1,9 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=1e0328bf42ab54830ceabba75477ebd25671616e
 eclipse.preferences.version=1
-<<<<<<< HEAD
 encoding//WebContent/front_end/shoppingCart/EShop.jsp=UTF-8
-=======
-encoding//WebContent/front_end/menu/noddleShop.jsp=UTF-8
->>>>>>> 1e0328bf42ab54830ceabba75477ebd25671616e
+encoding//WebContent/front_end/shoppingCart/noodleShop.jsp=UTF-8
 encoding//src/com/branch/model=UTF-8
 encoding//src/com/delivery/model=UTF-8
 encoding//src/com/delivery/model/DeliveryJDBCDAO.java=UTF-8

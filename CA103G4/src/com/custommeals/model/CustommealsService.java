@@ -38,6 +38,9 @@ public class CustommealsService {
 
 		return custommealsVO;
 	}
+	
+	
+
 
 	public void deleteCustommeals(String custom_no) {
 		dao.delete(custom_no);
@@ -52,7 +55,16 @@ public class CustommealsService {
 	}
 	
 	//add by Ning
-		public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
-			return dao.getMealByMemBuyed(mem_No);
-		}
+	public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
+		return dao.getMealByMemBuyed(mem_No);
+	}
+	//add by Ning
+	public CustommealsVO updateNameOnly( String custom_Name,String mem_No,String custom_No) {
+		CustommealsVO custommealsVO = new CustommealsVO();
+		custommealsVO.setcustom_No(custom_No);
+		custommealsVO.setcustom_Name(custom_Name);
+		custommealsVO.setcustom_Name(mem_No);
+		dao.updateNameOnly(custom_Name,mem_No,custom_No);
+		return custommealsVO;
+	}
 }

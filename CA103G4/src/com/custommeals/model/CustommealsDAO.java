@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 
 public class CustommealsDAO implements CustommealsDAO_interface{
 	
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -31,16 +32,14 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			e.printStackTrace();
 		}
 	}
-//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-//	private static final String USER = "CA103";
-//	private static final String PASSWORD = "123456";
-//	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String INSERT_STMT = 
 			"INSERT INTO CUSTOMMEALS" 
 	                +"(CUSTOM_NO, MEM_NO, CUSTOM_NAME, CUSTOM_PRICE, CUSTOM_PHOTO)"
 	                +"VALUES(('C'||LPAD(to_char(CUSTOMMEALS_seq.NEXTVAL),10,'0')),?,?,?,?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE CUSTOMMEALS SET MEM_NO=?, CUSTOM_NAME=?, CUSTOM_PRICE=?, CUSTOM_PHOTO=? WHERE CUSTOM_NO=?";
+	private static final String UPDATE_NAME_STMT = 
+			"UPDATE CUSTOMMEALS SET CUSTOM_NAME=? WHERE CUSTOM_NO=?";
 	private static final String DELETE_STMT =
 			"DELETE FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
 	private static final String SELECT_ONE_STMT=
@@ -50,16 +49,10 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 //	private static final String FINDBYMEMNO="SELECT * FROM CUSTOMMEALS WHERE MEM_NO=?";
 //	private static final String FINDBYCUSTOMNO="SELECT * FROM CUSTOMMEALS WHERE CUSTOM_NO=?";
 	
-	//依會員查他訂過的自訂餐點
 	private static final String SELECT_MEAL_BY_MEMBUYED="SELECT * FROM CUSTOMMEALS LEFT JOIN ORDERINVOICE\r\n" + 
 			"ON CUSTOMMEALS.CUSTOM_NO=orderinvoice.custom_no " + 
 			"WHERE orderinvoice.custom_no IS NOT NULL AND " + 
 			"mem_no=?";
-	
-	//依會員查他的所有自訂餐點
-	private static final String SELECT_ALLMEAL_BY_MEMNO="SELECT *  FROM CUSTOMMEALS  LEFT JOIN INGREDIENTCOMBINATION" + 
-	"ON CUSTOMMEALS.CUSTOM_NO=INGREDIENTCOMBINATION.CUSTOM_NO WHERE CUSTOMMEALS.mem_no=?";
-	
 	@Override
 	public void insert(CustommealsVO custommealsVO) {
 		// TODO Auto-generated method stub
@@ -67,8 +60,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -107,8 +99,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
@@ -148,8 +139,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
-//			Class.forName(DRIVER);
+			con = ds.getConnection();//			Class.forName(DRIVER);
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, Custom_No);
@@ -189,7 +179,6 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, Custom_No);
@@ -242,7 +231,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 
 		try {
 			con = ds.getConnection();
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			//			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(SELECT_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -337,40 +326,27 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		return custommealsVOList;
 	}
 	@Override
-	public List<CustommealsVO> getMealByMem(String mem_No) {
-		List<CustommealsVO> custommealsVOList = new ArrayList<>();
-		CustommealsVO custommealsVO = null;
+	public void updateNameOnly( String custom_Name,String mem_No,String custom_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
+		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALLMEAL_BY_MEMNO);
-			pstmt.setString(1, mem_No);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				custommealsVO = new CustommealsVO();
-				custommealsVO.setcustom_No(rs.getString("CUSTOM_NO"));
-				custommealsVO.setmem_No(rs.getString("MEM_NO"));
-				custommealsVO.setcustom_Name(rs.getString("CUSTOM_NAME"));
-				custommealsVO.setcustom_Price(rs.getInt("CUSTOM_PRICE"));
-				custommealsVO.setcustom_Photo(rs.getBytes("CUSTOM_PHOTO"));
-				custommealsVOList.add(custommealsVO);
-			}
-
+			System.out.println("Connecting to database successfully! (連線成功！)");
+			pstmt = con.prepareStatement(UPDATE_NAME_STMT);
+			pstmt.setString(1, custom_Name);
+			pstmt.setString(2, mem_No);
+			pstmt.setString(3, custom_No);
+			
+			
+			int rowCount =pstmt.executeUpdate();
+			System.out.println("updateNameOnly 修改 " + rowCount + " 筆資料");
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " 
 					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -386,8 +362,9 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 				}
 			}
 		}
-		return custommealsVOList;
+		
 	}
+
 	
 
 }

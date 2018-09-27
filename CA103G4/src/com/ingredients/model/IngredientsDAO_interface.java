@@ -9,5 +9,5 @@ public interface IngredientsDAO_interface {
 			public void delete(String ingredients_No);
 			public IngredientsVO findByPrimaryKey(String ingredients_No);
 			public List<IngredientsVO> getAll();
-		
+			public List<IngredientsVO> findIngtByCustomNo(String custom_No);
 }

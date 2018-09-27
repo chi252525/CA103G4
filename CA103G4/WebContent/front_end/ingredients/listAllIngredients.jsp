@@ -85,10 +85,7 @@
     font-weight: 600;
   }
   @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-  body{
-	background-image:url("images/woodbackground3.png");
-
-}
+  body{background-image:url("images/woodbackground3.png");}
 
 </style>
 
@@ -139,7 +136,7 @@
 			<td>${ingredientsVO.getingdt_Point()}</td>
 			<td>${ingredientsVO.getingdt_Unit()}</td>
 			<td>${ingredientsVO.getingdt_Price()}</td>
-			<td><img src="/CA103G4/DBGifReader3?ingdt_Id=${ingredientsVO.getingdt_Id()}" style="max-width: 200px; max-height: 200px;"></td>
+			<td><img src="/CA103G4/DBGifReader3?ingdt_Id=${ingredientsVO.getingdt_Id()}" style="max-width: 165px; max-height: 165px;"></td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/ingredients/ingredients.do" style="margin-bottom: 0px;">

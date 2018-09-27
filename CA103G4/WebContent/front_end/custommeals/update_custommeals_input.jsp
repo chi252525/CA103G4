@@ -23,8 +23,9 @@
 
 <style>
   table#table-1 {
-	background-color: #ffe66f;
-    border: 2px solid black;
+	background-color: rgba(255, 255, 255, 0.45);
+/*     border: 2px solid black; */
+	border-radius: 15px;
     text-align: center;
   }
   table#table-1 h4 {
@@ -33,66 +34,73 @@
     margin-bottom: 1px;
   }
   h4 {
-    color: #642100;
+    color: white;
     display: inline;
   }
 </style>
 
 <style>
   table {
-	width: 800px;
-	background-color: #fff8d7;
+    
+	width: 1280px;
+	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
-	
+	margin-left:400px;
+	font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
+    font-size: 20;
   }
   table, th, td {
-    border: 1px solid #CCCCFF;
+/*     border: 2px solid rgba(255, 255, 255, 0.8); */
+    border-radius: 15px;
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
   }
   th, td {
     padding: 5px;
     text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
   }
-  
-  body{
-	background-image:url("images/woodbackground3.png")
-}
+  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+  body{background-image:url("images/woodbackground3.png");}
 
 </style>
 
+<!-- <script type="text/javascript"> -->
 
-<script type="text/javascript">
+// $(document).ready(function (){
 
-$(document).ready(function (){
+//     function format_float(num, pos)
+//     {
+//         var size = Math.pow(10, pos);
+//         return Math.round(num * size) / size;
+//     }
 
-    function format_float(num, pos)
-    {
-        var size = Math.pow(10, pos);
-        return Math.round(num * size) / size;
-    }
+//     function preview(input) {
 
-    function preview(input) {
+//         if (input.files && input.files[0]) {
+//             var reader = new FileReader();
+//             var index = 0//input.name.slice(-1);
+//             reader.onload = function (e) {
+//                 $('.preview:eq('+index+')').attr('src', e.target.result);
+//                 var KB = format_float(e.total / 1024,2);
+//                 $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
+//             }
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            var index = 0//input.name.slice(-1);
-            reader.onload = function (e) {
-                $('.preview:eq('+index+')').attr('src', e.target.result);
-                var KB = format_float(e.total / 1024,2);
-                $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
-            }
+//             reader.readAsDataURL(input.files[0]);
+//         }
 
-            reader.readAsDataURL(input.files[0]);
-        }
+//     }
 
-    }
-
-    $("body").on("change", ".custom_Photo", function (){
-        preview(this);
-    })
+//     $("body").on("change", ".custom_Photo", function (){
+//         preview(this);
+//     })
     
-})
-</script>
+// })
+<!-- </script> -->
 
 </head>
 <body bgcolor='white'>
@@ -137,18 +145,18 @@ $(document).ready(function (){
 		<td><input type="TEXT" name="custom_Price" size="45" value="<%=custommealsVO.getcustom_Price()%>" /></td>
 	</tr>
 	
-	<tr>
-		<td>自訂餐點圖片:</td>
-		<td><input type="file" class="custom_Photo" name="custom_Photo" size="45"></td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>自訂餐點圖片:</td> -->
+<!-- 		<td><input type="file" class="custom_Photo" name="custom_Photo" size="45"></td> -->
+<!-- 	</tr> -->
 	
-	<tr>
-		<td>
-	        <p>ImgPreview</p>
-	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
-	        <div class="size"></div>
-		</td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td> -->
+<!-- 	        <p>ImgPreview</p> -->
+<!-- 	     	<img class="preview" style="max-width: 200px; max-height: 200px;"> -->
+<!-- 	        <div class="size"></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 	
 
 	

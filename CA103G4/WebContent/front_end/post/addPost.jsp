@@ -99,6 +99,8 @@ body {
 	width="100%">
 	<!--your html start==================================================================================-->
 	<jsp:include page="/front_end/header.jsp" flush="true" />
+		<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 	<div class="container my-5">
 					<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
@@ -193,9 +195,9 @@ body {
 							<div class="form-group">
 								<p>餐點推薦度</p>
 								<fieldset class="starability-slot">
-									<input type="radio" id="no-rate" class="input-no-rate"
-										name="post_Eva" value="0" checked aria-label="No rating." />
-									<input type="radio" id="rate1" name="post_Eva" value="1" /> <label
+									<input type="radio" id="no-rate" class="input-no-rate" name="post_Eva" value="0" checked aria-label="No rating." />
+									<input type="radio" id="rate1" name="post_Eva" value="1" /> 
+									<label
 										for="rate1">1 star.</label> <input type="radio" id="rate2"
 										name="post_Eva" value="2" /> <label for="rate2">2
 										stars.</label> <input type="radio" id="rate3" name="post_Eva"
@@ -212,7 +214,7 @@ body {
 					            </textarea>
 							<!-- //編輯器區塊 -->
 							<br>
-							<input type="hidden" id="mem_No" name="mem_No" value="${memVO.mem_No} " />
+							<input type="hidden" id="mem_No" name="mem_No" value="M000001" />
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-success">確認分享</button>
 							<a
