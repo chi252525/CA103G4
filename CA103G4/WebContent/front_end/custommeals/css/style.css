@@ -30,12 +30,12 @@ a:active,
 a:visited {
   color: #0066aa;
   text-decoration: none;
-  border-bottom: #000013 0.16rem solid;
+/*   border-bottom: #000013 0.16rem solid; */
 }
 
 a:hover {
   color: #000013;
-  border-bottom: #0066aa 0.16rem solid;
+/*   border-bottom: #0066aa 0.16rem solid; */
 }
 
 header,
@@ -45,29 +45,31 @@ footer {
   text-align: center;
 }
 
-.add-task-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 20rem;
-  height: 5.3rem;
-  margin: auto;
-  background: #a8a8a8;
-  border: #000013 0.2rem solid;
-  border-radius: 0.2rem;
-  padding: 0.4rem;
-}
+/* .add-task-container { */
+/*   display: -webkit-box; */
+/*   display: -ms-flexbox; */
+/*   display: flex; */
+/*   width: 20rem; */
+/*   height: 5.3rem; */
+/* /*   margin: auto; */ */
+/*   background: #a8a8a8; */
+/* /*   border: #000013 0.2rem solid; */ */
+/*   border-radius: 0.2rem; */
+/*   padding: 0.4rem; */
+/* } */
 
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+/*   display: flex;   */
+ 
+
 }
 
 .columns {
-  display: -webkit-box;
+/*   display: -webkit-box; */
   display: -ms-flexbox;
-  display: flex;
+/*   display: flex-wrap;  */
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
@@ -75,37 +77,56 @@ footer {
 }
 
 .column {
-/*  width: 8.4rem;*/
+/*   width: 8.4 rem; */
 /*  height: 3.4rem;*/
-  margin: 0 0.6rem;
+  width: 725px;
+/*   margin: 0 0.6rem; */
   background: rgba(255,255,255,0.3);
 /*  background: #e0e0e0;*/
-  border: #000013 0.2rem solid;
+/*   border: #000013 0.2rem solid; */
   border-radius: 0.2rem;
+/*   overflow:auto; */
+  margin-top: 10px;
 }
 
 .column-header {
   padding: 0.1rem;
-  border-bottom: #000013 0.2rem solid;
+/*   border-bottom: #000013 0.2rem solid; */
+}
+
+.column-header2 {
+/* 	position:fixed; */
 }
 
 .column-header h4 {
   text-align: center;
 }
 
-.to-do-column .column-header {
+.ingdt_1-column .column-header {
   background: #ff872f;
 }
 
-.doing-column .column-header {
+.ingdt_2-column .column-header {
+  background: #ff872f;
+}
+
+.ingdt_3-column .column-header {
+  background: #ff872f;
+}
+
+.ingdt_4-column .column-header {
+  background: #ff872f;
+}
+
+.ingdt_5-column .column-header {
   background: #13a4d9;
 }
 
-.done-column .column-header {
+.ingdt_6-column .column-header {
   background: #15d072;
 }
 
-.trash-column .column-header {
+.trash-column .column-header2 {
   background: #ff4444;
 }
 
@@ -117,12 +138,18 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display:inline;
 }
 
 li {
   list-style-type: none;
-  display:inline;
+}
+
+ul li {
+	float:left;
+}
+
+#position_fixed {
+/* 	position:fixed; */
 }
 
 .column-button {
@@ -133,7 +160,7 @@ li {
 .button {
   font-family: "Arimo", sans-serif;
   font-weight: 700;
-  border: #000013 0.14rem solid;
+/*   border: #000013 0.14rem solid; */
   border-radius: 0.2rem;
   color: #000013;
   padding: 0.6rem 1rem;
@@ -176,7 +203,7 @@ li {
   transition: all 0.3s;
   margin: 0.4rem;
   height: 6rem;
-  border: #000013 0.05rem solid;
+/*   border: #000013 0.05rem solid; */
   border-radius: 0.2rem;
   cursor: move;
   text-align: center;
@@ -185,7 +212,7 @@ li {
 
 #taskText {
   background: #fff;
-  border: #000013 0.15rem solid;
+/*   border: #000013 0.15rem solid; */
   border-radius: 0.2rem;
   text-align: center;
   font-family: "Roboto Slab", serif;
@@ -196,6 +223,7 @@ li {
 
 .task p {
   margin: auto;
+  width:100px;
 }
 
 /* Dragula CSS Release 3.2.0 from: https://github.com/bevacqua/dragula */

@@ -24,10 +24,10 @@
   
 </head>
 
-<body>
+
 
 <header>
-  <h1>製作專屬於你的拉麵組合</h1>
+<!--   <h1>製作專屬於你的拉麵組合</h1> -->
 <style>
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
@@ -86,16 +86,18 @@
   <button id="add" class="button add-button" onclick="addTask()">Add New Task</button>
 </section>
 -->
-<body bgcolor='white'>
+<body>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+		width="100% height="" alt="banner">
 
-<table id="table-1">
-	<tr><td>
-		 <h3>新增客製化餐點 - addCustommeals.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
+<!-- <table id="table-1"> -->
+<!-- 	<tr><td> -->
+<!-- 		 <h3>新增客製化餐點 - addCustommeals.jsp</h3></td><td> -->
+<!-- 		 <h4><a href="select_page.jsp">回首頁</a></h4> -->
+<!-- 	</td></tr> -->
+<!-- </table> -->
 
 <%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
@@ -117,309 +119,332 @@
 	
 	
 
-<div class="wrapper">
-<div class="middle">
-		<div class="container">
-			<main class="content">
+<!-- <div class="wrapper"> -->
+<!-- <div class="middle"> -->
+	<div class="container">
+		<div class="row">
+	<!-- 				<main class="content"> -->
+					<div class="col-8">
+						<div class="container">
+						  <ul class="columns">
+						
+						    <li class="column ingdt_1-column">
+						      <div class="column-header">
+						        <h4>麵條</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_1">
+						        <li class="task" myid="I0001">
+						          <p>細拉麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/01.png" alt="細拉麵" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0002">
+						          <p>烏龍麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/02.png" alt="烏龍麵" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0003">
+						          <p>刀削麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/03.png" alt="刀削麵" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0004">
+						          <p>蕎麥麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/04.png" alt="蕎麥麵" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0005">
+						          <p>墨魚麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/05.png" alt="墨魚麵" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0006">
+						          <p>蔬菜麵
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/06.png" alt="蔬菜麵" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						    
+						    <li class="column ingdt_2-column">
+						      <div class="column-header">
+						        <h4>湯頭</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_2">
+						        <li class="task" myid="I0007">
+						          <p>醬油湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/07.png" alt="醬油湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0008">
+						          <p>泡菜湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/08.png" alt="泡菜湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0009">
+						          <p>牛肉湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/09.png" alt="牛肉湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0010">
+						          <p>麻辣湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/10.png" alt="麻辣湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0011">
+						          <p>番茄湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/11.png" alt="番茄湯" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0012">
+						          <p>雞湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0013">
+						          <p>豚骨湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/13.png" alt="豚骨湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0014">
+						          <p>味增湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/14.png" alt="味增湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0015">
+						          <p>咖哩湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0015">
+						          <p>咖哩湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0015">
+						          <p>咖哩湯
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						
+						    <li class="column ingdt_3-column">
+						      <div class="column-header">
+						        <h4>主餐</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_3">
+						        <li class="task" myid="I0016">
+						          <p>叉燒肉
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/16.png" alt="叉燒肉" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0017">
+						          <p>炸豬排
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/17.png" alt="炸豬排" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0018">
+						          <p>炸雞柳
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/18.png" alt="炸雞柳" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0019">
+						          <p>唐揚雞塊
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/19.png" alt="唐揚雞" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0020">
+						          <p>鮮蝦
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/20.png" alt="鮮蝦" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0021">
+						          <p>小龍蝦
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/21.png" alt="小龍蝦" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0022">
+						          <p>櫻花蝦
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/22.png" alt="櫻花蝦" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0023">
+						          <p>鴨胸
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/23.png" alt="鴨胸" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0024">
+						          <p>魷魚圈
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/24.png" alt="魷魚圈" style="max-width:80px"></p>
+						        </li>
+						
+						        <li class="task" myid="I0025">
+						          <p>蛤蠣
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/25.png" alt="蛤蠣" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0026">
+						          <p>虱目魚
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/26.png" alt="虱目魚" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						    
 
-<div class="container">
-  <ul class="columns">
+						    
+						  </ul>
+						</div>
+					</div>
+					<div class="col-4" id="position_fixed">
+				<!-- <div class="right-sidebar"> -->
+				
+						  <ul class="columns">
+						  	<li class="column trash-column">
+						      <div class="column-header2">
+						        <h4>組合區</h4>
+						      </div>
+						      <ul class="task-list" id="combination">
+						
+						      </ul>
+						      <div class="column-button">
+						        <button class="button delete-button" onclick="emptyTrash()">重新選擇</button>
+						      </div>
+						<!--      <form id="sform" action="submit">-->
+						      <div class="column-button">
+						<!--       	<input type="button" name="action" value="insert" class="button confirm-button confirmBtn"> -->
+						        <button class="button confirm-button confirmBtn">確認組合</button>
+						      </div>
+						<!--      </form>-->
+						    </li>
+						  	<li class="column ingdt_4-column">
+						      <div class="column-header">
+						        <h4>附餐</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_4">
+						        <li class="task" myid="I0027">
+						          <p>荷包蛋
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/27.png" alt="荷包蛋" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0028">
+						          <p>溫泉蛋
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/28.png" alt="溫泉蛋" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0029">
+						          <p>滷蛋
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/29.png" alt="滷蛋" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0030">
+						          <p>貢丸
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/30.png" alt="貢丸" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0031">
+						          <p>豆皮
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/31.png" alt="豆皮" style="max-width:80px"></p>
+						        </li>
+						<!--         <li class="task" myid="I0032"> -->
+						<!--           <p>筍乾 -->
+						<!--           <br> -->
+						<!--             <img src="/CA103G4/front_end/custommeals/images/32.png" alt="筍乾" style="max-width:80px"></p> -->
+						<!--         </li> -->
+						        <li class="task" myid="I0033">
+						          <p>小魚乾
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/33.png" alt="小魚乾" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						    
+						    <li class="column ingdt_5-column">
+						      <div class="column-header">
+						        <h4>配料</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_5">
+						        <li class="task" myid="I0034">
+						          <p>韓式泡菜
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/34.png" alt="韓式泡菜" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0035">
+						          <p>台式泡菜
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/35.png" alt="台式泡菜" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0036">
+						          <p>海帶
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/36.png" alt="海帶" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0037">
+						          <p>海苔
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/37.png" alt="海苔" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0038">
+						          <p>燙青菜
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/38.png" alt="燙青菜" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						    
+						    <li class="column ingdt_6-column">
+						      <div class="column-header">
+						        <h4>調味料</h4>
+						      </div>
+						      <ul class="task-list" id="ingdt_6">
+						        <li class="task" myid="I0039">
+						          <p>蔥花
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/39.png" alt="蔥花" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0040">
+						          <p>柴魚
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/40.png" alt="柴魚" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0041">
+						          <p>胡椒
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/41.png" alt="胡椒" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0042">
+						          <p>辣椒
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/42.png" alt="辣椒" style="max-width:80px"></p>
+						        </li>
+						        <li class="task" myid="I0043">
+						          <p>玫瑰鹽
+						          <br>
+						            <img src="/CA103G4/front_end/custommeals/images/43.png" alt="玫瑰鹽" style="max-width:80px"></p>
+						        </li>
+						      </ul>
+						    </li>
+						  
 
-    <li class="column ingdt_1-column">
-      <div class="column-header">
-        <h4>麵條</h4>
-      </div>
-      <ul class="task-list" id="ingdt_1">
-        <li class="task" myid="I0001">
-          <p>細拉麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/01.png" alt="細拉麵" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0002">
-          <p>烏龍麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/02.png" alt="烏龍麵" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0003">
-          <p>刀削麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/03.png" alt="刀削麵" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0004">
-          <p>蕎麥麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/04.png" alt="蕎麥麵" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0005">
-          <p>墨魚麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/05.png" alt="墨魚麵" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0006">
-          <p>蔬菜麵
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/06.png" alt="蔬菜麵" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-    
-    <li class="column ingdt_2-column">
-      <div class="column-header">
-        <h4>湯頭</h4>
-      </div>
-      <ul class="task-list" id="ingdt_2">
-        <li class="task" myid="I0007">
-          <p>醬油湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/07.png" alt="醬油湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0008">
-          <p>泡菜湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/08.png" alt="泡菜湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0009">
-          <p>牛肉湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/09.png" alt="牛肉湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0010">
-          <p>麻辣湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/10.png" alt="麻辣湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0011">
-          <p>番茄湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/11.png" alt="番茄湯" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0012">
-          <p>雞湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0013">
-          <p>豚骨湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/13.png" alt="豚骨湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0014">
-          <p>味增湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="味增湯" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0015">
-          <p>咖哩湯
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-
-    <li class="column ingdt_3-column">
-      <div class="column-header">
-        <h4>主餐</h4>
-      </div>
-      <ul class="task-list" id="ingdt_3">
-        <li class="task" myid="I0016">
-          <p>叉燒肉
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/16.png" alt="叉燒肉" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0017">
-          <p>炸豬排
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/17.png" alt="炸豬排" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0018">
-          <p>炸雞柳
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/18.png" alt="炸雞柳" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0019">
-          <p>唐揚雞塊
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/19.png" alt="唐揚雞" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0020">
-          <p>鮮蝦
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/20.png" alt="鮮蝦" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0021">
-          <p>小龍蝦
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/21.png" alt="小龍蝦" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0022">
-          <p>櫻花蝦
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/22.png" alt="櫻花蝦" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0023">
-          <p>鴨胸
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/23.png" alt="鴨胸" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0024">
-          <p>魷魚圈
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/24.png" alt="魷魚圈" style="max-width:80px"></p>
-        </li>
-
-        <li class="task" myid="I0025">
-          <p>蛤蠣
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/25.png" alt="蛤蠣" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0026">
-          <p>虱目魚
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/26.png" alt="虱目魚" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-    
-    <li class="column ingdt_4-column">
-      <div class="column-header">
-        <h4>附餐</h4>
-      </div>
-      <ul class="task-list" id="ingdt_4">
-        <li class="task" myid="I0027">
-          <p>荷包蛋
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/27.png" alt="荷包蛋" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0028">
-          <p>溫泉蛋
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/28.png" alt="溫泉蛋" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0029">
-          <p>滷蛋
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/29.png" alt="滷蛋" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0030">
-          <p>貢丸
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/30.png" alt="貢丸" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0031">
-          <p>豆皮
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/31.png" alt="豆皮" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0032">
-          <p>筍乾
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/32.png" alt="筍乾" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0033">
-          <p>小魚乾
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/33.png" alt="小魚乾" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-    
-    <li class="column ingdt_5-column">
-      <div class="column-header">
-        <h4>配料</h4>
-      </div>
-      <ul class="task-list" id="ingdt_5">
-        <li class="task" myid="I0034">
-          <p>韓式泡菜
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/34.png" alt="韓式泡菜" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0035">
-          <p>台式泡菜
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/35.png" alt="台式泡菜" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0036">
-          <p>海帶
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/36.png" alt="海帶" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0037">
-          <p>海苔
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/37.png" alt="海苔" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0038">
-          <p>燙青菜
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/38.png" alt="燙青菜" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-    
-    <li class="column ingdt_6-column">
-      <div class="column-header">
-        <h4>調味料</h4>
-      </div>
-      <ul class="task-list" id="ingdt_6">
-        <li class="task" myid="I0039">
-          <p>蔥花
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/39.png" alt="蔥花" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0040">
-          <p>柴魚
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/40.png" alt="柴魚" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0041">
-          <p>胡椒
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/41.png" alt="胡椒" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0042">
-          <p>辣椒
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/42.png" alt="辣椒" style="max-width:80px"></p>
-        </li>
-        <li class="task" myid="I0043">
-          <p>玫瑰鹽
-          <br>
-            <img src="/CA103G4/front_end/custommeals/images/43.png" alt="玫瑰鹽" style="max-width:80px"></p>
-        </li>
-      </ul>
-    </li>
-    
-
-
-    <li class="column trash-column">
-      <div class="column-header">
-        <h4>組合區</h4>
-      </div>
-      <ul class="task-list" id="combination">
-
-      </ul>
-      <div class="column-button">
-        <button class="button delete-button" onclick="emptyTrash()">重新選擇</button>
-      </div>
-<!--      <form id="sform" action="submit">-->
-      <div class="column-button">
-<!--       	<input type="button" name="action" value="insert" class="button confirm-button confirmBtn"> -->
-        <button class="button confirm-button confirmBtn">確認組合</button>
-      </div>
-<!--      </form>-->
-    </li>
-
-  </ul>
-</div>
-</main>
-</div>
+						
+						  </ul>
+					</div>
+				<!-- </div> -->
+	<!-- 				</main> -->
+		</div>
+	</div>
+<!-- </div> -->
+<!-- </div> -->
 
  
 
@@ -446,10 +471,11 @@
 	</tr>
     
     
-    <tr style="display: none;">
+    <tr style="display: block;">
 <!-- 	<tr> -->
             <td>食材選擇:</td>
-            <td>麵條
+            <td>
+            	 麵條
                 <input id="I0001" type="checkbox" name="ingredients" value="I0001"> 細拉麵
                 <input id="I0002" type="checkbox" name="ingredients" value="I0002"> 烏龍麵
                 <input id="I0003" type="checkbox" name="ingredients" value="I0003"> 刀削麵
@@ -487,7 +513,7 @@
                 <input id="I0029" type="checkbox" name="ingredients" value="I0029"> 滷蛋
                 <input id="I0030" type="checkbox" name="ingredients" value="I0030"> 貢丸
                 <input id="I0031" type="checkbox" name="ingredients" value="I0031"> 豆皮
-                <input id="I0032" type="checkbox" name="ingredients" value="I0032"> 筍乾
+<!--                 <input id="I0032" type="checkbox" name="ingredients" value="I0032"> 筍乾 -->
                 <input id="I0033" type="checkbox" name="ingredients" value="I0033"> 小魚乾
                 <br>
 				配料
@@ -516,7 +542,7 @@
 
 
 <footer>
-  <p>Built with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a> and Vanilla JS by <a href="http://nikkipantony.com" target="_blank">Nikki Pantony</a></p>
+<!--   <p>Built with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a> and Vanilla JS by <a href="http://nikkipantony.com" target="_blank">Nikki Pantony</a></p> -->
 </footer>
  <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
