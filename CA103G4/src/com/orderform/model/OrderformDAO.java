@@ -444,7 +444,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			String cols[] = { "ORDER_NO" };
 			pstmt = con.prepareStatement(INSERT_STMT, cols);
-
 			pstmt.setString(1, orderformVO.getDek_no());
 			pstmt.setString(2, orderformVO.getMem_no());
 			pstmt.setString(3, orderformVO.getBranch_no());
