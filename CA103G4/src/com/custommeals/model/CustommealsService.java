@@ -2,8 +2,6 @@ package com.custommeals.model;
 
 import java.util.List;
 
-import com.ingredientcombination.model.IngredientCombinationVO;
-
 
 public class CustommealsService {
 	private CustommealsDAO_interface dao;
@@ -12,21 +10,21 @@ public class CustommealsService {
 		dao = new CustommealsDAO();
 	}
 
-	public CustommealsVO addCustommeals(String mem_no, String custom_name, Integer custom_price) {
+	public CustommealsVO addCustommeals(String mem_no, String custom_name, Integer custom_price, byte[] custom_photo) {
 
 		CustommealsVO custommealsVO = new CustommealsVO();
 
 		custommealsVO.setmem_No(mem_no);
 		custommealsVO.setcustom_Name(custom_name);
 		custommealsVO.setcustom_Price(custom_price);
-
+		custommealsVO.setcustom_Photo(custom_photo);
 
 		dao.insert(custommealsVO);
 
 		return custommealsVO;
 	}
 
-	public CustommealsVO updateCustommeals(String custom_no, String mem_no, String custom_name, Integer custom_price) {
+	public CustommealsVO updateCustommeals(String custom_no, String mem_no, String custom_name, Integer custom_price, byte[] custom_photo) {
 
 		CustommealsVO custommealsVO = new CustommealsVO();
 
@@ -34,7 +32,7 @@ public class CustommealsService {
 		custommealsVO.setmem_No(mem_no);
 		custommealsVO.setcustom_Name(custom_name);
 		custommealsVO.setcustom_Price(custom_price);
-
+		custommealsVO.setcustom_Photo(custom_photo);
 
 		dao.update(custommealsVO);
 
@@ -57,35 +55,16 @@ public class CustommealsService {
 	}
 	
 	//add by Ning
-<<<<<<< HEAD
-		public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
-			return dao.getMealByMemBuyed(mem_No);
-		}
-		
-		public CustommealsVO addCustommealsAutoKeys(String mem_no, String custom_name, Integer custom_price,List<IngredientCombinationVO> list) {
-
-			CustommealsVO custommealsVO = new CustommealsVO();
-
-			custommealsVO.setmem_No(mem_no);
-			custommealsVO.setcustom_Name(custom_name);
-			custommealsVO.setcustom_Price(custom_price);
-			dao.insertWithIngredientCombination(custommealsVO, list);
-
-	
-
-			return custommealsVO;
-		}
-=======
 	public List<CustommealsVO> getMealByMemBuyed(String mem_No) {
 		return dao.getMealByMemBuyed(mem_No);
 	}
 	//add by Ning
-	public CustommealsVO updateNameOnly( String custom_Name,String custom_No) {
+	public CustommealsVO updateNameOnly( String custom_Name,String mem_No,String custom_No) {
 		CustommealsVO custommealsVO = new CustommealsVO();
 		custommealsVO.setcustom_No(custom_No);
 		custommealsVO.setcustom_Name(custom_Name);
-		dao.updateNameOnly(custom_Name,custom_No);
+		custommealsVO.setcustom_Name(mem_No);
+		dao.updateNameOnly(custom_Name,mem_No,custom_No);
 		return custommealsVO;
 	}
->>>>>>> 3a7874aa3b7145489ed16b794a0c414df9ae4bc2
 }
