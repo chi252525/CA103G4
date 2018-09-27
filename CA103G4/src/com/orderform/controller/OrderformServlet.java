@@ -18,10 +18,8 @@ import javax.websocket.Session;
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
 
-/**
- * Servlet implementation class DeliveryServlet
- */
-@WebServlet("/DeliveryServlet")
+
+
 public class OrderformServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String dn;
