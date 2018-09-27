@@ -1,5 +1,7 @@
 package com.orderform.model;
 
+import java.sql.Date;
+
 public class OrderformVO {
 	private String order_no;
 	private String dek_no;
@@ -11,6 +13,14 @@ public class OrderformVO {
 	private Integer order_status;
 	private String deliv_addres;
 	private Integer order_pstatus;
+	private Date order_date;
+	
+	public Date getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
 	public String getOrder_no() {
 		return order_no;
 	}
