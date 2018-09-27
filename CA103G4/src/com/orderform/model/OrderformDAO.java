@@ -33,6 +33,8 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_no=? ";
 	private static final String DELETE = "DELETE FROM orderform where order_no = ?";
 	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
+	// s針對外送的SQL指令
+	private static final String UPDATE2 = "UPDATE orderform set deliv_no= ? where order_no= ?";
 
 	@Override
 	public void insert(OrderformVO orderformVO) {
@@ -430,6 +432,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 		return list;
 	}
 
+	// s綁定訂單主鍵，同時新增多筆訂單明細
 	@Override
 	public void insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
 		Connection con = null;
@@ -465,7 +468,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			rs.close();
 
-			// 同時新增訂單明細
+			// s同時新增訂單明細
 			OrderinvoiceDAO dao = new OrderinvoiceDAO();
 			for (OrderinvoiceVO aOin : list) {
 				aOin.setOrder_no(new String(next_orderno));
@@ -505,16 +508,42 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 	}
 
+//	外送派送單綁定主鍵，同時更新多筆訂單資料
 	@Override
 	public void updateWithDelivery(OrderformVO orderformVO, Connection con) {
 
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			pstmt = con.prepareStatement(UPDATE);
-		
+			pstmt = con.prepareStatement(UPDATE2);
+
+			pstmt.setString(1, orderformVO.getDeliv_no());
+			pstmt.setString(2, orderformVO.getOrder_no());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 		}
-		
 
 	}
 
