@@ -27,5 +27,11 @@ Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000002','M002',null,1);
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000003','M002',null,1);
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000004',null,'C0000000004',2);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000006','M002',null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000006','M001',null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000006','M003',null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000007','M001',null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M003',null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,CUSTOM_NO,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M002',null,1);
 
 commit;

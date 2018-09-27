@@ -23,6 +23,8 @@ public interface OrderformDAO_interface {
 	
 	public List<OrderformVO> findByOrderTypeAndStatus(Integer order_type, Integer order_status);
 	
+	public List<OrderformVO> findByDeliveryNo(String delivery_no);
+	
 	public OrderformVO findByDekNoAndOrderStatus(String dek_no, Integer order_status);
 
 }
