@@ -20,11 +20,17 @@ public class ShoppingServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
-		System.out.println(action);
-		for(MenuVO x:buylist) {
-			System.out.println(x.getMenu_Id());
-		}
+		System.out.println("action="+action);
 		
+		System.out.println("目前購物車內容:");
+		if (buylist != null) {
+			for (MenuVO x : buylist) {
+				System.out.println(x.getMenu_Id()+"有"+x.getMenu_quantity()+"碗");
+			}
+		}else {
+			System.out.println("沒東西 !");
+		}
+
 		if (!action.equals("CHECKOUT")) {
 
 			// 刪除餐點
@@ -87,6 +93,12 @@ public class ShoppingServlet extends HttpServlet {
 		String menuid = req.getParameter("menuid");
 		String menuno = req.getParameter("menuno");
 		String price = req.getParameter("price");
+
+		System.out.println("品項: " + menuid);
+		System.out.println("餐點編號: " + menuno);
+		System.out.println("價格=" + price);
+		System.out.println("數量="+quantity);
+		System.out.println();
 
 		MenuVO MenuVO = new MenuVO();
 
