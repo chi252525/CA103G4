@@ -89,7 +89,9 @@ body {
 	width="100%" >
 <!--your html start==================================================================================-->
 <jsp:include page="/front_end/header.jsp" flush="true" />
-
+<!--background image-->
+		<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+			width="100%" height="" alt="">
 
 	<div class="container">
 		<%-- 錯誤表列 --%>

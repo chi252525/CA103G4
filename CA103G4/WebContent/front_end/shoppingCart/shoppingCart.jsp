@@ -56,11 +56,9 @@
 							for (int i = 0; i < buylist.size(); i++) {
 									MenuVO menuVO = buylist.get(i);
 						%>
-						<li class="list-group-item list-group-item-dark d-flex">
-						<strong><%=menuVO.getMenu_Id()%></strong>
-						<strong><%=menuVO.getMenu_Price()%></strong>
-						<strong></strong>
-							<input type="number" min="1" max="10" value="2">
+						<li class="list-group-item list-group-item-dark d-flex"><strong><%=menuVO.getMenu_Id()%></strong>
+							<strong><%=menuVO.getMenu_Price()%></strong> <strong></strong> <input
+							type="number" min="1" max="10" value="2">
 							<button id="del" class="ml-auto align-self-center btn-light btn">
 								<i class="fa fa-trash ml-auto"
 									style="font-size: 20px; color: red"></i>

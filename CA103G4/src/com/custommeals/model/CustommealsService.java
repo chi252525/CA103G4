@@ -71,4 +71,14 @@ public class CustommealsService {
 
 			return custommealsVO;
 		}
+		
+		
+		//add by Ning
+		public CustommealsVO updateNameOnly( String custom_Name,String custom_No) {
+			CustommealsVO custommealsVO = new CustommealsVO();
+			custommealsVO.setcustom_No(custom_No);
+			custommealsVO.setcustom_Name(custom_Name);
+			dao.updateNameOnly(custom_Name,custom_No);
+			return custommealsVO;
+		}
 }

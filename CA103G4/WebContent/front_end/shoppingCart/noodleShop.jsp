@@ -33,8 +33,8 @@
 
 	<c:forEach var="menuVO" items="${menuSvc.all}">
 		<c:if test="${menuVO.menu_Status == 1}">
-			<form id="menuform" name="shoppingForm"
-				action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do"
+			<form id="menuform" name="shoppingForm" class="shoppingForm"
+				action="ShoppingServlet.do"
 				method="POST">
 
 				<table>
@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<div>
-							<input id="buy" type="submit" class="submit" value="放入購物車">
+							<input id="buy" type="button" class="submit" value="放入購物車">
 						</div>
 					</tr>
 				</table>
@@ -77,16 +77,19 @@
 		style="font-size: 40px;"></i></a>
 
 	<script>
-// 		$(function() {
-// 			$(".submit").click(function(){	
-// 						swal("提示","操作成功","success");
-// 					});
-// 		});
-		
-// 		$(".swal2-confirm").click(function(){
-// 			$("#menuform").submit();
-// 		});
-		
-		</script>
+		$(function() {
+			$(".submit").eq(0).click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function(){$(".shoppingForm").eq(0).submit()});
+			});
+		});
+
+		// 		$(".swal2-confirm").click(function(){
+		// 			$("#menuform").submit();
+		// 		});
+	</script>
 </body>
 </html>

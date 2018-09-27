@@ -7,9 +7,9 @@
 
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
-	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
-	if (memberVO == null) {
-		memberVO = (MemberVO) session.getAttribute("memberVO");
+	MemberVO memVO = (MemberVO) request.getAttribute("memVO");
+	if (memVO == null) {
+		memVO = (MemberVO) session.getAttribute("memVO");
 	}
 %>
 
@@ -126,7 +126,7 @@ body {
 
 <%
 	CustommealsService cusmealSvc = new CustommealsService();
-	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed("M000001");
+	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(memVO.getMem_No());
 	pageContext.setAttribute("list", list);
 %>
             <div class="card-header text-primary p-3">我訂過的餐點</div>
@@ -214,7 +214,7 @@ body {
 					            </textarea>
 							<!-- //編輯器區塊 -->
 							<br>
-							<input type="hidden" id="mem_No" name="mem_No" value="M000001" />
+							<input type="hidden" id="mem_No" name="mem_No" value="${memVO.mem_No}" />
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-success">確認分享</button>
 							<a

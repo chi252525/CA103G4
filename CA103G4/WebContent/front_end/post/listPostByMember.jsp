@@ -7,16 +7,13 @@
 <%@ page import="com.member.model.*"%>
 <jsp:useBean id="cusmealSvc" scope="page"
 	class="com.custommeals.model.CustommealsService" />
-
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 	
 <%
 
 	PostService postSvc = new PostService();
-	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
-	if(memberVO == null){
-		memberVO = (MemberVO)session.getAttribute("memVO");
-	}
-	List<PostVO>list = postSvc.getMem_Post("M000001");
+	MemberVO memVO = (MemberVO)session.getAttribute("memVO");
+	List<PostVO> list = postSvc.getMem_Post(memVO.getMem_No());
 	pageContext.setAttribute("list", list);
 %>
 
@@ -45,9 +42,6 @@
 	href="<%=request.getContextPath()%>/front_end/post/css/starability.css"
 	media="all" rel="stylesheet" type="text/css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front_end/post/js/star-rating.js"
-	type="text/javascript"></script>
 <!--Bootstrap JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -94,7 +88,8 @@ body {
 	width="100%">
 	<!--your html start==================================================================================-->
 	<jsp:include page="/front_end/header.jsp" flush="true" />
-	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
+	<!--background image-->
+		<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
 			width="100%" height="" alt="">
 
 	<%-- 錯誤表列 --%>
@@ -126,7 +121,7 @@ body {
 				
 				<div class="col-md-6">
 			
-						<div class="display-4">我的貼文${memVO.mem_Name}</div>
+						<div class="display-4">${memVO.mem_Name}的貼文${postVO.post_No}</div>
 				</div>
 			
 				<div class="col-md-6">
@@ -167,6 +162,7 @@ body {
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 							<!-- 會員可以修改及刪除的按紐 -->
 							<a
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"

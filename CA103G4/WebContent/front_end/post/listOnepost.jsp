@@ -23,12 +23,9 @@
 %>
 
 
-<jsp:useBean id="postSvc" scope="page"
-	class="com.post.model.PostService" />
-<jsp:useBean id="memSvc" scope="page"
-	class="com.member.model.MemberService" />
-<jsp:useBean id="cusmealSvc" scope="page"
-	class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="postSvc" scope="page"	class="com.post.model.PostService" />
+<jsp:useBean id="memSvc" scope="page" 	class="com.member.model.MemberService" />
+<jsp:useBean id="cusmealSvc" scope="page"	class="com.custommeals.model.CustommealsService" />
 
 
 
