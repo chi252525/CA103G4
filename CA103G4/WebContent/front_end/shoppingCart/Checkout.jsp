@@ -18,7 +18,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 <head>
-    <title>Mode II ÁØÑ‰?Á®ãÂ? - Checkout.jsp</title>
+    <title>µ≤±b - Checkout.jsp</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ShoppingCart.css">
     <style>
         table,
@@ -38,13 +38,13 @@
         <p>
             <table id="table-1" style="margin: auto;">
                 <tr>
-                    <th width="200">È§êÈ??çÁ®±</th>
-                    <th width="100">?πÊ†º</th>
-                    <th width="100">?∏È?</th>
+                    <th width="200">¿\¬I¶W∫Ÿ</th>
+                    <th width="100">≥Êª˘</th>
+                    <th width="100">º∆∂q</th>
                     <th width="120">
-                        <h3>Á∏ΩÂÉπ</h3>
+                        <h3>¡`√B</h3>
                     </th>
-                    <th width="100">?ôË®ª</th>
+                    <th width="100">≥∆µ˘</th>
                 </tr>
 
 

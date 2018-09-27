@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <!--customized datatable css-->
+    <link rel="stylesheet" href="css/datable.css">
     <style>
         table, th, td {
 	border: 1px solid black;
@@ -38,11 +40,11 @@
 		if (buylist != null && (buylist.size() > 0)) {
 	%>
 
-    <img src="images/tomcat.gif">
+    <img src="img/logo.png">
     <font size="+3">購物車：（Cart.jsp）</font>
     <div class="container">
         <div class="row">
-            <table id="cart" class="display table table-striped table-bordered" style="width:100%">
+            <table id="example" class="display table table-striped table-bordered" style="width:100%">
                 <thead style="margin-bottom: 15px; ">
                     <tr>
                         <th width="200">餐點名稱</th>
@@ -74,7 +76,7 @@
                         <td width="120">
                             <form name="deleteForm" action="ShoppingServlet.do" method="POST">
                                 <input type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=index%>">
-                                <button class="btn"type="submit" value="刪除" style="background-color: antiquewhite">
+                                <button class="btn btn-light" type="submit" value="刪除" style="background-color: antiquewhite">
                                     <i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
                                 </button>
                             </form>
