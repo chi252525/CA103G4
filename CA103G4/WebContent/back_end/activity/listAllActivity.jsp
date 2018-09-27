@@ -38,11 +38,10 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<%@ include file="/front_end/PostHeader.jsp" %> 
+
 <div class="container-fluid">
     <div class="row">
             </div>
-           
             <div class="col-sm-12 col-12 col-lg-12">
                 <h1>廣告活動設定</h1>
                   <div class="float-right"><button type="button" class="btn btn-primary">新增</button></div><br>
@@ -131,8 +130,6 @@
 
             </div>
            
-    </div>
-<%@ include file="/front_end/PostFooter.jsp" %> 
-	
+    </div>	
 </body>
 </html>
