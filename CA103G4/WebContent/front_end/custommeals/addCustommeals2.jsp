@@ -121,10 +121,10 @@
 
 <!-- <div class="wrapper"> -->
 <!-- <div class="middle"> -->
-	<div class="container">
+	<div class="container.fluid">
 		<div class="row">
 	<!-- 				<main class="content"> -->
-					<div class="col-8">
+					<div class="col-6">
 						<div class="container">
 						  <ul class="columns">
 						
@@ -218,15 +218,15 @@
 						          <br>
 						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
 						        </li>
-						        <li class="task" myid="I0015">
-						          <p>咖哩湯
+						        <li class="task" myid="I0015-1">
+						          <p>鹽味湯
 						          <br>
-						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+						            <img src="/CA103G4/front_end/custommeals/images/15-1.png" alt="鹽味湯" style="max-width:80px"></p>
 						        </li>
-						        <li class="task" myid="I0015">
-						          <p>咖哩湯
+						        <li class="task" myid="I0015-2">
+						          <p>海鮮湯
 						          <br>
-						            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+						            <img src="/CA103G4/front_end/custommeals/images/15-2.png" alt="海鮮湯" style="max-width:80px"></p>
 						        </li>
 						      </ul>
 						    </li>
@@ -493,6 +493,8 @@
                 <input id="I0013" type="checkbox" name="ingredients" value="I0013"> 豚骨湯
                 <input id="I0014" type="checkbox" name="ingredients" value="I0014"> 味增湯
                 <input id="I0015" type="checkbox" name="ingredients" value="I0015"> 咖哩湯
+                <input id="I0015-1" type="checkbox" name="ingredients" value="I0015-1"> 鹽味湯
+                <input id="I0015-2" type="checkbox" name="ingredients" value="I0015-2"> 海鮮湯
                 <br>
 				主餐
                 <input id="I0016" type="checkbox" name="ingredients" value="I0016"> 叉燒肉
