@@ -2,6 +2,9 @@ package android.com.orderform.model;
 
 import java.util.List;
 
+import android.com.member.model.MemberVO;
+import android.com.orderinvoice.model.OrderinvoiceVO;
+
 public class OrderformVO {
 	private String order_no;
 	private String dek_no;
@@ -13,9 +16,24 @@ public class OrderformVO {
 	private Integer order_status;
 	private String deliv_addres;
 	private Integer order_pstatus;
-	
+	//部分
 	private List<OrderInvoiceVO> orderList;
+	//全部
+	private List<OrderinvoiceVO> orderList2;
+	private MemberVO memVO;
 	
+	public List<OrderinvoiceVO> getOrderList2() {
+		return orderList2;
+	}
+	public void setOrderList2(List<OrderinvoiceVO> orderList2) {
+		this.orderList2 = orderList2;
+	}
+	public MemberVO getMemVO() {
+		return memVO;
+	}
+	public void setMemVO(MemberVO memVO) {
+		this.memVO = memVO;
+	}
 	public List<OrderInvoiceVO> getOrderList() {
 		return orderList;
 	}

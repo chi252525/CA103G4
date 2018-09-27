@@ -42,12 +42,6 @@ public class AndroidMenuServlet extends HttpServlet {
 			List<MenuVO> menuList = dao.getAll();
 			writeText(res, gson.toJson(menuList));
 		} 
-//		else if ("findByCategory".equals(action)) {
-//			int cid = Integer.parseInt(jsonObject.get("cid").getAsString());
-//			List<Book> bookList = dao.findByCategory(cid);
-//			writeText(res, gson.toJson(bookList));
-//			
-//		} 
 		// 圖片請求
 		else if ("getImage".equals(action)) {
 			OutputStream os = res.getOutputStream();
