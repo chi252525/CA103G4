@@ -34,7 +34,7 @@ public class MemberDAO implements MemberDAO_interface{
 			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
 			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_STMT=
-			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR = to_date(?,'yyyy-mm-dd') , MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=? , MEM_BONUS=? , MEM_PHOTO=? WHERE MEM_ID =?";
+			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR=?, MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=?, MEM_PHOTO=? WHERE MEM_ID =?";
 	public static final String CHANGESTATUS_STMT=
 			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
 	public static final String GETALL=
@@ -105,7 +105,7 @@ public class MemberDAO implements MemberDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			System.out.println("連線成功");
+			System.out.println("修改連線成功");
 			pstmt.setString(1, memVO.getMem_Pw());
 			pstmt.setString(2, memVO.getMem_Name());
 			pstmt.setString(3, memVO.getMem_Gender());
@@ -119,9 +119,8 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(11, memVO.getMem_Readdr());
 			pstmt.setString(12, memVO.getMem_Cardnum());
 			pstmt.setString(13, memVO.getMem_Carddue());
-			pstmt.setInt(14, memVO.getMem_Bonus());
-			pstmt.setBytes(15,memVO.getMem_Photo());
-			pstmt.setString(16, memVO.getMem_Id());
+			pstmt.setBytes(14,memVO.getMem_Photo());
+			pstmt.setString(15, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("修改 "+rowCount+" 筆資料");
 					

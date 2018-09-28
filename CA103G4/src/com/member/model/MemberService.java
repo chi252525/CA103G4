@@ -40,8 +40,7 @@ public class MemberService {
 
 	public MemberVO updateMem(String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, Date mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
-			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
-			byte[] mem_Photo) {
+			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, byte[] mem_Photo) {
 
 		MemberVO memVO = new MemberVO();
 
@@ -56,10 +55,10 @@ public class MemberService {
 		memVO.setMem_Repno(mem_Repno);
 		memVO.setMem_Recounty(mem_Recounty);
 		memVO.setMem_Retown(mem_Retown);
-		memVO.setMem_Retown(mem_Readdr);
+		memVO.setMem_Readdr(mem_Readdr);
 		memVO.setMem_Cardnum(mem_Cardnum);
 		memVO.setMem_Carddue(mem_Carddue);
-		memVO.setMem_Bonus(mem_Bonus);
+		memVO.setMem_Photo(mem_Photo);
 
 		dao.update(memVO);
 

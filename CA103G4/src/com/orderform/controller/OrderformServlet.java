@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import com.orderform.model.*;
-import com.orderinvoice.model.OrderinvoiceService;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformServlet extends HttpServlet {
@@ -44,7 +43,7 @@ public class OrderformServlet extends HttpServlet {
 			String addres = req.getParameter("deliv_addres");
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
 			//明細參數
-			List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();
+			List<OrderinvoiceVO> list = (List)req.getAttribute("invoice");//等前端 更改
 			//還沒做，在此處取得需要的參數!!!!!!!!!!!!!
 			//範例
 			//想法>>用迴圈跑出送進來的參數並加入list
@@ -54,7 +53,7 @@ public class OrderformServlet extends HttpServlet {
 //			empXX.setHiredate(java.sql.Date.valueOf("2001-01-15"));
 //			empXX.setSal(new Double(15000));
 //			empXX.setComm(new Double(150));
-//			testList.add(empXX);
+//			list.add(empXX);
 			
 			OrderformVO orderformVO = new OrderformVO();
 			orderformVO.setDek_no(dekno);
@@ -73,6 +72,30 @@ public class OrderformServlet extends HttpServlet {
 			//尚未寫
 			
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}

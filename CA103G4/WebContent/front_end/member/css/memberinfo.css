@@ -16,8 +16,15 @@ body{
 input{
 	width:200px;
 	border-radius: 0.5rem;
+	background-color:#FFD4D4;
 }
 
+#city-list{
+	background-color:#FFD4D4;
+}
+#sector-list{
+	background-color:#FFD4D4;
+}
 .td1 {
 	width: 10%;
 	text-align: center;
@@ -73,6 +80,8 @@ input{
 	width: 200px;
 	margin-left: 60px;
 }
+
+
 
 #img-td {
 	text-align: legt;
