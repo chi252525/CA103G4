@@ -466,11 +466,11 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			rs.close();
 
-			// s同時新增訂單明細
-			OrderinvoiceDAO dao = new OrderinvoiceDAO();
+			// s同時新增訂單明細//明天的進度
+			OrderinvoiceService Svc = new OrderinvoiceService();
 			for (OrderinvoiceVO aOin : list) {
 				aOin.setOrder_no(new String(next_orderno));
-				dao.insert2(aOin, con);
+				Svc.addInvoice(aOin, con);
 			}
 
 			con.commit();
