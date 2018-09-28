@@ -4,6 +4,7 @@
 <html>
 
 <head>
+
     <title>竹風堂購物車</title>
     <!-- <link rel="stylesheet" type="text/css" -->
     <%-- 	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/shoppingCart.css"> --%>
@@ -16,16 +17,21 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
     <!-- datatable-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <!--customized datatable css-->
     <link rel="stylesheet" href="css/datable.css">
+    
+    <!-- sweet alert2 -->
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+	
     <style>
         table, th, td {
 	border: 1px solid black;
 	text-align: center;
-}
+}	
 </style>
 </head>
 
@@ -44,7 +50,7 @@
     <font size="+3">購物車：（Cart.jsp）</font>
     <div class="container">
         <div class="row">
-            <table id="example" class="display table table-striped table-bordered" style="width:100%">
+            <table id="example" class="datatable" style="width:100%">
                 <thead style="margin-bottom: 15px; ">
                     <tr>
                         <th width="200">餐點名稱</th>
@@ -74,9 +80,9 @@
                             <%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%>
                         </td>
                         <td width="120">
-                            <form name="deleteForm" action="ShoppingServlet.do" method="POST">
-                                <input type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=index%>">
-                                <button class="btn btn-light" type="submit" value="刪除" style="background-color: antiquewhite">
+                            <form id="form<%=index%>>"name="deleteForm" action="ShoppingServlet.do" method="POST">
+                                <input  type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=index%>">
+                                <button id="delete" class="del btn btn-light" type="button" value="刪除" style="background-color: antiquewhite" >
                                     <i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
                                 </button>
                             </form>
@@ -116,9 +122,9 @@
             </div>
             </div>
         </c:if>
+        
         <script>
-            document.getElementsByClassName("submit").
-
+      
             $(document).ready(function() {
                 $('#cart').DataTable();
             });
@@ -127,7 +133,25 @@
                 scrollY: 100,
                 select: true
             });
-
+            
+            $(function(){
+				$("#delete").click(function(){
+					//alert("11");
+					swal({
+						  title: "確定刪除餐點？",
+						  text: "很好吃喔!",
+						  type: "warning",
+						  showCancelButton: true,
+						  confirmButtonColor: "#DD6B55",
+						  confirmButtonText: "删除",
+						  cancelButtonText: "取消",
+						  closeOnConfirm: false
+						}).then(function(){
+							$("#form0").submit();
+						  swal("删除成功！", "恭喜，数据删除成功！.", "success");
+						});
+				});
+			});
         </script>
 </body>
 

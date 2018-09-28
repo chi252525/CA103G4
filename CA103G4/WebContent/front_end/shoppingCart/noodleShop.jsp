@@ -115,8 +115,8 @@
 // 			}
 		
 
-		
-
+		// sweet alerrt for adding product
+ 
 				$(function(){
 					$(".submit").eq(1).click(function(){
 						swal({
