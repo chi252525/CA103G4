@@ -26,7 +26,7 @@ public class PostShowImage extends HttpServlet{
 		ServletOutputStream out = res.getOutputStream();
 	
 		try{
-			System.out.println("in PostShowImage");
+//			System.out.println("in PostShowImage");
 			String post_No = req.getParameter("post_No");
 			PostService postSvc = new PostService();
 			byte[] image = postSvc.getOne_Post(post_No).getPost_Photo();

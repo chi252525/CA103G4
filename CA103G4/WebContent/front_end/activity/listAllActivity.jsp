@@ -74,6 +74,9 @@ padding-bottom: 760px;
 .expire {
     color: red;
 }
+#carousel-ctrl .item img{ 
+ 		height:100%;
+ 	} 
 </style>
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
@@ -82,36 +85,30 @@ padding-bottom: 760px;
 	width="100%" height="">
 	<!--your html start==================================================================================-->
 	    <section class="section-gap">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="img/ad_01.png" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="img/ad_05.png" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="img/ad_07.png" alt="Third slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="img/ad_06.png" alt="Fourth slide">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-    </div>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-0">
+		
+			<div id="carousel-id2" class="carousel slide" data-ride="carousel">
+			    <!-- 幻燈片小圓點區 -->
+			    <ol class="carousel-indicators">
+				    <c:forEach varStatus="s" items="${actSvc.getAll()}">
+				    	<li data-target="#carousel-id2" data-slide-to="${s.index}" class="${s.first?'active':''}"></li>
+				    </c:forEach>
+			    </ol>
+			    <!-- 幻燈片主圖區 -->
+			    <div class="carousel-inner ">
+				    <c:forEach varStatus="s" var="adVO" items="${avtSvc.getAll()}">
+				     	<div class="item ${s.first?'active':''}">
+				        	<img class="adimg" src="<%= request.getContextPath()%>/activity/activityshowimage?act_No=${activityVO.act_No}" alt="">
+					    </div>
+				    </c:forEach>
+			    </div>
+			    <!-- 上下頁控制區 -->
+				    <a class="left carousel-control" href="#carousel-id2" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+				    <a class="right carousel-control" href="#carousel-id2" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+			</div>
+		</div>
 </section>
+
             <script>$('.carousel').carousel()</script>
 	
 	<!-- 優惠卷 -->

@@ -17,7 +17,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB3");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -28,6 +28,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?)";
+	private static final String INSERT_STMT2 = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, 1)";
 	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no DESC";
 	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ?";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
@@ -53,7 +54,6 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 			pstmt.executeUpdate();
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -277,13 +277,17 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 		
 		try {
 
-     		pstmt = con.prepareStatement(INSERT_STMT);
-
-			pstmt.setString(1, orderinvoiceVO.getOrder_no());
-			pstmt.setString(2, orderinvoiceVO.getMenu_no());
-			pstmt.setString(3, orderinvoiceVO.getCustom_no());
-			pstmt.setInt(4, orderinvoiceVO.getInvo_status());
-
+     		pstmt = con.prepareStatement(INSERT_STMT2);
+     		
+     		if (orderinvoiceVO.getCustom_no() == null) {
+				pstmt.setString(1, orderinvoiceVO.getOrder_no());
+				pstmt.setString(2, orderinvoiceVO.getMenu_no());
+				pstmt.setString(3, null);
+     		} else if (orderinvoiceVO.getMenu_no() == null){
+     			pstmt.setString(1, orderinvoiceVO.getOrder_no());
+    			pstmt.setString(2, null);
+    			pstmt.setString(3, orderinvoiceVO.getCustom_no());   			
+     		}
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -301,6 +305,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 			}
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
+			
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {

@@ -13,7 +13,7 @@
 
 	PostService postSvc = new PostService();
 	MemberVO memVO = (MemberVO)session.getAttribute("memVO");
-	List<PostVO> list = postSvc.getMem_Post(memVO.getMem_No());
+	List<PostVO> list = postSvc.getMem_Post("M000001");
 	pageContext.setAttribute("list", list);
 %>
 
@@ -93,27 +93,14 @@ body {
 			width="100%" height="" alt="">
 
 	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<div class="modal fade" id="errorModal_Ning">
-			<div class="modal-dialog modal-sm" role="dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<i class="fas fa-exclamation-triangle"></i> <span
-							class="modal-title"><h4>&nbsp;注意：</h4></span>
-					</div>
-					<div class="modal-body">
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red" type="square">${message}</li>
-						</c:forEach>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</c:if>
-	<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
 
 	<div class="container my-5">
 		<div class="container">
@@ -121,7 +108,7 @@ body {
 				
 				<div class="col-md-6">
 			
-						<div class="display-4">${memVO.mem_Name}的貼文${postVO.post_No}</div>
+						<div class="display-4">${memVO.mem_Name}的貼文</div>
 				</div>
 			
 				<div class="col-md-6">
@@ -142,7 +129,6 @@ body {
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 					<div class="col-md-4 px-2 py-4">
-
 						<div class="card">
 							<img class="card-img img-fluid"
 								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
@@ -164,10 +150,23 @@ body {
 							</p>
 							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 							<!-- 會員可以修改及刪除的按紐 -->
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="hidden" name="post_No" value="${postVO.post_No}"/>
+								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
+								<!-- 查單一貼文 -->
+								<input type="hidden" name="action" value="getOne_For_Display"/>
+								<!-- 同時查單一貼文的所有留言 -->
+								<input type="hidden" name="action" value="listReplybyPostNo"/>
+								<button type="submit" 
+									class="btn btn-info btn-sm btn-block ">查看內容</button>
+							</FORM>
+							
 							<a
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
 								class="btn lnr lnr-pencil btn-warning">修改</a>
-							<FORM ETHOD="post"
+							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
 								<input type="hidden" name="post_No" value="${postVO.post_No}">

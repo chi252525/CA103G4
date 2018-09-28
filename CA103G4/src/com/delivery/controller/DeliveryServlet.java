@@ -83,13 +83,16 @@ public class DeliveryServlet extends HttpServlet {
 				DeliveryService delSvc = new DeliveryService();
 				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
 				
-				if (req.getParameter("update") != null) {
-					delVOList = delSvc.getSelect(dn, en, ds);
+				if (req.getAttribute("deliv") != null && req.getAttribute("emp") != null && req.getAttribute("status") != null) {
+					
+					delVOList = delSvc.getSelect((String)req.getAttribute("deliv"), (String)req.getAttribute("emp"), (String)req.getAttribute("status"));
+					
+				} else {
+					dn = strd;
+					en = stre;
+					ds = strs;	
 				}
 				
-				dn = strd;
-				en = stre;
-				ds = strs;
 				
 				if (delVOList.isEmpty()) {
 					errorMsgs.add("查無資料");
@@ -146,13 +149,14 @@ public class DeliveryServlet extends HttpServlet {
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("update", delVO);
-			
-//			String requestURL = req.getParameter("requestURL");
+			req.setAttribute("deliv", deliv);
+			req.setAttribute("emp", emp);
+			req.setAttribute("status", status);
 			
 			String page = req.getParameter("whichPage");
 			req.setAttribute("whichPage",page);
 				
-//			String url = requestURL;
+
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 			successView.forward(req, res);

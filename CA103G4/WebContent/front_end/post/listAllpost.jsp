@@ -5,11 +5,12 @@
 <%@ page import="com.post.model.*"%>
 <%@ page import="com.custommeals.model.*"%>
 <%@ page import="com.member.model.*"%>
-<jsp:useBean id="cusmealSvc" scope="page" class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="cusmealSvc1" scope="page" class="com.custommeals.model.CustommealsService" />
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <% 
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
+	
 	pageContext.setAttribute("list", list);
 %>
 
@@ -87,27 +88,16 @@ body {
 			width="100%" height="" alt="">
 
 	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<div class="modal fade" id="errorModal_Ning">
-			<div class="modal-dialog modal-sm" role="dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<i class="fas fa-exclamation-triangle"></i> <span
-							class="modal-title"><h4>&nbsp;注意：</h4></span>
-					</div>
-					<div class="modal-body">
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red" type="square">${message}</li>
-						</c:forEach>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</c:if>
-	<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+
 	<div class="container my-5">
 		<div class="container">
 			<div class="row">
@@ -129,12 +119,12 @@ body {
 							</form>
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do">
-								<jsp:useBean id="postSvc1" scope="page"
+								<jsp:useBean id="postSvc2" scope="page"
 									class="com.post.model.PostService" />
 								<b><font color=orange>選擇貼文:</font></b> <select size="1"
 									name="post_No">
-									<c:forEach var="postVO" items="${postSvc1.all}">
-										<option value="${postVO.post_No}">${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}
+									<c:forEach var="postVO" items="${postSvc2.all}">
+										<option value="${postVO.post_No}">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}
 									</c:forEach>
 								</select> <button type="submit" class="btn btn-danger">送出</button><input type="hidden"
 									name="action" value="getOne_For_Display">
@@ -144,17 +134,54 @@ body {
 				</div>
 				<!-- */查詢BAR -->
 				
+				<!-- 查詢BAR -->
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header mb-5">關鍵字搜尋</div>
+						
+							<form METHOD="post"
+								ACTION="<%=request.getContextPath()%>/post/postServlet.do" class="card card-sm">
+                                <div class="card-body row no-gutters align-items-center mb-4">
+                                    <!--end of col-->
+                                    <div class="col">
+                                        <input class="form-control form-control-lg form-control-borderless" name="keyword" type="search" placeholder="搜尋關鍵字">
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col-auto">
+                                        <button class="btn btn-lg btn-success" type="submit" 
+                                        name="action" value="keyword">搜尋</button>
+                                    </div>
+                                    <!--end of col-->
+                                </div>
+                            </form>
+							
+						
+					</div>
+				</div>
+				<!-- */查詢BAR -->
+				
 				<!-- 分享按鈕 -->
 				<div class="col-md-6">
-					<a class="btn btn-info btn-lg px-3 btn-block mt-5"
+					<a class="btn btn-info btn-sm px-3 btn-block mt-2"
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
 				</div>
 				<!-- /*分享按鈕 -->
 				<div class="col-md-6">
-					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
+					<a class="btn btn-info btn-sm px-3 btn-block mt-2"
 						href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
 				</div>
+
+				<div class="btn-group float-right my-3">
+					<button class="btn btn-secondary btn-sm dropdown-toggle"
+						type="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">排序</button>
+					<div class="dropdown-menu"><a
+							href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews"
+							>依點閱人氣</a> </div>
+				</div>
+
 			</div>
+			
 			<div class="row">
 				<div class="col-md-12 mt-3">
 					<!-- 共幾篇貼文 -->
@@ -166,7 +193,6 @@ body {
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 					<div class="col-md-4 px-2 py-4">
-
 						<div class="card">
 							<img class="card-img img-fluid"
 								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
@@ -174,19 +200,22 @@ body {
 							<div
 								class="card-img-overlay d-flex justify-content-center align-items-center">
 								<h2 class="display-5" class="text-primary ">
-									<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
+									<b>${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</b>
 								</h2>
 							</div>
 						</div>
 						
 						<div class="card px-2">
-							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
-							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
+							<h5 class="card-title text-dark my-2 px-2"></h5>
+							推薦度<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+							
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
+							<p style="text-align: right;">
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}</p>
+							<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
@@ -199,14 +228,7 @@ body {
 								<input type="hidden" name="action" value="listReplybyPostNo"/>
 								<input type="hidden" name="action" value="addviews">
 								<button type="submit" 
-									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>
-							</FORM>
-							<FORM>
-								<input type="hidden" name="post_No" value="${postVO.post_No}">
-								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<input type="hidden" name="action" value="listReplybyPostNo">
-								<button type="submit" value="viewreply"
-									class="btn btn-secondary btn-sm btn-block">查看留言 &raquo;</button>
+									class="btn btn-info btn-sm btn-block mb-2">看更多 &raquo;</button>
 							</FORM>
 
 						</div>

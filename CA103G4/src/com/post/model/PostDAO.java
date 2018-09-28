@@ -42,12 +42,15 @@ public class PostDAO implements PostDAO_interface{
 	// 刪除貼文
 	private static final String DELETE_STMT = "DELETE FROM POST WHERE POST_NO = ?";
 	
+	//刪除貼文的所有留言
+	private static final String DELETE_MSG_FROMONE_STMT = "DELETE FROM RPLY_MSG WHERE POST_NO = ?";
+	
 	// 一個會員的貼文
 	private static final String FINDBYMEMNO="SELECT * FROM POST WHERE MEM_NO=?";
 	
 	private static final String FINDBYCUSTOMNO="SELECT * FROM POST WHERE CUSTOM_NO=?";
 	// 所有貼文
-	private static final String GETALL = "SELECT * FROM POST order by POST_NO DESC";
+	private static final String GETALL = "SELECT * FROM POST order by POST_TIME DESC";
 	// 取得單一貼文
 	private static final String GET_ONE_POST = "SELECT * FROM POST WHERE POST_NO=?";
 	// 依據年月查貼文
@@ -59,6 +62,18 @@ public class PostDAO implements PostDAO_interface{
 	//取得一個貼文的所有留言
 	private static final String GET_ONE_POST_ALLRPLYS =
 	"SELECT RPLY_NO,MEM_NO,POST_NO,RPLY_CONT,RPLY_TIME FROM rply_msg where POST_NO =? order by RPLY_NO desc";
+	
+
+	// 取得所有貼文，根據瀏覽次數由多到少排列
+	private static final String GET_ALL_BY_HOT_STMT = 
+					"SELECT * FROM POST ORDER BY POST_VIEWS DESC";
+	// 取得4個發文日期最新的貼文
+	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE ROWNUM <=4";
+	// 根據內容搜尋，根據發文時間由新到舊排列	
+	private static final String GET_ALL_BY_KEYWORD_ORDER_BY_VIEWS =
+	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, ?) ORDER BY POST_TIME DESC";
+	
+	
 	@Override
 	public void insert(PostVO postVO) {
 		Connection con = null;
@@ -138,26 +153,48 @@ public class PostDAO implements PostDAO_interface{
 				}
 			}
 		}
-
-		
 	}
 
 	@Override
 	public void delete(String post_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int updateCount_MSGS = 0;
 		try {
-
+			System.out.println("進到post delete");
 			
 			con = ds.getConnection();
+			// 1●設定於 pstm.executeUpdate()之前
+			con.setAutoCommit(false);
+			
+			// 先刪除員工
+			pstmt = con.prepareStatement(DELETE_MSG_FROMONE_STMT);
+			pstmt.setString(1,post_No);
+			updateCount_MSGS = pstmt.executeUpdate();
+			// 再刪除貼文
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, post_No);
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		}  catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
+			
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("刪除貼文編號" + post_No + "時,共有留言" + updateCount_MSGS
+					+ "則同時被刪除");
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -173,7 +210,7 @@ public class PostDAO implements PostDAO_interface{
 					e.printStackTrace(System.err);
 				}
 			}
-		}		
+		}
 	}
 
 	@Override
@@ -535,6 +572,167 @@ public class PostDAO implements PostDAO_interface{
 						}
 					}
 					return set;
+	}
+
+	@Override
+	public List<PostVO> getAllByHot() {
+		List<PostVO> postlist = new ArrayList<PostVO>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BY_HOT_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PostVO postVO=new PostVO();
+				postVO.setPost_No(rs.getString("post_No"));
+				postVO.setMem_No(rs.getString("mem_No"));
+				postVO.setCustom_No(rs.getString("custom_No"));
+				postVO.setPost_Cont(rs.getString("post_Cont"));
+				postVO.setPost_Eva(rs.getInt("post_Eva"));
+				postVO.setPost_Photo(rs.getBytes("post_Photo"));
+				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
+				postlist.add(postVO); 
+			}
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postlist;
+	}
+
+	@Override
+	public List<PostVO> getAllByNewFour() {
+		List<PostVO> postlist = new ArrayList<PostVO>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BY_NEW_FOUR_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PostVO postVO=new PostVO();
+				postVO.setPost_No(rs.getString("post_No"));
+				postVO.setMem_No(rs.getString("mem_No"));
+				postVO.setCustom_No(rs.getString("custom_No"));
+				postVO.setPost_Cont(rs.getString("post_Cont"));
+				postVO.setPost_Eva(rs.getInt("post_Eva"));
+				postVO.setPost_Photo(rs.getBytes("post_Photo"));
+				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postlist.add(postVO); 
+			}
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postlist;
+	}
+
+	@Override
+	public List<PostVO> getAllByKeywordOrderByViews(String keyword) {
+		List<PostVO> postlist = new ArrayList<PostVO>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BY_KEYWORD_ORDER_BY_VIEWS);
+			pstmt.setString(1,  keyword);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PostVO postVO=new PostVO();
+				postVO.setPost_No(rs.getString("post_No"));
+				postVO.setMem_No(rs.getString("mem_No"));
+				postVO.setCustom_No(rs.getString("custom_No"));
+				postVO.setPost_Cont(rs.getString("post_Cont"));
+				postVO.setPost_Eva(rs.getInt("post_Eva"));
+				postVO.setPost_Photo(rs.getBytes("post_Photo"));
+				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postlist.add(postVO); 
+			}
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postlist;
 	}
 	
 }

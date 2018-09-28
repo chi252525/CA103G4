@@ -332,7 +332,7 @@ COMMIT;
 
 CREATE TABLE RPLY_MSG (	
 RPLY_NO    VARCHAR2(15)   NOT NULL, 
-MEM_NO   VARCHAR2(7)  NOT NULL, 
+MEM_NO   VARCHAR2(10)  NOT NULL, 
 POST_NO     VARCHAR2(15)  NOT NULL, 
 RPLY_CONT   VARCHAR2(4000), 
 RPLY_TIME    TIMESTAMP DEFAULT systimestamp, 
@@ -398,28 +398,36 @@ commit;
 --------------------------------------------------------
 
 CREATE TABLE REPORT_Msg (	
-
-  MEM_NO   VARCHAR2(7)  NOT NULL, 
-  RPLY_NO   VARCHAR2(15)  NOT NULL,  
+RPT_NO VARCHAR2(10)  NOT NULL, 
+  MEM_NO   VARCHAR2(10)  NOT NULL, 
+POST_NO     VARCHAR2(15)  NOT NULL,
   RPT_RSM   VARCHAR2(5),
   RPT_STATUS    VARCHAR2(5) default 'RS0',
   RPT_TIME TIMESTAMP DEFAULT systimestamp,
   
-  CONSTRAINT REPORT_Msg_PK PRIMARY KEY (MEM_NO,RPLY_NO),
+  CONSTRAINT REPORT_Msg_PK PRIMARY KEY (RPT_NO),
   CONSTRAINT REPORT_Msg_FK1 FOREIGN KEY (MEM_NO) 
   REFERENCES MEMBER (MEM_NO),
-  CONSTRAINT REPORT_Msg_FK2 FOREIGN KEY (RPLY_NO) 
-  REFERENCES RPLY_MSG (RPLY_NO));
+  CONSTRAINT REPORT_Msg_FK2 FOREIGN KEY (POST_NO) 
+  REFERENCES POST (POST_NO));
 
-INSERT INTO REPORT_Msg(MEM_NO,RPLY_NO,
+INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
-('M000002',TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||'10','RR1','RS0',sysdate);
+(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||'000003','RR1','RS0',sysdate);
 
-INSERT INTO REPORT_Msg(MEM_NO,RPLY_NO,
+INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
-('M000002',TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||'11','RR1','RS1',sysdate);
+(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||'000004','RR1','RS0',sysdate);
+
+INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
+RPT_RSM,RPT_STATUS,RPT_TIME)
+VALUES 
+(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||'000005','RR1','RS0',sysdate);
 
 COMMIT;
 
@@ -1179,15 +1187,15 @@ ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
 ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a1','新品上市期間限定~會員憑卷點紐西蘭牛肉拉麵折扣
-100元 ',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001','a1','新品上市期間限定~會員憑券點拉麵折扣100元
+ ',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
 ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a2','慶祝竹風堂拉麵十周年慶,在活動期間內至各分店用餐(限內用),即免費贈送食材一份,活動日期從即日起至XX月XX日為止,別錯過囉! ',null,null,null,TO_TIMESTAMP('2018-09-08 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001','a2','慶祝竹風堂拉麵十周年慶,活動期間內至各分店用餐(限內用),一碗即折80元',null,null,null,TO_TIMESTAMP('2018-09-08 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 
 INSERT INTO ACTIVITY(
@@ -1195,15 +1203,14 @@ ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
 ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000002','a1','激安!宇宙最強極致豚骨玉子麵，豚骨X玉子的經典搭配，
-會員憑優惠卷現折80元(一人限購一碗)',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000002','a1','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
 ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000003','a1','線上訂餐會員獨享! 訂餐外送滿千可折100元',NULL,NULL,NULL,
+to_char(sysdate,'yyyymmdd')||'-'||'000003','a1','線上訂餐會員獨享!訂餐外送滿千可折100元!',NULL,NULL,NULL,
 TO_TIMESTAMP('2018-09-22 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 
@@ -1260,3 +1267,4 @@ Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-000000
 
    
 COMMIT;
+

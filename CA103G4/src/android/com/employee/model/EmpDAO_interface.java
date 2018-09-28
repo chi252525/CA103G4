@@ -9,4 +9,5 @@ public interface EmpDAO_interface {
           public EmpVO findByPrimaryKey(String emp_no);
           public EmpVO isEmployee(String emp_Acnum, String emp_Psw);
           public List<EmpVO> getAll();
+          public String findEmpNameByPrimaryKey(String emp_no);
 }

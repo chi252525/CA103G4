@@ -40,7 +40,8 @@ public class ShoppingServlet extends HttpServlet {
 				int d = Integer.parseInt(del);
 				buylist.remove(d);
 				try {
-					req.getRequestDispatcher("Cart.jsp").forward(req, res);
+					res.sendRedirect("Cart.jsp");
+					return;
 				} catch (Exception e) {
 
 				}
@@ -65,8 +66,9 @@ public class ShoppingServlet extends HttpServlet {
 
 			session.setAttribute("shoppingcart", buylist);
 			String url = "noodleShop.jsp";// send back
-			RequestDispatcher rd = req.getRequestDispatcher(url);
-			rd.forward(req, res);
+//			RequestDispatcher rd = req.getRequestDispatcher(url);
+//			rd.forward(req, res);
+			res.sendRedirect(url);
 		}
 
 		//

@@ -3,18 +3,17 @@
     position: absolute;
     top:0;
     border-color: #C79467 #1D1D1D #C79467 #1D1D1D;
-    height: 1270px;
+    height: 1370px;
     border-width: 15px;
     
 }
 #title{
-/*    font-family: DFKai-sb;*/
    font-family: 'SentyWen';
     text-align: center; 
     font-size: 90px; 
 }
 .list-group{
-/*    font-family: 'SentyWen';*/
+	
     font-family: 'Senty Golden Bell';
     font-size: 30px;
     letter-spacing: 10px;
@@ -22,11 +21,6 @@
     font-weight: 100;
 }
 
-/*
-a.list-group-item:active {
-    transform: translateY(1.5px);
-}
-*/
 a.list-group-item:hover{    
     font-size: 33px;
     text-decoration:none;
@@ -47,17 +41,6 @@ body{
     text-align: left;
     text-decoration: none;
 }
-/*
-.button:active {
-    transform: translateY(1.5px);
-}
-*/
-/*cursor*/
-/*
-.button:active {
-    transform: translateY(4px);
-}
-*/
 .row-fluid no-gutters{
     border:20px;
 }
@@ -68,7 +51,7 @@ body{
 .col-12.col-md-9{
     position: absolute;
     right: 0;
-    height: 1270px;
+    height: 1370px;
     z-index: -1;
     background-color: whitesmoke;
     padding-left: 60px;
@@ -82,21 +65,21 @@ body{
     vertical-align: middle;
   }
 #log-out{
- background-color: #C79467;
- font-size:22px;
- font-family: 'SentyWen'; 
+	 background-color: #C79467;
+	 font-size:22px;
+	 font-family: 'SentyWen'; 
  
 }
 .ramei{
      position: absolute;
      right:45%;
      top:0.5%;
-     animation: transform 1450s infinite;
+     animation: transform 1600s infinite;
 }
 #Footer {
-��height: 100px;
-��position: relative;
-��margin-top: -100px;
+	height: 100px;
+	position: relative;
+	margin-top: -100px;
 }
 .input-group>.form-control{
     flex:none;
@@ -111,14 +94,6 @@ body{
     border-radius: 50%;
 }
 @keyframes transform {
-/*
-    0%   {left:600px;top: 100px;}
-    25%  {left:100px;top:200px;}
-    50%  {left:1000px;top: 1000px;}
-    75%  {left:1400px;top: 700px;}
-    80% {left:800px;top: 450px;}
-    100% {left:600px;top: 70px;opacity:0;}
-*/
      from {
         transform:rotate(0deg);
     }

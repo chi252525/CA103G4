@@ -81,6 +81,15 @@
     <url-pattern>/front_end/delivery/delivery.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>OrderformServlet</servlet-name>
+    <servlet-class>com.orderform.controller.OrderformServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderformServlet</servlet-name>
+    <url-pattern>/front_end/orderform/orderform.do</url-pattern>
+  </servlet-mapping>
+  
   
   <servlet>
     <servlet-name>CustommealsServlet</servlet-name>

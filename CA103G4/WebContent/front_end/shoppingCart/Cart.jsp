@@ -1,77 +1,158 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.* , com.menu.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
+
 <head>
-<title>Mode II ½d¨Òµ{¦¡ - Cart.jsp</title>
-<!-- <link rel="stylesheet" type="text/css" -->
-<%-- 	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/shoppingCart.css"> --%>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-<style>
-table, th, td {
+
+    <title>ç«¹é¢¨å ‚è³¼ç‰©è»Š</title>
+    <!-- <link rel="stylesheet" type="text/css" -->
+    <%-- 	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/shoppingCart.css"> --%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
+    <!-- Bootsraps-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <!-- datatable-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <!--customized datatable css-->
+    <link rel="stylesheet" href="css/datable.css">
+    
+    <!-- sweet alert2 -->
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+	
+    <style>
+        table, th, td {
 	border: 1px solid black;
 	text-align: center;
-}
+}	
 </style>
 </head>
+
 <body>
-	<br>
-	<%
+    <br>
+    <%
 		@SuppressWarnings("unchecked")
 		Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		System.out.println(request.getContextPath() + "/front_end/shoppingCart/css/shoppingCart.css");
 	%>
-	<%
+    <%
 		if (buylist != null && (buylist.size() > 0)) {
 	%>
 
-	<img src="images/tomcat.gif">
-	<font size="+3">¥Ø«eÁÊª«¨®ªº¤º®e¦p¤U¡G¡]Cart.jsp¡^</font>
+    <img src="img/logo.png">
+    <font size="+3">è³¼ç‰©è»Šï¼šï¼ˆCart.jspï¼‰</font>
+    <div class="container">
+        <div class="row">
+            <table id="example" class="datatable" style="width:100%">
+                <thead style="margin-bottom: 15px; ">
+                    <tr>
+                        <th width="200">é¤é»åç¨±</th>
+                        <th width="100">åƒ¹æ ¼</th>
+                        <th width="100">æ•¸é‡</th>
+                        <th width="100">ç¸½è¨ˆ</th>
+                        <th width="120">æ“ä½œ</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-	<table id="table-1" >
-		<tr>
-			<th width="200">À\ÂI¦WºÙ</th>
-			<th width="100">»ù®æ</th>
-			<th width="100">¼Æ¶q</th>
-			<th width="100">Á`­p</th>
-			
-			<th width="120"><img src="images/view-cart.png"></th>
-		</tr>
-	</table>
-	<table>
-
-		<%
+                    <%
 			for (int index = 0; index < buylist.size(); index++) {
 					MenuVO menuVO = buylist.get(index);
 		%>
-		<tr>
-			<td width="200"><%=menuVO.getMenu_Id()%></td>
-			<td width="100"><%=menuVO.getMenu_Price()%></td>
-			<td width="100"><%=menuVO.getMenu_quantity()%></td>
-			<td width="100"><%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></td>
-			<td width="120">
-				<form name="deleteForm" action="ShoppingServlet.do" method="POST">
-					<input type="hidden" name="action" value="DELETE"> 
-					<input type="hidden" name="del" value="<%=index%>">
-					<button type="submit" value="§R°£"><i class="fa fa-trash" style="font-size: 25px;color: firebrick"></i></button>
-				</form>
-			</td>
-		</tr>
-		<%
+                    <tr>
+                        <td width="200">
+                            <%=menuVO.getMenu_Id()%>
+                        </td>
+                        <td width="100">
+                            <%=menuVO.getMenu_Price()%>
+                        </td>
+                        <td width="100">
+                            <%=menuVO.getMenu_quantity()%>
+                        </td>
+                        <td width="100">
+                            <%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%>
+                        </td>
+                        <td width="120">
+                            <form id="form<%=index%>>"name="deleteForm" action="ShoppingServlet.do" method="POST">
+                                <input  type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=index%>">
+                                <button id="delete" class="del btn btn-light" type="button" value="åˆªé™¤" style="background-color: antiquewhite" >
+                                    <i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                <%
 			}
 		%>
-	</table>
-	<p>
-	<form name="checkoutForm" action="ShoppingServlet.do" method="POST">
-		<input type="hidden" name="action" value="CHECKOUT"> <input
-			type="submit" value="¥I´Úµ²±b" class="button">
-	</form>
-	<form name="checkoutForm" action="noodleShop.jsp" method="POST">
-		<input type="hidden" name="action" value="CHECKOUT"> <input
-			type="submit" value="Ä~Äò¿ïÁÊ" class="button">
-	</form>
-	<%
+            </table>
+            
+        </div>
+    </div>
+    <p>
+        <form name="checkoutForm" action="ShoppingServlet.do" method="POST">
+            <input type="hidden" name="action" value="CHECKOUT"> <input type="submit" value="ä»˜æ¬¾çµå¸³" class="button">
+        </form>
+        <form name="checkoutForm" action="noodleShop.jsp" method="POST">
+            <input type="hidden" name="action" value="CHECKOUT"> <input type="submit" value="ç¹¼çºŒé¸è³¼" class="button">
+        </form>
+        <%
 		}
 	%>
+        <c:if test="${empty shoppingcart}">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="card " style="width: 18rem;">
+                        <img class="card-img-top" src="img/cart_list.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">ä½ çš„è³¼ç‰©è»Šé‚„æ˜¯ç©ºçš„</p>
+                        </div>
+
+                        <button class="btn" onclick="window.location.href='noodleShop.jsp'">é»é¤å»!</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </c:if>
+        
+        <script>
+      
+            $(document).ready(function() {
+                $('#cart').DataTable();
+            });
+
+            $('#cart').DataTable({
+                scrollY: 100,
+                select: true
+            });
+            
+            $(function(){
+				$("#delete").click(function(){
+					//alert("11");
+					swal({
+						  title: "ç¢ºå®šåˆªé™¤é¤é»ï¼Ÿ",
+						  text: "å¾ˆå¥½åƒå–”!",
+						  type: "warning",
+						  showCancelButton: true,
+						  confirmButtonColor: "#DD6B55",
+						  confirmButtonText: "åˆ é™¤",
+						  cancelButtonText: "å–æ¶ˆ",
+						  closeOnConfirm: false
+						}).then(function(){
+							$("#form0").submit();
+						  swal("åˆ é™¤æˆåŠŸï¼", "æ­å–œï¼Œæ•°æ®åˆ é™¤æˆåŠŸï¼.", "success");
+						});
+				});
+			});
+        </script>
 </body>
+
 </html>

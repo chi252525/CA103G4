@@ -23,7 +23,6 @@ public class PostServlet extends HttpServlet{
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");// 判斷做什麼動作
-		String orderby = req.getParameter("orderby"); // 判斷排列方式
 		
 		//顯示單一貼文
 		 if ("getOne_For_Display".equals(action)) { 
@@ -137,14 +136,10 @@ public class PostServlet extends HttpServlet{
 						errorMsgs.add("留言內容請勿空白");
 					}	
 
-					Integer post_Eva=null;
-					try {
-						post_Eva= new Integer(req.getParameter("post_Eva").trim());
 				
-					}catch (NumberFormatException e) {
-						post_Eva = 5;
-						errorMsgs.add("評價請填數字1-5.");
-					}
+						Integer	post_Eva= new Integer(req.getParameter("post_Eva").trim());
+				
+					
 		
 					java.sql.Timestamp post_Time=new java.sql.Timestamp(System.currentTimeMillis());
 		        	byte[] post_Photo = null;
@@ -275,6 +270,8 @@ public class PostServlet extends HttpServlet{
         	System.out.println("delete開始");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑
+			String whichPage = req.getParameter("whichPage"); 
 			try {
 				/***************************1.接收請求參數***************************************/
 				String post_No = req.getParameter("post_No");
@@ -284,7 +281,7 @@ public class PostServlet extends HttpServlet{
 				postSvc.deletePost(post_No);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/front_end/post/listAllpost.jsp";
+				String url = requestURL+"?whichPage="+whichPage;  
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 			
@@ -337,6 +334,7 @@ public class PostServlet extends HttpServlet{
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("postlist", postlist);
 				System.out.println("req.setAttributelist="+postlist);
+				
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp"); 
 				successView.forward(req, res);
 				/***************************其他可能的錯誤處理*************************************/
@@ -411,6 +409,66 @@ public class PostServlet extends HttpServlet{
 			}
 				
 			}
+        
+        if("keyword".equals(action)) {
+        	List<String> errorMsgs = new LinkedList<String>(); 
+			req.setAttribute("errorMsgs", errorMsgs);
+        	try {
+        	
+//        	System.out.println("跳進keyword");
+        	String keyword = req.getParameter("keyword"); // 使用者輸入的值
+//        	System.out.println("keyword的req.getParameter"+keyword);
+        	/*************************** 2.開始查詢資料 *****************************************/
+        	PostService postSvc= new PostService();
+        	List<PostVO> postlist = postSvc.getAllByKeywordOrderByViews(keyword.trim());
+        	if (postlist.isEmpty()) { // 如果list是空的代表沒有資料
+				errorMsgs.add("查無資料");
+			}
+        	if (!errorMsgs.isEmpty()) { // 如果錯誤List不是空的就return
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("postlist", postlist); // 將list存到req中
+			String url = "/front_end/post/listPostByQuery.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+        	}catch (Exception e) {
+    			errorMsgs.add("無法取得資料" + e.getMessage());
+    			RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+    			failureView.forward(req, res);
+    			}
+        
+        	}
+        
+        
+        if("orderbyViews".equals(action)) {
+        	List<String> errorMsgs = new LinkedList<String>(); 
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+			/*************************** 2.開始查詢資料 *****************************************/
+			PostService postSvc= new PostService();
+        	List<PostVO> postlist = postSvc.getAllByHot();
+        	if (postlist.isEmpty()) { // 如果list是空的代表沒有資料
+				errorMsgs.add("查無資料");
+			}
+        	
+        	if (!errorMsgs.isEmpty()) { // 如果錯誤List不是空的就return
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+				failureView.forward(req, res);
+				return;
+			}	
+        	req.setAttribute("postlist", postlist); // 將list存到req中
+        	String url = "/front_end/post/listPostByQuery.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+        	}catch (Exception e) {
+    			errorMsgs.add("無法取得資料" + e.getMessage());
+    			RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+    			failureView.forward(req, res);
+    			}
+        }
         	
         }
         
