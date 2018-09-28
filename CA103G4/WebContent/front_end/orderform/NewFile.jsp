@@ -8,12 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do"
-		id="a" name="First">
-		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="新增">
-			
-</FORM>
+
 </body>
 </html>

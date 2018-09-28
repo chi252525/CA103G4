@@ -1,6 +1,7 @@
 package com.delivery.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
+import com.orderform.model.OrderformVO;
 
 /**
  * Servlet implementation class DeliveryServlet
@@ -34,6 +36,7 @@ public class DeliveryServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
@@ -168,47 +171,32 @@ public class DeliveryServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
+		
 
-			String branchno = req.getParameter("branch_no").trim();
-			String branchnoReg = "^[0-9]{4}$";
-
-			if (branchno.trim().length() != 0 && !branchno.matches(branchnoReg)) {
-				errorMsgs.add("請確認格式");
-			} else if (branchno.trim().length() == 0) {
-				errorMsgs.add("請填寫資料");
-			}
-
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
+//			String branchno = req.getParameter("branch_no").trim();
+//			String empno = req.getParameter("emp_no").trim();
+			String branchno = "0001";
+			String empno = "E000000001";
+			
+			List<OrderformVO> list = new ArrayList<OrderformVO>();
+			list = (List<OrderformVO>)req.getAttribute("");
 
 			DeliveryVO delVO = new DeliveryVO();
-//			delVO.setBranch_no(branchno);
-//				delVO.setEmp_no(emp);
-//				delVO.setDeliv_status(status);
+			delVO.setBranch_no(branchno);
+			delVO.setEmp_no(empno);
 
 			/*************************** 2.開始新增資料 ***************************************/
-			try {
-				DeliveryService delSvc = new DeliveryService();
-				delVO = delSvc.addDelivery(branchno);
-			} catch (Exception e) {
-				errorMsgs.add("請確定是否有此分店編號！");
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
-			}
+			DeliveryService delSvc = new DeliveryService();
+			delVO = delSvc.addDelivery(delVO, list);
+			
+		
 
+			
+			
 			req.setAttribute("insert", delVO);
-
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "select_page.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 
 			/*************************** 其他可能的錯誤處理 **********************************/

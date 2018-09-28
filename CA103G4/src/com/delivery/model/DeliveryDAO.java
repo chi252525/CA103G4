@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.orderform.model.OrderformVO;
+
 public class DeliveryDAO implements DeliveryDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -32,7 +34,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 	// VARCHAR2 (PK not found)
 
 	@Override
-	public void insert(DeliveryVO deliveryVO) {
+	public void insert(DeliveryVO deliveryVO, List<OrderformVO> list) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -2,6 +2,8 @@ package com.delivery.model;
 
 import java.util.List;
 
+import com.orderform.model.OrderformVO;
+
 public class DeliveryService {
 	private DeliveryDAO_interface dao;
 	
@@ -9,14 +11,13 @@ public class DeliveryService {
 		dao = new DeliveryDAO();
 	}
 
-	public DeliveryVO addDelivery(String branch_no) {
+	public DeliveryVO addDelivery(DeliveryVO deliveryVO, List<OrderformVO> list) {
 		
-		DeliveryVO deliveryVO = new DeliveryVO();
+		DeliveryVO deliveryOrdVO = new DeliveryVO();
+	
+		dao.insert(deliveryVO,list);
 		
-		deliveryVO.setBranch_no(branch_no);
-		dao.insert(deliveryVO);
-		
-		return deliveryVO;
+		return deliveryOrdVO;
 	}
 	
 	public DeliveryVO updateDelivery(String emp_no,String deliv_status, String deliv_no) {

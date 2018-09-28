@@ -2,9 +2,11 @@ package com.delivery.model;
 
 import java.util.*;
 
+import com.orderform.model.OrderformVO;
+
 public interface DeliveryDAO_interface {
 
-	public void insert(DeliveryVO deliveryVO);
+	public void insert(DeliveryVO deliveryVO, List<OrderformVO> list);
 
 	public void update(DeliveryVO deliveryVO);
 
