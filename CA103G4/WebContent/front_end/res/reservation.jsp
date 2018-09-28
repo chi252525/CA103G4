@@ -7,7 +7,8 @@
   
 
   <%@ include file="/front_end/PostHeader.jsp" %>
-  
+  	
+
   
     <div class="container" >
         <div class=" row centered-form" style="padding-top: 100px">
@@ -120,7 +121,7 @@
                       </div>
                       &nbsp;
                       <div style="width: 100px;height: 100px;padding-left: 30px">
-                      <img src="/EddyTest/res/img/cutie.png" width="180%" class="cutie">
+                      <img src="/CA103G4/front_end/img/cutie.png" width="180%" class="cutie">
                       </div>
                        
                       <div style="text-align:right;">
@@ -215,6 +216,6 @@
   </script>
   
   
-  
+ 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/res.css"> 
  <%@ include file="/front_end/PostFooter.jsp" %> 
-<link rel="stylesheet" href="/EddyTest/res/css/res.css">
