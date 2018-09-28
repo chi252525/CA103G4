@@ -47,15 +47,12 @@
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="col-sm-12 col-12 col-lg-12">
-			<h1>留言檢舉管理</h1>
+			<h1>貼文檢舉管理</h1>
 			<br>
 			<h4>查詢:</h4>
 			<div class="container-fluid">
 				<div class="row">
-
 					<div class="test col-md-6">
-
-
 						<form class="form-inline" action="/action_page.php">
 							<div class="form-group">
 								<select class="form-control">
