@@ -429,7 +429,7 @@ System.out.println("我已經改完囉");
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("登入失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/member/login.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/front_end/member/login.jsp");
 				failuerView.forward(req, res);
 			}
 		

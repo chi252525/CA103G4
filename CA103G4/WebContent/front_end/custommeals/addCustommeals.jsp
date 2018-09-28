@@ -140,68 +140,81 @@
 	</tr>
 	<tr>
 		<td>自訂餐點價格:</td>
-<!-- 		<td>	   -->
-<!-- 			<div class="result-area"> -->
-<!-- 		    <span class="cb-count">0</span>元 -->
-<!-- 		    <p class="result-text"></p> -->
-<!-- 		  	</div> -->
-<!-- 	    </td>	 -->
+
 		<td><input type="TEXT" name="custom_Price" size="45"	
 			value="<%=(custommealsVO==null)?"480":custommealsVO.getcustom_Price()%>" /></td>
+	</tr>	
+	<tr>	
+		<td>餐點價格計算:</td>
+	
+		<td>	  
+			<div class="result-area">
+		    <span class="cb-count">0</span>元
+		    <p class="result-text"></p>
+		  	</div>
+	    </td>	
 	</tr>
 	
 	<tr>
 		<td>食材選擇:</td>
-		<td>麵條&nbsp
-			<input id="I0001" type="checkbox" name="ingredients" value="10"> 細拉麵
-		    <input id="I0002" type="checkbox" name="ingredients" value="20"> 烏龍麵
-    		<input id="I0003" type="checkbox" name="ingredients" value="30"> 刀削麵
-    		<input id="I0004" type="checkbox" name="ingredients" value="40"> 蕎麥麵
-   			<input id="I0005" type="checkbox" name="ingredients" value="55"> 墨魚麵
-     		<input id="I0006" type="checkbox" name="ingredients" value="25"> 蔬菜麵
-     		<br>
-     		湯頭&nbsp
-     		<input  type="checkbox" name="ingredients" value=""> 醬油湯
-		    <input  type="checkbox" name="ingredients" value=""> 泡菜湯
-    		<input  type="checkbox" name="ingredients" value=""> 牛肉湯
-    		<input  type="checkbox" name="ingredients" value=""> 麻辣湯
-   			<input  type="checkbox" name="ingredients" value=""> 番茄湯
-     		<input  type="checkbox" name="ingredients" value=""> 雞湯
-     		<input  type="checkbox" name="ingredients" value=""> 豚骨湯
-   			<input  type="checkbox" name="ingredients" value=""> 味增湯
-     		<input  type="checkbox" name="ingredients" value=""> 咖哩湯<br>
-     		主餐&nbsp
-     		<input  type="checkbox" name="ingredients" value=""> 叉燒肉
-		    <input  type="checkbox" name="ingredients" value=""> 炸豬排
-    		<input  type="checkbox" name="ingredients" value=""> 炸雞柳
-    		<input  type="checkbox" name="ingredients" value=""> 唐揚雞塊
-   			<input  type="checkbox" name="ingredients" value=""> 鮮蝦
-     		<input  type="checkbox" name="ingredients" value=""> 小龍蝦
-     		<input  type="checkbox" name="ingredients" value=""> 櫻花蝦
-   			<input  type="checkbox" name="ingredients" value=""> 鴨胸
-   			<input  type="checkbox" name="ingredients" value=""> 魷魚圈
-   			<input  type="checkbox" name="ingredients" value=""> 蛤蠣
-     		<input  type="checkbox" name="ingredients" value=""> 虱目魚<br>
-     		副餐&nbsp
-     		<input  type="checkbox" name="ingredients" value=""> 荷包蛋
-     		<input  type="checkbox" name="ingredients" value=""> 溫泉蛋
-     		<input  type="checkbox" name="ingredients" value=""> 滷蛋
-   			<input  type="checkbox" name="ingredients" value=""> 貢丸
-   			<input  type="checkbox" name="ingredients" value=""> 豆皮
-   			<input  type="checkbox" name="ingredients" value=""> 筍乾
-     		<input  type="checkbox" name="ingredients" value=""> 小魚乾<br>
-     		配料&nbsp
-     		<input  type="checkbox" name="ingredients" value=""> 韓式泡菜
-   			<input  type="checkbox" name="ingredients" value=""> 台式泡菜
-   			<input  type="checkbox" name="ingredients" value=""> 海帶
-   			<input  type="checkbox" name="ingredients" value=""> 海苔
-     		<input  type="checkbox" name="ingredients" value=""> 燙青菜<br>
-     		調味&nbsp
-     		<input  type="checkbox" name="ingredients" value=""> 蔥花
-   			<input  type="checkbox" name="ingredients" value=""> 柴魚
-   			<input  type="checkbox" name="ingredients" value=""> 胡椒
-   			<input  type="checkbox" name="ingredients" value=""> 辣椒
-     		<input  type="checkbox" name="ingredients" value=""> 玫瑰鹽<br>
+		<td>
+            	 麵條
+                <input id="I0001" type="checkbox" name="ingredients" value="I0001" price="20"> 細拉麵20
+                <input id="I0002" type="checkbox" name="ingredients" value="I0002" price="20"> 烏龍麵20
+                <input id="I0003" type="checkbox" name="ingredients" value="I0003" price="20"> 刀削麵20
+                <input id="I0004" type="checkbox" name="ingredients" value="I0004" price="20"> 蕎麥麵20
+                <input id="I0005" type="checkbox" name="ingredients" value="I0005" price="30"> 墨魚麵30
+                <input id="I0006" type="checkbox" name="ingredients" value="I0006" price="20"> 蔬菜麵20
+                <br>
+               	 湯頭
+                <input id="I0007" type="checkbox" name="ingredients" value="I0007"> 醬油湯20
+                <input id="I0008" type="checkbox" name="ingredients" value="I0008"> 泡菜湯30
+                <input id="I0009" type="checkbox" name="ingredients" value="I0009"> 牛肉湯30
+                <input id="I0010" type="checkbox" name="ingredients" value="I0010"> 麻辣湯30
+                <input id="I0011" type="checkbox" name="ingredients" value="I0011"> 番茄湯20
+                <input id="I0012" type="checkbox" name="ingredients" value="I0012"> 雞湯20
+                <input id="I0013" type="checkbox" name="ingredients" value="I0013"> 豚骨湯20
+                <input id="I0014" type="checkbox" name="ingredients" value="I0014"> 味增湯20
+                <input id="I0015" type="checkbox" name="ingredients" value="I0015"> 咖哩湯30
+                <input id="I0015-1" type="checkbox" name="ingredients" value="I0015-1"> 鹽味湯
+                <input id="I0015-2" type="checkbox" name="ingredients" value="I0015-2"> 海鮮湯
+                <br>
+				主餐
+                <input id="I0016" type="checkbox" name="ingredients" value="I0016"> 叉燒肉50
+                <input id="I0017" type="checkbox" name="ingredients" value="I0017"> 炸豬排70
+                <input id="I0018" type="checkbox" name="ingredients" value="I0018"> 炸雞柳50
+                <input id="I0019" type="checkbox" name="ingredients" value="I0019"> 唐揚雞塊60
+                <input id="I0020" type="checkbox" name="ingredients" value="I0020"> 鮮蝦80
+                <input id="I0021" type="checkbox" name="ingredients" value="I0021"> 龍蝦100
+                <input id="I0022" type="checkbox" name="ingredients" value="I0022"> 櫻花蝦50
+                <input id="I0023" type="checkbox" name="ingredients" value="I0023"> 鴨胸80
+                <input id="I0024" type="checkbox" name="ingredients" value="I0024"> 魷魚圈60
+                <input id="I0025" type="checkbox" name="ingredients" value="I0025"> 蛤蠣60
+                <input id="I0026" type="checkbox" name="ingredients" value="I0026"> 虱目魚70
+                <br>
+				副餐
+                <input id="I0027" type="checkbox" name="ingredients" value="I0027"> 荷包蛋20
+                <input id="I0028" type="checkbox" name="ingredients" value="I0028"> 溫泉蛋20
+                <input id="I0029" type="checkbox" name="ingredients" value="I0029"> 滷蛋20
+                <input id="I0030" type="checkbox" name="ingredients" value="I0030"> 貢丸20
+                <input id="I0031" type="checkbox" name="ingredients" value="I0031"> 豆皮20
+                <input id="I0032" type="checkbox" name="ingredients" value="I0032"> 筍乾20
+                <input id="I0033" type="checkbox" name="ingredients" value="I0033"> 小魚乾20
+                <br>
+				配料
+                <input id="I0034" type="checkbox" name="ingredients" value="I0034"> 韓式泡菜20
+                <input id="I0035" type="checkbox" name="ingredients" value="I0035"> 台式泡菜20
+                <input id="I0036" type="checkbox" name="ingredients" value="I0036"> 海帶20
+                <input id="I0037" type="checkbox" name="ingredients" value="I0037"> 海苔15
+                <input id="I0038" type="checkbox" name="ingredients" value="I0038"> 燙青菜30
+                <br>
+				調味
+                <input id="I0039" type="checkbox" name="ingredients" value="I0039"> 蔥花5
+                <input id="I0040" type="checkbox" name="ingredients" value="I0040"> 柴魚5
+                <input id="I0041" type="checkbox" name="ingredients" value="I0041"> 胡椒5
+                <input id="I0042" type="checkbox" name="ingredients" value="I0042"> 辣椒5
+                <input id="I0043" type="checkbox" name="ingredients" value="I0043"> 玫瑰鹽5
+                <br>
 		</td>
 	</tr>
 	<tr>
@@ -243,9 +256,9 @@
         	
         	check.on('change', function() {
         		if($(this).prop('checked')) {
-        			count = count + parseInt($(this).val());
+        			count = count + parseInt($(this).attr('price'));
         		} else {
-        			count = count - parseInt($(this).val());
+        			count = count - parseInt($(this).attr('price'));
         		}
         		$('.cb-count').text(count);
 

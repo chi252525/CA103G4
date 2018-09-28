@@ -319,16 +319,6 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
 					
-//					List<IngredientCombinationVO> list = new ArrayList();
-//					String id[] = req.getParameterValues("ingredients");
-//					if (id != null) {
-//						for (int i = 0; i < id.length; i++) {
-//							System.out.println(id[i]);
-//							IngredientCombinationVO ingt = new IngredientCombinationVO();
-//							ingt.setIngdt_Id(id[i]);
-//							list.add(ingt);
-//						}
-//					}
 
 					List<IngredientCombinationVO> list = new ArrayList();
 					String values[] = req.getParameterValues("ingredients");
@@ -341,12 +331,13 @@ public class CustommealsServlet extends HttpServlet{
 						}
 					}
 	
-					
+					System.out.println("開始新增資料*");
 					/***************************2.開始新增資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();
 					custommealsVO = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+					System.out.println("新增資料完成*");
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
 					successView.forward(req, res);
 					/***************************其他可能的錯誤處理**********************************/
@@ -357,7 +348,7 @@ public class CustommealsServlet extends HttpServlet{
 				}
 			}
 			
-			if("delete".equals(action)) {  // 來自listAllMenu.jsp
+			if("delete".equals(action)) {  // 來自listAllCustommeals.jsp
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				
