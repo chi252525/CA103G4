@@ -41,6 +41,7 @@ public class ShoppingServlet extends HttpServlet {
 				buylist.remove(d);
 				try {
 					req.getRequestDispatcher("Cart.jsp").forward(req, res);
+					return;
 				} catch (Exception e) {
 
 				}

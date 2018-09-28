@@ -34,8 +34,7 @@
 	<c:forEach var="menuVO" items="${menuSvc.all}">
 		<c:if test="${menuVO.menu_Status == 1}">
 			<form id="menuform" name="shoppingForm" class="shoppingForm"
-				action="ShoppingServlet.do"
-				method="POST">
+				action="ShoppingServlet.do" method="POST">
 
 				<table>
 					<tr>
@@ -77,19 +76,82 @@
 		style="font-size: 40px;"></i></a>
 
 	<script>
-		$(function() {
-			$(".submit").eq(0).click(function() {
-				swal({
-					title : "加入購物車",
-					html : "成功",
-					type : "success"
-				}).then(function(){$(".shoppingForm").eq(0).submit()});
-			});
-		});
+// 		$(function() {
+// 			for (i = 0; i < 3; i++) {
+// 				(function(arg) {
+// 					alert(arg);
+// 					$(".submit").eq(i).click(function() {
+// 						(function(arg) {
+// 							swal({
+// 								title : "加入購物車",
+// 								html : "成功",
+// 								type : "success"
+// 							}).then(function() {
+// 								$(".shoppingForm").eq(args).submit();
 
-		// 		$(".swal2-confirm").click(function(){
-		// 			$("#menuform").submit();
-		// 		});
+// 							})
+// 						})(i);
+// 					});
+// 				})(i);
+// 			}
+// 		});
+// 		var i;
+// 		function a() {
+// 			swal({
+// 				title : "加入購物車",
+// 				html : "成功",
+// 				type : "success"
+// 			}).then(b);
+// 		}
+
+// 		function b() {
+// 			$(".shoppingForm").eq(i).submit();
+// 		}
+
+			
+// 			for (i = 0; i < $(".submit").length ; i++) {
+// 				$(".submit").eq(i).click(a);
+					
+// 			}
+		
+
+		
+
+				$(function(){
+					$(".submit").eq(1).click(function(){
+						swal({
+							title : "加入購物車",
+							html : "成功",
+							type : "success"
+						}).then(function() {
+							$(".shoppingForm").eq(1).submit();
+					});
+					});
+				});
+
+				$(function(){
+					$(".submit").eq(2).click(function(){
+						swal({
+							title : "加入購物車",
+							html : "成功",
+							type : "success"
+						}).then(function() {
+							$(".shoppingForm").eq(2).submit();
+					});
+					});
+				});
+
+				$(function(){
+					$(".submit").eq(0).click(function(){
+						swal({
+							title : "加入購物車",
+							html : "成功",
+							type : "success"
+						}).then(function() {
+							$(".shoppingForm").eq(0).submit();
+					});
+					});
+				});
 	</script>
 </body>
 </html>

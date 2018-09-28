@@ -43,6 +43,11 @@ public class AndroidEmployeeServlet extends HttpServlet {
 			// 查不到該員工回傳空字串，轉成Json格式字串為{}
 			writeText(res, empVO == null ? "" : gson.toJson(empVO));
 		} 
+		else if (action.equals("getEmpNameByEmpNo")) {
+			String empNo = jsonObject.get("empNo").getAsString();
+			String empName = empDAO.findEmpNameByPrimaryKey(empNo);
+			writeText(res, gson.toJson(empName));
+		} 
 //		else if (action.equals("isUserIdExist")) {
 //			String userId = jsonObject.get("userId").getAsString();
 ////			writeText(res, String.valueOf(memberDao.isUserIdExist(userId)));

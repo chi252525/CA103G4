@@ -37,7 +37,56 @@ public class EmpDAO implements EmpDAO_interface{
 		"UPDATE EMPLOYEE set BRANCH_NO=? ,EMP_ACNUM=? ,EMP_PSW=? ,EMP_NAME=? ,EMP_GENDER=? ,EMP_POS=? ,EMP_TEL=? ,EMP_STATUS=? where EMP_NO = ?";
 	private static final String FIND_BY_ID_PASWD =
 		"SELECT * FROM EMPLOYEE WHERE EMP_ACNUM = ? AND EMP_PSW = ?";
+	private static final String FIND_EMPNAME_BY_EMPNO =
+			"SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = ?";
 	
+	
+	
+	@Override
+	public String findEmpNameByPrimaryKey(String emp_no) {
+		String empName = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_EMPNAME_BY_EMPNO);
+			
+			pstmt.setString(1, emp_no);
+			rs = pstmt.executeQuery();
+		    rs.next();
+		    empName = rs.getString("emp_name");
+			
+	
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empName;
+	}
 	@Override
 	public EmpVO isEmployee(String emp_Acnum, String emp_Psw) {
 		
