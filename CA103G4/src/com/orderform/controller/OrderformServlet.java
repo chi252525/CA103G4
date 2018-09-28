@@ -27,6 +27,8 @@ public class OrderformServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -38,38 +40,26 @@ public class OrderformServlet extends HttpServlet {
 			String memno = req.getParameter("mem_no");
 			String brano = req.getParameter("branch_no");
 			Integer ordertyp = new Integer(req.getParameter("order_type").trim());
-			Integer orderpri = new Integer(req.getParameter("order_price").trim());			
-			Integer ordersts = new Integer(req.getParameter("order_status").trim());
+			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
 			String addres = req.getParameter("deliv_addres");
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
 			//明細參數
-			List<OrderinvoiceVO> list = (List)req.getAttribute("invoice");//等前端 更改
-			//還沒做，在此處取得需要的參數!!!!!!!!!!!!!
-			//範例
-			//想法>>用迴圈跑出送進來的參數並加入list
-//			EmpVO empXX = new EmpVO();   // 員工POJO1
-//			empXX.setEname("吳x");
-//			empXX.setJob("MANAGER");
-//			empXX.setHiredate(java.sql.Date.valueOf("2001-01-15"));
-//			empXX.setSal(new Double(15000));
-//			empXX.setComm(new Double(150));
-//			list.add(empXX);
+			List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();//等前端 更改 
+			list = (List<OrderinvoiceVO>)req.getAttribute("invoice");
 			
 			OrderformVO orderformVO = new OrderformVO();
 			orderformVO.setDek_no(dekno);
 			orderformVO.setMem_no(memno);
 			orderformVO.setBranch_no(brano);
-			orderformVO.setDeliv_no(null);
 			orderformVO.setOrder_type(ordertyp);
 			orderformVO.setOrder_price(orderpri);
-			orderformVO.setOrder_status(ordersts);
 			orderformVO.setDeliv_addres(addres);
 			orderformVO.setOrder_pstatus(orderpa);
 			//開始新增
 			OrderformService ordSvc = new OrderformService();
 			ordSvc.addOrd(orderformVO, list);
 			//準備轉交
-			//尚未寫
+			
 			
 		}
 		
