@@ -7,8 +7,9 @@
 
 <%	
 	PostService postSvc = new PostService();
-	List<PostVO> list = (List<PostVO>) request.getAttribute("postlist");
-	pageContext.setAttribute("list",list);
+	List<PostVO> list = (List<PostVO>) session.getAttribute("list");
+	System.out.println("quert的="+list);
+	session.setAttribute("list",list);
 	
 %>
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />

@@ -332,8 +332,11 @@ public class PostServlet extends HttpServlet{
 					return;
 				}
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("postlist", postlist);
-				System.out.println("req.setAttributelist="+postlist);
+				HttpSession session = req.getSession();
+				session.setAttribute("list", postlist);
+				session.setAttribute("year", year);
+				session.setAttribute("month", month);
+				System.out.println("req.setAttributelist=" + postlist);
 				
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp"); 
 				successView.forward(req, res);
