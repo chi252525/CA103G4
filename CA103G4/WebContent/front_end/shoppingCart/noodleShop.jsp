@@ -24,7 +24,11 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
 </head>
 <body>
-
+	<jsp:include page="/front_end/header.jsp" flush="true" />
+	<!--background image-->
+	<img
+		src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
+		width="100%" height="" alt="">
 
 
 
@@ -76,82 +80,81 @@
 		style="font-size: 40px;"></i></a>
 
 	<script>
-// 		$(function() {
-// 			for (i = 0; i < 3; i++) {
-// 				(function(arg) {
-// 					alert(arg);
-// 					$(".submit").eq(i).click(function() {
-// 						(function(arg) {
-// 							swal({
-// 								title : "加入購物車",
-// 								html : "成功",
-// 								type : "success"
-// 							}).then(function() {
-// 								$(".shoppingForm").eq(args).submit();
+		// 		$(function() {
+		// 			for (i = 0; i < 3; i++) {
+		// 				(function(arg) {
+		// 					alert(arg);
+		// 					$(".submit").eq(i).click(function() {
+		// 						(function(arg) {
+		// 							swal({
+		// 								title : "加入購物車",
+		// 								html : "成功",
+		// 								type : "success"
+		// 							}).then(function() {
+		// 								$(".shoppingForm").eq(args).submit();
 
-// 							})
-// 						})(i);
-// 					});
-// 				})(i);
-// 			}
-// 		});
-// 		var i;
-// 		function a() {
-// 			swal({
-// 				title : "加入購物車",
-// 				html : "成功",
-// 				type : "success"
-// 			}).then(b);
-// 		}
+		// 							})
+		// 						})(i);
+		// 					});
+		// 				})(i);
+		// 			}
+		// 		});
+		// 		var i;
+		// 		function a() {
+		// 			swal({
+		// 				title : "加入購物車",
+		// 				html : "成功",
+		// 				type : "success"
+		// 			}).then(b);
+		// 		}
 
-// 		function b() {
-// 			$(".shoppingForm").eq(i).submit();
-// 		}
+		// 		function b() {
+		// 			$(".shoppingForm").eq(i).submit();
+		// 		}
 
-			
-// 			for (i = 0; i < $(".submit").length ; i++) {
-// 				$(".submit").eq(i).click(a);
-					
-// 			}
-		
+		// 			for (i = 0; i < $(".submit").length ; i++) {
+		// 				$(".submit").eq(i).click(a);
+
+		// 			}
 
 		// sweet alerrt for adding product
- 
-				$(function(){
-					$(".submit").eq(1).click(function(){
-						swal({
-							title : "加入購物車",
-							html : "成功",
-							type : "success"
-						}).then(function() {
-							$(".shoppingForm").eq(1).submit();
-					});
-					});
-				});
 
-				$(function(){
-					$(".submit").eq(2).click(function(){
-						swal({
-							title : "加入購物車",
-							html : "成功",
-							type : "success"
-						}).then(function() {
-							$(".shoppingForm").eq(2).submit();
-					});
-					});
+		$(function() {
+			$(".submit").eq(1).click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					$(".shoppingForm").eq(1).submit();
 				});
+			});
+		});
 
-				$(function(){
-					$(".submit").eq(0).click(function(){
-						swal({
-							title : "加入購物車",
-							html : "成功",
-							type : "success"
-						}).then(function() {
-							$(".shoppingForm").eq(0).submit();
-					});
-					});
+		$(function() {
+			$(".submit").eq(2).click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					$(".shoppingForm").eq(2).submit();
 				});
+			});
+		});
+
+		$(function() {
+			$(".submit").eq(0).click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					$(".shoppingForm").eq(0).submit();
+				});
+			});
+		});
 	</script>
+	<jsp:include page="/front_end/footer.jsp" flush="true" />
 </body>
 </html>
