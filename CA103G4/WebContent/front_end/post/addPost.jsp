@@ -6,7 +6,8 @@
 <%@ page import="com.member.model.*"%>
 
 <%
-	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	PostVO postVO = (PostVO) session.getAttribute("postVO");
+	System.out.println("addPost的postVO"+postVO);
 	MemberVO memVO = (MemberVO) request.getAttribute("memVO");
 	if (memVO == null) {
 		memVO = (MemberVO) session.getAttribute("memVO");

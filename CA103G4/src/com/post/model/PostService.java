@@ -69,6 +69,17 @@ public class PostService {
 	public void updatePostViews(String post_No) {
 		dao.updateViews(post_No);
 	}
+	
+	public List<PostVO> getAllByHot() {
+		return dao.getAllByHot();
+	}
+
+	public List<PostVO> getAllByNewFour() {
+		return dao.getAllByNewFour();
+	}
+	public List<PostVO> getAllByKeywordOrderByViews(String keyword) {
+		return dao.getAllByKeywordOrderByViews(keyword);
+	}
 
 	
 }

@@ -193,8 +193,8 @@ body {
 								<input type="hidden" id="post_No" name="post_No"
 									value="${postVO.post_No}" /> 
 									<input type="hidden" id="mem_No"
-									name="mem_No" value="${memVO.mem_Name}" /> <input type="hidden"
-									name="action" value="insert">
+									name="mem_No" value="M000001" /> 
+									<input type="hidden"	name="action" value="insert">
 								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>
 						</div>

@@ -147,6 +147,7 @@ body {
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
 							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
@@ -155,15 +156,9 @@ body {
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
 								<input type="hidden" name="action" value="getOne_For_Display">
 								<button type="submit" value="viewdetail"
-									class="btn btn-danger btn-sm">看更多 &raquo;</button>
+									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>
 							</FORM>
-							<FORM>
-								<input type="hidden" name="post_No" value="${postVO.post_No}">
-								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<input type="hidden" name="action" value="listReplybyPostNo">
-								<button type="submit" value="viewreply"
-									class="btn btn-secondary btn-sm">查看留言 &raquo;</button>
-							</FORM>
+						
 
 						</div>
 					</div>

@@ -13,6 +13,9 @@ public interface PostDAO_interface {
 	List<PostVO> findbyYearandMonth(String year,String month);
 	Set<ReplyVO> getOnePost_AllRplys(String post_No);
 	List<PostVO> getAll();
+	List<PostVO> getAllByHot();
+	List<PostVO> getAllByNewFour();
+	List<PostVO> getAllByKeywordOrderByViews(String keyword);
 	public int updateViews(String post_No);
 }
 

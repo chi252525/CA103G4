@@ -23,8 +23,7 @@ public class PostServlet extends HttpServlet{
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");// 判斷做什麼動作
-		String orderby = req.getParameter("orderby"); // 判斷排列方式
-		
+		String keyword = req.getParameter("keyword"); // 使用者輸入的值
 		//顯示單一貼文
 		 if ("getOne_For_Display".equals(action)) { 
 	        	List<String> errorMsgs = new LinkedList<String>();
@@ -412,6 +411,36 @@ public class PostServlet extends HttpServlet{
 			}
 				
 			}
+        
+        if("keyword".equals(action)) {
+        	List<String> errorMsgs = new LinkedList<String>(); 
+			req.setAttribute("errorMsgs", errorMsgs);
+        	try {
+        	/*************************** 2.開始查詢資料 *****************************************/
+        	PostService postSvc= new PostService();
+        	List<PostVO> list = postSvc.getAllByKeywordOrderByViews(keyword.trim());
+        	if (list.isEmpty()) { // 如果list是空的代表沒有資料
+				errorMsgs.add("查無資料");
+			}
+        	
+        	if (!errorMsgs.isEmpty()) { // 如果錯誤List不是空的就return
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+        	 
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("list", list); // 將list存到req中
+			String url = "/front_end/post/listAllPost.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+        	}catch (Exception e) {
+    			errorMsgs.add("無法取得資料" + e.getMessage());
+    			RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+    			failureView.forward(req, res);
+    			}
+        
+        	}
         	
         }
         
