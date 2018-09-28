@@ -10,6 +10,7 @@
 <% 
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
+	
 	pageContext.setAttribute("list", list);
 %>
 
@@ -161,15 +162,26 @@ body {
 				
 				<!-- 分享按鈕 -->
 				<div class="col-md-6">
-					<a class="btn btn-info btn-sm px-3 btn-block mt-5"
+					<a class="btn btn-info btn-sm px-3 btn-block mt-2"
 						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
 				</div>
 				<!-- /*分享按鈕 -->
 				<div class="col-md-6">
-					<a class="btn btn-info btn-sm px-3 btn-block mt-5"
+					<a class="btn btn-info btn-sm px-3 btn-block mt-2"
 						href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
 				</div>
+
+				<div class="btn-group float-right my-3">
+					<button class="btn btn-secondary btn-sm dropdown-toggle"
+						type="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">排序</button>
+					<div class="dropdown-menu"><a
+							href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews"
+							>依點閱人氣</a> </div>
+				</div>
+
 			</div>
+			
 			<div class="row">
 				<div class="col-md-12 mt-3">
 					<!-- 共幾篇貼文 -->
@@ -194,13 +206,16 @@ body {
 						</div>
 						
 						<div class="card px-2">
-							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
-							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
+							<h5 class="card-title text-dark my-2 px-2"></h5>
+							推薦度<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+							
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
+							<p style="text-align: right;">
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}</p>
+							<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
@@ -213,7 +228,7 @@ body {
 								<input type="hidden" name="action" value="listReplybyPostNo"/>
 								<input type="hidden" name="action" value="addviews">
 								<button type="submit" 
-									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>
+									class="btn btn-info btn-sm btn-block mb-2">看更多 &raquo;</button>
 							</FORM>
 
 						</div>

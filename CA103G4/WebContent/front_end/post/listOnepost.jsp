@@ -14,18 +14,19 @@
 	if (memVO == null) {
 		memVO = (MemberVO) session.getAttribute("memVO");
 	}
-	
-	IngredientsService ingtSvc=(IngredientsService)new  IngredientsService();
+
+	IngredientsService ingtSvc = (IngredientsService) new IngredientsService();
 	List<IngredientsVO> tags = ingtSvc.findIngtByCustomNo(postVO.getCustom_No());
 	pageContext.setAttribute("tags", tags);
-	
-
 %>
 
 
-<jsp:useBean id="postSvc" scope="page"	class="com.post.model.PostService" />
-<jsp:useBean id="memSvc" scope="page" 	class="com.member.model.MemberService" />
-<jsp:useBean id="cusmealSvc" scope="page"	class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="postSvc" scope="page"
+	class="com.post.model.PostService" />
+<jsp:useBean id="memSvc" scope="page"
+	class="com.member.model.MemberService" />
+<jsp:useBean id="cusmealSvc" scope="page"
+	class="com.custommeals.model.CustommealsService" />
 
 
 
@@ -114,8 +115,9 @@ body {
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
 	<!--your html start==================================================================================-->
-	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
-			width="100%" height="" alt="">
+	<img
+		src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
+		width="100%" height="" alt="">
 	<div class="container container-margin">
 		<div class="row">
 
@@ -140,20 +142,10 @@ body {
 					<hr>
 					<p>餐點推薦度</p>
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-						<c:forEach var="ingredientsVO" items="${tags}" >
+					<c:forEach var="ingredientsVO" items="${tags}">
 						<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
-						</c:forEach>
+					</c:forEach>
 					<p>${postVO.post_Cont}</p>
-					<div class="btn-group">
-						<a
-							href="<%=request.getContextPath()%>/post/postServlet.do?action=addviews&post_No=${postVO.post_No}"
-							class="btn btn-primary lnr lnr-thumbs-up">點擊</a> <a
-							href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
-							class="btn lnr lnr-pencil btn-light">修改</a> <a
-							href="<%=request.getContextPath()%>/post/postServlet.do?action=delete&post_No=${postVO.post_No}"
-							class="btn lnr lnr-cross btn-secondary">刪除</a>
-					</div>
-
 					<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 				</div>
 				<!-- /*單一餐點貼文 -->
@@ -177,7 +169,6 @@ body {
 					data-href="<%=request.getContextPath()%>/post/listOnepost.jsp"
 					data-layout="button_count"></div>
 
-
 				<!-- 新增留言區塊 -->
 				<form method="post"
 					action="<%=request.getContextPath()%>/reply/replyServlet.do"
@@ -191,19 +182,19 @@ body {
 										required></textarea>
 								</div>
 								<input type="hidden" id="post_No" name="post_No"
-									value="${postVO.post_No}" /> 
-									<input type="hidden" id="mem_No"
-									name="mem_No" value="M000001" /> 
-									<input type="hidden"	name="action" value="insert">
-								<button type="submit" class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
+									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
+									name="mem_No" value="M000001" /> <input type="hidden"
+									name="action" value="insert">
+								<button type="submit"
+									class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
 							</form>
 						</div>
 					</div>
 				</form>
 				<!-- /*新增留言區塊 -->
-<script type="text/javascript">
-
-</script>
+				<script type="text/javascript">
+					
+				</script>
 
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
@@ -229,29 +220,25 @@ body {
 					<span class="right floated">${rplyList.size()}個留言</span>
 				</div>
 
-	
+
 				<!-- Comment  comments -->
 				<c:forEach var="replyVO" items="${rplyList}">
 					<div class="media mb-4 test">
 						<img class="d-flex mr-3 rounded-circle"
-							src="<%=request.getContextPath()%>/front_end/readPic?action=member&id=${replyVO.mem_No}"
-							style="width: 50px; height: 50px;">
+							src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${replyVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;">
 						<div class="my-0 ">
 							<h5 class="my-0 ">${memSvc.getOne_Member(replyVO.mem_No).mem_Name}</h5>
 							<p id="rply_Cont">${replyVO.rply_Cont}</p>
 							<div class="mt-0 mb-2 mr-2">
-
 								<fmt:formatDate value="${replyVO.rply_Time}"
 									pattern="yyyy年MM月dd日 HH:mm:ss" />
-								<a href="#" class="btn btn-sm btn-outline-danger mx-3 mt-0">檢舉</a>
-
+								<button type="button"
+									class="btn btn-sm btn-outline-danger mx-3 mt-0"
+									data-toggle="modal" data-target="#reportModal">檢舉</button>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-
-
-
 
 
 			</div>
@@ -259,7 +246,51 @@ body {
 	</div>
 
 
-	<jsp:include page="/front_end/footer.jsp" flush="true" />
+<!-- 輸入檢舉原因的Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">請告訴我們原因</h5>
+			</div>
+			<form>
+			<div class="modal-body">
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio1" name="rply_Rsm"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio1">留言內容不實</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio2" name="rply_Rsm"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio2">廣告內容</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio3" name="rply_Rsm"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio3">惡意留言</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio4" name="rply_Rsm"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio4">就是想檢舉</label>
+				</div>
+				</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-dismiss="modal">不檢舉了</button>
+				<input type="hidden" name="mem_No" value="M000001"/>
+				<input type="hidden" name="rply_No" value="${replyVO.rply_No}"/>
+				<button type="button" class="btn btn-primary" name="action" >送出</button>
+			</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
 
 </body>
 

@@ -42,12 +42,15 @@ public class PostDAO implements PostDAO_interface{
 	// 刪除貼文
 	private static final String DELETE_STMT = "DELETE FROM POST WHERE POST_NO = ?";
 	
+	//刪除貼文的所有留言
+	private static final String DELETE_MSG_FROMONE_STMT = "DELETE FROM RPLY_MSG WHERE POST_NO = ?";
+	
 	// 一個會員的貼文
 	private static final String FINDBYMEMNO="SELECT * FROM POST WHERE MEM_NO=?";
 	
 	private static final String FINDBYCUSTOMNO="SELECT * FROM POST WHERE CUSTOM_NO=?";
 	// 所有貼文
-	private static final String GETALL = "SELECT * FROM POST order by POST_NO DESC";
+	private static final String GETALL = "SELECT * FROM POST order by POST_TIME DESC";
 	// 取得單一貼文
 	private static final String GET_ONE_POST = "SELECT * FROM POST WHERE POST_NO=?";
 	// 依據年月查貼文
@@ -68,7 +71,7 @@ public class PostDAO implements PostDAO_interface{
 	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE ROWNUM <=4";
 	// 根據內容搜尋，根據發文時間由新到舊排列	
 	private static final String GET_ALL_BY_KEYWORD_ORDER_BY_VIEWS =
-	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, '?') ORDER BY POST_TIME DESC";
+	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, ?) ORDER BY POST_TIME DESC";
 	
 	
 	@Override
@@ -150,26 +153,48 @@ public class PostDAO implements PostDAO_interface{
 				}
 			}
 		}
-
-		
 	}
 
 	@Override
 	public void delete(String post_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int updateCount_MSGS = 0;
 		try {
-
+			System.out.println("進到post delete");
 			
 			con = ds.getConnection();
+			// 1●設定於 pstm.executeUpdate()之前
+			con.setAutoCommit(false);
+			
+			// 先刪除員工
+			pstmt = con.prepareStatement(DELETE_MSG_FROMONE_STMT);
+			pstmt.setString(1,post_No);
+			updateCount_MSGS = pstmt.executeUpdate();
+			// 再刪除貼文
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, post_No);
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		}  catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
+			
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("刪除貼文編號" + post_No + "時,共有留言" + updateCount_MSGS
+					+ "則同時被刪除");
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -185,7 +210,7 @@ public class PostDAO implements PostDAO_interface{
 					e.printStackTrace(System.err);
 				}
 			}
-		}		
+		}
 	}
 
 	@Override
@@ -571,6 +596,7 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_Eva(rs.getInt("post_Eva"));
 				postVO.setPost_Photo(rs.getBytes("post_Photo"));
 				postVO.setPost_Time(rs.getTimestamp("post_Time"));
+				postVO.setPost_Views(rs.getInt("post_Views"));
 				postlist.add(postVO); 
 			}
 		}  catch (SQLException se) {

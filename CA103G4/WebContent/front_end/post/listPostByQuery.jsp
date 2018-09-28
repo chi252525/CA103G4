@@ -11,7 +11,6 @@
 	pageContext.setAttribute("list",list);
 	
 %>
-
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <jsp:useBean id="cusmealSvc" scope="page"
 	class="com.custommeals.model.CustommealsService" />
@@ -140,25 +139,31 @@ body {
 								</h2>
 							</div>
 						</div>
-						<div class="card px-2">
-							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
-							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+							<div class="card px-2">
+							<h5 class="card-title text-dark my-2 px-2"></h5>
+							推薦度<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+							
 							<p class="card-text text-dark px-2 font-italic ">
 								<fmt:formatDate value="${postVO.post_Time}"
 									pattern="MM月dd日 HH:mm" />
 							</p>
-							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
+							<p style="text-align: right;">
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}</p>
+							<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
-								<input type="hidden" name="post_No" value="${postVO.post_No}">
+								<input type="hidden" name="post_No" value="${postVO.post_No}"/>
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<input type="hidden" name="action" value="getOne_For_Display">
-								<button type="submit" value="viewdetail"
-									class="btn btn-danger btn-sm btn-block">看更多 &raquo;</button>
+								<!-- 查單一貼文 -->
+								<input type="hidden" name="action" value="getOne_For_Display"/>
+								<!-- 同時查單一貼文的所有留言 -->
+								<input type="hidden" name="action" value="listReplybyPostNo"/>
+								<input type="hidden" name="action" value="addviews">
+								<button type="submit" 
+									class="btn btn-danger btn-sm btn-block mb-2">看更多 &raquo;</button>
 							</FORM>
-						
 
 						</div>
 					</div>

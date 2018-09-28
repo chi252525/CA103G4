@@ -141,47 +141,15 @@ padding-bottom:20px;
 					
 					
 						<%-- 錯誤表列 --%>
-						
+							<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
 							<ul>
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
 								</c:forEach>
 							</ul>
-
-					<%-- 錯誤表列 --%>
-						<c:if test="${not empty errorMsgs}">
-							<div class="modal fade" id="errorMsgs" tabindex="-1"
-								role="dialog" aria-labelledby="exampleModalCenterTitle"
-								aria-hidden="true" data-target="#exampleModalCenter">
-								<div class="modal-dialog modal-dialog-centered" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLongTitle">請修正以下錯誤:</h5>
-										</div>
-										<div class="modal-body">
-											<ul>
-												<c:forEach var="message" items="${errorMsgs}">
-													<li style="color: red">${message}</li>
-												</c:forEach>
-											</ul>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-
-										</div>
-									</div>
-								</div>
-							</div>
 						</c:if>
-
-
-
-
-
-
+				
 						<form method="post"
 							action="<%=request.getContextPath()%>/post/postServlet.do"
 							name="updateform" enctype="multipart/form-data">
@@ -193,10 +161,6 @@ padding-bottom:20px;
 								<input type="text" id="custom_Name"
 									name="custom_Name" value="${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}" class="form-control"
 									required />
-									<input type="text" id="member_Buyed"
-									name="member_Buyed" value="${cusmealSvc1.getOneCustommeals(postVO.custom_No).mem_No}" class="form-control"
-									required />
-								
 								<input type="hidden" id="custom_No"
 									name="custom_No" value="<%=postVO.getCustom_No()%>" class="form-control"
 									required />
@@ -215,31 +179,26 @@ padding-bottom:20px;
 								<p>餐點推薦度</p>
 								<fieldset class="starability-slot">
 									<input type="radio" id="no-rate" class="input-no-rate"	name="post_Eva" value="0" checked aria-label="No rating." />
-									<input type="radio" id="rate1" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
+									<input type="radio" id="rate1" name="post_Eva" value="1" /> 
 									<label	for="rate1">1 star.</label>
-									<input type="radio" id="rate2"	name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
+									<input type="radio" id="rate2"	name="post_Eva" value="2" /> 
 									<label for="rate2">2stars.</label> 
-									<input type="radio" id="rate3" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
+									<input type="radio" id="rate3" name="post_Eva" value="3" /> 
 									<label for="rate3">3 stars.</label> 
-									<input	type="radio" id="rate4" name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
+									<input	type="radio" id="rate4" name="post_Eva" value="4" /> 
 									<label	for="rate4">4 stars.</label> 
-									<input type="radio" id="rate5"	name="post_Eva" value="<%=postVO.getPost_Cont()%>" /> 
+									<input type="radio" id="rate5"	name="post_Eva" value="5" /> 
 									<label for="rate5">5 stars.</label> <span class="starability-focus-ring"></span>
 								</fieldset>
 							</div>
 							
 							
-							<div class="form-group">
-								<label>評分 1-5(轉星星)</label> <input type="text" id="post_Eva"
-								value="<%=postVO.getPost_Eva()%>" name="post_Eva" class="form-control" required />
-							</div>
 							
 							<!-- 編輯器區塊 -->
 							<textarea name="post_Cont">
 					             <%= (postVO==null)? "" : postVO.getPost_Cont()%>
 					            </textarea>
 							<!-- //編輯器區塊 -->
-						
 							<input type="hidden" id="post_No" name="post_No" value="${postVO.post_No}" />
 							<input type="hidden" id="mem_No" name="mem_No" value="${postVO.mem_No}" />
 							<input type="hidden" name="action" value="update">
