@@ -18,6 +18,7 @@ import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
+import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
 
 /**
@@ -277,6 +278,60 @@ public class DeliveryServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
+		
+		if ("selectOrd".equals(action)) {
+
+			
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				
+				/*************************** 2.開始查詢資料 ****************************************/
+				OrderformService ordSvc = new OrderformService();
+				List<OrderformVO> list = ordSvc.getDeliv();
+				
+				
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("selDel", list); // 資料庫取出的set物件,存入request
+				
+				String url = "choseord.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 

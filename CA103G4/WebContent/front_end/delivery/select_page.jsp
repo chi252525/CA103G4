@@ -71,7 +71,7 @@ h4 {
 	<%-- s以下是新增外送派送單 --%>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
 	<input type="submit" value="+新增外送派送單"> 
-	<input type="hidden" name="action" value="insert">
+	<input type="hidden" name="action" value="selectOrd">
 	</FORM>
 	<br>
 	
