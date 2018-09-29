@@ -32,12 +32,12 @@ public class ReplyDAO implements ReplyDAO_interface  {
 	//刪除單一留言
 		private static final String DELETE_STMT = "DELETE FROM RPLY_MSG WHERE RPLY_NO = ?";
 	//取一個貼文的所有留言
-	private static final String GET_ALL_BY_POSTNO = "SELECT * FROM RPLY_MSG WHERE POST_NO=? order by RPLY_NO desc";
+	private static final String GET_ALL_BY_POSTNO = "SELECT * FROM RPLY_MSG WHERE POST_NO=? order by RPLY_TIME desc";
 	// 修改此會員在單一貼文的留言狀態-隱藏或顯示 
 	private static final String UPDATE_STATUS_STMT = "UPDATE RPLY_MSG SET RPLY_STATUS = ? WHERE MEM_NO = ? AND POST_NO = ?";
 	
-	//取全部
-		private static final String GETALL = "SELECT * FROM RPLY_MSG";
+	//取全部可顯示的留言
+		private static final String GETALL = "SELECT * FROM RPLY_MSG WHERE RPLY_STATUS =? ORDER BY RPLY_TIME DESC";
 	
 	// 修改留言狀態-隱藏或顯示 FORBACKEND
 	private static final String UPDATE_STATUS_FOR_BACKEND_STMT = "UPDATE RPLY_MSG SET RPLY_STATUS = ? WHERE RPLY_NO = ? ";
@@ -275,7 +275,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 	}
 
 	@Override
-	public List<ReplyVO> getAll() {
+	public List<ReplyVO> getAll(String rply_Status) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -285,6 +285,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
+			pstmt.setString(1, "rply_Status");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

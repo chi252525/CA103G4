@@ -1,25 +1,38 @@
 package com.report_msg.model;
-
-import java.sql.Timestamp;
-
-public class ReportVO implements java.io.Serializable{
-
+ import java.sql.Timestamp;
+ public class ReportVO implements java.io.Serializable{
+ 	/**
+	 * 
+	 */
+	private String rpt_No;
 	private String mem_No;
-	private String rply_No;
+	private String post_No;
 	private String rpt_Rsm;
 	private String rpt_Status;
 	private Timestamp rpt_Time;
+	
+	
+	public ReportVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+ 	public String getRpt_No() {
+		return rpt_No;
+	}
+	public void setRpt_No(String rpt_No) {
+		this.rpt_No = rpt_No;
+	}
 	public String getMem_No() {
 		return mem_No;
 	}
 	public void setMem_No(String mem_No) {
 		this.mem_No = mem_No;
 	}
-	public String getRply_No() {
-		return rply_No;
+	public String getPost_No() {
+		return post_No;
 	}
-	public void setRply_No(String rply_No) {
-		this.rply_No = rply_No;
+	public void setPost_No(String post_No) {
+		this.post_No = post_No;
 	}
 	public String getRpt_Rsm() {
 		return rpt_Rsm;

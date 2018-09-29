@@ -11,20 +11,19 @@ private ReportDAO_interface dao;
 		dao=new ReportDAO();
 	}
 	
-	public ReportVO addReport(String mem_No, String rply_No ,String rpt_Rsm) {
+	public ReportVO addReport(String post_No,String mem_No ,String rpt_Rsm) {
 		ReportVO reportVO = new ReportVO();
 		reportVO.setMem_No(mem_No);
-		reportVO.setRply_No(rply_No);
+		reportVO.setPost_No(post_No);
 		reportVO.setRpt_Rsm(rpt_Rsm);
 		dao.insert(reportVO);
 		return reportVO;
 	}
 
-	public ReportVO updateStatus (String rpt_Status,String mem_No,String rply_No) {
+	public ReportVO updateStatus (String rpt_Status,String rpt_No) {
 		ReportVO reportVO=new ReportVO();
 		reportVO.setRpt_Status(rpt_Status);
-		reportVO.setMem_No(mem_No);
-		reportVO.setRply_No(rply_No);
+		reportVO.setRpt_No(rpt_No);
 		dao.updateStatus(reportVO);
 		return reportVO;
 	}
@@ -33,8 +32,8 @@ private ReportDAO_interface dao;
 		return dao.findbyStatus(rpt_Status);
 	}
 	
-	public ReportVO getOne_Reply(String mem_No,String rply_No) {
-		return dao.getOne(mem_No,rply_No);
+	public ReportVO getOneReport(String rpt_No) {
+		return dao.getOneReport(rpt_No);
 	}
 	public List<ReportVO> getAll(){
 		return dao.getAll();

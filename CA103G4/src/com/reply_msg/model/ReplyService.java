@@ -30,8 +30,8 @@ public class ReplyService {
 		replyVO.setRply_Status(rply_Status);
 		return replyVO;
 	}
-	public List<ReplyVO> getAll(){
-		return dao.getAll();
+	public List<ReplyVO> getAll(String rply_Status){
+		return dao.getAll(rply_Status);
 	}
 	
 	public List<ReplyVO> getByPostNo(String post_No){

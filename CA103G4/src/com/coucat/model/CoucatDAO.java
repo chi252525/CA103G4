@@ -15,25 +15,17 @@ public class CoucatDAO implements CoucatDAO_interface {
 	private static final String USER = "raman";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	
+	private static final String GET_COUCAT_PIC="SELECT COUCAT_PIC FROM COUCAT WHERE COUCAT_NO=?";
+	
 	private static final String INSERT_VALUE_STMT = 
-			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
-			"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
-			"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-			"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
-//	private static final String INSERT_DIS_STMT  = 
-//			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
-//					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
-//					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-//					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
-//	private static final String INSERT_FREEP_STMT  = 
-//			"INSERT INTO   COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_CONT, "+ 
-//					"COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC)" + 
-//					"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-//					"?,?,?,?,NULL,NULL,TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),TO_TIMESTAMP(?,'YYYY-MM-DD hh24:mi'),?,?)";
+			"INSERT INTO  COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
+			"?,?,?,NULL,NULL,?,?,?,?,'CS1')";
+
 	private static final String UPDATE_STMT = 
-			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_CONT=?,COUCAT_VALUE=?," + 
-			"COUCAT_VALID=TO_TIMESTAMP(?,'YYYY-MM-DD HH24:MI')," + 
-			"COUCAT_INVALID=TO_TIMESTAMP(?,'YYYY-MM-DD HH24:MI'),COUCAT_AMO=?" + 
+			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_VALUE=?," + 
+			"COUCAT_VALID=?," + 
+			"COUCAT_INVALID=?,COUCAT_AMO=?" + 
 			"WHERE COUCAT_NO=?";
 	private static final String GETALL = 
 			"SELECT * FROM COUCAT";

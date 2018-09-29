@@ -28,14 +28,15 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 
 	// 新增一個貼文被檢舉
 	private static final String INSERT_STMT =
-			"INSERT INTO REPORT_MSG (MEM_NO,RPLY_NO,RPT_RSM,RPT_TIME,RPT_STATUS) VALUES(?,?,?,SYSDATE,'RS0')";
-	
+			"INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,RPT_RSM,RPT_STATUS,RPT_TIME)VALUES "
+			+ "(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),"
+			+ "?,?,?,'RS0',sysdate)";	
 	// 修改貼文留言檢舉狀態
-	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS=?, WHERE MEM_NO=? AND RPLY_NO=?";
+	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS=?, WHERE RPT_NO=?";
 	// 傳回全部根據檢舉處理狀況排序，未處理的排上面
 		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS";
 	//傳回單筆
-	private static final String GET_ONE_REPORT = "SELECT * FROM REPORT_MSG WHERE MEM_NO=? AND RPLY_NO=?";
+	private static final String GET_ONE_REPORT = "SELECT * FROM REPORT_MSG WHERE AND RPT_NO=?";
 	//傳回處理狀況的List
 		private static final String GETALL_BYSTATUS_STMT="SELECT * FROM REPORT_MSG WHERE RPT_STATUS=?";
 		
@@ -49,7 +50,7 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, report_MsgVO.getMem_No());
-			pstmt.setString(2, report_MsgVO.getRply_No());
+			pstmt.setString(2, report_MsgVO.getPost_No());
 			pstmt.setString(3, report_MsgVO.getRpt_Rsm());
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -74,7 +75,7 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 	}
 	
 	@Override
-	public void updateStatus(ReportVO report_MsgVO) {
+	public void updateStatus(ReportVO reportVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -83,9 +84,8 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATESTATUS_STMT);
 	
-			pstmt.setString(1, report_MsgVO.getRpt_Status());
-			pstmt.setString(2, report_MsgVO.getMem_No());
-			pstmt.setString(3, report_MsgVO.getRply_No());
+			pstmt.setString(1, reportVO.getRpt_Status());
+			pstmt.setString(2, reportVO.getRpt_No());
 			int rowCount =pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
 		} catch (SQLException se) {
@@ -123,13 +123,14 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 			pstmt.setString(1, rpt_Status);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				ReportVO report_MsgVO=new ReportVO();
-				report_MsgVO.setMem_No(rs.getString("mem_No"));
-				report_MsgVO.setRply_No(rs.getString("rply_No"));
-				report_MsgVO.setRpt_Rsm(rs.getString("rpt_Rsm"));
-				report_MsgVO.setRpt_Status(rs.getString("rpt_Status"));
-				report_MsgVO.setRpt_Time(rs.getTimestamp("rpt_Time"));
-				reportlist.add(report_MsgVO); 
+				ReportVO reportVO=new ReportVO();
+				reportVO.setRpt_No(rs.getString("rpt_No"));
+				reportVO.setMem_No(rs.getString("mem_No"));
+				reportVO.setPost_No(rs.getString("post_No"));
+				reportVO.setRpt_Rsm(rs.getString("rpt_Rsm"));
+				reportVO.setRpt_Status(rs.getString("rpt_Status"));
+				reportVO.setRpt_Time(rs.getTimestamp("rpt_Time"));
+				reportlist.add(reportVO); 
 			}
 
 
@@ -175,13 +176,14 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				ReportVO report_MsgVO=new ReportVO();
-				report_MsgVO.setMem_No(rs.getString("mem_No"));
-				report_MsgVO.setRply_No(rs.getString("rply_No"));
-				report_MsgVO.setRpt_Rsm(rs.getString("rpt_Rsm"));
-				report_MsgVO.setRpt_Status(rs.getString("rpt_Status"));
-				report_MsgVO.setRpt_Time(rs.getTimestamp("rpt_Time"));
-				rpt_Msglist.add(report_MsgVO); 
+				ReportVO reportVO=new ReportVO();
+				reportVO.setRpt_No(rs.getString("rpt_No"));
+				reportVO.setMem_No(rs.getString("mem_No"));
+				reportVO.setPost_No(rs.getString("post_No"));
+				reportVO.setRpt_Rsm(rs.getString("rpt_Rsm"));
+				reportVO.setRpt_Status(rs.getString("rpt_Status"));
+				reportVO.setRpt_Time(rs.getTimestamp("rpt_Time"));
+				rpt_Msglist.add(reportVO); 
 			}
 
 
@@ -215,7 +217,7 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 	}
 
 	@Override
-	public ReportVO getOne(String mem_No,String rply_No) {
+	public ReportVO getOneReport(String rpt_No) {
 
 		ReportVO reportVO = null;
 		Connection con = null;
@@ -225,14 +227,15 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_REPORT);
-			pstmt.setString(1, mem_No);
-			pstmt.setString(2, rply_No);
+	
+			pstmt.setString(1, rpt_No);
 			rs = pstmt.executeQuery();
   
 			while (rs.next()) {
 				reportVO = new ReportVO();
+				reportVO.setRpt_No(rs.getString("rpt_No"));
 				reportVO.setMem_No(rs.getString("mem_No"));
-				reportVO.setRply_No(rs.getString("rply_No"));
+				reportVO.setPost_No(rs.getString("post_No"));
 				reportVO.setRpt_Rsm(rs.getString("rpt_Rsm"));
 				reportVO.setRpt_Status(rs.getString("rpt_Status"));
 				reportVO.setRpt_Time(rs.getTimestamp("rpt_Time"));
