@@ -18,6 +18,7 @@ import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
+import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
 
 /**
@@ -30,13 +31,11 @@ public class DeliveryServlet extends HttpServlet {
 	String en;
 	String ds;
 
-
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(req, res);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
@@ -55,8 +54,8 @@ public class DeliveryServlet extends HttpServlet {
 				String strdReg = "^D[-]{1}[0-9]{9}$";
 				String streReg = "^E{1}[0-9)]{9}$";
 				String strsReg = "^[123]$";
-				
-				//這邊是為了分頁進來時的空值問題，避免下面執行時Exception				
+
+				// 這邊是為了分頁進來時的空值問題，避免下面執行時Exception
 				if (strd == null) {
 					strd = "";
 				}
@@ -67,8 +66,7 @@ public class DeliveryServlet extends HttpServlet {
 					strs = "";
 				}
 				//
-				
-				
+
 				if (strd.trim().length() != 0 && !strd.matches(strdReg))
 					errorMsgs.add("請檢查派送單編號的格式是否正確。");
 				if (stre.trim().length() != 0 && !stre.matches(streReg))
@@ -85,18 +83,21 @@ public class DeliveryServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				DeliveryService delSvc = new DeliveryService();
 				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
-				
-				if (req.getAttribute("deliv") != null && req.getAttribute("emp") != null && req.getAttribute("status") != null) {
-					
-					delVOList = delSvc.getSelect((String)req.getAttribute("deliv"), (String)req.getAttribute("emp"), (String)req.getAttribute("status"));
-					
+
+				if (req.getAttribute("deliv") != null && req.getAttribute("emp") != null
+						&& req.getAttribute("status") != null) {
+
+					delVOList = delSvc.getSelect((String) req.getAttribute("deliv"), (String) req.getAttribute("emp"),
+							(String) req.getAttribute("status"));
+
 				} else {
 					dn = strd;
 					en = stre;
-					ds = strs;	
+					ds = strs;
 				}
 				
 				
+
 				if (delVOList.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
@@ -109,8 +110,6 @@ public class DeliveryServlet extends HttpServlet {
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.getSession().setAttribute("get_By_Key", delVOList);
 
-				
-				
 				String url = "select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -123,7 +122,7 @@ public class DeliveryServlet extends HttpServlet {
 		}
 
 		if ("update".equals(action)) { // 更新派送單狀態
-			
+
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
 			String emp = new String(req.getParameter("emp_no"));
@@ -155,33 +154,40 @@ public class DeliveryServlet extends HttpServlet {
 			req.setAttribute("deliv", deliv);
 			req.setAttribute("emp", emp);
 			req.setAttribute("status", status);
-			
+
 			String page = req.getParameter("whichPage");
-			req.setAttribute("whichPage",page);
-				
+			req.setAttribute("whichPage", page);
 
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 			successView.forward(req, res);
- 
+
 			/*************************** 其他可能的錯誤處理 **********************************/
 
 		}
 
 		if ("insert".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-		
+			try {
 
 //			String branchno = req.getParameter("branch_no").trim();//綁定登入員工的分店編號
 //			test
-			String branchno = "0001";
-			
-			List<OrderformVO> list = new ArrayList<OrderformVO>();
-//			String[]x = req.getParameterValues("selectorder");//name jsp
-			
-			
-			
+				String branchno = "0001";
+
+				OrderformVO ord = null;
+
+				List<OrderformVO> list = new ArrayList<OrderformVO>();
+				String[] ordlist = req.getParameterValues("ordno");// name jsp
+
+				for (int i = 0; i < ordlist.length; i++) {
+					ord = new OrderformVO();
+					ord.setOrder_no(ordlist[i]);
+					list.add(ord);
+				}
+				
 //			test
 //			OrderformVO vo1 = new OrderformVO();
 //			vo1.setOrder_no("O000000001");
@@ -198,28 +204,26 @@ public class DeliveryServlet extends HttpServlet {
 //			list.add(vo3);
 //			list.add(vo4);
 //			list.add(vo5);
-			
-			
 
-			DeliveryVO delVO = new DeliveryVO();
-			delVO.setBranch_no(branchno);
+				DeliveryVO delVO = new DeliveryVO();
+				delVO.setBranch_no(branchno);
 
-			/*************************** 2.開始新增資料 ***************************************/
-			DeliveryService delSvc = new DeliveryService();
-			delVO = delSvc.addDelivery(delVO, list);
-			
-		
+				/*************************** 2.開始新增資料 ***************************************/
+				DeliveryService delSvc = new DeliveryService();
+				delVO = delSvc.addDelivery(delVO, list);
 
-			
-			
-			req.setAttribute("insert", delVO);
-			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "select_page.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+				req.setAttribute("insert", delVO);
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
 
-			/*************************** 其他可能的錯誤處理 **********************************/
-
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (RuntimeException e) {
+				errorMsgs.add("請選擇需要派送的訂單或回到派送單頁面。");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/delivery/delivery.do?action=selectOrd");
+				failureView.forward(req, res);
+			}
 		}
 
 		if ("listAllDelivery".equals(action)) {
@@ -269,6 +273,28 @@ public class DeliveryServlet extends HttpServlet {
 				if ("listNotOk".equals(action))
 					url = "select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
 
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+
+		if ("selectOrd".equals(action)) {
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				OrderformService ordSvc = new OrderformService();
+				List<OrderformVO> list = ordSvc.getDeliv();
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("selDel", list); // 資料庫取出的set物件,存入request
+
+				String url = "choseord.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

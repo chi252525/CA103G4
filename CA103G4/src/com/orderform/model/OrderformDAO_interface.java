@@ -26,6 +26,6 @@ public interface OrderformDAO_interface {
 
 	public void updateWithDelivery(OrderformVO orderformVO , Connection con);
 	
-	public List<OrderformVO> getDel(String order_no);
+	public List<OrderformVO> getDel();
 	
 }

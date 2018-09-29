@@ -35,7 +35,10 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
 	// s針對外送的SQL指令
 	private static final String UPDATE2 = "UPDATE orderform set deliv_no= ? where order_no= ?";
-	private static final String SELECT_DEL = "SELECT order_no FROM orderform where deliv_no is null and order_type = 2"; //下好了 寫方法 進service 給deliverey的ˇ
+	private static final String SELECT_DEL = "SELECT order_no,deliv_addres FROM orderform where deliv_no is null and order_type = 2"; // 下好了
+																															// 寫方法
+																															// 進service
+																															// 給deliverey的
 
 	@Override
 	public void insert(OrderformVO orderformVO) {
@@ -544,25 +547,57 @@ public class OrderformDAO implements OrderformDAO_interface {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	}
 
+//	private static final String SELECT_DEL = "SELECT order_no,deliv_addres FROM orderform where deliv_no is null and order_type = 2"; //下好了 寫方法 進service 給deliverey的
+	@Override
+	public List<OrderformVO> getDel() {
+		List<OrderformVO> list = new ArrayList<OrderformVO>();
+		OrderformVO orderformVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_DEL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				list.add(orderformVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }

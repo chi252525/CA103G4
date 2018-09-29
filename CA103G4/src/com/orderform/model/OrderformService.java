@@ -27,6 +27,8 @@ public class OrderformService {
 		return ordVO;
 	}
 	
-	public 
+	public List<OrderformVO> getDeliv() {
+		return dao.getDel();
+	}
 
 }
