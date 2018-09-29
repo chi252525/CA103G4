@@ -26,8 +26,7 @@
 <body>
 	<jsp:include page="/front_end/header.jsp" flush="true" />
 	<!--background image-->
-	<img
-		src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
+	<img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
 		width="100%" height="" alt="">
 
 
@@ -118,42 +117,43 @@
 		// 			}
 
 		// sweet alerrt for adding product
-
+	//Java完美操縱javaScript
+	<%for (int i = 0; i < 3; i++) {%>
 		$(function() {
-			$(".submit").eq(1).click(function() {
+			$(".submit").eq(<%=i%>).click(function() {
 				swal({
 					title : "加入購物車",
 					html : "成功",
 					type : "success"
 				}).then(function() {
-					$(".shoppingForm").eq(1).submit();
+					$(".shoppingForm").eq(<%=i%>).submit();
 				});
 			});
 		});
+	<%}%>
+// 		$(function() {
+// 			$(".submit").eq(2).click(function() {
+// 				swal({
+// 					title : "加入購物車",
+// 					html : "成功",
+// 					type : "success"
+// 				}).then(function() {
+// 					$(".shoppingForm").eq(2).submit();
+// 				});
+// 			});
+// 		});
 
-		$(function() {
-			$(".submit").eq(2).click(function() {
-				swal({
-					title : "加入購物車",
-					html : "成功",
-					type : "success"
-				}).then(function() {
-					$(".shoppingForm").eq(2).submit();
-				});
-			});
-		});
-
-		$(function() {
-			$(".submit").eq(0).click(function() {
-				swal({
-					title : "加入購物車",
-					html : "成功",
-					type : "success"
-				}).then(function() {
-					$(".shoppingForm").eq(0).submit();
-				});
-			});
-		});
+// 		$(function() {
+// 			$(".submit").eq(0).click(function() {
+// 				swal({
+// 					title : "加入購物車",
+// 					html : "成功",
+// 					type : "success"
+// 				}).then(function() {
+// 					$(".shoppingForm").eq(0).submit();
+// 				});
+// 			});
+// 		});
 	</script>
 	<jsp:include page="/front_end/footer.jsp" flush="true" />
 </body>
