@@ -199,11 +199,11 @@
 	
 	<servlet>
 		<servlet-name>ReportServlet</servlet-name>
-		<servlet-class>com.report.controller.ReportServlet</servlet-class>
+		<servlet-class>com.report_msg.controller.ReportServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ReportServlet</servlet-name>
-		<url-pattern>/report/report.do</url-pattern>
+		<url-pattern>/report/reportServlet.do</url-pattern>
 	</servlet-mapping>
 	
 		<servlet>

@@ -77,7 +77,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		try {
 			con = ds.getConnection();
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
@@ -117,7 +117,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		try {
 			con = ds.getConnection();
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			
@@ -198,7 +198,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		try {
 			con = ds.getConnection();
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(SELECT_ONE_STMT);
 			pstmt.setString(1, Custom_No);
 			rs = pstmt.executeQuery();
@@ -490,7 +490,7 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 		try {
 			con = ds.getConnection();
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_NAME_STMT);
 			
 			pstmt.setString(1, custom_Name);

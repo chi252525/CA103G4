@@ -75,22 +75,19 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 	}
 	
 	@Override
-	public void updateStatus(ReportVO reportVO) {
+	public int updateReportStatus(String rpt_No) {
 
+		int updateCount = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATESTATUS_STMT);
-	
-			pstmt.setString(1, reportVO.getRpt_Status());
-			pstmt.setString(2, reportVO.getRpt_No());
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("修改" + rowCount + " 筆資料");
+			pstmt.setString(1, rpt_No);
+
+			updateCount = pstmt.executeUpdate();
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -107,6 +104,8 @@ public class ReportJDBCDAO implements ReportDAO_interface {
 				}
 			}
 		}
+		return updateCount;
+	
 		
 	}
 

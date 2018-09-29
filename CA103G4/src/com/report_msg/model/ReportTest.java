@@ -4,12 +4,9 @@ import java.util.List;
  public class ReportTest {
  	public static void main(String[] args) {
 		
- 		ReportVO rm1=new ReportVO();
-		rm1.setRpt_Status("RS2");
-		rm1.setRpt_Rsm("RR2");
-		rm1.setRpt_No("201809081437-01");
+ 
 		ReportJDBCDAO dao= new ReportJDBCDAO();
-		dao.updateStatus(rm1);
+		dao.updateReportStatus("201809081437-01");
 		
 		//findbystatus
 		SimpleDateFormat fmt1=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E ");

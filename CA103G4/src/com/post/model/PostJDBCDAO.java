@@ -34,6 +34,11 @@ public class PostJDBCDAO implements PostDAO_interface{
 	// 修改貼文
 	private static final String UPDATE_STMT = 
 			"UPDATE POST SET MEM_NO=?,CUSTOM_NO=?,POST_CONT=?,POST_EVA=?,POST_PHOTO=?,POST_TIME=? WHERE POST_NO=?";
+	
+	// 修改貼文狀態
+	private static final String UPDATE_POST_STATUS_STMT = 
+			"UPDATE POST SET POST_STATUS=? WHERE POST_NO=?";
+	
 	// 刪除貼文
 	private static final String DELETE_STMT = "DELETE FROM POST WHERE POST_NO = ?";
 	
@@ -696,6 +701,38 @@ public class PostJDBCDAO implements PostDAO_interface{
 			}
 		}
 		return postlist;
+	}
+	@Override
+	public int updatePostStatus(String post_No) {
+
+		int updateCount = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_POST_STATUS_STMT);
+			pstmt.setString(1, post_No);
+
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return updateCount;
 	}
 	
 }
