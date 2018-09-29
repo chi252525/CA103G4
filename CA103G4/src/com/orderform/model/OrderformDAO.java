@@ -549,7 +549,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 	}
 
-//	private static final String SELECT_DEL = "SELECT order_no FROM orderform where deliv_no is null and order_type = 2"; //下好了 寫方法 進service 給deliverey的
+//	private static final String SELECT_DEL = "SELECT order_no,deliv_addres FROM orderform where deliv_no is null and order_type = 2"; //下好了 寫方法 進service 給deliverey的
 	@Override
 	public List<OrderformVO> getDel() {
 		List<OrderformVO> list = new ArrayList<OrderformVO>();
@@ -566,10 +566,9 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
-				orderformVO.setDeliv_no(rs.getString("deliv_no"));
 				orderformVO.setOrder_no(rs.getString("order_no"));
 				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
-				
+				list.add(orderformVO);
 			}
 
 		} catch (SQLException se) {
