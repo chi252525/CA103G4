@@ -61,6 +61,15 @@
 				<servlet-name>AndroidOrderformServlet</servlet-name>
 				<url-pattern>/AndroidOrderformServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidMemberServlet</servlet-name>
+				<servlet-class>android.com.Member.controller.AndroidMemberServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidMemberServlet</servlet-name>
+				<url-pattern>/AndroidMemberServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>
