@@ -163,7 +163,7 @@ public class DeliveryServlet extends HttpServlet {
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 			successView.forward(req, res);
-
+ 
 			/*************************** 其他可能的錯誤處理 **********************************/
 
 		}
@@ -173,17 +173,36 @@ public class DeliveryServlet extends HttpServlet {
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 		
 
-//			String branchno = req.getParameter("branch_no").trim();
-//			String empno = req.getParameter("emp_no").trim();
+//			String branchno = req.getParameter("branch_no").trim();//綁定登入員工的分店編號
+//			test
 			String branchno = "0001";
-			String empno = "E000000001";
 			
 			List<OrderformVO> list = new ArrayList<OrderformVO>();
-			list = (List<OrderformVO>)req.getAttribute("");
+//			String[]x = req.getParameterValues("selectorder");//name jsp
+			
+			
+			
+//			test
+//			OrderformVO vo1 = new OrderformVO();
+//			vo1.setOrder_no("O000000001");
+//			OrderformVO vo2 = new OrderformVO();
+//			vo2.setOrder_no("O000000002");
+//			OrderformVO vo3 = new OrderformVO();
+//			vo3.setOrder_no("O000000003");
+//			OrderformVO vo4 = new OrderformVO();
+//			vo4.setOrder_no("O000000004");
+//			OrderformVO vo5 = new OrderformVO();
+//			vo5.setOrder_no("O000000005");
+//			list.add(vo1);
+//			list.add(vo2);
+//			list.add(vo3);
+//			list.add(vo4);
+//			list.add(vo5);
+			
+			
 
 			DeliveryVO delVO = new DeliveryVO();
 			delVO.setBranch_no(branchno);
-			delVO.setEmp_no(empno);
 
 			/*************************** 2.開始新增資料 ***************************************/
 			DeliveryService delSvc = new DeliveryService();

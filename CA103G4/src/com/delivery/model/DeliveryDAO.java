@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
 
 public class DeliveryDAO implements DeliveryDAO_interface {
@@ -42,14 +43,48 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			con.setAutoCommit(false);
 
+			String cols[] = { "DELIV_NO" };
+
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 			pstmt.setString(1, deliveryVO.getBranch_no());
 
 			pstmt.executeUpdate();
+
+			String next_delivno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				next_delivno = rs.getString(1);
+				System.out.println("有取得自增主鍵。");
+			} else {
+				System.out.println("為取得自增主鍵");
+			}
+
+			rs.close();
+
+			// 新增外送派送單後開始更新訂單的外送派送單編號
+			OrderformService Svc = new OrderformService();
+			for (OrderformVO uOrd : list) {
+				uOrd.setDeliv_no(new String(next_delivno));
+				Svc.upOrdDel(uOrd, con);
+			}
+
+			con.commit();
+			con.setAutoCommit(true);
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -66,7 +101,6 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -78,11 +112,11 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		try {
 
 			con = ds.getConnection();
-				pstmt = con.prepareStatement(UPDATE);
+			pstmt = con.prepareStatement(UPDATE);
 
-				pstmt.setString(1, deliveryVO.getEmp_no());
-				pstmt.setString(2, deliveryVO.getDeliv_status());
-				pstmt.setString(3, deliveryVO.getDeliv_no());
+			pstmt.setString(1, deliveryVO.getEmp_no());
+			pstmt.setString(2, deliveryVO.getDeliv_status());
+			pstmt.setString(3, deliveryVO.getDeliv_no());
 
 			pstmt.executeUpdate();
 
@@ -120,17 +154,16 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		String dt = "deliv_status= ?";
 		String ad = " and ";
 		String od = " order by deliv_no DESC";
-	
-			if (deliv_no.trim().length() == 0) {
-				deliv_no = null;
-			}
-			if (emp_no.trim().length() == 0) {
-				emp_no = null;
-			}
-			if (deliv_status.trim().length() == 0) {
-				deliv_status = null;
-			}
-	
+
+		if (deliv_no.trim().length() == 0) {
+			deliv_no = null;
+		}
+		if (emp_no.trim().length() == 0) {
+			emp_no = null;
+		}
+		if (deliv_status.trim().length() == 0) {
+			deliv_status = null;
+		}
 
 		try {
 

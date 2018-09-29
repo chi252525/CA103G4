@@ -13,9 +13,9 @@ private OrderinvoiceDAO_interface dao;
 	}
 
 	public OrderinvoiceVO addInvoice(OrderinvoiceVO orderinvoiceVO, Connection con) {
-		OrderinvoiceVO ordVO = new OrderinvoiceVO();
+		OrderinvoiceVO oinVO = new OrderinvoiceVO();
 		dao.insert2(orderinvoiceVO, con);
-		return ordVO;
+		return oinVO;
 	}
 	
 	

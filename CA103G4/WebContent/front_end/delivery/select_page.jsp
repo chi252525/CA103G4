@@ -61,23 +61,17 @@ h4 {
 
 
 	<%-- s以下是複合查詢列 --%>
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
-		id="a" name="First">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do" name="First">
 		派送單編號:<input type="text" name="deliv_no"> 員工編號: <input
 			type="text" name="emp_no"> 派送單狀態:<input type="text"
 			name="deliv_status"> <input type="hidden" name="action"
 			value="get_By_Key"> <input type="submit" value="開始搜尋">
-			
 	</FORM>
 	<br>
 	<%-- s以下是新增外送派送單 --%>
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"
-		id="b">
-		<input type="text" name="branch_no"> <input type="submit"
-			value="+新增外送派送單"> <input type="hidden" name="action"
-			value="insert">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+	<input type="submit" value="+新增外送派送單"> 
+	<input type="hidden" name="action" value="insert">
 	</FORM>
 	<br>
 	
