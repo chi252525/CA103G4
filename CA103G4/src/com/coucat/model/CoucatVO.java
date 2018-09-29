@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 
 public class CoucatVO implements java.io.Serializable{
+	
 	private String coucat_No;
 	private String coucat_Name;
 	private String coucat_Cata;
@@ -15,8 +16,7 @@ public class CoucatVO implements java.io.Serializable{
 	private Timestamp coucat_Invalid;
 	private Integer coucat_Amo;
 	private byte[] coucat_Pic;
-	private String coupon_status;
-	
+	private String coucat_Status;
 	public String getCoucat_No() {
 		return coucat_No;
 	}
@@ -77,13 +77,13 @@ public class CoucatVO implements java.io.Serializable{
 	public void setCoucat_Pic(byte[] coucat_Pic) {
 		this.coucat_Pic = coucat_Pic;
 	}
-	public String getCoupon_status() {
-		return coupon_status;
+	public String getCoucat_Status() {
+		return coucat_Status;
 	}
-	public void setCoupon_status(String coupon_status) {
-		this.coupon_status = coupon_status;
+	public void setCoucat_Status(String coucat_Status) {
+		this.coucat_Status = coucat_Status;
 	}
-	
+
 	
 	
 	

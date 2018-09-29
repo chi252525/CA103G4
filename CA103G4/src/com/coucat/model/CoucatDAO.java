@@ -18,19 +18,21 @@ public class CoucatDAO implements CoucatDAO_interface {
 	
 	private static final String GET_COUCAT_PIC="SELECT COUCAT_PIC FROM COUCAT WHERE COUCAT_NO=?";
 	
-	private static final String INSERT_VALUE_STMT = 
+	private static final String INSERT_STMT = 
 			"INSERT INTO  COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
-			"?,?,?,NULL,NULL,?,?,?,?,'CS1')";
+			"?,?,?,?,?,?,?,?,?,'CS1')";
 
 	private static final String UPDATE_STMT = 
-			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_VALUE=?," + 
+			"UPDATE COUCAT SET COUCAT_Name=?,COUCAT_CATA=?,COUCAT_VALUE=?,COUCAT_DISCOUNT=?,COUCAT_FREEP=?," + 
 			"COUCAT_VALID=?," + 
-			"COUCAT_INVALID=?,COUCAT_AMO=?" + 
+			"COUCAT_INVALID=?,COUCAT_PIC=?" + 
 			"WHERE COUCAT_NO=?";
-	private static final String GETALL = 
-			"SELECT * FROM COUCAT";
+	private static final String GETALL = "SELECT * FROM COUCAT";
 	private static final String FIND_BY_CATA = 
 			"SELECT * FROM COUCAT WHERE COUCAT_CATA=?";
+	
+	private static final String  GET_ONE_COUCAT="SELECT * FROM COUCAT WHERE COUCAT_NO=?";
+	
 	static {
 		try {
 			Class.forName(DRIVER);
@@ -38,6 +40,8 @@ public class CoucatDAO implements CoucatDAO_interface {
 			ce.printStackTrace();
 		}
 		}
+	
+	
 	@Override
 	public void insert(CoucatVO coucatVO) {{
 		Connection con = null;
@@ -51,15 +55,16 @@ public class CoucatDAO implements CoucatDAO_interface {
 		
 			//insert coucat record
 			int cols[] = {1};
-			pstmt = con.prepareStatement(INSERT_VALUE_STMT,cols);
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
 			pstmt.setString(1, coucatVO.getCoucat_Name());
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
-			pstmt.setString(3, coucatVO.getCoucat_Cont());
-			pstmt.setInt(4, coucatVO.getCoucat_Value());
-			pstmt.setString(5, coucatVO.getCoucat_Valid());
-			pstmt.setString(6, coucatVO.getCoucat_Invalid());
-			pstmt.setInt(7, coucatVO.getCoucat_Amo());
-			pstmt.setBytes(8, coucatVO.getCoucat_Pic());
+			pstmt.setInt(3, coucatVO.getCoucat_Value());
+			pstmt.setDouble(4, coucatVO.getCoucat_Discount());
+			pstmt.setInt(5, coucatVO.getCoucat_Freep());
+			pstmt.setTimestamp(6, coucatVO.getCoucat_Valid());
+			pstmt.setTimestamp(7, coucatVO.getCoucat_Invalid());
+			pstmt.setInt(8, coucatVO.getCoucat_Amo());
+			pstmt.setBytes(9, coucatVO.getCoucat_Pic());
 			pstmt.executeUpdate();
 			// getGeneratedKeys
 						ResultSet rs = pstmt.getGeneratedKeys();
@@ -113,14 +118,14 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, coucatVO.getCoucat_Name());
 			pstmt.setString(2, coucatVO.getCoucat_Cata());
-			pstmt.setString(3, coucatVO.getCoucat_Cont());
-			pstmt.setInt(4, coucatVO.getCoucat_Value());
-			pstmt.setString(5, coucatVO.getCoucat_Valid());
-			pstmt.setString(6, coucatVO.getCoucat_Invalid());
-			pstmt.setInt(7, coucatVO.getCoucat_Amo());
-			pstmt.setString(8, coucatVO.getCoucat_No());
+			pstmt.setInt(3, coucatVO.getCoucat_Value());
+			pstmt.setDouble(4, coucatVO.getCoucat_Discount());
+			pstmt.setInt(5, coucatVO.getCoucat_Freep());
+			pstmt.setTimestamp(6, coucatVO.getCoucat_Valid());
+			pstmt.setTimestamp(7, coucatVO.getCoucat_Invalid());
+			pstmt.setBytes(8, coucatVO.getCoucat_Pic());
 			int rowCount=pstmt.executeUpdate();
-			System.out.println("修改" + rowCount + "筆資料");
+			System.out.println("修改" + rowCount + "筆資料(序號部分沒有被修改)");
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
@@ -164,10 +169,12 @@ public class CoucatDAO implements CoucatDAO_interface {
 				coucat.setCoucat_No(rs.getString("Coucat_No"));
 				coucat.setCoucat_Name(rs.getString("Coucat_Name"));
 				coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));
-				coucat.setCoucat_Cont(rs.getString("Coucat_Cont"));
 				coucat.setCoucat_Value(rs.getInt("Coucat_Value"));
-				coucat.setCoucat_Valid(rs.getString("Coucat_Valid"));
-				coucat.setCoucat_Invalid(rs.getString("Coucat_Invalid"));
+				coucat.setCoucat_Discount(rs.getDouble("Coucat_Discount"));
+				coucat.setCoucat_Freep(rs.getInt("Coucat_Freep"));
+				coucat.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));
+				coucat.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
+				coucat.setCoucat_Pic(rs.getBytes("Coucat_Pic"));
 				coucat.setCoucat_Amo(rs.getInt("Coucat_Amo"));
 				coucatlist.add(coucat); // Store the row in the list
 			}
@@ -206,7 +213,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		Connection con=null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
-		CoucatVO coucat =null;
+		CoucatVO coucatVO =null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Connecting to database successfully! ");
@@ -214,15 +221,17 @@ public class CoucatDAO implements CoucatDAO_interface {
 			pstmt.setString(1,coucat_Cata);
 			 rs =pstmt.executeQuery();
 			while(rs.next()) {
-				coucat=new CoucatVO();
-				coucat.setCoucat_Name(rs.getString("Coucat_Name"));
-				coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));		
-				coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));	
-				coucat.setCoucat_Cont(rs.getString("Coucat_Cont"));	
-				coucat.setCoucat_Value(rs.getInt("Coucat_Value"));	
-				coucat.setCoucat_Valid(rs.getString("Coucat_Valid"));	
-				coucat.setCoucat_Invalid(rs.getString("Coucat_Invalid"));	
-				coucat.setCoucat_Amo(rs.getInt("Coucat_Amo"));	
+				coucatVO=new CoucatVO();
+				coucatVO.setCoucat_No(rs.getString("Coucat_No"));
+				coucatVO.setCoucat_Name(rs.getString("Coucat_Name"));
+				coucatVO.setCoucat_Cata(rs.getString("Coucat_Cata"));
+				coucatVO.setCoucat_Value(rs.getInt("Coucat_Value"));
+				coucatVO.setCoucat_Discount(rs.getDouble("Coucat_Discount"));
+				coucatVO.setCoucat_Freep(rs.getInt("Coucat_Freep"));
+				coucatVO.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));
+				coucatVO.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
+				coucatVO.setCoucat_Pic(rs.getBytes("Coucat_Pic"));
+				coucatVO.setCoucat_Amo(rs.getInt("Coucat_Amo"));
 			}
 			
 		}catch(SQLException e) {
@@ -250,7 +259,112 @@ public class CoucatDAO implements CoucatDAO_interface {
 				}
 			}
 		}
-		return coucat;
+		return coucatVO;
+	}
+	@Override
+	public byte[] getPic(String coucat_No) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		byte[] pic = null;
+		
+	try {
+		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		pstmt = con.prepareStatement(GET_COUCAT_PIC);
+		pstmt.setString(1, coucat_No);
+		rs = pstmt.executeQuery();
+		rs.next();
+		pic = rs.getBytes(1);
+
+		// Handle any driver errors
+	}catch(SQLException se)
+	{
+		throw new RuntimeException("A database error occured. " + se.getMessage());
+		// Clean up JDBC resources
+	}finally
+	{
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+
+	}return pic;
+
+	}
+	@Override
+	public CoucatVO getOneCoucat(String coucat_No) {
+
+		CoucatVO coucatVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			coucatVO = new CoucatVO();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ONE_COUCAT);
+			pstmt.setString(1, coucat_No);
+			rs = pstmt.executeQuery();
+			rs.next();
+			coucatVO.setCoucat_No(rs.getString("Coucat_No"));
+			coucatVO.setCoucat_Name(rs.getString("Coucat_Name"));
+			coucatVO.setCoucat_Cata(rs.getString("Coucat_Cata"));
+			coucatVO.setCoucat_Value(rs.getInt("Coucat_Value"));
+			coucatVO.setCoucat_Discount(rs.getDouble("Coucat_Discount"));
+			coucatVO.setCoucat_Freep(rs.getInt("Coucat_Freep"));
+			coucatVO.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));
+			coucatVO.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
+			coucatVO.setCoucat_Pic(rs.getBytes("Coucat_Pic"));
+			coucatVO.setCoucat_Amo(rs.getInt("Coucat_Amo"));
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
+		}
+		return coucatVO;
 	}
 
 			
