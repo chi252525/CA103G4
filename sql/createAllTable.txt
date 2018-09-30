@@ -1230,15 +1230,16 @@ CREATE TABLE ACTIVITY (
 ACT_NO VARCHAR2(15) NOT NULL,
 COUCAT_NO VARCHAR2(15) NOT NULL,
 ACT_CAT VARCHAR2(5) ,
-ACT_CTYPE VARCHAR2(50),
 ACT_NAME VARCHAR2(4000),
 ACT_CAROUSEL BLOB,
 ACT_Pic BLOB,
-ACT_PTYPE VARCHAR2(50),
 ACT_CONTENT CLOB,
+act_PreAddTime 	TIMESTAMP,
+act_PreOffTime TIMESTAMP,
 ACT_START TIMESTAMP,
 ACT_END TIMESTAMP,
-ACT_USECOU VARCHAR(3),
+act_Status NUMBER(10) default 1,
+act_Views Number(38) default 0,
 
 CONSTRAINT ACTIVITY_FK FOREIGN KEY (COUCAT_NO)
 REFERENCES COUCAT (COUCAT_NO),
@@ -1250,36 +1251,69 @@ START WITH 1
 NOMAXVALUE
 NOCYCLE
 NOCACHE;
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a1','新品上市期間限定~會員憑券點拉麵折扣100元
- ',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a2','慶祝竹風堂拉麵十周年慶,活動期間內至各分店用餐(限內用),一碗即折80元',null,null,null,TO_TIMESTAMP('2018-09-08 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','新品上市期間限定~會員憑券點拉麵折扣100元',NULL,NULL,'新品上市期間限定~會員憑券點拉麵折扣100元'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)',NULL,NULL,'慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',NULL,NULL,'會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000002','a1','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC1','拉麵的基本元素',NULL,NULL,'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。到底拉麵是由哪些元素組成的呢?'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000003','a1','線上訂餐會員獨享!訂餐外送滿千可折100元!',NULL,NULL,NULL,
-TO_TIMESTAMP('2018-09-22 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','西門店限定二郎風蒜味拉麵',NULL,NULL,'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','永康公園店限定辣味噌拉麵',NULL,NULL,'辛味噌拉麵是日本東北仙台及山形的代表拉麵，因為味噌是仙台的特產，因此當地本來就以味噌拉麵為特產，其後附上加入辣椒的味噌醬，而成為辛味噌拉麵。'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
 
 
 COMMIT;

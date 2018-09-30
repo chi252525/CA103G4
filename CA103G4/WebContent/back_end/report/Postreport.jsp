@@ -66,15 +66,15 @@
 			<div class="container-fluid">
 				<div class="row mx-0">
 					<div class="col-md-8 mx-0">
-						<form class="form-inline" action="/action_page.php">
+						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
 								<select class="form-control">
 									<option name="rpt_Status" value="RS0">未處理</option>
 									<option name="rpt_Status" value="RS1">已處理</option>
-									
 								</select>
 							</div>
-							<button type="button" class="btn btn-primary">查詢</button>
+								<input type="hidden" name="action" value="getPostByStatus" />
+							<button type="submit" class="btn btn-primary">查詢</button>
 						</form>
 					</div>
 				</div>
@@ -120,8 +120,9 @@
 						<td>${(reportVO.rpt_Status=='RS0')?'未處理':'已處理'}</td>
 						<td><fmt:formatDate value="${reportVO.rpt_Time}"
 								pattern="MM月dd日 HH:mm:ss" /></td>
-						<td><jsp:useBean id="postSvc" scope="page"
-								class="com.post.model.PostService" />
+						<td>
+						<!-- 一顆postSvc -->
+						<jsp:useBean id="postSvc" scope="page"	class="com.post.model.PostService" />
 
 
 						<!--通過的btn -->
@@ -129,7 +130,7 @@
 
 								<form method="post"
 									action="<%=request.getContextPath()%>/post/postServlet.do" id="updateStatus${reportVO.rpt_No}">
-									<button type="submit" class="btn btn-success" >
+									<button type="submit" class="btn btn-success" ${(reportVO.rpt_Status=='RS1')?'disabled':'' }>
 										<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
 										<input type="hidden" name="post_No" value="${postSvc.getOne_Post(reportVO.post_No).post_No}" />
 										<input type="hidden" name="action" value="updatePostStatus" /> <span
@@ -171,11 +172,10 @@
 						
 								</script>
 
-
 								<!-- 不通過的btn -->
 								<form method="post"
 									action="<%=request.getContextPath()%>/report/reportServlet.do" id="updateRepotStatusOnly${reportVO.rpt_No}">
-									<button type="submit" class="btn btn-dark">
+									<button type="submit" class="btn btn-dark" ${(reportVO.rpt_Status=='RS1')?'disabled':''}>
 										<input type="hidden" name="rpt_No"
 											value="${reportVO.rpt_No}" />
 										<input type="hidden" name="action" value="updateReportStatus" /> <span
@@ -218,7 +218,8 @@
 								
 								
 
-							</div> <%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
+							</div> 
+							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
 								<font style="color: red">請修正以下錯誤:</font>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">

@@ -34,7 +34,7 @@ public class ResServlet extends HttpServlet {
 				}
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView =req
-							.getRequestDispatcher("/front_end/res/research_page.jsp");
+							.getRequestDispatcher("/back_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -47,7 +47,7 @@ public class ResServlet extends HttpServlet {
 				
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/res/research_page.jsp");
+							.getRequestDispatcher("/back_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -60,18 +60,18 @@ public class ResServlet extends HttpServlet {
 				
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView =req
-							.getRequestDispatcher("/front_end/res/research_page.jsp");
+							.getRequestDispatcher("/back_end/res/research_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				req.setAttribute("resVO", resVO);
-				String url ="/front_end/res/listOneRes.jsp";
+				String url ="/back_end/res/listOneRes.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 				successView.forward(req, res);
 			}catch(Exception e) {
 				errorMsgs.add("無法取得資料:"+ e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front_end/res/research_page.jsp");
+						.getRequestDispatcher("/back_end/res/research_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

@@ -76,6 +76,9 @@ body {
 .test {
 	border: solid 1px;
 }
+.card{
+background-color:rgba(253,253,253,0.8);
+}
 </style>
 </head>
 <body
@@ -170,7 +173,6 @@ body {
 					<a class="btn btn-info btn-sm px-3 btn-block mt-2"
 						href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
 				</div>
-
 				<div class="btn-group float-right my-3">
 					<button class="btn btn-secondary btn-sm dropdown-toggle"
 						type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -189,34 +191,28 @@ body {
 				共 <span>${list.size()}</span> 篇
 				</c:if>
 				
-				
 				<%@ include file="pages/page1.file"%>
 					<!-- /*共幾篇貼文 -->
 				</div>
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
-					<div class="col-md-4 px-2 py-4">
-						<div class="card">
+					<div class="col-md-4 px-2 py-4 " >
+						<div class="card " style="background-color:rgba(255,255,255,0.45)">
 							<img class="card-img img-fluid"
-								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
+								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"  style="height:348px;width:348px"
 								alt="Card image">
 							<div
-								class="card-img-overlay d-flex justify-content-center align-items-center">
+								class="card-img-overlay d-flex justify-content-center align-items-center ">
 								<h2 class="display-5" class="text-primary ">
-									<b>${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name} ${postVO.post_No}</b>
+									<b> ${postVO.post_No}</b>
 								</h2>
 							</div>
 						</div>
 						
-						<div class="card px-2">
-							<h5 class="card-title text-dark my-2 px-2"></h5>
-							推薦度<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							
-							<p class="card-text text-dark px-2 font-italic ">
-								<fmt:formatDate value="${postVO.post_Time}"
-									pattern="MM月dd日 HH:mm" />
-							</p>
-							<p style="text-align: right;">
+						<div class="card px-2" style="background-color:rgba(255,255,255,0.45)">
+							<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
+							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+							<p style="text-align: right;" class="my-0">
 							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}</p>
 							<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 							<!-- 查看單一貼文action -->
