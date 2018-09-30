@@ -8,31 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import com.employee.model.EmpVO;
 
-public class EmpauthorityDAO implements EmpauthorityDAO_interface{
+public class EmpauthorityJDBCDAO implements EmpauthorityDAO_interface{
 	
-	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-	
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
+	private static final String USER = "CHIAPAO";
+	private static final String PASSWORD = "CHIAPAO";
 	private static final String INSERT_STMT=
 			"INSERT INTO EMPAUTHORITY(EMP_NO,FEA_NO) VALUES(?,?)";
 	private static final String FINDBY_EMPNO=
 			"SELECT FEA_NO FROM EMPAUTHORITY WHERE EMP_NO=?";
 	
+	
+	static {
+		try {
+			Class.forName(DRIVER);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void insert(EmpauthorityVO empauthorVO) {
@@ -41,7 +38,7 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			System.out.println("成功連線");
 			pstmt.setString(1, empauthorVO.getEmp_No());
@@ -71,7 +68,7 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 		List<EmpauthorityVO> empauthlist = new ArrayList<>();
 		
 		try {
-			con = ds.getConnection();
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(FINDBY_EMPNO);
 			System.out.println("連線成功");
 			pstmt.setString(1,emp_No);
@@ -110,48 +107,6 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 	@Override
 	public void insert2(EmpauthorityVO empauthorVO, Connection con) {
 		// TODO Auto-generated method stub
-	
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(INSERT_STMT);
-			System.out.println("從員工新增過來的連線成功");
-			System.out.println(empauthorVO.getEmp_No());
-			System.out.println(empauthorVO.getFea_No());
-			pstmt.setString(1, empauthorVO.getEmp_No());
-			System.out.println("111111111111111111111111");
-			pstmt.setString(2, empauthorVO.getFea_No());
-			System.out.println("222222222222222222222222");
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("新增 "+rowCount+" 筆員工權限");
-			
-			
-			
-		} catch (SQLException se) {
-			try {
-				System.err.print("Transaction is being ");
-				System.err.println("rolled back-由-empauthority");
-				con.rollback();
-				
-			}catch(SQLException se2){
-				throw new RuntimeException("A database error occured. " 
-						+ se.getMessage());
-				
-			}
-			throw new RuntimeException("A database error occured. " 
-					+ se.getMessage());
-
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			
-		}
 		
 	}
 
