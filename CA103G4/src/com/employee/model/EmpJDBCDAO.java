@@ -37,14 +37,14 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, empVO.getBranch_no());
-			pstmt.setString(2, empVO.getEmp_acnum());
-			pstmt.setString(3, empVO.getEmp_psw());
-			pstmt.setString(4, empVO.getEmp_name());
-			pstmt.setString(5, empVO.getEmp_gender());
-			pstmt.setString(6, empVO.getEmp_pos());
-			pstmt.setString(7, empVO.getEmp_tel());      	
-			pstmt.setBytes(8,empVO.getEmp_photo());
+			pstmt.setString(1, empVO.getBranch_No());
+			pstmt.setString(2, empVO.getEmp_Acnum());
+			pstmt.setString(3, empVO.getEmp_Psw());
+			pstmt.setString(4, empVO.getEmp_Name());
+			pstmt.setString(5, empVO.getEmp_Gender());
+			pstmt.setString(6, empVO.getEmp_Pos());
+			pstmt.setString(7, empVO.getEmp_Tel());      	
+			pstmt.setBytes(8,empVO.getEmp_Photo());
 			pstmt.executeUpdate();
 			
 			System.out.println("新增成功");
@@ -99,16 +99,16 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
-			pstmt.setString(1, empVO.getBranch_no());
-			pstmt.setString(2, empVO.getEmp_acnum());
-			pstmt.setString(3, empVO.getEmp_psw());
-			pstmt.setString(4, empVO.getEmp_name());
-			pstmt.setString(5, empVO.getEmp_gender());
-			pstmt.setString(6, empVO.getEmp_pos());
-			pstmt.setString(7, empVO.getEmp_tel()); 
-			pstmt.setString(8, empVO.getEmp_status()); 
-			pstmt.setBytes(9,empVO.getEmp_photo());
-			pstmt.setString(10, empVO.getEmp_no());
+			pstmt.setString(1, empVO.getBranch_No());
+			pstmt.setString(2, empVO.getEmp_Acnum());
+			pstmt.setString(3, empVO.getEmp_Psw());
+			pstmt.setString(4, empVO.getEmp_Name());
+			pstmt.setString(5, empVO.getEmp_Gender());
+			pstmt.setString(6, empVO.getEmp_Pos());
+			pstmt.setString(7, empVO.getEmp_Tel()); 
+			pstmt.setString(8, empVO.getEmp_Status()); 
+			pstmt.setBytes(9,empVO.getEmp_Photo());
+			pstmt.setString(10, empVO.getEmp_No());
 			
 
 			pstmt.executeUpdate();
@@ -160,17 +160,17 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		    while(rs.next()) {
 		    	
 		    	empVO = new EmpVO();
-		    	empVO.setEmp_no(rs.getString("emp_no"));
-		    	empVO.setBranch_no(rs.getString("branch_no"));
-				empVO.setEmp_acnum(rs.getString("emp_acnum"));
-				empVO.setEmp_psw(rs.getString("emp_psw"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_gender(rs.getString("emp_gender"));
-				empVO.setEmp_pos(rs.getString("emp_pos"));
-				empVO.setEmp_tel(rs.getString("emp_tel"));      	
-				empVO.setEmp_status(rs.getString("emp_status"));  	
-				empVO.setEmp_credate(rs.getDate("emp_credate"));
-				empVO.setEmp_photo(rs.getBytes("emp_photo"));
+		    	empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
 				
 		    }
 	
@@ -224,17 +224,17 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		    while(rs.next()) {
 		    	
 		    	empVO = new EmpVO();
-		    	empVO.setEmp_no(rs.getString("emp_no"));
-		    	empVO.setBranch_no(rs.getString("branch_no"));
-				empVO.setEmp_acnum(rs.getString("emp_acnum"));
-				empVO.setEmp_psw(rs.getString("emp_psw"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_gender(rs.getString("emp_gender"));
-				empVO.setEmp_pos(rs.getString("emp_pos"));
-				empVO.setEmp_tel(rs.getString("emp_tel"));      	
-				empVO.setEmp_status(rs.getString("emp_status"));  	
-				empVO.setEmp_credate(rs.getDate("emp_credate"));
-				empVO.setEmp_photo(rs.getBytes("emp_photo"));
+		    	empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
 				list.add(empVO);
 		    }
 	
@@ -279,59 +279,59 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		
 		//新增
 		EmpVO empVO1 = new EmpVO();
-		empVO1.setBranch_no("0001");
-		empVO1.setEmp_acnum("65987");
-		empVO1.setEmp_psw("95753");
-		empVO1.setEmp_name("帥帥");
-		empVO1.setEmp_gender("G1");
-		empVO1.setEmp_pos("工讀生");
-		empVO1.setEmp_tel("0976100100");
-		empVO1.setEmp_photo(getPictureByteArray("img/000.jpg"));
+		empVO1.setBranch_No("0001");
+		empVO1.setEmp_Acnum("65987");
+		empVO1.setEmp_Psw("95753");
+		empVO1.setEmp_Name("帥帥");
+		empVO1.setEmp_Gender("G1");
+		empVO1.setEmp_Pos("工讀生");
+		empVO1.setEmp_Tel("0976100100");
+		empVO1.setEmp_Photo(getPictureByteArray("img/000.jpg"));
 		dao.insert(empVO1);
 		
 		//修改
 		EmpVO empVO2 = new EmpVO();
-		empVO2.setEmp_no("E000000008");
-		empVO2.setBranch_no("0002");
-		empVO2.setEmp_acnum("6598700");
-		empVO2.setEmp_psw("9575300");
-		empVO2.setEmp_name("藍藍");
-		empVO2.setEmp_gender("G2");
-		empVO2.setEmp_pos("經理");
-		empVO2.setEmp_tel("0976100100");
-		empVO2.setEmp_status("E2");
-		empVO2.setEmp_photo(getPictureByteArray("img/001.png"));
+		empVO2.setEmp_No("E000000008");
+		empVO2.setBranch_No("0002");
+		empVO2.setEmp_Acnum("6598700");
+		empVO2.setEmp_Psw("9575300");
+		empVO2.setEmp_Name("藍藍");
+		empVO2.setEmp_Gender("G2");
+		empVO2.setEmp_Pos("經理");
+		empVO2.setEmp_Tel("0976100100");
+		empVO2.setEmp_Status("E2");
+		empVO2.setEmp_Photo(getPictureByteArray("img/001.png"));
 		dao.update(empVO2);	
 		
 		// 查詢
 		EmpVO empVO3 = dao.findByPrimaryKey("E000000001");
-		System.out.println(empVO3.getEmp_no()+ ",");
-		System.out.println(empVO3.getBranch_no()+ ",");
-		System.out.println(empVO3.getEmp_acnum()+ ",");
-		System.out.println(empVO3.getEmp_psw()+ ",");
-		System.out.println(empVO3.getEmp_name()+ ",");
-		System.out.println(empVO3.getEmp_gender()+ ",");
-		System.out.println(empVO3.getEmp_pos()+ ",");
-		System.out.println(empVO3.getEmp_tel()+ ",");
-		System.out.println(empVO3.getEmp_status()+ ",");
-		System.out.println(empVO3.getEmp_credate()+ ",");
-		System.out.println(empVO3.getEmp_photo());
+		System.out.println(empVO3.getEmp_No()+ ",");
+		System.out.println(empVO3.getBranch_No()+ ",");
+		System.out.println(empVO3.getEmp_Acnum()+ ",");
+		System.out.println(empVO3.getEmp_Psw()+ ",");
+		System.out.println(empVO3.getEmp_Name()+ ",");
+		System.out.println(empVO3.getEmp_Gender()+ ",");
+		System.out.println(empVO3.getEmp_Pos()+ ",");
+		System.out.println(empVO3.getEmp_Tel()+ ",");
+		System.out.println(empVO3.getEmp_Status()+ ",");
+		System.out.println(empVO3.getEmp_Credate()+ ",");
+		System.out.println(empVO3.getEmp_Photo());
 		System.out.println("---------------------");
 				
 		//查詢
 		List<EmpVO> list = dao.getAll();
 		for(EmpVO aEmp : list) {
-			System.out.println(aEmp.getEmp_no()+ ",");
-			System.out.println(aEmp.getBranch_no()+ ",");
-			System.out.println(aEmp.getEmp_acnum()+ ",");
-			System.out.println(aEmp.getEmp_psw()+ ",");
-			System.out.println(aEmp.getEmp_name()+ ",");
-			System.out.println(aEmp.getEmp_gender()+ ",");
-			System.out.println(aEmp.getEmp_pos()+ ",");
-			System.out.println(aEmp.getEmp_tel()+ ",");
-			System.out.println(aEmp.getEmp_status()+ ",");
-			System.out.println(aEmp.getEmp_credate()+ ",");
-			System.out.println(aEmp.getEmp_photo());
+			System.out.println(aEmp.getEmp_No()+ ",");
+			System.out.println(aEmp.getBranch_No()+ ",");
+			System.out.println(aEmp.getEmp_Acnum()+ ",");
+			System.out.println(aEmp.getEmp_Psw()+ ",");
+			System.out.println(aEmp.getEmp_Name()+ ",");
+			System.out.println(aEmp.getEmp_Gender()+ ",");
+			System.out.println(aEmp.getEmp_Pos()+ ",");
+			System.out.println(aEmp.getEmp_Tel()+ ",");
+			System.out.println(aEmp.getEmp_Status()+ ",");
+			System.out.println(aEmp.getEmp_Credate()+ ",");
+			System.out.println(aEmp.getEmp_Photo());
 		
 		}
 	}
