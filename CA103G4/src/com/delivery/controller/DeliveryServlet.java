@@ -84,12 +84,13 @@ public class DeliveryServlet extends HttpServlet {
 				DeliveryService delSvc = new DeliveryService();
 				List<DeliveryVO> delVOList = delSvc.getSelect(strd, stre, strs);
 
-				if (req.getAttribute("deliv") != null && req.getAttribute("emp") != null
-						&& req.getAttribute("status") != null) {
+				if (req.getAttribute("deliv") != null && req.getAttribute("emp") != null && req.getAttribute("status") != null) {
 
 					delVOList = delSvc.getSelect((String) req.getAttribute("deliv"), (String) req.getAttribute("emp"),
 							(String) req.getAttribute("status"));
 
+				} else if (req.getParameter("whichPage") != null) {
+					delVOList = delSvc.getSelect(dn, en, ds);
 				} else {
 					dn = strd;
 					en = stre;
@@ -98,9 +99,9 @@ public class DeliveryServlet extends HttpServlet {
 				
 				
 
-				if (delVOList.isEmpty()) {
-					errorMsgs.add("查無資料");
-				}
+//				if (delVOList.isEmpty()) {
+//					errorMsgs.add("查無資料");
+//				}
 
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
@@ -154,9 +155,6 @@ public class DeliveryServlet extends HttpServlet {
 			req.setAttribute("deliv", deliv);
 			req.setAttribute("emp", emp);
 			req.setAttribute("status", status);
-
-			String page = req.getParameter("whichPage");
-			req.setAttribute("whichPage", page);
 
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
