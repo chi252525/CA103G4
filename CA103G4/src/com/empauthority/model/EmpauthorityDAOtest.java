@@ -3,6 +3,8 @@ package com.empauthority.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.employee.model.EmpVO;
+
 public class EmpauthorityDAOtest {
 
 	public static void main(String args[]) {
@@ -16,7 +18,7 @@ public class EmpauthorityDAOtest {
 		
 //查詢BY EMP_NO	
 		
-		EmployeeVO empVO = new EmployeeVO();
+		EmpVO empVO = new EmpVO();
 		empVO.setEmp_No("E000000001");
 		EmpauthorityDAO dao = new EmpauthorityDAO();
 		List<EmpauthorityVO> empauthlist = new ArrayList<>();
