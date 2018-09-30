@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=1e0328bf42ab54830ceabba75477ebd25671616e
 eclipse.preferences.version=1
+encoding//WebContent/back_end/HeadquarterFooter.jsp=UTF-8
 encoding//WebContent/front_end/shoppingCart/Cart.jsp=UTF-8
 encoding//WebContent/front_end/shoppingCart/EShop.jsp=UTF-8
 encoding//WebContent/front_end/shoppingCart/noodleShop.jsp=UTF-8
