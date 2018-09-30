@@ -1,6 +1,7 @@
 package com.couponhistory.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -262,4 +263,61 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<CouponhistoryVO> getCouponByMem(String mem_No) {
+		List<CouponhistoryVO> list = new ArrayList<CouponhistoryVO>();
+		CouponhistoryVO couponhistoryVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_COUPON);
+
+			pstmt.setString(1, mem_No);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				couponhistoryVO = new CouponhistoryVO();
+				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
+				couponhistoryVO.setMem_no(rs.getString("mem_no"));
+				couponhistoryVO.setOrder_no(rs.getString("order_no"));
+				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
+				list.add(couponhistoryVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 }

@@ -2,12 +2,9 @@ package com.couponhistory.model;
 
 import java.util.List;
 
-import com.delivery.model.DeliveryJDBCDAO;
-import com.delivery.model.DeliveryVO;
-
 public class CouponhistoryTest {
 	public static void main(String[] args) {
-		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
+		
 		
 //		//新增(完成)
 //		CouponhistoryVO couponhistoryVO1 = new CouponhistoryVO();
@@ -50,12 +47,21 @@ public class CouponhistoryTest {
 //		}
 		
 		// 查詢 all(完成)
-//		List<CouponhistoryVO> list = dao.getAll();
-//		for (CouponhistoryVO adeliv : list) {
+//		CouponhistoryJDBCDAO dao1 = new CouponhistoryJDBCDAO();
+//		List<CouponhistoryVO> list2 = dao1.getAll();
+//		for (CouponhistoryVO adeliv : list2) {
 //			System.out.print(adeliv.getCoup_sn() + ",");
 //			System.out.println(adeliv.getCoup_state() + ",");
 //			System.out.println();
 //		}
+		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
+		List<CouponhistoryVO> list = dao.getCouponByMem("M000001");
+		for (CouponhistoryVO adeliv : list) {
+			System.out.print(adeliv.getCoup_sn() + ",");
+			System.out.println(adeliv.getCoup_state() + ",");
+			System.out.println();
+		}
+		
 		
 
 	}

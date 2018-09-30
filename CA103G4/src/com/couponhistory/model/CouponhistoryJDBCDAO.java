@@ -8,21 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.delivery.model.DeliveryVO;
 
 public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "Pro";
-	String passwd = "123456";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String userid = "CA103";
+	private static final String passwd = "123456";
+	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 
 	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,order_no,coup_state) values (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT coup_sn,coup_state FROM couponhistory order by coup_sn";
 	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_state = ?";
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
 	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
-
+	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn WHERE COUPONHISTORY.mem_no=?";
 	@Override
 	public void insert(CouponhistoryVO couponhistoryVO) {
 
@@ -243,6 +242,63 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<CouponhistoryVO> getCouponByMem(String mem_No) {
+		List<CouponhistoryVO> list = new ArrayList<CouponhistoryVO>();
+		CouponhistoryVO couponhistoryVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_MEM_COUPON);
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// deliveryVO 也稱為 Domain objects
+				couponhistoryVO = new CouponhistoryVO();
+				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
+				couponhistoryVO.setMem_no(rs.getString("mem_no"));
+				couponhistoryVO.setOrder_no(rs.getString("order_no"));
+				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
+				list.add(couponhistoryVO);
+			}
+
+			// Handle any driver errors
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
