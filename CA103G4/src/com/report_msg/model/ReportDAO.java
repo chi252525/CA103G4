@@ -39,7 +39,7 @@ public class ReportDAO implements ReportDAO_interface {
 	// 修改檢舉的處理狀態為已處理
 	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS='RS1' WHERE RPT_NO=?";
 	// 傳回全部根據檢舉處理狀況排序，未處理的排上面
-		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS ";
+		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS asc ,RPT_TIME desc";
 	//傳回根據會員檢舉的單筆
 	private static final String GET_ONE_REPORT = "SELECT * FROM REPORT_MSG WHERE RPT_NO=?";
 	//傳回處理狀況的List
