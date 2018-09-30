@@ -117,8 +117,8 @@
 				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id}
 				                <br> </h5>
 				              <h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>
-				              <p class="card-text">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro} ${menuVO.menu_Intro}</p>
-				              <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545;">我要訂餐</a>
+				              <p class="card-text" style="height:72px;">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro} ${menuVO.menu_Intro}</p>
+				              <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545; margin-left:60px;">我要訂餐</a>
 				            </div>
 				          </div>
 				        </div>
