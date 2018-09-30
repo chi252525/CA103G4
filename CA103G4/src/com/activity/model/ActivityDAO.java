@@ -28,7 +28,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)" + 
 			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
 			"'0')," + 
-			"?,?,?,?,?,?,?,?,?,?,'AS1',0)";
+			"?,?,?,?,?,?,?,?,?,?,'1',0)";
 	//更新一個 廣告
 	private static final String UPDATE_STMT = 
 			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=?" + 

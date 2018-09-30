@@ -2,6 +2,8 @@ package com.member.model;
 
 import java.util.List;
 
+import com.couponhistory.model.CouponhistoryVO;
+
 public interface MemberDAO_interface {
 	
 	public void insert(MemberVO memVO);
@@ -11,6 +13,6 @@ public interface MemberDAO_interface {
 	public List<MemberVO> getAll();
 	public MemberVO findByPrimaryKey(String mem_No);
 //	public MemberVO compareMemId(String mem_Id);
-	
+	public List<MemberVO> getCouponByMem(String mem_No);
 }
 	

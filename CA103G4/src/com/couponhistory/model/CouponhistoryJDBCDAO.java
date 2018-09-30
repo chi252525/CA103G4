@@ -21,7 +21,8 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_state = ?";
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
 	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
-	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn WHERE COUPONHISTORY.mem_no=?";
+	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  LEFT JOIN MEMBER ON " + 
+			"Member.mem_No= COUPONHISTORY.mem_No WHERE Member.mem_no=?";
 	@Override
 	public void insert(CouponhistoryVO couponhistoryVO) {
 
