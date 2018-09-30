@@ -149,7 +149,7 @@ body {
 					<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 				</div>
 				<!-- /*單一餐點貼文 -->
-
+					
 				<!-- Load Facebook SDK for JavaScript -->
 				<div id="fb-root"></div>
 				<script>
@@ -168,7 +168,9 @@ body {
 				<div class="fb-share-button"
 					data-href="<%=request.getContextPath()%>/post/listOnepost.jsp"
 					data-layout="button_count"></div>
-
+				<button type="button"
+									class="btn btn-sm btn-outline-danger mt-2  float-right"
+									data-toggle="modal" data-target="#reportModal">檢舉此發文</button>
 				<!-- 新增留言區塊 -->
 				<form method="post"
 					action="<%=request.getContextPath()%>/reply/replyServlet.do"
@@ -212,7 +214,7 @@ body {
 				<%
 					ReplyService rplySvc = new ReplyService();
 					String listReplybypost_No = postVO.getPost_No();
-					System.out.println("listReplybypost_No" + listReplybypost_No);
+				
 					List<ReplyVO> rplyList = rplySvc.getByPostNo(listReplybypost_No);
 					pageContext.setAttribute("rplyList", rplyList);
 				%>
@@ -232,9 +234,7 @@ body {
 							<div class="mt-0 mb-2 mr-2">
 								<fmt:formatDate value="${replyVO.rply_Time}"
 									pattern="yyyy年MM月dd日 HH:mm:ss" />
-								<button type="button"
-									class="btn btn-sm btn-outline-danger mx-3 mt-0"
-									data-toggle="modal" data-target="#reportModal">檢舉</button>
+							
 							</div>
 						</div>
 					</div>
@@ -254,25 +254,38 @@ body {
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLongTitle">請告訴我們原因</h5>
 			</div>
-			<form>
+			<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/report/reportServlet.do"
+								style="margin-bottom: 0px;">
 			<div class="modal-body">
+			
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+			
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio1" name="rply_Rsm"
+					<input type="radio" id="customRadio1" name="rpt_Rsm" value="RR1"
 						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio1">留言內容不實</label>
+						class="custom-control-label" for="customRadio1">貼文內容不實</label>
 				</div>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio2" name="rply_Rsm"
+					<input type="radio" id="customRadio2" name="rpt_Rsm" value="RR2"
 						class="custom-control-input"> <label
 						class="custom-control-label" for="customRadio2">廣告內容</label>
 				</div>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio3" name="rply_Rsm"
+					<input type="radio" id="customRadio3" name="rpt_Rsm" value="RR3"
 						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio3">惡意留言</label>
+						class="custom-control-label" for="customRadio3">無關餐點分享</label>
 				</div>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio4" name="rply_Rsm"
+					<input type="radio" id="customRadio4" name="rpt_Rsm" value="RR4"
 						class="custom-control-input"> <label
 						class="custom-control-label" for="customRadio4">就是想檢舉</label>
 				</div>
@@ -281,8 +294,8 @@ body {
 				<button type="button" class="btn btn-secondary"
 					data-dismiss="modal">不檢舉了</button>
 				<input type="hidden" name="mem_No" value="M000001"/>
-				<input type="hidden" name="rply_No" value="${replyVO.rply_No}"/>
-				<button type="button" class="btn btn-primary" name="action" >送出</button>
+				<input type="hidden" name="post_No" value="${postVO.post_No}"/>
+				<button type="submit" class="btn btn-primary" name="action" value="insert">同意並送出</button>
 			</div>
 				</form>
 			</div>

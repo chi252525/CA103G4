@@ -7,4 +7,6 @@ public interface CoucatDAO_interface {
 	void update(CoucatVO coucatVO);
 	CoucatVO findByCata(String coucat_Cata);
 	List<CoucatVO> getAll();
+	public byte[] getPic(String coucat_No);
+	public CoucatVO getOneCoucat(String coucat_No);
 }

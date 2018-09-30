@@ -48,7 +48,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, replyVO.getMem_No());
 			pstmt.setString(2, replyVO.getPost_No());
@@ -84,7 +84,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, replyVO.getRply_Cont());
 			pstmt.setString(2, replyVO.getRply_Status());
@@ -157,7 +157,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 		
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ALL_BY_POSTNO);
 			pstmt.setString(1, post_No);
 			rs = pstmt.executeQuery();
@@ -283,7 +283,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 		
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			pstmt.setString(1, "rply_Status");
 			rs = pstmt.executeQuery();

@@ -4,11 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.report_msg.model.*"%>
+<%@ page import="com.post.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.member.model.*"%>
+<jsp:useBean id="cusmealSvc1" scope="page"
+	class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="memSvc" scope="page"
+	class="com.member.model.MemberService" />
 <%
 	ReportService rptSvc = new ReportService();
 	List<ReportVO> list = rptSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +44,11 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+<!-- Sweet alert -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.css">
 
 <style>
 .test {
@@ -43,76 +57,184 @@
 </style>
 </head>
 <body>
-
+	<jsp:include page="/back_end/PostHeader.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="col-sm-12 col-12 col-lg-12">
-			<h1>貼文檢舉管理</h1>
+			<h5>貼文檢舉管理</h5>
 			<br>
-			<h4>查詢:</h4>
 			<div class="container-fluid">
-				<div class="row">
-					<div class="test col-md-6">
+				<div class="row mx-0">
+					<div class="col-md-8 mx-0">
 						<form class="form-inline" action="/action_page.php">
 							<div class="form-group">
 								<select class="form-control">
-									<option value="RS0">未處理</option>
-									<option value="RS1">已處理-通過</option>
-									<option value="RS2">已處理-不通過</option>
+									<option name="rpt_Status" value="RS0">未處理</option>
+									<option name="rpt_Status" value="RS1">已處理</option>
+									
 								</select>
 							</div>
 							<button type="button" class="btn btn-primary">查詢</button>
 						</form>
-	
 					</div>
-					<div class="test col-md-6">col-6</div>
-					<div class="test col-md-6">col-6</div>
 				</div>
 			</div>
-
-			<%@ include file="pages/page1.file"%>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>檢舉會員編號</th>
-						<th>檢舉原因</th>
-						<th>處理狀態</th>
-						<th>檢舉時間</th>
-						<th><span class="lnr lnr-pencil">修改</span></th>
-					</tr>
-				</thead>
-				<c:forEach var="reportVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>">
-					<tbody>
-						<tr>
-							<td>${reportVO.rply_No}</td>
-							<td>${reportVO.mem_No}</td>
-							<td>${reportVO.rpt_Rsm}</td>
-							<td>${reportVO.rpt_Status}</td>
-							<td>${reportVO.rpt_Time}</td>
-							<td>
-							
-							<form method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
-							<button type="submit" class="btn btn-primary">
-						  	<input type="hidden" name="rply_No" value="${reportVO.rply_No}" >
-						  	<input type="hidden" name="mem_No" value="${reportVO.mem_No}" >
-						  	<input type="hidden" name="rpt_Status" value="${reportVO.rpt_Status}" >
-						  	<input type="hidden" name="action" value="update"/>
-							<span class="lnr lnr-pencil"></span></button>
-							</form>
-							
-							
-							
-							</td>
-						</tr>
-					</tbody>
-				</c:forEach>
-
-			</table>
-			<%@ include file="pages/page2.file"%>
 		</div>
 
+		<%@ include file="pages/page1.file"%>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#處理流水號</th>
+					<th>檢舉貼文編號</th>
+					<th>檢舉會員</th>
+					<th>檢舉原因</th>
+					<th>處理狀態</th>
+					<th>檢舉時間</th>
+					<th>通過/不通過</span></th>
+				</tr>
+			</thead>
+			<c:forEach var="reportVO" items="${list}" begin="<%=pageIndex%>"
+				end="<%=pageIndex+rowsPerPage-1%>">
+				<tbody>
+					<tr>
+						<td>${reportVO.rpt_No}</td>
+						<td><a
+							href="<%=request.getContextPath()%>/post/postServlet.do?post_No=${reportVO.post_No}&action=getOne_For_Display">${reportVO.post_No}</td>
+						<td>${reportVO.mem_No}${memSvc.getOne_Member(reportVO.mem_No).mem_Name}</td>
+
+
+						<c:if test='${reportVO.rpt_Rsm.equals("RR1")}'>
+							<td>貼文內容不實</td>
+						</c:if>
+						<c:if test='${reportVO.rpt_Rsm.equals("RR2")}'>
+							<td>廣告內容</td>
+						</c:if>
+						<c:if test='${reportVO.rpt_Rsm.equals("RR3")}'>
+							<td>無關餐點分享</td>
+						</c:if>
+						<c:if test='${reportVO.rpt_Rsm.equals("RR4")}'>
+							<td>就是想檢舉</td>
+						</c:if>
+
+						<td>${(reportVO.rpt_Status=='RS0')?'未處理':'已處理'}</td>
+						<td><fmt:formatDate value="${reportVO.rpt_Time}"
+								pattern="MM月dd日 HH:mm:ss" /></td>
+						<td><jsp:useBean id="postSvc" scope="page"
+								class="com.post.model.PostService" />
+
+
+						<!--通過的btn -->
+							<div class="btn-group" role="group" aria-label="Basic example">
+
+								<form method="post"
+									action="<%=request.getContextPath()%>/post/postServlet.do" id="updateStatus${reportVO.rpt_No}">
+									<button type="submit" class="btn btn-success" >
+										<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
+										<input type="hidden" name="post_No" value="${postSvc.getOne_Post(reportVO.post_No).post_No}" />
+										<input type="hidden" name="action" value="updatePostStatus" /> <span
+											class="lnr lnr-checkmark-circle"></span>
+									</button>
+									
+									
+								</form>
+							<script type="text/javascript">
+					
+								document.querySelector('#updateStatus${reportVO.rpt_No}').addEventListener('submit', function(e) {
+									  var form = this;
+
+									  e.preventDefault(); // <--- prevent form from submitting
+
+									  swal({
+									      title: "確定隱藏貼文嗎?",
+									      text: "此貼文將不可再被看到",
+									      icon: "warning",
+									      buttons: [
+									        '否',
+									        '是'
+									      ],
+									      dangerMode: true,
+									    }).then(function(isConfirm) {
+									      if (isConfirm) {
+									        swal({
+									          title: '成功',
+									          text: '貼文已經被隱藏',
+									          icon: 'success'
+									        }).then(function() {
+									          form.submit(); // <--- submit form programmatically
+									        });
+									      } else {
+									        swal("Cancelled", "貼文還好好的存在", "error");
+									      }
+									    })
+									});
+						
+								</script>
+
+
+								<!-- 不通過的btn -->
+								<form method="post"
+									action="<%=request.getContextPath()%>/report/reportServlet.do" id="updateRepotStatusOnly${reportVO.rpt_No}">
+									<button type="submit" class="btn btn-dark">
+										<input type="hidden" name="rpt_No"
+											value="${reportVO.rpt_No}" />
+										<input type="hidden" name="action" value="updateReportStatus" /> <span
+											class="lnr lnr-cross"></span>
+									</button>
+								</form>
+								
+								
+									<script type="text/javascript">
+					
+								document.querySelector('#updateRepotStatusOnly${reportVO.rpt_No}').addEventListener('submit', function(e) {
+									  var form = this;
+									  e.preventDefault(); // <--- prevent form from submitting
+
+									  swal({
+									      title: "確定不隱藏貼文嗎?",
+									      text: "此貼文將繼續被看到",
+									      icon: "warning",
+									      buttons: [
+									        '否',
+									        '是'
+									      ],
+									      dangerMode: true,
+									    }).then(function(isConfirm) {
+									      if (isConfirm) {
+									        swal({
+									          title: '成功',
+									          text: '處理完成',
+									          icon: 'success'
+									        }).then(function() {
+									          form.submit(); // <--- submit form programmatically
+									        });
+									      } else {
+									        swal("Cancelled", "貼文還好好的存在", "error");
+									      }
+									    })
+									});
+						
+								</script>
+								
+								
+
+							</div> <%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if></td>
+					</tr>
+				</tbody>
+			</c:forEach>
+
+		</table>
+		<%@ include file="pages/page2.file"%>
 	</div>
+
+	</div>
+	<jsp:include page="/back_end/PostFooter.jsp" flush="true" />
 </body>
 </html>

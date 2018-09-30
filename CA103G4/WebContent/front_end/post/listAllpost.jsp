@@ -187,7 +187,10 @@ body {
 					<!-- 共幾篇貼文 -->
 					<c:if test="${not empty list}">
 				共 <span>${list.size()}</span> 篇
-				</c:if><%@ include file="pages/page1.file"%>
+				</c:if>
+				
+				
+				<%@ include file="pages/page1.file"%>
 					<!-- /*共幾篇貼文 -->
 				</div>
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
@@ -200,7 +203,7 @@ body {
 							<div
 								class="card-img-overlay d-flex justify-content-center align-items-center">
 								<h2 class="display-5" class="text-primary ">
-									<b>${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</b>
+									<b>${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name} ${postVO.post_No}</b>
 								</h2>
 							</div>
 						</div>
@@ -224,8 +227,6 @@ body {
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
 								<!-- 查單一貼文 -->
 								<input type="hidden" name="action" value="getOne_For_Display"/>
-								<!-- 同時查單一貼文的所有留言 -->
-								<input type="hidden" name="action" value="listReplybyPostNo"/>
 								<input type="hidden" name="action" value="addviews">
 								<button type="submit" 
 									class="btn btn-info btn-sm btn-block mb-2">看更多 &raquo;</button>

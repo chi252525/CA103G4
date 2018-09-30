@@ -20,12 +20,8 @@ private ReportDAO_interface dao;
 		return reportVO;
 	}
 
-	public ReportVO updateStatus (String rpt_Status,String rpt_No) {
-		ReportVO reportVO=new ReportVO();
-		reportVO.setRpt_Status(rpt_Status);
-		reportVO.setRpt_No(rpt_No);
-		dao.updateStatus(reportVO);
-		return reportVO;
+	public void updateReportStatus(String rpt_No) {
+		dao.updateReportStatus(rpt_No);
 	}
 	//***********************取得已處理或未處理的留言
 	public List<ReportVO> getReplybyStatus(String rpt_Status){

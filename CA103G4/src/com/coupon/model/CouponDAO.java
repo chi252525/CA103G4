@@ -8,34 +8,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.activity.model.ActivityVO;
 
 public class CouponDAO implements CouponDAO_interface {
-		private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-		private static final String USER = "raman";
-		private static final String PASSWORD = "123456";
-		private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 		private static final String INSERT_STMT = 
 				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
 				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?,'CP1')";
 		private static final String UPDATESTATUS_FALSE="UPDATE COUPON SET COUP_STATUS='CP0' WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=?";
-		
-		static {
-			try {
-				Class.forName(DRIVER);
-			}catch(ClassNotFoundException ce) {
-				ce.printStackTrace();
-			}
-			}
+	
 		@Override
 		public void insert(CouponVO couponVO, Integer coucat_Amo) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			
 			try {
-				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = ds.getConnection();
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				for(int i=0;i<coucat_Amo;i++) {
 				pstmt = con.prepareStatement(INSERT_STMT);
@@ -75,7 +78,7 @@ public class CouponDAO implements CouponDAO_interface {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
-				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = ds.getConnection();
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(UPDATESTATUS_FALSE);
 				pstmt.setString(1, couponVO.getCoup_Sn());
@@ -113,7 +116,7 @@ public class CouponDAO implements CouponDAO_interface {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = ds.getConnection();
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(FINDBYCOUCAT_NO);
 				pstmt.setString(1, coucat_No);
@@ -156,9 +159,8 @@ public class CouponDAO implements CouponDAO_interface {
 		}
 
 
-
 		@Override
-		public void insert(Connection con,String coucat_No,Integer coucat_Amo) {
+		public void insertbyGenratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
 			PreparedStatement pstmt = null;
 			
 			try {

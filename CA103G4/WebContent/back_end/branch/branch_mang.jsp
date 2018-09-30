@@ -278,7 +278,7 @@
                         "action": "listAll"
                     },
                     dataType: "json",
-                    success: function(result) {
+                    success: function(result) { //result 為後端送回來的資料名稱
                         console.log(result);
                         for (i = 0; i < result.length; i++) {
 
