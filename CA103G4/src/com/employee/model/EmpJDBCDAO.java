@@ -2,7 +2,8 @@ package com.employee.model;
 
 import java.util.*;
 
-
+import com.empauthority.model.EmpauthorityVO;
+import com.feature.model.FeatureVO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -334,6 +335,12 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			System.out.println(aEmp.getEmp_Photo());
 		
 		}
+	}
+
+	@Override
+	public void insertWithEmpauthorityVO(EmpVO empVO, List<EmpauthorityVO> empauthorlist) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -7,7 +7,7 @@
 
 
 
-<%@ include file="/front_end/PostHeader.jsp" %> 
+<%@ include file="/back_end/PostHeader.jsp" %> 
 
      		<div >
      			<b>所有訂位紀錄 - listOneRes.jsp</b>
@@ -65,5 +65,5 @@
              </div>
 
 	
-<%@ include file="/front_end/PostFooter.jsp" %> 	
+<%@ include file="/back_end/PostFooter.jsp" %> 	
 	

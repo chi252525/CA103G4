@@ -93,6 +93,7 @@
 <body>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">

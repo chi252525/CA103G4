@@ -3,7 +3,7 @@
     position: absolute;
     top:0;
     border-color: #C79467 #1D1D1D #C79467 #1D1D1D;
-    height: 1370px;
+    height: 800px;
     border-width: 15px;
     
 }
@@ -51,7 +51,7 @@ body{
 .col-12.col-md-9{
     position: absolute;
     right: 0;
-    height: 1370px;
+    height: 800px;
     z-index: -1;
     background-color: whitesmoke;
     padding-left: 60px;
