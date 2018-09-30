@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" charset="UTF-8">
 
-  <title>新增客製化餐點 - addcustommeals.jsp</title>
+  <title>客製化點餐</title>
   
   
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
@@ -197,11 +197,11 @@
 	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/11.png" alt="番茄湯" style="max-width:80px"></p> -->
 	<!-- 						        </li> -->
 							
-							        <li class="task" myid="I0012" price="20">
-							          <p>雞湯20
-							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p>
-							        </li>
+<!-- 							        <li class="task" myid="I0012" price="20"> -->
+<!-- 							          <p>雞湯20 -->
+<!-- 							          <br> -->
+<!-- 							            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p> -->
+<!-- 							        </li> -->
 							
 							        <li class="task" myid="I0013" price="20">
 							          <p>豚骨湯20
@@ -213,11 +213,11 @@
 							          <br>
 							            <img src="/CA103G4/front_end/custommeals/images/14.png" alt="味增湯" style="max-width:80px"></p>
 							        </li>
-<!-- 							        <li class="task" myid="I0015" price="30"> -->
-<!-- 							          <p>咖哩湯30 -->
-<!-- 							          <br> -->
-<!-- 							            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p> -->
-<!-- 							        </li> -->
+							        <li class="task" myid="I0015" price="30">
+							          <p>咖哩湯30
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
+							        </li>
 	<!-- 						        <li class="task" myid="I0015-1" price="20"> -->
 	<!-- 						          <p>鹽味湯20 -->
 	<!-- 						          <br> -->

@@ -102,11 +102,11 @@ position: fixed;
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#"
 								id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> 客製化拉麵 </a>
+								aria-haspopup="true" aria-expanded="false"> 餐點 </a>
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">經典餐點</a> <a
-										class="dropdown-item" href="#">客製化餐點</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu2.jsp">經典餐點</a> <a
+										class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">線上預約訂位</a>
 							</li>

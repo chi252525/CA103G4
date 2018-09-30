@@ -161,7 +161,7 @@
 		<url-pattern>/front_end/member/member.do</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>PostServlet</servlet-name>
 		<servlet-class>com.post.controller.PostServlet</servlet-class>
 	</servlet>
@@ -170,13 +170,31 @@
 		<url-pattern>/post/postServlet.do</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>PostShowImage</servlet-name>
 		<servlet-class>com.post.controller.PostShowImage</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PostShowImage</servlet-name>
 		<url-pattern>/post/postshowimage.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MenuServlet</servlet-name>
+		<servlet-class>com.menu.controller.MenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuServlet</servlet-name>
+		<url-pattern>/menu/menuServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MenuShowImage</servlet-name>
+		<servlet-class>com.menu.controller.MenuShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuShowImage</servlet-name>
+		<url-pattern>/menu/menushowimage.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

@@ -17,7 +17,7 @@ import javax.servlet.http.Part;
 import com.menu.model.*;
 
 @WebServlet("/front_end/menu/menu.do")
-@MultipartConfig
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 8 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MenuServlet extends HttpServlet{
 
 	@Override
