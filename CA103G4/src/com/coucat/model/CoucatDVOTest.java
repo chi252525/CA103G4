@@ -10,15 +10,6 @@ public class CoucatDVOTest {
 
 	public static void main(String[] args) {
 //		insert done
-		try {
-			byte[] pic = getPictureByteArray("items/Bing3.jpeg");
-			CoucatVO cv1=new CoucatVO("CCCCCCCC",
-					 "CC2","CCCCCCC",100,"2018-09-05","2018-09-08",5,pic);
-			 CoucatDAO dao =new CoucatDAO();
-			 dao.insert(cv1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		 
 //   	update done
 //		 CoucatVO cv2=new CoucatVO("20180908-000002","CCCCCCCCC",

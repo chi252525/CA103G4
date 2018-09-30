@@ -108,7 +108,7 @@ public class ReportServlet  extends HttpServlet {
 
 				String rpt_Status = req.getParameter("rpt_Status");
 				if (rpt_Status == null ) {
-					errorMsgs.add("請填寫有效日期");
+					errorMsgs.add("請選正確狀態");
 				}
 		
 				if (!errorMsgs.isEmpty()) {
@@ -118,8 +118,8 @@ public class ReportServlet  extends HttpServlet {
 				}
 				/*************************** 2.開始查詢資料 *****************************************/
 				ReportService rptSvc = new ReportService();
-				List<ReportVO> list = rptSvc.getReplybyStatus(rpt_Status);
-				if (list == null) {
+				List<ReportVO> getPostByStatuslist = rptSvc.getReplybyStatus(rpt_Status);
+				if (getPostByStatuslist == null) {
 					errorMsgs.add("查無資料");
 				}
 
@@ -130,8 +130,8 @@ public class ReportServlet  extends HttpServlet {
 					return;
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("list", list);
-				System.out.println("req.setAttribute" + list);
+				req.setAttribute("getPostByStatuslist", getPostByStatuslist);
+				System.out.println("req.setAttribute" + getPostByStatuslist);
 
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/report/Postreport.jsp");
 				successView.forward(req, res);

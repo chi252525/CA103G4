@@ -44,6 +44,8 @@ public class PostServlet extends HttpServlet {
 				}
 				/*************************** 2.開始查詢資料 *****************************************/
 				PostService postSvc = new PostService();
+				/*************************** 開始增加瀏覽次數 ***************************************/
+				postSvc.updatePostViews(post_No);
 				PostVO postVO = postSvc.getOne_Post(post_No);
 				if (postVO == null) {
 					errorMsgs.add("查無資料");
@@ -56,9 +58,8 @@ public class PostServlet extends HttpServlet {
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 
-				/*************************** 開始增加瀏覽次數 ***************************************/
-
-				postSvc.updatePostViews(post_No);
+				
+			
 				HttpSession session = req.getSession();
 				session.setAttribute("postVO", postVO);
 				String url = "/front_end/post/listOnepost.jsp";
@@ -500,21 +501,23 @@ public class PostServlet extends HttpServlet {
 		}
 
 	}
+	
+	
+	
 
 	public String getFileName(Part part) {
-		Collection headername = part.getHeaderNames();
-		Iterator it = headername.iterator();
-		while (it.hasNext()) {
-			String name = (String) it.next();
-			String header = part.getHeader(name);
-//			System.out.println(name + ":" + header);
-
-		}
+	
 		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
 //		System.out.println(header);
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		if (filename.isEmpty())
+		System.out.println("filename=" + filename);  //測試用
+		//取出副檔名
+		String fnameExt = filename.substring(filename.lastIndexOf(".")+1,filename.length()).toLowerCase();
+		System.out.println("fnameExt=" + fnameExt);  //測試用
+		if (filename.length() == 0) {
 			return null;
-		return filename;
+		}
+		return fnameExt;
 	}
 }

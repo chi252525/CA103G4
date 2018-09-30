@@ -10,13 +10,15 @@ public class ActivityVO implements java.io.Serializable{
 	private String act_Cat;
 	private String act_Name;
 	private byte[] act_Carousel;
-	private String act_Cmimetype;
 	private byte[] act_Pic;
-	private String act_Pmimetype;
 	private String act_Content;
+	private Timestamp act_PreAddTime;
+	private Timestamp act_PreOffTime;
 	private Timestamp act_Start;
 	private Timestamp act_End;
-	private String act_Usecou;
+	private Integer act_Status;
+	private Integer act_Views;
+	
 	public String getAct_No() {
 		return act_No;
 	}
@@ -47,29 +49,29 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_Carousel(byte[] act_Carousel) {
 		this.act_Carousel = act_Carousel;
 	}
-	public String getAct_Cmimetype() {
-		return act_Cmimetype;
-	}
-	public void setAct_Cmimetype(String act_Cmimetype) {
-		this.act_Cmimetype = act_Cmimetype;
-	}
 	public byte[] getAct_Pic() {
 		return act_Pic;
 	}
 	public void setAct_Pic(byte[] act_Pic) {
 		this.act_Pic = act_Pic;
 	}
-	public String getAct_Pmimetype() {
-		return act_Pmimetype;
-	}
-	public void setAct_Pmimetype(String act_Pmimetype) {
-		this.act_Pmimetype = act_Pmimetype;
-	}
 	public String getAct_Content() {
 		return act_Content;
 	}
 	public void setAct_Content(String act_Content) {
 		this.act_Content = act_Content;
+	}
+	public Timestamp getAct_PreAddTime() {
+		return act_PreAddTime;
+	}
+	public void setAct_PreAddTime(Timestamp act_PreAddTime) {
+		this.act_PreAddTime = act_PreAddTime;
+	}
+	public Timestamp getAct_PreOffTime() {
+		return act_PreOffTime;
+	}
+	public void setAct_PreOffTime(Timestamp act_PreOffTime) {
+		this.act_PreOffTime = act_PreOffTime;
 	}
 	public Timestamp getAct_Start() {
 		return act_Start;
@@ -83,12 +85,20 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_End(Timestamp act_End) {
 		this.act_End = act_End;
 	}
-	public String getAct_Usecou() {
-		return act_Usecou;
+	public Integer getAct_Status() {
+		return act_Status;
 	}
-	public void setAct_Usecou(String act_Usecou) {
-		this.act_Usecou = act_Usecou;
+	public void setAct_Status(Integer act_Status) {
+		this.act_Status = act_Status;
 	}
+	public Integer getAct_Views() {
+		return act_Views;
+	}
+	public void setAct_Views(Integer act_Views) {
+		this.act_Views = act_Views;
+	}
+
+	
 
 	
 	

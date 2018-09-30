@@ -30,7 +30,6 @@ public class CoucatDAO implements CoucatDAO_interface {
 	private static final String GETALL = "SELECT * FROM COUCAT";
 	private static final String FIND_BY_CATA = 
 			"SELECT * FROM COUCAT WHERE COUCAT_CATA=?";
-	
 	private static final String  GET_ONE_COUCAT="SELECT * FROM COUCAT WHERE COUCAT_NO=?";
 	
 	static {
@@ -77,7 +76,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 						
 			// insert coupon record at the same time
 						CouponDAO dao= new CouponDAO();
-						dao.insert(con,next_coucat_No,coucatVO.getCoucat_Amo());
+						dao.insertbyGenratedKeys(con,next_coucat_No,coucatVO.getCoucat_Amo());
 						con.commit();
 						con.setAutoCommit(true);
 						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
@@ -366,6 +365,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		}
 		return coucatVO;
 	}
+	
 
 			
 				
