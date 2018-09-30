@@ -73,4 +73,8 @@ public class BranchService {
 	public Set<String> getCity() {
 		return dao.getCity();
 	}
+	
+	public BranchVO getBranch(String Branch_No) {
+		return dao.findByPrimaryKey(Branch_No);
+	}
 }

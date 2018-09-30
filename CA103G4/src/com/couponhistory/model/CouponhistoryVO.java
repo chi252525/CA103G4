@@ -1,6 +1,12 @@
 package com.couponhistory.model;
 
-public class CouponhistoryVO {
+import java.io.Serializable;
+
+public class CouponhistoryVO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String coup_sn;
 	private String mem_no;
 	private String order_no;

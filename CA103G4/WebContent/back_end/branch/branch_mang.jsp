@@ -68,7 +68,8 @@
                                         <c:forEach var="brVO" items="${branchSvc.all}">
                                     <option value="${brVO.branch_No}">${brVO.branch_No}
                                         </c:forEach>
-                                </select> <input type="hidden" name="action" value="getOne_For_Display">
+                                </select> <input type="hidden" name="action" value="getOne_For_Display"><input type="hidden" name="location" value="/back_end/branch/branch_mang.jsp">
+                                
 
                             </FORM>
                             <FORM METHOD="post" ACTION="branch.do">

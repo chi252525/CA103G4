@@ -87,6 +87,10 @@ table {
 h3{
 /* 	color:#dfbe9f !important; */
 }
+
+a{
+ margin-bottom:5px;
+}
 </style>
 </head>
 
@@ -220,7 +224,7 @@ h3{
             <img class="card-img-top" src="img/000PPUE410DCEE7B3216CEj.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in </p>
                 <p class="card-text"><small class="text-muted"></small></p>
                 <a href="#" class="btn btn-warning" >去看看</a>
             </div>

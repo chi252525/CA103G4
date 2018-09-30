@@ -40,7 +40,7 @@ public class BranchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println("action="+action);
+		System.out.println("action=" + action);
 		// ==================查單筆儲值紀錄=================
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -50,7 +50,8 @@ public class BranchServlet extends HttpServlet {
 			try {
 				// ==================輸入檢驗 select menu doesnt need====================
 				String branch_No = req.getParameter("branch_No");
-
+				String location = req.getParameter("location");
+				System.out.println("location=" + location);
 				if (!errorMsgs.isEmpty()) {
 					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 					return;// 有錯誤,返回
@@ -61,17 +62,27 @@ public class BranchServlet extends HttpServlet {
 				BranchVO brVO = brsvc.findByBranch_No(branch_No);
 				if (brVO == null) {
 					errorMsgs.add("查無資料");
+					if (location.contains("front_end")) {
+						req.getRequestDispatcher(location).forward(req, res);
+					}
+
 					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 				// error display...
 				/* ==================轉交查詢結果====================== */
 				req.setAttribute("brVO", brVO);
-				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				if (location.contains("front_end")) {
+					req.getRequestDispatcher(location).forward(req, res);
+
+				} else {
+					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				}
 
 				// ====================錯誤處理===========================
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
+
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 			}
 		}
@@ -359,10 +370,10 @@ public class BranchServlet extends HttpServlet {
 				String branch_No = req.getParameter("branch_No");
 				BranchService strSvc = new BranchService();
 				String delrow = Integer.toString(strSvc.delete(branch_No));
-				if(delrow.equals("0")) {
-					delrow="刪除失敗，請聯絡管理員";
-				}else {
-					delrow="刪除成功";
+				if (delrow.equals("0")) {
+					delrow = "刪除失敗，請聯絡管理員";
+				} else {
+					delrow = "刪除成功";
 				}
 				if (!errorMsgs.isEmpty()) {
 					errorMsgs.add("刪除失敗，請聯絡管理員");
@@ -374,19 +385,20 @@ public class BranchServlet extends HttpServlet {
 				res.setCharacterEncoding("UTF-8");
 				res.getWriter().print(new StringBuilder("<tr valign=\"middle\">")
 						.append("<td class=\"text-center\" colspan=\"6\" rowspan=\"6\"\r\n"
-								+ "style=\"vertical-align: middle; font-size: 20px; color: sienna; padding-top: 20px; font-weight: bold;\"> "+ delrow +" </td>\r\n"
-								+ "</tr>")
+								+ "style=\"vertical-align: middle; font-size: 20px; color: sienna; padding-top: 20px; font-weight: bold;\"> "
+								+ delrow + " </td>\r\n" + "</tr>")
 						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>")
 						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>")
 						.append("<tr style=\"height: 40px;\"></tr>").append("<tr style=\"height: 40px;\"></tr>"));
-				//req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				// req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req,
+				// res);
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 			}
 		}
-		
-		if ("findBybranch_City".equals(action)) {
+
+		if ("findBybranch_City".equals(action) || "findBybranch_CityfonrEnd".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -403,7 +415,10 @@ public class BranchServlet extends HttpServlet {
 				}
 				// ==========forward result===============
 				req.setAttribute("list", list);
-				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				if ("findBybranch_City".equals(action))
+					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				else if ("findBybranch_CityfonrEnd".equals(action))
+					req.getRequestDispatcher("/front_end/branchInfo/branch_mang.jsp").forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
@@ -427,19 +442,18 @@ public class BranchServlet extends HttpServlet {
 				req.setAttribute("list", list);
 				// req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req,
 				// res);
-				//=============print to web page=====================
+				// =============print to web page=====================
 				StringBuilder htmlstr = new StringBuilder();
 				JSONArray jsonarr = new JSONArray();
-										
-					
+
 				for (BranchVO brVO : list) {
-					 JSONObject jso = new  JSONObject();
-					 jso.put("branch_No", brVO.getBranch_No());
-					 jso.put("branch_Name", brVO.getBranch_Name());
-					 jso.put("branch_City", brVO.getBranch_City());
-					 jso.put("branch_Dist", brVO.getBranch_Dist());
-					 jso.put("branch_Addr", brVO.getBranch_Addr());
-					 jso.put("branch_Tel", brVO.getBranch_Tel());
+					JSONObject jso = new JSONObject();
+					jso.put("branch_No", brVO.getBranch_No());
+					jso.put("branch_Name", brVO.getBranch_Name());
+					jso.put("branch_City", brVO.getBranch_City());
+					jso.put("branch_Dist", brVO.getBranch_Dist());
+					jso.put("branch_Addr", brVO.getBranch_Addr());
+					jso.put("branch_Tel", brVO.getBranch_Tel());
 //					htmlstr.append("<tr><td>" + brVO.getBranch_No() + "</td>")
 //							.append("<td>" + brVO.getBranch_Name() + "</td>")
 //							.append("<td>" + brVO.getBranch_City() + "</td>")
@@ -448,12 +462,12 @@ public class BranchServlet extends HttpServlet {
 //							.append("<td>" + brVO.getBranch_Tel() + "</td>")
 //							.append("<td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>")
 //							.append("<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
-					 jsonarr.put(jso);
+					jsonarr.put(jso);
 				}
-				
+
 				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");
-				
+
 				PrintWriter out = res.getWriter();
 				out.print(jsonarr);
 				System.out.println(jsonarr);
