@@ -36,10 +36,10 @@ public class ReportDAO implements ReportDAO_interface {
 			"INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,RPT_RSM,RPT_STATUS,RPT_TIME)VALUES "
 			+ "(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),"
 			+ "?,?,?,'RS0',sysdate)";	
-	// 修改貼文檢舉狀態
-	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS=?, WHERE RPT_NO=?";
+	// 修改檢舉的處理狀態為已處理
+	private static final String UPDATESTATUS_STMT ="UPDATE REPORT_MSG SET RPT_STATUS='RS1' WHERE RPT_NO=?";
 	// 傳回全部根據檢舉處理狀況排序，未處理的排上面
-		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS";
+		private static final String GET_ALL_STMT = "SELECT * FROM REPORT_MSG ORDER BY RPT_STATUS ";
 	//傳回根據會員檢舉的單筆
 	private static final String GET_ONE_REPORT = "SELECT * FROM REPORT_MSG WHERE RPT_NO=?";
 	//傳回處理狀況的List
@@ -80,22 +80,19 @@ public class ReportDAO implements ReportDAO_interface {
 	}
 	
 	@Override
-	public void updateStatus(ReportVO reportVO) {
+	public int updateReportStatus(String rpt_No) {
 
+		int updateCount = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATESTATUS_STMT);
-	
-			pstmt.setString(1, reportVO.getRpt_Status());
-			pstmt.setString(2, reportVO.getRpt_No());
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("修改" + rowCount + " 筆資料");
+			pstmt.setString(1, rpt_No);
+
+			updateCount = pstmt.executeUpdate();
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -112,6 +109,8 @@ public class ReportDAO implements ReportDAO_interface {
 				}
 			}
 		}
+		return updateCount;
+	
 		
 	}
 
@@ -123,7 +122,7 @@ public class ReportDAO implements ReportDAO_interface {
 		List<ReportVO> reportlist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL_BYSTATUS_STMT);
 			pstmt.setString(1, rpt_Status);
 			rs = pstmt.executeQuery();
@@ -176,7 +175,7 @@ public class ReportDAO implements ReportDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -230,7 +229,7 @@ public class ReportDAO implements ReportDAO_interface {
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_REPORT);
 		
 			pstmt.setString(1, rpt_No);

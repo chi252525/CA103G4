@@ -8,7 +8,7 @@ public class MemberVO {
 	private String mem_Pw;
 	private String mem_Name;
 	private String mem_Gender;
-	private String mem_Bir;
+	private Date mem_Bir;
 	private String mem_Mail;
 	private String mem_Phone;
 	private String mem_Receiver;
@@ -21,15 +21,15 @@ public class MemberVO {
 	private Integer mem_Bonus;
 	private Date  mem_Credate;
 	private String mem_Status;
-	private byte[] mem_Photo;
+//	private byte[] mem_Photo;
 	
 	
 	
 	
-	public MemberVO(String mem_No, String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, String mem_Bir,
+	public MemberVO(String mem_No, String mem_Id, String mem_Pw, String mem_Name, String mem_Gender, Date mem_Bir,
 			String mem_Mail, String mem_Phone, String mem_Receiver, String mem_Repno, String mem_Recounty,
 			String mem_Retown, String mem_Readdr, String mem_Cardnum, String mem_Carddue, Integer mem_Bonus,
-			Date mem_Credate, String mem_Status, byte[] mem_Photo) {
+			Date mem_Credate, String mem_Status) {
 		super();
 		this.mem_No = mem_No;
 		this.mem_Id = mem_Id;
@@ -49,7 +49,7 @@ public class MemberVO {
 		this.mem_Bonus = mem_Bonus;
 		this.mem_Credate = mem_Credate;
 		this.mem_Status = mem_Status;
-		this.mem_Photo = mem_Photo;
+//		this.mem_Photo = mem_Photo;
 	}
 	
 	
@@ -98,10 +98,10 @@ public class MemberVO {
 	public void setMem_Gender(String mem_Gender) {
 		this.mem_Gender = mem_Gender;
 	}
-	public String getMem_Bir() {
+	public Date getMem_Bir() {
 		return mem_Bir;
 	}
-	public void setMem_Bir(String mem_Bir) {
+	public void setMem_Bir(Date mem_Bir) {
 		this.mem_Bir = mem_Bir;
 	}
 	public String getMem_Mail() {
@@ -176,12 +176,12 @@ public class MemberVO {
 	public void setMem_Status(String mem_Status) {
 		this.mem_Status = mem_Status;
 	}
-	public byte[] getMem_Photo() {
-		return mem_Photo;
-	}
-	public void setMem_Photo(byte[] mem_Photo) {
-		this.mem_Photo = mem_Photo;
-	}
+//	public byte[] getMem_Photo() {
+//		return mem_Photo;
+//	}
+//	public void setMem_Photo(byte[] mem_Photo) {
+//		this.mem_Photo = mem_Photo;
+//	}
 	
 	
 }

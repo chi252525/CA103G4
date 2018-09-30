@@ -39,6 +39,12 @@ public class PostService {
 		dao.update(postVO);
 		return postVO;
 	}
+
+	
+	public void updatePostStatus(String post_No) {
+		dao.updatePostStatus(post_No);
+	}
+	
 	
 	public void deletePost(String post_No) {
 		dao.delete(post_No);
@@ -80,6 +86,8 @@ public class PostService {
 	public List<PostVO> getAllByKeywordOrderByViews(String keyword) {
 		return dao.getAllByKeywordOrderByViews(keyword);
 	}
+	
+	
 
 	
 }

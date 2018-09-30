@@ -30,15 +30,20 @@ public class PostDAO implements PostDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	// 新增一個貼文
+	// 新增一個貼文預設顯示
 	private static final String INSERT_STMT=
 			"INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT," + 
-			"POST_EVA,POST_PHOTO,POST_TIME)" + 
+			"POST_EVA,POST_PHOTO,POST_TIME,POST_STATUS)" + 
 			"VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')," + 
-			"?,?,?,?,?,?)";	
+			"?,?,?,?,?,?,'PS1')";	
 	// 修改貼文
 	private static final String UPDATE_STMT = 
 			"UPDATE POST SET MEM_NO=?,CUSTOM_NO=?,POST_CONT=?,POST_EVA=?,POST_PHOTO=?,POST_TIME=? WHERE POST_NO=?";
+	
+	// 修改貼文狀態
+		private static final String UPDATE_POST_STATUS_STMT = 
+				"UPDATE POST SET POST_STATUS='PS0' WHERE POST_NO=?";
+	
 	// 刪除貼文
 	private static final String DELETE_STMT = "DELETE FROM POST WHERE POST_NO = ?";
 	
@@ -48,30 +53,37 @@ public class PostDAO implements PostDAO_interface{
 	// 一個會員的貼文
 	private static final String FINDBYMEMNO="SELECT * FROM POST WHERE MEM_NO=?";
 	
+	// 一個餐點的貼文(not good)
 	private static final String FINDBYCUSTOMNO="SELECT * FROM POST WHERE CUSTOM_NO=?";
+	
 	// 所有貼文
-	private static final String GETALL = "SELECT * FROM POST order by POST_TIME DESC";
+	private static final String GETALL = "SELECT * FROM POST WHERE POST_STATUS='PS1' order by POST_TIME DESC";
+	
 	// 取得單一貼文
 	private static final String GET_ONE_POST = "SELECT * FROM POST WHERE POST_NO=?";
+	
 	// 依據年月查貼文
 	private static final String FINDBY_YEAR_AND_MON="SELECT * FROM post WHERE EXTRACT(YEAR FROM post_time )=?" + 
 			"and EXTRACT(MONTH FROM post_time )=?";
+	
 	// 貼文瀏覽數++
 	private static final String UPDATE_POST_VIEWS_STMT = "UPDATE POST SET POST_VIEWS = POST_VIEWS + 1 WHERE POST_NO = ?";
 	
 	//取得一個貼文的所有留言
 	private static final String GET_ONE_POST_ALLRPLYS =
-	"SELECT RPLY_NO,MEM_NO,POST_NO,RPLY_CONT,RPLY_TIME FROM rply_msg where POST_NO =? order by RPLY_NO desc";
+	"SELECT RPLY_NO,MEM_NO,POST_NO,RPLY_CONT,RPLY_TIME FROM rply_msg where POST_NO =?  order by RPLY_NO desc";
 	
 
 	// 取得所有貼文，根據瀏覽次數由多到少排列
 	private static final String GET_ALL_BY_HOT_STMT = 
-					"SELECT * FROM POST ORDER BY POST_VIEWS DESC";
+					"SELECT * FROM POST WHERE POST_STATUS='PS1' ORDER BY POST_VIEWS DESC";
+	
 	// 取得4個發文日期最新的貼文
-	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE ROWNUM <=4";
+	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE POST_STATUS='PS1' AND ROWNUM <=4";
+	
 	// 根據內容搜尋，根據發文時間由新到舊排列	
 	private static final String GET_ALL_BY_KEYWORD_ORDER_BY_VIEWS =
-	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, ?) ORDER BY POST_TIME DESC";
+	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, ?) AND POST_STATUS='PS1' ORDER BY POST_TIME DESC";
 	
 	
 	@Override
@@ -733,6 +745,39 @@ public class PostDAO implements PostDAO_interface{
 			}
 		}
 		return postlist;
+	}
+
+	@Override
+	public int updatePostStatus(String post_No) {
+
+		int updateCount = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_POST_STATUS_STMT);
+			pstmt.setString(1, post_No);
+
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return updateCount;
 	}
 	
 }

@@ -11,6 +11,8 @@ import com.custommeals.model.CustommealsVO;
 import com.post.model.*;
 import com.reply_msg.model.ReplyService;
 import com.reply_msg.model.ReplyVO;
+import com.report_msg.model.ReportService;
+import com.report_msg.model.ReportVO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 8 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class PostServlet extends HttpServlet {
@@ -33,7 +35,7 @@ public class PostServlet extends HttpServlet {
 
 				String post_No = req.getParameter("post_No");
 				if (post_No == null || (post_No.trim()).length() == 0) {
-					errorMsgs.add("請輸入貼文編號");
+					errorMsgs.add("請重新輸入");
 				}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
@@ -306,8 +308,8 @@ public class PostServlet extends HttpServlet {
 				}
 				/*************************** 2.開始查詢資料 *****************************************/
 				PostService postSvc = new PostService();
-				List<PostVO> postlist = postSvc.getYear_and_Month_Post(year, month);
-				if (postlist == null) {
+				List<PostVO> list = postSvc.getYear_and_Month_Post(year, month);
+				if (list == null) {
 					errorMsgs.add("查無資料");
 				}
 
@@ -319,8 +321,8 @@ public class PostServlet extends HttpServlet {
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				HttpSession session = req.getSession();
-				session.setAttribute("list", postlist);
-				System.out.println("req.setAttributelist=" + postlist);
+				session.setAttribute("list", list);
+				System.out.println("session.setAttributelist=" + list);
 
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp");
 				successView.forward(req, res);
@@ -337,7 +339,7 @@ public class PostServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("跳進listReplybyPostNo");
+//			System.out.println("跳進listReplybyPostNo");
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String post_No = req.getParameter("post_No");
@@ -376,7 +378,7 @@ public class PostServlet extends HttpServlet {
 				/*************************** 2.開始增加瀏覽次數 ***************************************/
 				PostService postSvc = new PostService();
 				postSvc.updatePostViews(post_No);
-
+				
 				/*************************** 3.更新完成，準備轉交(Send the Success view) ***********/
 				System.out.println("updatePostViews=" + post_No);
 				HttpSession session = req.getSession();
@@ -400,22 +402,23 @@ public class PostServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 
-//        	System.out.println("跳進keyword");
+        	System.out.println("跳進keyword");
 				String keyword = req.getParameter("keyword"); // 使用者輸入的值
-//        	System.out.println("keyword的req.getParameter"+keyword);
+        	System.out.println("keyword的req.getParameter"+keyword);
 				/*************************** 2.開始查詢資料 *****************************************/
 				PostService postSvc = new PostService();
-				List<PostVO> postlist = postSvc.getAllByKeywordOrderByViews(keyword.trim());
-				if (postlist.isEmpty()) { // 如果list是空的代表沒有資料
+				List<PostVO> list = postSvc.getAllByKeywordOrderByViews(keyword.trim());
+				if (list.isEmpty()) { // 如果list是空的代表沒有資料
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) { // 如果錯誤List不是空的就return
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("postlist", postlist); // 將list存到req中
+				HttpSession session = req.getSession();
+				session.setAttribute("keyword", keyword);
+				session.setAttribute("list", list); // 將list存到req中
 				String url = "/front_end/post/listPostByQuery.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -452,6 +455,48 @@ public class PostServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
 				failureView.forward(req, res);
 			}
+		}
+		
+		if ("updatePostStatus".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("in updatePostStatus");
+			
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				String post_No = req.getParameter("post_No");
+				System.out.println("updateStatus的post_No"+post_No);
+				if (post_No == null || (post_No.trim()).length() == 0) {
+					errorMsgs.add("貼文編號沒取到");
+				}
+				String rpt_No = req.getParameter("rpt_No");
+				if (rpt_No == null || (rpt_No.trim()).length() == 0) {
+					errorMsgs.add(" rpt_No沒取到");
+				}
+				/*************************** 2.開始更新資料 *****************************************/
+				PostVO postVO = new PostVO();
+				postVO.setPost_No(post_No);
+				/***************************修改貼文狀態******************************/
+				PostService postSvc = new PostService();
+				postSvc.updatePostStatus(post_No);
+				System.out.println("updatePostStatus");
+				/***************************同時修改Report處理狀態******************************/
+				ReportService rptSvc = new ReportService();
+				rptSvc.updateReportStatus(rpt_No);
+				/***************************返回畫面*****************************/
+				
+				String url = "/back_end/report/Postreport.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+			}catch(Exception e) {
+				errorMsgs.add("無法取得資料" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
+				failureView.forward(req, res);
+			}
+				
+			
+			
 		}
 
 	}

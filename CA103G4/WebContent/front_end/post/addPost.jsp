@@ -6,18 +6,15 @@
 <%@ page import="com.member.model.*"%>
 
 <%
-	PostVO postVO = (PostVO) session.getAttribute("postVO");
-	System.out.println("addPost的postVO"+postVO);
+	PostVO postVO = (PostVO) request.getAttribute("postVO");
 	MemberVO memVO = (MemberVO) request.getAttribute("memVO");
 	if (memVO == null) {
 		memVO = (MemberVO) session.getAttribute("memVO");
 	}
 %>
 
-<jsp:useBean id="cusmealSvc1" scope="page"
-	class="com.custommeals.model.CustommealsService" />
-<jsp:useBean id="memSvc" scope="page"
-	class="com.member.model.MemberService" />
+<jsp:useBean id="cusmealSvc1" scope="page"	class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <!DOCTYPE html>
 <html>
 
@@ -211,7 +208,7 @@ body {
 							</div>
 							<!-- 編輯器區塊 -->
 							<textarea name="post_Cont">
-					            	<%=(postVO == null) ? "" : postVO.getPost_Cont()%>
+					            	<%=(postVO == null) ? "我推薦此餐點!" : postVO.getPost_Cont()%>
 					            </textarea>
 							<!-- //編輯器區塊 -->
 							<br>
