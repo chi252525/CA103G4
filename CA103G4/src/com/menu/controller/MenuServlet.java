@@ -16,7 +16,7 @@ import javax.servlet.http.Part;
 
 import com.menu.model.*;
 
-@WebServlet("/front_end/testimgupload/menu.do")
+@WebServlet("/front_end/menu/menu.do")
 @MultipartConfig
 public class MenuServlet extends HttpServlet{
 
@@ -43,7 +43,7 @@ public class MenuServlet extends HttpServlet{
 					errorMsgs.add("請輸入餐點編號");
 				}
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -52,7 +52,7 @@ public class MenuServlet extends HttpServlet{
 				if(!(menu_No.matches("M\\d{3}")))
 					errorMsgs.add("餐點編號格式不正確");
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -63,19 +63,19 @@ public class MenuServlet extends HttpServlet{
 				if(menuVO == null)
 					errorMsgs.add("查無資料");
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("menuVO", menuVO);
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listOneMenu.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listOneMenu.jsp");
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理*************************************/
 			}catch(Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
 				failureView.forward(req, res);
 			}
 			
@@ -97,13 +97,13 @@ public class MenuServlet extends HttpServlet{
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("menuVO", menuVO);
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/update_menu_input.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/update_menu_input.jsp");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("無法取得要修改的資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/listAllMenu.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -180,7 +180,7 @@ public class MenuServlet extends HttpServlet{
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/addMenu.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -191,13 +191,13 @@ public class MenuServlet extends HttpServlet{
 								
 				/***************************3.新增完成,準備轉交(Send the Success view)************/
 				req.setAttribute("menuVO", menuVO);  // 資料庫新增成功後,正確的的menuVO物件,存入req
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listAllMenu.jsp");
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("資料新增失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/menu/addMenu.jsp");
 				failuerView.forward(req, res);
 			}
 		}
@@ -278,7 +278,7 @@ public class MenuServlet extends HttpServlet{
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/addMenu.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -289,13 +289,13 @@ public class MenuServlet extends HttpServlet{
 								
 				/***************************3.修改完成,準備轉交(Send the Success view)************/
 				req.setAttribute("menuVO", menuVO);  // 資料庫修改成功後,正確的的menuVO物件,存入req
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listOneMenu.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listOneMenu.jsp");
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("資料修改失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/testimgupload/addMenu.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/menu/addMenu.jsp");
 				failuerView.forward(req, res);
 			}
 		}
@@ -315,14 +315,14 @@ public class MenuServlet extends HttpServlet{
 								
 				/***************************3.刪除完成,準備轉交(Send the Success view)************/
 				req.setAttribute("menu_No", menu_No);
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp?"+whichPage);
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listAllMenu.jsp?"+whichPage);
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
 				
 			} catch(Exception e) {
 				errorMsgs.add("刪除資料失敗" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/testimgupload/listAllMenu.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/listAllMenu.jsp");
 				failureView.forward(req, res);
 			}
 		}

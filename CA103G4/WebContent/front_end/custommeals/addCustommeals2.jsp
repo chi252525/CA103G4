@@ -197,11 +197,11 @@
 	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/11.png" alt="番茄湯" style="max-width:80px"></p> -->
 	<!-- 						        </li> -->
 							
-	<!-- 						        <li class="task" myid="I0012" price="20"> -->
-	<!-- 						          <p>雞湯20 -->
-	<!-- 						          <br> -->
-	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p> -->
-	<!-- 						        </li> -->
+							        <li class="task" myid="I0012" price="20">
+							          <p>雞湯20
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p>
+							        </li>
 							
 							        <li class="task" myid="I0013" price="20">
 							          <p>豚骨湯20
@@ -213,11 +213,11 @@
 							          <br>
 							            <img src="/CA103G4/front_end/custommeals/images/14.png" alt="味增湯" style="max-width:80px"></p>
 							        </li>
-							        <li class="task" myid="I0015" price="30">
-							          <p>咖哩湯30
-							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
-							        </li>
+<!-- 							        <li class="task" myid="I0015" price="30"> -->
+<!-- 							          <p>咖哩湯30 -->
+<!-- 							          <br> -->
+<!-- 							            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p> -->
+<!-- 							        </li> -->
 	<!-- 						        <li class="task" myid="I0015-1" price="20"> -->
 	<!-- 						          <p>鹽味湯20 -->
 	<!-- 						          <br> -->
@@ -362,18 +362,20 @@
 <div class="container">
 										
 	<div class="row">
-		<div class="col-4">													
+		<div style="width:60px;">
+		</div>
+		<div style="width:450px;">													
 										  &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp;
 										  ${memVO.mem_No}
 										  <input type="hidden" name="mem_No" size="45" 	
 												value="<%=(memVO==null)?"":memVO.getMem_No()%>" /><br>
 										  
 										  &nbsp;&nbsp;&nbsp;餐點名稱&nbsp;&nbsp;&nbsp;
-										  <input type="TEXT" name="custom_Name" size="45" style="margin-top:10px;"	
-												value="<%=(custommealsVO==null)?"海陸":custommealsVO.getcustom_Name()%>" /><br>
+										  <input type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;"	
+												value="<%=(custommealsVO==null)?"":custommealsVO.getcustom_Name()%>" /><br>
 										  	
 									 	  &nbsp;&nbsp;&nbsp;餐點價格&nbsp;&nbsp;&nbsp; 
-									 	  <input type="TEXT" name="custom_Price" size="45"	class="custom_Price" style="margin-top:10px;"
+									 	  <input type="text" name="custom_Price" size="45" class="custom_Price" readonly style="margin-top:10px; width:250px;"
 												value="<%=(custommealsVO==null)?"":custommealsVO.getcustom_Price()%>" /><br>
 			
 											<table>
@@ -442,7 +444,7 @@
 										        </tr>
 											</table>
 		</div>
-		<div class="col-1">						  
+		<div style="width:150px;">						  
 									   <div class="column-button">
 								        <button type="button" class="button confirm-button confirmBtn">計算金額</button>
 								       </div>
