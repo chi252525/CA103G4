@@ -61,7 +61,7 @@ public class EmpauthorityJDBCDAO implements EmpauthorityDAO_interface{
 	}
 
 	@Override
-	public List<EmpauthorityVO> findByEmp(EmpVO empVO) {
+	public List<EmpauthorityVO> oneEmpFealist(String emp_No) {
 		// TODO Auto-generated method stub
 		Connection con =null;
 		PreparedStatement pstmt =null;
@@ -71,7 +71,7 @@ public class EmpauthorityJDBCDAO implements EmpauthorityDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(FINDBY_EMPNO);
 			System.out.println("連線成功");
-			pstmt.setString(1,empVO.getEmp_No());
+			pstmt.setString(1,emp_No);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				EmpauthorityVO empauthorVO = new EmpauthorityVO();

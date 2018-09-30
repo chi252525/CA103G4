@@ -17,12 +17,10 @@ public class EmpauthorityDAOtest {
 //		dao.insert(empauthorVO);
 		
 //查詢BY EMP_NO	
-		
-		EmpVO empVO = new EmpVO();
-		empVO.setEmp_No("E000000001");
+
 		EmpauthorityDAO dao = new EmpauthorityDAO();
 		List<EmpauthorityVO> empauthlist = new ArrayList<>();
-		empauthlist=dao.findByEmp(empVO);
+		empauthlist=dao.oneEmpFealist("E000000001");
 		for(EmpauthorityVO empauthorVO : empauthlist) {
 			System.out.println(empauthorVO.getFea_No());
 			
