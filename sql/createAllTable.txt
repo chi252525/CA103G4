@@ -879,13 +879,40 @@ NOCACHE;
  
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'極致豚骨玉子麵','經典餐點',299,'48小時溫火慢熬精緻豚骨湯頭，搭配叉燒肉及溫泉蛋',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'極致豚骨玉子麵','經典餐點',240,'14小時溫火慢熬精緻豚骨湯頭，搭配叉燒肉及溫泉蛋。',null,'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'紐西蘭牛肉拉麵','經典餐點',350,'回甘的牛肉湯頭，搭配空運來台紐西蘭牛肉',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'紐西蘭牛肉拉麵','經典餐點',280,'回甘的牛肉湯頭，搭配空運來台紐西蘭牛肉。',null,'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'地獄麻辣拉麵','經典餐點',269,'川味麻辣湯頭，搭配辣味肉燥與叉燒肉',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'地獄麻辣拉麵','經典餐點',260,'川味麻辣湯頭，辣醬與叉燒肉，搭上微酸辣味泡菜，辛辣口感，風味倍增。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'經典特製拉麵','經典餐點',270,'特製九州溫泉蛋、叉燒肉、提味青蔥，搭配出完美組合，是超高人氣餐點。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'醬油叉燒拉麵','經典餐點',220,'日本進口醬油調製的醬汁，搭配招牌叉燒肉，特殊口味與眾不同。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'味噌叉燒拉麵','經典餐點',220,'加入日本味噌的湯頭，是日本拉麵代表性風味之一。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'咖哩豬排烏龍麵','經典餐點',250,'酥脆厚實的炸豬排，配上經典咖哩湯頭，濃濃的日式風。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'墨魚海鮮大餐','經典餐點',260,'軟硬適中的墨魚麵搭配鮮蝦與魷魚，濃郁的鮮美海味。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'蛤蠣鮮蝦刀削麵','經典餐點',290,'鮮美的蛤蠣搭上鮮蝦，鹽味湯頭配上嚼勁十足的刀削麵。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'海陸雙拼大餐','經典餐點',320,'鮮蝦搭配紐西蘭牛肉，海陸味覺交疊的絕佳滋味。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'櫻桃鴨胸蕎麥麵','經典餐點',280,'札實的櫻桃鴨胸切片，搭配清爽的日式蕎麥麵。',null,'1');
+
+INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'鹽味牛肉蔬菜麵','經典餐點',270,'玫瑰鹽調製的湯頭，他配紐西蘭牛肉及清爽有勁的蔬菜麵。',null,'1');
 
 --------------------------------------------------------
 --  for Table INGCLASS
@@ -1003,6 +1030,8 @@ INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_PO
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0003','蛤蠣','1','2','一份',60, null); 
 INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0003','虱目魚','1','2','一份',70, null); 
+INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
+VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0003','牛肉','1','2','一份',90, null); 
 
 
 INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
@@ -1031,6 +1060,8 @@ INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_PO
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0005','海苔','1','1','一份',15, null); 
 INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0005','燙青菜','1','1','一份',30, null); 
+INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
+VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0005','高麗菜絲','1','1','一份',25, null); 
 
 
 INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
@@ -1043,6 +1074,8 @@ INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_PO
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0006','辣椒','1','1','一份',5, null); 
 INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
 VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0006','玫瑰鹽','1','1','一份',5, null); 
+INSERT INTO INGREDIENTS (INGDT_ID, INGDTC_ID, INGDT_NAME, INGDT_STATUS, INGDT_POINT, INGDT_UNIT, INGDT_PRICE, INGDT_PHOTO)
+VALUES(('I'||LPAD(to_char(INGREDIENTS_seq.NEXTVAL), 4, '0')),'T0006','特調醬汁','1','1','一份',5, null); 
 
 
  
@@ -1197,15 +1230,16 @@ CREATE TABLE ACTIVITY (
 ACT_NO VARCHAR2(15) NOT NULL,
 COUCAT_NO VARCHAR2(15) NOT NULL,
 ACT_CAT VARCHAR2(5) ,
-ACT_CTYPE VARCHAR2(50),
 ACT_NAME VARCHAR2(4000),
 ACT_CAROUSEL BLOB,
 ACT_Pic BLOB,
-ACT_PTYPE VARCHAR2(50),
 ACT_CONTENT CLOB,
+act_PreAddTime 	TIMESTAMP,
+act_PreOffTime TIMESTAMP,
 ACT_START TIMESTAMP,
 ACT_END TIMESTAMP,
-ACT_USECOU VARCHAR(3),
+act_Status NUMBER(10) default 1,
+act_Views Number(38) default 0,
 
 CONSTRAINT ACTIVITY_FK FOREIGN KEY (COUCAT_NO)
 REFERENCES COUCAT (COUCAT_NO),
@@ -1217,36 +1251,69 @@ START WITH 1
 NOMAXVALUE
 NOCYCLE
 NOCACHE;
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a1','新品上市期間限定~會員憑券點拉麵折扣100元
- ',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001','a2','慶祝竹風堂拉麵十周年慶,活動期間內至各分店用餐(限內用),一碗即折80元',null,null,null,TO_TIMESTAMP('2018-09-08 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','新品上市期間限定~會員憑券點拉麵折扣100元',NULL,NULL,'新品上市期間限定~會員憑券點拉麵折扣100元'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)',NULL,NULL,'慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC2','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',NULL,NULL,'會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000002','a1','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',null,null,null,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC1','拉麵的基本元素',NULL,NULL,'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。到底拉麵是由哪些元素組成的呢?'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,ACT_START,ACT_END,ACT_USECOU)
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000003','a1','線上訂餐會員獨享!訂餐外送滿千可折100元!',NULL,NULL,NULL,
-TO_TIMESTAMP('2018-09-22 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),'AU1');
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','西門店限定二郎風蒜味拉麵',NULL,NULL,'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','永康公園店限定辣味噌拉麵',NULL,NULL,'辛味噌拉麵是日本東北仙台及山形的代表拉麵，因為味噌是仙台的特產，因此當地本來就以味噌拉麵為特產，其後附上加入辣椒的味噌醬，而成為辛味噌拉麵。'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
 
 
 COMMIT;

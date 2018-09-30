@@ -18,9 +18,10 @@
 		<!-- myself CSS -->
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/member/css/login.css">	
 </head>
-<body>
+<jsp:include page="/front_end/header.jsp" flush="true" />
+<body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
+	width="100%" height="">
 <!-- header勿動 -->
-<jsp:include page="/front_end/header.jsp"></jsp:include>
 	<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
 			width="100%" height="" alt="">
 

@@ -7,6 +7,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.empauthority.model.EmpauthorityDAO;
+import com.empauthority.model.EmpauthorityVO;
+import com.feature.model.FeatureVO;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,14 +51,14 @@ public class EmpDAO implements EmpDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, empVO.getBranch_no());
-			pstmt.setString(2, empVO.getEmp_acnum());
-			pstmt.setString(3, empVO.getEmp_psw());
-			pstmt.setString(4, empVO.getEmp_name());
-			pstmt.setString(5, empVO.getEmp_gender());
-			pstmt.setString(6, empVO.getEmp_pos());
-			pstmt.setString(7, empVO.getEmp_tel());      	
-			pstmt.setBytes(8,empVO.getEmp_photo());
+			pstmt.setString(1, empVO.getBranch_No());
+			pstmt.setString(2, empVO.getEmp_Acnum());
+			pstmt.setString(3, empVO.getEmp_Psw());
+			pstmt.setString(4, empVO.getEmp_Name());
+			pstmt.setString(5, empVO.getEmp_Gender());
+			pstmt.setString(6, empVO.getEmp_Pos());
+			pstmt.setString(7, empVO.getEmp_Tel());      	
+			pstmt.setBytes(8,empVO.getEmp_Photo());
 			pstmt.executeUpdate();
 			
 			System.out.println("新增成功");
@@ -104,16 +108,16 @@ public class EmpDAO implements EmpDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
-			pstmt.setString(1, empVO.getBranch_no());
-			pstmt.setString(2, empVO.getEmp_acnum());
-			pstmt.setString(3, empVO.getEmp_psw());
-			pstmt.setString(4, empVO.getEmp_name());
-			pstmt.setString(5, empVO.getEmp_gender());
-			pstmt.setString(6, empVO.getEmp_pos());
-			pstmt.setString(7, empVO.getEmp_tel()); 
-			pstmt.setString(8, empVO.getEmp_status()); 
-			pstmt.setBytes(9,empVO.getEmp_photo());
-			pstmt.setString(10, empVO.getEmp_no());
+			pstmt.setString(1, empVO.getBranch_No());
+			pstmt.setString(2, empVO.getEmp_Acnum());
+			pstmt.setString(3, empVO.getEmp_Psw());
+			pstmt.setString(4, empVO.getEmp_Name());
+			pstmt.setString(5, empVO.getEmp_Gender());
+			pstmt.setString(6, empVO.getEmp_Pos());
+			pstmt.setString(7, empVO.getEmp_Tel()); 
+			pstmt.setString(8, empVO.getEmp_Status()); 
+			pstmt.setBytes(9,empVO.getEmp_Photo());
+			pstmt.setString(10, empVO.getEmp_No());
 			
 
 			pstmt.executeUpdate();
@@ -160,17 +164,17 @@ public class EmpDAO implements EmpDAO_interface{
 		    while(rs.next()) {
 		    	
 		    	empVO = new EmpVO();
-		    	empVO.setEmp_no(rs.getString("emp_no"));
-		    	empVO.setBranch_no(rs.getString("branch_no"));
-				empVO.setEmp_acnum(rs.getString("emp_acnum"));
-				empVO.setEmp_psw(rs.getString("emp_psw"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_gender(rs.getString("emp_gender"));
-				empVO.setEmp_pos(rs.getString("emp_pos"));
-				empVO.setEmp_tel(rs.getString("emp_tel"));      	
-				empVO.setEmp_status(rs.getString("emp_status"));  	
-				empVO.setEmp_credate(rs.getDate("emp_credate"));
-				empVO.setEmp_photo(rs.getBytes("emp_photo"));
+		    	empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
 				
 		    }
 	
@@ -221,17 +225,17 @@ public class EmpDAO implements EmpDAO_interface{
 		    while(rs.next()) {
 		    	
 		    	empVO = new EmpVO();
-		    	empVO.setEmp_no(rs.getString("emp_no"));
-		    	empVO.setBranch_no(rs.getString("branch_no"));
-				empVO.setEmp_acnum(rs.getString("emp_acnum"));
-				empVO.setEmp_psw(rs.getString("emp_psw"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_gender(rs.getString("emp_gender"));
-				empVO.setEmp_pos(rs.getString("emp_pos"));
-				empVO.setEmp_tel(rs.getString("emp_tel"));      	
-				empVO.setEmp_status(rs.getString("emp_status"));  	
-				empVO.setEmp_credate(rs.getDate("emp_credate"));
-				empVO.setEmp_photo(rs.getBytes("emp_photo"));
+		    	empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
 				list.add(empVO);
 		    }
 	
@@ -261,5 +265,93 @@ public class EmpDAO implements EmpDAO_interface{
 			}
 		}
 		return list;
+	}
+	@Override
+	public void insertWithEmpauthorityVO(EmpVO empVO, List<EmpauthorityVO> empauthorlist) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			con = ds.getConnection();
+			
+			//開始新增前須使用交易故將自動commit設為false
+			con.setAutoCommit(false);
+			
+			String[] cols = {"EMP_NO"};
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
+			
+			pstmt.setString(1, empVO.getBranch_No());
+			pstmt.setString(2, empVO.getEmp_Acnum());
+			pstmt.setString(3, empVO.getEmp_Psw());
+			pstmt.setString(4, empVO.getEmp_Name());
+			pstmt.setString(5, empVO.getEmp_Gender());
+			pstmt.setString(6, empVO.getEmp_Pos());
+			pstmt.setString(7, empVO.getEmp_Tel());      	
+			pstmt.setBytes(8,empVO.getEmp_Photo());
+			pstmt.executeUpdate();
+			
+			
+			System.out.println("員工新增成功，準備開始同時新增員工權限");
+			
+			//取得自增主鍵值
+			String pk_emp_no = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				pk_emp_no = rs.getString(1);
+				System.out.println("自增主鍵值為="+pk_emp_no+"(此為剛剛新增的員工編號)");
+			}else {
+				System.out.println("未取得自增主鍵值");
+			}
+			
+			rs.close();
+			
+			//現在開始同時新增員工權限
+			EmpauthorityDAO dao = new EmpauthorityDAO();
+			System.out.println("員工權限empauthorlist.size()="+empauthorlist.size());
+			for(EmpauthorityVO empauthorVO : empauthorlist) {
+				empauthorVO.setEmp_No(new String(pk_emp_no));
+				dao.insert2(empauthorVO, con);
+			}
+			
+			
+			//員工權限新增完成後手動確認，並調成自動確認
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("新增員工編號： " + pk_emp_no + "時,共有員工權限" + empauthorlist.size()
+					+ "功能同時被新增");
+		}  catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		
 	}
 }

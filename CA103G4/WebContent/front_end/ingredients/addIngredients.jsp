@@ -108,6 +108,7 @@ $(document).ready(function (){
 <body bgcolor='white'>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
+<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
 <table id="table-1">
 	<tr><td>
@@ -174,7 +175,7 @@ $(document).ready(function (){
 	<tr>
 		<td></td>
 		<td>
-	        <p>ImgPreview</p>
+	        <p></p>
 	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
 	        <div class="size"></div>
 		</td>
@@ -206,22 +207,5 @@ $(document).ready(function (){
   }
 </style>
 
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y/m/d',         //format:'Y-m-d H:i:s',
-		   value: '<%="2018/10/19"%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-       
-        
-</script>
 
 </html>

@@ -1,0 +1,228 @@
+.navbar{
+    background-color: #373856;
+}
+.title{
+    font-family: 'SentyWen';   
+    color:#F5FFFA;
+    font-size: 90px;
+    
+}
+.title:hover{
+    color:crimson;
+}
+
+
+.navbar-toggler-icon{
+    background-image: url(/CA103G4/back_end/img/3line.png);
+    width: 60px;
+}
+
+/*user-icon*/
+.fa-user{
+    padding:5px;
+    
+}
+.fa-cog{
+    padding:5px; 
+}
+/*main-icon*/
+.fa-users{
+    padding:5px;
+}
+.fa-coffee{
+    padding:5px;
+}
+.fa-user-md{
+    padding:5px;
+}
+.fa-university{
+    padding:5px;
+}
+.fa-file{
+    padding:5px;
+}
+
+.log-in{
+    padding: 6px;
+    width: 90px;
+    height: 45px;
+    background-color:#4D5061 ;
+    font-family: 'SentyGoldenBell';
+    font-size: 20px;
+    color:aliceblue;
+}
+.log-in:hover{
+    background-color:#B22222 ;
+    color:aliceblue;
+}
+.register{
+    padding: 6px;
+    width: 90px;
+    height: 45px;
+    background-color:#4D5061;
+    font-family: 'SentyGoldenBell';
+    font-size: 20px;
+    color:aliceblue;
+}
+.register:hover{
+    background-color:#008B8B;
+    color:aliceblue;
+}
+
+.content{
+    margin: auto;
+}
+
+/*bar-primaryTitle*/
+
+/* .aboutUs{ */
+   
+/* } */
+/* .material{ */
+    
+/* } */
+/* .member{ */
+    
+/* } */
+/* .branch{ */
+    
+/* } */
+/* .activity{ */
+    
+/* } */
+.p{
+     font-family: 'SentyGoldenBell';
+     font-size: 22px;
+/*
+     padding-right: 100px;
+     padding-left: 100px;
+*/
+}
+.main-icon{
+    color: aliceblue;
+}
+.icon-font{
+    color: #FFD86D;
+    transition: color .13s ease-in;
+    transition: font-size .10s ease-in;
+/*    transition: border-bottom .600s ease-in;*/
+}
+.icon-font:hover{
+    font-size: 24px;
+    color:#F0F8FF;
+    border-bottom: 1px solid #F0F8FF;
+    padding-bottom: 15px;
+    
+}
+.mainbar{
+/*
+    border-bottom:2px solid #C0C0C0;
+    border-top:2px solid #C0C0C0;
+*/
+    animation: transform00 25s infinite;
+}
+
+.b{
+    padding-top: 9px;
+    text-align: center;
+    width:250px;
+    height:70px;
+}
+.title-box{
+    text-align: center;
+    width:350px;
+    height:100px;
+    padding-top: -3px;
+    line-height:640%;
+}
+.footer {
+    border-top:6px solid aliceblue;
+/*    position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:#363636;
+    color: white;
+    text-align: center;
+}
+body{
+    background: url("/CA103G4/back_end/img/ricepaper.png");
+}
+.hd{
+    height:0.00003px;
+    
+}
+.footer-inner{
+    margin: auto;
+    width:600px;
+    height:110px;
+}
+.footer-1{
+    border-bottom: 1px solid #F0F8FF;
+}
+.navbar-brand {
+    padding-top: 0rem;
+}
+.dropdown-item{
+    background-color: #373856;
+    border-radius: 3px;
+    color:#F0F8FF;
+    transition: color .13s ease-in;
+    transition: font-size .10s ease-in;
+    font-family: 'SentyGoldenBell';
+     font-size: 22px;
+}
+.dropdown-item:hover{
+    font-size: 24px;
+    background-color: #F0F8FF;
+    color:black;   
+}
+.dropdown-menu{
+    background-color: #373856;
+}
+.dropdown-toggle::after {
+    content: none;
+}
+.collapse  ul li a:active {
+  -webkit-animation-name: hideSubMenu;
+  -webkit-animation-duration: .8s;
+}
+
+@keyframes transform00 {
+    0%  {border-bottom:2px solid #FFD86D;border-top:2px solid #FFD86D;}
+    55%  {border-bottom:2px solid #FFFFFF;border-top:2px solid #FFFFFF;}
+    100% {border-bottom:2px solid #FF4500;border-top:2px solid #FF4500;}
+}
+
+@font-face {
+            font-family: 'SentyWen';
+            src: url(/CA103G4/back_end/fonts/SentyWen.woff2) format('woff2'),
+                url(/CA103G4/back_end/fonts/SentyWen.woff) format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+@font-face {
+            font-family: 'SentyGoldenBell';
+            src: url(/CA103G4/back_end/fonts/SentyGoldenBell.woff2) format('woff2'),
+                url(/CA103G4/back_end/fonts/SentyGoldenBell.woff) format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+@-webkit-keyframes hideSubMenu {
+  0% {
+    transform: scale(1,1);
+  }
+  25% {
+    transform: scale(0.8,0.8);
+  }
+  50% {
+    transform: scale(0.7,0.7);
+  }
+  75% {
+    transform: scale(0.6,0.6);
+  }
+  100% {
+    transform: scale(0.4,0.4);
+  }
+}
+

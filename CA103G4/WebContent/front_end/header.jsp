@@ -60,12 +60,7 @@ body {
 	background-position: center;
 	background-size: cover;
 }
-.coupon{
-position: fixed;
-  right: 30px;
-  top:500px;
 
-}
 </style>
 <!--Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
@@ -97,16 +92,16 @@ position: fixed;
 							<li class="nav-item active"><a class="nav-link" href="#">分店資訊
 									<span class="sr-only">(current)</span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">餐點介紹</a></li>
+<!-- 							<li class="nav-item"><a class="nav-link" href="#">餐點介紹</a></li> -->
 							<li class="nav-item"><a class="nav-link" href="#"></a></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#"
 								id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> 客製化拉麵 </a>
+								aria-haspopup="true" aria-expanded="false"> 餐點 </a>
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">經典餐點</a> <a
-										class="dropdown-item" href="#">客製化餐點</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu2.jsp">經典餐點</a> <a
+									   class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">線上預約訂位</a>
 							</li>
@@ -150,46 +145,14 @@ position: fixed;
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/member.do?logout=out" >登出</a>
 								</div>
 							</li>
-
+					
 						</ul>
 					</div>
 				</nav>
 
 			</div>
 		</header>
-		<div class="coupon filter-dark" >
-          <h4>Test</h4>
-          <div id="carousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block img-fluid " src="<%=request.getContextPath()%>/front_end/img/no-photo.png" style="height:35px;width:35px;border-radius:50%";>
-                <div class="carousel-caption">
-                  <h1 class="text-white">First slide label</h1>
-                  <p class="text-white">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="img/index/hero-bg3.jpg">
-                <div class="carousel-caption">
-                  <h3>Second slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-          <div class="row">
-            <div class="col-md-12"></div>
-          </div>
-          <p class="lead">優惠卷</p>
-        </div>
+		
 	
 	</section>
 </body>

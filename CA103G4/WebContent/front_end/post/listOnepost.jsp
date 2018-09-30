@@ -108,6 +108,9 @@ body {
 	border-radius: 5px;
 	;
 }
+.box{
+background-color:rgba(253,253,253,0.8);
+}
 </style>
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
@@ -143,7 +146,8 @@ body {
 					<p>餐點推薦度</p>
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
 					<c:forEach var="ingredientsVO" items="${tags}">
-						<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
+					
+					<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
 					</c:forEach>
 					<p>${postVO.post_Cont}</p>
 					<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>

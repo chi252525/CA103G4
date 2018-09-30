@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" charset="UTF-8">
 
-  <title>新增客製化餐點 - addcustommeals.jsp</title>
+  <title>客製化點餐</title>
   
   
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
@@ -171,11 +171,11 @@
 							        <h4>湯頭</h4>
 							      </div>
 							      <ul class="task-list" id="ingdt_2">
-							        <li class="task" myid="I0007" price="20">
-							          <p>醬油湯20
-							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/07.png" alt="醬油湯" style="max-width:80px"></p>
-							        </li>
+<!-- 							        <li class="task" myid="I0007" price="20"> -->
+<!-- 							          <p>醬油湯20 -->
+<!-- 							          <br> -->
+<!-- 							            <img src="/CA103G4/front_end/custommeals/images/07.png" alt="醬油湯" style="max-width:80px"></p> -->
+<!-- 							        </li> -->
 	<!-- 						        <li class="task" myid="I0008" price="30"> -->
 	<!-- 						          <p>泡菜湯30 -->
 	<!-- 						          <br> -->
@@ -197,11 +197,11 @@
 	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/11.png" alt="番茄湯" style="max-width:80px"></p> -->
 	<!-- 						        </li> -->
 							
-	<!-- 						        <li class="task" myid="I0012" price="20"> -->
-	<!-- 						          <p>雞湯20 -->
-	<!-- 						          <br> -->
-	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p> -->
-	<!-- 						        </li> -->
+<!-- 							        <li class="task" myid="I0012" price="20"> -->
+<!-- 							          <p>雞湯20 -->
+<!-- 							          <br> -->
+<!-- 							            <img src="/CA103G4/front_end/custommeals/images/12.png" alt="雞湯" style="max-width:80px"></p> -->
+<!-- 							        </li> -->
 							
 							        <li class="task" myid="I0013" price="20">
 							          <p>豚骨湯20
@@ -218,11 +218,11 @@
 							          <br>
 							            <img src="/CA103G4/front_end/custommeals/images/15.png" alt="咖哩湯" style="max-width:80px"></p>
 							        </li>
-	<!-- 						        <li class="task" myid="I0015-1" price="20"> -->
-	<!-- 						          <p>鹽味湯20 -->
-	<!-- 						          <br> -->
-	<!-- 						            <img src="/CA103G4/front_end/custommeals/images/15-1.png" alt="鹽味湯" style="max-width:80px"></p> -->
-	<!-- 						        </li> -->
+							        <li class="task" myid="I0015-1" price="20">
+							          <p>鹽味湯20
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/15-1.png" alt="鹽味湯" style="max-width:80px"></p>
+							        </li>
 	<!-- 						        <li class="task" myid="I0015-2" price="30"> -->
 	<!-- 						          <p>海鮮湯30 -->
 	<!-- 						          <br> -->
@@ -362,18 +362,20 @@
 <div class="container">
 										
 	<div class="row">
-		<div class="col-4">													
+		<div style="width:60px;">
+		</div>
+		<div style="width:450px;">													
 										  &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp;
 										  ${memVO.mem_No}
 										  <input type="hidden" name="mem_No" size="45" 	
 												value="<%=(memVO==null)?"":memVO.getMem_No()%>" /><br>
 										  
 										  &nbsp;&nbsp;&nbsp;餐點名稱&nbsp;&nbsp;&nbsp;
-										  <input type="TEXT" name="custom_Name" size="45" style="margin-top:10px;"	
-												value="<%=(custommealsVO==null)?"海陸":custommealsVO.getcustom_Name()%>" /><br>
+										  <input type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;"	
+												value="<%=(custommealsVO==null)?"":custommealsVO.getcustom_Name()%>" /><br>
 										  	
 									 	  &nbsp;&nbsp;&nbsp;餐點價格&nbsp;&nbsp;&nbsp; 
-									 	  <input type="TEXT" name="custom_Price" size="45"	class="custom_Price" style="margin-top:10px;"
+									 	  <input type="text" name="custom_Price" size="45" class="custom_Price" readonly style="margin-top:10px; width:250px;"
 												value="<%=(custommealsVO==null)?"":custommealsVO.getcustom_Price()%>" /><br>
 			
 											<table>
@@ -430,19 +432,21 @@
 										                <input id="I0037" type="checkbox" name="ingredients" value="I0037"> 海帶20
 										                <input id="I0038" type="checkbox" name="ingredients" value="I0038"> 海苔15
 										                <input id="I0039" type="checkbox" name="ingredients" value="I0039"> 燙青菜30
+										                <input id="I0040" type="checkbox" name="ingredients" value="I0040"> 高麗菜絲25
 										                <br>
 														調味
-										                <input id="I0040" type="checkbox" name="ingredients" value="I0040"> 蔥花5
-										                <input id="I0041" type="checkbox" name="ingredients" value="I0041"> 柴魚5
-										                <input id="I0042" type="checkbox" name="ingredients" value="I0042"> 胡椒5
-										                <input id="I0043" type="checkbox" name="ingredients" value="I0043"> 辣椒5
-										                <input id="I0044" type="checkbox" name="ingredients" value="I0044"> 玫瑰鹽5
+										                <input id="I0041" type="checkbox" name="ingredients" value="I0041"> 蔥花5
+										                <input id="I0042" type="checkbox" name="ingredients" value="I0042"> 柴魚5
+										                <input id="I0043" type="checkbox" name="ingredients" value="I0043"> 胡椒5
+										                <input id="I0044" type="checkbox" name="ingredients" value="I0044"> 辣椒5
+										                <input id="I0045" type="checkbox" name="ingredients" value="I0045"> 玫瑰鹽5
+										                <input id="I0046" type="checkbox" name="ingredients" value="I0046"> 特調醬汁5
 										                <br>
 										            </td>
 										        </tr>
 											</table>
 		</div>
-		<div class="col-1">						  
+		<div style="width:150px;">						  
 									   <div class="column-button">
 								        <button type="button" class="button confirm-button confirmBtn">計算金額</button>
 								       </div>
@@ -498,6 +502,11 @@
 							          <br>
 							            <img src="/CA103G4/front_end/custommeals/images/39.png" alt="燙青菜" style="max-width:80px"></p>
 							        </li>
+							        <li class="task" myid="I0040" price="25">
+							          <p>高麗菜絲25
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/40.png" alt="高麗菜絲" style="max-width:80px"></p>
+							        </li>
 							      </ul>
 							    </li>
 							    
@@ -506,30 +515,35 @@
 							        <h4>調味料</h4>
 							      </div>
 							      <ul class="task-list" id="ingdt_6">
-							        <li class="task" myid="I0040" price="5">
+							        <li class="task" myid="I0041" price="5">
 							          <p>蔥花5
 							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/40.png" alt="蔥花" style="max-width:80px"></p>
-							        </li>
-							        <li class="task" myid="I0041" price="5">
-							          <p>柴魚5
-							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/41.png" alt="柴魚" style="max-width:80px"></p>
+							            <img src="/CA103G4/front_end/custommeals/images/41.png" alt="蔥花" style="max-width:80px"></p>
 							        </li>
 							        <li class="task" myid="I0042" price="5">
-							          <p>胡椒5
+							          <p>柴魚5
 							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/42.png" alt="胡椒" style="max-width:80px"></p>
+							            <img src="/CA103G4/front_end/custommeals/images/42.png" alt="柴魚" style="max-width:80px"></p>
 							        </li>
 							        <li class="task" myid="I0043" price="5">
-							          <p>辣椒5
+							          <p>胡椒5
 							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/43.png" alt="辣椒" style="max-width:80px"></p>
+							            <img src="/CA103G4/front_end/custommeals/images/43.png" alt="胡椒" style="max-width:80px"></p>
 							        </li>
 							        <li class="task" myid="I0044" price="5">
+							          <p>辣椒5
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/44.png" alt="辣椒" style="max-width:80px"></p>
+							        </li>
+							        <li class="task" myid="I0045" price="5">
 							          <p>玫瑰鹽5
 							          <br>
-							            <img src="/CA103G4/front_end/custommeals/images/44.png" alt="玫瑰鹽" style="max-width:80px"></p>
+							            <img src="/CA103G4/front_end/custommeals/images/45.png" alt="玫瑰鹽" style="max-width:80px"></p>
+							        </li>
+							        <li class="task" myid="I0046" price="5">
+							          <p>特調醬汁5
+							          <br>
+							            <img src="/CA103G4/front_end/custommeals/images/46.png" alt="玫瑰鹽" style="max-width:80px"></p>
 							        </li>
 							      </ul>
 							    </li>

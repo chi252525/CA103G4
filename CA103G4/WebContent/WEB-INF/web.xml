@@ -161,7 +161,7 @@
 		<url-pattern>/front_end/member/member.do</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>PostServlet</servlet-name>
 		<servlet-class>com.post.controller.PostServlet</servlet-class>
 	</servlet>
@@ -170,13 +170,31 @@
 		<url-pattern>/post/postServlet.do</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>PostShowImage</servlet-name>
 		<servlet-class>com.post.controller.PostShowImage</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PostShowImage</servlet-name>
 		<url-pattern>/post/postshowimage.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MenuServlet</servlet-name>
+		<servlet-class>com.menu.controller.MenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuServlet</servlet-name>
+		<url-pattern>/menu/menuServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MenuShowImage</servlet-name>
+		<servlet-class>com.menu.controller.MenuShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuShowImage</servlet-name>
+		<url-pattern>/menu/menushowimage.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -215,17 +233,29 @@
 		<url-pattern>/report/reportServlet.do</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	  <servlet>
 		<servlet-name>ResServlet</servlet-name>
 		<servlet-class>com.reservation.controller.ResServlet</servlet-class>
 	  </servlet>
 	  <servlet-mapping>
 	    <servlet-name>ResServlet</servlet-name>
-	    <url-pattern>/front_end/res/res.do</url-pattern>
+	    <url-pattern>/back_end/res/res.do</url-pattern>
 	  </servlet-mapping>
   
 
-	
+	<servlet>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.employee.controller.EmpServlet</servlet-class>
+		<multipart-config>
+        <max-file-size>10485760</max-file-size>
+        <max-request-size>20971520</max-request-size>
+        <file-size-threshold>5242880</file-size-threshold>
+    	</multipart-config>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/back_end/employee/emp.do</url-pattern>
+	</servlet-mapping>
 	
 	
 	

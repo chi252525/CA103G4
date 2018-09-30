@@ -100,6 +100,17 @@
 padding:11rem!important;
 
 }
+.coupon{
+position: fixed;
+  top:500px;
+    width: 30%;
+    margin: 0 auto;
+    max-width: 200px;
+    background-color:rgba(0,0,0,0.4)
+}
+
+
+   
 </style>
 </head>
 <body>
@@ -128,6 +139,52 @@ padding:11rem!important;
 		</div>
 	</div>
 	<!-- End banner Area -->
+	
+	<!-- 廁旁優惠卷 -->
+	<div class="coupon filter-dark" >
+          <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+            <!-- 第一個 -->
+              <div class="carousel-item active">
+              
+                <img class="d-block img-fluid px-2 py-2" src="<%=request.getContextPath()%>/res/img/coupon01.jpg" style="height:150px;width:200px";>
+                <div class="carousel-caption">
+                  <h5 style="color:black"> <span class="promo">Test</span></h5>
+                </div>
+                <p class="mb-0" style="color:white" Align="Center">test</p>
+              </div>
+              
+              <!-- 第二個 -->
+             <div class="carousel-item ">
+              
+                <img class="d-block img-fluid px-2 py-2" src="<%=request.getContextPath()%>/res/img/coupon01.jpg" style="height:150px;width:200px";>
+                <div class="carousel-caption">
+                  <h5 style="color:black"> <span class="promo">BOH232</span></h5>
+                </div>
+                <p class="lead mb-0" style="color:white" Align="Center">優惠卷</p>
+              </div>
+              
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-12"></div>
+          </div>
+        </div>
+	
+	
+	
+	
+	
+	
+	
 	<script>
             // Wrap every letter in a span
 $('.ml13').each(function(){

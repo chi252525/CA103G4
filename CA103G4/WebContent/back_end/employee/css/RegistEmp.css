@@ -1,0 +1,66 @@
+#back{
+	background-color: rgba(225,225,225,0.45);
+	border-radius: 2rem;
+	box-shadow:3px 3px 5px 6px #cccccc;
+
+}
+
+body {
+	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+#img{
+	
+	border-radius: 10rem;
+	width: 200px;
+	height: 200px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	box-shadow:3px 3px 5px 6px #cccccc;
+}
+
+.tdbtn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#img-td{
+	text-align: center;
+}
+
+.td1{
+	width: 20%;
+	text-align: center;
+}
+
+.td2{
+	width: 40%;
+	text-align: center;
+}
+
+.td2.emp_Gender{
+	padding-top: 8px;
+}
+
+.td2.fea {
+	background-color: rgba(240, 0, 0, 0.45);
+}
+
+#td2cancel{
+	margin-top: 30px;
+	margin-right: 20px;
+	margin-bottom: 15px;
+}
+
+#td2yes{
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+
+.empinput{
+	border-radius: 0.5rem;
+}
