@@ -1,19 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.menu.model.*"%>
-
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-    MenuService menuSvc = new MenuService();
-    List<MenuVO> list = menuSvc.getAll();
-    pageContext.setAttribute("list",list);
+  MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); //MenuServlet.java(Controller), 存入req的menuVO物件
 %>
-
 
 <html>
 <head>
-<title>listAllMenu2.jsp</title>
+<title>餐點資料 - listOneMenu.jsp</title>
 
 <style>
   table#table-1 {
@@ -36,7 +31,7 @@
 <style>
   table {
     
-	max-width: 1280px;
+	width: 1440px;
 	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -48,13 +43,13 @@
   table, th, td {
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
-    text-align: left;
+    text-align: center;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
   th, td {
     padding: 5px;
-    text-align: left;
+    text-align: center;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
@@ -63,49 +58,34 @@
 
 </style>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/menu/css/theme.css" />
-  
-
-
 </head>
 <body bgcolor='white'>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
-<!-- <h4>此頁練習採用 EL 的寫法取值:</h4> -->
+<h4></h4>
 <!-- <table id="table-1"> -->
 <!-- 	<tr><td> -->
-<!-- 		 <h3>listAllMenu.jsp</h3> -->
+<!-- 		 <h3>餐點資料 - ListOneMenu.jsp</h3> -->
 <!-- 		 <h4><a href="select_page.jsp">回首頁</a></h4> -->
 <!-- 	</td></tr> -->
 <!-- </table> -->
 
-<%-- 錯誤列表 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+
 
 
 
 <div class="h-100 py-5">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mt-3">
-				<%@ include file="page1.file"%><br>
-	
-			</div>
-				<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"><br>
+			
 				
-				        <div class="col-md-3">
+	
+			
+				
+				
+				        <div class="col-md-12">
 				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px;">
 				
 				            <img class="card-img-top" 
@@ -124,28 +104,35 @@
 				        </div>
 				        
 				
-				</c:forEach>
 				
-			<div class="col-md-12 mt-3">
-				<%@ include file="page2.file"%>  
-  			</div>
+				
+			
+				
+  			
     	</div>
 	</div>
 </div>
 
 
-  
-  
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-
-
-
-
-
+<table>
+	<tr>
+		
+		<th>餐點名稱</th>
+		
+		<th>餐點價格</th>
+		<th>餐點介紹</th>
+		<th>餐點圖片</th>
+		
+	</tr>
+	<tr>
+		
+		<td><%=menuVO.getMenu_Id()%></td>
+		<td><%=menuVO.getMenu_Price()%></td>
+		<td><%=menuVO.getMenu_Intro()%></td>
+		<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td>
+		
+	</tr>
+</table>
 
 </body>
 </html>

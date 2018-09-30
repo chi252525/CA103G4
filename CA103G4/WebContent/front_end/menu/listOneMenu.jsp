@@ -64,7 +64,7 @@
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+<h4></h4>
 <table id="table-1">
 	<tr><td>
 		 <h3>餐點資料 - ListOneMenu.jsp</h3>

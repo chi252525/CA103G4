@@ -16,6 +16,109 @@
 <title>listAllMenu2.jsp</title>
 
 <style>
+body{
+ margin: 0;  
+}
+.container{
+  display: flex;
+  background-color: rgba(255, 64, 64, 0.3);
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-button{
+  width: 10em;
+  height: 3em;
+  color: white;
+  background-color: #019fe9;
+  border: none;
+}
+
+.lightbox-button:active{
+  background-color: #208fc3;
+  border: none;
+}
+
+.lightbox-button:focus{
+  outline:0;
+}
+
+.lightbox{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1001;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.lightbox-header{
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  background-color: red;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-card{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 10px 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+.resort-img-container{
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 5em;
+}
+
+.resort-img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+}
+
+.resort-name-container{
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  flex-basis: 5em;
+}
+
+.resort-name{
+  font-size: 18px;
+  margin: 0 0.1em;
+}
+
+</style>
+
+
+<style>
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
@@ -70,6 +173,9 @@
   
 
 
+
+
+
 </head>
 <body bgcolor='white'>
 
@@ -122,8 +228,6 @@
 				            </div>
 				          </div>
 				        </div>
-				        
-				
 				</c:forEach>
 				
 			<div class="col-md-12 mt-3">
@@ -132,6 +236,22 @@
     	</div>
 	</div>
 </div>
+
+
+
+
+
+
+
+<script>
+$(".lightbox-button").click(function(){
+    $(".lightbox").show(200);
+});
+
+$(".lightbox-container").click(function(){
+    $(".lightbox").hide(200);
+});
+</script>
 
 
   
