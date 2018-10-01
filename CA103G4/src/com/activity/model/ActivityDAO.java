@@ -28,28 +28,16 @@ public class ActivityDAO implements ActivityDAO_interface{
 			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)" + 
 			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
 			"'0')," + 
-			"?,?,?,?,?,?,?,?,?,?,'1',0)";
-	//更新一個 廣告
+			"?,?,?,?,?,?,?,?,?,?,1,0)";
+	////修改廣告資訊(必須在下架狀態才能修改)
 	private static final String UPDATE_STMT = 
 			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=?" + 
 			  "WHERE ACT_NO=?";
 	//取得一個廣告活動
 	private static final String GET_ONE_STMT = "SELECT * FROM ACTIVITY WHERE ACT_NO=?";
 	
-	//以時間區間搜尋廣告活動
-	private static final String FINDBYDATEBETWEEN = 
-    		"SELECT * FROM activity WHERE act_start BETWEEN ? AND ? AND " + 
-    				"act_End BETWEEN ? and ?";
-	
-	//以種類搜尋廣告活動
-	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
-	
-	//以欲上架時間最近的的活動排序取得全部
-		private static final String GETALL = 
-				"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
-	
-	//更動廣告為馬上上架
-	private static final String UPDATE_ADONSTAT_STMT="UPDATE ACTIVITY SET act_Status=1,act_PreAddTime=SYSDATE,ACT_START=SYSDATE,act_PreOffTime=? WHERE ACT_NO=?";
+	///***更動廣告為馬上上架***(上/下架也會更新成實際上下架時間)
+	private static final String UPDATE_ADONSTAT_STMT="UPDATE ACTIVITY SET act_Status=1,act_PreAddTime=SYSDATE,ACT_START=sysdate,act_PreOffTime=?,ACT_END=? WHERE ACT_NO=?";
 	
 	//更動廣告為馬上下架
 	private static final String UPDATE_ADOFFSTAT_STMT=
@@ -66,7 +54,17 @@ public class ActivityDAO implements ActivityDAO_interface{
 	private static final String FINDNEW_STMT=
 			"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY ACT_START DESC";
 
+	//以時間區間搜尋廣告活動
+	private static final String FINDBYDATEBETWEEN = 
+    		"SELECT * FROM activity WHERE act_start BETWEEN ? AND ? AND " + 
+    				"act_End BETWEEN ? and ?";
 	
+	//以種類搜尋廣告活動
+	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
+	
+	//以欲上架時間最近的的活動排序取得全部
+		private static final String GETALL = 
+				"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
 	
 	
 	@Override
@@ -166,7 +164,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		List<ActivityVO> activitylist = new ArrayList<>();
 
 		try {
-			con = ds.getConnection();
+			con =ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYDATEBETWEEN);
 			pstmt.setTimestamp(1, act_Start1);
@@ -230,26 +228,27 @@ public class ActivityDAO implements ActivityDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ActivityVO> activitylist = new ArrayList<>();
+		ActivityVO activityVO=null;
 
 		try {
-			con =ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+			con = ds.getConnection();
+			System.out.println("getAll Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
-
+		
 			while (rs.next()) {
-				ActivityVO activityVO=new ActivityVO();
+				activityVO=new ActivityVO();
 				activityVO.setAct_No(rs.getString("act_No"));
 				activityVO.setCoucat_No(rs.getString("coucat_No"));
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
-				activityVO.setAct_Content(rs.getString("act_Content"));
 				activityVO.setAct_PreAddTime(rs.getTimestamp("act_PreAddTime"));
 				activityVO.setAct_PreOffTime(rs.getTimestamp("act_PreOffTime"));
 				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
 				activityVO.setAct_End(rs.getTimestamp("act_End"));
 				activityVO.setAct_Status(rs.getInt("act_Status"));
 				activityVO.setAct_Views(rs.getInt("act_Views"));
+				activitylist.add(activityVO);
 			}
 
 
@@ -279,7 +278,9 @@ public class ActivityDAO implements ActivityDAO_interface{
 				}
 			}
 		}
+		System.out.println("OK");
 		return activitylist;
+		
 	}
  
 	@Override
@@ -290,7 +291,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		ResultSet rs = null;
 		List<ActivityVO> activitylist = new ArrayList<>();
 		try {
-			con =ds.getConnection();
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYACTCATA);
 			pstmt.setString(1, act_Cata);
@@ -397,9 +398,85 @@ public class ActivityDAO implements ActivityDAO_interface{
 	}
 
 	@Override
-	public int updateAct(String act_No, Integer act_status, ActivityVO activityVO) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateAct(String act_No, Integer act_Status, ActivityVO activityVO) {
+		int count=0;
+		Connection con = null ;
+		PreparedStatement pstmt= null;
+		//如果廣告為下架狀態
+		if(act_Status == 0) {
+			try {
+				
+				con=ds.getConnection();
+				//更新成馬上上架
+				pstmt=con.prepareStatement(UPDATE_ADONSTAT_STMT);
+				
+				//假設上架時間大於原有預計下架時間時，把預計下架時間跟實際下架時間清空
+				if(System.currentTimeMillis() >= activityVO.getAct_PreOffTime().getTime() ) {
+					pstmt.setTimestamp(1,null);
+					pstmt.setTimestamp(2,null);
+					pstmt.setString(3,act_No);
+				}else {
+					//設定預計何時下架時間
+					pstmt.setTimestamp(1,activityVO.getAct_PreOffTime());
+					pstmt.setTimestamp(2,null);
+					pstmt.setString(3,act_No);
+				}
+				
+				count=pstmt.executeUpdate();
+				
+			}catch(SQLException se) {
+				throw new RuntimeException("資料庫發生錯誤"+se.getMessage());
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close();
+					}catch(SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				
+				if(con != null) {
+					try {
+					  con.close();
+					}catch(Exception e) {
+					  e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+		}else if(act_Status == 1) {		
+			try {
+			
+				con=ds.getConnection();
+				pstmt=con.prepareStatement(UPDATE_ADOFFSTAT_STMT);
+				
+				pstmt.setString(1,act_No);
+				
+				count=pstmt.executeUpdate();
+				
+			}catch(SQLException se) {
+				throw new RuntimeException("資料庫發生錯誤"+se.getMessage());
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close();
+					}catch(SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				
+				if(con != null) {
+					try {
+					  con.close();
+					}catch(Exception e) {
+					  e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+			
+		}
+		return count;
 	}
 
 	@Override

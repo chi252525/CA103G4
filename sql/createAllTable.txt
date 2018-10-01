@@ -1,8 +1,28 @@
-﻿
+﻿CREATE OR REPLACE DIRECTORY AD_BIGPIC_DIR AS 'D:\CA103G4_img\AD_BIGPIC';
+CREATE OR REPLACE DIRECTORY AD_PIC_DIR AS 'D:\CA103G4_img\AD_PIC';
+CREATE OR REPLACE DIRECTORY POST_DIR AS 'D:\CA103G4_img\POST';
+--建立bfile 轉 blob 
+create or replace FUNCTION bfile_to_blob
+ (p_bfile     IN BFILE)
+ RETURN           BLOB
+ AS v_src_file      BFILE := p_bfile;
+V_AMOUNT        INTEGER;
+v_dest_lob      BLOB;
+BEGIN
+DBMS_LOB.OPEN (v_src_file, DBMS_LOB.LOB_READONLY);
+v_amount := DBMS_LOB.GETLENGTH (v_src_file);
+DBMS_LOB.CREATETEMPORARY (v_dest_lob, FALSE, DBMS_LOB.CALL);
+DBMS_LOB.LOADFROMFILE (v_dest_lob, v_src_file, v_amount);
+DBMS_LOB.CLOSE (v_src_file);
+RETURN v_dest_lob;
+END bfile_to_blob;
+/
+
+
+
 --------------------------------------------------------
 --  建立表格
 --------------------------------------------------------
-alter session set deferred_segment_creation=false;
 
 DROP TABLE PERNTD;
 DROP TABLE SYSNT;
@@ -92,7 +112,7 @@ CREATE TABLE MEMBER(
     MEM_CARDDUE VARCHAR2(10),
     MEM_BONUS NUMBER(10),
     MEM_CREDATE DATE DEFAULT(SYSDATE),
-    MEM_STATUS VARCHAR(10) DEFAULT('m1'),
+    MEM_STATUS VARCHAR(10) DEFAULT('m0'),
     MEM_PHOTO BLOB,
     CONSTRAINT  MEMBER_PK PRIMARY KEY (MEM_NO)); 
      
@@ -235,7 +255,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 比起伊比利豬我更偏好鴨胸，價格上算略高但也吃得出用心，
 缺點大概就是沒有碗公大的香菜可以加點。',
 5,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-01.jpg')),
 SYSDATE,12,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -247,7 +267,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 但是今晚加點的肉增量（角煮）第一次吃到是冷的，與以往大不相同，
 詢問後告知是冷的沒錯，讓人感到意外',
 5,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-02.jpg')),
 SYSDATE,12,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -264,7 +284,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 5. 牛肉夾白飯吃
 6. 麵吃完白飯倒湯裡',
 5,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-03.jpg')),
 SYSDATE,12,'PS1');
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -275,8 +295,8 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 很好吃，黑胡椒調味的舒肥叉燒也很讚！我的沾麵吃法是夾適量的麵 
 完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，值得',
 5,
-NULL,
-SYSDATE,13,'PS1');
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-04.jpg')),
+sysdate,13,'PS1');
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0'),
@@ -286,8 +306,8 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 使用大量的魚跟雞骨經過10個小時以上的微火熬煮，櫻花蝦跟干貝各種
 海鮮的清新香味層次分明的浮現，搭配精選的細麵，清香又豐潤的湯頭及麵條清爽的口感保證對味！',
 5,
-NULL,
-SYSDATE,14,'PS1');
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-05.jpg')),
+sysdate,14,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -298,8 +318,8 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 東北新瀉的口味比較重鹹 上次點的特製清湯醬油 對我來說太Hard core了....
 這次晚上大老遠跑去值得了',
 5,
-NULL,
-SYSDATE,15,'PS1');
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-06.jpg')),
+sysdate,15,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -309,7 +329,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '每次看著熬湯的鍋子在冒煙，發出徹徹徹聲，
 像是看著蒸汽小火車奔跑很療癒感謝招待',
 4,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-07.jpg')),
 SYSDATE,18,'PS1');
 
 
@@ -322,7 +342,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
 4,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-07.jpg')),
 SYSDATE,50,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -332,7 +352,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 'C0000000006',
 '「拉麵粉」「打擾了！ 本店專售歐美日韓服飾，全部貨品均以優惠價發售，歡迎選購，謝謝！」',
 4,
-NULL,
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-non.jpg')),
 SYSDATE,50,'PS1');
 
 COMMIT;
@@ -602,27 +622,15 @@ CREATE SEQUENCE feature_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'關於我們資料編輯');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'分店管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'留言檢舉管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'儲值管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'餐點管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'食材項目管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'廣告活動設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'優惠卷發放設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工權限設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工資料設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'桌位配置設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送範圍設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂位紀錄管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'線上預訂位設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'候位顧客資料管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'現場座位管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'出餐管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'收銀結帳管理');
 INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂單管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'結帳');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訊息管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'出餐館理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'食材顯示設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂位管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'即時線上客服');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'分店基本資訊管理');
 
 --------------------------------------------------------
 --  for Table EMPLOYEE
@@ -1258,7 +1266,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','新品上市期間限定~會員憑券點拉麵折扣100元',NULL,NULL,'新品上市期間限定~會員憑券點拉麵折扣100元'
+'AC2','新品上市期間限定~會員憑券點拉麵折扣100元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_01.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-1.jpg')),'新品上市期間限定~會員憑券點拉麵折扣100元'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
@@ -1268,7 +1276,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)',NULL,NULL,'慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)'
+'AC2','慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_02.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-2.jpg')),'慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
@@ -1278,18 +1286,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',NULL,NULL,'會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
-
-
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC1','拉麵的基本元素',NULL,NULL,'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。到底拉麵是由哪些元素組成的呢?'
+'AC2','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_03.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-3.jpg')),'會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
@@ -1300,7 +1297,18 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC3','西門店限定二郎風蒜味拉麵',NULL,NULL,'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
+'AC1','拉麵的基本元素',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_04.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-4.jpg')),'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。到底拉麵是由哪些元素組成的呢?'
+,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','西門店限定二郎風蒜味拉麵',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-5.jpg')),'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
@@ -1310,7 +1318,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC3','永康公園店限定辣味噌拉麵',NULL,NULL,'辛味噌拉麵是日本東北仙台及山形的代表拉麵，因為味噌是仙台的特產，因此當地本來就以味噌拉麵為特產，其後附上加入辣椒的味噌醬，而成為辛味噌拉麵。'
+'AC3','永康公園店限定辣味噌拉麵',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-6.jpg')),'辛味噌拉麵是日本東北仙台及山形的代表拉麵，因為味噌是仙台的特產，因此當地本來就以味噌拉麵為特產，其後附上加入辣椒的味噌醬，而成為辛味噌拉麵。'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
@@ -1369,4 +1377,3 @@ Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-000000
 
    
 COMMIT;
-

@@ -38,19 +38,20 @@ body {
 }
 
 td {
-	font-size: 12px;
+	font-size: 18px;
 }
 
 h1 {
 	font-weight: bolder;
+	color:#ffefcc !important;
 }
 
 th {
-	color: sienna;
+	color: #331a00;
 }
 
 tbody>tr:hover {
-	background-color: #fcf4e8;
+/* 	background-color: #ac7339; */
 	color: black;
 }
 
@@ -91,5 +92,9 @@ tbody>tr:hover {
 b {
 /* 	margin-top:15px; */
     height: auto;
+}
+
+select{
+	background-color:#fff7e6;
 }
 	

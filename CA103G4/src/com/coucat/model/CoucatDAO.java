@@ -7,14 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.coupon.model.CouponDAO;
 
 
 public class CoucatDAO implements CoucatDAO_interface {
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "raman";
-	private static final String PASSWORD = "123456";
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String GET_COUCAT_PIC="SELECT COUCAT_PIC FROM COUCAT WHERE COUCAT_NO=?";
 	
@@ -32,14 +43,6 @@ public class CoucatDAO implements CoucatDAO_interface {
 			"SELECT * FROM COUCAT WHERE COUCAT_CATA=?";
 	private static final String  GET_ONE_COUCAT="SELECT * FROM COUCAT WHERE COUCAT_NO=?";
 	
-	static {
-		try {
-			Class.forName(DRIVER);
-		}catch(ClassNotFoundException ce) {
-			ce.printStackTrace();
-		}
-		}
-	
 	
 	@Override
 	public void insert(CoucatVO coucatVO) {{
@@ -47,7 +50,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		PreparedStatement pstmt = null;
 		String next_coucat_No = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully!");
 
 			con.setAutoCommit(false);
@@ -76,7 +79,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 						
 			// insert coupon record at the same time
 						CouponDAO dao= new CouponDAO();
-						dao.insertbyGenratedKeys(con,next_coucat_No,coucatVO.getCoucat_Amo());
+						dao.insertbyGenaratedKeys(con,next_coucat_No,coucatVO.getCoucat_Amo());
 						con.commit();
 						con.setAutoCommit(true);
 						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
@@ -112,7 +115,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully!");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, coucatVO.getCoucat_Name());
@@ -157,7 +160,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		List<CoucatVO> coucatlist = new ArrayList<>();
 
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully!");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
@@ -208,13 +211,14 @@ public class CoucatDAO implements CoucatDAO_interface {
 		return coucatlist;
 	}
 	@Override
-	public CoucatVO findByCata(String coucat_Cata) {
+	public List<CoucatVO> findByCata(String coucat_Cata) {
 		Connection con=null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
 		CoucatVO coucatVO =null;
+		List<CoucatVO> list =new ArrayList<>();
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con =  ds.getConnection();
 			System.out.println("Connecting to database successfully! ");
 			pstmt = con.prepareStatement(FIND_BY_CATA);
 			pstmt.setString(1,coucat_Cata);
@@ -231,6 +235,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 				coucatVO.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
 				coucatVO.setCoucat_Pic(rs.getBytes("Coucat_Pic"));
 				coucatVO.setCoucat_Amo(rs.getInt("Coucat_Amo"));
+				list.add(coucatVO);
 			}
 			
 		}catch(SQLException e) {
@@ -258,7 +263,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 				}
 			}
 		}
-		return coucatVO;
+		return list;
 	}
 	@Override
 	public byte[] getPic(String coucat_No) {
@@ -269,7 +274,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 		byte[] pic = null;
 		
 	try {
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		con = ds.getConnection();
 		pstmt = con.prepareStatement(GET_COUCAT_PIC);
 		pstmt.setString(1, coucat_No);
 		rs = pstmt.executeQuery();
@@ -319,7 +324,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 	
 		try {
 			coucatVO = new CoucatVO();
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_COUCAT);
 			pstmt.setString(1, coucat_No);
 			rs = pstmt.executeQuery();

@@ -9,6 +9,8 @@ import javax.servlet.http.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.coucat.model.CoucatService;
+import com.coupon.model.CouponService;
 import com.menu.model.MenuVO;
 
 @WebServlet("/front_end/shoppingCart/ShoppingServlet.do")
@@ -84,18 +86,24 @@ public class ShoppingServlet extends HttpServlet {
 
 		} else if (action.equals("CHECKOUT")) {
 			double total = 0;
-			for (int i = 0; i < buylist.size(); i++) {
-				MenuVO menuVO = buylist.get(i);
-				Integer price = menuVO.getMenu_Price();
-				Integer quantity = menuVO.getMenu_quantity();
-				total += (price * quantity);
-			}
+			if (buylist == null) {
+				String url = "Cart.jsp";
+				RequestDispatcher rd = req.getRequestDispatcher(url);
+				rd.forward(req, res);
+			} else {
+				for (int i = 0; i < buylist.size(); i++) {
+					MenuVO menuVO = buylist.get(i);
+					Integer price = menuVO.getMenu_Price();
+					Integer quantity = menuVO.getMenu_quantity();
+					total += (price * quantity);
 
-			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
-			String url = "Checkout.jsp";
-			RequestDispatcher rd = req.getRequestDispatcher(url);
-			rd.forward(req, res);
+					String amount = String.valueOf(total);
+					req.setAttribute("amount", amount);
+					String url = "Checkout.jsp";
+					RequestDispatcher rd = req.getRequestDispatcher(url);
+					rd.forward(req, res);
+				}
+			}
 
 		}
 		// 餐點數量加減按鈕(未完成)
@@ -128,8 +136,26 @@ public class ShoppingServlet extends HttpServlet {
 //			rd.forward(req, res);
 			res.sendRedirect(url);
 
+		} else if ("findMemCoupon".equals(action)) {
+			String amount = req.getParameter("amount");
+			String couponSn = req.getParameter("couponSn");
+			CouponService couponSvc = new CouponService();
+			CoucatService coucatSvc = new CoucatService();
+
+			String CoucatNo = couponSvc.getOneCoupon(couponSn).getCoucat_No();// 查優惠卷類別編號
+			Double CouponDiscount = coucatSvc.getOneCoucat(CoucatNo).getCoucat_Discount();// 查優惠卷打折
+			Double amount2 = Double.parseDouble(amount) * CouponDiscount;
+			req.setAttribute("amount", String.valueOf(amount2));
+
+			req.getRequestDispatcher("Checkout.jsp").forward(req, res);
+
 		}
 
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
 	}
 
 	private MenuVO getMenuVO(HttpServletRequest req) {

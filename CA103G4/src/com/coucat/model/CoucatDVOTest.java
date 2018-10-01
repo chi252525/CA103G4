@@ -32,17 +32,18 @@ public class CoucatDVOTest {
 //			 System.out.println("=========================");
 //		 }
 //		 findbyCATADONE
-//		 CoucatVO cv5=dao.findByCata("CC1");
-//		 System.out.println(cv5.getCoucat_No());
-//		 System.out.println(cv5.getCoucat_Name());
-//		 System.out.println(cv5.getCoucat_Cata());
-//		 System.out.println(cv5.getCoucat_Cont());
-//		 System.out.println(cv5.getCoucat_Value());
-//		 System.out.println(cv5.getCoucat_Valid());
-//		 System.out.println(cv5.getCoucat_Invalid());
-//		 System.out.println(cv5.getCoucat_Amo());
-//		 System.out.println("=========================");
-		 
+		CoucatJDBCDAO dao= new CoucatJDBCDAO();
+		 List<CoucatVO> licv=dao.findByCata("CC2");
+		 for(CoucatVO cv5:licv) {
+		 System.out.println(cv5.getCoucat_No());
+		 System.out.println(cv5.getCoucat_Name());
+		 System.out.println(cv5.getCoucat_Cata());
+		 System.out.println(cv5.getCoucat_Value());
+		 System.out.println(cv5.getCoucat_Valid());
+		 System.out.println(cv5.getCoucat_Invalid());
+		 System.out.println(cv5.getCoucat_Amo());
+		 System.out.println("=========================");
+		 }
 		 
 	}
 	public static byte[] getPictureByteArray(String path) throws IOException {

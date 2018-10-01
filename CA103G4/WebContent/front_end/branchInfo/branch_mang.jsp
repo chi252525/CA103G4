@@ -37,13 +37,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
     <!-- My <css></css> for transaction page-->
-    <link rel="stylesheet" href="branch_css.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/branchInfo/branch_css.css">
 
 </head>
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <form method="get" action="<%=request.getContextPath()%>/back_end/branch/branch.do">
-        <div id="div_shadow" class="py-5"">
+        <div id="div_shadow" class="py-5">
 			<div class=" container">
             <div class="row">
                 <div class="col-md-12">
@@ -59,28 +59,15 @@
                 <div class="row ">
                     <div id="div1" class="col-md-12 d-flex align-items-center">
                         <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
-                        <div class="input-group d-flex align-items-center" style="width: 430px;">
+                        <div class="input-group d-flex align-items-center" style="width: 180px;">
+                           
                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/branch/branch.do">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
-                                        <i class="fas fa-search" style="font-size: 20px; color: grey; margin-top: 8px;"></i>
-                                    </button>
-                                </div>
-                                <b>分店編號:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 100px; margin-right: 8%;" onchange="submit()">
-                                    <option selected>請選擇
-                                        <c:forEach var="brVO" items="${branchSvc.all}">
-                                    <option value="${brVO.branch_No}">${brVO.branch_No}
-                                        </c:forEach>
-                                </select> <input type="hidden" name="action" value="getOne_For_Display">
-
-                            </FORM>
-                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/branch/branch.do">
-                                <b>所在城市:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_City" style="margin-left: 5px !important; width: 100px;" onchange="submit()">
+                                <b>所在城市:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_City" style="margin-left: 5px !important; width: 50px;" onchange="submit()">
                                     <option selected>請選擇
                                         <c:forEach var="brCity" items="${branchSvc.city}">
                                     <option value="${brCity}">${brCity}
                                         </c:forEach>
-                                </select> <input type="hidden" name="action" value="findBybranch_City">
+                                </select> <input type="hidden" name="action" value="findBybranch_CityfonrEnd">
                             </FORM>
                         </div>
                         <div class="d-flex ml-auto">
@@ -109,6 +96,7 @@
                             </thead>
 
                             <tbody id="tbody">
+                            <!-- error message display -->
                                 <c:if test="${not empty errorMsgs}">
                                     <c:forEach var="errorObj" items="${errorMsgs}">
                                         <tr valign="middle">
@@ -154,8 +142,10 @@
                                             <td>${brVO.branch_Tel}</td>
                                             <td>
                                                 <FORM id="delform" method="post" action="<%=request.getContextPath()%>/back_end/branch/branch.do">
-                                                    <input id="update" type="button" class="update btn btn-warning btn-sm" value="修改" style="display: none">
-
+                                                    <input id="update" type="submit" class="update btn btn-warning btn-sm" value="看更多" style="">
+													<input type="hidden" name="action" value="getOne_For_Display">
+													<input type="hidden" name="branch_No" value="${brVO.branch_No}">
+													<input type="hidden" name="location" value="/front_end/branchInfo/branch_single.jsp">
                                                 </FORM>
                                             </td>
                                             <td>
@@ -168,14 +158,14 @@
                                 </c:if>
                             </tbody>
                         </table>
-                        <div class="d-flex inline">
+<!--                         <div class="d-flex inline"> -->
 <!--                             <button class="d-flex ml-auto btn btn-info btn-sm" style="margin: 5px;" onclick="mytoggle()"> -->
 <!--                                 <i class="fas fa-edit">編輯</i> -->
 <!--                             </button> -->
 <!--                             <button class="d-flex btn btn-info btn-sm" style="margin: 5px;"> -->
 <!--                                 <i class="far fa-plus-square"><b>新增</b></i> -->
 <!--                             </button> -->
-                        </div>
+<!--                         </div> -->
                     </div>
                 </div>
             </div>

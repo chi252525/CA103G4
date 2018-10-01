@@ -1,11 +1,6 @@
 package com.activity.model;
 import java.util.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 public class ActivityJDBCDAO implements ActivityDAO_interface{
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "raman";
+	private static final String USER = "CA103";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	//新增一個 廣告
@@ -23,7 +18,7 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)" + 
 			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
 			"'0')," + 
-			"?,?,?,?,?,?,?,?,?,?,'AS1',0)";
+			"?,?,?,?,?,?,?,?,?,?,1,0)";
 	////修改廣告資訊(必須在下架狀態才能修改)
 	private static final String UPDATE_STMT = 
 			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=?" + 
@@ -31,8 +26,8 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 	//取得一個廣告活動
 	private static final String GET_ONE_STMT = "SELECT * FROM ACTIVITY WHERE ACT_NO=?";
 	
-	///***更動廣告為馬上上架***(上架/下架也會更新成實際上下架時間)
-	private static final String UPDATE_ADONSTAT_STMT="UPDATE ACTIVITY SET act_Status=1,act_PreAddTime=SYSDATE,ACT_START=SYSDATE,act_PreOffTime=? WHERE ACT_NO=?";
+	///***更動廣告為馬上上架***(上/下架也會更新成實際上下架時間)
+	private static final String UPDATE_ADONSTAT_STMT="UPDATE ACTIVITY SET act_Status=1,act_PreAddTime=SYSDATE,ACT_START=sysdate,act_PreOffTime=?,ACT_END=? WHERE ACT_NO=?";
 	
 	//更動廣告為馬上下架
 	private static final String UPDATE_ADOFFSTAT_STMT=
@@ -223,26 +218,27 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ActivityVO> activitylist = new ArrayList<>();
+		ActivityVO activityVO=null;
 
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
+			System.out.println("getAll Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
-
+		
 			while (rs.next()) {
-				ActivityVO activityVO=new ActivityVO();
+				activityVO=new ActivityVO();
 				activityVO.setAct_No(rs.getString("act_No"));
 				activityVO.setCoucat_No(rs.getString("coucat_No"));
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
-				activityVO.setAct_Content(rs.getString("act_Content"));
 				activityVO.setAct_PreAddTime(rs.getTimestamp("act_PreAddTime"));
 				activityVO.setAct_PreOffTime(rs.getTimestamp("act_PreOffTime"));
 				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
 				activityVO.setAct_End(rs.getTimestamp("act_End"));
 				activityVO.setAct_Status(rs.getInt("act_Status"));
 				activityVO.setAct_Views(rs.getInt("act_Views"));
+				activitylist.add(activityVO);
 			}
 
 
@@ -272,7 +268,9 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				}
 			}
 		}
+		System.out.println("OK");
 		return activitylist;
+		
 	}
  
 	@Override
@@ -390,12 +388,12 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 	}
 
 	@Override
-	public int updateAct(String act_No, Integer act_status, ActivityVO activityVO) {
+	public int updateAct(String act_No, Integer act_Status, ActivityVO activityVO) {
 		int count=0;
 		Connection con = null ;
 		PreparedStatement pstmt= null;
 		
-		if(act_status == 1) {
+		if(act_Status == 1) {
 			try {
 				
 				con=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -414,8 +412,6 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				
 				count=pstmt.executeUpdate();
 				
-			}catch(ClassNotFoundException ce) {
-				throw new RuntimeException("資料庫無法載入驅動"+ce.getMessage());
 			}catch(SQLException se) {
 				throw new RuntimeException("資料庫發生錯誤"+se.getMessage());
 			}finally {
@@ -436,13 +432,13 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				}
 			}
 			
-		}else if(stat == 0) {		
+		}else if(act_Status == 0) {		
 			try {
 				Class.forName(DRIVER);
 				con=DriverManager.getConnection(URL, USER, PASSWORD);
 				pstmt=con.prepareStatement(UPDATE_ADOFFSTAT_STMT);
 				
-				pstmt.setString(1,id);
+				pstmt.setString(1,act_No);
 				
 				count=pstmt.executeUpdate();
 				

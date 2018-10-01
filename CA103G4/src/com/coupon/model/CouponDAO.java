@@ -31,6 +31,7 @@ public class CouponDAO implements CouponDAO_interface {
 		private static final String UPDATESTATUS_FALSE="UPDATE COUPON SET COUP_STATUS='CP0' WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=?";
+		private static final String FINDBY_PRIMARY_KEY="SELECT * FROM COUPON WHERE COUP_SN=?";
 	
 		@Override
 		public void insert(CouponVO couponVO, Integer coucat_Amo) {
@@ -110,11 +111,12 @@ public class CouponDAO implements CouponDAO_interface {
 
 
 		@Override
-		public CouponVO findByCoucatNo(String coucat_No) {
+		public List<CouponVO> findByCoucatNo(String coucat_No) {
 			CouponVO couponVO = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
+			List<CouponVO> list =new ArrayList();
 			try {
 				con = ds.getConnection();
 				System.out.println("Connecting to database successfully! (連線成功！)");
@@ -127,7 +129,7 @@ public class CouponDAO implements CouponDAO_interface {
 					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
 					couponVO.setCoucat_No(rs.getString("coucat_No"));
 					couponVO.setCoup_Status(rs.getString("coup_Status"));
-		
+					list.add(couponVO);
 				}
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
@@ -155,12 +157,12 @@ public class CouponDAO implements CouponDAO_interface {
 					}
 				}
 			}
-			return couponVO;
+			return list;
 		}
 
 
 		@Override
-		public void insertbyGenratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
+		public void insertbyGenaratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
 			PreparedStatement pstmt = null;
 			
 			try {
@@ -200,6 +202,59 @@ public class CouponDAO implements CouponDAO_interface {
 			}			
 		}
 
+
+
+
+
+		@Override
+		public CouponVO getOneCoupon(String coup_Sn) {
+			CouponVO couponVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = ds.getConnection();
+				System.out.println("Connecting to database successfully! (連線成功！)");
+				pstmt = con.prepareStatement(FINDBY_PRIMARY_KEY);
+		
+				pstmt.setString(1, coup_Sn);
+				rs = pstmt.executeQuery();
+	  
+				while (rs.next()) {
+					couponVO = new CouponVO();
+					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
+					couponVO.setCoucat_No(rs.getString("coup_No"));
+					couponVO.setCoup_Status(rs.getString("coup_Status"));
+					
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return couponVO;
+		}
 		
 		
 		

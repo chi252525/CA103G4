@@ -13,7 +13,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.delivery.model.DeliveryVO;
 
 public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 	private static DataSource ds = null;
