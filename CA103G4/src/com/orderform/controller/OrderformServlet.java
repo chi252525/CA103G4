@@ -45,7 +45,14 @@ public class OrderformServlet extends HttpServlet {
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
 			//明細參數
 			List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();//等前端 更改 
-			list = (List<OrderinvoiceVO>)req.getAttribute("invoice");
+			String[] oinlist = req.getParameterValues("invoice");
+			OrderinvoiceVO oin = null;
+			
+			for (int i = 0; i < oinlist.length; i++) {
+				oin = new OrderinvoiceVO();
+				oin.setOrder_no(oinlist[i]);
+				list.add(oin);
+			}
 			
 			OrderformVO orderformVO = new OrderformVO();
 			orderformVO.setDek_no(dekno);

@@ -7,6 +7,7 @@
   response.setHeader("Pragma","no-cache");        //HTTP 1.0
   response.setDateHeader ("Expires", 0);
 %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -58,14 +59,19 @@ h4 {
 			value="listNotOk">
 	</FORM>
 --%>
-
-
+	<jsp:useBean id="empSvc" scope="page" class="com.employee.model.EmpService" />
+<!-- default -->
 	<%-- s以下是複合查詢列 --%>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do" name="First">
-		派送單編號:<input type="text" name="deliv_no"> 員工編號: <input
-			type="text" name="emp_no"> 派送單狀態:<input type="text"
-			name="deliv_status"> <input type="hidden" name="action"
-			value="get_By_Key"> <input type="submit" value="開始搜尋">
+		派送單編號:<input type="text" name="deliv_no">
+		 員工姓名: <select size="1" name="emp_no">
+		 			<option  value="">
+					<c:forEach var="empVO" items="${empSvc.all}">
+					<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
+					</c:forEach>
+				</select>
+		 派送單狀態:<input type="text" name="deliv_status"> 
+		 <input type="hidden" name="action" value="get_By_Key"> <input type="submit" value="開始搜尋">
 	</FORM>
 	<br>
 	<%-- s以下是新增外送派送單 --%>

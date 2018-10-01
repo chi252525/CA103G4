@@ -69,7 +69,7 @@
 	<tr>
 		<th>派送單編號</th>
 		<th>分店編號</th>
-		<th>員工編號</th>
+		<th>員工</th>
 		<th>派送單狀態</th>
 	</tr>
 <%-- s分頁 --%>
@@ -86,7 +86,7 @@
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
 				<select size="1" name="emp_no">
 					<c:forEach var="empVO" items="${empDao.all}">
-					<option value="${empVO.emp_no}" ${(deliveryVO.emp_no==empVO.emp_no)? 'selected':'' } >${empVO.emp_name}
+					<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
 					</c:forEach>
 				</select>
 						
@@ -101,8 +101,8 @@
 						
 		<c:if test="${deliveryVO.emp_no != null}">			
 					<c:forEach var="empVO" items="${empDao.all}">
-					<c:if test="${deliveryVO.emp_no==empVO.emp_no}">
-					${empVO.emp_no}-${empVO.emp_name}
+					<c:if test="${deliveryVO.emp_no==empVO.emp_No}">
+					${empVO.emp_No}-${empVO.emp_Name}
 					</c:if>
 					</c:forEach>
 		</c:if>
