@@ -98,7 +98,6 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
                     <option value="請選擇">請選擇</option>
                     <option value="經理">經理</option>
                     <option value="服務生">服務生</option>
-                    <option value="工讀生">工讀生</option>
                     <option value="外送員">外送員</option>
                     <option value="客服人員">客服人員</option>
                 </select>    
@@ -107,12 +106,12 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
         <tr>
             <td colspan="2" class="td2 fea">功能使用權限</td>
         </tr>
-        <tr><td >
+        <tr><td style="padding-left:50px;">
         	<c:forEach var="featureVO" items="${fealist}" begin="1" end="5" >
   					<input type=checkbox name="fea_No" id="${featureVO.fea_No}" value="${featureVO.fea_No}"><label for="${featureVO.fea_No}" class="col-form-label">${featureVO.fea_Name}</label></br> 
 			</c:forEach>
 			</td>
-			<td >
+			<td style="padding-left:80px;" >
         	<c:forEach var="featureVO" items="${fealist}" begin="6" >
   					<input type=checkbox name="fea_No" id="${featureVO.fea_No}" value="${featureVO.fea_No}"><label for="${featureVO.fea_No}" class="col-form-label">${featureVO.fea_Name}</label></br>  
 			</c:forEach>			
