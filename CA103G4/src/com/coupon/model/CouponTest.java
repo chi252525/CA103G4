@@ -26,11 +26,11 @@ public class CouponTest {
 //	
 //	}
 	
-	CouponVO cv4=dao.getOneCoupon("M-00000000001");
-	 System.out.println(cv4.getCoucat_No());
-	 System.out.println(cv4.getCoup_Sn());
-	 System.out.println(cv4.getCoup_Status());
-	 System.out.println("=========================");
+//	CouponVO cv4=dao.getOneCoupon("M-00000000001");
+//	 System.out.println(cv4.getCoucat_No());
+//	 System.out.println(cv4.getCoup_Sn());
+//	 System.out.println(cv4.getCoup_Status());
+//	 System.out.println("=========================");
 
 	}
 }

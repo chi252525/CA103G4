@@ -70,6 +70,15 @@
 				<servlet-name>AndroidMemberServlet</servlet-name>
 				<url-pattern>/AndroidMemberServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidCouponhistoryServlet</servlet-name>
+				<servlet-class>android.com.couponhistory.controller.AndroidCouponhistoryServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidCouponhistoryServlet</servlet-name>
+				<url-pattern>/AndroidCouponhistoryServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>

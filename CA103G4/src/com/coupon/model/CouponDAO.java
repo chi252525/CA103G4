@@ -162,7 +162,7 @@ public class CouponDAO implements CouponDAO_interface {
 
 
 		@Override
-		public void insertbyGenratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
+		public void insertbyGenaratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
 			PreparedStatement pstmt = null;
 			
 			try {
