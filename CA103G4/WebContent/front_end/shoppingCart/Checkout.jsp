@@ -34,7 +34,12 @@
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
+<!--credit card-->
+<script src="js/card.js"></script>
+<link rel="stylesheet" href="css/card.css">
+<!-- address choosing -->
+<script
+	src="<%=request.getContextPath()%>/front_end/member/js/selectaddress.js"></script>
 <head>
 <title>竹風堂-結帳</title>
 <link rel="stylesheet" type="text/css"
@@ -47,6 +52,27 @@ table, th, td {
 
 a:hover {
 	text-decoration: none;
+}
+
+/* credit card */
+.demo-container {
+	width: 100%;
+	max-width: 350px;
+	margin: 50px auto;
+}
+
+form {
+	margin: 30px;
+}
+
+input {
+	width: 200px;
+	margin: 10px auto;
+	display: block;
+}
+
+field>div {
+	margin: 10px;
 }
 </style>
 </head>
@@ -110,13 +136,18 @@ a:hover {
 						%>
 
 
-						<tr>
-							<td colspan="6" style="text-align: right;"><font size="+2">總記
-									<h4>
-										$
-										<%=amount%>
-									</h4>
-							</font></td>
+						<tr class="">
+							<td class=""></td>
+							<td class="" colspan="6" style="text-align: right;">
+								<!-- coupon button trigger modal --> <input id="coupon"
+								class="btn btn-sm" type="button" data-toggle="modal"
+								data-target="#couponModal" value="Coupon"
+								style="background-image: url(); width: 30%">
+								<h4>
+									總計 $
+									<%=amount%>
+								</h4> </font>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -124,8 +155,148 @@ a:hover {
 		</div>
 	</div>
 
+	<!-- filedset for 取餐方式-->
+	<div class=" container">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="bd-example">
+					<fieldset>
+						<legend>點餐資訊</legend>
 
-	<p>
+						<!-- 						<p> -->
+						<!-- 							<label for="input">Example input</label> <input type="text" -->
+						<!-- 								id="input" placeholder="Example input" /> -->
+						<!-- 						</p> -->
+
+						<!-- 						<p> -->
+						<!-- 							<label for="select">Example select</label> < select id="select"> -->
+						<!-- 							<option value="">Choose...</option> -->
+						<!-- 							<optgroup label="Option group 1"> -->
+						<!-- 								<option value="">Option 1</option> -->
+						<!-- 								<option value="">Option 2</option> -->
+						<!-- 								<option value="">Option 3</option> -->
+						<!-- 							</optgroup> -->
+						<!-- 							<optgroup label="Option group 2"> -->
+						<!-- 								<option value="">Option 4</option> -->
+						<!-- 								<option value="">Option 5</option> -->
+						<!-- 								<option value="">Option 6</option> -->
+						<!-- 							</optgroup> -->
+						<!-- 							</select> -->
+						<!-- 						</p> -->
+
+						<!--取餐方式 -->
+
+						<p class="form-check form-check-inline" style="margin: 10px;">
+							取餐方式: <input class="form-check-input" type="radio"
+								name="eatIn&takeAway" id="takeaway" value="option1" checked=""
+								style="width: 50px;" /> <label class="form-check-label">
+								外帶 </label> <input class="form-check-input" type="radio"
+								name="eatIn&takeAway" id="delivery" value="option2"
+								style="width: 50px;"> <label class="form-check-label">外送</label>
+						</p>
+
+						<!-- choose branch -->
+						<div class="form-group">
+							<jsp:useBean id="branchSvc" scope="page"
+								class="com.branch.model.BranchService" />
+							<b>分店編號:</b> <select class="custom-select align-items-center"
+								id="inputGroupSelect04 stor_No"
+								aria-label="Example select with button addon" size="1"
+								name="branch_No"
+								style="margin-left: 5px !important; width: 100px; margin-right: 8%;"
+								onchange="submit()">
+								<option selected>請選擇
+									<c:forEach var="brVO" items="${branchSvc.all}">
+										<option value="${brVO.branch_Name}">${brVO.branch_Name}
+									</c:forEach>
+							</select> <input type="hidden" name="location" value="Checkout.jsp">
+						</div>
+						<!-- choose address -->
+						<div class="form-group">
+							鄉鎮區市: <select style="display: inline" class="nice-select"
+								name="mem_Recounty" id="city-list"></select> <select
+								style="display: inline" name="mem_Retown" class="nice-select"
+								id="sector-list"></select>
+						</div>
+						<div class="form-group row" style="width: 80%">
+							外送地址<input type="text" class="form-control-sm" id="mem_Readdr"
+								name="mem_Readdr" style="width: 50%;">
+						</div>
+
+
+						<!-- 取餐時間 -->
+						<div class="form-group row">
+
+							<div class="container">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group row" style="width: 60%;">
+											<label class="col-form-label" for="date">取餐時間</label>
+											<div class="input-group date" id="datetimepicker2"
+												data-target-input="nearest">
+												<input type="text" class="form-control datetimepicker-input"
+													data-target="#datetimepicker2" />
+												<div class="input-group-append"
+													data-target="#datetimepicker2" data-toggle="datetimepicker">
+													<div class="input-group-text">
+														<i class="fa fa-calendar"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- payment -->
+						<p>
+							付款方式: <label> <input type="button" class="btn btn-light"
+								id="takeaway" value="現金" onclick="cash()"> <input
+								type="hidden" name="payment" value="cash">
+							</label> <label> <input type="button" class="btn btn-light"
+								id="delivery" value="信用卡" onclick="cardShow()"> <input
+								type="hidden" name="payment" value="credit">
+
+							</label>
+						</p>
+						<!-- credit card -->
+						<div id="card" class="demo-container"
+							style="margin: 10px; display: none;">
+							<div class="card-wrapper"></div>
+
+							<div class="form-container active" style="margin: 10px;">
+								<form action="">
+									<input placeholder="Card number" type="tel" name="number"
+										style="margin: 5px;"> <input placeholder="Full name"
+										type="text" name="name" style="margin: 5px;"> <input
+										placeholder="MM/YY" type="tel" name="expiry"
+										style="margin: 5px;"> <input placeholder="CVC"
+										type="number" name="cvc" style="margin: 5px;">
+								</form>
+							</div>
+						</div>
+						<label for="textarea" class="">備註:</label>
+						<p>
+
+							<textarea id="textarea" cols="60" rows="3" style="margin: auto;"></textarea>
+						</p>
+
+
+						<!-- 						<p> -->
+						<!-- 							<label for="time">Example time</label> <input type="time" -->
+						<!-- 								id="time" /> -->
+						<!-- 						</p> -->
+
+						<!-- 						<p> -->
+						<!-- 							<label for="output">Example output</label> -->
+						<!-- 							<output name="result" id="output">100</output> -->
+						<!-- 						</p> -->
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- submit order -->
 	<div class=container>
 		<div class="row">
 			<div class="d-flex ml-auto">
@@ -136,20 +307,16 @@ a:hover {
 				<button class="btn mr-auto"
 					onclick="window.location.href='noodleShop.jsp'"
 					style="margin: 5px;">結帳</button>
-					<!-- coupon button -->>
-				<input id="coupon" class="btn" type="button" data-toggle="modal"
-		data-target="#couponModal" style="background-image: url(img/printable-coupons.jpg); width: 100px; height: 50px; margin: 5px;">
+
 			</div>
 		</div>
 	</div>
 
-	<!-- Button trigger modal -->
-	
+
 
 	<!-- Modal -->
-	<div class="modal fade" id="couponModal" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
+	<div class="modal fade" id="couponModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -159,28 +326,43 @@ a:hover {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<jsp:useBean id="couponSvc" class="com.couponhistory.model.CouponhistoryService"/>
+				<jsp:useBean id="couponhSvc"
+					class="com.couponhistory.model.CouponhistoryService" />
 				<div class="modal-body">
-					<select>
-<%-- 						<c:set var="memID" value="${memVO.mem_Id}"/> --%>
-						<c:forEach var="CouponVO" items="${couponSvc.getCouponByMem(memVO.mem_Id)}">
-							<option value="${CouponVO}">${CouponVO}
+					<select name="couponSn">
+						<c:set var="memID" value="${memVO.mem_Id}" />
+						<c:forEach var="CouponVO"
+							items="${couponhSvc.getCouponByMem(memVO.mem_Id)}">
+							<option value="${CouponhVO.Coup_sn}">${CouponhVO.Coup_sn}
 						</c:forEach>
 					</select>
 				</div>
 				<div class="modal-footer">
-				<form action="<%request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do"></form>
-					<button type="button" class="btn btn-secondary"
+					<form
+						action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
+					<button type="button" class="btn btn-secondary btn-sm"
 						data-dismiss="modal">使用</button>
-						<input name="action" value="findMemCoupon">
-					<button type="button" class="btn btn-light">Save changes</button>
+					<input name="action" value="findMemCoupon"> <input
+						name="amount" value="<%=amount%>">
+					<button type="button" class="btn btn-light">取消</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/front_end/footer.jsp" flush="true" />
+	<!-- credit card js -->
 	<script>
-	
+		new Card({
+			form : document.querySelector('form'),
+			container : '.card-wrapper'
+		});
+
+		function cardShow() {
+			$('#card').toggle();
+		}
+		function cash() {
+			$('#card').hide();
+		}
 	</script>
 </body>
 

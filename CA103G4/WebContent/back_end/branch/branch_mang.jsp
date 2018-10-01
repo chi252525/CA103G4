@@ -63,10 +63,10 @@
                                         <i class="fas fa-search" style="font-size: 20px; color: grey; margin-top: 8px;"></i>
                                     </button>
                                 </div>
-                                <b>分店編號:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 100px; margin-right: 8%;" onchange="submit()">
+                                <b>分店:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 100px; margin-right: 8%;" onchange="submit()">
                                     <option selected>請選擇
                                         <c:forEach var="brVO" items="${branchSvc.all}">
-                                    <option value="${brVO.branch_No}">${brVO.branch_No}
+                                    <option value="${brVO.branch_No}">${brVO.branch_Name}
                                         </c:forEach>
                                 </select> <input type="hidden" name="action" value="getOne_For_Display"><input type="hidden" name="location" value="/back_end/branch/branch_mang.jsp">
                                 
