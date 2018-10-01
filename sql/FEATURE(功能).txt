@@ -18,27 +18,17 @@ CREATE SEQUENCE feature_seq
   NOCYCLE
   NOCACHE;
 
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'關於我們資料編輯');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'分店管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'留言檢舉管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'儲值管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'餐點管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'食材項目管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'廣告活動設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'優惠卷發放設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工權限設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工資料設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'桌位配置設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送範圍設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂位紀錄管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'線上預訂位設定');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'候位顧客資料管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'現場座位管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'出餐管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送管理');
+
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'收銀結帳管理');
 INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂單管理');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'結帳');
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訊息管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'出餐館理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'外送管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'食材顯示設定');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'訂位管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'員工管理');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'即時線上客服');
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(feature_seq.NEXTVAL), 3, '0'),'分店基本資訊管理');
+
 
 commit;
 ----------------------------------------------------------------------------------------------------------------------------
