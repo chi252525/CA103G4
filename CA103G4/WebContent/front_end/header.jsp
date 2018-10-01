@@ -95,7 +95,7 @@ body {
 							</li>
 							
 							<li class="nav-item active">
-								<a class="nav-link" href="#">分店資訊
+								<a class="nav-link" href="<%=request.getContextPath()%>/front_end/branchInfo/branch_mang.jsp">分店資訊
 									<span class="sr-only">(current)</span></a>
 							</li>
 <!-- 							<li class="nav-item"><a class="nav-link" href="#">餐點介紹</a></li> -->

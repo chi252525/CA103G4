@@ -27,10 +27,10 @@ public class ShoppingServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
-		if (!action.equals("CHECKOUT") && (!action.equals("addCart"))) {
+		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action))) {
 
 			// 刪除餐點
-			if (action.equals("DELETE")) {
+			if ("DELETE".equals(action)) {
 
 				String del = req.getParameter("del");
 				int d = Integer.parseInt(del);
@@ -51,7 +51,7 @@ public class ShoppingServlet extends HttpServlet {
 				}
 			}
 			//
-			else if (action.equals("ADD")) {
+			else if ("ADD".equals(action)) {
 				//
 				MenuVO aMenuVO = getMenuVO(req);
 
@@ -84,7 +84,7 @@ public class ShoppingServlet extends HttpServlet {
 //			rd.forward(req, res);
 			res.sendRedirect(url);
 
-		} else if (action.equals("CHECKOUT")) {
+		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
 			if (buylist == null) {
 				String url = "Cart.jsp";
@@ -107,7 +107,7 @@ public class ShoppingServlet extends HttpServlet {
 
 		}
 		// 餐點數量加減按鈕(未完成)
-		else if (action.equals("addCart")) {
+		else if ("addCart".equals(action)) {
 			//
 //			String currentQuantity = req.getParameter("quantity");//獲取前端購物車商品數量
 //			System.out.println("數量=" + currentQuantity);

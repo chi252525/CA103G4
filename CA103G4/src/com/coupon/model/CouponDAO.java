@@ -223,7 +223,7 @@ public class CouponDAO implements CouponDAO_interface {
 				while (rs.next()) {
 					couponVO = new CouponVO();
 					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
-					couponVO.setCoucat_No(rs.getString("coup_No"));
+					couponVO.setCoucat_No(rs.getString("coucat_No"));
 					couponVO.setCoup_Status(rs.getString("coup_Status"));
 					
 				}

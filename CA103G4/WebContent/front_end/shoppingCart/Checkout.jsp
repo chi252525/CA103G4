@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.* , com.menu.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="com.couponhistory.model.*"%>
 <html>
 <jsp:include page="/front_end/header.jsp" flush="true" />
 <!--background image-->
@@ -108,7 +110,12 @@ field>div {
 							</th>
 							<th width="100">備註</th>
 						</tr>
-
+						<%
+							MemberService memSrv = new MemberService();
+							MemberVO memVO = memSrv.getOne_Member("M000001");
+							System.out.println(memVO);
+							session.setAttribute("memVO", memVO);
+						%>
 
 
 						<%
@@ -143,6 +150,7 @@ field>div {
 								class="btn btn-sm" type="button" data-toggle="modal"
 								data-target="#couponModal" value="Coupon"
 								style="background-image: url(); width: 30%">
+
 								<h4>
 									總計 $
 									<%=amount%>
@@ -199,11 +207,11 @@ field>div {
 						<div class="form-group">
 							<jsp:useBean id="branchSvc" scope="page"
 								class="com.branch.model.BranchService" />
-							<b>分店編號:</b> <select class="custom-select align-items-center"
-								id="inputGroupSelect04 stor_No"
+							<b>取餐分店:</b> <select class="custom-select align-items-center"
+								id="inputGroupSelect04 stor_No delivery"
 								aria-label="Example select with button addon" size="1"
 								name="branch_No"
-								style="margin-left: 5px !important; width: 100px; margin-right: 8%;"
+								style="margin-left: 5px !important; width: 100px; margin-right: 8%;display= none;"
 								onchange="submit()">
 								<option selected>請選擇
 									<c:forEach var="brVO" items="${branchSvc.all}">
@@ -215,12 +223,12 @@ field>div {
 						<div class="form-group">
 							鄉鎮區市: <select style="display: inline" class="nice-select"
 								name="mem_Recounty" id="city-list"></select> <select
-								style="display: inline" name="mem_Retown" class="nice-select"
+								style="display: none" name="mem_Retown" class="nice-select"
 								id="sector-list"></select>
 						</div>
 						<div class="form-group row" style="width: 80%">
 							外送地址<input type="text" class="form-control-sm" id="mem_Readdr"
-								name="mem_Readdr" style="width: 50%;">
+								name="mem_Readdr" style="width: 50%; display: none;">
 						</div>
 
 
@@ -326,14 +334,29 @@ field>div {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<jsp:useBean id="couponhSvc"
-					class="com.couponhistory.model.CouponhistoryService" />
+				<jsp:useBean id="CoucatSvc" class="com.coucat.model.CoucatService" />
+				<jsp:useBean id="CouponSvc" class="com.coupon.model.CouponService" />
+				<jsp:useBean id="CouponhSvc" class="com.couponhistory.model.CouponhistoryService" />
+				<%
+					// 					CouponhistoryService couponhSvc = new CouponhistoryService();
+					// 					List<CouponhistoryVO> list = couponhSvc.getCouponByMem(memVO.getMem_No());
+					// 					for (CouponhistoryVO CouponhVO : list) {
+					// 						System.out.println(CouponhVO.getCoup_sn());
+					// 					}
+				%>
+				<!-- 				test -->
+				<%-- 				<c:out value="${memVO}" --%>
+				<%-- 					default="幹沒值!" /> --%>
+
+				<%-- 				<c:out value="${CouponhSvc.getCouponByMem(memVO.mem_No)}" --%>
+				<%-- 					default="幹沒值!" /> --%>
 				<div class="modal-body">
 					<select name="couponSn">
-						<c:set var="memID" value="${memVO.mem_Id}" />
-						<c:forEach var="CouponVO"
-							items="${couponhSvc.getCouponByMem(memVO.mem_Id)}">
-							<option value="${CouponhVO.Coup_sn}">${CouponhVO.Coup_sn}
+						<c:forEach var="CouponhVO" items="${CouponhSvc.getCouponByMem(memVO.mem_No)}"><%--取得優惠卷序號 --%>
+							<c:set var="coupon" value="${CouponSvc.getOneCoupon(CouponhVO.coup_sn)}"/><%--取得優惠卷 --%>
+							<c:set var="coucat_No" value="${coupon.coucat_No }"/><%--取得優惠卷類別編號 --%>
+							<c:set var="coucat" value="${CoucatSvc.getOneCoucat(coucat_No)}"/><%--取得優惠卷類別 --%>
+							<option value="${coucat.coucat_Name }">${coucat.coucat_Name }<%--取得優惠卷類別名稱 --%>
 						</c:forEach>
 					</select>
 				</div>
@@ -342,7 +365,7 @@ field>div {
 						action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
 					<button type="button" class="btn btn-secondary btn-sm"
 						data-dismiss="modal">使用</button>
-					<input name="action" value="findMemCoupon"> <input
+					<input type="hidden" name="action" value="findMemCoupon"> <input
 						name="amount" value="<%=amount%>">
 					<button type="button" class="btn btn-light">取消</button>
 				</div>
@@ -362,6 +385,14 @@ field>div {
 		}
 		function cash() {
 			$('#card').hide();
+		}
+
+		function takeaway() {
+
+		}
+
+		function delivery() {
+			$('#delivery')
 		}
 	</script>
 </body>
