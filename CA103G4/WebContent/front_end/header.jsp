@@ -89,9 +89,15 @@ body {
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavDropdown">
 						<ul class="navbar-nav nav-fill mx-auto">
-							<li class="nav-item active"><a class="nav-link" href="#">分店資訊
-									<span class="sr-only">(current)</span>
-							</a></li>
+							<li>
+								<a class="index_page" href="<%=request.getContextPath()%>/front_end/index.jsp">
+									<img src="/CA103G4/front_end/img/LOGO-04.png" style="width:50px;"></a>
+							</li>
+							
+							<li class="nav-item active">
+								<a class="nav-link" href="#">分店資訊
+									<span class="sr-only">(current)</span></a>
+							</li>
 <!-- 							<li class="nav-item"><a class="nav-link" href="#">餐點介紹</a></li> -->
 							<li class="nav-item"><a class="nav-link" href="#"></a></li>
 							<li class="nav-item dropdown"><a
@@ -100,8 +106,8 @@ body {
 								aria-haspopup="true" aria-expanded="false"> 餐點 </a>
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu2.jsp">經典餐點</a> <a
-									   class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu2.jsp">經典餐點</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">線上預約訂位</a>
 							</li>

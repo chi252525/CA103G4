@@ -15,107 +15,6 @@
 <head>
 <title>listAllMenu2.jsp</title>
 
-<style>
-body{
- margin: 0;  
-}
-.container{
-  display: flex;
-  background-color: rgba(255, 64, 64, 0.3);
-  width: 100vw;
-  height: 100vh;
-  color: white;
-  justify-content: center;
-  align-items: center;
-}
-
-.lightbox-button{
-  width: 10em;
-  height: 3em;
-  color: white;
-  background-color: #019fe9;
-  border: none;
-}
-
-.lightbox-button:active{
-  background-color: #208fc3;
-  border: none;
-}
-
-.lightbox-button:focus{
-  outline:0;
-}
-
-.lightbox{
-  display: flex;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-  z-index: 1001;
-  justify-content: center;
-  align-items: center;
-}
-
-.lightbox-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-  overflow: hidden;
-  flex-wrap: wrap;
-}
-
-.lightbox-header{
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  background-color: red;
-  color: white;
-  justify-content: center;
-  align-items: center;
-}
-
-.lightbox-card{
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  padding: 10px 0;
-  border-bottom: 1px solid #cccccc;
-}
-
-.resort-img-container{
-  display: flex;
-  overflow: hidden;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  flex-basis: 5em;
-}
-
-.resort-img{
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-}
-
-.resort-name-container{
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: flex-start;
-  flex-basis: 5em;
-}
-
-.resort-name{
-  font-size: 18px;
-  margin: 0 0.1em;
-}
-
-</style>
 
 
 <style>
@@ -239,7 +138,36 @@ body{
 
 
 
+<c:if test="${openModal!=null}">
 
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+				
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+            </div>
+			
+			<div class="modal-body">
+<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
+               <jsp:include page="listOneMenu.jsp" />
+<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
+			</div>
+			
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+		
+		</div>
+	</div>
+</div>
+
+        <script>
+    		 $("#basicModal").modal({show: true});
+        </script>
+ </c:if>
 
 
 
