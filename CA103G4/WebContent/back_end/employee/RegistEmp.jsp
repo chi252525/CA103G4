@@ -47,6 +47,13 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
 <div class="container col-5 rounded " style="padding-top: 100px;">
 <Form action="emp.do" method="POST" enctype="multipart/form-data" >
     <table  id="back">
+        		<c:if test="${not empty errorMsgs}">
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color:black">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
         <tr>
             <td colspan="2" id="img-td">
                 <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles()" name="emp_Photo">
