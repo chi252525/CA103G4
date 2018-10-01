@@ -32,18 +32,6 @@ public class MemServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 				
-		//登出區塊
-		String logout = req.getParameter("logout");
-		System.out.println("doget的logout："+logout);
-		if("out".equals(logout)) {
-			try {
-				session.invalidate();
-				System.out.println("登出囉");
-				res.sendRedirect(req.getContextPath()+"/front_end/header.jsp");
-			}catch(Exception e) {
-				
-			}
-		}
 		
 		//登入顯示大頭照
 		ServletOutputStream out = res.getOutputStream();
@@ -423,7 +411,7 @@ System.out.println("我已經改完囉");
 								
 				/***************************3.登入完成************/
 
-				res.sendRedirect(req.getContextPath()+"/front_end/header.jsp");
+				res.sendRedirect(req.getContextPath()+"/front_end/index.jsp");
 				
 				
 				/***************************其他可能的錯誤處理**********************************/
