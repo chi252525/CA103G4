@@ -79,7 +79,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 						
 			// insert coupon record at the same time
 						CouponDAO dao= new CouponDAO();
-						dao.insertbyGenratedKeys(con,next_coucat_No,coucatVO.getCoucat_Amo());
+						dao.insertbyGenaratedKeys(con,next_coucat_No,coucatVO.getCoucat_Amo());
 						con.commit();
 						con.setAutoCommit(true);
 						System.out.println("新增訂單編號 " + next_coucat_No + " 時，優惠卷序號同時被新增完畢");
