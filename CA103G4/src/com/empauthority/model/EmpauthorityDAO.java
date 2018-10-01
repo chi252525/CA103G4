@@ -113,7 +113,6 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 	
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
 			pstmt=con.prepareStatement(INSERT_STMT);
 			System.out.println("從員工新增過來的連線成功");
 			System.out.println(empauthorVO.getEmp_No());
