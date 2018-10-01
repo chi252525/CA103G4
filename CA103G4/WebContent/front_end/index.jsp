@@ -113,14 +113,15 @@ position: fixed;
    
 </style>
 </head>
-<body>
+<body style="overflow:hidden;">
 	<jsp:include page="/front_end/header.jsp" flush="true" />
 	<!-- #header -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 	<!-- 標題區 -->
-	<div class="text-center p-self"
-		style="background-image: url('img/index/ramen-animate.gif');">
+	<div class="text-center p-self"	style="background-image: url('img/index/ramen-animate.gif'); 
+											background-size:cover; min-height:1080px; background-repeat: no-repeat; 
+											background-position:center; background-attachment:fixed;">
 		<div class="container  h-100">
 			<div class="row mx-2 my-5 py-5">
 				<p class="px-2">WIDE OPTIONS OF CHOICE</p>

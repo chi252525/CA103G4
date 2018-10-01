@@ -10,7 +10,7 @@ public class CustommealsTest {
 	public static void main(String[] args) {
 		CustommealsJDBCDAO dao = new CustommealsJDBCDAO();
 		
-//		//新增
+		//新增
 //		CustommealsVO custom1 = new CustommealsVO();
 //		custom1.setcustom_No("C0000000001");
 //		custom1.setmem_No("M000001");
@@ -52,15 +52,15 @@ public class CustommealsTest {
 //		dao.delete("C0000000004");
 
 		//查詢
-//		List<CustommealsVO> list = dao.getAll();
-//		for (CustommealsVO custom : list) {
-//			System.out.print(custom.getcustom_No() + ",");
-//			System.out.print(custom.getmem_No() + ",");
-//			System.out.print(custom.getcustom_Name() + ",");
-//			System.out.print(custom.getcustom_Price() + ",");
-//
-//			System.out.println();
-//		}
+		List<CustommealsVO> list = dao.getAll();
+		for (CustommealsVO custom : list) {
+			System.out.print(custom.getcustom_No() + ",");
+			System.out.print(custom.getmem_No() + ",");
+			System.out.print(custom.getcustom_Name() + ",");
+			System.out.print(custom.getcustom_Price() + ",");
+
+			System.out.println();
+		}
 		
 	}
 }
