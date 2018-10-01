@@ -47,20 +47,20 @@ public class CouponhistoryTest {
 //		}
 		
 		// 查詢 all(完成)
-//		CouponhistoryJDBCDAO dao1 = new CouponhistoryJDBCDAO();
-//		List<CouponhistoryVO> list2 = dao1.getAll();
-//		for (CouponhistoryVO adeliv : list2) {
-//			System.out.print(adeliv.getCoup_sn() + ",");
-//			System.out.println(adeliv.getCoup_state() + ",");
-//			System.out.println();
-//		}
-		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
-		List<CouponhistoryVO> list = dao.getCouponByMem("M000001");
-		for (CouponhistoryVO adeliv : list) {
+		CouponhistoryJDBCDAO dao1 = new CouponhistoryJDBCDAO();
+		List<CouponhistoryVO> list2 = dao1.getAll();
+		for (CouponhistoryVO adeliv : list2) {
 			System.out.print(adeliv.getCoup_sn() + ",");
 			System.out.println(adeliv.getCoup_state() + ",");
 			System.out.println();
 		}
+//		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
+//		List<CouponhistoryVO> list = dao.getCouponByMem("M000001");
+//		for (CouponhistoryVO adeliv : list) {
+//			System.out.print(adeliv.getCoup_sn() + ",");
+//			System.out.println(adeliv.getCoup_state() + ",");
+//			System.out.println();
+//		}
 		
 		
 

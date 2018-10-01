@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 public class ActivityJDBCDAO implements ActivityDAO_interface{
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "raman";
+	private static final String USER = "CA103";
 	private static final String PASSWORD = "123456";
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	//新增一個 廣告

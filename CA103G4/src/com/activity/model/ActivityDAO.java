@@ -23,11 +23,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 		}
 	}
 	//新增一個 廣告
-	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(" + 
-			"ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME," + 
-			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)" + 
-			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
-			"'0')," + 
+	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,'0')," + 
 			"?,?,?,?,?,?,?,?,?,?,'1',0)";
 	//更新一個 廣告
 	private static final String UPDATE_STMT = 
