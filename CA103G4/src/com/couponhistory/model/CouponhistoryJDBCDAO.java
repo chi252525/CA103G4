@@ -282,7 +282,7 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
+			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_MEM_COUPON);
 			pstmt.setString(1, mem_No);
@@ -299,7 +299,11 @@ public class CouponhistoryJDBCDAO implements CouponhistoryDAO_interface {
 			}
 
 			// Handle any driver errors
-		}  catch (SQLException se) {
+		}  catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources

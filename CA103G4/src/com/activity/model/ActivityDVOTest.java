@@ -11,16 +11,13 @@ public class ActivityDVOTest {
 
 	public static void main(String[] args) {
 //		insert的執行 done
-//		ActivityVO vo1=new ActivityVO();
-//		vo1.setCoucat_No("20180912-000002");
-//		vo1.setAct_Cat("a1");
-//		vo1.setAct_Name("gfdgfd");
-//		vo1.setAct_Content("yoyoyoy");
-//		vo1.setAct_Cmimetype("jpg");
-//		vo1.setAct_Pmimetype("jpg");
-//		vo1.setAct_Start(java.sql.Timestamp.valueOf("2018-03-03 13:35:57"));
-//		vo1.setAct_End(java.sql.Timestamp.valueOf("2018-03-03 13:35:57"));
-//		vo1.setAct_Usecou("AU1");
+		ActivityJDBCDAO dao=new ActivityJDBCDAO();
+		ActivityVO vo1=new ActivityVO();
+		vo1.setCoucat_No("20181001-000001");
+		vo1.setAct_Cat("a1");
+		vo1.setAct_Name("gfdgfd");
+		vo1.setAct_Start(java.sql.Timestamp.valueOf("2018-03-03 13:35:57"));
+		vo1.setAct_End(java.sql.Timestamp.valueOf("2018-03-03 13:35:57"));
 //		try {
 //			byte[] pic = getPictureByteArray("items/Bing3.jpeg");
 //			byte[] pic2 = getPictureByteArray("items/Bing3.jpeg");
@@ -30,9 +27,9 @@ public class ActivityDVOTest {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		
+		
 	
-//		 dao.insert(vo1);
+		 dao.insert(vo1);
 
 		//  update的執行 done
 //		 ActivityVO vo2=new ActivityVO();
@@ -71,19 +68,19 @@ public class ActivityDVOTest {
 //		 System.out.println(fmt1.format(vo3.getAct_End()));
 //		 
 //		 getAll的執行done
-		ActivityJDBCDAO dao =new ActivityJDBCDAO();
-		 List<ActivityVO> licv=dao.getAll();
-		 for(ActivityVO vo3:licv) {
-		 SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
-			 System.out.println(vo3.getAct_No());
-			 System.out.println(vo3.getCoucat_No());
-			 System.out.println(vo3.getAct_Cat());
-			 System.out.println(vo3.getAct_Name());
-			 System.out.println(fmt2.format(vo3.getAct_Start()));
-			 System.out.println(fmt2.format(vo3.getAct_End()));
-			 System.out.println("=========================");
-			 
-		 }
+//		ActivityJDBCDAO dao =new ActivityJDBCDAO();
+//		 List<ActivityVO> licv=dao.getAll();
+//		 for(ActivityVO vo3:licv) {
+//		 SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
+//			 System.out.println(vo3.getAct_No());
+//			 System.out.println(vo3.getCoucat_No());
+//			 System.out.println(vo3.getAct_Cat());
+//			 System.out.println(vo3.getAct_Name());
+//			 System.out.println(fmt2.format(vo3.getAct_Start()));
+//			 System.out.println(fmt2.format(vo3.getAct_End()));
+//			 System.out.println("=========================");
+//			 
+//		 }
 		 
 //		 findByAct_Cata的執行 done
 //		 SimpleDateFormat fmt3=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");

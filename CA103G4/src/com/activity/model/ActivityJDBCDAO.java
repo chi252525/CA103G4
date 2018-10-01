@@ -390,12 +390,12 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 	}
 
 	@Override
-	public int updateAct(String act_No, Integer act_status, ActivityVO activityVO) {
+	public int updateAct(String act_No, Integer act_Status, ActivityVO activityVO) {
 		int count=0;
 		Connection con = null ;
 		PreparedStatement pstmt= null;
 		
-		if(act_status == 1) {
+		if(act_Status == 1) {
 			try {
 				
 				con=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -414,8 +414,6 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				
 				count=pstmt.executeUpdate();
 				
-			}catch(ClassNotFoundException ce) {
-				throw new RuntimeException("資料庫無法載入驅動"+ce.getMessage());
 			}catch(SQLException se) {
 				throw new RuntimeException("資料庫發生錯誤"+se.getMessage());
 			}finally {
@@ -436,13 +434,13 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				}
 			}
 			
-		}else if(stat == 0) {		
+		}else if(act_Status == 0) {		
 			try {
 				Class.forName(DRIVER);
 				con=DriverManager.getConnection(URL, USER, PASSWORD);
 				pstmt=con.prepareStatement(UPDATE_ADOFFSTAT_STMT);
 				
-				pstmt.setString(1,id);
+				pstmt.setString(1,act_No);
 				
 				count=pstmt.executeUpdate();
 				
