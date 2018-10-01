@@ -109,8 +109,7 @@ padding-bottom: 760px;
           <div class="carousel-inner" role="listbox">
              <c:forEach varStatus="s" var="actVO" items="${list}">
             <div class="carousel-item ${s.first?'active':''}">
-              <img class="img-fluid" src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=${actVO.act_No}
-              " data-holder-rendered="true" > </div>
+              <img class="img-fluid" src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=${actVO.act_No}" data-holder-rendered="true" > </div>
            </c:forEach>
           </div>
         </div>
@@ -136,7 +135,7 @@ padding-bottom: 760px;
         <div class=" col-md-12">
           <div class="row">
             <div class="text-center col-4 px-1 py-1">
-              <img class="img-fluid d-block" src="img/ad_001.jpg" > </div>
+              <img class="img-fluid d-block" src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${actVO.act_No}"  > </div>
             <div class="col-8">
               <h5 class="mb-3 text-dark my-2">
                 <b>${activityVO.act_Name}</b>

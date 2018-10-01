@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.activity.model.ActivityVO;
-import com.report_msg.model.ReportVO;
 
 public class CouponJDBCDAO implements CouponDAO_interface {
 		private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";

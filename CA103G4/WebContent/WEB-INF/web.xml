@@ -224,6 +224,17 @@
 		<url-pattern>/activity/activityshowimage.do</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>ActivityShowSmallPic</servlet-name>
+		<servlet-class>com.activity.controller.ActivityShowSmallPic</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ActivityShowSmallPic</servlet-name>
+		<url-pattern>/activity/activityshowsmallpic.do</url-pattern>
+	</servlet-mapping>
+	
+	
 		<servlet>
 		<servlet-name>ReplyServlet</servlet-name>
 		<servlet-class>com.reply.controller.ReplyServlet</servlet-class>
