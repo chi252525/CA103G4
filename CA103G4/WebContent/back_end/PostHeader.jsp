@@ -34,6 +34,16 @@
                 $("#first-page").fadeToggle(1500);
                 $("#second-page2").hide();
             });
+            
+            $("#btn3").click(function(){
+                $("#first-page").hide();
+                $("#second-page3").fadeToggle(1500);
+            });
+            
+            $(".button3").click(function(){
+                $("#first-page").fadeToggle(1500);
+                $("#second-page3").hide();
+            });
         });
     
          
@@ -125,9 +135,9 @@
                 
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
                 
-<!--                 <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/branch.png" width="18%">&nbsp;分店管理</a> -->
+                <a href="#" id="btn3" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/employee.png" width="18%">&nbsp;員工管理</a>
                 
-<!--                 <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/transaction.png" width="18%">&nbsp;儲值管理</a> -->
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/chat.png" width="17%">&nbsp;即時線上客服</a>
                 
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
                 
@@ -155,6 +165,15 @@
 	                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" ><b>&#187;</b>&nbsp;結帳</a>
 	                
 	                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><b>&#187;</b>&nbsp;外帶自取身份確認</a>
+	                
+	            </div>
+	            
+	            <div class="list-group" style="display:none" id="second-page3">
+	                 <a href="#" class="list-group-item list-group-item-action button3" style="background-color: #FAECD1" >上一頁</a>
+	                 
+	                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" ><b>&#187;</b>&nbsp;員工資料權限設定</a>
+	                
+	                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><b>&#187;</b>&nbsp;員工權限修改</a>
 	                
 	            </div>
     	  </div>  

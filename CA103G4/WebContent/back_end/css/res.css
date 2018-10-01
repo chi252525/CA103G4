@@ -12,6 +12,7 @@
           background-color: dimgray;
           color:aliceblue;
       }
+
       .form-control:disabled{
           background-color: white;
       }
