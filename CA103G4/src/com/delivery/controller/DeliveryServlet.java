@@ -125,11 +125,7 @@ public class DeliveryServlet extends HttpServlet {
 		if ("update".equals(action)) { // 更新派送單狀態
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			
-			
+
 			String emp = new String(req.getParameter("emp_no"));
 			String status = new String(req.getParameter("deliv_status"));
 			String deliv = new String(req.getParameter("deliv_no"));

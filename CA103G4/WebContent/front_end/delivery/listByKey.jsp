@@ -81,12 +81,11 @@
 		<td>${deliveryVO.branch_no}</td>
 			
 		<td>
-		<jsp:useBean id="empSvc" scope="page" class="com.employee.model.EmpService" />
+		<jsp:useBean id="empDao" scope="page" class="com.employee.model.EmpDAO" />
 		<c:if test="${deliveryVO.emp_no == null}">
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
 				<select size="1" name="emp_no">
-					<option  value="">
-					<c:forEach var="empVO" items="${empSvc.all}">
+					<c:forEach var="empVO" items="${empDao.all}">
 					<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
 					</c:forEach>
 				</select>
