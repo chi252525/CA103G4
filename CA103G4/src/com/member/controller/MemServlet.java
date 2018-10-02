@@ -31,18 +31,14 @@ public class MemServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-				
-		
+						
 		//登入顯示大頭照
 		ServletOutputStream out = res.getOutputStream();
 		res.setContentType("image/gif");
 			try {
-				Context ctx = new javax.naming.InitialContext();
-				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-				con = ds.getConnection();
+
 				String mem_No = req.getParameter("mem_No").trim();
-		System.out.println(mem_No);
-		
+				System.out.println(mem_No);		
 				Statement stmt = con.createStatement();
 	
 				ResultSet rs = stmt.executeQuery(
@@ -56,7 +52,6 @@ public class MemServlet extends HttpServlet{
 					}
 					in.close();
 				}else {
-					//res.sendError(HttpServletResponse.SC_NOT_FOUND);
 					InputStream in = getServletContext().getResourceAsStream("/front_end/img/no-photo.png");
 					byte[] buf = new byte[in.available()];
 					in.read(buf);
@@ -71,11 +66,29 @@ public class MemServlet extends HttpServlet{
 				in.read(b);
 				out.write(b);
 				in.close();
-			}			
-						
-//		doPost(req,res);
+			}
+							
+		doPost(req,res);
+	}
+	public void init() throws ServletException {
+		try {
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			con = ds.getConnection();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
+	public void destroy() {
+		try {
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
@@ -158,13 +171,13 @@ public class MemServlet extends HttpServlet{
 					errorMsgs.add("收件人僅能填寫中文與英文");
 				}
 				
-				//預設收件人電話驗證
+				//預設收件郵遞區號驗證
 				String mem_Repno = req.getParameter("mem_Repno");
 				String mem_RepnoReg = "^[0-9]+$";
 				if(mem_Repno.isEmpty()) {
 					
 				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
-					errorMsgs.add("電話僅能輸入數字");
+					errorMsgs.add("僅能輸入數字");
 				}
 				
 				//預設收件人地址縣市
@@ -287,7 +300,197 @@ public class MemServlet extends HttpServlet{
 			}
 		}
 		
-		//更改驗證狀態
+		
+		//修改區塊-chiapao
+		if("update".equals(action)){  
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數****************************************/
+				
+				//修改開始
+				String mem_Id = req.getParameter("mem_Id").trim();
+				System.out.println("update");
+//				String mem_IdReg = "^[(a-zA-Z0-9_)]{2,50}$";
+				
+//				MemberService memSvc = new MemberService();
+//				MemberVO checkId = memSvc.getOneMem_Id(mem_Id);
+				
+//				//帳號是否重複檢查
+//				if(checkId !=null) {
+//					errorMsgs.add("帳號重複");
+//				}
+//				//帳號驗證
+//				if(mem_Id == null || mem_Id.length() == 0) {
+//					errorMsgs.add("尚未填寫帳號");
+//				}  else if(!mem_Id.trim().matches(mem_IdReg)) {
+//					errorMsgs.add("帳號須為英文或數字或底線");
+//				}
+				
+				//密碼驗證
+				String mem_Pw = req.getParameter("mem_Pw").trim();
+				if(mem_Pw == null || mem_Pw.length() == 0) {
+					errorMsgs.add("尚未填寫密碼");
+				} 
+				//姓名驗證
+				String mem_Name = req.getParameter("mem_Name");
+				String mem_NameReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				if (mem_Name == null || (mem_Name.trim()).length() == 0) {
+					errorMsgs.add("尚未填寫姓名");
+				}else if(!mem_Name.trim().matches(mem_NameReg)) {
+					errorMsgs.add("姓名僅能填寫中文與英文");
+				}
+				
+				//性別選擇
+				String mem_Gender = req.getParameter("mem_Gender");
+				if(mem_Gender == null) {
+					errorMsgs.add("尚未選擇性別");
+				}
+				
+				//生日驗證
+				Date mem_Bir = java.sql.Date.valueOf(req.getParameter("mem_Bir"));
+				if(mem_Bir == null) {
+					errorMsgs.add("尚未填寫生日");
+				}
+				
+				//信箱驗證
+				String mem_Mail = req.getParameter("mem_Mail");
+				if(mem_Mail == null || mem_Mail.trim().isEmpty()) {
+					errorMsgs.add("尚未填寫信箱");
+				}
+				
+				//手機驗證
+				String mem_Phone = req.getParameter("mem_Phone");
+				String mem_PhoneReg = "^[(0-9)]+$";
+				if(mem_Phone == null || mem_Phone.trim().isEmpty()) {
+					errorMsgs.add("尚未填寫電話");			
+				}else if (!(mem_Phone.trim().matches(mem_PhoneReg))) {
+					errorMsgs.add("電話僅能輸入數字");
+				}
+				//預設收件人驗證
+				String mem_Receiver = req.getParameter("mem_Receiver");
+				String mem_ReceiverReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				if(mem_Receiver.isEmpty()) {				
+				}
+				else if(!(mem_Receiver.trim().matches(mem_ReceiverReg))) {
+					errorMsgs.add("收件人僅能填寫中文與英文");
+				}
+				
+				//預設收件人郵遞區號驗證
+				String mem_Repno = req.getParameter("mem_Repno").trim();
+				String mem_RepnoReg = "^[0-9]+$";
+				if(mem_Repno.isEmpty()) {
+					
+				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
+					errorMsgs.add("郵遞區號僅能輸入數字");
+				}
+				
+				//預設收件人地址縣市
+				String mem_Recounty = req.getParameter("mem_Recounty");
+				
+				//預設收件人鄉鎮區
+				String mem_Retown = req.getParameter("mem_Retown");
+				
+				//預設收件人地址
+				String mem_Readdr = req.getParameter("mem_Readdr");
+				
+				//預設收件人信用卡
+				String mem_Cardnum = req.getParameter("mem_Cardnum");
+				
+				//預設信用卡截止日
+				String mem_Carddue = req.getParameter("mem_Carddue");
+				
+				//照片處理
+				Part part = req.getPart("mem_Photo");
+				InputStream in = part.getInputStream();
+				byte[] mem_Photo = new byte[in.available()];
+				in.read(mem_Photo);
+				in.close();
+				
+				
+				
+				
+				MemberVO memVO = new MemberVO();
+
+				memVO.setMem_Name(mem_Name);
+				System.out.println("memName="+memVO.getMem_Name());
+				memVO.setMem_Pw(mem_Pw);
+				System.out.println("memPw="+memVO.getMem_Pw());
+				memVO.setMem_Bir(mem_Bir);
+				System.out.println("memBir="+memVO.getMem_Bir());
+				memVO.setMem_Gender(mem_Gender);
+				System.out.println("memGender="+memVO.getMem_Gender());
+				memVO.setMem_Mail(mem_Mail);
+				System.out.println("memMail="+memVO.getMem_Mail());
+				memVO.setMem_Phone(mem_Phone);
+				System.out.println("memPhone="+memVO.getMem_Phone());
+				memVO.setMem_Receiver(mem_Receiver);
+				System.out.println("memReceiver="+memVO.getMem_Receiver());
+				
+				memVO.setMem_Repno(mem_Repno);
+				System.out.println("memRepno="+memVO.getMem_Repno());
+				
+				memVO.setMem_Recounty(mem_Recounty);
+				System.out.println("memRecounty="+memVO.getMem_Recounty());
+				
+				memVO.setMem_Retown(mem_Retown);
+				System.out.println("memRetown="+memVO.getMem_Retown());
+				
+				memVO.setMem_Readdr(mem_Readdr);
+				System.out.println("memRaddr="+memVO.getMem_Readdr());
+				
+				memVO.setMem_Cardnum(mem_Cardnum);
+				System.out.println("memCardnum="+memVO.getMem_Cardnum());
+				memVO.setMem_Carddue(mem_Carddue);
+				System.out.println("memCarddue="+memVO.getMem_Carddue());
+				
+				memVO.setMem_Photo(mem_Photo);
+								
+				System.out.println("memPhoto="+memVO.getMem_Photo());
+				memVO.setMem_Id(mem_Id);
+				
+								
+							
+				
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("memVO", memVO);  // 含有輸入格式錯誤的memVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/member/updateMem.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				
+				/***************************2.開始修改資料****************************************/
+				MemberService memSvc = new MemberService();
+				memSvc.updateMem(mem_Id, mem_Pw, mem_Name, mem_Gender, mem_Bir, mem_Mail, mem_Phone, mem_Receiver, mem_Repno, mem_Recounty, mem_Retown, mem_Readdr, mem_Cardnum, mem_Carddue, mem_Photo);
+													
+				/***************************3.修改完成(Send the check view)************/
+									
+				//取得會員帳號的全部資料
+				memVO = memSvc.getOneMem_Id(mem_Id);							
+				HttpSession session = req.getSession();
+					session.setAttribute("memVO", memVO);					
+					session.setAttribute("mem_Id", mem_Id);
+					
+					RequestDispatcher checkAuth = req.getRequestDispatcher("/front_end/member/memberinfo.jsp");
+					checkAuth.forward(req, res);
+					return;
+//				}
+	
+				
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("資料修改失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/memberinfo.jsp");
+				failuerView.forward(req, res);
+			}
+		}
+		
+		
+		
+		//更改驗證狀態區塊
 		if("checkstatus".equals(action)) {
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -417,7 +620,7 @@ System.out.println("我已經改完囉");
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("登入失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/front_end/member/login.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/login.jsp");
 				failuerView.forward(req, res);
 			}
 		

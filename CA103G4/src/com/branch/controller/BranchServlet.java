@@ -432,6 +432,7 @@ public class BranchServlet extends HttpServlet {
 				// =========query=========================
 				BranchService brvc = new BranchService();
 				List<BranchVO> list = brvc.getAll();
+				
 				if (list.size() == 0) {
 					errorMsgs.add("一間分店都沒有");
 					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req

@@ -55,6 +55,9 @@ public class EmpService {
 				
 	}
 	
+	public EmpVO findOneByEmpAcnum(String emp_Acnum) {
+		return dao.findByEmpAcnum(emp_Acnum);
+	}
 	
 	public List<EmpVO> getAll(){
 		return dao.getAll();

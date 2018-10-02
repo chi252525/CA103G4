@@ -7,6 +7,7 @@
 
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	System.out.println("addpost的request.getAttribute"+postVO);
 	MemberVO memVO = (MemberVO) request.getAttribute("memVO");
 	if (memVO == null) {
 		memVO = (MemberVO) session.getAttribute("memVO");
@@ -63,12 +64,10 @@ body {
 	background-position: center;
 	background-size: cover;
 }
-
-.container-margin {
-	margin-top: 50px;
-	margin-bottom: 20px;
+#myDIV {
+    height: 100px;
+    overflow: auto;
 }
-
 #img_input2 {
 	display: none;
 }
@@ -129,7 +128,7 @@ body {
 %>
             <div class="card-header text-primary p-3">我訂過的餐點</div>
           </div>
-          	<div class="card-body px-0 py-0 id="myDIV" onscroll="myFunction()">
+          	<div class="card-body px-0 py-0" id="myDIV" onscroll="myFunction()">
           <ul class="list-group">
             <!-- 訂過的List -->
             <c:forEach var="custommealsVO" items="${list}">
@@ -206,11 +205,11 @@ body {
 										stars.</label> <span class="starability-focus-ring"></span>
 								</fieldset>
 							</div>
-							<!-- 編輯器區塊 -->
+							<!-- 編輯區塊 -->
 							<textarea name="post_Cont">
 					            	<%=(postVO == null) ? "我推薦此餐點!" : postVO.getPost_Cont()%>
 					            </textarea>
-							<!-- //編輯器區塊 -->
+								<!-- */編輯區塊 -->
 							<br>
 							<input type="hidden" id="mem_No" name="mem_No" value="M000001" />
 							<input type="hidden" name="action" value="insert">
@@ -251,15 +250,8 @@ body {
 									}
 								});
 			</script>
-
-
-
-
-   
 	
 	</div>
-	<!-- /.blog-sidebar end-->
-
 
 
 

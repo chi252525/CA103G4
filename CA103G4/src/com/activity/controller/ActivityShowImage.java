@@ -37,7 +37,7 @@ public class ActivityShowImage extends HttpServlet {
 				in.close();
 			} else {
 				//res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("CA103G4/front_end/activity/img/ad_no_photo.png");
+				InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
 				byte[] buf = new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
@@ -47,7 +47,7 @@ public class ActivityShowImage extends HttpServlet {
 			stmt.close();
 		} catch (Exception e) {
 			//System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/NoData/null.png");
+			InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
 			byte[] buf = new byte[in.available()];
 			in.read(buf);
 			out.write(buf);

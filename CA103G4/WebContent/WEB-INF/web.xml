@@ -79,6 +79,15 @@
 				<servlet-name>AndroidCouponhistoryServlet</servlet-name>
 				<url-pattern>/AndroidCouponhistoryServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidCoucatServlet</servlet-name>
+				<servlet-class>android.com.coucat.controller.AndroidCoucatServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidCoucatServlet</servlet-name>
+				<url-pattern>/AndroidCoucatServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>

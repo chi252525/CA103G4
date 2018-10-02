@@ -94,8 +94,8 @@ body {
 									<img src="/CA103G4/front_end/img/LOGO-04.png" style="width:50px;"></a>
 							</li>
 							
-							<li class="nav-item active">
-								<a class="nav-link" href="#">分店資訊
+							<li class="nav-item ">
+								<a class="nav-link" href="<%=request.getContextPath()%>/front_end/branchInfo/branch_mang.jsp">分店資訊
 									<span class="sr-only">(current)</span></a>
 							</li>
 <!-- 							<li class="nav-item"><a class="nav-link" href="#">餐點介紹</a></li> -->
@@ -114,7 +114,7 @@ body {
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp">餐點分享</a>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="#">活動快訊</a></li>
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/activity/listAllActivity.jsp"">活動快訊</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">線上客服</a></li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>

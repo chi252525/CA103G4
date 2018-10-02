@@ -27,10 +27,10 @@ public class ShoppingServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
-		if (!action.equals("CHECKOUT") && (!action.equals("addCart"))) {
+		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action))&&(!("findMemCoupon").equals(action))) {
 
 			// 刪除餐點
-			if (action.equals("DELETE")) {
+			if ("DELETE".equals(action)) {
 
 				String del = req.getParameter("del");
 				int d = Integer.parseInt(del);
@@ -51,7 +51,7 @@ public class ShoppingServlet extends HttpServlet {
 				}
 			}
 			//
-			else if (action.equals("ADD")) {
+			else if ("ADD".equals(action)) {
 				//
 				MenuVO aMenuVO = getMenuVO(req);
 
@@ -84,7 +84,7 @@ public class ShoppingServlet extends HttpServlet {
 //			rd.forward(req, res);
 			res.sendRedirect(url);
 
-		} else if (action.equals("CHECKOUT")) {
+		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
 			if (buylist == null) {
 				String url = "Cart.jsp";
@@ -96,18 +96,17 @@ public class ShoppingServlet extends HttpServlet {
 					Integer price = menuVO.getMenu_Price();
 					Integer quantity = menuVO.getMenu_quantity();
 					total += (price * quantity);
-
-					String amount = String.valueOf(total);
-					req.setAttribute("amount", amount);
-					String url = "Checkout.jsp";
-					RequestDispatcher rd = req.getRequestDispatcher(url);
-					rd.forward(req, res);
 				}
+				
+				String amount = String.valueOf(total);
+				req.setAttribute("amount", amount);
+				String url = "Checkout.jsp";
+				RequestDispatcher rd = req.getRequestDispatcher(url);
+				rd.forward(req, res);
 			}
-
 		}
 		// 餐點數量加減按鈕(未完成)
-		else if (action.equals("addCart")) {
+		else if ("addCart".equals(action)) {
 			//
 //			String currentQuantity = req.getParameter("quantity");//獲取前端購物車商品數量
 //			System.out.println("數量=" + currentQuantity);
@@ -138,18 +137,11 @@ public class ShoppingServlet extends HttpServlet {
 
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
-			String couponSn = req.getParameter("couponSn");
-			CouponService couponSvc = new CouponService();
-			CoucatService coucatSvc = new CoucatService();
-
-			String CoucatNo = couponSvc.getOneCoupon(couponSn).getCoucat_No();// 查優惠卷類別編號
-			Double CouponDiscount = coucatSvc.getOneCoucat(CoucatNo).getCoucat_Discount();// 查優惠卷打折
-			Double amount2 = Double.parseDouble(amount) * CouponDiscount;
-			req.setAttribute("amount", String.valueOf(amount2));
-
-			req.getRequestDispatcher("Checkout.jsp").forward(req, res);
-
-		}
+			String couponDiscount = req.getParameter("coucatValue");
+			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
+			
+			res.getWriter().print(amount);//輸出前端
+			}
 
 	}
 

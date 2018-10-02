@@ -73,7 +73,8 @@
 
                             </FORM>
                             <FORM METHOD="post" ACTION="branch.do">
-                                <b>所在城市:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_City" style="margin-left: 5px !important; width: 100px;" onchange="submit()">
+                                <b>所在城市:</b> 
+                                <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No" aria-label="Example select with button addon" size="1" name="branch_City" style="margin-left: 5px !important; width: 100px;" onchange="submit()">
                                     <option selected>請選擇
                                         <c:forEach var="brCity" items="${branchSvc.city}">
                                     <option value="${brCity}">${brCity}

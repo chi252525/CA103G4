@@ -6,7 +6,7 @@
 
   
 
-  <%@ include file="/front_end/PostHeader.jsp" %>
+  <%@ include file="/back_end/PostHeader.jsp" %>
   	
 
   
@@ -210,12 +210,25 @@
             	 }
              }
         });
-     
-           
-      
+        
+//btn onclick color
+		$(function(){
+        	 $(".btn").click(function(e){ 
+            	aa();
+                e.target.style.backgroundColor="#F08080";
+                e.target.style.color="aliceblue";
+        	 });
+        	 function aa(){
+            	 for(var i = 0;i<9;i++){
+            	 	$(".btn")[i].style.backgroundColor="#DDDDDD";
+            	 	$(".btn")[i].style.color="#F08080";
+
+            	 }
+             }
+        });
   </script>
   
   
  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/res.css"> 
- <%@ include file="/front_end/PostFooter.jsp" %> 
+ <%@ include file="/back_end/PostFooter.jsp" %> 

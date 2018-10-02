@@ -27,14 +27,15 @@
 	<!-- linearicons CSS -->
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-	
-	
-<!--your  CSS ============================================= -->
 
-   <!--JS BS4-->
+<!--JS BS4-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ <!-- Shave v2.1.3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shave/2.1.3/shave.min.js"></script>
+
+
 <style>
 html {
 	height: 100%;
@@ -49,25 +50,8 @@ body {
 	font-family: 'Noto Sans TC', sans-serif;
 	font-weight: 400;
 }
-.container-margin{
-margin-top:20px;
-margin-bottom:20px;
-opacity:0.8;
-padding-bottom: 760px;
-}
 
-.coupon {
-    border: 5px dotted #bbb;
-    width: 80%;
-    border-radius: 15px;
-    margin: 0 auto;
-    max-width: 600px;
-}
 
-.container {
-    padding: 2px 16px;
-    background-color: #f1f1f1;
-}
 
 .promo {
     background: #ccc;
@@ -94,10 +78,12 @@ padding-bottom: 760px;
 
  <script>$('.carousel').carousel()</script>
 	
-	<div class="container px-0" style="background-color:rgba(255,255,255,0.45)">
-	
+	<div class="container " >
+	<div class="row " style="background-color:rgba(255,255,255,0.45)">
 	<div class="my-4"></div>
 		<!-- 廣告輪播圖開始 -->
+		<div class="container-fulid">
+		
       <div class="carousel slide" data-ride="carousel" id="carouselArchitecture" >
           <ol class="carousel-indicators">
             <c:forEach varStatus="s" items="${list}">
@@ -113,6 +99,7 @@ padding-bottom: 760px;
            </c:forEach>
           </div>
         </div>
+        </div>
 		<!-- 廣告輪播圖end -->
 
 			<%-- 錯誤表列 --%>
@@ -125,27 +112,52 @@ padding-bottom: 760px;
 				</ul>
 			</c:if>
 			
+			<!-- 搜尋開始 -->
+
+			<div class="my-1 col-12" >
+				<div class="card" style="background-color:rgba(255,255,255,0.45)">
+					<div class="card-header">Featured</div>
+					<div class="card-body">
+						<p class="card-text">With supporting text below as a natural
+							lead-in to additional content.</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<!-- 分頁及內容開始 -->
+			<div class="my-1 col-12">	
 			
-	<%@ include file="pages/page1.file"%>
+	<%@ include file="pages/page1.file"%></div>
 	
-<c:forEach var="activityVO" items="${list}">
+<c:forEach var="activityVO" items="${list}" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>" >
+<div class="col-12" style="background-color:rgba(255,255,255,0.45)" >
 	 <div class="py-4 px-2"  >
-    <div class="container" style="background-color:rgba(255,255,255,0.45)">
+    <div class="container" >
       <div class="row">
         <div class=" col-md-12">
-          <div class="row">
+          <div class="row" style="background-color:rgba(255,255,255,0.45)">
             <div class="text-center col-4 px-1 py-1">
               <img class="img-fluid d-block" src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${actVO.act_No}"  > </div>
             <div class="col-8">
-              <h5 class="mb-3 text-dark my-2">
-                <b>${activityVO.act_Name}</b>
+              <h5 class="mb-3 text-dark my-3">
+                <b>${activityVO.act_Name}${activityVO.act_Content}</b>
+                
               </h5>
+              <hr>
               <p class="my-1">活動期間
 							<fmt:formatDate value="${activityVO.act_Start}"
 								pattern="yyyy-MM-dd " />
 							~
 							<fmt:formatDate value="${activityVO.act_End}"
-								pattern="yyyy-MM-dd " /></p> </p>
+								pattern="yyyy-MM-dd " />&nbsp;${activityVO.act_Views}&nbsp;Views</p> 
+			<p></p>
               <a href="#" class="btn btn-outline-primary">More..</a>
               <a class="btn btn-danger" href="#">取得優惠卷</a>
             </div>
@@ -155,25 +167,29 @@ padding-bottom: 760px;
   
     </div>
   </div>
+  </div>
 		</c:forEach>
-		<%@ include file="pages/page2.file"%>
-	
-			
-			
-			
-			
-			
-			
-			
-	
-
 		
-		
-	 
+	
+			
+			
+			
+			
+			
+			
+		<!-- page2的內容 -->
+	    <div class="col-12  my-2">	
+	    <div class="row justify-content-center">
+	    <div class="col-3 px-2 py-1">
+     	<%@ include file="pages/page2.file"%></div>
+     	<!-- 內容結束-->
+    </div>	
+    </div>
+	</div>
 
-	
-	
 </div>
 <!-- container end -->
+	
+<jsp:include page="/front_end/footer.jsp" flush="true" />
 </body>
 </html>
