@@ -11,7 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 @MultipartConfig
-public class ActivityShowImage extends HttpServlet {
+public class ActivityShowSmallPic extends HttpServlet {
 
 	Connection con;
 
@@ -24,11 +24,11 @@ public class ActivityShowImage extends HttpServlet {
 		try {
 			Statement stmt = con.createStatement();
 			String act_No = req.getParameter("act_No").trim();
-
+//			System.out.println("有進ActivityShowSmallPic");
 			ResultSet rs = stmt.executeQuery(
-					"select ACT_CAROUSEL from activity where act_No='"+act_No+"'"); 
+					"select ACT_PIC from activity where act_No='"+act_No+"'"); 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("act_Carousel"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("act_Pic"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
@@ -37,7 +37,7 @@ public class ActivityShowImage extends HttpServlet {
 				in.close();
 			} else {
 				//res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
+				InputStream in = getServletContext().getResourceAsStream("/res/img/ad_nosmallpic.jpg");
 				byte[] buf = new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
@@ -47,7 +47,7 @@ public class ActivityShowImage extends HttpServlet {
 			stmt.close();
 		} catch (Exception e) {
 			//System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
+			InputStream in = getServletContext().getResourceAsStream("/res/img/ad_nosmallpic.jpg");
 			byte[] buf = new byte[in.available()];
 			in.read(buf);
 			out.write(buf);

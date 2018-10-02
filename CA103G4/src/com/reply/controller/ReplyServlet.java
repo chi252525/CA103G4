@@ -5,6 +5,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
+import com.post.model.PostService;
 import com.reply_msg.model.ReplyService;
 import com.reply_msg.model.ReplyVO;
 
@@ -20,7 +22,7 @@ public class ReplyServlet extends HttpServlet{
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-//		System.out.println("跳到Servlet+action ="+action );
+		System.out.println("跳到Servlet+action ="+action );
 		 /***********************新增留言*************************/	
         if ("insert".equals(action)) {
         	List<String> errorMsgs =new LinkedList<String>();
@@ -55,6 +57,74 @@ public class ReplyServlet extends HttpServlet{
 				failureView.forward(req, res);
 			}
         }
+        
+        
+        if ("delete".equals(action)) {
+//			System.out.println("delete開始");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				String rply_No = req.getParameter("rply_No");
+				
+				ReplyVO rplyVO= new ReplyVO();
+				rplyVO.setRply_No(rply_No);
+				
+				/*************************** 2.開始刪除 留言***************************************/
+				ReplyService rplySvc = new ReplyService();
+				rplySvc.delete(rply_No);
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/front_end/post/listOnepost.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);	
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listOnepost.jsp");
+				failureView.forward(req, res);
+			}
+		}
+        
+        
+        if ("updateStatus".equals(action)) {
+//			System.out.println("delete開始");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				System.out.println("updateStatus in ");
+				String rply_No = req.getParameter("rply_No");
+				System.out.println("rply_No"+rply_No);
+				String rply_Status = req.getParameter("rply_Status");
+				System.out.println("rply_Status"+rply_Status);
+				/*************************** 2.開始隱藏或顯示留言***************************************/
+				ReplyService rplySvc = new ReplyService();
+				if(rply_Status=="RS1") {
+					rplySvc.updateStatus("RS0",rply_No);
+					System.out.println("RS1的情況");
+				}else {
+					rplySvc.updateStatus("RS1",rply_No);
+					System.out.println("RS0的情況");
+				}
+				
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/front_end/post/listOnepost.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);	
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listOnepost.jsp");
+				failureView.forward(req, res);
+			}
+		}
+        
+        
+        
+        
+
         
         	
 	}

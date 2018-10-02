@@ -22,47 +22,47 @@ public class ActivityDAO implements ActivityDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	//新增一個 廣告
+	//新增一個 廣告backend
 	private static final String INSERT_STMT ="INSERT INTO ACTIVITY(" + 
 			"ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME," + 
 			"ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)" + 
 			"VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4," + 
 			"'0')," + 
 			"?,?,?,?,?,?,?,?,?,?,1,0)";
-	////修改廣告資訊(必須在下架狀態才能修改)
+	////修改廣告資訊(必須在下架狀態才能修改)backend
 	private static final String UPDATE_STMT = 
 			"UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=?" + 
 			  "WHERE ACT_NO=?";
 	//取得一個廣告活動
 	private static final String GET_ONE_STMT = "SELECT * FROM ACTIVITY WHERE ACT_NO=?";
 	
-	///***更動廣告為馬上上架***(上/下架也會更新成實際上下架時間)
+	///***更動廣告為馬上上架***(上/下架也會更新成實際上下架時間)backend
 	private static final String UPDATE_ADONSTAT_STMT="UPDATE ACTIVITY SET act_Status=1,act_PreAddTime=SYSDATE,ACT_START=sysdate,act_PreOffTime=?,ACT_END=? WHERE ACT_NO=?";
 	
-	//更動廣告為馬上下架
+	//更動廣告為馬上下架backend
 	private static final String UPDATE_ADOFFSTAT_STMT=
 			"UPDATE ACTIVITY SET act_Status=0,act_PreOffTime=SYSDATE,ACT_END=SYSDATE WHERE ACT_NO=?";
 
-	///瀏覽數++
+	///瀏覽數++ front_end
 	private static final String UPDATE_CLICK_STMT="UPDATE ACTIVITY SET act_Views=act_Views+1 WHERE ACT_NO=?";
 	
-	///以瀏覽數高低排序
+	///以瀏覽數高低排序front_end
 	private static final String FINDHOT_STMT=
 			"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_Views DESC";
 	
-	//查詢已上架的最新廣告
+	//查詢已上架的最新廣告們front_end
 	private static final String FINDNEW_STMT=
 			"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY ACT_START DESC";
 
-	//以時間區間搜尋廣告活動
+	//以時間區間搜尋廣告活動front_end
 	private static final String FINDBYDATEBETWEEN = 
     		"SELECT * FROM activity WHERE act_start BETWEEN ? AND ? AND " + 
     				"act_End BETWEEN ? and ?";
 	
-	//以種類搜尋廣告活動
+	//以種類搜尋廣告活動backend
 	private static final String FINDBYACTCATA ="SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
 	
-	//以欲上架時間最近的的活動排序取得全部
+	//以欲上架時間最近的的活動排序取得全部front_end
 		private static final String GETALL = 
 				"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
 	
@@ -232,7 +232,7 @@ public class ActivityDAO implements ActivityDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			System.out.println("getAll Connecting to database successfully! (連線成功！)");
+//			System.out.println("getAll Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
 		
