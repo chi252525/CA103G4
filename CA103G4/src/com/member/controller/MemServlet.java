@@ -31,18 +31,14 @@ public class MemServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-				
-		
+						
 		//登入顯示大頭照
 		ServletOutputStream out = res.getOutputStream();
 		res.setContentType("image/gif");
 			try {
-				Context ctx = new javax.naming.InitialContext();
-				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-				con = ds.getConnection();
+
 				String mem_No = req.getParameter("mem_No").trim();
-		System.out.println(mem_No);
-		
+				System.out.println(mem_No);		
 				Statement stmt = con.createStatement();
 	
 				ResultSet rs = stmt.executeQuery(
@@ -56,7 +52,6 @@ public class MemServlet extends HttpServlet{
 					}
 					in.close();
 				}else {
-					//res.sendError(HttpServletResponse.SC_NOT_FOUND);
 					InputStream in = getServletContext().getResourceAsStream("/front_end/img/no-photo.png");
 					byte[] buf = new byte[in.available()];
 					in.read(buf);
@@ -71,11 +66,29 @@ public class MemServlet extends HttpServlet{
 				in.read(b);
 				out.write(b);
 				in.close();
-			}			
-						
+			}
+							
 		doPost(req,res);
 	}
+	public void init() throws ServletException {
+		try {
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			con = ds.getConnection();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	public void destroy() {
+		try {
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
@@ -158,13 +171,13 @@ public class MemServlet extends HttpServlet{
 					errorMsgs.add("收件人僅能填寫中文與英文");
 				}
 				
-				//預設收件人電話驗證
+				//預設收件郵遞區號驗證
 				String mem_Repno = req.getParameter("mem_Repno");
 				String mem_RepnoReg = "^[0-9]+$";
 				if(mem_Repno.isEmpty()) {
 					
 				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
-					errorMsgs.add("電話僅能輸入數字");
+					errorMsgs.add("僅能輸入數字");
 				}
 				
 				//預設收件人地址縣市
@@ -287,64 +300,8 @@ public class MemServlet extends HttpServlet{
 			}
 		}
 		
-		//更改驗證狀態
-		if("checkstatus".equals(action)) {
-			List<String> errorMsgs = new LinkedList<>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			try {
-			//取得網頁輸入的驗證碼
-			String authCode = req.getParameter("authCode").trim();
-
-
-			//取得連線
-			Jedis jedis = new Jedis("localhost", 6379);	
-			jedis.auth("123456");
-						
-			HttpSession session = req.getSession();
-			
-			String mem_No = (String) session.getAttribute("mem_No");
-			String mem_Name = (String) session.getAttribute("mem_Name");	
-			String mem_Id = (String) session.getAttribute("mem_Id");
-			
-			//取得jedis的驗證碼
-
-			String jedisAuthCode = jedis.get(mem_No);
-System.out.println("jedisAuthCode="+jedisAuthCode);
-
-			
-
-			if(jedisAuthCode == null) {		
-				errorMsgs.add("驗證已失效");				
-			}else if(authCode.equals(jedisAuthCode)) {
-				MemberService ms = new MemberService();
-				ms.memChangeStatus(mem_Id, "m1");
-System.out.println("我已經改完囉");
-				
-			}else {
-				errorMsgs.add("輸入錯誤");
-				}
-			if(!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/member/checkstatus.jsp");
-				failureView.forward(req, res);
-				return; //程式中斷
-			}
-						
-			jedis.close();
-			session.invalidate();
-			
-			RequestDispatcher login = req.getRequestDispatcher("/front_end/member/login.jsp");
-			login.forward(req, res);
-			
-			}catch(Exception e){
-				errorMsgs.add("驗證失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/checkstatus.jsp");
-				failuerView.forward(req, res);			
-			}
-			
-		}
 		
-//修改區塊-chiapao
+		//修改區塊-chiapao
 		if("update".equals(action)){  
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -355,21 +312,21 @@ System.out.println("我已經改完囉");
 				//修改開始
 				String mem_Id = req.getParameter("mem_Id").trim();
 				System.out.println("update");
-//						String mem_IdReg = "^[(a-zA-Z0-9_)]{2,50}$";
+//				String mem_IdReg = "^[(a-zA-Z0-9_)]{2,50}$";
 				
-//						MemberService memSvc = new MemberService();
-//						MemberVO checkId = memSvc.getOneMem_Id(mem_Id);
+//				MemberService memSvc = new MemberService();
+//				MemberVO checkId = memSvc.getOneMem_Id(mem_Id);
 				
-//						//帳號是否重複檢查
-//						if(checkId !=null) {
-//							errorMsgs.add("帳號重複");
-//						}
-//						//帳號驗證
-//						if(mem_Id == null || mem_Id.length() == 0) {
-//							errorMsgs.add("尚未填寫帳號");
-//						}  else if(!mem_Id.trim().matches(mem_IdReg)) {
-//							errorMsgs.add("帳號須為英文或數字或底線");
-//						}
+//				//帳號是否重複檢查
+//				if(checkId !=null) {
+//					errorMsgs.add("帳號重複");
+//				}
+//				//帳號驗證
+//				if(mem_Id == null || mem_Id.length() == 0) {
+//					errorMsgs.add("尚未填寫帳號");
+//				}  else if(!mem_Id.trim().matches(mem_IdReg)) {
+//					errorMsgs.add("帳號須為英文或數字或底線");
+//				}
 				
 				//密碼驗證
 				String mem_Pw = req.getParameter("mem_Pw").trim();
@@ -519,7 +476,7 @@ System.out.println("我已經改完囉");
 					RequestDispatcher checkAuth = req.getRequestDispatcher("/front_end/member/memberinfo.jsp");
 					checkAuth.forward(req, res);
 					return;
-//						}
+//				}
 	
 				
 				
@@ -530,7 +487,67 @@ System.out.println("我已經改完囉");
 				failuerView.forward(req, res);
 			}
 		}
+		
+		
+		
+		//更改驗證狀態區塊
+		if("checkstatus".equals(action)) {
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+			//取得網頁輸入的驗證碼
+			String authCode = req.getParameter("authCode").trim();
+
+
+			//取得連線
+			Jedis jedis = new Jedis("localhost", 6379);	
+			jedis.auth("123456");
+						
+			HttpSession session = req.getSession();
+			
+			String mem_No = (String) session.getAttribute("mem_No");
+			String mem_Name = (String) session.getAttribute("mem_Name");	
+			String mem_Id = (String) session.getAttribute("mem_Id");
+			
+			//取得jedis的驗證碼
+
+			String jedisAuthCode = jedis.get(mem_No);
+System.out.println("jedisAuthCode="+jedisAuthCode);
+
+			
+
+			if(jedisAuthCode == null) {		
+				errorMsgs.add("驗證已失效");				
+			}else if(authCode.equals(jedisAuthCode)) {
+				MemberService ms = new MemberService();
+				ms.memChangeStatus(mem_Id, "m1");
+System.out.println("我已經改完囉");
 				
+			}else {
+				errorMsgs.add("輸入錯誤");
+				}
+			if(!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/member/checkstatus.jsp");
+				failureView.forward(req, res);
+				return; //程式中斷
+			}
+						
+			jedis.close();
+			session.invalidate();
+			
+			RequestDispatcher login = req.getRequestDispatcher("/front_end/member/login.jsp");
+			login.forward(req, res);
+			
+			}catch(Exception e){
+				errorMsgs.add("驗證失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/checkstatus.jsp");
+				failuerView.forward(req, res);			
+			}
+			
+		}
+		
+		
 		//登入區塊-chiapao
 		
 		if("loginhandler".equals(action)){  // 來自register.jsp的請求  
@@ -603,7 +620,7 @@ System.out.println("我已經改完囉");
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("登入失敗"+e.getMessage());
-				RequestDispatcher failuerView = req.getRequestDispatcher(req.getContextPath()+"/front_end/member/login.jsp");
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/member/login.jsp");
 				failuerView.forward(req, res);
 			}
 		
