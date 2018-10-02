@@ -1,12 +1,14 @@
 package com.orderinvoice.model;
 
+
+
 public class OrderinvoiceVO {
 	private String invo_no;
 	private String order_no;
 	private String menu_no;
 	private String custom_no;
 	private Integer invo_status;
-
+	
 	public String getInvo_no() {
 		return invo_no;
 	}
