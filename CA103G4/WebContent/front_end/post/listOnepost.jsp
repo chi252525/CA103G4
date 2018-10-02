@@ -220,7 +220,7 @@ background-color:rgba(253,253,253,0.8);
 
 
 				<!-- 列出所有留言 -->
-			<c:set var="listReplybypost_No" value="${postVO.post_No}" />
+			
 				<%
 					ReplyService rplySvc = new ReplyService();
 					String listReplybypost_No = postVO.getPost_No();
@@ -253,24 +253,18 @@ background-color:rgba(253,253,253,0.8);
  
   <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=delete&rply_No=${replyVO.rply_No}" 
   class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}">刪除</a>
-   
+  
+  
    <c:choose>
-   <c:when test="${replyVO.rply_Status == 'RS1'&& 'M000001'==replyVO.mem_No}">
-
+   <c:when test="${'M000001'==replyVO.mem_No}">
    <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}"
     class="btn btn-default btn-sm " id="hide" >隱藏</a> </c:when>
-    
     	<c:otherwise>
-     
     <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}" 
     class="btn btn-default btn-sm " id="show" >顯示</a>   
   	</c:otherwise>
   	  	</c:choose>
 </div>
-
-
-      
-
 						</div>
 					</div>
 				</c:forEach>

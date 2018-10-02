@@ -31,7 +31,7 @@ public class ReplyServlet extends HttpServlet{
         	/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
         	String mem_No = req.getParameter("mem_No");
         	System.out.println("新增留言 會員編號: "+mem_No);
-        	String rply_No = req.getParameter("rply_No");
+        //	String rply_No = req.getParameter("rply_No");
         	String post_No = req.getParameter("post_No");
         	String rply_Cont = req.getParameter("rply_Cont");
 			if (rply_Cont == null || rply_Cont.trim().length() == 0) {
@@ -39,13 +39,14 @@ public class ReplyServlet extends HttpServlet{
 			}	
        
 				ReplyVO rplyVO= new ReplyVO();
-				rplyVO.setRply_No(rply_No);
+		//		rplyVO.setRply_No(rply_No);
 				rplyVO.setMem_No(mem_No);
 				rplyVO.setPost_No(post_No);
 				
 				/***************************2.開始新增資料***************************************/
 				ReplyService rplySvc = new ReplyService();
-				rplyVO=rplySvc.addReply(rply_No,mem_No,post_No,rply_Cont);
+//				rplyVO=rplySvc.addReply(rply_No,mem_No,post_No,rply_Cont);
+				rplyVO=rplySvc.addReply(mem_No,post_No,rply_Cont);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/front_end/post/listOnepost.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 

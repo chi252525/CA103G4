@@ -127,10 +127,8 @@ body {
 								</div>
 							</div>
 						</div>
-
 						<fieldset class="form-group">
 							<div class="row">
-
 
 								<!-- 搜尋年月 -->
 								<div class="col-sm-4">
@@ -146,7 +144,6 @@ body {
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 										class="form-inline">
-
 										<div class="form-group">
 											<select size="1" class="form-control" name="post_No">
 												<c:forEach var="postVO" items="${postSvc2.all}">
@@ -159,8 +156,6 @@ body {
 											<input type="hidden" name="action" value="getOne_For_Display">
 										</div>
 									</FORM>
-
-
 								</div>
 
 								<div class="col-sm-8 ">
@@ -181,14 +176,7 @@ body {
 
 								</div>
 
-
-
-
-
-
 								<div class="col-sm-4 my-1">
-
-
 									<div class="btn-group float-right ">
 										<button class="btn btn-secondary btn-sm dropdown-toggle"
 											type="button" data-toggle="dropdown" aria-haspopup="true"

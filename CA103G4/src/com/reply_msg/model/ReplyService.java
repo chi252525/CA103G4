@@ -12,9 +12,8 @@ public class ReplyService {
 		dao=new ReplyDAO();
 	}
 	
-	public ReplyVO addReply(String rply_No,String mem_No,String post_No,String rply_Cont) {
+	public ReplyVO addReply(String mem_No,String post_No,String rply_Cont) {
 		ReplyVO replyVO=new ReplyVO();
-		replyVO.setRply_No(rply_No);
 		replyVO.setPost_No(post_No);
 		replyVO.setMem_No(mem_No);
 		replyVO.setRply_Cont(rply_Cont);

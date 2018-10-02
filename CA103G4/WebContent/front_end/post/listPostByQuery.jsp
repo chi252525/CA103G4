@@ -247,9 +247,9 @@ body {
 					</div>
 				</c:forEach>
 		
-			<%@ include file="pages/page2.file"%>
-		</div>
 
+		</div>
+			<%@ include file="pages/page2.file"%>
 
 	</div>
 	<jsp:include page="/front_end/footer.jsp" flush="true" />
