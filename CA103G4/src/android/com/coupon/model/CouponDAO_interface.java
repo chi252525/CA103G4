@@ -10,5 +10,6 @@ public interface CouponDAO_interface {
 	void updateStatus(CouponVO couponVO);
 	List<CouponVO> findByCoucatNo(String coucat_No) ;  
 	CouponVO getOneCoupon(String coup_Sn);
+	CouponVO getOneCouponWithCoucat(String coup_Sn);
 	
 }
