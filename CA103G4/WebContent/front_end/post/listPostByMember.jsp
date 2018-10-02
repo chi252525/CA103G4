@@ -5,7 +5,7 @@
 <%@ page import="com.post.model.*"%>
 <%@ page import="com.custommeals.model.*"%>
 <%@ page import="com.member.model.*"%>
-<jsp:useBean id="cusmealSvc" scope="page"
+<jsp:useBean id="cusmealSvc1" scope="page"
 	class="com.custommeals.model.CustommealsService" />
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 	
@@ -111,10 +111,7 @@ body {
 						<div class="display-4">${memVO.mem_Name}的貼文</div>
 				</div>
 			
-				<div class="col-md-6">
-					<a class="btn btn-info btn-sm px-3 btn-block mt-1"
-						href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
-				</div>
+				
 				
 				
 			</div>
@@ -128,41 +125,37 @@ body {
 				</div>
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
-					<div class="col-md-4 px-2 py-4">
-						<div class="card">
-							<img class="card-img img-fluid"
-								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
-								alt="Card image">
-							<div
-								class="card-img-overlay d-flex justify-content-center align-items-center">
-								<h2 class="display-5" class="text-primary ">
-									<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
-								</h2>
-							</div>
-						</div>
+					<div class="col-md-4 px-2 py-4 ">
 						
-						<div class="card px-2">
-							<h5 class="card-title text-dark my-2 px-2">推薦組合</h5>
+						<div class="card"
+							style="background-color: rgba(255, 255, 255, 0.45)">
+							<img class=" img-responsive"
+								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
+								style="height: 280px; width: 348px" alt="Card image">
+						</div>
+
+						<div class="card px-2"
+							style="background-color: rgba(255, 255, 255, 0.45)">
+							<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
 							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							<p class="card-text text-dark px-2 font-italic ">
-								<fmt:formatDate value="${postVO.post_Time}"
-									pattern="MM月dd日 HH:mm" />
-							</p>
-							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name}
-							<!-- 會員可以修改及刪除的按紐 -->
+							<p style="text-align: right;" class="my-0">by
+								${memSvc.getOne_Member(postVO.mem_No).mem_Name}
+								<span class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span></p>
+							
+
+							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
-								<input type="hidden" name="post_No" value="${postVO.post_No}"/>
+								<input type="hidden" name="post_No" value="${postVO.post_No}" />
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
 								<!-- 查單一貼文 -->
-								<input type="hidden" name="action" value="getOne_For_Display"/>
-								<!-- 同時查單一貼文的所有留言 -->
-								<input type="hidden" name="action" value="listReplybyPostNo"/>
-								<button type="submit" 
-									class="btn btn-info btn-sm btn-block ">查看內容</button>
+								<input type="hidden" name="action" value="getOne_For_Display" />
+								<input type="hidden" name="action" value="addviews">
+								<button type="submit" class="btn btn-info btn-sm btn-block ">看更多
+									&raquo;</button>
 							</FORM>
-							
+							<!-- 會員可以修改及刪除的按紐 -->
 							<a
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
 								class="btn lnr lnr-pencil btn-warning">修改</a>
@@ -174,15 +167,19 @@ body {
 			     				<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 								<input type="hidden" name="action" value="delete">
 								<button type="submit" value="delete"
-									class="btn  btn-sm btn-danger btn-block"
+									class="btn  btn-sm btn-danger btn-block mb-1"
 									onclick="deleteConfirm()">
 									<i class="far fa-trash-alt"></i> 刪除
 								</button>
 							</FORM>
+							
+
+
+
 						</div>
-						
-						
 					</div>
+						
+					
 				</c:forEach>
 
 			</div>

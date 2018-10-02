@@ -199,7 +199,7 @@ public class ReplyJDBCDAO implements ReplyDAO_interface  {
 
 
 	@Override
-	public int updateStatus(String post_No, String mem_No, String rply_Status) {
+	public int updateStatus(String rply_Status,String rply_No) {
 		int updateCount = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -209,8 +209,7 @@ public class ReplyJDBCDAO implements ReplyDAO_interface  {
 			pstmt = con.prepareStatement(UPDATE_STATUS_STMT);
 
 			pstmt.setString(1, rply_Status);
-			pstmt.setString(2, mem_No);
-			pstmt.setString(3, post_No);
+			pstmt.setString(2, rply_No);
 
 			updateCount = pstmt.executeUpdate();
 			

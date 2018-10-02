@@ -99,8 +99,8 @@
 				<tbody>
 					<tr>
 						<td>${reportVO.rpt_No}</td>
-						<td><a
-							href="<%=request.getContextPath()%>/post/postServlet.do?post_No=${reportVO.post_No}&action=getOne_For_Display">${reportVO.post_No}</td>
+						<td>
+						<a href="<%=request.getContextPath()%>/post/postServlet.do?post_No=${reportVO.post_No}&action=getOne_For_Display"/>${reportVO.post_No}</td>
 						<td>${reportVO.mem_No}${memSvc.getOne_Member(reportVO.mem_No).mem_Name}</td>
 
 
@@ -130,12 +130,12 @@
 
 								<form method="post"
 									action="<%=request.getContextPath()%>/post/postServlet.do" id="updateStatus${reportVO.rpt_No}">
-									<button type="submit" class="btn btn-success" ${(reportVO.rpt_Status=='RS1')?'disabled':'' }>
+									<button type="submit" class="btn btn-success" ${(reportVO.rpt_Status=='RS1')?'disabled':'' }></button>
 										<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
 										<input type="hidden" name="post_No" value="${postSvc.getOne_Post(reportVO.post_No).post_No}" />
-										<input type="hidden" name="action" value="updatePostStatus" /> <span
-											class="lnr lnr-checkmark-circle"></span>
-									</button>
+										<input type="hidden" name="action" value="updatePostStatus" /> 
+										<span class="lnr lnr-checkmark-circle"></span>
+									
 									
 									
 								</form>

@@ -24,20 +24,20 @@ public class ReplyDAO implements ReplyDAO_interface  {
 			e.printStackTrace();
 		}
 	}
-	//新增一個留言
+	//新增一個留言 done
 	private static final String INSERT_STMT="INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2,'0'),?,?,?)";
 	//修改一個留言
 	private static final String UPDATE_STMT = 
 			"UPDATE RPLY_MSG SET RPLY_CONT=?, RPLY_STATUS=? ,RPLY_TIME=? WHERE RPLY_NO=?";
-	//刪除單一留言
+	//刪除單一留言 done
 		private static final String DELETE_STMT = "DELETE FROM RPLY_MSG WHERE RPLY_NO = ?";
-	//取一個貼文的所有留言
-	private static final String GET_ALL_BY_POSTNO = "SELECT * FROM RPLY_MSG WHERE POST_NO=? order by RPLY_TIME desc";
-	// 修改此會員在單一貼文的留言狀態-隱藏或顯示 
-	private static final String UPDATE_STATUS_STMT = "UPDATE RPLY_MSG SET RPLY_STATUS = ? WHERE MEM_NO = ? AND POST_NO = ?";
+	//取一個貼文的所有留言 done
+	private static final String GET_ALL_BY_POSTNO = "SELECT * FROM RPLY_MSG WHERE POST_NO=? AND RPLY_STATUS='RS1' order by RPLY_TIME desc";
+	// 修改此會員在單一貼文的留言狀態-隱藏或顯示   done
+	private static final String UPDATE_STATUS_STMT = "UPDATE RPLY_MSG SET RPLY_STATUS = ? WHERE RPLY_NO= ?";
 	
 	//取全部可顯示的留言
-		private static final String GETALL = "SELECT * FROM RPLY_MSG WHERE RPLY_STATUS =? ORDER BY RPLY_TIME DESC";
+		private static final String GETALL = "SELECT * FROM RPLY_MSG WHERE RPLY_STATUS ='RS1' ORDER BY RPLY_TIME DESC";
 	
 	// 修改留言狀態-隱藏或顯示 FORBACKEND
 	private static final String UPDATE_STATUS_FOR_BACKEND_STMT = "UPDATE RPLY_MSG SET RPLY_STATUS = ? WHERE RPLY_NO = ? ";
@@ -203,7 +203,7 @@ public class ReplyDAO implements ReplyDAO_interface  {
 
 
 	@Override
-	public int updateStatus(String post_No, String mem_No, String rply_Status) {
+	public int updateStatus(String rply_Status ,String rply_No) {
 		int updateCount = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -213,8 +213,8 @@ public class ReplyDAO implements ReplyDAO_interface  {
 			pstmt = con.prepareStatement(UPDATE_STATUS_STMT);
 
 			pstmt.setString(1, rply_Status);
-			pstmt.setString(2, mem_No);
-			pstmt.setString(3, post_No);
+			pstmt.setString(2, rply_No);
+			
 
 			updateCount = pstmt.executeUpdate();
 			
@@ -285,7 +285,6 @@ public class ReplyDAO implements ReplyDAO_interface  {
 			con = ds.getConnection();
 //			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
-			pstmt.setString(1, "rply_Status");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

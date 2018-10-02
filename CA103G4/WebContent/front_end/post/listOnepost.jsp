@@ -109,6 +109,11 @@ body {
 .box{
 background-color:rgba(253,253,253,0.8);
 }
+
+.hidebtn{
+  visibility: hidden;
+}
+
 </style>
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
@@ -122,12 +127,13 @@ background-color:rgba(253,253,253,0.8);
 	<div class="container container-margin">
 		<div class="row">
 
-			<div class="col-sm-12 blog-main p-2 box">
+			<div class="col-sm-12 blog-main p-4 box mt-3">
 				<!-- 單一餐點貼文 -->
 				<div class="blog-post">
 					<h3 class="blog-post-title">
 						<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
 					</h3>
+					<hr>
 					<p class="font-italic ml-auto post-time">
 						<span class="lnr lnr-bookmark"></span>
 						<fmt:formatDate value="${postVO.post_Time}"
@@ -167,12 +173,14 @@ background-color:rgba(253,253,253,0.8);
 				</script>
 
 				<!-- Your share button code -->
+				<div class="col-12">
 				<div class="fb-share-button"
 					data-href="<%=request.getContextPath()%>/post/listOnepost.jsp"
 					data-layout="button_count"></div>
-				<button type="button"
+					<button type="button"
 									class="btn btn-sm btn-outline-danger mt-2  float-right"
 									data-toggle="modal" data-target="#reportModal">檢舉此發文</button>
+				</div>
 				<!-- 新增留言區塊 -->
 				<form method="post"
 					action="<%=request.getContextPath()%>/reply/replyServlet.do"
@@ -212,7 +220,7 @@ background-color:rgba(253,253,253,0.8);
 
 
 				<!-- 列出所有留言 -->
-				<c:set var="listReplybypost_No" value="${postVO.post_No}" />
+			<c:set var="listReplybypost_No" value="${postVO.post_No}" />
 				<%
 					ReplyService rplySvc = new ReplyService();
 					String listReplybypost_No = postVO.getPost_No();
@@ -227,17 +235,42 @@ background-color:rgba(253,253,253,0.8);
 
 				<!-- Comment  comments -->
 				<c:forEach var="replyVO" items="${rplyList}">
-					<div class="media mb-4 test">
+					<div class="media my-4 px-2 py-2 " style="background-color: rgba(255, 255, 255, 0.45)">
 						<img class="d-flex mr-3 rounded-circle"
-							src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${replyVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;">
+							src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${replyVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;">
 						<div class="my-0 ">
 							<h5 class="my-0 ">${memSvc.getOne_Member(replyVO.mem_No).mem_Name}</h5>
-							<p id="rply_Cont">${replyVO.rply_Cont}</p>
+							<p id="rply_Cont" class="my-0">${replyVO.rply_Cont}</p>
 							<div class="mt-0 mb-2 mr-2">
 								<fmt:formatDate value="${replyVO.rply_Time}"
 									pattern="yyyy年MM月dd日 HH:mm:ss" />
-							
+								&nbsp;&nbsp;&nbsp;&nbsp;
+
+
 							</div>
+
+<div class="btn-group">
+ 
+  <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=delete&rply_No=${replyVO.rply_No}" 
+  class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}">刪除</a>
+   
+   <c:choose>
+   <c:when test="${replyVO.rply_Status == 'RS1'&& 'M000001'==replyVO.mem_No}">
+
+   <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}"
+    class="btn btn-default btn-sm " id="hide" >隱藏</a> </c:when>
+    
+    	<c:otherwise>
+     
+    <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}" 
+    class="btn btn-default btn-sm " id="show" >顯示</a>   
+  	</c:otherwise>
+  	  	</c:choose>
+</div>
+
+
+      
+
 						</div>
 					</div>
 				</c:forEach>
@@ -247,6 +280,13 @@ background-color:rgba(253,253,253,0.8);
 		</div>
 	</div>
 
+
+
+
+
+ 
+
+           
 
 <!-- 輸入檢舉原因的Modal -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
