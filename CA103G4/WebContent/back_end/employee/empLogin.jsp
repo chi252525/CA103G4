@@ -37,8 +37,17 @@ body {
 </head>
 <body>
 <jsp:include page="/back_end/PostHeader.jsp"></jsp:include> 
+
 <div class="container col-3 rounded " style="margin-top:200px;padding-top: 10px" id="back" >
-	<form>
+<c:if test="${not empty errorMsgs}">
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color:black">${message}</li>
+			</c:forEach>
+		</ul>
+</c:if>
+	<form action="emp.do" method="POST" enctype="multipart/form-data">
+
 		<div class="form-group">
 			<label for="emp_Acnum">員工帳號</label>
 			<input type="text" class="form-control form-control-sm" id="emp_Acnum" name="emp_Acnum" >
@@ -48,8 +57,9 @@ body {
 			<input type="password" class="form-control form-control-sm" id="emp_Psw" name="emp_Psw" >
 		</div>
 
-		<div style="text-align: center;" >	
-			<input type="submit" class="btn btn-warning" name="" value="登入" style="margin-bottom:10px" >
+		<div style="text-align: center;" >
+			<input type="hidden" name="action" value="login">	
+			<input type="submit" class="btn btn-warning" value="登入" style="margin-bottom:10px" >
 		</div>
 	</form>	
 </div>

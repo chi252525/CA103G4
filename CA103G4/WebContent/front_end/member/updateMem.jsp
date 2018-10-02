@@ -110,7 +110,7 @@
             <td colspan="4" class="tdbtn">
             <a href="<%=request.getContextPath() %>/front_end/header.jsp" class="btn btn-warning btn-sm " align="right" style="width:80px">取消</a>
             <input type="hidden" name="action" value="update">
-            <input type="submit" class="btn btn-warning btn-sm " align="right" id="send" style="width:80px" value="確認修改   "> 
+            <input type="submit" class="btn btn-warning btn-sm " align="right" id="send" style="width:80px" value="確認修改  "> 
             </td>
         </tr>
     </table>
