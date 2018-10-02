@@ -76,19 +76,20 @@
 <%@ include file="page1.file" %>
 <%-- s員工編號，一開始為下拉式選單和按鈕，點擊後派送單狀態會變為2，成為按鈕，選擇後選單和按鈕會消失 --%><%-- s分頁 --%>
 <c:forEach var="deliveryVO" items="${get_By_Key}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-	<tr>
-		<td>${deliveryVO.deliv_no}</td>
-		<td>${deliveryVO.branch_no}</td>
-			
-		<td>
-		<jsp:useBean id="empDao" scope="page" class="com.employee.model.EmpDAO" />
-		<c:if test="${deliveryVO.emp_no == null}">
-			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
-				<select size="1" name="emp_no">
-					<c:forEach var="empVO" items="${empDao.all}">
-					<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
-					</c:forEach>
-				</select>
+<tr>
+	<td>${deliveryVO.deliv_no}</td>
+	<td>${deliveryVO.branch_no}</td>
+		
+	<td>
+	<jsp:useBean id="empDao" scope="page" class="com.employee.model.EmpDAO" />
+	<c:if test="${deliveryVO.emp_no == null}">
+		<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+			<select size="1" name="emp_no">
+				<option  value="">
+				<c:forEach var="empVO" items="${empDao.all}">
+				<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
+				</c:forEach>
+			</select>
 						
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}">
