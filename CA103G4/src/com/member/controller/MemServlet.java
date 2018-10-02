@@ -402,11 +402,25 @@ public class MemServlet extends HttpServlet{
 				String mem_Carddue = req.getParameter("mem_Carddue");
 				
 				//照片處理
-				Part part = req.getPart("mem_Photo");
-				InputStream in = part.getInputStream();
-				byte[] mem_Photo = new byte[in.available()];
-				in.read(mem_Photo);
-				in.close();
+				Part part = req.getPart("mem_Photo");			
+				byte[] mem_Photo = null;
+				
+				try {
+					String filename = getFileName(part);
+					if (filename != null && part.getContentType() != null) {
+						InputStream in = part.getInputStream();
+						mem_Photo = new byte[in.available()];
+						in.read(mem_Photo);
+						in.close();
+					} else {
+						MemberService memsvc = new MemberService();
+						MemberVO memVO = memsvc.getOneMem_Id(mem_Id);
+						mem_Photo = memVO.getMem_Photo();
+					}
+				} catch (FileNotFoundException fe) {
+					fe.printStackTrace();
+				}
+
 				
 				
 				
@@ -628,7 +642,21 @@ System.out.println("我已經改完囉");
 		
 		}
 	}
-	
+	public String getFileName(Part part) {
+		
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+//		System.out.println(header);
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename);  //測試用
+		//取出副檔名
+		String fnameExt = filename.substring(filename.lastIndexOf(".")+1,filename.length()).toLowerCase();
+		System.out.println("fnameExt=" + fnameExt);  //測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return fnameExt;
+	}
 	
 
 }
