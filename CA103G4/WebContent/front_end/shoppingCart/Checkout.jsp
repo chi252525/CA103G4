@@ -34,7 +34,17 @@
         table, th, td {
 	/*             border: 1px solid black; */
 	text-align: center;
+	opacity: 0.9;
 }
+
+    th {
+	background-color: darkgoldenrod;
+}
+
+tbody {
+	background-color: bisque;
+}
+
 
 a:hover {
 	text-decoration: none;
@@ -85,9 +95,7 @@ field>div {
                             <th width="200">餐點</th>
                             <th width="100">價格</th>
                             <th width="100">數量</th>
-                            <th width="120">
-                                <h3>小記</h3>
-                            </th>
+                            <th width="120">小記</th>
                             <th width="100">備註</th>
                         </tr>
                         <%
@@ -134,9 +142,12 @@ field>div {
                         <tr class="">
                             <td class=""></td>
                             <td class="" colspan="6" style="text-align: right;">
-                                <!-- coupon button trigger modal --> <input id="coupon" class="btn btn-sm" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(); width: 30%">
+                                <img src="img/coupon.png" style="margin-right: 10px;">
+                                <!-- coupon button trigger modal --> <input id="coupon" class="btn btn-sm btn-light" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(''); width: 20%">
 
-                                <h4> 總計 <span id="price">$<%=amount%></span>
+                                <h4>
+                                    總計 <span id="price">$
+                                        <%=amount%></span>
                                 </h4>
                             </td>
                         </tr>
@@ -153,108 +164,110 @@ field>div {
                 <form class="bd-example">
                     <fieldset>
                         <legend>點餐資訊</legend>
+                        <div class="form-row">
 
-                        <!-- 						<p> -->
-                        <!-- 							<label for="input">Example input</label> <input type="text" -->
-                        <!-- 								id="input" placeholder="Example input" /> -->
-                        <!-- 						</p> -->
+                            <!-- 						<p> -->
+                            <!-- 							<label for="input">Example input</label> <input type="text" -->
+                            <!-- 								id="input" placeholder="Example input" /> -->
+                            <!-- 						</p> -->
 
-                        <!-- 						<p> -->
-                        <!-- 							<label for="select">Example select</label> < select id="select"> -->
-                        <!-- 							<option value="">Choose...</option> -->
-                        <!-- 							<optgroup label="Option group 1"> -->
-                        <!-- 								<option value="">Option 1</option> -->
-                        <!-- 								<option value="">Option 2</option> -->
-                        <!-- 								<option value="">Option 3</option> -->
-                        <!-- 							</optgroup> -->
-                        <!-- 							<optgroup label="Option group 2"> -->
-                        <!-- 								<option value="">Option 4</option> -->
-                        <!-- 								<option value="">Option 5</option> -->
-                        <!-- 								<option value="">Option 6</option> -->
-                        <!-- 							</optgroup> -->
-                        <!-- 							</select> -->
-                        <!-- 						</p> -->
+                            <!-- 						<p> -->
+                            <!-- 							<label for="select">Example select</label> < select id="select"> -->
+                            <!-- 							<option value="">Choose...</option> -->
+                            <!-- 							<optgroup label="Option group 1"> -->
+                            <!-- 								<option value="">Option 1</option> -->
+                            <!-- 								<option value="">Option 2</option> -->
+                            <!-- 								<option value="">Option 3</option> -->
+                            <!-- 							</optgroup> -->
+                            <!-- 							<optgroup label="Option group 2"> -->
+                            <!-- 								<option value="">Option 4</option> -->
+                            <!-- 								<option value="">Option 5</option> -->
+                            <!-- 								<option value="">Option 6</option> -->
+                            <!-- 							</optgroup> -->
+                            <!-- 							</select> -->
+                            <!-- 						</p> -->
 
-                        <!--取餐方式 -->
+                            <!--取餐方式 -->
 
-                        <p class="form-check form-check-inline" style="margin: 10px;">
-                            取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="option1" checked="" style="width: 50px;" /> <label class="form-check-label">
-                                外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="option2" style="width: 50px;"> <label class="form-check-label">外送</label>
-                        </p>
+                            <p class="form-check form-check-inline form-group col-md-6" style="margin-right: : 10px;">
+                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="option1" checked="" style="width: 50px;" /> <label class="form-check-label">
+                                    外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="option2" style="width: 50px;"> <label class="form-check-label">外送</label>
+                            </p>
 
-                        <!-- choose branch -->
-                        <div class="form-group">
-                            <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
-                            <b>取餐分店:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 100px; margin-right: 8%;display= none;" onchange="submit()">
-                                <option selected>請選擇
-                                    <c:forEach var="brVO" items="${branchSvc.all}">
-                                <option value="${brVO.branch_Name}">${brVO.branch_Name}
-                                    </c:forEach>
-                            </select> <input type="hidden" name="location" value="Checkout.jsp">
-                        </div>
-                        <!-- choose address -->
-                        <div class="form-group">
-                            鄉鎮區市: <select style="display: inline" class="nice-select" name="mem_Recounty" id="city-list"></select> <select style="display: none" name="mem_Retown" class="nice-select" id="sector-list"></select>
-                        </div>
-                        <div class="form-group row" style="width: 80%">
-                            外送地址<input type="text" class="form-control-sm" id="mem_Readdr" name="mem_Readdr" style="width: 50%; display: none;">
-                        </div>
+                            <!-- choose branch -->
+                            <div class="form-group col-md-4">
+                                <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
+                                <b>取餐分店:</b> <select class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 100px; margin-right: 8%;display= none;" onchange="submit()">
+                                    <option selected>請選擇
+                                        <c:forEach var="brVO" items="${branchSvc.all}">
+                                    <option value="${brVO.branch_Name}">${brVO.branch_Name}
+                                        </c:forEach>
+                                </select> <input type="hidden" name="location" value="Checkout.jsp">
+                            </div>
+                            <!-- choose address -->
+                            <div class="form-group col-md-6">
+                                <b>鄉鎮區市:</b> <br><select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select>
+                                <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display: "></select>
+                            </div>
+                            <div class="form-group col-md-8" style="width: 80%; display:;">
+                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%;margin-top: 10px;">
+                            </div>
 
 
-                        <!-- 取餐時間 -->
-                        <div class="form-group row">
-
+                            <!-- 取餐時間 -->
+                            
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group row" style="width: 60%;">
-                                            <label class="col-form-label" for="date">取餐時間</label>
-                                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+							<div class="row">
+								<div class="col-sm-6" style="padding-left:0px;">
+									<div class="form-group col-md-12" style="padding-left:0px;"><b> 取餐時間:</b>
+										<div class="input-group date" id="datetimepicker2"
+											data-target-input="nearest" style="margin-top:20px;margin-bottom:20px;">
+											<input type="text" class="form-control datetimepicker-input"
+												data-target="#datetimepicker2" />
+											<div class="input-group-append"
+												data-target="#datetimepicker2" data-toggle="datetimepicker">
+												<div class="input-group-text">
+													<i class="fa fa-calendar"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                            <!-- payment -->
+                            <p>
+                                <b>付款方式:</b> <br>    <label> <input type="button" class="btn btn-light" id="takeaway" value="現金" onclick="cash()"> <input type="hidden" name="payment" value="cash">
+                                </label> <label> <input type="button" class="btn btn-light" id="delivery" value="信用卡" onclick="cardShow()"> <input type="hidden" name="payment" value="credit">
+
+                                </label>
+                            </p>
+                            <!-- credit card -->
+                            <div id="card" class="demo-container" style="margin: 10px; display: none;">
+                                <div class="card-wrapper"></div>
+
+                                <div class="form-container active" style="margin: 10px;">
+                                    <form action="">
+                                        <input placeholder="Card number" type="tel" name="number" style="margin: 5px;"> <input placeholder="Full name" type="text" name="name" style="margin: 5px;"> <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;"> <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
+                                    </form>
                                 </div>
                             </div>
+                            
+                            <p class="form-group">
+                                <label for="textarea" >備註:</label>
+                                <textarea id="textarea" class="form-control" cols="60" rows="3" style="margin: auto;"></textarea>
+                            </p>
+
+                            <!-- 						<p> -->
+                            <!-- 							<label for="time">Example time</label> <input type="time" -->
+                            <!-- 								id="time" /> -->
+                            <!-- 						</p> -->
+
+                            <!-- 						<p> -->
+                            <!-- 							<label for="output">Example output</label> -->
+                            <!-- 							<output name="result" id="output">100</output> -->
+                            <!-- 						</p> -->
                         </div>
-                        <!-- payment -->
-                        <p>
-                            付款方式: <label> <input type="button" class="btn btn-light" id="takeaway" value="現金" onclick="cash()"> <input type="hidden" name="payment" value="cash">
-                            </label> <label> <input type="button" class="btn btn-light" id="delivery" value="信用卡" onclick="cardShow()"> <input type="hidden" name="payment" value="credit">
-
-                            </label>
-                        </p>
-                        <!-- credit card -->
-                        <div id="card" class="demo-container" style="margin: 10px; display: none;">
-                            <div class="card-wrapper"></div>
-
-                            <div class="form-container active" style="margin: 10px;">
-                                <form action="">
-                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;"> <input placeholder="Full name" type="text" name="name" style="margin: 5px;"> <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;"> <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
-                                </form>
-                            </div>
-                        </div>
-                        <label for="textarea" class="">備註:</label>
-                        <p>
-
-                            <textarea id="textarea" cols="60" rows="3" style="margin: auto;"></textarea>
-                        </p>
-
-
-                        <!-- 						<p> -->
-                        <!-- 							<label for="time">Example time</label> <input type="time" -->
-                        <!-- 								id="time" /> -->
-                        <!-- 						</p> -->
-
-                        <!-- 						<p> -->
-                        <!-- 							<label for="output">Example output</label> -->
-                        <!-- 							<output name="result" id="output">100</output> -->
-                        <!-- 						</p> -->
                     </fieldset>
                 </form>
             </div>
@@ -302,18 +315,18 @@ field>div {
                 <%-- 					default="幹沒值!" /> --%>
                 <div class="modal-body">
                     <select id="coucatValue" name="coucatValue">
-                    		<option selected>我的優惠卷清單
-                        <c:forEach var="CouponhVO" items="${CouponhSvc.getCouponByMem(memVO.mem_No)}">
-                            <%--取得優惠卷序號 --%>
-                            <c:set var="coupon" value="${CouponSvc.getOneCoupon(CouponhVO.coup_sn)}" />
-                            <%--取得優惠卷 --%>
-                            <c:set var="coucat_No" value="${coupon.coucat_No }" />
-                            <%--取得優惠卷類別編號 --%>
-                            <c:set var="coucat" value="${CoucatSvc.getOneCoucat(coucat_No)}" />
-                            <%--取得優惠卷類別 --%>
-                            <option value="${coucat.coucat_Value }">${coucat.coucat_Name }
-                                <%--取得優惠卷類別名稱 --%>
-                        </c:forEach>
+                        <option selected>我的優惠卷清單
+                            <c:forEach var="CouponhVO" items="${CouponhSvc.getCouponByMem(memVO.mem_No)}">
+                                <%--取得優惠卷序號 --%>
+                                <c:set var="coupon" value="${CouponSvc.getOneCoupon(CouponhVO.coup_sn)}" />
+                                <%--取得優惠卷 --%>
+                                <c:set var="coucat_No" value="${coupon.coucat_No }" />
+                                <%--取得優惠卷類別編號 --%>
+                                <c:set var="coucat" value="${CoucatSvc.getOneCoucat(coucat_No)}" />
+                                <%--取得優惠卷類別 --%>
+                        <option value="${coucat.coucat_Value }">${coucat.coucat_Name }
+                            <%--取得優惠卷類別名稱 --%>
+                            </c:forEach>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -352,7 +365,7 @@ field>div {
         var couponValue; //選告全域變數
         $('#coucatValue').change(function() {
             couponValue = $(this).val();
-            var discountPrice = $('#amount').val()-couponValue;
+            var discountPrice = $('#amount').val() - couponValue;
             $('#amount').text(discountPrice);
             console.log(couponValue);
             console.log(discountPrice);
@@ -373,7 +386,9 @@ field>div {
                 dataType: "html",
                 success: function(amount) {
                     alert("折價成功!");
-                    $('#price').html("<font style=color:red>\$"+amount+"</font>");
+                    $('#price').html(
+                        "<font style=color:red>\$" + amount +
+                        "</font>");
                 },
                 error: function() {
                     alert("reduce ajax error!")
