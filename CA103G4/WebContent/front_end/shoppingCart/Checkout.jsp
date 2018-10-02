@@ -136,7 +136,7 @@ field>div {
                             <td class="" colspan="6" style="text-align: right;">
                                 <!-- coupon button trigger modal --> <input id="coupon" class="btn btn-sm" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(); width: 30%">
 
-                                <h4> 總計 $<span id="price"><%=amount%></span>
+                                <h4> 總計 <span id="price">$<%=amount%></span>
                                 </h4>
                             </td>
                         </tr>
@@ -302,6 +302,7 @@ field>div {
                 <%-- 					default="幹沒值!" /> --%>
                 <div class="modal-body">
                     <select id="coucatValue" name="coucatValue">
+                    		<option selected>我的優惠卷清單
                         <c:forEach var="CouponhVO" items="${CouponhSvc.getCouponByMem(memVO.mem_No)}">
                             <%--取得優惠卷序號 --%>
                             <c:set var="coupon" value="${CouponSvc.getOneCoupon(CouponhVO.coup_sn)}" />
@@ -318,7 +319,7 @@ field>div {
                 <div class="modal-footer">
                     <form action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
-                    <input type="hidden" name="action" value="findMemCoupon"> <input name="amount" value="<%=amount%>">
+                    <input type="hidden" name="action" value="findMemCoupon"> <input type="text" id="amount" name="amount" value="<%=amount%>">
                     <button type="button" class="btn btn-light">取消</button>
                 </div>
             </div>
@@ -351,7 +352,10 @@ field>div {
         var couponValue; //選告全域變數
         $('#coucatValue').change(function() {
             couponValue = $(this).val();
+            var discountPrice = $('#amount').val()-couponValue;
+            $('#amount').text(discountPrice);
             console.log(couponValue);
+            console.log(discountPrice);
         });
 
 
@@ -368,8 +372,8 @@ field>div {
                 },
                 dataType: "html",
                 success: function(amount) {
-                    alert("開始減價!");
-                    $('#price').html(amount);
+                    alert("折價成功!");
+                    $('#price').html("<font style=color:red>\$"+amount+"</font>");
                 },
                 error: function() {
                     alert("reduce ajax error!")
