@@ -126,6 +126,15 @@
     <servlet-name>IngredientsServlet</servlet-name>
     <url-pattern>/front_end/ingredients/ingredients.do</url-pattern>
   </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>IngredientsShowImage</servlet-name>
+		<servlet-class>com.ingredients.controller.IngredientsShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IngredientsShowImage</servlet-name>
+		<url-pattern>/ingredients/ingredientsshowimage.do</url-pattern>
+	</servlet-mapping>
 
  
   <servlet>
@@ -205,6 +214,17 @@
 		<servlet-name>MenuShowImage</servlet-name>
 		<url-pattern>/menu/menushowimage.do</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+    	<servlet-name>test_controller</servlet-name>
+    	<servlet-class>com.menu.Test_Controller_MenuServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>test_controller</servlet-name>
+    	<url-pattern>/menu/test_menu.do</url-pattern>
+  	</servlet-mapping>
+	
 	
 	<servlet>
 		<servlet-name>ActivityServlet</servlet-name>
