@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">竹風堂</string>
+    <string name="app_name">竹風堂E</string>
     <string name="EmpId">請輸入員工ID</string>
     <string name="Password">請輸入密碼</string>
     <string name="Login">登入</string>
@@ -21,8 +21,8 @@
     <string name="menu_popular">人氣餐點</string>
     <string name="msg_NoNetwork">No network connection available</string>
     <string name="msg_MenusNotFound">Menus not found</string>
-    <string name="msg_DeliveryNotFound">Deliverys not found</string>
-    <string name="msg_DeskNotFound">全部餐點均已出餐完畢!</string>
+    <string name="msg_DeliveryNotFound">Delivery not found</string>
+    <string name="msg_DeskNotFound">餐點均已出餐!</string>
     <string name="msg_GoogleApiClientConnectionFailed">GoogleApiClient connection failed</string>
     <string name="msg_GoogleApiClientConnectionSuspended">GoogleApiClient connection suspended</string>
     <string name="msg_LocationNotAvailable">Location is not available</string>
