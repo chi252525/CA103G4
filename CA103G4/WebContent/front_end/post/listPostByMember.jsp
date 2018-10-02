@@ -7,12 +7,12 @@
 <%@ page import="com.member.model.*"%>
 <jsp:useBean id="cusmealSvc1" scope="page"
 	class="com.custommeals.model.CustommealsService" />
-<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
-	
-<%
+<jsp:useBean id="memSvc" scope="page"
+	class="com.member.model.MemberService" />
 
+<%
 	PostService postSvc = new PostService();
-	MemberVO memVO = (MemberVO)session.getAttribute("memVO");
+	MemberVO memVO = (MemberVO) session.getAttribute("memVO");
 	List<PostVO> list = postSvc.getMem_Post("M000001");
 	pageContext.setAttribute("list", list);
 %>
@@ -89,31 +89,32 @@ body {
 	<!--your html start==================================================================================-->
 	<jsp:include page="/front_end/header.jsp" flush="true" />
 	<!--background image-->
-		<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
-			width="100%" height="" alt="">
+	<img
+		src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
+		width="100%" height="" alt="">
 
 	<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
 	<div class="container my-5">
 		<div class="container">
 			<div class="row">
-				
+
 				<div class="col-md-6">
-			
-						<div class="display-4">${memVO.mem_Name}的貼文</div>
+
+					<div class="display-4">${memVO.mem_Name}的貼文</div>
 				</div>
-			
-				
-				
-				
+
+
+
+
 			</div>
 			<div class="row">
 				<div class="col-md-12 mt-3">
@@ -126,7 +127,7 @@ body {
 				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 					<div class="col-md-4 px-2 py-4 ">
-						
+
 						<div class="card"
 							style="background-color: rgba(255, 255, 255, 0.45)">
 							<img class=" img-responsive"
@@ -138,10 +139,11 @@ body {
 							style="background-color: rgba(255, 255, 255, 0.45)">
 							<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
 							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							<p style="text-align: right;" class="my-0">by
-								${memSvc.getOne_Member(postVO.mem_No).mem_Name}
-								<span class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span></p>
-							
+							<p style="text-align: right;" class="my-0">
+								by ${memSvc.getOne_Member(postVO.mem_No).mem_Name} <span
+									class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span>
+							</p>
+
 
 							<!-- 查看單一貼文action -->
 							<FORM METHOD="post"
@@ -159,27 +161,30 @@ body {
 							<a
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=getOne_For_Update&post_No=${postVO.post_No}"
 								class="btn lnr lnr-pencil btn-warning">修改</a>
-							<FORM METHOD="post"
+							<FORM METHOD="post" id="deleteform"
 								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 								style="margin-bottom: 0px;">
 								<input type="hidden" name="post_No" value="${postVO.post_No}">
-								<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     				<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+								<input type="hidden" name="requestURL"
+									value="<%=request.getServletPath()%>">
+								<!--送出本網頁的路徑給Controller-->
+								<input type="hidden" name="whichPage" value="<%=whichPage%>">
+								<!--送出當前是第幾頁給Controller-->
 								<input type="hidden" name="action" value="delete">
-								<button type="submit" value="delete"
+								<button type="button" value="delete"
 									class="btn  btn-sm btn-danger btn-block mb-1"
 									onclick="deleteConfirm()">
 									<i class="far fa-trash-alt"></i> 刪除
 								</button>
 							</FORM>
-							
+
 
 
 
 						</div>
 					</div>
-						
-					
+
+
 				</c:forEach>
 
 			</div>
@@ -187,16 +192,13 @@ body {
 					<%@ include file="pages/page2.file"%></div>
 		</div>
 	</div>
-<script type="text/javascript">
-function deleteConfirm(){
-	if(window.confirm('確定刪除嗎?')){
-	return true;
-	}else{
-	return false;}
-
-	}
-
-</script>
+	<script type="text/javascript">
+		function deleteConfirm() {
+			if (window.confirm('確定刪除嗎?')) {
+				$('#deleteform').submit();
+			}
+		}
+	</script>
 
 	<jsp:include page="/front_end/footer.jsp" flush="true" />
 

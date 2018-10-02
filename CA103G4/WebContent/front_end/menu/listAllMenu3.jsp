@@ -10,10 +10,16 @@
     pageContext.setAttribute("list",list);
 %>
 
+<jsp:useBean id="menuDAO"  scope="page" class="com.menu.model.MenuDAO" />
+
+
 
 <html>
 <head>
 <title>listAllMenu2.jsp</title>
+
+
+
 
 
 
@@ -65,6 +71,58 @@
 
 </style>
 
+
+
+
+
+
+
+<style>
+		.black_overlay{
+			display: none;
+/* 			position: absolute; */
+			top: 0%;
+			left: 0%;
+ 			width: 100%;
+  			height: 1920px;
+			background-color: black;
+			z-index:1001;
+			-moz-opacity: 0.8;
+			opacity:.80;
+			filter: alpha(opacity=80);
+/*  			background-size:cover;    */
+/* 			min-height:1080px;  */
+/*  			background-repeat: no-repeat; */
+/*  			background-position:center;   */
+/*  			background-attachment:fixed;  */
+ 			position:relative; 
+   			margin-top:-200px;  
+			
+			
+		}
+		.white_content {
+			display: none;
+			position: absolute;
+			top: 25%;
+			left: 25%;
+			width: 50%;
+ 			height: 60%;
+			padding: 16px;
+/* 			border: 16px solid orange; */
+			border-radius: 20px;
+			background-color: rgba(255,255,255,0.7);
+			z-index:1002;
+/*  			overflow: auto; */
+		}
+</style>
+
+
+
+
+
+
+
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -78,8 +136,35 @@
 </head>
 <body bgcolor='white'>
 
+
+
+
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
 <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
+
+
+
+
+<!-- 		<p>燈箱點這裡  -->
+<!-- 		    <a href = "javascript:void(0)"  -->
+<%-- 		    onclick = "document.getElementById('light').style.display='block'; --%>
+<%-- <!-- 					   document.getElementById('fade').style.display='block'">點這裡</a> --> --%>
+<!-- 		</p> -->
+		
+<!-- 		<div id="light" class="white_content">  -->
+<%-- 			<jsp:include page="listOneMenu2.jsp" /> --%>
+<!-- 		    <a href = "javascript:void(0)"  -->
+<%-- 		    onclick = "document.getElementById('light').style.display='none'; --%>
+<%-- <!-- 		    		   document.getElementById('fade').style.display='none'">關閉</a> --> --%>
+<!--         </div> -->
+            
+<!-- 		<div id="fade" class="black_overlay"> -->
+<!-- 		</div> -->
+
+
+
+
+
 
 <!-- <h4>此頁練習採用 EL 的寫法取值:</h4> -->
 <!-- <table id="table-1"> -->
@@ -99,7 +184,7 @@
 	</ul>
 </c:if>
 
-
+<!-- <input type="button" value="訊息顯示" onclick="alert('test!!')"> -->
 
 <div class="h-100 py-5">
 	<div class="container">
@@ -111,13 +196,15 @@
 				<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"><br>
 				
 				        <div class="col-md-3">
+				       
 				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px;">
-				
+							<a 
+								href="menu.do?action=getOne_For_Display_Member&menu_No=${menuVO.menu_No}">
 				            <img class="card-img-top" 
 				            	src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"
 				            
 				            	alt="Card image cap" style="margin-top:20px;">
-				            	
+				            </a>	
 				            <div class="card-body">
 				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id}
 				                <br> </h5>
@@ -126,6 +213,7 @@
 				              <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545; margin-left:60px;">我要訂餐</a>
 				            </div>
 				          </div>
+				        
 				        </div>
 				</c:forEach>
 				
@@ -138,51 +226,26 @@
 
 
 
-<c:if test="${openModal!=null}">
-
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-				
-			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
-            </div>
-			
-			<div class="modal-body">
-<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
-               <jsp:include page="listOneMenu.jsp" />
-<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
-			</div>
-			
-			<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-		
-		</div>
-	</div>
-</div>
-
-        <script>
-    		 $("#basicModal").modal({show: true});
-        </script>
- </c:if>
-
-
 
 <script>
-$(".lightbox-button").click(function(){
-    $(".lightbox").show(200);
+
+$(function() {
+$( "#dialog" ).dialog({
+modal: true,
+buttons: {
+Ok: function() {
+$( this ).dialog( "close" );
+}
+}
+});
 });
 
-$(".lightbox-container").click(function(){
-    $(".lightbox").hide(200);
-});
 </script>
 
+		
 
-  
+
+
   
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 
 import com.menu.model.*;
 
+
 @WebServlet("/front_end/menu/menu.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 8 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MenuServlet extends HttpServlet{
@@ -69,7 +70,7 @@ public class MenuServlet extends HttpServlet{
 				}
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("menuVO", menuVO);
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listOneMenu.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listOneMenu2.jsp");
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理*************************************/
@@ -326,6 +327,60 @@ public class MenuServlet extends HttpServlet{
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		if("getOne_For_Display_Member".equals(action)) {  // 來自select_page.jsp的請求
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String menu_No  = req.getParameter("menu_No").trim();
+				//無輸入
+				if(menu_No == null || menu_No.length() == 0) {
+					errorMsgs.add("請輸入餐點編號");
+				}
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				//格式錯誤
+				if(!(menu_No.matches("M\\d{3}")))
+					errorMsgs.add("餐點編號格式不正確");
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				/***************************2.開始查詢資料*****************************************/
+				MenuService menuSvc = new MenuService();
+				MenuVO menuVO = menuSvc.getOneMenu(menu_No);
+				if(menuVO == null)
+					errorMsgs.add("查無資料");
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("menuVO", menuVO);
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/listOneMenu2.jsp");
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理*************************************/
+			}catch(Exception e) {
+				errorMsgs.add("無法取得資料" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
+		
 		
 	}
 
