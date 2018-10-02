@@ -13,7 +13,7 @@
 	class="com.member.model.MemberService" />
 <%
 	ReportService rptSvc = new ReportService();
-	List<ReportVO> list = rptSvc.getAll();
+	List<ReportVO> list = (List<ReportVO>)request.getAttribute("getPostByStatuslist");
 	pageContext.setAttribute("list", list);
 %>
 
@@ -67,19 +67,27 @@
 					<div class="col-md-8 mx-0">
 						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
-								<select class="form-control">
-									<option name="rpt_Status" value="RS0">未處理</option>
-									<option name="rpt_Status" value="RS1">已處理</option>
+								<select class="form-control" name="rpt_Status">
+									<option value='RS0'>未處理</option>
+									<option value='RS1'>已處理</option>
 								</select>
 							</div>
-								<input type="hidden" name="action" value="getPostByStatus" />
+								<input type="hidden" name="action" value="getReportByStatus" />
 							<button type="submit" class="btn btn-primary">查詢</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
+<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 		<%@ include file="pages/page1.file"%>
 		<table class="table table-hover">
 			<thead>
@@ -90,7 +98,7 @@
 					<th>檢舉原因</th>
 					<th>處理狀態</th>
 					<th>檢舉時間</th>
-					<th>通過/不通過</span></th>
+					<th>通過/不通過</th>
 				</tr>
 			</thead>
 			<c:forEach var="reportVO" items="${list}" begin="<%=pageIndex%>"

@@ -249,8 +249,10 @@ body {
 						</div>
 					</div>
 				</c:forEach>
+				<div class="col-12">
+					<%@ include file="pages/page2.file"%></div>
 			</div>
-			<%@ include file="pages/page2.file"%>
+		
 			
 	
 			

@@ -179,7 +179,7 @@ public class PostDAO implements PostDAO_interface{
 			// 1●設定於 pstm.executeUpdate()之前
 			con.setAutoCommit(false);
 			
-			// 先刪除員工
+			// 先刪除留言
 			pstmt = con.prepareStatement(DELETE_MSG_FROMONE_STMT);
 			pstmt.setString(1,post_No);
 			updateCount_MSGS = pstmt.executeUpdate();

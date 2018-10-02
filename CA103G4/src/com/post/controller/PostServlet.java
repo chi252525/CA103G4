@@ -267,11 +267,7 @@ public class PostServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String post_No = req.getParameter("post_No");
-				/*************************** 先刪除有被檢舉的資料 ***************************************/
-				
-				/*************************** 再刪除留言 ***************************************/
-				ReplyService rplySvc= new ReplyService();
-				
+			
 				/*************************** 2.開始刪除 貼文***************************************/
 				PostService postSvc = new PostService();
 				postSvc.deletePost(post_No);
@@ -284,7 +280,7 @@ public class PostServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listPostByMember.jsp");
 				failureView.forward(req, res);
 			}
 		}
