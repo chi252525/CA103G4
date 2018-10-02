@@ -11,7 +11,6 @@
    		  <b>查詢單一訂位紀錄 - research_page.jsp</b>
    		  <hr>
    	  </div>
-<hr>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
