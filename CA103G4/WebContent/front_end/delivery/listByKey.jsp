@@ -99,6 +99,8 @@
 				<input type="submit" value="指派外送員">
 			</form>	
 		</c:if>
+		
+		目前無可派送人員
 						
 		<c:if test="${deliveryVO.emp_no != null}">			
 					<c:forEach var="empVO" items="${empDao.all}">
