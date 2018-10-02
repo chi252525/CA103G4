@@ -286,7 +286,7 @@ style>.mapouter {
 		<!-- 						                            </div> -->
 		<c:if test="${not empty brVO}">
 			<!-- branch card -->
-			<div class="card col-12 col-md-9 center" >
+			<div class="card col-12 col-md-6 center" >
 				<div class="card-body">
 					<h5 class="card-title">${brVO.branch_Name}</h5>
 					<p class="card-text">This is a wider card with supporting text
