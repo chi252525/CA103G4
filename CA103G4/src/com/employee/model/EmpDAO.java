@@ -39,6 +39,9 @@ public class EmpDAO implements EmpDAO_interface{
 		"select EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_STATUS,to_char(EMP_CREDATE,'yyyy-mm-dd') EMP_CREDATE,EMP_PHOTO from EMPLOYEE where EMP_NO = ?";
 	private static final String UPDATE =
 		"UPDATE EMPLOYEE set BRANCH_NO=? ,EMP_ACNUM=? ,EMP_PSW=? ,EMP_NAME=? ,EMP_GENDER=? ,EMP_POS=? ,EMP_TEL=? ,EMP_STATUS=? ,EMP_PHOTO=? where EMP_NO = ?";
+	private static final String GET_ONE_BY_EMPACNUM=
+			"select EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_STATUS,to_char(EMP_CREDATE,'yyyy-mm-dd') EMP_CREDATE,EMP_PHOTO from EMPLOYEE where EMP_ACNUM = ?";
+	
 	
 	@Override
 	public void insert(EmpVO empVO) {
@@ -353,5 +356,65 @@ public class EmpDAO implements EmpDAO_interface{
 		}
 		
 		
+	}
+	@Override
+	public EmpVO findByEmpAcnum(String emp_Acnum) {
+		// TODO Auto-generated method stub
+		EmpVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_BY_EMPACNUM);
+			
+			pstmt.setString(1, emp_Acnum);
+			rs = pstmt.executeQuery();
+		
+		    while(rs.next()) {
+		    	
+		    	empVO = new EmpVO();
+		    	empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
+				
+		    }
+	
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empVO;
 	}
 }

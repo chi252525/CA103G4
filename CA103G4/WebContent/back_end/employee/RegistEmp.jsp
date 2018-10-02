@@ -16,8 +16,6 @@ List<BranchVO> branlist = new ArrayList();
 branlist = branSvc.getAll();
 pageContext.setAttribute("branlist",branlist);
 
-EmpVO empVO =(EmpVO)request.getAttribute("empVO");
-
 %>
 
 
@@ -47,7 +45,7 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
 <div class="container col-5 rounded " style="padding-top: 100px;">
 <Form action="emp.do" method="POST" enctype="multipart/form-data" >
     <table  id="back">
-        		<c:if test="${not empty errorMsgs}">
+    			<c:if test="${not empty errorMsgs}">
 					<ul>
 						<c:forEach var="message" items="${errorMsgs}">
 							<li style="color:black">${message}</li>
@@ -75,15 +73,15 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
             </td>
         </tr>
         <tr>
-            <td class="td1" ><label for="emp_Acnum" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Acnum" name="emp_Acnum"></td>
+            <td class="td1" ><label for="emp_Acnum" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Acnum" name="emp_Acnum" value="${empVO.emp_Acnum}"></td>
         </tr>
         <tr>
-            <td class="td1"><label for="emp_Psw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control-sm empinput" id="emp_Psw" name="emp_Psw"></td>
+            <td class="td1"><label for="emp_Psw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control-sm empinput" id="emp_Psw" name="emp_Psw" value="${empVO.emp_Psw }"></td>
         </tr>
         <tr>
             <td class="td1">性別</td>
             <td class="td2 emp_Gender" >
-                <input  type="radio" name="emp_Gender" id="emp_Gender1" value="1">
+                <input  type="radio" name="emp_Gender" id="emp_Gender1" value="1" >
                 <label  for="emp_Gender1" style="padding-right: 20px">男</label>
                 <input  type="radio" name="emp_Gender" id="emp_Gender2" value="2">
                 <label  for="emp_Gender2">女</label>
@@ -91,11 +89,11 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
         </tr>
 
         <tr>
-            <td class="td1"><label for="emp_Name" class="col-form-label">員工姓名</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Name" name="emp_Name">
+            <td class="td1"><label for="emp_Name" class="col-form-label">員工姓名</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Name" name="emp_Name" value="${empVO.emp_Name }">
         </tr>
         <tr>
             <td class="td1"><label for="emp_Tel" class="col-form-label">員工電話</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Tel" name="emp_Tel"></td>
+            <td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Tel" name="emp_Tel" value="${empVO.emp_Tel }"></td>
         </tr>        
 
         <tr>
@@ -113,12 +111,12 @@ EmpVO empVO =(EmpVO)request.getAttribute("empVO");
         <tr>
             <td colspan="2" class="td2 fea">功能使用權限</td>
         </tr>
-        <tr><td style="padding-left:50px;">
+        <tr><td  style="padding-left:50px;">
         	<c:forEach var="featureVO" items="${fealist}" begin="1" end="5" >
   					<input type=checkbox name="fea_No" id="${featureVO.fea_No}" value="${featureVO.fea_No}"><label for="${featureVO.fea_No}" class="col-form-label">${featureVO.fea_Name}</label></br> 
 			</c:forEach>
 			</td>
-			<td style="padding-left:80px;" >
+			<td style="padding-left:80px;">
         	<c:forEach var="featureVO" items="${fealist}" begin="6" >
   					<input type=checkbox name="fea_No" id="${featureVO.fea_No}" value="${featureVO.fea_No}"><label for="${featureVO.fea_No}" class="col-form-label">${featureVO.fea_Name}</label></br>  
 			</c:forEach>			

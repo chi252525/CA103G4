@@ -90,7 +90,7 @@ public class EmpServlet extends HttpServlet{
 				in.close();
 				System.out.println("emp_Photo="+emp_Photo);
 				
-				//將所勾選的功能包裝成集合
+				//將所勾選的功能放入員工包裝成集合
 				List<EmpauthorityVO> empauthorlist = new ArrayList<>();
 				String valuse[]=req.getParameterValues("fea_No");
 				if(valuse != null) {
@@ -101,9 +101,9 @@ public class EmpServlet extends HttpServlet{
 						empauthorlist.add(empauthorVO);
 					}
 				}
-//				else{
-//					errorMsgs.add("尚未給員工使用權限");
-//				}
+				else{
+					errorMsgs.add("尚未給員工使用權限");
+				}
 				
 						
 				/***************************2.開始新增資料****************************************/
@@ -139,15 +139,69 @@ public class EmpServlet extends HttpServlet{
 				
 				
 			}catch(Exception e) {
-				errorMsgs.add("資料新增失敗"+e.getMessage());
+				errorMsgs.add("資料新增失敗");
 				RequestDispatcher failuerView = req.getRequestDispatcher("/back_end/employee/RegistEmp.jsp");
 				failuerView.forward(req, res);
+				System.out.println(e.getMessage());
 			}
+														
+		}
+		
+		
+		//員工登區塊
+		if("login".equals(action)) {
+			
+			List<String> errorMsgs = new ArrayList();
+			req.setAttribute("errorMsgs", errorMsgs);	
+			System.out.println("這裡");
+			
+			try {
+				
+				/***************************1.接收請求參數****************************************/
+				//取得帳號密碼
+				String emp_Acnum = req.getParameter("emp_Acnum").trim();
+				String emp_Psw = req.getParameter("emp_Psw").trim();
+				
+				EmpService empSvc = new EmpService();
+				EmpVO empVO = new EmpVO();
+				empVO = empSvc.findOnebyEmpNo(emp_Acnum);
+				
+				
+				if(emp_Acnum==null||emp_Acnum.length()==0) {
+					errorMsgs.add("帳號尚未填寫");
+				}else if (empVO != null) {
+					if(empVO.getEmp_Psw().equals(emp_Psw)) {
+						errorMsgs.add("密碼錯誤");	
+					}
+					
+				}else {
+					errorMsgs.add("帳號錯誤");
+				}
+				
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/employee/empLogin.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				/***************************2.帳號密碼皆正確****************************************/
+				System.out.println("帳密都沒錯");
+				
+				HttpSession session = req.getSession();
+				session.setAttribute("empVO", empVO);
+				
+				
+				/***************************3.登入完成************/
 
-			
-			
-			
-			
+				res.sendRedirect(req.getContextPath()+"/back_end/employee/RegistEmp.jsp");
+				
+				
+				
+			}catch(Exception e){
+				errorMsgs.add("登入失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/back_end/employee/empLogin.jsp");
+				failuerView.forward(req, res);
+			}
 			
 		}
 		
