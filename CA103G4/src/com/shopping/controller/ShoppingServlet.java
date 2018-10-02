@@ -138,7 +138,7 @@ public class ShoppingServlet extends HttpServlet {
 
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
-			String couponSn = req.getParameter("couponSn");
+			String couponSn = req.getParameter("coucatValue");
 			CouponService couponSvc = new CouponService();
 			CoucatService coucatSvc = new CoucatService();
 

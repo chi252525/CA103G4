@@ -151,7 +151,7 @@ field>div {
 								data-target="#couponModal" value="Coupon"
 								style="background-image: url(); width: 30%">
 
-								<h4>
+								<h4 id="price">
 									總計 $
 									<%=amount%>
 								</h4> </font>
@@ -344,14 +344,14 @@ field>div {
 					// 						System.out.println(CouponhVO.getCoup_sn());
 					// 					}
 				%>
-				<!-- 				test -->
+				<!-- just for test -->
 				<%-- 				<c:out value="${memVO}" --%>
 				<%-- 					default="幹沒值!" /> --%>
 
 				<%-- 				<c:out value="${CouponhSvc.getCouponByMem(memVO.mem_No)}" --%>
 				<%-- 					default="幹沒值!" /> --%>
 				<div class="modal-body">
-					<select name="couponSn">
+					<select name="coucatValue">
 						<c:forEach var="CouponhVO" items="${CouponhSvc.getCouponByMem(memVO.mem_No)}"><%--取得優惠卷序號 --%>
 							<c:set var="coupon" value="${CouponSvc.getOneCoupon(CouponhVO.coup_sn)}"/><%--取得優惠卷 --%>
 							<c:set var="coucat_No" value="${coupon.coucat_No }"/><%--取得優惠卷類別編號 --%>
@@ -361,8 +361,7 @@ field>div {
 					</select>
 				</div>
 				<div class="modal-footer">
-					<form
-						action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
+					<form action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
 					<button type="button" class="btn btn-secondary btn-sm"
 						data-dismiss="modal">使用</button>
 					<input type="hidden" name="action" value="findMemCoupon"> <input
@@ -393,6 +392,25 @@ field>div {
 
 		function delivery() {
 			$('#delivery')
+		}
+		
+		// Ajax for Coupon
+		function reduce(){
+			.ajax({
+				type:"post",
+				url:"<%=request.getContextPath()%>/front_end/shoppingCart/shoppingServlet.do",
+				data:{},
+				dataType:"json",
+				success:function(reducePrice){
+					"action":"findMemCoupon",
+					"amount":"<%=amount%>",
+					"coucatValue":"${coucat.coucat_Value}"
+				},
+				erroe:function(){
+					alert("reduce ajax error!")
+				}
+				
+			});
 		}
 	</script>
 </body>
