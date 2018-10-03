@@ -20,40 +20,40 @@ NOCACHE;
  
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'極致豚骨玉子麵','經典餐點',240,'14小時溫火慢熬精緻豚骨湯頭，搭配叉燒肉及溫泉蛋。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'極致豚骨玉子麵','經典餐點',240,'14小時溫火慢熬精緻豚骨湯頭，搭配叉燒肉及溫泉蛋。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-1.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'紐西蘭牛肉拉麵','經典餐點',280,'回甘的牛肉湯頭，搭配空運來台紐西蘭牛肉。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'紐西蘭牛肉拉麵','經典餐點',280,'回甘的牛肉湯頭，搭配空運來台紐西蘭牛肉。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-2.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'地獄麻辣拉麵','經典餐點',260,'川味麻辣湯頭，辣醬與叉燒肉，搭上微酸辣味泡菜，辛辣口感，風味倍增。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'地獄麻辣拉麵','經典餐點',260,'川味麻辣湯頭，辣醬與叉燒肉，搭上微酸辣味泡菜，辛辣口感，風味倍增。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-3.png')),'1');
 
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'經典特製拉麵','經典餐點',270,'特製九州溫泉蛋、叉燒肉、提味青蔥，搭配出完美組合，是超高人氣餐點。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'經典特製拉麵','經典餐點',270,'特製九州溫泉蛋、叉燒肉、提味青蔥，搭配出完美組合，是超高人氣餐點。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-4.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'醬油叉燒拉麵','經典餐點',220,'日本進口醬油調製的醬汁，搭配招牌叉燒肉，特殊口味與眾不同。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'醬油叉燒拉麵','經典餐點',220,'日本進口醬油調製的醬汁，搭配招牌叉燒肉，特殊口味與眾不同。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-5.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'味噌叉燒拉麵','經典餐點',220,'加入日本味噌的湯頭，是日本拉麵代表性風味之一。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'味噌叉燒拉麵','經典餐點',220,'加入日本味噌的湯頭，是日本拉麵代表性風味之一。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-6.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'咖哩豬排烏龍麵','經典餐點',250,'酥脆厚實的炸豬排，配上經典咖哩湯頭，濃濃的日式風。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'咖哩豬排烏龍麵','經典餐點',250,'酥脆厚實的炸豬排，配上經典咖哩湯頭，濃濃的日式風。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-7.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'墨魚海鮮大餐','經典餐點',260,'軟硬適中的墨魚麵搭配鮮蝦與魷魚，濃郁的鮮美海味。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'墨魚海鮮大餐','經典餐點',260,'軟硬適中的墨魚麵搭配鮮蝦與魷魚，濃郁的鮮美海味。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-8.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'蛤蠣鮮蝦刀削麵','經典餐點',290,'鮮美的蛤蠣搭上鮮蝦，鹽味湯頭配上嚼勁十足的刀削麵。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'蛤蠣鮮蝦刀削麵','經典餐點',290,'鮮美的蛤蠣搭上鮮蝦，鹽味湯頭配上嚼勁十足的刀削麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-9.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'海陸雙拼大餐','經典餐點',320,'鮮蝦搭配紐西蘭牛肉，海陸味覺交疊的絕佳滋味。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'海陸雙拼大餐','經典餐點',320,'鮮蝦搭配紐西蘭牛肉，海陸味覺交疊的絕佳滋味。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-10.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'櫻桃鴨胸蕎麥麵','經典餐點',280,'札實的櫻桃鴨胸切片，搭配清爽的日式蕎麥麵。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'櫻桃鴨胸蕎麥麵','經典餐點',280,'札實的櫻桃鴨胸切片，搭配清爽的日式蕎麥麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-11.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'鹽味牛肉蔬菜麵','經典餐點',270,'玫瑰鹽調製的湯頭，他配紐西蘭牛肉及清爽有勁的蔬菜麵。',null,'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'鹽味牛肉蔬菜麵','經典餐點',270,'玫瑰鹽調製的湯頭，他配紐西蘭牛肉及清爽有勁的蔬菜麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-12.png')),'1');
 
 commit;
