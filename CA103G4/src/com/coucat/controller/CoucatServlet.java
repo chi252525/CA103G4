@@ -52,6 +52,8 @@ public class CoucatServlet extends HttpServlet {
 				while(en.hasMoreElements()) {
 					System.out.println(en.nextElement());
 				}
+				
+				
 			try {
 				String coucat_Name = req.getParameter("coucat_Name");
 				System.out.println(coucat_Name);
@@ -59,6 +61,13 @@ public class CoucatServlet extends HttpServlet {
 					errorMsgs.add("標題：請勿空白。");
 				}else if(coucat_Name.trim().length()<2||coucat_Name.trim().length()>30){
 					errorMsgs.add("標題：請輸入2~30個字。");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back_end/activity/addAct.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
 				}
 				
 				String coucat_Cata= req.getParameter("coucat_Cata");
@@ -106,7 +115,6 @@ public class CoucatServlet extends HttpServlet {
 					errorMsgs.add("coucat_Value 折扣價格格式不正確");
 				}}
 				
-				
 				java.sql.Timestamp coucat_Valid = null;
 				try {
 					coucat_Valid = java.sql.Timestamp.valueOf(req.getParameter("coucat_Valid").trim());
@@ -132,7 +140,7 @@ public class CoucatServlet extends HttpServlet {
 				}
 				Double coucat_Discount= null;
 				Integer coucat_Freep= null;
-						
+				System.out.println("OK");		
 				CoucatVO coucatVO = new CoucatVO();
 				coucatVO.setCoucat_Name(coucat_Name);
 				coucatVO.setCoucat_Cata(coucat_Cata);
@@ -147,7 +155,7 @@ public class CoucatServlet extends HttpServlet {
 				couSvc.addCoucat(coucat_Name,coucat_Cata,coucat_Value,coucat_Discount,
 						coucat_Freep,coucat_Valid,coucat_Invalid,coucat_Amo,coucat_Pic);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back_end/activity/listAllActivity.jsp";
+				String url = "/back_end/activity/addAct.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
 				successView.forward(req, res);

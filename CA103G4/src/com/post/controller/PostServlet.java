@@ -110,6 +110,7 @@ public class PostServlet extends HttpServlet {
 				System.out.println("post_No=" + post_No);
 				String custom_Name = req.getParameter("custom_Name");
 				System.out.println("custom_Name=" + custom_Name);
+				
 				if (post_No == null || (post_No.trim()).length() == 0) {
 					errorMsgs.add("請輸入貼文編號");
 				}
@@ -336,38 +337,7 @@ public class PostServlet extends HttpServlet {
 
 		}
 
-		if ("listReplybyPostNo".equals(action)) {
-
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-//			System.out.println("跳進listReplybyPostNo");
-			try {
-				/*************************** 1.接收請求參數 ***************************************/
-				String post_No = req.getParameter("post_No");
-
-				/*************************** 2.開始查詢資料 *****************************************/
-				PostService postSvc = new PostService();
-				Set<ReplyVO> rplyset = postSvc.getOnePost_AllRplys(post_No);
-				if (rplyset == null) {
-					errorMsgs.add("還沒有人留言喔!");
-				}
-
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				HttpSession session = req.getSession();
-
-				session.setAttribute("listReplybyPostNo", rplyset);
-				System.out.println("req.setAttribute" + rplyset);
-				String url = "/front_end/post/listOnepost.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-
-			} catch (NullPointerException e) {
-				System.out.println("此篇貼文沒有留言");
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
-
-		}
+		
 	
 
 		if ("keyword".equals(action)) {

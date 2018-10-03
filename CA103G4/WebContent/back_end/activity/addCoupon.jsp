@@ -47,7 +47,7 @@ var $JUI = $.noConflict(true);
 </style>
 </head>
 <body>
-	<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+
 <div class="py-5 text-white">
 	<div class="container">
 		<div class="row">
@@ -186,6 +186,6 @@ $( function() {
 </script>
 
 
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+
 </body>
 </html>
