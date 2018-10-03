@@ -17,5 +17,7 @@ public interface DeliveryDAO_interface {
 	public List<DeliveryVO> getByStatus();
 	
 	public List<DeliveryVO> getAll();
+	
+	public List<String> getOut();
 
 }

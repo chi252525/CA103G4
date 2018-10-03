@@ -45,7 +45,7 @@ public class OrderformServlet extends HttpServlet {
 			String addres = req.getParameter("deliv_addres");
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
 			//明細參數
-			List<OrderinvoiceVO,MenuVO> list = new ArrayList<OrderinvoiceVO,MenuVO>();//等前端 更改 
+			List<OrderinvoiceVO,MenuVO> list = new ArrayList<>();//等前端 更改 
 			String[] oinlist = req.getParameterValues("invoice");
 			OrderinvoiceVO oin = null;
 			

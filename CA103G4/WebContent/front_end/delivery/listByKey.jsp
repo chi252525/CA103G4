@@ -65,6 +65,8 @@
 	</ul>
 </c:if>
 
+<jsp:useBean id="deSvc" scope="page" class="com.delivery.model.DeliveryService" />
+
 <table>
 	<tr>
 		<th>派送單編號</th>
@@ -81,24 +83,34 @@
 	<td>${deliveryVO.branch_no}</td>
 		
 	<td>
+	
 	<jsp:useBean id="empDao" scope="page" class="com.employee.model.EmpDAO" />
-	<c:if test="${deliveryVO.emp_no == null}">
-		<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
-			<select size="1" name="emp_no">
-				<option  value="">
-				<c:forEach var="empVO" items="${empDao.all}">
-				<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
-				</c:forEach>
-			</select>
-						
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}">
-				<input type="hidden" name="deliv_status"  value="${deliveryVO.deliv_status}">
-				<input type="hidden" name="whichPage"	value="<%=whichPage%>">
-				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-				<input type="submit" value="指派外送員">
+
+	<c:if test="${(deSvc.out).size() != (empDao.all).size()}">
+		<c:if test="${deliveryVO.emp_no == null}">
+			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+				<select size="1" name="emp_no">
+					<c:forEach var="empVO" items="${empDao.all}">
+						<c:if test="${!(deSvc.out).contains(empVO.emp_No)}">
+							<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
+						</c:if>
+					</c:forEach>
+				</select>
+							
+					<input type="hidden" name="action" value="update">
+					<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}">
+					<input type="hidden" name="deliv_status"  value="${deliveryVO.deliv_status}">
+					<input type="hidden" name="whichPage"	value="<%=whichPage%>">
+					<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+					<input type="submit" value="指派外送員">
 			</form>	
 		</c:if>
+	</c:if>
+	
+	<c:if test="${(deSvc.out).size() == (empDao.all).size() and deliveryVO.emp_no == null}">
+		目前尚無可派送員工。
+	</c:if>
+	
 						
 		<c:if test="${deliveryVO.emp_no != null}">			
 					<c:forEach var="empVO" items="${empDao.all}">

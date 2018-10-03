@@ -48,6 +48,9 @@ public class DeliveryService {
 		return dao.getAll();
 	}
 	
+	public List<String> getOut(){
+		return dao.getOut();
+	}
 	
 	
 }
