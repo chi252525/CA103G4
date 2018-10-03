@@ -274,8 +274,8 @@ a {
                 <form name="checkoutForm" action="ShoppingServlet.do" method="POST" style="margin: 10px;">
                     <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳" class="btn btn-warning">
                 </form>
-                <form name="checkoutForm" action="noodleShop.jsp" method="POST" style="margin: 10px;">
-                    <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
+                <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
+                     <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
                 </form>
             </div>
         </div>
@@ -355,7 +355,7 @@ a {
                 <img class="rounded d-block img-responsive" src="img/stock-photo-traditional-japanese-soup-ramen-with-meat-broth-asian-noodles-seaweed-sliced-pork-eggs-and-709288393X.jpg" alt="Card image cap" style="align-self: center;width:100%; ">
                 <div class="overlay">
 
-                    <a class="info center" href="noodleShop.jsp">點餐去</a>
+                    <a class="info center" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">點餐去</a>
                 </div>
             </div>
         </div>
