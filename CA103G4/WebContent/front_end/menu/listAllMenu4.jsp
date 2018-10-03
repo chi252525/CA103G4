@@ -116,7 +116,70 @@
 		}
 </style>
 
+<style>
+/* * { */
+/*   font size: 62.5%; */
+/*   box-sizing: border-box; */
+/*   outline: none; */
+/* } */
+/* input { */
+/*   display:block; */
+/*   padding: 10px; */
+/*   position: relative; */
+/*   border: 1px solid black; */
+/*   width: 80px; */
+/* } */
+/* input:focus { */
+/*   outline-color: springgreen; */
+/* } */
+/* input[type=number]::-webkit-inner-spin-button {  */
+/*   position: absolute; */
+/*   top: 0; */
+/*   bottom: 0; */
+/*   right: 0; */
+/*   padding: 10px; */
+/*   opacity: 1; */
+/*   cursor: pointer; */
+/* } */
 
+/* input[type=number]::-webkit-inner-spin-button:hover {  */
+
+/* } */
+/* input[type=number]::-webkit-inner-spin-button:before { */
+/*   font-family: "FontAwesome"; */
+/*   font-size: 1.4rem; */
+/*   content: '\f106'; */
+/*   position: absolute; */
+/*   top: 0; */
+/*   bottom: 50%; */
+/*   right: 0; */
+/*   left: 0; */
+/*   border-left: 1px solid black; */
+/*   border-bottom: 1px solid black; */
+/*   display: flex; */
+/*   justify-content: center; */
+/*   align-items: center; */
+/*   background: white; */
+/*   cursor: pointer; */
+/* } */
+/* input[type=number]::-webkit-inner-spin-button:after { */
+/*   font-family: "FontAwesome"; */
+/*   font-size: 1.4rem; */
+/*   content: '\f107'; */
+/*   position: absolute; */
+/*   top: 50%; */
+/*   bottom: 0; */
+/*   right: 0; */
+/*   left: 0; */
+/*   border-left: 1px solid black; */
+/*   display: flex; */
+/*   justify-content: center; */
+/*   align-items: center; */
+/*   background: white; */
+/*   cursor: pointer; */
+/* } */
+
+</style>
 
 
 
@@ -146,7 +209,34 @@
 
 
 
+<!-- 		<p>燈箱點這裡  -->
+<!-- 		    <a href = "javascript:void(0)"  -->
+<%-- 		    onclick = "document.getElementById('light').style.display='block'; --%>
+<%-- <!-- 					   document.getElementById('fade').style.display='block'">點這裡</a> --> --%>
+<!-- 		</p> -->
+		
+<!-- 		<div id="light" class="white_content">  -->
+<%-- 			<jsp:include page="listOneMenu2.jsp" /> --%>
+<!-- 		    <a href = "javascript:void(0)"  -->
+<%-- 		    onclick = "document.getElementById('light').style.display='none'; --%>
+<%-- <!-- 		    		   document.getElementById('fade').style.display='none'">關閉</a> --> --%>
+<!--         </div> -->
+            
+<!-- 		<div id="fade" class="black_overlay"> -->
+<!-- 		</div> -->
 
+
+
+
+
+
+<!-- <h4>此頁練習採用 EL 的寫法取值:</h4> -->
+<!-- <table id="table-1"> -->
+<!-- 	<tr><td> -->
+<!-- 		 <h3>listAllMenu.jsp</h3> -->
+<!-- 		 <h4><a href="select_page.jsp">回首頁</a></h4> -->
+<!-- 	</td></tr> -->
+<!-- </table> -->
 
 <%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
@@ -158,6 +248,22 @@
 	</ul>
 </c:if>
 
+<!-- <input type="button" value="訊息顯示" onclick="alert('test!!')"> -->
+<div class="well">
+    <label class="input-stepper">
+      <span id="label-text">Things</span>
+      <div>
+        <a href="#0" role="button" id="step-decrement" class="btn btn-default" aria-label="remove 1" aria-labelledby="step-decrement label-text">
+          <i aria-hidden="true" class="icon icon-minus"></i>
+        </a>
+        <input disabled type="text" id="spinner" name="quantity" class="text-strong form-control input-number text-center" value="1" aria-live="polite" tabindex="-1" aria-labelledby="label-text">
+        <a href="#0" role="button" id="step-increment" class="btn btn-default" aria-label="add 1" aria-labelledby="step-increment label-text">
+          <i aria-hidden="true" class="icon icon-plus"></i>
+        </a>
+      </div>
+    </label>
+  </div>
+</div>
 
 
 
@@ -188,22 +294,17 @@
 				              <p class="card-text" style="height:72px;">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro} ${menuVO.menu_Intro}</p>
 <!-- 				            	  數量 <input type="tel" name="quantity" value=1 style="width: 60px"> -->
 				            	  
-							  <form>
-								  <div class="row">
-									  <div style="width:100px; margin-left:40px; margin-top:5px;">
-										   數量 <input type="number" name="quantity" size="3" value=1 style="width: 40px">
-									  </div>
-									  <div style="width:80px;">
-						              	 <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545; margin-left:0px;">訂餐</a>
-						              </div>
-					              	</div>
-				              </form>
+								<form>
+								   數量 <input type="number" name="quantity" value=1 style="size:3rem;">
+								</form>
+
+				              <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545; margin-left:60px;">訂餐</a>
 				            </div>
 				          </div>
 				        
 				        </div>
 				</c:forEach>
-
+				
 			<div class="col-md-12 mt-3">
 				<%@ include file="page2.file"%>  
   			</div>
