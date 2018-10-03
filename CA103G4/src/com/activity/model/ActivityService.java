@@ -2,6 +2,7 @@ package com.activity.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityService {
 	private ActivityDAO_interface dao;
@@ -57,7 +58,7 @@ public class ActivityService {
 	public ActivityVO getOneActivity(String act_No) {
 		return dao.findByPrimaryKey(act_No);
 	}
-	public List<ActivityVO> getAll(){
+	public List<ActivityVO> getAll(Map<String, String[]> map){
 		return dao.getAll();
 	}
 	public List<ActivityVO> findHotAct(){
@@ -76,7 +77,9 @@ public class ActivityService {
 		dao.updateAct(act_No,act_Status,activityVO);
 		
 	}
-	
+	public List<ActivityVO> getAll(){
+		return dao.getAll();
+	}
 	
 		
 	

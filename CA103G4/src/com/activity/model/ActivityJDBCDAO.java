@@ -1,6 +1,8 @@
 package com.activity.model;
 import java.util.*;
 
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -620,6 +622,71 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 		}
 		return list;
 		
+	}
+
+	@Override
+	public List<ActivityVO> getAll(Map<String, String[]> map) {
+		List<ActivityVO> list = new ArrayList<ActivityVO>();
+		ActivityVO activityVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			String finalSQL = "select * from activity "
+		          + jdbcUtil_CompositeQuery.get_WhereCondition(map)
+		          + "order by empno";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				activityVO= new ActivityVO();
+				activityVO.setAct_No(rs.getString("act_No"));
+				activityVO.setAct_Cat(rs.getString("act_cat"));
+				activityVO.setAct_Name(rs.getString("act_Name"));
+				activityVO.setCoucat_No(rs.getString("coucat_No"));
+				activityVO.setAct_Content(rs.getString("act_Content"));
+				activityVO.setAct_PreAddTime(rs.getTimestamp("act_PreAddTime"));
+				activityVO.setAct_PreOffTime(rs.getTimestamp("act_PreOffTime"));
+				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
+				activityVO.setAct_End(rs.getTimestamp("act_End"));
+				activityVO.setAct_Status(rs.getInt("act_Status"));
+				activityVO.setAct_Views(rs.getInt("act_Views"));
+				list.add(activityVO);
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 

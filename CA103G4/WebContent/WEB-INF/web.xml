@@ -250,7 +250,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ActivityServlet</servlet-name>
-		<url-pattern>/activity/activity.do</url-pattern>
+		<url-pattern>/activity/activityServlet.do</url-pattern>
 	</servlet-mapping>
 	
 		<servlet>
@@ -289,6 +289,16 @@
 	<servlet-mapping>
 		<servlet-name>ReportServlet</servlet-name>
 		<url-pattern>/report/reportServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	
+		<servlet>
+		<servlet-name>CoucatServlet</servlet-name>
+		<servlet-class>com.coucat.controller.CoucatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CoucatServlet</servlet-name>
+		<url-pattern>/coucat/coucatServlet.do</url-pattern>
 	</servlet-mapping>
 	
 	  <servlet>

@@ -38,7 +38,7 @@ public class CoucatDAO implements CoucatDAO_interface {
 			"COUCAT_VALID=?," + 
 			"COUCAT_INVALID=?,COUCAT_PIC=?" + 
 			"WHERE COUCAT_NO=?";
-	private static final String GETALL = "SELECT * FROM COUCAT";
+	private static final String GETALL = "SELECT * FROM COUCAT ORDER BY COUCAT_INVALID DESC";
 	private static final String FIND_BY_CATA = 
 			"SELECT * FROM COUCAT WHERE COUCAT_CATA=?";
 	private static final String  GET_ONE_COUCAT="SELECT * FROM COUCAT WHERE COUCAT_NO=?";

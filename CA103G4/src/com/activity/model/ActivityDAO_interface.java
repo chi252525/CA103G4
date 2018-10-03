@@ -1,6 +1,7 @@
 package com.activity.model;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public interface ActivityDAO_interface {
 	void insert(ActivityVO activityVO);
@@ -17,6 +18,7 @@ public interface ActivityDAO_interface {
 	List<ActivityVO> findHotAct();
 	//查詢已上架的最新廣告
 	List<ActivityVO> findNewAct();
+	public List<ActivityVO> getAll(Map<String, String[]> map);
 }
 
 
