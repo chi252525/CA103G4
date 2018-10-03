@@ -378,7 +378,8 @@ a {
         //                 scrollY: 300,
         //                 select: true
         //             });
-        <%for (int i = 0; i < buylist.size(); i++) {%>
+        <%if(buylist!=null){
+        for (int i = 0; i < buylist.size(); i++) {%>
         $(function() {
             $("#delete<%=i%>").click(function() {
                 //alert("11");
@@ -404,7 +405,9 @@ a {
                 });
             });
         });
-        <%}%>
+        <%}
+        }
+        %>
 
         function add() {
             $.ajax({
