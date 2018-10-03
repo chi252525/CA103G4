@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import android.com.orderinvoice.model.*;
+import android.com.coupon.model.*;
 import android.com.desk.model.*;
 import android.com.member.model.*;
 import android.com.menu.model.*;
@@ -236,7 +237,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	}
 
 	@Override
-	public String addWithOrderItem(OrderformVO orderformVO, List<OrderInvoiceVO> orderList) {
+	public String addWithOrderItem(OrderformVO orderformVO, List<OrderInvoiceVO> orderList, String coupSn) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String next_order_no = null;
@@ -279,8 +280,13 @@ public class OrderformDAO implements OrderformDAO_interface {
 				oidao.insert(oi,con);
 			}
 			// 更新桌位狀態
-			DeskDAO_interface d= new DeskDAO();
-			d.updateDekStatus(orderformVO.getDek_no(),con);
+			DeskDAO_interface ddao= new DeskDAO();
+			ddao.updateDekStatus(orderformVO.getDek_no(),con);
+			// 有使用優惠卷則更新個人優惠卷持有紀錄
+			if(!coupSn.isEmpty()) {
+				CouponDAO_interface chdao = new CouponDAO();
+				chdao.updateOrderNoAndCoupState(coupSn,"CP0",con);
+			}
 
 			// 2.設定於pstmt.executeUpdate()之後
 			con.commit();

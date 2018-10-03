@@ -1,5 +1,6 @@
 package android.com.couponhistory.model;
 
+import java.sql.Connection;
 import java.util.*;
 
 import android.com.coupon.model.*;
