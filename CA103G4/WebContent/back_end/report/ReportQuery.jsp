@@ -11,12 +11,12 @@
 	class="com.custommeals.model.CustommealsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
+
 <%
 	ReportService rptSvc = new ReportService();
-	List<ReportVO> list = rptSvc.getAll();
+	List<ReportVO> list = (List<ReportVO>)request.getAttribute("getPostByStatuslist");
 	pageContext.setAttribute("list", list);
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -33,9 +33,7 @@
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <!--Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -61,26 +59,75 @@
 		<div class="row"></div>
 		<div class="col-sm-12 col-12 col-lg-12">
 			<h5>貼文檢舉管理</h5>
+					<%@ include file="pages/page1.file"%>
 			<br>
 			<div class="container-fluid">
 				<div class="row mx-0">
 					<div class="col-md-8 mx-0">
 						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
-								<select class="form-control">
-									<option name="rpt_Status" value="RS0">未處理</option>
-									<option name="rpt_Status" value="RS1">已處理</option>
+							<input type="hidden" name="action" value="updateReportStatus" />
+								<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
+								<select class="form-control" name="rpt_Status">
+									<option value='RS0'>未處理</option>
+									<option value='RS1'>已處理</option>
 								</select>
 							</div>
-								<input type="hidden" name="action" value="getPostByStatus" />
-							<button type="submit" class="btn btn-primary">查詢</button>
+								
+							<button type="button" class="btn btn-primary" onclick="getReportByStatus2()">查詢</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
+				<script>
+			 function getReportByStatus2() {
+	                // 				console.log("0000");
+	                $.ajax({
+	                    type: "post",
+	                    url: "<%=request.getContextPath()%>/report/reportServlet.do",
+	                    data: {
+	                        "action": "getReportByStatus2"
+	                    },
+	                    dataType: "json",
+	                    success: function(result) { //result 為後端送回來的資料名稱
+	                        console.log(result);
+	                        for (i = 0; i < result.length; i++) {
+	                            $("#tbody").append("<tr><td>" + result[i].rpt_No + "</td><td>" + result[i].post_No +
+	                                "</td><td>" + result[i].mem_No + "</td><td>" + result[i].rpt_Rsm +
+	                                "</td><td>" + result[i].rpt_Status + "</td><td>" + result[i].rpt_Time +
+	                                "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
+	                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
+	                           
+	                        }
+	                    },
+	                    error: function() {
+	                        alert("error!")
+	                    }
+	                })
+	            }
+			
+			</script>
+		
+		
+	
+		
+		
+<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+	
+	
 
-		<%@ include file="pages/page1.file"%>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -90,12 +137,17 @@
 					<th>檢舉原因</th>
 					<th>處理狀態</th>
 					<th>檢舉時間</th>
-					<th>通過/不通過</span></th>
+					<th>通過/不通過</th>
 				</tr>
 			</thead>
-			<c:forEach var="reportVO" items="${list}" begin="<%=pageIndex%>"
+			<c:forEach var="reportVO" items="${getPostByStatuslist}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
-				<tbody>
+				<div class="col-12">
+				<p id="test"></p>
+				
+				
+				</div>
+				<tbody  id="tbody">
 					<tr>
 						<td>${reportVO.rpt_No}</td>
 						<td>
@@ -183,6 +235,14 @@
 								</form>
 								
 								
+						
+								
+								
+								
+								
+								
+								
+								
 									<script type="text/javascript">
 					
 								document.querySelector('#updateRepotStatusOnly${reportVO.rpt_No}').addEventListener('submit', function(e) {
@@ -229,10 +289,15 @@
 					</tr>
 				</tbody>
 			</c:forEach>
-
+			
 		</table>
-		<%@ include file="pages/page2.file"%>
+		<div class="col">
+		<div class="col-4 float right"><%@ include file="pages/page2.file"%></div>
+		
+		</div>
 	</div>
+
+
 
 </body>
 </html>

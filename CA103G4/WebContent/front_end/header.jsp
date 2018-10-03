@@ -119,7 +119,7 @@ body {
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
-							<li class="nav-link imgicon"><a href="..."><span
+							<li class="nav-link imgicon"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
 									class="lnr lnr-cart"></span></a></li>
 							<li class="nav-link imgicon"><a href="gallery.html"></a><span
 								class="lnr lnr-alarm"></span></li>

@@ -88,6 +88,15 @@
 				<servlet-name>AndroidCoucatServlet</servlet-name>
 				<url-pattern>/AndroidCoucatServlet</url-pattern>
 			</servlet-mapping>
+			
+			<servlet>
+				<servlet-name>AndroidCouponServlet</servlet-name>
+				<servlet-class>android.com.coupon.controller.AndroidCouponServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>AndroidCouponServlet</servlet-name>
+				<url-pattern>/AndroidCouponServlet</url-pattern>
+			</servlet-mapping>
 	
 	
   <servlet>

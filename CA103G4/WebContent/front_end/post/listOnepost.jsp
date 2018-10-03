@@ -255,15 +255,7 @@ background-color:rgba(253,253,253,0.8);
   class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}">刪除</a>
   
   
-   <c:choose>
-   <c:when test="${'M000001'==replyVO.mem_No}">
-   <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}"
-    class="btn btn-default btn-sm " id="hide" >隱藏</a> </c:when>
-    	<c:otherwise>
-    <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=updateStatus&rply_No=${replyVO.rply_No}&rply_Status=${replyVO.rply_Status}" 
-    class="btn btn-default btn-sm " id="show" >顯示</a>   
-  	</c:otherwise>
-  	  	</c:choose>
+  
 </div>
 						</div>
 					</div>

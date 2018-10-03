@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 
 import com.activity.model.ActivityVO;
 
+import android.com.coucat.model.CoucatVO;
+
 public class CouponDAO implements CouponDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -32,7 +34,84 @@ public class CouponDAO implements CouponDAO_interface {
 		private static final String FINDBYCOUCAT_NO = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=?";
 		private static final String FINDBY_PRIMARY_KEY="SELECT * FROM COUPON WHERE COUP_SN=?";
+		private static final String GET_COUPON_WITH_COUCAT=	
+				"SELECT coupon.COUP_SN,coupon.COUP_STATUS,coucat.*  FROM COUPON LEFT JOIN coucat ON coupon.coucat_no= coucat.coucat_no WHERE coup_Sn=?";
 	
+		
+		
+		
+		@Override
+		public CouponVO getOneCouponWithCoucat(String coup_Sn) {
+			CouponVO couponVO = null;
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_COUPON_WITH_COUCAT);
+
+				pstmt.setString(1, coup_Sn);
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					couponVO = new CouponVO();
+					couponVO.setCoup_Sn(rs.getString("coup_sn"));
+					couponVO.setCoucat_No(rs.getString("coucat_No"));
+					couponVO.setCoup_Status(rs.getString("coup_Status"));
+					
+					CoucatVO coucat = new CoucatVO();
+					coucat = new CoucatVO();
+					coucat.setCoucat_No(rs.getString("Coucat_No"));
+					coucat.setCoucat_Name(rs.getString("Coucat_Name"));
+					coucat.setCoucat_Cata(rs.getString("Coucat_Cata"));
+					coucat.setCoucat_Value(rs.getInt("Coucat_Value"));
+					coucat.setCoucat_Discount(rs.getDouble("Coucat_Discount"));
+					coucat.setCoucat_Freep(rs.getInt("Coucat_Freep"));
+					coucat.setCoucat_Valid(rs.getTimestamp("Coucat_Valid"));
+					coucat.setCoucat_Invalid(rs.getTimestamp("Coucat_Invalid"));
+//					coucat.setCoucat_Pic(rs.getBytes("Coucat_Pic"));
+					coucat.setCoucat_Amo(rs.getInt("Coucat_Amo"));
+					
+					couponVO.setCoucatVO(coucat);
+					
+				}
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				se.printStackTrace();
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return couponVO;
+		}
+
+
+
 		@Override
 		public void insert(CouponVO couponVO, Integer coucat_Amo) {
 			Connection con = null;

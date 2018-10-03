@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.menu.model.MenuVO;
 import com.orderform.model.*;
 import com.orderinvoice.model.OrderinvoiceVO;
 
@@ -44,7 +45,7 @@ public class OrderformServlet extends HttpServlet {
 			String addres = req.getParameter("deliv_addres");
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
 			//明細參數
-			List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();//等前端 更改 
+			List<OrderinvoiceVO,MenuVO> list = new ArrayList<OrderinvoiceVO,MenuVO>();//等前端 更改 
 			String[] oinlist = req.getParameterValues("invoice");
 			OrderinvoiceVO oin = null;
 			

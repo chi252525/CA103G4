@@ -1,5 +1,6 @@
 package com.report_msg.controller;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.branch.model.BranchVO;
 import com.post.model.PostService;
 import com.post.model.PostVO;
 import com.report_msg.model.ReportService;
@@ -66,14 +71,18 @@ public class ReportServlet  extends HttpServlet {
 		}
 		
 		if ("updateReportStatus".equals(action)) { 
-			System.out.println("跳進Report 的updateStatus 處理狀態");
+			System.out.println("跳進Report 的updateReportStatus 處理狀態");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			System.out.println("requestURL"+requestURL);
+			String whichPage = req.getParameter("whichPage");
+			System.out.println("whichPage"+whichPage);
 			try {
 			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			String rpt_No =req.getParameter("rpt_No");
-			System.out.println(rpt_No);
+			System.out.println("rpt_No"+rpt_No);
 //			String rpt_Status= "RS1";
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
@@ -87,32 +96,39 @@ public class ReportServlet  extends HttpServlet {
 			
 			
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
-			RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/Postreport.jsp"); 
+			if(requestURL.equals("/back_end/report/Postreport.jsp")||requestURL.equals("/back_end/report/Postreport.jsp?"+whichPage)){
+				req.setAttribute("rpt_No",rpt_No);
+			}
+			
+			RequestDispatcher successView = req.getRequestDispatcher(requestURL); 
+		
 			successView.forward(req, res);
+			System.out.println("success");
 			/***************************其他可能的錯誤處理*************************************/
 			}catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/qa_report/qa_report.jsp");
+						.getRequestDispatcher("/back_end/report/Postreport.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		}  
 		
 		
-		if ("getPostByStatus".equals(action)) {
+		if ("getReportByStatus".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			 System.out.println("跳進getPostByStatus");
+			 System.out.println("跳進getReportByStatus");
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
 				String rpt_Status = req.getParameter("rpt_Status");
+				System.out.println("rpt_Status"+rpt_Status);
 				if (rpt_Status == null ) {
 					errorMsgs.add("請選正確狀態");
 				}
 		
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/report/Postreport.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -124,21 +140,87 @@ public class ReportServlet  extends HttpServlet {
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/report/Postreport.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
+					System.out.println("查詢失敗");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				
+//				HttpSession session = req.getSession();
+				req.setAttribute("getPostByStatuslist", getPostByStatuslist);
+				System.out.println("req.setAttribute" + getPostByStatuslist);
+
+				RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/ReportQuery.jsp");
+				successView.forward(req, res);
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+		
+		
+		if ("getReportByStatus2".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			 System.out.println("跳進getReportByStatus");
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+
+				String rpt_Status = req.getParameter("rpt_Status");
+				System.out.println("rpt_Status"+rpt_Status);
+				if (rpt_Status == null ) {
+					errorMsgs.add("請選正確狀態");
+				}
+		
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+				ReportService rptSvc = new ReportService();
+				List<ReportVO> getPostByStatuslist = rptSvc.getReplybyStatus(rpt_Status);
+				if (getPostByStatuslist == null) {
+					errorMsgs.add("查無資料");
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/ReportQuery.jsp");
 					System.out.println("查詢失敗");
 					failureView.forward(req, res);
 					return;
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("getPostByStatuslist", getPostByStatuslist);
-				System.out.println("req.setAttribute" + getPostByStatuslist);
+				// =============print to web page=====================
+				JSONArray jsonarr = new JSONArray();
 
-				RequestDispatcher successView = req.getRequestDispatcher("/front_end/report/Postreport.jsp");
-				successView.forward(req, res);
+				for (ReportVO rptVO : getPostByStatuslist) {
+					JSONObject jso = new JSONObject();
+					jso.put("rpt_No", rptVO.getRpt_No());
+					jso.put("post_No", rptVO.getPost_No());
+					jso.put("mem_No", rptVO.getMem_No());
+					jso.put("rpt_Rsm", rptVO.getRpt_Rsm());
+					jso.put("rpt_Status", rptVO.getRpt_Status());
+					jso.put("rpt_Time", rptVO.getRpt_Time());
+					jsonarr.put(jso);
+				}
+
+
+				
+				PrintWriter out = res.getWriter();
+				out.print(jsonarr);
+				System.out.println(jsonarr);
+				out.flush();
+				out.close();
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/report/Postreport.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
 				failureView.forward(req, res);
 			}
 

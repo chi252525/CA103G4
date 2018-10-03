@@ -33,9 +33,7 @@
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <!--Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -64,23 +62,70 @@
 			<br>
 			<div class="container-fluid">
 				<div class="row mx-0">
+				<%@ include file="pages/page1.file"%>
 					<div class="col-md-8 mx-0">
 						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
-								<select class="form-control">
-									<option name="rpt_Status" value="RS0">未處理</option>
-									<option name="rpt_Status" value="RS1">已處理</option>
+								<select class="form-control" name="rpt_Status">
+									<option value='RS0'>未處理</option>
+									<option value='RS1'>已處理</option>
 								</select>
+								
+								<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
+								<input type="hidden" name="action" value="getReportByStatus" />
 							</div>
-								<input type="hidden" name="action" value="getPostByStatus" />
-							<button type="submit" class="btn btn-primary">查詢</button>
+								
+							<button type="submit" class="btn btn-primary"  >查詢</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<%@ include file="pages/page1.file"%>
+		
+		
+				<script>
+			 function getReportByStatus2() {
+	                // 				console.log("0000");
+	                $.ajax({
+	                    type: "post",
+	                    url: "<%=request.getContextPath()%>/report/reportServlet.do",
+	                    data: {
+	                        "action": "getReportByStatus2"
+	                    },
+	                    dataType: "json",
+	                    success: function(result) { //result 為後端送回來的資料名稱
+	                        console.log(result);
+	                        for (i = 0; i < result.length; i++) {
+	                            $("#tbody").append("<tr><td>" + result[i].rpt_No + "</td><td>" + result[i].post_No +
+	                                "</td><td>" + result[i].mem_No + "</td><td>" + result[i].rpt_Rsm +
+	                                "</td><td>" + result[i].rpt_Status + "</td><td>" + result[i].rpt_Time +
+	                                "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
+	                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
+	                           
+	                        }
+	                    },
+	                    error: function() {
+	                        alert("error!")
+	                    }
+	                })
+	            }
+			
+			</script>
+		
+		
+		
+		
+		
+<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -90,13 +135,18 @@
 					<th>檢舉原因</th>
 					<th>處理狀態</th>
 					<th>檢舉時間</th>
-					<th>通過/不通過</span></th>
+					<th>通過/不通過</th>
 				</tr>
 			</thead>
 			<c:forEach var="reportVO" items="${list}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
-				<tbody>
-					<tr>
+				<div class="col-12">
+				<p id="test"></p>
+				
+				
+				</div>
+				<tbody  id="tbody">
+					<tr ${(reportVO.rpt_No==param.rpt_No) ? 'bgcolor=#CCCCFF':''}>
 						<td>${reportVO.rpt_No}</td>
 						<td>
 						<a href="<%=request.getContextPath()%>/post/postServlet.do?post_No=${reportVO.post_No}&action=getOne_For_Display"/>${reportVO.post_No}</td>
@@ -130,13 +180,12 @@
 								<form method="post"
 									action="<%=request.getContextPath()%>/post/postServlet.do" id="updateStatus${reportVO.rpt_No}">
 									<button type="submit" class="btn btn-success" ${(reportVO.rpt_Status=='RS1')?'disabled':'' }><span class="lnr lnr-checkmark-circle"></span></button>
+										<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			    				 <input type="hidden" name="whichPage"	value="<%=whichPage%>">  
 										<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
 										<input type="hidden" name="post_No" value="${postSvc.getOne_Post(reportVO.post_No).post_No}" />
 										<input type="hidden" name="action" value="updatePostStatus" /> 
-										
-									
-									
-									
+							
 								</form>
 							<script type="text/javascript">
 					
@@ -174,6 +223,8 @@
 								<!-- 不通過的btn -->
 								<form method="post"
 									action="<%=request.getContextPath()%>/report/reportServlet.do" id="updateRepotStatusOnly${reportVO.rpt_No}">
+										<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			    				 		<input type="hidden" name="whichPage"	value="<%=whichPage%>">  
 										<input type="hidden" name="rpt_No"
 											value="${reportVO.rpt_No}" />
 										<input type="hidden" name="action" value="updateReportStatus" /> 
@@ -181,6 +232,14 @@
 									<span
 											class="lnr lnr-cross"></span></button>
 								</form>
+								
+								
+						
+								
+								
+								
+								
+								
 								
 								
 									<script type="text/javascript">
@@ -218,21 +277,16 @@
 								
 
 							</div> 
-							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if></td>
+						</td>
 					</tr>
 				</tbody>
 			</c:forEach>
 
 		</table>
-		<%@ include file="pages/page2.file"%>
+<%@ include file="pages/page2.file"%>
 	</div>
+
+
 
 </body>
 </html>
