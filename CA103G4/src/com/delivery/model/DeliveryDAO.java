@@ -33,6 +33,7 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT deliv_no,branch_no,emp_no,deliv_status FROM delivery where deliv_no= ?";
 	private static final String UPDATE = "UPDATE delivery set emp_no=?,deliv_status=? where deliv_no = ?";
 	// VARCHAR2 (PK not found)
+	private static final String GETOUT = "SELECT emp_no FROM delivery where deliv_status= 2";
 
 	@Override
 	public void insert(DeliveryVO deliveryVO, List<OrderformVO> list) {
@@ -407,5 +408,54 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 		}
 		return deliveryVO;
 	}
+	
+	@Override
+	public List<String> getOut() {
+		List<String> list = new ArrayList<String>();
+		DeliveryVO deliveryVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GETOUT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("emp_no")); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 }
