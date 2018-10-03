@@ -164,7 +164,7 @@ public class EmpServlet extends HttpServlet{
 				
 				EmpService empSvc = new EmpService();
 				EmpVO empVO = new EmpVO();
-				empVO = empSvc.findOnebyEmpNo(emp_Acnum);
+				empVO = empSvc.findOneByEmpAcnum(emp_Acnum);
 				
 				
 				if(emp_Acnum==null||emp_Acnum.length()==0) {
