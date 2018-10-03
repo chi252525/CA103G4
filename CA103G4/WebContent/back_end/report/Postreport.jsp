@@ -62,6 +62,7 @@
 			<br>
 			<div class="container-fluid">
 				<div class="row mx-0">
+				<%@ include file="pages/page1.file"%>
 					<div class="col-md-8 mx-0">
 						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
@@ -69,9 +70,12 @@
 									<option value='RS0'>未處理</option>
 									<option value='RS1'>已處理</option>
 								</select>
+								
+								<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
+								<input type="hidden" name="action" value="getReportByStatus" />
 							</div>
-								<input type="hidden" name="action" value="getReportByStatus2" />
-							<button type="button" class="btn btn-primary" onclick="getReportByStatus2()">查詢</button>
+								
+							<button type="submit" class="btn btn-primary"  >查詢</button>
 						</form>
 					</div>
 				</div>
@@ -121,7 +125,7 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-		<%@ include file="pages/page1.file"%>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -142,7 +146,7 @@
 				
 				</div>
 				<tbody  id="tbody">
-					<tr>
+					<tr ${(reportVO.rpt_No==param.rpt_No) ? 'bgcolor=#CCCCFF':''}>
 						<td>${reportVO.rpt_No}</td>
 						<td>
 						<a href="<%=request.getContextPath()%>/post/postServlet.do?post_No=${reportVO.post_No}&action=getOne_For_Display"/>${reportVO.post_No}</td>
@@ -176,13 +180,12 @@
 								<form method="post"
 									action="<%=request.getContextPath()%>/post/postServlet.do" id="updateStatus${reportVO.rpt_No}">
 									<button type="submit" class="btn btn-success" ${(reportVO.rpt_Status=='RS1')?'disabled':'' }><span class="lnr lnr-checkmark-circle"></span></button>
+										<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			    				 <input type="hidden" name="whichPage"	value="<%=whichPage%>">  
 										<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
 										<input type="hidden" name="post_No" value="${postSvc.getOne_Post(reportVO.post_No).post_No}" />
 										<input type="hidden" name="action" value="updatePostStatus" /> 
-										
-									
-									
-									
+							
 								</form>
 							<script type="text/javascript">
 					
@@ -220,6 +223,8 @@
 								<!-- 不通過的btn -->
 								<form method="post"
 									action="<%=request.getContextPath()%>/report/reportServlet.do" id="updateRepotStatusOnly${reportVO.rpt_No}">
+										<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			    				 		<input type="hidden" name="whichPage"	value="<%=whichPage%>">  
 										<input type="hidden" name="rpt_No"
 											value="${reportVO.rpt_No}" />
 										<input type="hidden" name="action" value="updateReportStatus" /> 
@@ -272,20 +277,13 @@
 								
 
 							</div> 
-							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if></td>
+						</td>
 					</tr>
 				</tbody>
 			</c:forEach>
 
 		</table>
-
+<%@ include file="pages/page2.file"%>
 	</div>
 
 

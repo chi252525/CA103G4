@@ -71,14 +71,18 @@ public class ReportServlet  extends HttpServlet {
 		}
 		
 		if ("updateReportStatus".equals(action)) { 
-			System.out.println("跳進Report 的updateStatus 處理狀態");
+			System.out.println("跳進Report 的updateReportStatus 處理狀態");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			System.out.println("requestURL"+requestURL);
+			String whichPage = req.getParameter("whichPage");
+			System.out.println("whichPage"+whichPage);
 			try {
 			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			String rpt_No =req.getParameter("rpt_No");
-			System.out.println(rpt_No);
+			System.out.println("rpt_No"+rpt_No);
 //			String rpt_Status= "RS1";
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
@@ -92,16 +96,22 @@ public class ReportServlet  extends HttpServlet {
 			
 			
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
-			RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/Postreport.jsp"); 
+			if(requestURL.equals("/back_end/report/Postreport.jsp")||requestURL.equals("/back_end/report/Postreport.jsp?"+whichPage)){
+				req.setAttribute("rpt_No",rpt_No);
+			}
+			
+			RequestDispatcher successView = req.getRequestDispatcher(requestURL); 
+		
 			successView.forward(req, res);
+			System.out.println("success");
 			/***************************其他可能的錯誤處理*************************************/
 			}catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/qa_report/qa_report.jsp");
+						.getRequestDispatcher("/back_end/report/Postreport.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		}  
 		
 		
 		if ("getReportByStatus".equals(action)) {
@@ -130,16 +140,18 @@ public class ReportServlet  extends HttpServlet {
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/PostQuery.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
 					System.out.println("查詢失敗");
 					failureView.forward(req, res);
 					return;
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				
+//				HttpSession session = req.getSession();
 				req.setAttribute("getPostByStatuslist", getPostByStatuslist);
 				System.out.println("req.setAttribute" + getPostByStatuslist);
 
-				RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/Postreport.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/ReportQuery.jsp");
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
@@ -177,7 +189,7 @@ public class ReportServlet  extends HttpServlet {
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/PostQuery.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/report/ReportQuery.jsp");
 					System.out.println("查詢失敗");
 					failureView.forward(req, res);
 					return;
