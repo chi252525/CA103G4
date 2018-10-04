@@ -69,7 +69,7 @@ body {
 <body>
 <jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 <div class="py-5 " >
-    <div class="container">
+    <div class="container-fluid px-5">
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-tabs">

@@ -251,7 +251,7 @@ background-color:rgba(253,253,253,0.8);
 <div class="btn-group">
  
   <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=delete&rply_No=${replyVO.rply_No}" 
-  class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}">刪除</a>
+  class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}" onclick="deleteConfirm()">刪除</a>
   
   
   
@@ -265,7 +265,13 @@ background-color:rgba(253,253,253,0.8);
 		</div>
 	</div>
 
-
+	<script type="text/javascript">
+		function deleteConfirm() {
+			if (window.confirm('確定刪除嗎?')) {
+				$('#deleteform').submit();
+			}
+		}
+	</script>
 
 
 
