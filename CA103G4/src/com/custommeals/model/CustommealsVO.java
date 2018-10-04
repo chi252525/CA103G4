@@ -2,7 +2,7 @@ package com.custommeals.model;
 
 import com.menu.model.MenuVO;
 
-public class CustommealsVO extends MenuVO implements java.io.Serializable {
+public class CustommealsVO extends MenuVO  {
 
 	private String custom_No;
 	private String mem_No;

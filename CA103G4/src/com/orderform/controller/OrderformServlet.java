@@ -37,7 +37,7 @@ public class OrderformServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			//接受參數
 			//訂單參數
-			String dekno = req.getParameter("dek_no");
+			String dekno = req.getParameter("table_no");
 			String memno = req.getParameter("mem_no");
 			String brano = req.getParameter("branch_no");
 			Integer ordertyp = new Integer(req.getParameter("order_type").trim());
@@ -45,8 +45,8 @@ public class OrderformServlet extends HttpServlet {
 			String addres = req.getParameter("deliv_addres");
 			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());//信用卡表已付款2; 現金表1未付款
 			//明細參數
-			List<OrderinvoiceVO,MenuVO> list = new ArrayList<>();//等前端 更改 
-			String[] oinlist = req.getParameterValues("invoice");
+			List<? extends MenuVO> list = new ArrayList<>();//等前端 更改 
+			String[] oinlist = req.getParameterValues("shoppingCart");
 			OrderinvoiceVO oin = null;
 			
 			for (int i = 0; i < oinlist.length; i++) {

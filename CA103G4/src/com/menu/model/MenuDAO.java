@@ -17,6 +17,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.custommeals.model.CustommealsVO;
+
 public class MenuDAO implements MenuDAO_interface {
 
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
@@ -45,6 +47,13 @@ public class MenuDAO implements MenuDAO_interface {
 			"SELECT MENU_NO, MENU_ID, MENU_TYPE, MENU_PRICE, MENU_INTRO, MENU_PHOTO, MENU_STATUS FROM MENU WHERE MENU_NO=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT MENU_NO, MENU_ID, MENU_TYPE, MENU_PRICE, MENU_INTRO, MENU_PHOTO, MENU_STATUS FROM MENU ORDER BY MENU_NO";
+	
+	//依會員查他訂過的經典餐點
+	private static final String SELECT_MEAL_BY_MEMBUYED_CLASSIC="SELECT * FROM MENU LEFT JOIN ORDERINVOICE\r\n" + 
+			"ON MENU.MENU_NO=orderinvoice.menu_no " + 
+			"WHERE orderinvoice.menu_no IS NOT NULL AND " + 
+			"mem_no=?";
+	
 	
 	
 	@Override
@@ -302,4 +311,62 @@ public class MenuDAO implements MenuDAO_interface {
 		return baos.toByteArray();
 		//  toByteArray() 獲取數據。
 		}
+	
+	@Override
+	public List<MenuVO> getMealByMemBuyedClassic(String mem_No) {
+		List<MenuVO> menuVOList = new ArrayList<>();
+		MenuVO menuVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_MEAL_BY_MEMBUYED_CLASSIC);
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				menuVO = new CustommealsVO();
+				menuVO.setMenu_No(rs.getString("MENU_NO"));
+				menuVO.setMenu_Id(rs.getString("MENU_ID"));
+				menuVO.setMenu_Type(rs.getString("MENU_TYPE"));
+				menuVO.setMenu_Price(rs.getInt("MENU_PRICE"));
+				menuVO.setMenu_Intro(rs.getString("MENU_INTRO"));
+				menuVO.setMenu_Photo(rs.getBytes("MENU_PHOTO"));
+				menuVO.setMenu_Status(rs.getInt("MENU_STATUS"));
+
+				menuVOList.add(menuVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " 
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return menuVOList;
+	}
+	
+	
 }
