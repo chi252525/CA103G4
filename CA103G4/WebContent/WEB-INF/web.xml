@@ -260,6 +260,16 @@
     <servlet-name>CoucatServlet</servlet-name>
     <url-pattern>/coucat/coucatServlet.do</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>CouponhistoryServlet</servlet-name>
+    <servlet-class>com.couponhistory.controller.CouponhistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CouponhistoryServlet</servlet-name>
+    <url-pattern>/couponhistory/CouponhistoryServlet.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>ResServlet</servlet-name>
     <servlet-class>com.reservation.controller.ResServlet</servlet-class>

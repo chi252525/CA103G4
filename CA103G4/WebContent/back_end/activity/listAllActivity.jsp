@@ -57,7 +57,12 @@ body {
 	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
 	background-position: center;
 }
-
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
 
 </style>
 </head>

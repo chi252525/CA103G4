@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -90,7 +92,6 @@ public class ActivityServlet extends HttpServlet {
 		   if ("insert".equals(action)) { 
 			 List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("OK");
 			try {
 				String act_Name = req.getParameter("act_Name");
 				System.out.println(act_Name);
@@ -137,24 +138,31 @@ public class ActivityServlet extends HttpServlet {
 					errorMsgs.add("活動內容: 請勿空白");
 				}
 				
-				java.sql.Timestamp act_PreAddTime = null;
-				try {
-					act_PreAddTime = java.sql.Timestamp.valueOf(req.getParameter("act_PreAddTime").trim());
-				} catch (IllegalArgumentException e) {
-					act_PreAddTime=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
-				}
+				
+				java.sql.Timestamp act_PreAddTime = new Timestamp(System.currentTimeMillis()); 
+				
+			    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+			    try {
+			    java.util.Date act_PreAddTimestr = dateFormat.parse(req.getParameter("act_PreAddTime").trim());
+			    act_PreAddTime = new java.sql.Timestamp(act_PreAddTimestr.getTime());
+			    }catch(ParseException e) {
+			    	e.printStackTrace();
+
+			    }
 				
 				
-				java.sql.Timestamp act_PreOffTime = null;
-				try {
-					act_PreOffTime = java.sql.Timestamp.valueOf(req.getParameter("act_PreOffTime").trim());
-				} catch (IllegalArgumentException e) {
-					act_PreOffTime=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
-				}
+			    java.sql.Timestamp act_PreOffTime = new Timestamp(System.currentTimeMillis()); 
 				
-				java.sql.Timestamp act_Start = new java.sql.Timestamp(System.currentTimeMillis());
+			    SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+			    try {
+			    java.util.Date act_PreOffTimestr = dateFormat1.parse(req.getParameter("act_PreOffTime").trim());
+			    act_PreAddTime = new java.sql.Timestamp(act_PreOffTimestr.getTime());
+			    }catch(ParseException e) {
+			    	e.printStackTrace();
+
+			    }
+				
+				java.sql.Timestamp act_Start = act_PreAddTime;
 				java.sql.Timestamp act_End = act_PreOffTime;
 						
 				ActivityVO activityVO = new ActivityVO();
