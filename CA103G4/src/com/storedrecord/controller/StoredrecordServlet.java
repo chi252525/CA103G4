@@ -54,9 +54,9 @@ public class StoredrecordServlet extends HttpServlet {
 				Boolean x = stor_No.matches(regexStor);// test for regular expression
 				if (stor_No == null || stor_No.trim().length() == 0) {
 					errorMsgs.add("請輸入儲值流水單號");
-				} else if (stor_No == null && !mem_No.matches(regexMem)) {
+				} else if (!mem_No.matches(regexMem)) {
 					errorMsgs.add("格式錯誤:會員編號格式必須是大寫英文字母M加上5個數字");
-				} else if (mem_No == null && !stor_No.matches(regexStor)) {
+				} else if ( !stor_No.matches(regexStor)) {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母B加上9個數字");
 				}
 				if (!errorMsgs.isEmpty()) {
