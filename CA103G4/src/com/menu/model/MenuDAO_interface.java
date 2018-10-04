@@ -9,5 +9,6 @@ public interface MenuDAO_interface {
 		public void delete(String menu_No);
 		public MenuVO findByPrimaryKey(String menu_No);
 		public List<MenuVO> getAll();
+		List<MenuVO> getMealByMemBuyedClassic(String mem_No);
 	
 }

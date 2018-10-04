@@ -39,6 +39,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 																															// 寫方法
 																															// 進service
 																															// 給deliverey的
+	private static final String SELECT_ORDER_BY_MEMBUYED = "SELECT ORDER_NO, ORDER_PRICE FROM ORDERFORM WHERE MEM_NO=?";
 
 	@Override
 	public void insert(OrderformVO orderformVO) {
@@ -599,5 +600,60 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public List<OrderformVO> getOrderNoByMemNo(String mem_No) {
+		List<OrderformVO> list = new ArrayList<OrderformVO>();
+		OrderformVO orderformVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ORDER_BY_MEMBUYED);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setMem_no(rs.getString("mem_no"));
+				orderformVO.setOrder_price(rs.getInt("order_price"));
+				list.add(orderformVO);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 
 }

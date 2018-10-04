@@ -64,6 +64,8 @@ public class CustommealsDAO implements CustommealsDAO_interface{
 			"WHERE orderinvoice.custom_no IS NOT NULL AND " + 
 			"mem_no=?";
 	
+
+	
 	//依會員查他的所有自訂餐點
 	private static final String SELECT_ALLMEAL_BY_MEMNO="SELECT *  FROM CUSTOMMEALS  LEFT JOIN INGREDIENTCOMBINATION" + 
 	"ON CUSTOMMEALS.CUSTOM_NO=INGREDIENTCOMBINATION.CUSTOM_NO WHERE CUSTOMMEALS.mem_no=?";

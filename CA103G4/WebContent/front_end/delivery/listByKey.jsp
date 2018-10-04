@@ -74,9 +74,9 @@
 		<th>員工</th>
 		<th>派送單狀態</th>
 	</tr>
-<%-- s分頁 --%>
+<%-- 分頁 --%>
 <%@ include file="page1.file" %>
-<%-- s員工編號，一開始為下拉式選單和按鈕，點擊後派送單狀態會變為2，成為按鈕，選擇後選單和按鈕會消失 --%><%-- s分頁 --%>
+<%-- 員工編號，一開始為下拉式選單和按鈕，點擊後派送單狀態會變為2，成為按鈕，選擇後選單和按鈕會消失 --%><%-- s分頁 --%>
 <c:forEach var="deliveryVO" items="${get_By_Key}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <tr>
 	<td>${deliveryVO.deliv_no}</td>
@@ -121,11 +121,11 @@
 		</c:if>
 		</td>
 			
-<%-- s下面可以操控狀態，1為等待派送文字，2時為可以點擊確認的按鈕，點擊後會成為3，派送完成的字樣--%>
+<%-- 下面可以操控狀態，1為等待派送文字，2時為可以點擊確認的按鈕，點擊後會成為3，派送完成的字樣--%>
 		
 		<td>
 			<c:if test="${deliveryVO.deliv_status == '1'}">
-				 等待派送。
+				 等待派送
 			</c:if>
 			<c:if test="${deliveryVO.deliv_status == '2'}">
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
@@ -139,14 +139,15 @@
 				</form>	
 			</c:if>
 			<c:if test="${deliveryVO.deliv_status == '3'}">
-				 派送完成。
+				 派送完成
 			</c:if>
 		</td>
 	</tr>
 </c:forEach>
 	
 </table>
-<%-- s分頁 --%>
+<%-- 分頁 --%>
+
 <%@ include file="page2.file" %>
 
 </body>

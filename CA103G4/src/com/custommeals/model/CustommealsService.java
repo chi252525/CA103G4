@@ -3,6 +3,7 @@ package com.custommeals.model;
 import java.util.List;
 
 import com.ingredientcombination.model.IngredientCombinationVO;
+import com.post.model.PostVO;
 
 
 public class CustommealsService {
@@ -81,4 +82,6 @@ public class CustommealsService {
 			dao.updateNameOnly(custom_Name,custom_No);
 			return custommealsVO;
 		}
+		
+		
 }
