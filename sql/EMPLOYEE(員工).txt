@@ -30,8 +30,8 @@ NOCYCLE
 NOCACHE;
 
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a','a','帥帥','G1','工讀生','0912345678',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','b123456','0000000','陳永志','G1','服務生','0966666666',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','c123456','6666666','林冠宏','G1','客服人員','0987654321',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','d123456','a123456','懂懂','G1','經理','0930165789',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','e123456','m168888','黃惠民','G1','外送員','0911223345',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','b','b','陳永志','G1','服務生','0966666666',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','c','c','林冠宏','G1','客服人員','0987654321',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','d','d','懂懂','G1','經理','0930165789',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','e','e','黃惠民','G1','外送員','0911223345',null);
 

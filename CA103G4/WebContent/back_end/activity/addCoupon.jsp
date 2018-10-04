@@ -30,14 +30,17 @@
 <!-- linearicons CSS -->
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<!-- JqueryUI -->
+<!-- Datetimepicker -->
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<!-- Sweet alert -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.js"></script>
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-var $JUI = $.noConflict(true);
-</script>
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.css">
+
 <style>
 #preview_box2 img {
 	width: 450px;
@@ -51,15 +54,6 @@ var $JUI = $.noConflict(true);
 <div class="py-5 text-white">
 	<div class="container">
 		<div class="row">
-				<%-- 錯誤表列 --%>
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
 				<div class="col-md-12">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a
@@ -84,7 +78,7 @@ var $JUI = $.noConflict(true);
 					</ul>
 				</c:if>
 				<form method="post"
-						action="<%=request.getContextPath()%>/coucat/coucatServlet.do"
+						action="<%=request.getContextPath()%>/coucat/coucatServlet.do" id="addCouponConfirm"
 						 enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-md-8">
@@ -107,17 +101,19 @@ var $JUI = $.noConflict(true);
 											<input type="text"	class="form-control" placeholder="NT." name="coucat_Value">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-8">
 										<div class="form-group">
-											<label class="text-dark">生效日:</label> <input type="text"
-												id="datepicker1" name="coucat_Valid" class="form-control">
+											<label class="text-dark">生效日:</label> 
+											<input name="coucat_Valid" id="start_dateTime"    type="text" class="form-control" >
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="text-dark">失效日:</label> <input type="text"
-												id="datepicker2" name="coucat_Invalid" class="form-control">
+											<label class="text-dark">失效日:</label> 
+												<input name="coucat_Invalid"  class="form-control" id="end_dateTime"  type="text" >
 										</div>
+										
+										
 									</div>
 								<div class="col-md-3">
 									<div class="form-group">
@@ -127,7 +123,7 @@ var $JUI = $.noConflict(true);
 								</div>
 								<div class="col-md-3">
 								<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-secondary">新增</button></div>
+							<button type="submit" class="btn btn-secondary" >新增</button></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3">
@@ -158,23 +154,33 @@ var $JUI = $.noConflict(true);
 
 
 <script>
-$( function() {
-  $JUI( "#datepicker1" ).datepicker({
-	  
-	  showAnim: "slideDown",
-	  minDate: "-1d",
-	  dateFormat : "yy-mm-dd"
-	  
-  });
-  $JUI( "#datepicker2" ).datepicker({
-	  
-	  showAnim: "slideDown",
-	  minDate: "-1d",
-	  dateFormat : "yy-mm-dd"
-	  
-	  
-  });
-} );
+
+$.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $('#start_dateTime').datetimepicker({
+	  format:'Y-m-d H:i',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#end_dateTime').val()?$('#end_dateTime').val():false
+	   })
+	  },
+	  timepicker:true,
+	  step: 30
+	 });
+	 
+	 $('#end_dateTime').datetimepicker({
+	  format:'Y-m-d H:i',
+	  onShow:function(){
+	   this.setOptions({
+	    minDate:$('#start_dateTime').val()?$('#start_dateTime').val():false
+	   })
+	  },
+	  timepicker:true,
+	  step: 30
+	 });
+});
+
+
 </script>
 <script>
 
@@ -192,6 +198,38 @@ $( function() {
 						}
 					});
 </script>
+	<script type="text/javascript">
+					
+								document.querySelector('#addCouponConfirm').addEventListener('submit', function(e) {
+									  var form = this;
+
+									  e.preventDefault(); // <--- prevent form from submitting
+
+									  swal({
+									      title: "確定新增優惠卷嗎?",
+									      text: "將繼續新增廣告活動",
+									      icon: "warning",
+									      buttons: [
+									        '否',
+									        '是'
+									      ],
+									      dangerMode: true,
+									    }).then(function(isConfirm) {
+									      if (isConfirm) {
+									        swal({
+									          title: '成功',
+									          text: '已新增優惠卷',
+									          icon: 'success'
+									        }).then(function() {
+									          form.submit(); // <--- submit form programmatically
+									        });
+									      } else {
+									        swal("Cancelled", "返回", "error");
+									      }
+									    })
+									});
+						
+								</script>
 
 
 

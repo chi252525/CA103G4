@@ -20,8 +20,24 @@ pageContext.setAttribute("orderformlist",orderformlist);
 
 OrderinvoiceService orderinvoiceSvc = new OrderinvoiceService();
 List<OrderinvoiceVO> orderinvoicelist = new ArrayList();
-orderinvoicelist = orderinvoiceSvc.findByOrder_no("O000000007");
-pageContext.setAttribute("orderinvoicelist", orderinvoicelist);
+
+
+
+for(int i = 0; i < orderformlist.size() ; i++ ){
+	System.out.println("--------------------------");
+	System.out.println(i);
+	System.out.println(orderformlist.get(i).getOrder_no());
+	System.out.println(orderformlist.get(i).getOrderInvoiceList());
+	
+	OrderformVO orderformVO = orderformlist.get(i);
+	List<OrderinvoiceVO> orderInvoiceList = orderinvoiceSvc.findByOrder_no(orderformVO.getOrder_no());
+	orderformVO.setOrderInvoiceList(orderInvoiceList);
+	
+	
+	System.out.println(orderformlist.get(i).getOrderInvoiceList());
+}
+
+
 %>
 
 
@@ -64,6 +80,7 @@ pageContext.setAttribute("orderinvoicelist", orderinvoicelist);
     font-weight: 600;
     font-size: 20;
     border: 1px;
+    border-color:black;
   }
   table, th, td {
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
@@ -99,12 +116,13 @@ pageContext.setAttribute("orderinvoicelist", orderinvoicelist);
 
 <table>
 	
+
+	<c:forEach var="orderFormVO" items="${orderformlist}">
 	<tr>
-		<th>訂單編號</th>
+		<th>訂單編號--------------------------------------------</th>
 		<th>會員編號</th>
 		<th>訂單價格</th>
 	</tr>
-	<c:forEach var="orderFormVO" items="${orderformlist}">
 	<tr>
 		<td>${orderFormVO.order_no}</td>
 		<td>${orderFormVO.mem_no}</td>
@@ -112,28 +130,30 @@ pageContext.setAttribute("orderinvoicelist", orderinvoicelist);
 <%-- 		<td><input type="button" value="${orderFormVO.order_no}"></td>	 --%>
 <%-- 		<td><a href="orderform.do?action=getOne_For_Display_By_Mem_No&order_no=${orderFormVO.order_no}">${orderFormVO.order_no}</a></td> --%>
 	</tr>
+		<tr>
+			<th></th>
+			<th>餐點編號</th>
+			<th>自訂餐點編號</th>
+		</tr>
+		<c:forEach var="orderinvoiceVO" items="${orderFormVO.getOrderInvoiceList()}">
+			
+
+		<tr>
+				<td></td>
+				<td>${orderinvoiceVO.menu_no}</td>
+				<td>${orderinvoiceVO.custom_no}</td>
+		</tr>
+		
+		<tr>
+				<td></td>
+				<td>${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}</td> 
+				<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</td>
+		</tr>
+		
+		</c:forEach>	
 	</c:forEach>
 	
-	<tr>
-		<th>訂單編號</th>
-		<th>餐點編號</th>
-		<th>自訂餐點編號</th>
-	</tr>
-	
-	<c:forEach var="orderinvoiceVO" items="${orderinvoicelist}">
-	<tr>
-			<td>${orderinvoiceVO.order_no}</td>
-			<td>${orderinvoiceVO.menu_no}</td>
-			<td>${orderinvoiceVO.custom_no}</td>
-	</tr>
-	
-	<tr>
-			<td>${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}</td>
-			<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</td>
-			
-	</tr>
-	
-	</c:forEach>	
+
 </table>
 
 </body>

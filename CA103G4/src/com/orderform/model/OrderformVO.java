@@ -1,6 +1,9 @@
 package com.orderform.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformVO {
 	private String order_no;
@@ -14,7 +17,7 @@ public class OrderformVO {
 	private String deliv_addres;
 	private Integer order_pstatus;
 	private Date order_date;
-	
+	private List<OrderinvoiceVO> orderInvoiceList;
 	
 	
 	
@@ -105,6 +108,12 @@ public class OrderformVO {
 	public void setOrder_date(Date order_date) {
 		this.order_date = order_date;
 	}
-	
+	public List<OrderinvoiceVO> getOrderInvoiceList() {
+		return orderInvoiceList;
+	}
+	public void setOrderInvoiceList(List<OrderinvoiceVO> orderInvoiceList) {
+		this.orderInvoiceList = orderInvoiceList;
+	}
+
 
 }

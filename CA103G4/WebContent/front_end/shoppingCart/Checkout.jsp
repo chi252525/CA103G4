@@ -111,12 +111,14 @@ field>div {
 							String amount = (String) request.getAttribute("amount");
 						%>
                         <%
-							for (int i = 0; i < buylist.size(); i++) {
-								MenuVO mv = buylist.get(i);
-								String name = mv.getMenu_Id();
-								Integer total = mv.getMenu_Price() * mv.getMenu_quantity();
-								Integer price = mv.getMenu_Price();
-								Integer quantity = mv.getMenu_quantity();
+							if (buylist != null && buylist.size() != 0) {
+
+								for (int i = 0; i < buylist.size(); i++) {
+									MenuVO mv = buylist.get(i);
+									String name = mv.getMenu_Id();
+									Integer total = mv.getMenu_Price() * mv.getMenu_quantity();
+									Integer price = mv.getMenu_Price();
+									Integer quantity = mv.getMenu_quantity();
 						%>
                         <tr>
                             <td width="200">
@@ -135,20 +137,28 @@ field>div {
                         </tr>
                         <%
 							}
+							} else if (buylist == null) { //發現購物車為空將提示
 						%>
-
-
-                        <tr class="">
-                            <td class=""></td>
-                            <td class="" colspan="6" style="text-align: right;"><img src="img/coupon.png" style="margin-right: 10px;"> <!-- coupon button trigger modal -->
-                                <input id="coupon" class="btn btn-sm btn-light" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(''); width: 20%">
-
-                                <h4>
-                                    總計 <span id="price">$
-                                        <%=amount%></span>
-                                </h4>
-                            </td>
+                        <tr>
+                            <td colspan='5' style='height: 150px; vertical-align: middle'><b class='center'>購物車裡沒有餐點!</b></td>
                         </tr>
+                        <%
+							}
+						%>
+                        <c:if test="${not empty shoppingcart}">
+
+                            <tr class="">
+                                <td class=""></td>
+                                <td class="" colspan="6" style="text-align: right;"><img src="img/coupon.png" style="margin-right: 10px;"> <!-- coupon button trigger modal -->
+                                    <input id="coupon" class="btn btn-sm btn-light" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(''); width: 20%">
+
+                                    <h4>
+                                        總計 <span id="price">$
+                                            <%=amount%></span>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </c:if>
                     </table>
                 </div>
             </div>
@@ -161,47 +171,24 @@ field>div {
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/checkoutServlet.do"><%--送去orferform Serbvlet --%>
-<!--                     	<input type="hidden" name="action" value="insert"> -->
-                    	<c:set var="action" value="insert" scope="session"/>
+                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/checkoutServlet.do">
+                        <%--送去orferform Serbvlet --%>
+                        <!--                     	<input type="hidden" name="action" value="insert"> -->
+                        <c:set var="action" value="insert" scope="session" />
                         <legend>
                             <b>點餐資訊</b>
                         </legend>
                         <div class="form-row">
-
-                            <!-- 						<p> -->
-                            <!-- 							<label for="input">Example input</label> <input type="text" -->
-                            <!-- 								id="input" placeholder="Example input" /> -->
-                            <!-- 						</p> -->
-
-                            <!-- 						<p> -->
-                            <!-- 							<label for="select">Example select</label> < select id="select"> -->
-                            <!-- 							<option value="">Choose...</option> -->
-                            <!-- 							<optgroup label="Option group 1"> -->
-                            <!-- 								<option value="">Option 1</option> -->
-                            <!-- 								<option value="">Option 2</option> -->
-                            <!-- 								<option value="">Option 3</option> -->
-                            <!-- 							</optgroup> -->
-                            <!-- 							<optgroup label="Option group 2"> -->
-                            <!-- 								<option value="">Option 4</option> -->
-                            <!-- 								<option value="">Option 5</option> -->
-                            <!-- 								<option value="">Option 6</option> -->
-                            <!-- 							</optgroup> -->
-                            <!-- 							</select> -->
-                            <!-- 						</p> -->
-
-                            <!--取餐方式 -->
-
+                        
+                        <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
-                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="option1" checked="" style="width: 50px;" />
-                                <label class="form-check-label"> 外帶 </label>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="option2" style="width: 50px;">
-                                <label class="form-check-label">外送</label>
+                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" /> <label class="form-check-label">
+                                    外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;"> <label class="form-check-label">外送</label>
                             </p>
                             <!-- choose branch -->
                             <div class="form-group col-md-8">
                                 <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
-                                <b>取餐分店:</b> <select name ="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;" onchange="submit()">
+                                <b>取餐分店:</b> <select name="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;" onchange="submit()">
                                     <option selected>請選擇
                                         <c:forEach var="brVO" items="${branchSvc.all}">
                                     <option value="${brVO.branch_No}">${brVO.branch_Name}
@@ -210,11 +197,11 @@ field>div {
                             </div>
                             <!-- choose address -->
                             <div class="form-group col-md-6">
-                                <b>鄉鎮區市:</b> <br>
-                                <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
+                                <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
                             </div>
                             <div class="form-group col-md-8" style="width: 80%; display:;">
-                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
+                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr"  	style="width: 80%; margin-top: 10px;">
+                                <input type="hidden" name="deliv_addres">
                             </div>
 
 
@@ -226,7 +213,7 @@ field>div {
                                         <div class="form-group col-md-12" style="padding-left: 5px;">
                                             <b> 取餐時間:</b>
                                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest" style="margin-top: 20px; margin-bottom: 20px;">
-                                                <input  name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                                                <input name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
                                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
@@ -238,9 +225,11 @@ field>div {
                                 </div>
                             </div>
                             <!-- payment -->
-                            <p class='col-12 col-md-8'style="padding-left: 5px;">
-                                <b>付款方式:</b> <br> <label> <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button>
-                                </label> <label> <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button>
+                            <p class='col-12 col-md-8' style="padding-left: 5px;">
+                                <b>付款方式:</b> <br> <label>
+                                    <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button>
+                                </label> <label>
+                                    <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button>
 
                                 </label>
                             </p>
@@ -249,8 +238,10 @@ field>div {
                                 <div class="card-wrapper"></div>
 
                                 <div class="form-container active" style="margin: 10px;">
-                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;"> <input placeholder="Full name" type="text" name="card_number" style="margin: 5px;"> 
-                                    <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;"> <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
+                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;"> 
+                                    <input placeholder="Full name" type="text" name="name" style="margin: 5px;"> 
+                                    <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;"> 
+                                    <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
                                 </div>
                             </div>
 
@@ -277,7 +268,7 @@ field>div {
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-                <button class="btn btn-ligth" onclick="window.location.href='<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do' style=" margin: 5px;">繼續點餐</button>
+                <button class="btn btn-ligth" onclick="window.location.href='<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp' style=" margin: 5px;">繼續點餐</button>
 
                 <button type="submit" class="btn mr-auto" style="margin: 5px;">結帳</button>
                 </form>

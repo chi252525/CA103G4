@@ -88,6 +88,14 @@
     <url-pattern>/AndroidCouponServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AndroidBranchServlet</servlet-name>
+    <servlet-class>android.com.branch.controller.AndroidBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidBranchServlet</servlet-name>
+    <url-pattern>/AndroidBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PerntdServlet</servlet-name>
     <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
   </servlet>
@@ -260,6 +268,16 @@
     <servlet-name>CoucatServlet</servlet-name>
     <url-pattern>/coucat/coucatServlet.do</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>CouponhistoryServlet</servlet-name>
+    <servlet-class>com.couponhistory.controller.CouponhistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CouponhistoryServlet</servlet-name>
+    <url-pattern>/couponhistory/CouponhistoryServlet.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>ResServlet</servlet-name>
     <servlet-class>com.reservation.controller.ResServlet</servlet-class>
