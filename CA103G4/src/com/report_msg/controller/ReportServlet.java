@@ -94,11 +94,7 @@ public class ReportServlet  extends HttpServlet {
 			ReportService rptSvc= new ReportService();
 			rptSvc.updateReportStatus(rpt_No);
 			
-			
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
-			if(requestURL.equals("/back_end/report/Postreport.jsp")||requestURL.equals("/back_end/report/Postreport.jsp?"+whichPage)){
-				req.setAttribute("rpt_No",rpt_No);
-			}
 			
 			RequestDispatcher successView = req.getRequestDispatcher(requestURL); 
 		
@@ -147,9 +143,9 @@ public class ReportServlet  extends HttpServlet {
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				
-//				HttpSession session = req.getSession();
-				req.setAttribute("getPostByStatuslist", getPostByStatuslist);
-				System.out.println("req.setAttribute" + getPostByStatuslist);
+				HttpSession session = req.getSession();
+				session.setAttribute("getPostByStatuslist", getPostByStatuslist);
+				System.out.println("session.setAttribute" + getPostByStatuslist);
 
 				RequestDispatcher successView = req.getRequestDispatcher("/back_end/report/ReportQuery.jsp");
 				successView.forward(req, res);
@@ -210,8 +206,6 @@ public class ReportServlet  extends HttpServlet {
 					jsonarr.put(jso);
 				}
 
-
-				
 				PrintWriter out = res.getWriter();
 				out.print(jsonarr);
 				System.out.println(jsonarr);

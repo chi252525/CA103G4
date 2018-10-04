@@ -171,11 +171,12 @@
                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        </button>
 
-                       <div><b>登出&nbsp;</b><b class="fas fa-sign-out-alt" style="margin-right:auto;" ></b></div>
+                       <a href="${(empVO==null)? '/chiapao/back_end/employee/empLogin.jsp' : '/chiapao/emplogout.do'}" style="text-decoration:none;color:black;"><div><b>${(empVO==null)? "登入&nbsp;":"登出&nbsp;"}</b>
+                       <b class="fas fa-sign-in-alt" style="margin-right:auto;" ${(empVO==null)?  '':'hidden'}></b><b class="fas fa-sign-out-alt" style="margin-right:auto;"  ${(empVO==null)?  'hidden':''} ></b></div></a>
                        <div style="margin-left:auto;"><b>Hello~</b></div>&nbsp;
-                       <i class="fas fa-chevron-left"></i><div><span><b>店長</b></span></div><i class="fas fa-chevron-right"></i>
-                       <div><span><b>呂竹</b></span></div>&nbsp;
-                       <div ><img src="/CA103G4/front_end/img/drew.jpg" class="drew"></div>
+                       <i class="fas fa-chevron-left"></i><div><span><b>${(empVO==null)?  "竹風堂":empVO.emp_Pos}</b></span></div><i class="fas fa-chevron-right"></i>
+                       <div><span><b>${empVO.emp_Name}</b></span></div>&nbsp;
+                       <div ><img src="<%=request.getContextPath()%>/empshow.do?emp_No=${(empVO == null)? '': empVO.emp_No} " class="drew" style="height:50px;width:50px;border-radius:50%;display:${(empVO == null )? 'none': ''}"></div>
                      
                     </nav>
 <!--   旋轉拉麵  -->

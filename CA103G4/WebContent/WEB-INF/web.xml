@@ -9,96 +9,84 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/TestDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
-  
-			<servlet>
-				<servlet-name>AndroidEmployeeServlet</servlet-name>
-				<servlet-class>android.com.employee.controller.AndroidEmployeeServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidEmployeeServlet</servlet-name>
-				<url-pattern>/AndroidEmployeeServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidMenuServlet</servlet-name>
-				<servlet-class>android.com.menu.controller.AndroidMenuServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidMenuServlet</servlet-name>
-				<url-pattern>/AndroidMenuServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidDeliveryServlet</servlet-name>
-				<servlet-class>android.com.delivery.controller.AndroidDeliveryServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidDeliveryServlet</servlet-name>
-				<url-pattern>/AndroidDeliveryServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidDeskServlet</servlet-name>
-				<servlet-class>android.com.desk.controller.AndroidDeskServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidDeskServlet</servlet-name>
-				<url-pattern>/AndroidDeskServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidOrderformServlet</servlet-name>
-				<servlet-class>android.com.orderform.controller.AndroidOrderformServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidOrderformServlet</servlet-name>
-				<url-pattern>/AndroidOrderformServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidMemberServlet</servlet-name>
-				<servlet-class>android.com.member.controller.AndroidMemberServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidMemberServlet</servlet-name>
-				<url-pattern>/AndroidMemberServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidCouponhistoryServlet</servlet-name>
-				<servlet-class>android.com.couponhistory.controller.AndroidCouponhistoryServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidCouponhistoryServlet</servlet-name>
-				<url-pattern>/AndroidCouponhistoryServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidCoucatServlet</servlet-name>
-				<servlet-class>android.com.coucat.controller.AndroidCoucatServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidCoucatServlet</servlet-name>
-				<url-pattern>/AndroidCoucatServlet</url-pattern>
-			</servlet-mapping>
-			
-			<servlet>
-				<servlet-name>AndroidCouponServlet</servlet-name>
-				<servlet-class>android.com.coupon.controller.AndroidCouponServlet</servlet-class>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>AndroidCouponServlet</servlet-name>
-				<url-pattern>/AndroidCouponServlet</url-pattern>
-			</servlet-mapping>
-	
-	
+  <servlet>
+    <servlet-name>AndroidEmployeeServlet</servlet-name>
+    <servlet-class>android.com.employee.controller.AndroidEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidEmployeeServlet</servlet-name>
+    <url-pattern>/AndroidEmployeeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidMenuServlet</servlet-name>
+    <servlet-class>android.com.menu.controller.AndroidMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuServlet</servlet-name>
+    <url-pattern>/AndroidMenuServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidDeliveryServlet</servlet-name>
+    <servlet-class>android.com.delivery.controller.AndroidDeliveryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidDeliveryServlet</servlet-name>
+    <url-pattern>/AndroidDeliveryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidDeskServlet</servlet-name>
+    <servlet-class>android.com.desk.controller.AndroidDeskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidDeskServlet</servlet-name>
+    <url-pattern>/AndroidDeskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidOrderformServlet</servlet-name>
+    <servlet-class>android.com.orderform.controller.AndroidOrderformServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidOrderformServlet</servlet-name>
+    <url-pattern>/AndroidOrderformServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidMemberServlet</servlet-name>
+    <servlet-class>android.com.member.controller.AndroidMemberServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMemberServlet</servlet-name>
+    <url-pattern>/AndroidMemberServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidCouponhistoryServlet</servlet-name>
+    <servlet-class>android.com.couponhistory.controller.AndroidCouponhistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidCouponhistoryServlet</servlet-name>
+    <url-pattern>/AndroidCouponhistoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidCoucatServlet</servlet-name>
+    <servlet-class>android.com.coucat.controller.AndroidCoucatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidCoucatServlet</servlet-name>
+    <url-pattern>/AndroidCoucatServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidCouponServlet</servlet-name>
+    <servlet-class>android.com.coupon.controller.AndroidCouponServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidCouponServlet</servlet-name>
+    <url-pattern>/AndroidCouponServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>PerntdServlet</servlet-name>
     <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
@@ -106,8 +94,7 @@
   <servlet-mapping>
     <servlet-name>PerntdServlet</servlet-name>
     <url-pattern>/front_end/perntd/perntd.do</url-pattern>
-  </servlet-mapping>  
-  
+  </servlet-mapping>
   <servlet>
     <servlet-name>DeliveryServlet</servlet-name>
     <servlet-class>com.delivery.controller.DeliveryServlet</servlet-class>
@@ -116,7 +103,6 @@
     <servlet-name>DeliveryServlet</servlet-name>
     <url-pattern>/front_end/delivery/delivery.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>OrderformServlet</servlet-name>
     <servlet-class>com.orderform.controller.OrderformServlet</servlet-class>
@@ -125,8 +111,6 @@
     <servlet-name>OrderformServlet</servlet-name>
     <url-pattern>/front_end/orderform/orderform.do</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>CustommealsServlet</servlet-name>
     <servlet-class>com.custommeals.controller.CustommealsServlet</servlet-class>
@@ -135,7 +119,6 @@
     <servlet-name>CustommealsServlet</servlet-name>
     <url-pattern>/front_end/custommeals/custommeals.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>IngredientsServlet</servlet-name>
     <servlet-class>com.ingredients.controller.IngredientsServlet</servlet-class>
@@ -144,48 +127,164 @@
     <servlet-name>IngredientsServlet</servlet-name>
     <url-pattern>/front_end/ingredients/ingredients.do</url-pattern>
   </servlet-mapping>
-  
-  	<servlet>
-		<servlet-name>IngredientsShowImage</servlet-name>
-		<servlet-class>com.ingredients.controller.IngredientsShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>IngredientsShowImage</servlet-name>
-		<url-pattern>/ingredients/ingredientsshowimage.do</url-pattern>
-	</servlet-mapping>
-
- 
   <servlet>
-	<servlet-name>DBGifReader</servlet-name>
-	<servlet-class>com.menu.util.DBGifReader</servlet-class>
+    <servlet-name>IngredientsShowImage</servlet-name>
+    <servlet-class>com.ingredients.controller.IngredientsShowImage</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>DBGifReader</servlet-name>
-	<url-pattern>/DBGifReader</url-pattern>
+    <servlet-name>IngredientsShowImage</servlet-name>
+    <url-pattern>/ingredients/ingredientsshowimage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader</servlet-name>
+    <servlet-class>com.menu.util.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader</servlet-name>
+    <url-pattern>/DBGifReader</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader2</servlet-name>
+    <servlet-class>com.custommeals.util.DBGifReader2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader2</servlet-name>
+    <url-pattern>/DBGifReader2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader3</servlet-name>
+    <servlet-class>com.ingredients.util.DBGifReader3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader3</servlet-name>
+    <url-pattern>/DBGifReader3</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemServlet</servlet-name>
+    <servlet-class>com.member.controller.MemServlet</servlet-class>
+    <multipart-config>
+      <max-file-size>10485760</max-file-size>
+      <max-request-size>20971520</max-request-size>
+      <file-size-threshold>5242880</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemServlet</servlet-name>
+    <url-pattern>/front_end/member/member.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PostServlet</servlet-name>
+    <servlet-class>com.post.controller.PostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostServlet</servlet-name>
+    <url-pattern>/post/postServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PostShowImage</servlet-name>
+    <servlet-class>com.post.controller.PostShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostShowImage</servlet-name>
+    <url-pattern>/post/postshowimage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MenuServlet</servlet-name>
+    <servlet-class>com.menu.controller.MenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuServlet</servlet-name>
+    <url-pattern>/menu/menuServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MenuShowImage</servlet-name>
+    <servlet-class>com.menu.controller.MenuShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuShowImage</servlet-name>
+    <url-pattern>/menu/menushowimage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>test_controller</servlet-name>
+    <servlet-class>com.menu.Test_Controller_MenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test_controller</servlet-name>
+    <url-pattern>/menu/test_menu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActivityServlet</servlet-name>
+    <servlet-class>com.activity.controller.ActivityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivityServlet</servlet-name>
+    <url-pattern>/activity/activityServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActivityShowImage</servlet-name>
+    <servlet-class>com.activity.controller.ActivityShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivityShowImage</servlet-name>
+    <url-pattern>/activity/activityshowimage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActivityShowSmallPic</servlet-name>
+    <servlet-class>com.activity.controller.ActivityShowSmallPic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivityShowSmallPic</servlet-name>
+    <url-pattern>/activity/activityshowsmallpic.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReplyServlet</servlet-name>
+    <servlet-class>com.reply.controller.ReplyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyServlet</servlet-name>
+    <url-pattern>/reply/replyServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReportServlet</servlet-name>
+    <servlet-class>com.report_msg.controller.ReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReportServlet</servlet-name>
+    <url-pattern>/report/reportServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CoucatServlet</servlet-name>
+    <servlet-class>com.coucat.controller.CoucatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoucatServlet</servlet-name>
+    <url-pattern>/coucat/coucatServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ResServlet</servlet-name>
+    <servlet-class>com.reservation.controller.ResServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResServlet</servlet-name>
+    <url-pattern>/back_end/res/res.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.employee.controller.EmpServlet</servlet-class>
+    <multipart-config>
+      <max-file-size>10485760</max-file-size>
+      <max-request-size>20971520</max-request-size>
+      <file-size-threshold>5242880</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/back_end/employee/emp.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
-	<servlet-name>DBGifReader2</servlet-name>
-	<servlet-class>com.custommeals.util.DBGifReader2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-	<servlet-name>DBGifReader2</servlet-name>
-	<url-pattern>/DBGifReader2</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-	<servlet-name>DBGifReader3</servlet-name>
-	<servlet-class>com.ingredients.util.DBGifReader3</servlet-class>
-  </servlet>
-  <servlet-mapping>
-	<servlet-name>DBGifReader3</servlet-name>
-	<url-pattern>/DBGifReader3</url-pattern>
-  </servlet-mapping>
-  
-  
-  <servlet>
-		<servlet-name>MemServlet</servlet-name>
-		<servlet-class>com.member.controller.MemServlet</servlet-class>
+		<servlet-name>EmpShowImg</servlet-name>
+		<servlet-class>com.employee.controller.EmpShowImg</servlet-class>
 		<multipart-config>
         <max-file-size>10485760</max-file-size>
         <max-request-size>20971520</max-request-size>
@@ -193,149 +292,48 @@
     	</multipart-config>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>MemServlet</servlet-name>
-		<url-pattern>/front_end/member/member.do</url-pattern>
+		<servlet-name>EmpShowImg</servlet-name>
+		<url-pattern>/empshow.do</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-		<servlet-name>PostServlet</servlet-name>
-		<servlet-class>com.post.controller.PostServlet</servlet-class>
+  <servlet>
+		<servlet-name>LogoutEmp</servlet-name>
+		<servlet-class>com.employee.controller.LogoutEmp</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>PostServlet</servlet-name>
-		<url-pattern>/post/postServlet.do</url-pattern>
+		<servlet-name>LogoutEmp</servlet-name>
+		<url-pattern>/emplogout.do</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PostShowImage</servlet-name>
-		<servlet-class>com.post.controller.PostShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PostShowImage</servlet-name>
-		<url-pattern>/post/postshowimage.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>MenuServlet</servlet-name>
-		<servlet-class>com.menu.controller.MenuServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MenuServlet</servlet-name>
-		<url-pattern>/menu/menuServlet.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>MenuShowImage</servlet-name>
-		<servlet-class>com.menu.controller.MenuShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MenuShowImage</servlet-name>
-		<url-pattern>/menu/menushowimage.do</url-pattern>
-	</servlet-mapping>
-	
-	
-	<servlet>
-    	<servlet-name>test_controller</servlet-name>
-    	<servlet-class>com.menu.Test_Controller_MenuServlet</servlet-class>
-  	</servlet>
-  	<servlet-mapping>
-    	<servlet-name>test_controller</servlet-name>
-    	<url-pattern>/menu/test_menu.do</url-pattern>
-  	</servlet-mapping>
-	
-	
-	<servlet>
-		<servlet-name>ActivityServlet</servlet-name>
-		<servlet-class>com.activity.controller.ActivityServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ActivityServlet</servlet-name>
-		<url-pattern>/activity/activity.do</url-pattern>
-	</servlet-mapping>
-	
-		<servlet>
-		<servlet-name>ActivityShowImage</servlet-name>
-		<servlet-class>com.activity.controller.ActivityShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ActivityShowImage</servlet-name>
-		<url-pattern>/activity/activityshowimage.do</url-pattern>
-	</servlet-mapping>
-	
-	
-	<servlet>
-		<servlet-name>ActivityShowSmallPic</servlet-name>
-		<servlet-class>com.activity.controller.ActivityShowSmallPic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ActivityShowSmallPic</servlet-name>
-		<url-pattern>/activity/activityshowsmallpic.do</url-pattern>
-	</servlet-mapping>
-	
-	
-		<servlet>
-		<servlet-name>ReplyServlet</servlet-name>
-		<servlet-class>com.reply.controller.ReplyServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ReplyServlet</servlet-name>
-		<url-pattern>/reply/replyServlet.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ReportServlet</servlet-name>
-		<servlet-class>com.report_msg.controller.ReportServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ReportServlet</servlet-name>
-		<url-pattern>/report/reportServlet.do</url-pattern>
-	</servlet-mapping>
-	
-	  <servlet>
-		<servlet-name>ResServlet</servlet-name>
-		<servlet-class>com.reservation.controller.ResServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>ResServlet</servlet-name>
-	    <url-pattern>/back_end/res/res.do</url-pattern>
-	  </servlet-mapping>
-  
-
-	<servlet>
-		<servlet-name>EmpServlet</servlet-name>
-		<servlet-class>com.employee.controller.EmpServlet</servlet-class>
-		<multipart-config>
-        <max-file-size>10485760</max-file-size>
-        <max-request-size>20971520</max-request-size>
-        <file-size-threshold>5242880</file-size-threshold>
-    	</multipart-config>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmpServlet</servlet-name>
-		<url-pattern>/back_end/employee/emp.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>LogoutServlet</servlet-name>
-		<servlet-class>com.member.controller.LogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/front_end/member/logout.do</url-pattern>
-	</servlet-mapping>
-	
-	
-	<filter>
-	  <filter-name>loginFilter</filter-name>
-	  <filter-class>com.loginfilter.LoginFilter</filter-class>
-	</filter>
-	<filter-mapping>
-	  <filter-name>loginFilter</filter-name>
-	  <url-pattern>/protected_front/*</url-pattern>
-	  <dispatcher>REQUEST</dispatcher>
-	  <dispatcher>FORWARD</dispatcher>
-	  <dispatcher>INCLUDE</dispatcher>
-	  <dispatcher>ERROR</dispatcher>
-	  <dispatcher>ASYNC</dispatcher>
-	</filter-mapping>
+      
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.member.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/front_end/member/logout.do</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.loginfilter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/protected_front/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckoutServlet</display-name>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <servlet-class>com.shopping.controller.ShoppingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <url-pattern>/CheckoutServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

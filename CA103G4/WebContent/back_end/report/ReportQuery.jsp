@@ -14,7 +14,7 @@
 
 <%
 	ReportService rptSvc = new ReportService();
-	List<ReportVO> list = (List<ReportVO>)request.getAttribute("getPostByStatuslist");
+	List<ReportVO> list = (List<ReportVO>)session.getAttribute("getPostByStatuslist");
 	pageContext.setAttribute("list", list);
 %>
 
@@ -66,7 +66,7 @@
 					<div class="col-md-8 mx-0">
 						<form class="form-inline" method="post" action="<%=request.getContextPath()%>/report/reportServlet.do">
 							<div class="form-group">
-							<input type="hidden" name="action" value="updateReportStatus" />
+							<input type="hidden" name="action" value="getReportByStatus" />
 								<input type="hidden" name="rpt_No" value="${reportVO.rpt_No}" />
 								<select class="form-control" name="rpt_Status">
 									<option value='RS0'>未處理</option>
@@ -74,7 +74,7 @@
 								</select>
 							</div>
 								
-							<button type="button" class="btn btn-primary" onclick="getReportByStatus2()">查詢</button>
+							<button type="submit" class="btn btn-primary" >查詢</button>
 						</form>
 					</div>
 				</div>
