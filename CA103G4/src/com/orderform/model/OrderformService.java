@@ -36,6 +36,11 @@ public class OrderformService {
 	public List<OrderformVO> getOrderNoByMemNo(String mem_No) {
 		return dao.getOrderNoByMemNo(mem_No);
 	}
+
+	public OrderformVO getOneOrderform(String mem_No) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

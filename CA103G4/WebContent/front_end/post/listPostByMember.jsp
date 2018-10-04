@@ -13,7 +13,7 @@
 <%
 	PostService postSvc = new PostService();
 	MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-	List<PostVO> list = postSvc.getMem_Post("M000001");
+	List<PostVO> list = postSvc.getMem_Post("M000002");
 	pageContext.setAttribute("list", list);
 %>
 

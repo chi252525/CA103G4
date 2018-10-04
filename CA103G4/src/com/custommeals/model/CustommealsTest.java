@@ -19,22 +19,22 @@ public class CustommealsTest {
 //		dao.insert(custom1);
 		
 		
-		CustommealsVO custom2 = new CustommealsVO();
-		custom2.setcustom_No("C0000000001");
-		custom2.setmem_No("M000001");
-		custom2.setcustom_Name("海陸雙拼大餐");
-		custom2.setcustom_Price(480);
-
-		
-		
-		List<IngredientCombinationVO> list2 = new ArrayList();
-		IngredientCombinationVO ingt =new 	IngredientCombinationVO();
-		ingt.setIngdt_Id("I0001");
-		IngredientCombinationVO ingt2 =new 	IngredientCombinationVO();
-		ingt2.setIngdt_Id("I0002");
-		list2.add(ingt);
-		list2.add(ingt2);
-		dao.insertWithIngredientCombination(custom2,list2);
+//		CustommealsVO custom2 = new CustommealsVO();
+//		custom2.setcustom_No("C0000000001");
+//		custom2.setmem_No("M000001");
+//		custom2.setcustom_Name("海陸雙拼大餐");
+//		custom2.setcustom_Price(480);
+//
+//		
+//		
+//		List<IngredientCombinationVO> list2 = new ArrayList();
+//		IngredientCombinationVO ingt =new 	IngredientCombinationVO();
+//		ingt.setIngdt_Id("I0001");
+//		IngredientCombinationVO ingt2 =new 	IngredientCombinationVO();
+//		ingt2.setIngdt_Id("I0002");
+//		list2.add(ingt);
+//		list2.add(ingt2);
+//		dao.insertWithIngredientCombination(custom2,list2);
 		
 		
 		

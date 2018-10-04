@@ -18,6 +18,10 @@ private OrderinvoiceDAO_interface dao;
 		return oinVO;
 	}
 	
+	public List<OrderinvoiceVO> findByOrder_no(String order_no) {
+		return dao.findByOrder_no(order_no);
+	}
+	
 	
 	
 	
