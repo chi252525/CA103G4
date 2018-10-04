@@ -37,7 +37,7 @@ public class OrderformServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			//接受參數
 			//訂單參數
-			String dekno = req.getParameter("dek_no");
+			String dekno = req.getParameter("table_no");
 			String memno = req.getParameter("mem_no");
 			String brano = req.getParameter("branch_no");
 			Integer ordertyp = new Integer(req.getParameter("order_type").trim());

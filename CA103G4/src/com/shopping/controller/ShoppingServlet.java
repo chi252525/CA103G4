@@ -23,7 +23,7 @@ public class ShoppingServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		@SuppressWarnings("unchecked")
-		List<? extends MenuVO> buylist = (Vector<? extends MenuVO>) session.getAttribute("shoppingcart");
+		List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
@@ -35,7 +35,7 @@ public class ShoppingServlet extends HttpServlet {
 				String del = req.getParameter("del");
 				int d = Integer.parseInt(del);
 				buylist.remove(d);
-				try {
+//				try {
 					System.out.println("目前購物車內容:");
 					if (buylist.size() != 0) {
 						for (MenuVO x : buylist) {
@@ -45,10 +45,10 @@ public class ShoppingServlet extends HttpServlet {
 						System.out.println("沒東西 !");
 					}
 					res.sendRedirect("Cart.jsp");
-					return;
-				} catch (Exception e) {
-
-				}
+					return;//被免被下面的forward或redirect 導致exception
+//				} catch (Exception e) {
+//					
+//				}
 			}
 			//
 			else if ("ADD".equals(action)) {
@@ -57,13 +57,13 @@ public class ShoppingServlet extends HttpServlet {
 
 				if (buylist == null) {
 					buylist = new Vector<MenuVO>();
-					((List)buylist).add(aMenuVO);
+					buylist.add(aMenuVO);
 				} else {
 					if (buylist.contains(aMenuVO)) {
 						MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));
 						innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() + aMenuVO.getMenu_quantity());
 					} else {
-						((List)buylist).add(aMenuVO);
+						buylist.add(aMenuVO);
 					}
 				}
 
@@ -83,6 +83,7 @@ public class ShoppingServlet extends HttpServlet {
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);
+			return;
 
 		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
@@ -90,6 +91,7 @@ public class ShoppingServlet extends HttpServlet {
 				String url = "Cart.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
+				return;
 			} else {
 				for (int i = 0; i < buylist.size(); i++) {
 					MenuVO menuVO = buylist.get(i);
@@ -103,6 +105,8 @@ public class ShoppingServlet extends HttpServlet {
 				String url = "Checkout.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
+				return;
+				
 			}
 		}
 		// 餐點數量加減按鈕(未完成)
@@ -126,7 +130,7 @@ public class ShoppingServlet extends HttpServlet {
 				// session.setAttribute("item", jsobj);
 				// res.getWriter().print(jsobj.toString());//輸出資料到前端
 			} else {
-				((List)buylist).add(aMenuVO);
+				buylist.add(aMenuVO);
 			}
 
 			session.setAttribute("shoppingcart", buylist);
@@ -134,7 +138,7 @@ public class ShoppingServlet extends HttpServlet {
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);
-
+			return;
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
