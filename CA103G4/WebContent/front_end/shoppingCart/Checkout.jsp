@@ -161,7 +161,9 @@ field>div {
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/orderform.do"><%--送去orferform Serbvlet --%>
+                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/checkoutServlet.do"><%--送去orferform Serbvlet --%>
+<!--                     	<input type="hidden" name="action" value="insert"> -->
+                    	<c:set var="action" value="insert" scope="session"/>
                         <legend>
                             <b>點餐資訊</b>
                         </legend>
