@@ -43,18 +43,18 @@ public class EmpServlet extends HttpServlet{
 					
 				//帳號檢查
 				String emp_Acnum = req.getParameter("emp_Acnum").trim();
-				String emp_AcnumReq = "^[(A-Za-z0-9_){1,50}]$";
+				String emp_AcnumReq = "^[(a-zA-Z0-9_)]{1,50}$";
 				if(emp_Acnum == null || emp_Acnum.length()==0) {
 					errorMsgs.add("帳號尚未填寫");
-				}else if (!(emp_Acnum.matches(emp_AcnumReq))) {
+				}else if (!emp_Acnum.trim().matches(emp_AcnumReq)) {
 					errorMsgs.add("帳號僅可填寫數字和英文");
 				}				
 				//密碼檢查
 				String emp_Psw = req.getParameter("emp_Psw").trim();
-				String emp_PswReq = "^[(0-9A-Za-z_)] {1,50}$";
+				String emp_PswReq = "^[(a-zA-Z0-9_)]{1,50}$";
 				if(emp_Psw == null || emp_Psw.length()==0) {
 					errorMsgs.add("密碼尚未填寫");
-				}else if (!(emp_Psw.matches(emp_PswReq))) {
+				}else if (!emp_Psw.trim().matches(emp_PswReq)) {
 					errorMsgs.add("密碼僅可填寫數字和英文");
 				}
 				//性別檢查
@@ -125,9 +125,6 @@ public class EmpServlet extends HttpServlet{
 				empVO.setEmp_Pos(emp_Pos);
 				System.out.println("emp_Pos="+emp_Pos);
 				
-				EmpService empsvc = new EmpService();
-				empsvc.addEmpWithAutoKeys(branch_No, emp_Acnum, emp_Psw, emp_Name, emp_Gender, emp_Pos, emp_Tel, emp_Photo, empauthorlist);
-				
 				
 				if(!(errorMsgs.isEmpty())) {					
 					req.setAttribute("empVO", empVO);  // 含有輸入格式錯誤的empVO物件,也存入req
@@ -136,6 +133,13 @@ public class EmpServlet extends HttpServlet{
 					return; //程式中斷
 					
 				}
+				
+				
+				
+				EmpService empsvc = new EmpService();
+				empsvc.addEmpWithAutoKeys(branch_No, emp_Acnum, emp_Psw, emp_Name, emp_Gender, emp_Pos, emp_Tel, emp_Photo, empauthorlist);
+				
+				res.sendRedirect(req.getContextPath()+"/back_end/employee/back_index.jsp");
 				
 				
 			}catch(Exception e) {
@@ -152,9 +156,7 @@ public class EmpServlet extends HttpServlet{
 		if("login".equals(action)) {
 			
 			List<String> errorMsgs = new ArrayList();
-			req.setAttribute("errorMsgs", errorMsgs);	
-			System.out.println("這裡");
-			
+			req.setAttribute("errorMsgs", errorMsgs);				
 			try {
 				
 				/***************************1.接收請求參數****************************************/
@@ -164,16 +166,15 @@ public class EmpServlet extends HttpServlet{
 				
 				EmpService empSvc = new EmpService();
 				EmpVO empVO = new EmpVO();
-				empVO = empSvc.findOnebyEmpNo(emp_Acnum);
+				empVO = empSvc.findOneByEmpAcnum(emp_Acnum);
+				System.out.println(empVO);
 				
-				
-				if(emp_Acnum==null||emp_Acnum.length()==0) {
-					errorMsgs.add("帳號尚未填寫");
+				if(emp_Acnum.trim().isEmpty()||emp_Psw.trim().isEmpty()) {
+					errorMsgs.add("帳號或密碼尚未填寫");
 				}else if (empVO != null) {
-					if(empVO.getEmp_Psw().equals(emp_Psw)) {
+					if(!empVO.getEmp_Psw().equals(emp_Psw)) {
 						errorMsgs.add("密碼錯誤");	
-					}
-					
+					} 
 				}else {
 					errorMsgs.add("帳號錯誤");
 				}
@@ -193,7 +194,7 @@ public class EmpServlet extends HttpServlet{
 				
 				/***************************3.登入完成************/
 
-				res.sendRedirect(req.getContextPath()+"/back_end/employee/RegistEmp.jsp");
+				res.sendRedirect(req.getContextPath()+"/back_end/employee/back_index.jsp");
 				
 				
 				

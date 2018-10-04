@@ -14,7 +14,7 @@
 <%
 	ReportService rptSvc = new ReportService();
 	List<ReportVO> list = rptSvc.getAll();
-	pageContext.setAttribute("list", list);
+	session.setAttribute("list", list);
 %>
 
 

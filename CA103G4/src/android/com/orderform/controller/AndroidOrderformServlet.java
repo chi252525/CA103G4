@@ -47,10 +47,11 @@ public class AndroidOrderformServlet extends HttpServlet {
 		}
 		else if("add".equals(action)) {
 			String orderJson = jsonObject.get("order").getAsString();
+			String coupSn = jsonObject.get("coupSn").getAsString();
 			OrderformVO order = gson.fromJson(orderJson, OrderformVO.class);
 			List<OrderInvoiceVO> orderList = order.getOrderList();
 			OrderformVO orderformVO = null;
-			String order_no = dao.addWithOrderItem(order, orderList);
+			String order_no = dao.addWithOrderItem(order, orderList, coupSn);
 			if (!"-1".equals(order_no)) {
 				orderformVO = dao.findByPrimaryKey(order_no);
 				orderformVO.setOrderList(orderList);

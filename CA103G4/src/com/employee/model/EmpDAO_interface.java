@@ -12,4 +12,5 @@ public interface EmpDAO_interface {
           public EmpVO findByPrimaryKey(String emp_no);
           public List<EmpVO> getAll();
           public void insertWithEmpauthorityVO(EmpVO empVO, List<EmpauthorityVO> empauthorlist);
+          public EmpVO findByEmpAcnum(String emp_Acnum);
 }

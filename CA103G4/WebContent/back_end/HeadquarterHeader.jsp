@@ -53,7 +53,7 @@
                  <a class="nav-item nav-link p branch nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-university main-icon" aria-hidden="true"></i><c class="icon-font">分店管理</c></a></li>
               &nbsp;&nbsp;
               <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p activity nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users main-icon" aria-hidden="true"></i><c class="icon-font">活動管理</c></a>
+                 <a class="nav-item nav-link p activity nav-link dropdown-toggle" href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users main-icon" aria-hidden="true"></i><c class="icon-font">活動管理</c></a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="#">活動設定</a>
                       <a class="dropdown-item" href="#">優惠卷發放設定</a>

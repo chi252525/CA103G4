@@ -43,7 +43,7 @@ public class OrderformServlet extends HttpServlet {
 			Integer ordertyp = new Integer(req.getParameter("order_type").trim());
 			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
 			String addres = req.getParameter("deliv_addres");
-			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
+			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());//信用卡表已付款2; 現金表1未付款
 			//明細參數
 			List<OrderinvoiceVO,MenuVO> list = new ArrayList<>();//等前端 更改 
 			String[] oinlist = req.getParameterValues("invoice");

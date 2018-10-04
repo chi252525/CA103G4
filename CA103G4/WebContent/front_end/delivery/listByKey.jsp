@@ -67,7 +67,7 @@
 
 <jsp:useBean id="deSvc" scope="page" class="com.delivery.model.DeliveryService" />
 
-<table>
+<table class="table table-hover">
 	<tr>
 		<th>派送單編號</th>
 		<th>分店編號</th>

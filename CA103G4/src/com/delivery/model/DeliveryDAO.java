@@ -172,13 +172,38 @@ public class DeliveryDAO implements DeliveryDAO_interface {
 			pstmt = con.prepareStatement(GET_MORE_STMT);
 
 			if (deliv_no != null) {
-
+				
+				if ( emp_no == null && deliv_status == null) {
 				pstmt = con.prepareStatement(GET_MORE_STMT + dn);
 
 				pstmt.setString(1, deliv_no);
 
 				rs = pstmt.executeQuery();
+				} else if (emp_no != null && deliv_status == null) {
+					
+					pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + od);
 
+					pstmt.setString(1, deliv_no);
+					pstmt.setString(2, emp_no);
+
+					rs = pstmt.executeQuery();
+				} else if(emp_no == null && deliv_status != null) {
+					pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + dt + od);
+
+					pstmt.setString(1, deliv_no);
+					pstmt.setString(2, deliv_status);
+
+					rs = pstmt.executeQuery();
+				} else if (emp_no != null && deliv_status != null) {
+					pstmt = con.prepareStatement(GET_MORE_STMT + dn + ad + em + ad + dt + od);
+
+					pstmt.setString(1, deliv_no);
+					pstmt.setString(2, emp_no);
+					pstmt.setString(3, deliv_status);
+
+					rs = pstmt.executeQuery();
+				}
+				
 			} else if (deliv_no == null && emp_no != null && deliv_status == null) {
 
 				pstmt = con.prepareStatement(GET_MORE_STMT + em + od);

@@ -39,7 +39,7 @@ session.getAttribute("mem_Name");
 			src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg"
 			width="100%" height="" alt="">
 <!--your html   start==================================================================================-->
-<div class="container rounded col-3" style="padding-bottom:170px;" >
+<div class="container rounded col-3" style="margin-top:150px;" >
 	<form method="post" action="member.do" enctype="multipart/form-data" >
 	
 	    <table id="back">

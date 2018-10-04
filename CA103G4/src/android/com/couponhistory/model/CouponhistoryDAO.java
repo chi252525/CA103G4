@@ -36,7 +36,8 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 	private static final String GET_MEM_COUPON=	
 			"SELECT coupon.COUP_SN,coupon.COUP_STATUS,coucat.*  FROM COUPONHISTORY "
 			+ "LEFT JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn "
-			+ "LEFT JOIN coucat ON coupon.coucat_no= coucat.coucat_no WHERE COUPONHISTORY.mem_no=?";
+			+ "LEFT JOIN coucat ON coupon.coucat_no= coucat.coucat_no WHERE COUPONHISTORY.mem_no=? AND coupon.COUP_STATUS=?";
+	
 
 	@Override
 	public List<CouponVO> getCouponByMemNo(String mem_No) {
@@ -53,6 +54,7 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 			pstmt = con.prepareStatement(GET_MEM_COUPON);
 
 			pstmt.setString(1, mem_No);
+			pstmt.setString(2, "CP1");
 
 			rs = pstmt.executeQuery();
 

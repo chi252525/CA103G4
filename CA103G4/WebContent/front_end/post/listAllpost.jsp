@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.post.model.*"%>
 <%@ page import="com.custommeals.model.*"%>
@@ -14,7 +13,6 @@
 <% 
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
-	
 	pageContext.setAttribute("list", list);
 %>
 
@@ -189,8 +187,6 @@ body {
 				<!-- */查詢BAR -->
 
 
-
-
 			</div>
 
 			<div class="row">
@@ -234,7 +230,6 @@ body {
 								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
 								<!-- 查單一貼文 -->
 								<input type="hidden" name="action" value="getOne_For_Display" />
-								<input type="hidden" name="action" value="addviews">
 								<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
 									&raquo;</button>
 							</FORM>
