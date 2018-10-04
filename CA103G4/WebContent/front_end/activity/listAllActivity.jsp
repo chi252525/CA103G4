@@ -126,10 +126,6 @@ body {
 			</div>
 
 
-
-
-
-
 			<!-- 分頁及內容開始 -->
 			<div class="my-1 col-12">	
 			
@@ -143,7 +139,7 @@ body {
       <div class="row">
         <div class=" col-md-12">
           <div class="row" style="background-color:rgba(255,255,255,0.45)">
-            <div class="text-center col-4 px-1 py-1">
+            <div class="text-center col-4 px-1 py-1 my-2">
               <img class="img-fluid d-block" src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${actVO.act_No}"  > </div>
             <div class="col-8">
               <h5 class="mb-3 text-dark my-3">
@@ -180,7 +176,7 @@ body {
 		<!-- page2的內容 -->
 	    <div class="col-12  my-2">	
 	    <div class="row justify-content-center">
-	    <div class="col-3 px-2 py-1">
+	    <div class="col-4 px-2 py-1">
      	<%@ include file="pages/page2.file"%></div>
      	<!-- 內容結束-->
     </div>	

@@ -7,8 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -92,37 +94,31 @@ public class CoucatServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.add("coucat_Value 折扣價格格式不正確");
 				}}
-
-				java.sql.Timestamp coucat_Valid = new Timestamp(System.currentTimeMillis()); 
-				String coucat_Validstr=req.getParameter("coucat_Valid").trim();
-				System.out.println("coucat_Validstr"+coucat_Validstr);
-				try {  
-					coucat_Valid = Timestamp.valueOf(coucat_Validstr);  
-		            System.out.println(coucat_Valid);  
-		        } catch (IllegalArgumentException e) {  
-		        	coucat_Valid=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入生效日期!");
-		        }  
+				
+				/***************************時間的輸入驗證*****************************************/
+				
+					java.sql.Timestamp coucat_Valid = new Timestamp(System.currentTimeMillis()); 
 		
-				java.sql.Timestamp coucat_Invalid = new Timestamp(System.currentTimeMillis()); 
-				String coucat_Invalidstr=req.getParameter("coucat_Invalid").trim();
-				System.out.println("coucat_Invalidstr"+coucat_Invalidstr);
-				try {  
-					coucat_Invalid = Timestamp.valueOf(coucat_Invalidstr);  
-		            System.out.println(coucat_Invalid);  
-		        } catch (IllegalArgumentException e) {  
-		        	coucat_Invalid=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入生效日期!");
-		        }  
-				
-				
-				//若預定生效時間與失效時間不符合的情況
-				if(coucat_Valid != null && coucat_Invalid !=null) {
-					if(coucat_Valid.getTime() >= coucat_Invalid.getTime()) {
-						errorMsgs.add("請修改生效時間：不得大於等於失效時間");
-					}
-				}
-				
+				    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				    try {
+				    java.util.Date coucat_Validstr = dateFormat.parse(req.getParameter("coucat_Valid").trim());
+				    coucat_Valid = new java.sql.Timestamp(coucat_Validstr.getTime());
+				    }catch(ParseException e) {
+				    	e.printStackTrace();
+
+				    }
+				    
+				     java.sql.Timestamp coucat_Invalid = new Timestamp(System.currentTimeMillis()); 
+				    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				    try {
+				    java.util.Date coucat_Invalidstr = dateFormat2.parse(req.getParameter("coucat_Invalid").trim());
+				    
+				     coucat_Valid = new java.sql.Timestamp(coucat_Invalidstr.getTime());
+				    }catch(ParseException e) {
+				    	e.printStackTrace();
+
+				    }
+
 				
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
@@ -145,7 +141,7 @@ public class CoucatServlet extends HttpServlet {
 				couSvc.addCoucat(coucat_Name,coucat_Cata,coucat_Value,coucat_Discount,
 						coucat_Freep,coucat_Valid,coucat_Invalid,coucat_Amo,coucat_Pic);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back_end/activity/listAllActivity.jsp";
+				String url = "/back_end/activity/addAct.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
@@ -153,7 +149,7 @@ public class CoucatServlet extends HttpServlet {
 			}catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/activity/addAct.jsp");
+						.getRequestDispatcher("/back_end/activity/addCoupon.jsp");
 				failureView.forward(req, res);
 			}
 		

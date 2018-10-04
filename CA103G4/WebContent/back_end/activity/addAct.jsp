@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.activity.model.*"%>
-<jsp:useBean id="couSvc" scope="page"
-	class="com.coucat.model.CoucatService" />
+<jsp:useBean id="couSvc" scope="page"	class="com.coucat.model.CoucatService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,34 +12,19 @@
 <!-- Site Title -->
 <title>Backend_addAct</title>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-
-<!-- Optional JavaScript -->
+<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"crossorigin="anonymous">
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"crossorigin="anonymous"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"crossorigin="anonymous"></script>
 <!-- linearicons CSS -->
-<link rel="stylesheet"
-	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<!-- JqueryUI -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+<!-- Datetimepicker -->
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script type="text/javascript">
- 		var $JUI = $.noConflict(true);
+var $JUI = $.noConflict(true);
 </script>
 <style>
 #preview_box2 img {
@@ -110,16 +93,14 @@
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="text-dark"><b>預計上架日</b></label> <input
-													type="text" id="datepicker1" name="act_PreAddTime"
-													class="form-control">
+												<label class="text-dark"><b>預計上架日</b></label> 
+												<input name="act_PreAddTime" id="start_dateTime"    type="text" class="form-control" >
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="text-dark"><b>預計下架日</b></label> <input
-													type="text" id="datepicker2" name="act_PreOffTime"
-													class="form-control">
+												<label class="text-dark"><b>預計下架日</b></label> 
+												<input name="act_PreOffTime"  class="form-control" id="end_dateTime"  type="text" >
 											</div>
 										</div>
 										<div class="col-md-4"></div>
@@ -165,14 +146,35 @@
 		</div>
 	</div>
 
+<script>
 
-	
-	<script>
-	  $( function() {
-	    $JUI( "#datepicker1" ).datepicker();
-	    $JUI( "#datepicker2" ).datepicker();
-	  } );
-  </script>
+$JUI.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $JUI('#start_dateTime').datetimepicker({
+	  format:'Y-m-d H:i',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#end_dateTime').val()?$('#end_dateTime').val():false
+	   })
+	  },
+	  timepicker:true,
+	  step: 30
+	 });
+	 
+	 $JUI('#end_dateTime').datetimepicker({
+	  format:'Y-m-d H:i',
+	  onShow:function(){
+	   this.setOptions({
+	    minDate:$('#start_dateTime').val()?$('#start_dateTime').val():false
+	   })
+	  },
+	  timepicker:true,
+	  step: 30
+	 });
+});
+
+
+</script>
 	<script>
 			$("#img_input1")
 			.on("change",function(e) {
