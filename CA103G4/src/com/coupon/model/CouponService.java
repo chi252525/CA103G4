@@ -35,6 +35,10 @@ private CouponDAO_interface dao;
 		return dao.findByCoucatNo(coucat_No);
 	}
 	
+	public List<CouponVO> getCouponByCata_Not_Sended(String coucat_No,String coucat_Status){
+		return dao.findByCoucatNo_CP0(coucat_No,coucat_Status);
+	}
+	
 	
 	
 }

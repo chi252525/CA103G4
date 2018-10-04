@@ -144,7 +144,6 @@ body {
             <div class="col-8">
               <h5 class="mb-3 text-dark my-3">
                 <b>${activityVO.act_Name}${activityVO.act_Content}</b>
-                
               </h5>
               <hr>
               <p class="my-1">活動期間
@@ -153,9 +152,9 @@ body {
 							~
 							<fmt:formatDate value="${activityVO.act_End}"
 								pattern="yyyy-MM-dd " />&nbsp;${activityVO.act_Views}&nbsp;Views</p> 
-			<p></p>
+			<p>${activityVO.coucat_No}</p>
               <a href="#" class="btn btn-outline-primary">More..</a>
-              <a class="btn btn-danger" href="#">取得優惠卷</a>
+              <a class="btn btn-danger" href="<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do?action=insert&mem_No=M000001&coucat_No=${activityVO.coucat_No}">取得優惠卷</a>
             </div>
           </div>
         </div>
@@ -166,7 +165,38 @@ body {
   </div>
 		</c:forEach>
 		
-	
+	<script type="text/javascript">
+					
+								document.querySelector('#addCouponConfirmByMem').addEventListener('submit', function(e) {
+									  var form = this;
+
+									  e.preventDefault(); // <--- prevent form from submitting
+
+									  swal({
+									      title: "確定取得優惠卷?",
+									      text: "",
+									      icon: "warning",
+									      buttons: [
+									        '否',
+									        '是'
+									      ],
+									      dangerMode: true,
+									    }).then(function(isConfirm) {
+									      if (isConfirm) {
+									        swal({
+									          title: '成功',
+									          text: '已新增優惠卷',
+									          icon: 'success'
+									        }).then(function() {
+									          form.submit(); // <--- submit form programmatically
+									        });
+									      } else {
+									        swal("Cancelled", "返回", "error");
+									      }
+									    })
+									});
+						
+								</script>
 			
 			
 			

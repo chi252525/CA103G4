@@ -17,10 +17,12 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 		private static final String INSERT_STMT = 
 				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
 				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?,'CP1')";
-		private static final String UPDATESTATUS_FALSE="UPDATE COUPON SET COUP_STATUS='CP0' WHERE COUP_SN=?";
+		private static final String UPDATESTATUS_MEMGET="UPDATE COUPON SET COUP_STATUS='CP0' WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=?";
 		private static final String FINDBY_PRIMARY_KEY="SELECT * FROM COUPON WHERE COUP_SN=?";
+		private static final String FINDBYCOUCAT_NO_NOT_SENDED = 
+				"SELECT * FROM COUPON WHERE COUCAT_NO=? AND COUCAT_STATUS=?";
 		static {
 			try {
 				Class.forName(DRIVER);
@@ -76,7 +78,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 			try {
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
-				pstmt = con.prepareStatement(UPDATESTATUS_FALSE);
+				pstmt = con.prepareStatement(UPDATESTATUS_MEMGET);
 				pstmt.setString(1, couponVO.getCoup_Sn());
 				int rowCount=pstmt.executeUpdate();
 				System.out.println("修改" + rowCount + " 筆資料");
@@ -251,7 +253,56 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 		}
 
 		
-		
+		@Override
+		public List<CouponVO> findByCoucatNo_CP0(String coucat_No, String coup_Status) {
+			CouponVO couponVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<CouponVO> list =new ArrayList();
+			try {
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				System.out.println("Connecting to database successfully! (連線成功！)");
+				pstmt = con.prepareStatement(FINDBYCOUCAT_NO_NOT_SENDED);
+				pstmt.setString(1, coucat_No);
+				pstmt.setString(1, coup_Status);
+				rs = pstmt.executeQuery();
+	  
+				while (rs.next()) {
+					couponVO=new CouponVO();
+					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
+					couponVO.setCoucat_No(rs.getString("coucat_No"));
+					couponVO.setCoup_Status(rs.getString("coup_Status"));
+					list.add(couponVO);
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
 		
 		
 		

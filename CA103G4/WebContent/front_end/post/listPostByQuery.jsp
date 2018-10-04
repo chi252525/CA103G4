@@ -177,15 +177,17 @@ body {
 
 
 								<div class="col-sm-4 my-1">
-
+									
 
 									<div class="btn-group float-right ">
 										<button class="btn btn-secondary btn-sm dropdown-toggle"
 											type="button" data-toggle="dropdown" aria-haspopup="true"
 											aria-expanded="false">排序</button>
 										<div class="dropdown-menu">
-											<a
-												href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
+											<form method="post" action="<%=request.getContextPath() %>/post/postServlet.do">
+											<button  type="submit" name="action" value="orderbyViews">依點閱人氣</button>
+											</form>
+											<a	href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
 										</div>
 									</div>
 
