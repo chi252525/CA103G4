@@ -108,7 +108,7 @@
         // 			}
 
         // sweet alerrt for adding product
-        //Java完美操縱javaScript
+        //Java完美操縱javaScript , 加入餐點進購物車
         <%for (int i = 0; i < 12; i++) {%>
         $(function() {
             $(".submit").eq(<%=i%>).click(function() {

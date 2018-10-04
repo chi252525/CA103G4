@@ -23,7 +23,7 @@ public class ShoppingServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		@SuppressWarnings("unchecked")
-		List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
+		List<? extends MenuVO> buylist = (Vector<? extends MenuVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
@@ -57,13 +57,13 @@ public class ShoppingServlet extends HttpServlet {
 
 				if (buylist == null) {
 					buylist = new Vector<MenuVO>();
-					buylist.add(aMenuVO);
+					((List)buylist).add(aMenuVO);
 				} else {
 					if (buylist.contains(aMenuVO)) {
 						MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));
 						innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() + aMenuVO.getMenu_quantity());
 					} else {
-						buylist.add(aMenuVO);
+						((List)buylist).add(aMenuVO);
 					}
 				}
 
@@ -79,7 +79,7 @@ public class ShoppingServlet extends HttpServlet {
 			}
 
 			session.setAttribute("shoppingcart", buylist);
-			String url = "noodleShop.jsp";// send back
+			String url = req.getContextPath()+"/front_end/menu/listAllMenu4.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);
@@ -126,7 +126,7 @@ public class ShoppingServlet extends HttpServlet {
 				// session.setAttribute("item", jsobj);
 				// res.getWriter().print(jsobj.toString());//輸出資料到前端
 			} else {
-				buylist.add(aMenuVO);
+				((List)buylist).add(aMenuVO);
 			}
 
 			session.setAttribute("shoppingcart", buylist);

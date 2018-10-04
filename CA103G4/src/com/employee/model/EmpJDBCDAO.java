@@ -342,5 +342,10 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public EmpVO findByEmpAcnum(String emp_Acnum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
