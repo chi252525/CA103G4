@@ -2,6 +2,8 @@ package com.orderform.model;
 
 import java.sql.Connection;
 import java.util.List;
+
+import com.custommeals.model.CustommealsVO;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformService {
@@ -30,5 +32,10 @@ public class OrderformService {
 	public List<OrderformVO> getDeliv() {
 		return dao.getDel();
 	}
+	
+	public List<OrderformVO> getOrderNoByMemNo(String mem_No) {
+		return dao.getOrderNoByMemNo(mem_No);
+	}
+	
 
 }
