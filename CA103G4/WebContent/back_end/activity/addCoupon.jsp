@@ -85,15 +85,13 @@ var $JUI = $.noConflict(true);
 				</c:if>
 				<form method="post"
 						action="<%=request.getContextPath()%>/coucat/coucatServlet.do"
-						name="insertform" enctype="multipart/form-data">
+						 enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-md-8">
 							<div class="form-group">
 								<label class="text-dark">優惠卷名稱</label>
 								 <input type="text"	class="form-control" placeholder="輸入優惠卷名稱:" name="coucat_Name">
 							</div>
-					
-								<div class="row">
 									<div class="col-md-6">
 									<label class="text-dark">優惠卷種類</label> 
 										<select class="form-control" name="coucat_Cata">
@@ -103,8 +101,6 @@ var $JUI = $.noConflict(true);
 										</select>
 									</div>
 									<div class="col-md-6"></div>
-								</div>
-								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="text-dark">折抵現金:</label> 
@@ -114,35 +110,33 @@ var $JUI = $.noConflict(true);
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="text-dark">生效日:</label> <input type="text"
-												id="datepicker1" name="act_Valid" class="form-control">
+												id="datepicker1" name="coucat_Valid" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="text-dark">失效日:</label> <input type="text"
-												id="datepicker2" name="act_Invalid" class="form-control">
+												id="datepicker2" name="coucat_Invalid" class="form-control">
 										</div>
 									</div>
-								</div>
-					
-							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group">
 										<label class="text-dark">發放數量</label> <input type="text"
 											class="form-control" placeholder="數量" name="coucat_Amo">
 									</div>
 								</div>
-								<div class="col-md-3"></div>
+								<div class="col-md-3">
+								<input type="hidden" name="action" value="insert">
+							<button type="submit" class="btn btn-secondary">新增</button></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3">
-									<input type="hidden" name="action" value="insert">
-									<button type="submit" class="btn btn-secondary">新增</button>
+									
 								</div>
-							</div>
+							
 						</div>
 						<div class="col-md-4">
-							<div class="row">
+						
 								<div class="form-group">
 									<label for="img_input2" id="img_label2">選擇檔案 </label> <input
 										type="file" id="img_input2" name="coucat_Pic"
@@ -151,8 +145,9 @@ var $JUI = $.noConflict(true);
 										<div class="card" id="preview_box2"></div>
 									</div>
 								</div>
-							</div>
+							
 						</div>
+							
 					</div>
 				</form>
 			</div>
@@ -164,8 +159,21 @@ var $JUI = $.noConflict(true);
 
 <script>
 $( function() {
-  $JUI( "#datepicker1" ).datepicker();
-  $JUI( "#datepicker2" ).datepicker();
+  $JUI( "#datepicker1" ).datepicker({
+	  
+	  showAnim: "slideDown",
+	  minDate: "-1d",
+	  dateFormat : "yy-mm-dd"
+	  
+  });
+  $JUI( "#datepicker2" ).datepicker({
+	  
+	  showAnim: "slideDown",
+	  minDate: "-1d",
+	  dateFormat : "yy-mm-dd"
+	  
+	  
+  });
 } );
 </script>
 <script>

@@ -30,7 +30,9 @@ public class CoucatDAO implements CoucatDAO_interface {
 	private static final String GET_COUCAT_PIC="SELECT COUCAT_PIC FROM COUCAT WHERE COUCAT_NO=?";
 	
 	private static final String INSERT_STMT = 
-			"INSERT INTO  COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
+			"INSERT INTO  COUCAT(COUCAT_NO,COUCAT_Name,COUCAT_CATA,COUCAT_VALUE,"
+			+ "COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS"
+			+ ")VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0')," + 
 			"?,?,?,?,?,?,?,?,?,'CS1')";
 
 	private static final String UPDATE_STMT = 

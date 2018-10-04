@@ -70,6 +70,15 @@
 				</div>
 			</div>
 			<div class="row">
+			<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 				<div class="col-md-12 p-4">
 					<form method="post"
 						action="<%=request.getContextPath()%>/activity/activityServlet.do"
@@ -132,7 +141,7 @@
 							<div class="col-md-4">
 								<div class="row">
 									<div class="form-group">
-										<label class="text-dark">前台大圖輪播</label> <input
+										<label class="text-dark">大圖輪播</label> <input
 												type="file" id="img_input1" name="act_Carousel"
 												class="form-control" accept="image/*">
 												<div class="card" id="preview_box1"></div>
@@ -157,15 +166,7 @@
 	</div>
 
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+	
 	<script>
 	  $( function() {
 	    $JUI( "#datepicker1" ).datepicker();

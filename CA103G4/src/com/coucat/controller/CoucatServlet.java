@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -47,29 +48,12 @@ public class CoucatServlet extends HttpServlet {
 		if ("insert".equals(action)) { 
 			 List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("insert in");
-				Enumeration en=req.getParameterNames();
-				while(en.hasMoreElements()) {
-					System.out.println(en.nextElement());
-				}
-				
-				
 			try {
 				String coucat_Name = req.getParameter("coucat_Name");
 				System.out.println(coucat_Name);
 				if(coucat_Name == null || coucat_Name.trim().length() == 0) {
 					errorMsgs.add("標題：請勿空白。");
-				}else if(coucat_Name.trim().length()<2||coucat_Name.trim().length()>30){
-					errorMsgs.add("標題：請輸入2~30個字。");
 				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/activity/addAct.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
 				String coucat_Cata= req.getParameter("coucat_Cata");
 				if(coucat_Cata==null) {
 					errorMsgs.add("請選擇對應優惠卷類別");
@@ -77,14 +61,8 @@ public class CoucatServlet extends HttpServlet {
 
 				byte[] coucat_Pic = null;
 				Part part = req.getPart("coucat_Pic");
-				if(getFileNameFromPart(part) == null) {
-					errorMsgs.add("請選擇圖片上傳。");
-				}else if(!getFileNameFromPart(part).matches(PicReg)) {
-					errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");
-				}
-				
 				try {
-					String filename = getFileNameFromPart(part);
+					String filename = getFileName(part);
 					if (filename != null && part.getContentType() != null) {
 						InputStream in = part.getInputStream();
 						coucat_Pic = new byte[in.available()];
@@ -94,13 +72,13 @@ public class CoucatServlet extends HttpServlet {
 				} catch (FileNotFoundException fe) {
 					fe.printStackTrace();
 				}
-		
+				
+				
 				String str1 = req.getParameter("coucat_Amo");
 				Integer coucat_Amo = null;
 				try {
 					coucat_Amo = new Integer(str1.trim());
 				} catch (NumberFormatException e) {
-					coucat_Amo = 0;
 					errorMsgs.add("數量請填數字整數");
 				}
 				
@@ -114,23 +92,29 @@ public class CoucatServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.add("coucat_Value 折扣價格格式不正確");
 				}}
-				
-				java.sql.Timestamp coucat_Valid = null;
-				try {
-					coucat_Valid = java.sql.Timestamp.valueOf(req.getParameter("coucat_Valid").trim());
-				} catch (IllegalArgumentException e) {
-					coucat_Valid=new java.sql.Timestamp(System.currentTimeMillis());
+
+				java.sql.Timestamp coucat_Valid = new Timestamp(System.currentTimeMillis()); 
+				String coucat_Validstr=req.getParameter("coucat_Valid").trim();
+				System.out.println("coucat_Validstr"+coucat_Validstr);
+				try {  
+					coucat_Valid = Timestamp.valueOf(coucat_Validstr);  
+		            System.out.println(coucat_Valid);  
+		        } catch (IllegalArgumentException e) {  
+		        	coucat_Valid=new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入生效日期!");
-				}
+		        }  
+		
+				java.sql.Timestamp coucat_Invalid = new Timestamp(System.currentTimeMillis()); 
+				String coucat_Invalidstr=req.getParameter("coucat_Invalid").trim();
+				System.out.println("coucat_Invalidstr"+coucat_Invalidstr);
+				try {  
+					coucat_Invalid = Timestamp.valueOf(coucat_Invalidstr);  
+		            System.out.println(coucat_Invalid);  
+		        } catch (IllegalArgumentException e) {  
+		        	coucat_Invalid=new java.sql.Timestamp(System.currentTimeMillis());
+					errorMsgs.add("請輸入生效日期!");
+		        }  
 				
-				
-				java.sql.Timestamp coucat_Invalid = null;
-				try {
-					coucat_Invalid = java.sql.Timestamp.valueOf(req.getParameter("coucat_Invalid").trim());
-				} catch (IllegalArgumentException e) {
-					coucat_Invalid=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入失效日期!");
-				}
 				
 				//若預定生效時間與失效時間不符合的情況
 				if(coucat_Valid != null && coucat_Invalid !=null) {
@@ -138,9 +122,16 @@ public class CoucatServlet extends HttpServlet {
 						errorMsgs.add("請修改生效時間：不得大於等於失效時間");
 					}
 				}
-				Double coucat_Discount= null;
-				Integer coucat_Freep= null;
-				System.out.println("OK");		
+				
+				
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back_end/activity/addCoupon.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				Double coucat_Discount=0.0;
+				Integer coucat_Freep= 0;
 				CoucatVO coucatVO = new CoucatVO();
 				coucatVO.setCoucat_Name(coucat_Name);
 				coucatVO.setCoucat_Cata(coucat_Cata);
@@ -149,17 +140,15 @@ public class CoucatServlet extends HttpServlet {
 				coucatVO.setCoucat_Pic(coucat_Pic);
 				coucatVO.setCoucat_Invalid(coucat_Invalid);
 				coucatVO.setCoucat_Amo(coucat_Amo);
-		
 				/*************************** 2.開始新增資料 ***************************************/
 				CoucatService couSvc = new CoucatService();
 				couSvc.addCoucat(coucat_Name,coucat_Cata,coucat_Value,coucat_Discount,
 						coucat_Freep,coucat_Valid,coucat_Invalid,coucat_Amo,coucat_Pic);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back_end/activity/addAct.jsp";
+				String url = "/back_end/activity/listAllActivity.jsp";
 
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
-				
 				
 			}catch (Exception e) {
 				errorMsgs.add(e.getMessage());
@@ -167,21 +156,19 @@ public class CoucatServlet extends HttpServlet {
 						.getRequestDispatcher("/back_end/activity/addAct.jsp");
 				failureView.forward(req, res);
 			}
-			 
-			 
-			 
-		 }
-	
-	
+		
+		}
 	
 	
 	
 	
 	}
 	
-	public String getFileNameFromPart(Part part) {
+	public String getFileName(Part part) {
+		
 		String header = part.getHeader("content-disposition");
 //		System.out.println("header=" + header); // 測試用
+//		System.out.println(header);
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
 //		System.out.println("filename=" + filename);  //測試用
 		//取出副檔名
