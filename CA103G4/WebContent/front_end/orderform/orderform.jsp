@@ -18,6 +18,13 @@
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostHeader.jsp" flush="true"/>
 
+
+
+
+
+
+
+
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostFooter.jsp" flush="true"/>
 
