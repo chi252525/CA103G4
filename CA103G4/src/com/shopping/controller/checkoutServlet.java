@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class checkoutServlet
  */
-@WebServlet("/front_end/shoppingCart/checkoutServlet.do")
+@WebServlet("/front_end/ShoppingCart/checkoutServlet.do")
 public class checkoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
