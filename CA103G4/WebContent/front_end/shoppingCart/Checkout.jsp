@@ -270,7 +270,7 @@
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-                <button class="btn btn-warning btn-lg" onclick="window.location.href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</button>
+                <a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
 
                 <button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
 
