@@ -28,6 +28,8 @@ public interface OrderformDAO_interface {
 	
 	public List<OrderformVO> getDel();
 
-	List<OrderformVO> getOrderNoByMemNo(String mem_No);
+	public List<OrderformVO> getOrderNoByMemNo(String mem_No);
+
+	public OrderformVO findByForeignKey(String mem_No);
 	
 }
