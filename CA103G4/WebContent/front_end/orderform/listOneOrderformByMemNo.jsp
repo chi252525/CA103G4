@@ -7,8 +7,8 @@
 
 <jsp:useBean id="menuService"  scope="page" class="com.menu.model.MenuService" />
 <jsp:useBean id="custommealsService" scope="page" class="com.custommeals.model.CustommealsService" />
-
-
+<jsp:useBean id="ingredientCombinationService" scope="page" class="com.ingredientcombination.model.IngredientCombinationService" />
+<jsp:useBean id="ingredientsService" scope="page" class="com.ingredients.model.IngredientsService" />
 
 <%
 OrderformService ofsvc = new OrderformService();
@@ -127,8 +127,7 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 		<td>${orderFormVO.order_no}</td>
 		<td>${orderFormVO.mem_no}</td>
 		<td>${orderFormVO.order_price}</td>
-<%-- 		<td><input type="button" value="${orderFormVO.order_no}"></td>	 --%>
-<%-- 		<td><a href="orderform.do?action=getOne_For_Display_By_Mem_No&order_no=${orderFormVO.order_no}">${orderFormVO.order_no}</a></td> --%>
+
 	</tr>
 		<tr>
 			<th></th>
@@ -148,6 +147,8 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 				<td></td>
 				<td>${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}</td> 
 				<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</td>
+				<td>${ingredientCombinationService.getOneIngredientCombination(orderinvoiceVO.custom_no).ingdt_Id}</td>
+<%-- 				<td>${ingredientsService.getOneIngredients(orderinvoiceVO.ingdt_Id).ingdt_Name}</td> --%>
 		</tr>
 		
 		</c:forEach>	
