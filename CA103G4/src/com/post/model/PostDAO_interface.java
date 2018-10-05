@@ -18,5 +18,6 @@ public interface PostDAO_interface {
 	List<PostVO> getAllByKeywordOrderByViews(String keyword);
 	public int updateViews(String post_No);
 	public int updatePostStatus(String post_No);
+	List<PostVO> getCountByEva();
 }
 

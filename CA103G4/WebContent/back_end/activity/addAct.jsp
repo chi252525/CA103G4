@@ -71,13 +71,13 @@ var $JUI = $.noConflict(true);
 								<div class="form-group">
 								<label class="text-dark">廣告標題</label> 
 									<input type="text" class="form-control" placeholder="輸入廣告標題"
-										name="act_Name"> 
+										name="act_Name" required> 
 								</div>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-md-6">
-											<label for="sel1" class="text-dark">廣告分類</label> <select
-												class="form-control" id="sel1" name="act_Cat">
+											<label for="sel1" class="text-dark">廣告分類</label> 
+											<select	class="form-control" id="sel1" name="act_Cat" onchange="submit()">
 												<option value="AC1">新品上市
 												<option value="AC2">優惠折扣
 												<option value="AC3">分店限定

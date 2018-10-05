@@ -87,6 +87,9 @@ public class PostService {
 		return dao.getAllByKeywordOrderByViews(keyword);
 	}
 	
+	public List<PostVO> getCountByEva() {
+		return dao.getCountByEva();
+	}
 	
 
 	
