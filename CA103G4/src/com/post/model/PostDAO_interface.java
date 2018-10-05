@@ -20,5 +20,7 @@ public interface PostDAO_interface {
 	public int updateViews(String post_No);
 	public int updatePostStatus(String post_No);
 	public Map<Integer,Integer>  getCountByEva();
+	
+	
 }
 
