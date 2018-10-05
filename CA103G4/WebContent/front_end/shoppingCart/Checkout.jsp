@@ -69,6 +69,13 @@ input {
 field>div {
 	margin: 10px;
 }
+
+.errorMsg{
+	color:red;
+	font-style: oblique;
+	font-weight: bold;
+	margin-left:50%;
+}
 </style>
 </head>
 
@@ -171,10 +178,10 @@ field>div {
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/checkoutServlet.do">
+                    <form method="post" action="<%=request.getContextPath()%>/front_end/shoppingCart/checkoutServlet.do">
                         <%--送去orferform Serbvlet --%>
-                        <!--                     	<input type="hidden" name="action" value="insert"> -->
-                        <c:set var="action" value="insert" scope="session" />
+                        <input type="hidden" name="action" value="insert">
+<%--                         <c:set var="action" value="insert" scope="request" /> --%>
                         <legend>
                             <b>點餐資訊</b>
                         </legend>
@@ -182,8 +189,9 @@ field>div {
                         
                         <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
-                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" /> <label class="form-check-label">
-                                    外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;"> <label class="form-check-label">外送</label>
+                                <b>取餐方式:</b> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" /> <label class="form-check-label">
+                                    <b>外帶</b> </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;"> <label class="form-check-label"><b>外送</b></label>
+                                    <div class='errorMsg'>${errorMsgs.eatIn_takeAway}</div>
                             </p>
                             <!-- choose branch -->
                             <div class="form-group col-md-8">
@@ -194,14 +202,17 @@ field>div {
                                     <option value="${brVO.branch_No}">${brVO.branch_Name}
                                         </c:forEach> <input type="hidden" name="location" value="Checkout.jsp">
                                 </select>
+                                <div class='errorMsg'>${errorMsgs.branch_no }</div>
                             </div>
                             <!-- choose address -->
                             <div class="form-group col-md-6">
                                 <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
+  								 <div class='errorMsg'>${errorMsgs.countytwon}</div>                  
                             </div>
                             <div class="form-group col-md-8" style="width: 80%; display:;">
-                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr"  	style="width: 80%; margin-top: 10px;">
+                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr"  style="width: 80%; margin-top: 10px;">
                                 <input type="hidden" name="deliv_addres">
+                                 <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
                             </div>
 
 
@@ -220,6 +231,7 @@ field>div {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class='errorMsg'>${errorMsgs.time}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -227,14 +239,14 @@ field>div {
                             <!-- payment -->
                             <p class='col-12 col-md-8' style="padding-left: 5px;">
                                 <b>付款方式:</b> <br> <label>
-                                    <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button>
+                                    <input type="radio" class="" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金
                                 </label> <label>
-                                    <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button>
+                                    <input type="radio" class="" id="delivery" name="order_pstatus" value="2" onclick="cardShow()" checked>信用卡
 
                                 </label>
                             </p>
                             <!-- credit card -->
-                            <div id="card" class="demo-container" style="margin: 10px; display: none;">
+                            <div id="card" class="demo-container" style="margin: 10px;">
                                 <div class="card-wrapper"></div>
 
                                 <div class="form-container active" style="margin: 10px;">
@@ -246,7 +258,7 @@ field>div {
                             </div>
 
                             <p class="form-group col-12 col-md-8">
-                                <label for="textarea">備註:</label>
+                                <label for="textarea"><b>備註:</b></label>
                                 <textarea name="ps" id="textarea" class="form-control" cols="45" rows="4" style="resize: none; margin: auto;"></textarea>
                             </p>
 
