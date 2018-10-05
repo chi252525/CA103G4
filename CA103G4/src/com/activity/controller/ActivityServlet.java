@@ -237,7 +237,7 @@ public class ActivityServlet extends HttpServlet {
 			}
 		   
 		   
-		   
+		   //馬上上架
 		   if("RightNow_UpdateStat".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
