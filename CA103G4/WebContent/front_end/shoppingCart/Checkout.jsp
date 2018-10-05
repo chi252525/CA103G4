@@ -69,6 +69,13 @@
    field>div {
        margin: 10px;
    }
+   
+   .errorMsg{
+	color:red;
+	font-style: oblique;
+	font-weight: bold;
+	margin-left:50%;
+}
 </style>
 </head>
 
@@ -188,6 +195,8 @@
                                 <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
                                 <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick='takeAway();'>
                                 <label class="form-check-label"><b>外送</b></label>
+                                <div class='errorMsg'>${errorMsgs.eatIn_takeAway}</div>
+
                             </p>
                             <!-- choose branch -->
                             <div class="form-group col-md-8">
@@ -198,15 +207,18 @@
                                     <option value="${brVO.branch_No}">${brVO.branch_Name}
                                         </c:forEach> <input type="hidden" name="location" value="Checkout.jsp">
                                 </select>
+                                <div class='errorMsg'>${errorMsgs.branch_no }</div>
                             </div>
                             <!-- choose address -->
-                            <div id='address' class='col-12 col-md-12'  style="display:none;">
+                            <div id='address' class='col-12 col-md-12' style="display:none;">
                                 <div class="form-group col-md-6" style="padding-left:0px">
                                     <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
+                                    <div class='errorMsg'>${errorMsgs.countytwon}</div>
                                 </div>
                                 <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
                                     <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
                                     <input type="hidden" name="deliv_addres">
+                                    <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
                                 </div>
                             </div>
 
@@ -225,6 +237,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class='errorMsg'>${errorMsgs.time}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +284,7 @@
         </div>
     </div>
     <!-- submit order -->
-<%--     <c:if test="${not empty shoppingcart}"><!--確認購物車不為空 --> --%>
+    <%--     <c:if test="${not empty shoppingcart}"><!--確認購物車不為空 --> --%>
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
@@ -283,10 +296,10 @@
         </div>
     </div>
     </form>
-<%-- 	</c:if> --%>
-<%-- 	<c:if test="${empty shoppingcart}"> --%>
-		<a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning' >點餐去</a>
-<%-- 	</c:if> --%>
+    <%-- 	</c:if> --%>
+    <%-- 	<c:if test="${empty shoppingcart}"> --%>
+    <a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
+    <%-- 	</c:if> --%>
 
     <!-- Modal -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
