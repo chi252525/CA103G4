@@ -53,7 +53,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 	private static final String FINDBYACTCATA = "SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
 
 	// 以欲上架時間最近的的活動排序取得全部front_end
-	private static final String GETALL = "SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
+	private static final String GETALL = "SELECT * FROM ACTIVITY  ORDER BY act_PreAddTime DESC";
 
 	@Override
 	public void insert(ActivityVO activityVO) {
