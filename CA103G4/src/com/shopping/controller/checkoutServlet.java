@@ -45,6 +45,18 @@ public class checkoutServlet extends HttpServlet {
 				} else if (!address.trim().matches(addressRegx)) {
 					errorMsgs.put("address", "地址: 只能是中、英文字母、數字");
 				}
+				
+				if("請選擇".equals(branch_No)) {
+					errorMsgs.put("branch_no", "請選擇取餐分店");
+				}
+				
+				
+				String county = req.getParameter("deliv_addres");
+				String town = req.getParameter("mem_Retown");
+				if("請選擇".equals(county)||"請選擇".equals(town)) {
+					errorMsgs.put("countytwon", "請選擇鄉鎮市區");
+				}
+				
 
 				String time = req.getParameter("time"); // 取得取餐時間
 				if (time == null || time.trim().length() == 0) {
@@ -54,7 +66,7 @@ public class checkoutServlet extends HttpServlet {
 				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
 				
 				String card_number =null;
-				if ("2".equals(order_pstatus)) {
+				if ("2".equals(order_pstatus)) { //檢查信用卡
 
 					card_number = req.getParameter("number");// 取得卡號
 					String card_number_regx = "^\\d{16}$";
