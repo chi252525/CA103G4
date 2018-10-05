@@ -245,20 +245,23 @@ body {
 			</div>
 		
 			<div class="col-12">
-			<% 
+<%
 	PostService postSvc1 = new PostService();
-	List<PostVO> countlist = postSvc.getCountByEva();
-	pageContext.setAttribute("countlist", countlist);
+	Map<Integer, Integer> map = postSvc.getCountByEva();
+	pageContext.setAttribute("map", map);
 %>
-<canvas id="myChart" width="300px" height="300px"></canvas></div>
+
+<div class="col-12" style=" width='100'; height='250'">
+<canvas id="myChart"  style="background-color:rgba(255,255,255,0.45)"></canvas></div>
+</div>
 <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-	  
-    labels: [<c:forEach varStatus="s" items="${countlist}">'${s.index}星',</c:forEach> ],
-    datasets: [{
+		
+    labels: [ <c:forEach var="message" items="${map}">'${message.key}星',</c:forEach>  ],   
+		 datasets: [{
       backgroundColor: [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
@@ -267,7 +270,7 @@ var myChart = new Chart(ctx, {
           'rgba(255, 206, 86, 1)'
       ],
       borderColor: [
-        'rgba(255,99,132,1)',
+        'rgba(255,255,255,1)',
         'rgba(54, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(75, 192, 192, 1)',
@@ -276,7 +279,9 @@ var myChart = new Chart(ctx, {
       ],
       borderWidth: 1,
       label: '竹風堂餐點評比',
-      data: [  <c:forEach varStatus="s" var="postcountVO" items="${countlist}">${postcountVO.count},</c:forEach>]
+      data: [ <c:forEach var="message" items="${map}"> '${message.value}',</c:forEach>]
+   
+ 
     }]
   }
 });

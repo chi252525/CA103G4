@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.naming.Context;
@@ -784,23 +786,19 @@ public class PostDAO implements PostDAO_interface{
 	}
 
 	@Override
-	public List<PostVO> getCountByEva() {
-		List<PostVO> postlist = new ArrayList<PostVO>();
-		
+	public Map<Integer,Integer> getCountByEva() {
+		Map<Integer,Integer> map=new HashMap();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			con =  ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_EVA_COUNT);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				PostVO postVO=new PostVO();
-				postVO.setPost_Eva(rs.getInt("post_Eva"));
-				postVO.setPost_Count(rs.getInt("post_Count"));
-				postlist.add(postVO); 
+				map.put(rs.getInt(1), rs.getInt(2));
 			}
 		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -828,7 +826,7 @@ public class PostDAO implements PostDAO_interface{
 				}
 			}
 		}
-		return postlist;
+		return map;
 	}
 	
 }

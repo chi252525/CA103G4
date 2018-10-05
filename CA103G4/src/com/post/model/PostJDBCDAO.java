@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.naming.Context;
@@ -738,10 +740,19 @@ public class PostJDBCDAO implements PostDAO_interface{
 		return updateCount;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
-	public List<PostVO> getCountByEva() {
-		List<PostVO> postlist = new ArrayList<PostVO>();
-		
+	public Map<Integer,Integer> getCountByEva() {
+		Map<Integer,Integer> map=new HashMap();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -750,14 +761,9 @@ public class PostJDBCDAO implements PostDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_EVA_COUNT);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				PostVO postVO=new PostVO();
-				postVO.setPost_Eva(rs.getInt("post_Eva"));
-				System.out.println("get");
-				postVO.setPost_Count(rs.getInt("post_Count"));
-				System.out.println("get2");
-				postlist.add(postVO); 
+				map.put(rs.getInt(1), rs.getInt(2));
 			}
 		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -785,7 +791,7 @@ public class PostJDBCDAO implements PostDAO_interface{
 				}
 			}
 		}
-		return postlist;
+		return map;
 	}
 	
 }

@@ -177,7 +177,10 @@ body {
                             <c:if test="${activityVO.act_Status==1}"><td>上架中</td></c:if>
 						   <c:if test="${activityVO.act_Status==0}"><td>下架</td></c:if>
                              <td>
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
+                             <input type="hidden" name="act_No"      value="${activityVO.act_No}">
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
+                             </FORM>
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
                              </td>
                               <td>
