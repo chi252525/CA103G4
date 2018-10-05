@@ -174,8 +174,7 @@ body {
 									pattern="yyyy/MM/dd-HH:mm" /></td>
                             <td><fmt:formatDate value="${activityVO.act_End}"
 									pattern="yyyy/MM/dd-HH:mm" /></td>
-                            <c:if test="${activityVO.act_Status==1}"><td>上架中</td></c:if>
-						   <c:if test="${activityVO.act_Status==0}"><td>下架</td></c:if>
+                         <td>  ${(activityVO.act_Status==1)?'上架中':'已下架'}</td>
                              <td>
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
