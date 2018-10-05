@@ -1,6 +1,7 @@
 package com.couponhistory.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,6 +58,12 @@ public class CouponhistoryServlet extends HttpServlet {
 				chSvc.insertOneCouponRecord(oneCoupon_Sn, mem_No, 0);
 				/**********************取完後更新狀態為已使用*****************************/
 				Csvc.updateCouoponStatus(oneCoupon_Sn);
+				res.setContentType("text/plain");
+				res.setCharacterEncoding("UTF-8");
+
+				PrintWriter out = res.getWriter();
+				out.print("已取得!!");
+				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front_end/activity/listAllActivity.jsp";
 

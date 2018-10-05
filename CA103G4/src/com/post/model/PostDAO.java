@@ -86,6 +86,9 @@ public class PostDAO implements PostDAO_interface{
 	"SELECT * FROM POST WHERE REGEXP_LIKE (POST_CONT, ?) AND POST_STATUS='PS1' ORDER BY POST_TIME DESC";
 	
 	
+	private static final String GET_EVA_COUNT ="SELECT post_eva ,COUNT(*) FROM post group by post_eva";
+	
+	
 	@Override
 	public void insert(PostVO postVO) {
 		Connection con = null;
@@ -778,6 +781,54 @@ public class PostDAO implements PostDAO_interface{
 			}
 		}
 		return updateCount;
+	}
+
+	@Override
+	public List<PostVO> getCountByEva() {
+		List<PostVO> postlist = new ArrayList<PostVO>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con =  ds.getConnection();
+			pstmt = con.prepareStatement(GET_EVA_COUNT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PostVO postVO=new PostVO();
+				postVO.setPost_Eva(rs.getInt("post_Eva"));
+				postVO.setPost_Count(rs.getInt("post_Count"));
+				postlist.add(postVO); 
+			}
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postlist;
 	}
 	
 }

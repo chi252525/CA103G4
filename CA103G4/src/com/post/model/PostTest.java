@@ -81,17 +81,17 @@ public class PostTest {
 //				 System.out.println("=========================");
 //			 }		
 		
-			SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E ");
-			List<PostVO> licv =dao.findbyYearandMonth("2018","9");
-			for(PostVO pv5:licv) {
-				 System.out.println(pv5.getPost_No());
-				 System.out.println(pv5.getMem_No());
-				 System.out.println(pv5.getCustom_No());
-				 System.out.println(pv5.getPost_Cont() );
-				 System.out.println(pv5.getPost_Eva());
-				System.out.println(fmt2.format(pv5.getPost_Time()));
-				 System.out.println("=========================");
-			 }
+//			SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E ");
+//			List<PostVO> licv =dao.findbyYearandMonth("2018","9");
+//			for(PostVO pv5:licv) {
+//				 System.out.println(pv5.getPost_No());
+//				 System.out.println(pv5.getMem_No());
+//				 System.out.println(pv5.getCustom_No());
+//				 System.out.println(pv5.getPost_Cont() );
+//				 System.out.println(pv5.getPost_Eva());
+//				System.out.println(fmt2.format(pv5.getPost_Time()));
+//				 System.out.println("=========================");
+//			 }
 		 
 		 
 //		 getAll done
@@ -116,7 +116,13 @@ public class PostTest {
 //			 System.out.println(pv3.getPost_Eva());
 //			System.out.println(fmt3.format(pv3.getPost_Time()));
 //			 System.out.println("=========================");
-		 
+		 List<PostVO> licv=dao.getCountByEva();
+		 for(PostVO pv6:licv) {
+		
+			 System.out.println(pv6.getPost_Eva());
+			 System.out.println(pv6.getPost_Count());
+			 System.out.println("=========================");
+		 }
 		 
 	}
 	public static byte[] getPictureByteArray(String path) throws IOException {

@@ -4,6 +4,12 @@ import java.sql.Timestamp;
 
 public class PostVO implements java.io.Serializable{
 
+
+
+
+
+
+
 	private String post_No;
 	private String mem_No;
 	private String custom_No;
@@ -65,7 +71,14 @@ public class PostVO implements java.io.Serializable{
 	}
 	
 	
-	
-	
-	
+
+	private Integer post_Count;
+
+	public Integer getPost_Count() {
+		return post_Count;
+	}
+	public void setPost_Count(Integer post_Count) {
+		this.post_Count = post_Count;
+	}
+
 }

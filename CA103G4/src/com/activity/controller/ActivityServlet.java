@@ -56,12 +56,7 @@ public class ActivityServlet extends HttpServlet {
 					if (act_No == null || (act_No.trim()).length() == 0) {
 						errorMsgs.add("沒取到");
 					}
-					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req
-								.getRequestDispatcher("/front_end/post/listAllActivity.jsp");
-						failureView.forward(req, res);
-						return;//程式中斷
-					}
+				
 					/***************************2.開始查詢資料*****************************************/
 					ActivityService actSvc =new ActivityService();
 					ActivityVO activityVO= actSvc.getOneActivity(act_No);
@@ -74,6 +69,7 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
+					
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("activityVO", activityVO);
 					String url = "/front_end/activity/listOnepost.jsp";
