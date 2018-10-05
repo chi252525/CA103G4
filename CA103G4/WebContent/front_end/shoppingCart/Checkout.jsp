@@ -109,6 +109,7 @@
                     @SuppressWarnings("unchecked")
                     Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
                     String amount = (String) request.getAttribute("amount");
+                    
                     %>
                         <%
                     if (buylist != null && buylist.size() != 0) {
@@ -270,6 +271,7 @@
         </div>
     </div>
     <!-- submit order -->
+<%--     <c:if test="${not empty shoppingcart}"><!--確認購物車不為空 --> --%>
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
@@ -281,7 +283,10 @@
         </div>
     </div>
     </form>
-
+<%-- 	</c:if> --%>
+<%-- 	<c:if test="${empty shoppingcart}"> --%>
+		<a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning' >點餐去</a>
+<%-- 	</c:if> --%>
 
     <!-- Modal -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

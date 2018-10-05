@@ -52,9 +52,11 @@ public class checkoutServlet extends HttpServlet {
 				}
 
 				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
+				
+				String card_number =null;
 				if ("2".equals(order_pstatus)) {
 
-					String card_number = req.getParameter("number");// 取得卡號
+					card_number = req.getParameter("number");// 取得卡號
 					String card_number_regx = "^\\d{16}$";
 
 					if (card_number == null || card_number.trim().length() == 0) {
@@ -94,7 +96,7 @@ public class checkoutServlet extends HttpServlet {
 					if (!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
 						failureView.forward(req, res);
-						return;
+						return;//中斷
 					}
 					/*************************** 2.開始新增資料 ***************************************/
 				
@@ -108,7 +110,7 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("time", time);
 					req.setAttribute("ps", ps);
 
-//					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
+					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
 					return;
 				
 				/*************************** 其他可能的錯誤處理 **********************************/
