@@ -64,15 +64,18 @@ public class CouponhistoryServlet extends HttpServlet {
 				PrintWriter out = res.getWriter();
 				out.print("已取得!!");
 				
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/activity/listAllActivity.jsp";
-
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
-				successView.forward(req, res);
+//				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+//				String url = "/front_end/activity/listAllActivity.jsp";
+//
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
+//				successView.forward(req, res);
 		
 			}catch (Exception e) {
 				errorMsgs.add("取得優惠卷失敗:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/activity/listAllActivity.jsp").forward(req, res);
+//				req.getRequestDispatcher("/front_end/activity/listAllActivity.jsp").forward(req, res);
+				res.setCharacterEncoding("UTF-8");
+				PrintWriter out = res.getWriter();
+				out.print("未取得!!");
 			}
 			
 		}
