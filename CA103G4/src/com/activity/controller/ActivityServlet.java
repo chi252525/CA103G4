@@ -38,7 +38,7 @@ public class ActivityServlet extends HttpServlet {
 			throws ServletException,IOException{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");// 判斷做什麼動作
-
+		String PicReg  = "^(jpeg|jpg|bmp|png|gif|ico)$";
 		System.out.println("跳到Servlet"+action);
 		Enumeration en=req.getAttributeNames();
 		while(en.hasMoreElements()) {
@@ -118,6 +118,11 @@ public class ActivityServlet extends HttpServlet {
 				}
 				byte[] act_Pic = null;
 				Part part2 = req.getPart("act_Pic");
+				if(getFileName(part2) == null) {
+					errorMsgs.add("請選擇圖片上傳。");
+				}else if(!getFileName(part2).matches(PicReg)) {
+					errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");
+				}
 				try {
 					String filename = getFileName(part2);
 					if (filename != null && part2.getContentType() != null) {

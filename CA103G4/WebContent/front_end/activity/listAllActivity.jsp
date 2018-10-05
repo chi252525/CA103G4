@@ -152,8 +152,7 @@ body {
                                                 </h5>
                                             </div>
                                             <div class="d-flex ">
-                                                <div class="p-2">
-                                                    活動期間
+                                                <div class="p-2"> 活動期間
                                                     <fmt:formatDate value="${activityVO.act_Start}" pattern="yyyy-MM-dd " />
                                                     ~
                                                     <fmt:formatDate value="${activityVO.act_End}" pattern="yyyy-MM-dd " />
@@ -177,7 +176,7 @@ body {
                                                         </div>
                                                         <div class="col-4">
                                                             <button class="btn btn-sm btn-danger" onclick="getCoupon()">取得優惠卷</button>
-                                                            <p class="mb-0 " id="gotCoupon">ffff</p>
+                                                            <p class="mb-0 " id="getCoupon">ffff</p>
                                                         </div>
                                                     </div>
 
@@ -230,6 +229,7 @@ body {
                 function getCoupon() {
                     // 				console.log("0000");
                     $.ajax({
+                    	alert('11');
                         type: "post",
                         url: "<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do",
                         data: {
@@ -239,7 +239,7 @@ body {
                         },
                         dataType: "html",
                         success: function(result) {
-                            $("#gotCoupon").html(result);
+                            $("#getCoupon").html(result);
                         },
                         error: function() {
                             alert("Oops!沒取到優惠券")
