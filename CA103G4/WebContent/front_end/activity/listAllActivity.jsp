@@ -148,7 +148,7 @@ body {
                                         <div class="col-8 py-1 my-2 ">
                                             <div class="col-12">
                                                 <h5>
-                                                    <b>${activityVO.act_Name}</b>
+                                                    <b>${activityVO.act_Name}${activityVO.coucat_No}</b>
                                                 </h5>
                                             </div>
                                             <div class="d-flex ">
@@ -176,11 +176,36 @@ body {
                                                             <a href="#" class="btn btn-outline-primary btn-sm">More..</a>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button class="btn btn-sm btn-danger" onclick="getCoupon()">取得優惠卷</button>
-                                                            <p class="mb-0 " id="gotCoupon">ffff</p>
+                                                            <button class="btn btn-sm btn-danger" id="${activityVO.act_No}">取得優惠卷</button>
+                                                            
+                                                            <p class="mb-0 test ${activityVO.act_No}" id="${activityVO.act_No}" style="color:red;"></p>
                                                         </div>
                                                     </div>
+ <script type="text/javascript">
+            
+            $(document).ready(function() {
+				$("#${activityVO.act_No}").click(function() {
+					$.ajax({
+                        type: "post",
+                        url: "<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do",
+                        data: {
+                            "action": "insert",
+                            'mem_No': 'M000001',
+                            'coucat_No': '${activityVO.coucat_No}'
+                        },
+                        dataType: "html",
+                        success: function(result) {
+                            $(".${activityVO.act_No}").html(result);
+                        },
+                        error: function() {
+                            alert("Oops!沒取到優惠券")
+                        }
+                    })
 
+				});
+			});
+
+            </script>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,61 +218,8 @@ body {
                 </div>
             </c:forEach>
 
-            <script type="text/javascript">
-                document.querySelector('#addCouponConfirmByMem').addEventListener('submit', function(e) {
-                    var form = this;
+      
 
-                    e.preventDefault(); // <--- prevent form from submitting
-
-                    swal({
-                        title: "確定取得優惠卷?",
-                        text: "",
-                        icon: "warning",
-                        buttons: [
-                            '否',
-                            '是'
-                        ],
-                        dangerMode: true,
-                    }).then(function(isConfirm) {
-                        if (isConfirm) {
-                            swal({
-                                title: '成功',
-                                text: '已新增優惠卷',
-                                icon: 'success'
-                            }).then(function() {
-                                form.submit(); // <--- submit form programmatically
-                            });
-                        } else {
-                            swal("Cancelled", "返回", "error");
-                        }
-                    })
-                });
-
-            </script>
-
-
-            <script type="text/javascript">
-                function getCoupon() {
-                    // 				console.log("0000");
-                    $.ajax({
-                        type: "post",
-                        url: "<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do",
-                        data: {
-                            "action": "insert",
-                            'mem_No': 'M000001',
-                            'coucat_No': '${activityVO.coucat_No}'
-                        },
-                        dataType: "html",
-                        success: function(result) {
-                            $("#gotCoupon").html(result);
-                        },
-                        error: function() {
-                            alert("Oops!沒取到優惠券")
-                        }
-                    })
-                }
-
-            </script>
 
 
 
