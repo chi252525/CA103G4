@@ -182,8 +182,11 @@
 
                             <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
-                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" /> <label id="takeAway" class="form-check-label">
-                                    外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick='takeaway()'> <label class="form-check-label" >外送</label>
+                                <b>取餐方式:</b>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" />
+                                <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick='takeAway();'>
+                                <label class="form-check-label"><b>外送</b></label>
                             </p>
                             <!-- choose branch -->
                             <div class="form-group col-md-8">
@@ -196,11 +199,11 @@
                                 </select>
                             </div>
                             <!-- choose address -->
-                            <div id='address' style="display:none;">
-                                <div class="form-group col-md-6">
+                            <div id='address' class='col-12 col-md-12'  style="display:none;">
+                                <div class="form-group col-md-6" style="padding-left:0px">
                                     <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
                                 </div>
-                                <div class="form-group col-md-8" style="width: 80%; display:;">
+                                <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
                                     <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
                                     <input type="hidden" name="deliv_addres">
                                 </div>
@@ -238,10 +241,10 @@
                             <div class="btn-group btn-group-toggle col-12 col-md-8" data-toggle="buttons" style="padding-left: 5px;">
                                 <b>付款方式:</b>
                                 <label class="btn btn-secondary active" onclick="cash()">
-                                    <input type="radio" name="order_pstatus" id="1" autocomplete="off" checked> 現金
+                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off"> 現金
                                 </label>
                                 <label class="btn btn-secondary" onclick="cardShow()">
-                                    <input type="radio" name="order_pstatus" id="2" autocomplete="off"> 信用卡
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off"> 信用卡
                                 </label>
                             </div><br>
                             <!-- credit card -->
@@ -347,7 +350,7 @@
             $('#card').hide();
         }
 
-        function takeaway() {
+        function takeAway() {
             $('#address').show();
         }
 

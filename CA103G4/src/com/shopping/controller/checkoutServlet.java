@@ -90,10 +90,9 @@ public class checkoutServlet extends HttpServlet {
 					} else if (!card_number.matches(cvc_regx)) {
 						errorMsgs.put("card_number_regx", "安全碼須為3個數字");
 					}
-
+				}
 					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req.getRequestDispatcher(
-								req.getContextPath() + "/front_end/shoppingCart/shoppoingCart.jsp");
+						RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
 						failureView.forward(req, res);
 						return;
 					}
@@ -101,7 +100,7 @@ public class checkoutServlet extends HttpServlet {
 				
 					/**************************** 3.新增完成,準備轉交(Send data to orderForm servlet) ***********/
 					req.setAttribute("card_number", card_number);
-				}
+				
 					req.setAttribute("branch_no", branch_No);
 					req.setAttribute("order_type", eatIn_takeAway);
 					req.setAttribute("deliv_addres", address);
@@ -109,7 +108,7 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("time", time);
 					req.setAttribute("ps", ps);
 
-					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
+//					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
 					return;
 				
 				/*************************** 其他可能的錯誤處理 **********************************/
