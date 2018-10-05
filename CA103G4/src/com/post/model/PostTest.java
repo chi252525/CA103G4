@@ -6,7 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class PostTest {
@@ -81,17 +84,17 @@ public class PostTest {
 //				 System.out.println("=========================");
 //			 }		
 		
-			SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E ");
-			List<PostVO> licv =dao.findbyYearandMonth("2018","9");
-			for(PostVO pv5:licv) {
-				 System.out.println(pv5.getPost_No());
-				 System.out.println(pv5.getMem_No());
-				 System.out.println(pv5.getCustom_No());
-				 System.out.println(pv5.getPost_Cont() );
-				 System.out.println(pv5.getPost_Eva());
-				System.out.println(fmt2.format(pv5.getPost_Time()));
-				 System.out.println("=========================");
-			 }
+//			SimpleDateFormat fmt2=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E ");
+//			List<PostVO> licv =dao.findbyYearandMonth("2018","9");
+//			for(PostVO pv5:licv) {
+//				 System.out.println(pv5.getPost_No());
+//				 System.out.println(pv5.getMem_No());
+//				 System.out.println(pv5.getCustom_No());
+//				 System.out.println(pv5.getPost_Cont() );
+//				 System.out.println(pv5.getPost_Eva());
+//				System.out.println(fmt2.format(pv5.getPost_Time()));
+//				 System.out.println("=========================");
+//			 }
 		 
 		 
 //		 getAll done
@@ -116,6 +119,15 @@ public class PostTest {
 //			 System.out.println(pv3.getPost_Eva());
 //			System.out.println(fmt3.format(pv3.getPost_Time()));
 //			 System.out.println("=========================");
+		 Map<Integer,Integer> map=dao.getCountByEva();
+		 Set set = map.keySet();
+		 Iterator it= set.iterator();
+		 while(it.hasNext()) {
+			 Object myKey = it.next();
+			System.out.println(myKey + "=" + map.get(myKey));
+		 }
+		 
+		 
 		 
 		 
 	}

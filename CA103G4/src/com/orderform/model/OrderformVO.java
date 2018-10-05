@@ -1,6 +1,9 @@
 package com.orderform.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformVO {
 	private String order_no;
@@ -14,12 +17,30 @@ public class OrderformVO {
 	private String deliv_addres;
 	private Integer order_pstatus;
 	private Date order_date;
+	private List<OrderinvoiceVO> orderInvoiceList;
 	
-	public Date getOrder_date() {
-		return order_date;
-	}
-	public void setOrder_date(Date order_date) {
+	
+	
+	
+	public OrderformVO(String order_no, String dek_no, String mem_no, String branch_no, String deliv_no,
+			Integer order_type, Integer order_price, Integer order_status, String deliv_addres, Integer order_pstatus,
+			Date order_date) {
+		super();
+		this.order_no = order_no;
+		this.dek_no = dek_no;
+		this.mem_no = mem_no;
+		this.branch_no = branch_no;
+		this.deliv_no = deliv_no;
+		this.order_type = order_type;
+		this.order_price = order_price;
+		this.order_status = order_status;
+		this.deliv_addres = deliv_addres;
+		this.order_pstatus = order_pstatus;
 		this.order_date = order_date;
+	}
+	public OrderformVO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public String getOrder_no() {
 		return order_no;
@@ -81,4 +102,18 @@ public class OrderformVO {
 	public void setOrder_pstatus(Integer order_pstatus) {
 		this.order_pstatus = order_pstatus;
 	}
+	public Date getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+	public List<OrderinvoiceVO> getOrderInvoiceList() {
+		return orderInvoiceList;
+	}
+	public void setOrderInvoiceList(List<OrderinvoiceVO> orderInvoiceList) {
+		this.orderInvoiceList = orderInvoiceList;
+	}
+
+
 }

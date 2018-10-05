@@ -38,7 +38,7 @@ public class ActivityServlet extends HttpServlet {
 			throws ServletException,IOException{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");// 判斷做什麼動作
-
+		String PicReg  = "^(jpeg|jpg|bmp|png|gif|ico)$";
 		System.out.println("跳到Servlet"+action);
 		Enumeration en=req.getAttributeNames();
 		while(en.hasMoreElements()) {
@@ -56,12 +56,7 @@ public class ActivityServlet extends HttpServlet {
 					if (act_No == null || (act_No.trim()).length() == 0) {
 						errorMsgs.add("沒取到");
 					}
-					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req
-								.getRequestDispatcher("/front_end/post/listAllActivity.jsp");
-						failureView.forward(req, res);
-						return;//程式中斷
-					}
+				
 					/***************************2.開始查詢資料*****************************************/
 					ActivityService actSvc =new ActivityService();
 					ActivityVO activityVO= actSvc.getOneActivity(act_No);
@@ -74,6 +69,7 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
+					
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("activityVO", activityVO);
 					String url = "/front_end/activity/listOnepost.jsp";
@@ -122,6 +118,11 @@ public class ActivityServlet extends HttpServlet {
 				}
 				byte[] act_Pic = null;
 				Part part2 = req.getPart("act_Pic");
+				if(getFileName(part2) == null) {
+					errorMsgs.add("請選擇圖片上傳。");
+				}else if(!getFileName(part2).matches(PicReg)) {
+					errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");
+				}
 				try {
 					String filename = getFileName(part2);
 					if (filename != null && part2.getContentType() != null) {
@@ -241,7 +242,7 @@ public class ActivityServlet extends HttpServlet {
 			}
 		   
 		   
-		   
+		   //馬上上架
 		   if("RightNow_UpdateStat".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
