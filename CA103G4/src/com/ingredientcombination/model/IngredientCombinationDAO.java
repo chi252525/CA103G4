@@ -254,7 +254,6 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			PreparedStatement pstmt = null;
 			
 			try {
-				con = ds.getConnection();
 //				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				System.out.println("Connecting to database successfully! (連線成功！)");
 				pstmt = con.prepareStatement(INSERT_STMT);
@@ -292,6 +291,8 @@ public class IngredientCombinationDAO implements IngredientCombinationDAO_interf
 			}
 			
 		}
+		
+		
 
 		
 	
