@@ -6,7 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class PostTest {
@@ -116,13 +119,16 @@ public class PostTest {
 //			 System.out.println(pv3.getPost_Eva());
 //			System.out.println(fmt3.format(pv3.getPost_Time()));
 //			 System.out.println("=========================");
-		 List<PostVO> licv=dao.getCountByEva();
-		 for(PostVO pv6:licv) {
-		
-			 System.out.println(pv6.getPost_Eva());
-			 System.out.println(pv6.getPost_Count());
-			 System.out.println("=========================");
+		 Map<Integer,Integer> map=dao.getCountByEva();
+		 Set set = map.keySet();
+		 Iterator it= set.iterator();
+		 while(it.hasNext()) {
+			 Object myKey = it.next();
+			System.out.println(myKey + "=" + map.get(myKey));
 		 }
+		 
+		 
+		 
 		 
 	}
 	public static byte[] getPictureByteArray(String path) throws IOException {

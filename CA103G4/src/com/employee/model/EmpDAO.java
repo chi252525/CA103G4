@@ -41,7 +41,8 @@ public class EmpDAO implements EmpDAO_interface{
 		"UPDATE EMPLOYEE set BRANCH_NO=? ,EMP_ACNUM=? ,EMP_PSW=? ,EMP_NAME=? ,EMP_GENDER=? ,EMP_POS=? ,EMP_TEL=? ,EMP_STATUS=? ,EMP_PHOTO=? where EMP_NO = ?";
 	private static final String GET_ONE_BY_EMPACNUM=
 			"select EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_STATUS,to_char(EMP_CREDATE,'yyyy-mm-dd') EMP_CREDATE,EMP_PHOTO from EMPLOYEE where EMP_ACNUM = ?";
-	
+	private static final String GET_ONE_BY_BRANCHNO=
+			"select * from employee where branch_no =? order by emp_no";
 	
 	@Override
 	public void insert(EmpVO empVO) {
@@ -416,5 +417,68 @@ public class EmpDAO implements EmpDAO_interface{
 			}
 		}
 		return empVO;
+	}
+	@Override
+	public List<EmpVO> EmpVOfindByBranchNo(String branch_No) {
+		// TODO Auto-generated method stub
+		EmpVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<EmpVO> listemp = new ArrayList();
+		ResultSet rs = null;
+		try {
+			con= ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_BY_BRANCHNO);
+			System.out.println("依分店查詢員工");
+			pstmt.setString(1, branch_No);
+			 rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				empVO = new EmpVO();
+				empVO.setEmp_No(rs.getString("emp_no"));
+		    	empVO.setBranch_No(rs.getString("branch_no"));
+				empVO.setEmp_Acnum(rs.getString("emp_acnum"));
+				empVO.setEmp_Psw(rs.getString("emp_psw"));
+				empVO.setEmp_Name(rs.getString("emp_name"));
+				empVO.setEmp_Gender(rs.getString("emp_gender"));
+				empVO.setEmp_Pos(rs.getString("emp_pos"));
+				empVO.setEmp_Tel(rs.getString("emp_tel"));      	
+				empVO.setEmp_Status(rs.getString("emp_status"));  	
+				empVO.setEmp_Credate(rs.getDate("emp_credate"));
+				empVO.setEmp_Photo(rs.getBytes("emp_photo"));
+				listemp.add(empVO);
+			}
+			
+			
+		} catch (SQLException se) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if ( rs !=null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}				
+			}
+			if(pstmt!= null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+				
+		return listemp;
 	}
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class checkoutServlet
  */
-@WebServlet("/front_end/ShoppingCart/checkoutServlet")
+@WebServlet("/front_end/shoppingCart/checkoutServlet.do")
 public class checkoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,6 +45,18 @@ public class checkoutServlet extends HttpServlet {
 				} else if (!address.trim().matches(addressRegx)) {
 					errorMsgs.put("address", "地址: 只能是中、英文字母、數字");
 				}
+				
+				if("請選擇".equals(branch_No)) {
+					errorMsgs.put("branch_no", "請選擇取餐分店");
+				}
+				
+				
+				String county = req.getParameter("deliv_addres");
+				String town = req.getParameter("mem_Retown");
+				if("請選擇".equals(county)||"請選擇".equals(town)) {
+					errorMsgs.put("countytwon", "請選擇鄉鎮市區");
+				}
+				
 
 				String time = req.getParameter("time"); // 取得取餐時間
 				if (time == null || time.trim().length() == 0) {
@@ -52,9 +64,11 @@ public class checkoutServlet extends HttpServlet {
 				}
 
 				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
-				if ("2".equals(order_pstatus)) {
+				
+				String card_number =null;
+				if ("2".equals(order_pstatus)) { //檢查信用卡
 
-					String card_number = req.getParameter("number");// 取得卡號
+					card_number = req.getParameter("number");// 取得卡號
 					String card_number_regx = "^\\d{16}$";
 
 					if (card_number == null || card_number.trim().length() == 0) {
@@ -90,18 +104,17 @@ public class checkoutServlet extends HttpServlet {
 					} else if (!card_number.matches(cvc_regx)) {
 						errorMsgs.put("card_number_regx", "安全碼須為3個數字");
 					}
-
+				}
 					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req.getRequestDispatcher(
-								req.getContextPath() + "/front_end/shoppingCart/shoppoingCart.jsp");
+						RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
 						failureView.forward(req, res);
-						return;
+						return;//中斷
 					}
 					/*************************** 2.開始新增資料 ***************************************/
 				
 					/**************************** 3.新增完成,準備轉交(Send data to orderForm servlet) ***********/
 					req.setAttribute("card_number", card_number);
-				}
+				
 					req.setAttribute("branch_no", branch_No);
 					req.setAttribute("order_type", eatIn_takeAway);
 					req.setAttribute("deliv_addres", address);
