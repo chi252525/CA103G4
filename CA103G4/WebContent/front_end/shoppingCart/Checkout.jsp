@@ -193,7 +193,7 @@
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
                                 <b>取餐方式:</b>
 <%--                                 <c:out value="${eatIntakeAway}" default="幹"></c:out> --%>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked style="width: 50px;" onclick="takeAway();" ${(eatIntakeAway=='takeaway' or eatIntakeAway=="")? 'checked' :'' }>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked style="width: 50px;" onclick="takeAway();" ${(eatIntakeAway=='takeaway' or eatIntakeAway==null)? 'checked' :'' }>
                                 <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
                                 <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick="Delivery();" ${(eatIntakeAway=='delivery')? 'checked' :'' }>
                                 <label class="form-check-label"><b>外送</b></label>
@@ -297,10 +297,10 @@
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-<%--             	<c:if test="${ not empty shoppingcart}"> --%>
+            	<c:if test="${ not empty shoppingcart}">
                 	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
                 	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
-<%-- 				</c:if> --%>
+				</c:if>
 				<c:if test="${empty shoppingcart}">
 				<a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
 				</c:if>
@@ -353,7 +353,7 @@
                 </div>
                 <div class="modal-footer">
                     <form action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
                     <input type="hidden" name="action" value="findMemCoupon"> <input type="text" id="amount" name="amount" value="<%=amount%>">
                     <button type="button" class="btn btn-light">取消</button>
                 </div>

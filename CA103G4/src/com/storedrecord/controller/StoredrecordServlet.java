@@ -2,13 +2,17 @@ package com.storedrecord.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
@@ -37,7 +41,7 @@ public class StoredrecordServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 		// ==================查單筆儲值紀錄=================
 		if ("findByPrimaryKey".equals(action)) {
@@ -56,7 +60,7 @@ public class StoredrecordServlet extends HttpServlet {
 					errorMsgs.add("請輸入儲值流水單號");
 				} else if (!mem_No.matches(regexMem)) {
 					errorMsgs.add("格式錯誤:會員編號格式必須是大寫英文字母M加上5個數字");
-				} else if ( !stor_No.matches(regexStor)) {
+				} else if (!stor_No.matches(regexStor)) {
 					errorMsgs.add("儲值流水單號必須是大寫英文字母B加上9個數字");
 				}
 				if (!errorMsgs.isEmpty()) {
@@ -187,62 +191,63 @@ public class StoredrecordServlet extends HttpServlet {
 			}
 		}
 		if ("insert".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
-				String mem_No = req.getParameter("mem_No").trim();
-				String regexMem = "^M\\d{6}$";
+				String mem_No = req.getParameter("mem_No");
+//				String regexMem = "^M\\d{6}$";
 				MemberService memsrv = new MemberService();
 				List<MemberVO> memlist = memsrv.getAll();
 
-				if (mem_No == null || mem_No.trim().length() == 0) {
-					errorMsgs.add("請輸入會員編號");
-				} else if (!mem_No.matches(regexMem)) {
-					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
-				}
+//				if (mem_No == null || mem_No.trim().length() == 0) {
+//					errorMsgs.add("請輸入會員編號");
+//				} else if (!mem_No.matches(regexMem)) {
+//					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
+//				}
 				MemberVO memVO = memsrv.getOne_Member(mem_No);
 				// 判斷member 資料庫裡是否有輸入的會員編號mem_No
-				if (!memlist.contains(memVO)) {
-					errorMsgs.add("會員編號不存在");
-				}
-				Timestamp stor_Date = null;
-				try {
-					stor_Date = Timestamp.valueOf(req.getParameter("stor_Date").trim());
-				} catch (IllegalArgumentException ie) {
-					stor_Date = new Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請選取日期");
-				}
-				Integer stor_Point = null;
-				try {
-					stor_Point = new Integer(req.getParameter("stor_Point").trim());
-				} catch (NumberFormatException ne) {
-					errorMsgs.add("點數請輸入數字");
-				}
+//				if (!memlist.contains(memVO)) {
+//					errorMsgs.add("會員編號不存在");
+//				}
+				Timestamp stor_Date = new Timestamp(System.currentTimeMillis()); ;
+//				try {
+//					stor_Date = Timestamp.valueOf(req.getParameter("stor_Date").trim());
+//				} catch (IllegalArgumentException ie) {
+//					stor_Date = new Timestamp(System.currentTimeMillis());
+//					errorMsgs.add("請選取日期");
+//				}
+//				try {
+				System.out.println("stor_Point="+req.getParameter("stor_Point"));
+				 Integer stor_Point = new Integer(req.getParameter("stor_Point"));
+//				} catch (NumberFormatException ne) {
+//					errorMsgs.add("點數請輸入數字");
+//				}
 
-				Integer drew_Point = null;
-				try {
-					drew_Point = Integer.parseInt(req.getParameter("drew_Point").trim());
-				} catch (NumberFormatException ne) {
-					errorMsgs.add("點數請輸入數字");
-				}
+//				Integer drew_Point = null;
+//				try {
+//					drew_Point = Integer.parseInt(req.getParameter("drew_Point").trim());
+//				} catch (NumberFormatException ne) {
+//					errorMsgs.add("點數請輸入數字");
+//				}
 				Integer stor_Status = null;
 				try {
-					stor_Status = Integer.parseInt(req.getParameter("stor_Status").trim());
+					System.out.println("stor_Status="+req.getParameter("stor_Status"));
+					stor_Status = Integer.parseInt(req.getParameter("stor_Status"));
 					if (stor_Status != 1 && stor_Status != 0) {
 						stor_Status = 0;
-						errorMsgs.add("請輸入1或0");
+						errorMsgs.put("stor_Status","請輸入1或0");
 					}
 				} catch (NumberFormatException ne) {
 					stor_Status = 0;
-					errorMsgs.add("狀態請輸入1或0");
+					errorMsgs.put("stor_Status","狀態請輸入1或0");
 				}
 
 				StoredrecordVO srVO = new StoredrecordVO();
 				srVO.setMem_No(mem_No);
 				srVO.setStor_Date(stor_Date);
 				srVO.setStor_Point(stor_Point);
-				srVO.setDrew_Point(drew_Point);
+//				srVO.setDrew_Point(drew_Point);
 				srVO.setStor_Status(stor_Status);
 
 				if (!errorMsgs.isEmpty()) {
@@ -252,14 +257,20 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 				// =============開始新增====================
 				StoredrecordService stsvc = new StoredrecordService();
-				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, drew_Point, stor_Status);
+				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
 				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
 				// =====================其他可能錯誤=========================
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				errorMsgs.put("修改資料失敗:" , e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
 			}
+		}
+
+		if ("getPoint".equals(action)) {
+			Integer stor_Point = new Integer(req.getParameter("stor_Point"));
+			req.setAttribute("stor_Point", stor_Point);
+			req.getRequestDispatcher("/front_end/storedrecord/addNewtransaction2.jsp").forward(req, res);
 		}
 
 		if ("delete".equals(action)) {
