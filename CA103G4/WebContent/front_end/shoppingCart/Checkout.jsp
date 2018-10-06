@@ -192,9 +192,10 @@
                             <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
                                 <b>取餐方式:</b>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked style="width: 50px;" onclick="takeAway();" ${(eatIntakeAway==takeaway)? 'checked' :'' }>
+<%--                                 <c:out value="${eatIntakeAway}" default="幹"></c:out> --%>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked style="width: 50px;" onclick="takeAway();" ${(eatIntakeAway=='takeaway' or eatIntakeAway=="")? 'checked' :'' }>
                                 <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick="Delivery();" ${(eatIntakeAway==delivery)? 'checked' :'' }>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick="Delivery();" ${(eatIntakeAway=='delivery')? 'checked' :'' }>
                                 <label class="form-check-label"><b>外送</b></label>
                                 <div class='errorMsg'>${errorMsgs.eatIn_takeAway}</div>
 
@@ -217,8 +218,7 @@
                                     <div class='errorMsg'>${errorMsgs.countytwon}</div>
                                 </div>
                                 <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
-                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
-                                    <input type="hidden" name="deliv_addres">
+                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="deliv_addres" style="width: 80%; margin-top: 10px;">
                                     <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->
                                 <!-- credit card -->
-                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px; display:;">
+                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
                                     <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
                                     <div class="form-container active" style="margin: 10px;">
                                         <div class="form-inline">
@@ -297,10 +297,10 @@
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-            	<c:if test="${ not empty shoppingcart}">
+<%--             	<c:if test="${ not empty shoppingcart}"> --%>
                 	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
                 	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
-				</c:if>
+<%-- 				</c:if> --%>
 				<c:if test="${empty shoppingcart}">
 				<a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
 				</c:if>

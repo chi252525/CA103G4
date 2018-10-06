@@ -30,33 +30,38 @@ public class checkoutServlet extends HttpServlet {
 		String eatIn_takeAway = req.getParameter("eatIn&takeAway"); // 取得用餐方式
 		String branch_No = req.getParameter("branch_no"); // 取得分店編號
 		String ps = req.getParameter("ps");
-		
+
 		if ("insert".equals(action)) {// 來自checkout.jsp的請求
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				String address = req.getParameter("deliv_addres");
-				String addressRegx = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]$";
 
-				if (address == null || address.trim().length() == 0) {
-					errorMsgs.put("deliv_addres", "外送地址 : 請勿空白");
-				} else if (!address.trim().matches(addressRegx)) {
-					errorMsgs.put("address", "地址: 只能是中、英文字母、數字");
-				}
-				
-				if("請選擇".equals(branch_No)) {
+				if ("請選擇".equals(branch_No)) {
 					errorMsgs.put("branch_no", "請選擇取餐分店");
 				}
 				
-				
-				String county = req.getParameter("deliv_addres");
-				String town = req.getParameter("mem_Retown");
-				if("請選擇".equals(county)||"請選擇".equals(town)) {
-					errorMsgs.put("countytwon", "請選擇鄉鎮市區");
+				String address =null;
+				String county = null;
+				String town = null;
+				if ("delivery".equals(eatIn_takeAway)) {  //若是為外送在執行地址的判斷
+					address = req.getParameter("deliv_addres");
+					String addressRegx = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]++$";
+
+					if (address == null || address.trim().length() == 0) {
+						errorMsgs.put("deliv_addres", "外送地址 : 請勿空白");
+					} else if (!address.trim().matches(addressRegx)) {
+						errorMsgs.put("address", "地址: 只能是中、英文字母、數字");
+					}
+
+					county = req.getParameter("mem_Recounty");
+					town = req.getParameter("mem_Retown");
+
+					if ("請選擇".equals(county) || "請選擇".equals(town)) {
+						errorMsgs.put("countytwon", "請選擇鄉鎮市區");
+					}
 				}
-				
 
 				String time = req.getParameter("time"); // 取得取餐時間
 				if (time == null || time.trim().length() == 0) {
@@ -64,12 +69,12 @@ public class checkoutServlet extends HttpServlet {
 				}
 
 				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
-				
-				String card_number =null;
+
+				String card_number = null;
 				String full_name = null;
-				String expiry = null ;
-				String cvc = null ;
-				if ("2".equals(order_pstatus)) { //為2 ,檢查信用卡
+				String expiry = null;
+				String cvc = null;
+				if ("2".equals(order_pstatus)) { // //若是為2 信用卡再執行信用卡資料的判斷
 
 					card_number = req.getParameter("number");// 取得卡號
 					String card_number_regx = "^\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}$";
@@ -112,39 +117,41 @@ public class checkoutServlet extends HttpServlet {
 						errorMsgs.put("cvc", "安全碼須為3個數字");
 					}
 				}
-					if (!errorMsgs.isEmpty()) {
-						req.setAttribute("eatIntakeAway", eatIn_takeAway);//剛寫的錯誤資料依然回傳
-						req.setAttribute("branch_No", branch_No);
-						req.setAttribute("deliv_addres", address);
-						req.setAttribute("mem_Retown", town);
-						req.setAttribute("mem_Recounty", county);
-						req.setAttribute("time", time);
-						//credit card
-						req.setAttribute("card_number", card_number);
-						req.setAttribute("name", full_name);
-						req.setAttribute("expiry", expiry);
-						req.setAttribute("cvc", cvc);
-						
-						req.setAttribute("order_pstatus", order_pstatus);//回給錯誤頁面判斷是否顯示信用卡 1為顯示
-						RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
-						failureView.forward(req, res);
-						return;//中斷
-					}
-					/*************************** 2.開始新增資料 ***************************************/
-				
-					/**************************** 3.新增完成,準備轉交(Send data to orderForm servlet) ***********/
-					req.setAttribute("card_number", card_number);
-				
-					req.setAttribute("branch_no", branch_No);
-					req.setAttribute("order_type", eatIn_takeAway);
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("eatIntakeAway", eatIn_takeAway);// 剛寫的錯誤資料依然回傳
+					req.setAttribute("branch_No", branch_No);
 					req.setAttribute("deliv_addres", address);
-					req.setAttribute("order_pstatus", order_pstatus);
+					req.setAttribute("mem_Retown", town);
+					req.setAttribute("mem_Recounty", county);
 					req.setAttribute("time", time);
-					req.setAttribute("ps", ps);
-					
-					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
-					return;
-				
+					// credit card
+					req.setAttribute("card_number", card_number);
+					req.setAttribute("name", full_name);
+					req.setAttribute("expiry", expiry);
+					req.setAttribute("cvc", cvc);
+
+					req.setAttribute("order_pstatus", order_pstatus);// 回給錯誤頁面判斷是否顯示信用卡 1為顯示
+					RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
+					failureView.forward(req, res);
+					return;// 中斷
+				}
+				/*************************** 2.開始新增資料 ***************************************/
+
+				/****************************
+				 * 3.新增完成,準備轉交(Send data to orderForm servlet)
+				 ***********/
+				req.setAttribute("card_number", card_number);
+
+				req.setAttribute("branch_no", branch_No);
+				req.setAttribute("order_type", eatIn_takeAway);
+				req.setAttribute("deliv_addres", address);
+				req.setAttribute("order_pstatus", order_pstatus);
+				req.setAttribute("time", time);
+				req.setAttribute("ps", ps);
+				System.out.println("全數通過,要去新增訂單囉!");
+				req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req, res);
+				return;
+
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
