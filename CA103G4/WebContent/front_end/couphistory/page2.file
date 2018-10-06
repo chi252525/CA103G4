@@ -1,0 +1,23 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<div class="container">
+<div class="row justify-content-md-center">
+<div class="col-md-auto">
+ <ul class="pagination">
+  <%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex>=rowsPerPage){%>
+         <li class="page-item"><A href="listbymem.jsp?whichPage=1&action=ByName" class="page-link">至第一頁</A></li>&nbsp;
+         <li class="page-item"><A href="listbymem.jsp?whichPage=<%=whichPage-1%>&action=ByName" class="page-link">上一頁 </A></li>
+    <%}%>
+  
+    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+         <li class="page-item"><td><A href="listbymem.jsp?whichPage=<%=whichPage+1%>&action=ByName" class="page-link">下一頁 </A></li>&nbsp;
+         <li class="page-item"><td><A href="listbymem.jsp?whichPage=<%=pageNumber%>&action=ByName" class="page-link">至最後一頁</A></li>&nbsp;
+    <%}%>
+  <%}%>  
+ </ul>
+  
+</div>
+</div>
+</div>
