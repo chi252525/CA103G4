@@ -1,5 +1,6 @@
 package com.activity.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,12 +40,12 @@ public class ActivityServlet extends HttpServlet {
 			throws ServletException,IOException{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");// 判斷做什麼動作
-
+		String ad_PicReg  = "^(jpeg|jpg|bmp|png|gif|ico)$";
 		System.out.println("跳到Servlet"+action);
-		Enumeration en=req.getAttributeNames();
-		while(en.hasMoreElements()) {
-			System.out.println(en.nextElement());
-		}
+//		Enumeration en=req.getAttributeNames();
+//		while(en.hasMoreElements()) {
+//			System.out.println(en.nextElement());
+//		}
 		//顯示單一貼文front_end
 		 if ("getOne_For_Display".equals(action)) { 
 	        	List<String> errorMsgs = new LinkedList<String>();
@@ -107,7 +109,7 @@ public class ActivityServlet extends HttpServlet {
 				byte[] act_Carousel = null;
 				Part part1 = req.getPart("act_Carousel");
 				try {
-					String filename = getFileName(part1);
+					String filename = getFileNameFromPart(part1);
 					if (filename != null && part1.getContentType() != null) {
 						InputStream in = part1.getInputStream();
 						act_Carousel = new byte[in.available()];
@@ -120,7 +122,7 @@ public class ActivityServlet extends HttpServlet {
 				byte[] act_Pic = null;
 				Part part2 = req.getPart("act_Pic");
 				try {
-					String filename = getFileName(part2);
+					String filename = getFileNameFromPart(part2);
 					if (filename != null && part2.getContentType() != null) {
 						InputStream in = part2.getInputStream();
 						act_Pic = new byte[in.available()];
@@ -238,22 +240,25 @@ public class ActivityServlet extends HttpServlet {
 			}
 		   
 		   
-		   //馬上上架
+		   //馬上上架/下架
 		   if("RightNow_UpdateStat".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				
-				try {
+				System.out.println("RightNow_UpdateStat in");
+			
+//				try {
 					/*****************第一步：接受請求參數****************************/
 					String act_No = req.getParameter("act_No");
+					System.out.println("act_No="+act_No);
 					String act_Status =req.getParameter("act_Status");
-					
-					if(act_No == null || act_No.trim().length() == 0) {
-						errorMsgs.add("未接受到廣告No參數");
-					}
-					if(act_Status == null || act_Status.trim().length() == 0) {
-						errorMsgs.add("未接受到廣告狀態要上架還是下架的參數");
-					}
+					System.out.println("act_Status="+act_Status);
+					System.out.println();
+//					if(act_No == null || act_No.trim().length() == 0) {
+//						errorMsgs.add("未接受到廣告No參數");
+//					}
+//					if(act_Status == null || act_Status.trim().length() == 0) {
+//						errorMsgs.add("未接受到廣告狀態要上架還是下架的參數");
+//					}
 					
 					if(!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
@@ -273,17 +278,19 @@ public class ActivityServlet extends HttpServlet {
 					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
 					successView.forward(req, res);
 					
-				}catch(Exception e ) {
-					errorMsgs.add("發生錯誤:"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
-					failureView.forward(req, res);
-				}
+//				}catch(Exception e ) {
+//					errorMsgs.add("發生錯誤:"+e.getMessage());
+//					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
+//					failureView.forward(req, res);
+//				}
 			}
 		   
 		 //修改廣告資訊時，會跳轉到修改頁面
 			if("getOne_For_Update".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
+				System.out.println("getOne_For_Update in");
+				String requestURL = req.getParameter("requestURL");
 				
 				try {
 					//*******************第一步：接受請求參數*******************
@@ -301,33 +308,163 @@ public class ActivityServlet extends HttpServlet {
 					
 				}catch(Exception e){
 					errorMsgs.add(e.getMessage());
-					RequestDispatcher filureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
+					System.out.println("error");
+					RequestDispatcher filureView = req.getRequestDispatcher(requestURL);
 					filureView.forward(req, res);
 				}
 				
 			}
 			
-		
+			if("update".equals(action)){
+				List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				System.out.println("update in");
+				byte[] pic1 = null;
+				byte[] pic2 = null;
+				ByteArrayOutputStream baos=null;
+				
+				Timestamp preAdd = null ;
+				Timestamp preOff = null ;
+				try {
+					String act_No = req.getParameter("act_No");
+					String act_Name = req.getParameter("act_Name");
+					if(act_Name == null || act_Name.trim().length() == 0) {
+						errorMsgs.add("標題：請勿空白");
+					}else if(act_Name.trim().length()<2||act_Name.trim().length()>30){
+						errorMsgs.add("標題：請輸入2~30個字。");
+					}
+					
+					String act_Cat = req.getParameter("act_Cat");
+					if(act_Cat == null || act_Cat.trim().length() == 0) {
+						errorMsgs.add("請選擇廣告分類");
+					}
+					
+					String coucat_No = req.getParameter("coucat_No");
+					if(coucat_No == null || coucat_No.trim().length() == 0) {
+						errorMsgs.add("請選擇對應宣傳的優惠卷");
+					}
+					
+					String act_Content = req.getParameter("act_Content");
+					if(act_Content == null || act_Content.trim().length() == 0) {
+						errorMsgs.add("內容請勿空白");
+					}
+					
+					
+					Part act_Carousel = req.getPart("act_Carousel");
+					if(getFileNameFromPart(act_Carousel) == null) {
+						ActivityService actSvc = new ActivityService();
+						ActivityVO advo_DB = actSvc.getOneActivity(act_No);
+						pic1 = advo_DB.getAct_Carousel();
+					}else if(!getFileNameFromPart(act_Carousel).matches(ad_PicReg)) {
+						errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");					}
+					
+
+					Part act_Pic = req.getPart("act_Pic");
+					if(getFileNameFromPart(act_Pic) == null) {
+						ActivityService actSvc = new ActivityService();
+						ActivityVO advo_DB = actSvc.getOneActivity(act_No);
+						pic2 = advo_DB.getAct_Pic();
+					}else if(!getFileNameFromPart(act_Pic).matches(ad_PicReg)) {
+						errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");	}
+					//預計上架時間判斷
+					SimpleDateFormat time_format = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+					String addTime = req.getParameter("act_PreAddTime");
+					if(addTime == null ||addTime.trim().length() == 0){
+						errorMsgs.add("預計上架時間：請勿空白。");
+					}else {
+						Date temp_addTime = time_format.parse(addTime);
+						preAdd = new Timestamp(temp_addTime.getTime());
+					}
+					//下架時間非必填 
+					String offTime = req.getParameter("act_PreOffTime");
+					if(offTime.trim().length() > 0) {
+						Date temp_offtime = time_format.parse(offTime);
+						preOff = new Timestamp(temp_offtime.getTime());
+					}
+					//預定上架時間與下架時間有輸入的判斷
+					if(preAdd != null && preOff !=null) {
+						if(preAdd.getTime() >= preOff.getTime()) {
+							errorMsgs.add("請修改上架時間：不得大於等於下架時間");
+						}
+					}
+					ActivityVO activityVO= new ActivityVO();
+					activityVO.setAct_No(act_No);
+					activityVO.setAct_Cat(act_Cat);
+					activityVO.setAct_Name(act_Name);
+					activityVO.setCoucat_No(coucat_No);
+					activityVO.setAct_Carousel(pic1);
+					activityVO.setAct_Pic(pic2);
+					
+					//以上驗證有錯誤訊息的判斷
+					if(!errorMsgs.isEmpty()) {
+						req.setAttribute("activityVO", activityVO);
+						RequestDispatcher failureView = req.getRequestDispatcher("/back_end/ad/back_updated.jsp");
+						failureView.forward(req, res);
+						return;
+					}
+					//************************第二步：新增資料**************************
+					if(getFileNameFromPart(act_Carousel) != null) {
+						InputStream is = act_Carousel.getInputStream();
+						baos = new ByteArrayOutputStream();
+						byte[] buf = new byte[is.available()];
+						
+						int len = 0 ;
+						while((len = is.read(buf))!=-1) {
+							baos.write(buf,0,len);
+						}
+						baos.close();
+						is.close();
+						
+						pic1=baos.toByteArray();
+					}
+					
+					if(getFileNameFromPart(act_Pic) != null) {
+						InputStream is = act_Pic.getInputStream();
+						baos = new ByteArrayOutputStream();
+						byte[] buf = new byte[is.available()];
+						
+						int len = 0 ;
+						while((len = is.read(buf))!=-1) {
+							baos.write(buf,0,len);
+						}
+						baos.close();
+						is.close();
+						
+						pic2=baos.toByteArray();
+					}
+					ActivityService actSvc =new ActivityService();
+					actSvc.updateActivity(act_No,coucat_No,act_Cat,
+							act_Name,pic1,pic2,act_Content,preAdd,
+							preOff);
+					//************************第三步：新增完成，準備提交**************************
+					String url = "/back_end/activity/listAllActivity.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+					
+				}catch(Exception e) {
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher filureView = req.getRequestDispatcher("/back_end/activity/back_activity_updated.jsp");
+					filureView.forward(req, res);
+				}
+				
+				
+			}
+			
+	
 		   
 		
 		
 	}
 	
-	public String getFileName(Part part) {
-		Collection headername = part.getHeaderNames();
-		Iterator it = headername.iterator();
-		while (it.hasNext()) {
-			String name = (String) it.next();
-			String header = part.getHeader(name);
-//			System.out.println(name + ":" + header);
-
-		}
+	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-//		System.out.println(header);
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		if (filename.isEmpty())
+		//取出副檔名
+		String fnameExt = filename.substring(filename.lastIndexOf(".")+1,filename.length()).toLowerCase();
+		if (filename.length() == 0) {
 			return null;
-		return filename;
+		}
+		return fnameExt;
 	}
 
 }

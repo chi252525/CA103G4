@@ -571,11 +571,11 @@ public class ActivityDAO implements ActivityDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(FINDNEW_STMT);
-			pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 			while (rs.next()) {
 				activityVO = new ActivityVO();
 				activityVO.setAct_No(rs.getString("act_No"));
-				activityVO.setAct_Cat(rs.getString("act_cat"));
+				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setCoucat_No(rs.getString("coucat_No"));
 				activityVO.setAct_Content(rs.getString("act_Content"));

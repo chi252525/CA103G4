@@ -576,7 +576,7 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 		try {
 			con=DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt=con.prepareStatement(FINDNEW_STMT);
-			pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				activityVO= new ActivityVO();
 				activityVO.setAct_No(rs.getString("act_No"));

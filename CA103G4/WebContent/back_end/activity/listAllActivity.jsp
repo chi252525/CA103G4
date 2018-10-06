@@ -63,15 +63,20 @@ body {
   .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
            height: 151px;   /* height:  151px; */
   }
-
+.item{
+			margin-left: 5px;
+		
+		}
 </style>
 </head>
 <body>
 <jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
-<div class="py-5 " >
+
+
+
+<div class="py-2 " >
     <div class="container-fluid px-5">
       <div class="row">
-        <div class="col-md-12">
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp" class=" nav-link">優惠卷設定</a>
@@ -80,77 +85,107 @@ body {
               <a class="nav-link" href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp">廣告設定</a>
             </li>
           </ul>
-        </div>
+       
+           <div class="card">
+  <div class="card-body">
+       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/activity/activity.do">
+         <div class="d-flex flex-wrap ">
+            <div class="item">
+                <label for="sel1" class="text-dark">分類</label>
+            <select class="form-control combobox" id="sel1" name="act_Cat" >
+                            <option value="AC1">新品上市
+                            <option value="AC2">優惠折扣
+                            <option value="AC3">分店限定
+                        </select>
+                        </div>
+                     
+            <div class="item ">
+                 <label for="sel1" class="text-dark">廣告編號</label>
+            <input type="text" name="act_No" class="form-control" value="" placeholder="YYYYMM-SSSS">
+            </div>
+            <div class="item ">
+            <label for="sel1" class="text-dark" >廣告名稱</label>
+            <input type="text" name="act_Name" class="form-control" value="" placeholder="輸入廣告名稱">
+            </div>
+             <div class="item">
+             <label for="sel1" class="text-dark">活動開始日從:</label>
+             <input type="text" id="datepicker1" class="form-control" >
+            </div>
+            <div class="item">
+             <label for="sel1" class="text-dark">活動結束日</label>
+             <input type="text" id="datepicker2" class="form-control" >
+            </div>
+            
+               <div class="item">
+                         <label for="sel1" class="text-dark">優惠卷類別</label>
+            <select size="1" class="form-control combobox" name="coucat_No" >
+         <c:forEach var="coucatVO" items="${couSvc1.all}" > 
+          <option value="${coucatVO.coucat_No}">${coucatVO.coucat_Name}
+         </c:forEach>   
+       </select>
+            </div>
+              <div class="item py-1">
+            <button type="submit" class=" btn btn-sm btn-success float-right mt-5 " value="">送出</button>
+        <input type="hidden" name="action" value="listActs_ByCompositeQuery"></div>
+              </FORM>
+               </div>
+  </div>
+</div>
+
       </div>
      
-      <div class="row">
-        <div class="col-md-12 p-4">
-        <div class="row">
-         <div class="col-md-6 ">
-          <p class="text-dark">活動查詢</p>
-          <ul>  
-  <li>   
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" name="form1">
-        <b>輸入廣告編號:</b>
-        <input type="text" name="act_No" value="" placeholder="YYYYMM-SSSS"><br>
-           
-       <b>輸入廣告名稱:</b>
-       <input type="text" name="act_Name" value="" placeholder="廣告名稱"><br>
-       
-       <b>選擇優惠卷類別:</b>
-       <select size="1" name="coucat_No" >
-         <c:forEach var="coucatVO" items="${couSvc1.all}" > 
-          <option value="${coucatVO.coucat_No}">${coucatVO.coucat_Cata}
-         </c:forEach>   
-       </select><br>
-	   
-	   <p>活動開始日從: <input type="text" id="datepicker1"></p>
-	     <p>活動結束日: <input type="text" id="datepicker2"></p>
-        <input type="submit" value="送出">
-        <input type="hidden" name="action" value="listActs_ByCompositeQuery">
-     </FORM>
-  </li>
-</ul>
-           </div>
-           
-           <div class="col-md-6 ">
-          <div class="row">
-             
-             <div class="col-12">
-           <p class="text-dark"></p>
-          </div>
-          <div class="col-6 ">
-          
-          </div>
-            <div class="col-6 ">
+        
+            <div class="col-12">
           <a href="<%=request.getContextPath()%>/back_end/activity/addAct.jsp" class="btn btn-primary btn-sm active float-right" role="button" aria-pressed="true">新增</a>
           </div>
-          </div> 
-         
-           </div>
-          </div>
           
+       
+         
+         
+         
  <script>
   $( function() {
     $JUI( "#datepicker1" ).datepicker();
     $JUI( "#datepicker2" ).datepicker();
   } );
   </script>
-          
+          <%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
           
         <%@ include file="pages/page1.file"%>  
    
-          </div>
+         
           <!-- 表格 -->
             <div class="col-md-12 p-1">
-          <form>
-            <div class="row">
-                    <div class="col-md-12">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>#</th>
+            <ul id="adTab" class="nav nav-tabs">
+                    			<li class="<%=request.getAttribute("display_tabs") == null ? "active" :"" %>"> 
+                        			<a class="nav-link" href="#offContent" data-toggle="tab">
+                        				未上架
+                        			</a>
+                   			 	</li>
+                   			 	
+                   			 	<li class="<%=request.getAttribute("display_tabs") == null ? "" :"active" %>">
+                        			<a class="nav-link" href="#onContent" data-toggle="tab">
+                        				已上架
+                        			</a>
+                   			 	</li>
+                    		</ul>
+            
+            <div id="adTabContent" class="tab-content  ui piled segment">
+                    			<div id="offContent" class="tab-pane fade <%=request.getAttribute("display_tabs") == null ? "active" :"" %>">
+			                   	<!-- 未上架的廣告 -->
+			                   		<br>
+			                        <table class="table">
+			                        	<thead>
+			                        		<th>#</th>
                             <th>活動名稱</th>
                             <th>優惠卷類別編號</th>
                             <th>預計上架日</th>
@@ -159,53 +194,53 @@ body {
                             <th>狀態</th>
                             <th>操作</th>
                             <th>修改</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="activityVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>" >
-                          <tr>
-                          <td>${activityVO.act_No}</td>
-                            <td>${activityVO.act_Name}</td>
-                            <td>${activityVO.coucat_No}</td>   
-                             <td>	<fmt:formatDate value="${activityVO.act_PreAddTime}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                             <td><fmt:formatDate value="${activityVO.act_Start}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                            <td><fmt:formatDate value="${activityVO.act_End}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                         <td>  ${(activityVO.act_Status==1)?'上架中':'已下架'}</td>
-                             <td>
-                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
-                             <input type="hidden" name="act_No"      value="${activityVO.act_No}">
-                             <input type="hidden" name="act_Status"      value="${activityVO.act_Status}">
-                             
-                             ${activityVO.act_Status==0?
-                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>:
-                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
-                              }
-                             </FORM>
-                             
-                             </td>
-                              <td>
-                               <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
-			     				<input type="hidden" name="act_No"      value="${activityVO.act_No}">
-			     				<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     				<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     				<input type="hidden" name="action"	    value="getOne_For_Update"></FORM>
-                              <button type="submit" class="btn btn-secondary"><span class="lnr lnr-pencil"></span></button></FORM></td>
-                          </tr>
-                    
-             </c:forEach>
-                        </tbody>
-                      </table>
-                       <%@ include file="pages/page2.file"%>
-              </div>
-          
-            </div>
-          </form>
+			                        	</thead>
+			                        	
+			                        	<c:forEach var="activityVO" items="${list}">
+											<c:if test="${activityVO.act_Status == 0}">
+												<%@ include file="Content.file" %>
+											</c:if>
+										</c:forEach>	
+			            
+			                        </table> 
+                    			</div>
+                    		
+                    		<!--已上架的廣告  -->
+                    		<div id="onContent" class="tab-pane fade <%=request.getAttribute("display_tabs") == null ? "" :"active" %>">
+			                   		<br>
+			                        <table class="table">
+			                        	<thead>
+			                        		<th>#</th>
+                            <th>活動名稱</th>
+                            <th>優惠卷類別編號</th>
+                            <th>預計上架日</th>
+                            <th>活動起始日</th>
+                            <th>下架日</th>
+                            <th>狀態</th>
+                            <th>操作</th>
+                            <th>修改</th>
+			                        	</thead>
+			                        	
+			                        	<c:forEach var="activityVO" items="${list}">
+											<c:if test="${activityVO.act_Status == 1}">
+												<%@ include file="Content.file" %>
+											</c:if>
+										</c:forEach>	
+			                        	
+			                        		
+			                        </table> 
+			                      
+                    			</div>	
+                    		
+                    			</div>
+            
+            
+            
+            
+            
+       
         </div>
-      </div>
+    
     </div>
   </div>
 <jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />

@@ -7,7 +7,7 @@
 <%@ page import="com.activity.model.*"%>
 <%
 	ActivityService actSvc = new ActivityService();
-	List<ActivityVO> list = actSvc.getAll();
+	List<ActivityVO> list = actSvc.findNewAct();
 	pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -65,6 +65,13 @@ body {
 #carousel-ctrl .item img {
 	height: 100%;
 }
+.item{
+			margin: 5px;
+			width: 250px;
+			height: 80px;
+			background-color: #fa0;
+		}
+
 </style>
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
@@ -110,21 +117,16 @@ body {
             </c:if>
 
             <!-- 搜尋開始 -->
+    <div class="row">
+    <div class="my-1 col-12">
 
-            <div class="my-1 col-12">
-                <div class="col-4 px-0">
+        
+          
+        </div>
 
-                    <label for="sel1" class="text-dark">分類</label>
-                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/activity/activity.do">
-                        <select class="form-control" id="sel1" name="act_Cat">
-                            <option value="AC1">新品上市
-                            <option value="AC2">優惠折扣
-                            <option value="AC3">分店限定
-                        </select><input type="hidden" name="action" value="">
-
-                    </FORM>
+           
+                
                 </div>
-                <div class="col-4"></div>
             </div>
 
 
@@ -232,9 +234,9 @@ body {
                     <!-- 內容結束-->
                 </div>
             </div>
-        </div>
+      </div>
 
-    </div>
+    
     <!-- container end -->
 
     <jsp:include page="/front_end/footer.jsp" flush="true" />
