@@ -178,7 +178,7 @@ System.out.println("AAA"+orderformlist.get(0).getOrderInvoiceList().get(0).getCu
 	
 
 <div class="h-100 py-5" style="backgrond-color:rgba(0,0,0,0.3);">
-	<div class="container">
+	<div class="container.fluid" style="width:1920px; margin-left:240px;">
 		<div class="row">
 			<div class="">
 			</div>
