@@ -612,6 +612,8 @@ System.out.println("我已經改完囉");
 				HttpSession session = req.getSession();
 				session.setAttribute("memVO", memVO);
 				session.setAttribute("mem_Id", mem_Id);
+				session.setAttribute("memNo", memVO.getMem_No());
+				
 				
 				
 					try {

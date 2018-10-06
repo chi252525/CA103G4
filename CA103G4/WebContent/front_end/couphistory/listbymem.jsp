@@ -1,5 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.couponhistory.model.*"%>
+
+<%-- <jsp:useBean id="couponhistorySvc" scope="page" class="com.couponhistory.model.CouponhistoryService" /> --%>
+
+<%-- 存取會員編號 --%>
+<%-- <% --%>
+<%-- mem = (String)session.getAttribute("memNo"); --%>
+<%-- %> --%>
+
+<%
+CouponhistoryService couponhistorySvc = new CouponhistoryService();
+List<CouponhistoryVO> list = couponhistorySvc.getByMem("M000001");
+pageContext.setAttribute("ByName",list);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -29,26 +44,40 @@
 <title>listbymem</title>
 
 <style type="text/css">
-  .all{
-    margin-top: 7%;
+ .all{
+    margin-top: 10%;
   }
 
   .amos{
     width: 1200px;
-    background-color: #AA7700;
+    background-color: #000;
     margin: auto; 
-    margin-top: 10%;
+    margin-top: 5%;
   }
 
   .item{
-    margin: 10px;
-    width: 1180px;
+    margin: 5px;
+    width: 1190px;
     height: 400px;
+    background-color: #880000;
+  }
+
+   .tet{
+    margin-top: 5%;
+  }
+
+  .pimg{
+    margin: 5px;
+    width: 360px;
+    height: 390px;
     background-color: #FFDDAA;
   }
-  
-   .tet{
-    margin-top: 7%;
+
+  .textc{
+    margin: 5px;
+    width: 810px;
+    height: 390px;
+    background-color: #FFDDAA;
   }
 
 
@@ -62,23 +91,23 @@
 </div>
 
 <div class="all">
+	<c:forEach var="couponhistoryVO" items="${ByName}">
     <div class="d-flex flex-wrap amos">
-    <div class="item">
-      
+    <div class="d-flex flex-wrap item">
+      <div class="pimg">
+          
+      </div>
+      <div class="textc">
+         <h3>
+         
+         </h3>
+         <h4>
+         
+         </h4>
+      </div>
     </div>
     </div>
-
-	<div class="d-flex flex-wrap amos">
-    <div class="item">
-      
-    </div>
-    </div>
-
-    <div class="d-flex flex-wrap amos">
-    <div class="item">
-      
-    </div>
-    </div>
+    </c:forEach>
 </div>
 
 <jsp:include page="/front_end/footer.jsp" flush="true" />

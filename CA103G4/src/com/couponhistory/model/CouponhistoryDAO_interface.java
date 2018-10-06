@@ -14,4 +14,6 @@ public interface CouponhistoryDAO_interface {
 	public List<CouponhistoryVO> getAll();
 	//取得會員有的的優惠卷
 	public List<CouponhistoryVO> getCouponByMem(String mem_No);
+	
+	public List<CouponhistoryVO> getByMem(String mem_No);
 }
