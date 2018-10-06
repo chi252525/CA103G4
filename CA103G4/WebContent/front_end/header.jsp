@@ -146,8 +146,8 @@ body {
 							<!-- 以下可以自己新增相關會員附屬功能 -->
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/memberinfo.jsp">會員基本資料</a>
 									<a class="dropdown-item" href="#">儲值紀錄</a> 
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/orderform/listOneOrderformByMemNo.jsp">訂單查詢</a> 
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/post/listPostByMember2.jsp">我的貼文</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/orderform/listOneOrderformByMemNo2.jsp">訂單查詢</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/post/listPostByMember.jsp">我的貼文</a>
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/logout.do" >登出</a>
 								</div>
 							</li>
