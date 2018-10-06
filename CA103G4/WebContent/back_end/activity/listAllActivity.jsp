@@ -178,9 +178,14 @@ body {
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
                              <input type="hidden" name="act_No"      value="${activityVO.act_No}">
-                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
-                             </FORM>
+                             <input type="hidden" name="act_Status"      value="${activityVO.act_Status}">
+                             
+                             ${activityVO.act_Status==0?
+                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>:
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
+                              }
+                             </FORM>
+                             
                              </td>
                               <td>
                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">

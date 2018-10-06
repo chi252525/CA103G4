@@ -56,7 +56,7 @@ public class CouponhistoryServlet extends HttpServlet {
 				chVO.setMem_no(mem_No);
 				chVO.setCoup_state(0);//未使用的狀態
 				chSvc.insertOneCouponRecord(oneCoupon_Sn, mem_No, 0);
-				/**********************取完後更新狀態為已使用*****************************/
+				/**********************取完後更新狀態為已取用*****************************/
 				Csvc.updateCouoponStatus(oneCoupon_Sn);
 				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");

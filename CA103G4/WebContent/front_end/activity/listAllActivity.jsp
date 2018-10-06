@@ -148,7 +148,7 @@ body {
                                         <div class="col-8 py-1 my-2 ">
                                             <div class="col-12">
                                                 <h5>
-                                                    <b>${activityVO.act_Name}${activityVO.coucat_No}</b>
+                                                    <b>${activityVO.act_Name}</b>
                                                 </h5>
                                             </div>
                                             <div class="d-flex ">
@@ -178,7 +178,7 @@ body {
                                                         <div class="col-4">
                                                             <button class="btn btn-sm btn-danger" id="${activityVO.act_No}">取得優惠卷</button>
                                                             
-                                                            <p class="mb-0 test ${activityVO.act_No}" id="${activityVO.act_No}" style="color:red;"></p>
+                                                            <p class="mb-0 test ${activityVO.act_No}"  style="color:red;"></p>
                                                         </div>
                                                     </div>
  <script type="text/javascript">

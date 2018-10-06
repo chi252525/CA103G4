@@ -107,35 +107,33 @@ body {
 
 		<div class="row">
 			<!-- 查詢BAR開始 -->
-			<div class="col-md-12">
+			
+
+			
+			
+			
+			
+			
+			<div class=" d-flex mx-2">
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
 					<div class="card-header">查詢貼文</div>
 					<div class="card-body py-1 px-2">
-						<div class="row">
-							<div class="col-12">
+				
+									<div class="d-flex justify-content-end">
+  <div class="p-2 "></div>
 
-								<div class="col-2 ml-auto">
-									<a class="btn btn-info btn-sm px-3 btn-block mt-2"
-										href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
-								</div>
-							</div>
-						</div>
-						<fieldset class="form-group">
-							<div class="row">
-
-								<!-- 搜尋年月 -->
-								<div class="col-sm-4">
-									<form METHOD="post" class="form-inline"
+ 
+</div>
+		<div class="d-flex  ">
+  <div class="p-1"><form METHOD="post" class="form-inline"
 										ACTION="<%=request.getContextPath()%>/post/postServlet.do">
 										<input type="month" name="bdaymonth" value="date"
 											class="form-control " required="required"> <input
 											type="hidden" name="action" value="getYear_and_Month_Post">
 										<button type="submit" class="btn btn-default">送出</button>
-									</form>
-								</div>
-								<div class="col-sm-4 my-1">
-									<FORM METHOD="post"
+									</form></div>
+  <div class="p-1">	<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 										class="form-inline">
 										<div class="form-group">
@@ -149,12 +147,10 @@ body {
 											<button type="submit" class="btn btn-default">送出</button>
 											<input type="hidden" name="action" value="getOne_For_Display">
 										</div>
-									</FORM>
-								</div>
-
-								<div class="col-sm-8 ">
-
-									<form METHOD="post"
+									</FORM></div>
+</div>				
+				<div class="d-flex  justify-content-start"> <div class="p-1">	
+					<form METHOD="post"
 										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 										class="form-inline ">
 										<div class="col-xs-2 input-group">
@@ -167,30 +163,35 @@ body {
 										</div>
 
 									</form>
-
-								</div>
-
-								<div class="col-sm-4 my-1">
-									<div class="btn-group float-right ">
-										<button class="btn btn-secondary btn-sm dropdown-toggle"
-											type="button" data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">排序</button>
-										<div class="dropdown-menu">
-											<a
-												href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
-										</div>
+									
+									
+				</div>
+				
+				
+				
+				</div>
+				<div class="float-right ">
+				<a class="btn btn-info btn-sm    "
+										href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
+				<a class="btn btn-info btn-sm  "
+										href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
+									
+										
 									</div>
-
-								</div>
-							</div>
-
-						</fieldset>
 					</div>
 				</div>
-				<!-- */查詢BAR -->
+			
 
 
 			</div>
+			
+			
+			<div class="d-flex p-2" >
+<canvas id="myChart"  style="background-color:rgba(255,255,255,0.45);width:420px; height:250px"></canvas></div>
+</div>
+			
+			
+				<!-- */查詢BAR -->
 
 			<div class="row">
 				<div class="col-md-12 mt-1">
@@ -251,9 +252,7 @@ body {
 	pageContext.setAttribute("map", map);
 %>
 
-<div class="col-12" style=" width='100'; height='250'">
-<canvas id="myChart"  style="background-color:rgba(255,255,255,0.45)"></canvas></div>
-</div>
+
 <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
