@@ -103,6 +103,8 @@ pageContext.setAttribute("ByName",list);
   <h1>優惠券持有紀錄</h1>
 </div>
 
+
+
 <div class="all">
 	<c:if test="${ByName != null}">
 	<c:forEach var="couponhistoryVO" items="${ByName}">
@@ -110,16 +112,29 @@ pageContext.setAttribute("ByName",list);
     <div class="d-flex flex-wrap item">
       <div class="pimg">
       
-      ${coucatSvc.getPic(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Pic}
+      <img src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" style="width: 360px; height: 390px;">
           
       </div>
+      
       <div class="textc">
       		<br>
          <h1>
          	優惠券名稱: ${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}
          </h1>
+         
+         <h7>
+         
+         <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now or couponhistoryVO.coup_state != 0}">
+         	 <不可使用>
+         </c:if>
+         
+         <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now and couponhistoryVO.coup_state == 0}">
+        	 <可使用>
+         </c:if>
+         
+         </h7>
+         
          <h2>
-         	<br>
          	
         	<p>優惠券序號: ${couponhistoryVO.coup_sn}</p>
         	
@@ -137,15 +152,23 @@ pageContext.setAttribute("ByName",list);
       			<p>發放點數:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Ereep}</p>
         	</c:if>
         	
-  			<br>
+  			<P>
+  			<c:if test="${couponhistoryVO.coup_state == 0}">
+      			<p>使用狀態:未使用</p>
+        	</c:if>
+  			<c:if test="${couponhistoryVO.coup_state == 1}">
+      			<p>使用狀態:已使用</p>
+        	</c:if>
+  			<c:if test="${couponhistoryVO.coup_state == 2}">
+      			<p>使用狀態:已過期</p>
+        	</c:if>  			
+  			</P>
 
         	<p>
         	到期日:<fmt:formatDate value="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid}" pattern="yyyy-MM-dd"/>
-        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">
-        	<無法使用>
+        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">過期
         	</c:if>
-        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">
-        	<可以使用>
+        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">未過期
         	</c:if>
         	</p>
 

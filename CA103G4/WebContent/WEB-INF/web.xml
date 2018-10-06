@@ -168,6 +168,14 @@
     <url-pattern>/DBGifReader3</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DBGifReader4</servlet-name>
+    <servlet-class>com.coucat.util.DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader4</servlet-name>
+    <url-pattern>/DBGifReader4</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>MemServlet</servlet-name>
     <servlet-class>com.member.controller.MemServlet</servlet-class>
     <multipart-config>
