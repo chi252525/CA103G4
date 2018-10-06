@@ -66,46 +66,66 @@ public class checkoutServlet extends HttpServlet {
 				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
 				
 				String card_number =null;
-				if ("2".equals(order_pstatus)) { //檢查信用卡
+				String full_name = null;
+				String expiry = null ;
+				String cvc = null ;
+				if ("2".equals(order_pstatus)) { //為2 ,檢查信用卡
 
 					card_number = req.getParameter("number");// 取得卡號
-					String card_number_regx = "^\\d{16}$";
+					String card_number_regx = "^\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}$";
 
 					if (card_number == null || card_number.trim().length() == 0) {
 						errorMsgs.put("card_number", "請輸入卡號");
 
 					} else if (!card_number.matches(card_number_regx)) {
-						errorMsgs.put("card_number_regx", "卡號須為16位阿拉伯數字");
+						errorMsgs.put("card_number", "卡號為16位阿拉伯數字");
 					}
 
-					String full_name = req.getParameter("name");// 取得持卡人姓名
-					String full_name_regx = "[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]^$";
+					full_name = req.getParameter("name");// 取得持卡人姓名
+					String full_name_regx = "^[(\u4e00-\u9fa5)(a-zA-Z)]++-[(\\u4e00-\\u9fa5)(a-zA-Z)]++";
+					System.out.println(full_name.trim().matches(full_name_regx));
+
 					if (full_name == null || full_name.trim().length() == 0) {
 
 						errorMsgs.put("full_name", "請輸入持卡人姓名");
-					} else if (!card_number.matches(full_name_regx)) {
-						errorMsgs.put("full_name_regx", "持卡人姓名須為中英文字");
+					} else if (!full_name.trim().matches(full_name_regx)) {
+						errorMsgs.put("full_name", "持卡人姓名為中英文字且不可有空格(eg.Kevin-Tsai)");
 					}
 
-					String expiry = req.getParameter("expiry");// 取得卡片期限
-					String expiry_regx = "[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]^$";
+					expiry = req.getParameter("expiry");// 取得卡片期限
+					String expiry_regx = "^0[1-9]||1[0-2]\\s/\\s\\d{2}$";
+					System.out.println(expiry.matches(expiry_regx));
+
 					if (expiry == null || expiry.trim().length() == 0) {
 						errorMsgs.put("expiry", "請輸卡限");
 
-					} else if (!card_number.matches(expiry_regx)) {
-						errorMsgs.put("card_number_regx", "^\\d{2}-\\d{2}$");
+					} else if (!expiry.matches(expiry_regx)) {
+						errorMsgs.put("expiry", "年月格式:MM/YY");
 					}
 
-					String cvc = req.getParameter("cvc");// 取得安全碼
+					cvc = req.getParameter("cvc");// 取得安全碼
 					String cvc_regx = "^\\d{3}$";
 					if (cvc == null || cvc.trim().length() == 0) {
 
 						errorMsgs.put("cvc", "請輸入安全碼");
-					} else if (!card_number.matches(cvc_regx)) {
-						errorMsgs.put("card_number_regx", "安全碼須為3個數字");
+					} else if (!cvc.matches(cvc_regx)) {
+						errorMsgs.put("cvc", "安全碼須為3個數字");
 					}
 				}
 					if (!errorMsgs.isEmpty()) {
+						req.setAttribute("eatIntakeAway", eatIn_takeAway);//剛寫的錯誤資料依然回傳
+						req.setAttribute("branch_No", branch_No);
+						req.setAttribute("deliv_addres", address);
+						req.setAttribute("mem_Retown", town);
+						req.setAttribute("mem_Recounty", county);
+						req.setAttribute("time", time);
+						//credit card
+						req.setAttribute("card_number", card_number);
+						req.setAttribute("name", full_name);
+						req.setAttribute("expiry", expiry);
+						req.setAttribute("cvc", cvc);
+						
+						req.setAttribute("order_pstatus", order_pstatus);//回給錯誤頁面判斷是否顯示信用卡 1為顯示
 						RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
 						failureView.forward(req, res);
 						return;//中斷
@@ -121,14 +141,14 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("order_pstatus", order_pstatus);
 					req.setAttribute("time", time);
 					req.setAttribute("ps", ps);
-
+					
 					req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req,res);
 					return;
 				
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do");
+				RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
 				failureView.forward(req, res);
 			}
 		}
