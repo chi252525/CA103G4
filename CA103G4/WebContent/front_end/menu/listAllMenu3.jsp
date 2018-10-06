@@ -171,6 +171,7 @@
 			</div>
 				<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"><br>
 				
+			<c:if test="${menuVO.menu_Status == '1'}">
 				        <div class="col-md-3">
 				       
 				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px;">
@@ -182,11 +183,12 @@
 				            	alt="Card image cap" style="margin-top:20px;">
 				            </a>	
 				            <div class="card-body">
-				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id}
-				                <br> </h5>
+				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id} <br> </h5>
 				              <h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>
+<%-- 				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Status} ${menuVO.menu_Status}</h5> --%>
+<%-- 				              <h5 class="card-title">${menuVO.menu_Status}</h5> --%>
 				              <p class="card-text" style="height:72px;">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro} ${menuVO.menu_Intro}</p>
-<!-- 				            	  數量 <input type="tel" name="quantity" value=1 style="width: 60px"> -->
+
 				            	  
 							  <form>
 								  <div class="row">
@@ -202,8 +204,8 @@
 				          </div>
 				        
 				        </div>
+			</c:if>
 				</c:forEach>
-
 			<div class="col-md-12 mt-3">
 				<%@ include file="page2.file"%>  
   			</div>

@@ -186,7 +186,7 @@ System.out.println("AAA"+orderformlist.get(0).getOrderInvoiceList().get(0).getCu
 				
 				        <div class="" style="width:360px;">
 
-				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px; margin-right:20px;">
+				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px; margin-right:20px; border-radius:5px;">
 
 <!-- 					            <img class="card-img-top"  -->
 <%-- 					            	src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}" --%>
@@ -202,8 +202,8 @@ System.out.println("AAA"+orderformlist.get(0).getOrderInvoiceList().get(0).getCu
 					            	    <h5 class="card-title">餐點名稱&nbsp;${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}
 					            	    									${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</h5>
 					            	    			
-					            	    		
-					            	    		<div style="background-color:rgba(255,255,245,0.45);">
+					            	    		<c:if test="${orderinvoiceVO.custom_no != null}">
+					            	    		<div style="background-color:rgba(255,255,245,0.45); border-radius:5px; padding:10px;">
 					            	    		
 						            	  			<h5 class="card-title">食材搭配&nbsp;</h5>
 						            	  			<c:forEach var="ingredientsVO" items="${orderinvoiceVO.getCustom_ingdt_List()}">	
@@ -212,7 +212,7 @@ System.out.println("AAA"+orderformlist.get(0).getOrderInvoiceList().get(0).getCu
 					            	  			
 													</c:forEach>	
 					            	 			 </div>
-					            	 			
+					            	 			</c:if>
 					           
 					              </c:forEach>  
 					            	  
