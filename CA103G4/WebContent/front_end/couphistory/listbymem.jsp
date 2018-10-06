@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.couponhistory.model.*"%>
 
@@ -15,6 +16,18 @@ CouponhistoryService couponhistorySvc = new CouponhistoryService();
 List<CouponhistoryVO> list = couponhistorySvc.getByMem("M000001");
 pageContext.setAttribute("ByName",list);
 %>
+
+<jsp:useBean id="couponSvc" scope="page" class="com.coupon.model.CouponService" />
+
+<jsp:useBean id="coucatSvc" scope="page" class="com.coucat.model.CoucatService" />
+
+<% 
+   java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+   String formatDate = df.format(new java.util.Date());
+%>
+
+<jsp:useBean id="now" scope="page" class="java.util.Date" /> 
+
 
 <!DOCTYPE html>
 <html>
@@ -91,23 +104,57 @@ pageContext.setAttribute("ByName",list);
 </div>
 
 <div class="all">
+	<c:if test="${ByName != null}">
 	<c:forEach var="couponhistoryVO" items="${ByName}">
     <div class="d-flex flex-wrap amos">
     <div class="d-flex flex-wrap item">
       <div class="pimg">
+      
+      ${coucatSvc.getPic(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Pic}
           
       </div>
       <div class="textc">
-         <h3>
-         
-         </h3>
-         <h4>
-         
-         </h4>
+      		<br>
+         <h1>
+         	優惠券名稱: ${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}
+         </h1>
+         <h2>
+         	<br>
+         	
+        	<p>優惠券序號: ${couponhistoryVO.coup_sn}</p>
+        	
+        	
+        	<c:if test="${(\"CC1\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			<p>優惠券類型: 訂單滿額折扣</p>
+      			<p>優惠券折扣:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Discount}</p>
+        	</c:if>
+        	<c:if test="${(\"CC2\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			<p>優惠券類型: 固定金額發放</p>
+      			<p>折抵金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</p>
+        	</c:if>
+        	<c:if test="${(\"CC3\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			<p>優惠券類型: 贈送定額竹幣</p>
+      			<p>發放點數:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Ereep}</p>
+        	</c:if>
+        	
+  			<br>
+
+        	<p>
+        	到期日:<fmt:formatDate value="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid}" pattern="yyyy-MM-dd"/>
+        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">
+        	<無法使用>
+        	</c:if>
+        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">
+        	<可以使用>
+        	</c:if>
+        	</p>
+
+         </h2>
       </div>
     </div>
     </div>
     </c:forEach>
+    </c:if>
 </div>
 
 <jsp:include page="/front_end/footer.jsp" flush="true" />
