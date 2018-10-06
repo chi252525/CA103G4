@@ -1,6 +1,8 @@
 package com.orderinvoice.model;
 
+import java.util.List;
 
+import com.ingredients.model.IngredientsVO;
 
 public class OrderinvoiceVO {
 	private String invo_no;
@@ -8,7 +10,16 @@ public class OrderinvoiceVO {
 	private String menu_no;
 	private String custom_no;
 	private Integer invo_status;
+	private List<IngredientsVO> custom_ingdt_List;
 	
+	public List<IngredientsVO> getCustom_ingdt_List() {
+		return custom_ingdt_List;
+	}
+
+	public void setCustom_ingdt_List(List<IngredientsVO> custom_ingdt_List) {
+		this.custom_ingdt_List = custom_ingdt_List;
+	}
+
 	public String getInvo_no() {
 		return invo_no;
 	}

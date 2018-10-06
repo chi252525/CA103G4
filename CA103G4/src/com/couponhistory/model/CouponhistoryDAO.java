@@ -31,6 +31,8 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
 	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
 	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn WHERE COUPONHISTORY.mem_no=?";
+//	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn right JOIN coucat ON coucat.coucat_no= COUPON.coucat_no WHERE COUPONHISTORY.mem_no= ?";
+	private static final String GET_BY_MEM= "SELECT coup_sn FROM COUPONHISTORY where mem_no = ?";
 
 	@Override
 	public void insert(CouponhistoryVO couponhistoryVO) {
@@ -317,4 +319,61 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<CouponhistoryVO> getByMem(String mem_No) {
+		List<CouponhistoryVO> list = new ArrayList<CouponhistoryVO>();
+		CouponhistoryVO couponhistoryVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_MEM);
+
+			pstmt.setString(1, mem_No);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				couponhistoryVO = new CouponhistoryVO();
+				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
+				list.add(couponhistoryVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	}
+	
 }

@@ -2,6 +2,8 @@ package com.ingredientcombination.model;
 
 import java.util.List;
 
+import com.ingredients.model.IngredientsVO;
+
 
 public class IngredientCombinationService {
 	private IngredientCombinationDAO_interface dao;
@@ -45,4 +47,5 @@ public class IngredientCombinationService {
 	public List<IngredientCombinationVO> getAll() {
 		return dao.getAll();
 	}
+	
 }

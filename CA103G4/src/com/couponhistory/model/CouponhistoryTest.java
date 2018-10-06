@@ -54,14 +54,14 @@ public class CouponhistoryTest {
 //			System.out.println(adeliv.getCoup_state() + ",");
 //			System.out.println();
 //		}
-		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
-		List<CouponhistoryVO> list = dao.getCouponByMem("M000001");
-		for (CouponhistoryVO adeliv : list) {
-			System.out.print(adeliv.getCoup_sn() + ",");
-			System.out.println(adeliv.getCoup_state() + ",");
-			System.out.println();
-		}
-		
+//		CouponhistoryJDBCDAO dao = new CouponhistoryJDBCDAO();
+//		List<CouponhistoryVO> list = dao.getCouponByMem("M000001");
+//		for (CouponhistoryVO adeliv : list) {
+//			System.out.print(adeliv.getCoup_sn() + ",");
+//			System.out.println(adeliv.getCoup_state() + ",");
+//			System.out.println();
+//		}
+//		
 		
 
 	}

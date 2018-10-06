@@ -354,4 +354,13 @@
     <servlet-name>CheckoutServlet</servlet-name>
     <url-pattern>/CheckoutServlet</url-pattern>
   </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>EmpauthServlet</servlet-name>
+		<servlet-class>com.empauthority.controller.EmpauthServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpauthServlet</servlet-name>
+		<url-pattern>/empauth.do</url-pattern>
+	</servlet-mapping>	
 </web-app>

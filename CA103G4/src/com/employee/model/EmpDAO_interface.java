@@ -13,4 +13,5 @@ public interface EmpDAO_interface {
           public List<EmpVO> getAll();
           public void insertWithEmpauthorityVO(EmpVO empVO, List<EmpauthorityVO> empauthorlist);
           public EmpVO findByEmpAcnum(String emp_Acnum);
+          public List<EmpVO> EmpVOfindByBranchNo(String branch_No);
 }

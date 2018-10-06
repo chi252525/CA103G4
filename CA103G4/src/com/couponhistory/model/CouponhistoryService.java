@@ -23,4 +23,8 @@ public class CouponhistoryService {
 		chVO.setCoup_state(coup_state);
 		dao.insert(chVO);
 	}
+	
+	public List<CouponhistoryVO> getByMem(String mem_No){
+		return dao.getByMem(mem_No);
+	}
 }
