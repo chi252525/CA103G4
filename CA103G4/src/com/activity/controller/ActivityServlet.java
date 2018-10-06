@@ -44,7 +44,7 @@ public class ActivityServlet extends HttpServlet {
 		while(en.hasMoreElements()) {
 			System.out.println(en.nextElement());
 		}
-		//顯示單一貼文
+		//顯示單一貼文front_end
 		 if ("getOne_For_Display".equals(action)) { 
 	        	List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
@@ -56,12 +56,7 @@ public class ActivityServlet extends HttpServlet {
 					if (act_No == null || (act_No.trim()).length() == 0) {
 						errorMsgs.add("沒取到");
 					}
-					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req
-								.getRequestDispatcher("/front_end/post/listAllActivity.jsp");
-						failureView.forward(req, res);
-						return;//程式中斷
-					}
+				
 					/***************************2.開始查詢資料*****************************************/
 					ActivityService actSvc =new ActivityService();
 					ActivityVO activityVO= actSvc.getOneActivity(act_No);
@@ -74,6 +69,7 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
+					
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("activityVO", activityVO);
 					String url = "/front_end/activity/listOnepost.jsp";
@@ -89,6 +85,7 @@ public class ActivityServlet extends HttpServlet {
 				}
 	        	
 	        }
+		 //back_end
 		   if ("insert".equals(action)) { 
 			 List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
@@ -241,7 +238,7 @@ public class ActivityServlet extends HttpServlet {
 			}
 		   
 		   
-		   
+		   //馬上上架
 		   if("RightNow_UpdateStat".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
@@ -282,6 +279,36 @@ public class ActivityServlet extends HttpServlet {
 					failureView.forward(req, res);
 				}
 			}
+		   
+		 //修改廣告資訊時，會跳轉到修改頁面
+			if("getOne_For_Update".equals(action)) {
+				List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					//*******************第一步：接受請求參數*******************
+					String act_No = req.getParameter("act_No");
+					/*****************第二步：取出廣告資料****************************/
+					ActivityService actSvc = new ActivityService();
+					ActivityVO activityVO = actSvc.getOneActivity(act_No);
+					/*****************第三步：查詢完成，準備轉交****************************/
+					
+					req.setAttribute("activityVO", activityVO);
+					String url="/back_end/activity/back_activity_updated.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+					
+					
+				}catch(Exception e){
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher filureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
+					filureView.forward(req, res);
+				}
+				
+			}
+			
+		
+		   
 		
 		
 	}

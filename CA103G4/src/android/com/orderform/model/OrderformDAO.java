@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import android.com.orderinvoice.model.*;
 import android.com.coupon.model.*;
+import android.com.couponhistory.model.*;
 import android.com.desk.model.*;
 import android.com.member.model.*;
 import android.com.menu.model.*;
@@ -284,7 +285,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			ddao.updateDekStatus(orderformVO.getDek_no(),con);
 			// 有使用優惠卷則更新個人優惠卷持有紀錄
 			if(!coupSn.isEmpty()) {
-				CouponDAO_interface chdao = new CouponDAO();
+				CouponhistoryDAO_interface chdao = new CouponhistoryDAO();
 				chdao.updateOrderNoAndCoupState(coupSn,"CP0",con);
 			}
 

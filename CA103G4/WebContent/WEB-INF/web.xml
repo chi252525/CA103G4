@@ -88,6 +88,14 @@
     <url-pattern>/AndroidCouponServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AndroidBranchServlet</servlet-name>
+    <servlet-class>android.com.branch.controller.AndroidBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidBranchServlet</servlet-name>
+    <url-pattern>/AndroidBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PerntdServlet</servlet-name>
     <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
   </servlet>

@@ -1,5 +1,6 @@
 package com.post.model;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.reply_msg.model.ReplyVO;
@@ -18,5 +19,8 @@ public interface PostDAO_interface {
 	List<PostVO> getAllByKeywordOrderByViews(String keyword);
 	public int updateViews(String post_No);
 	public int updatePostStatus(String post_No);
+	public Map<Integer,Integer>  getCountByEva();
+	
+	
 }
 

@@ -2,6 +2,7 @@ package com.post.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.reply_msg.model.ReplyVO;
@@ -87,6 +88,9 @@ public class PostService {
 		return dao.getAllByKeywordOrderByViews(keyword);
 	}
 	
+	public Map<Integer,Integer>  getCountByEva() {
+		return dao.getCountByEva();
+	}
 	
 
 	

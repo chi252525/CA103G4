@@ -25,7 +25,7 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,order_no,coup_state) values (?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO couponhistory (coup_sn,mem_no,coup_state) values (?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT coup_sn,coup_state FROM couponhistory order by coup_sn";
 	private static final String GET_ONE_STMT = "SELECT coup_sn,coup_state FROM couponhistory where coup_state = ?";
 	private static final String DELETE = "DELETE FROM couponhistory where coup_sn = ?";
@@ -39,15 +39,13 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
 			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, couponhistoryVO.getCoup_sn());
 			pstmt.setString(2, couponhistoryVO.getMem_no());
-			pstmt.setString(3, couponhistoryVO.getOrder_no());
-			pstmt.setInt(4, couponhistoryVO.getCoup_state());
+			pstmt.setInt(3, couponhistoryVO.getCoup_state());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {

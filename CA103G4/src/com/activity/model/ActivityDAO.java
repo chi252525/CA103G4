@@ -53,7 +53,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 	private static final String FINDBYACTCATA = "SELECT * FROM ACTIVITY WHERE ACT_CAT=?";
 
 	// 以欲上架時間最近的的活動排序取得全部front_end
-	private static final String GETALL = "SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
+	private static final String GETALL = "SELECT * FROM ACTIVITY  ORDER BY act_PreAddTime DESC";
 
 	@Override
 	public void insert(ActivityVO activityVO) {
@@ -397,7 +397,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 				// 更新成馬上上架
 				pstmt = con.prepareStatement(UPDATE_ADONSTAT_STMT);
 
-				// 假設上架時間大於原有預計下架時間時，把預計下架時間跟實際下架時間清空
+				// 正要馬上上架的時間大於這則廣告原有預計下架時間，把預計下架時間跟實際下架時間清空
 				if (System.currentTimeMillis() >= activityVO.getAct_PreOffTime().getTime()) {
 					pstmt.setTimestamp(1, null);
 					pstmt.setTimestamp(2, null);
@@ -430,11 +430,12 @@ public class ActivityDAO implements ActivityDAO_interface {
 					}
 				}
 			}
-
+			// 如果廣告為上架狀態
 		} else if (act_Status == 1) {
 			try {
 
 				con = ds.getConnection();
+				// 馬上下架
 				pstmt = con.prepareStatement(UPDATE_ADOFFSTAT_STMT);
 
 				pstmt.setString(1, act_No);

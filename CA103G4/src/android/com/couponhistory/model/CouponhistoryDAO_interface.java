@@ -20,4 +20,6 @@ public interface CouponhistoryDAO_interface {
 	//取得會員有的優惠卷 CouponVO裡的屬性包含CoucatVO
 	public List<CouponVO> getCouponByMemNo(String mem_No);
 	
+	public void updateOrderNoAndCoupState(String coup_sn, String orderNo, Connection con);
+	
 }

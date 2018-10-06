@@ -32,54 +32,61 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ShoppingCart.css">
     <style>
         table, th, td {
-	/*             border: 1px solid black; */
-	text-align: center;
-	opacity: 0.9;
-}
+       /*             border: 1px solid black; */
+       text-align: center;
+       opacity: 0.9;
+   }
 
-th {
-	background-color: darkgoldenrod;
-}
+   th {
+       background-color: darkgoldenrod;
+   }
 
-tbody {
-	background-color: bisque;
-}
+   tbody {
+       background-color: bisque;
+   }
 
-a:hover {
-	text-decoration: none;
-}
+   a:hover {
+       text-decoration: none;
+   }
 
-/* credit card */
-.demo-container {
-	width: 100%;
-	max-width: 350px;
-	margin: 50px auto;
-}
+   /* credit card */
+   .demo-container {
+       width: 100%;
+       max-width: 350px;
+       margin: 50px auto;
+   }
 
-form {
-	margin: 30px;
-}
+   form {
+       margin: 30px;
+   }
 
-input {
-	width: 200px;
-	margin: 10px auto;
-	display: block;
-}
+   input {
+       width: 200px;
+       margin: 10px auto;
+       display: block;
+   }
 
-field>div {
-	margin: 10px;
+   field>div {
+       margin: 10px;
+   }
+   
+   .errorMsg{
+	color:red;
+	font-style: oblique;
+	font-weight: bold;
+	margin-left:50%;
 }
 </style>
 </head>
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <div id="div_shadow" class="py-5"">
-		<div class=" container">
+      <div class=" container">
         <div class="row">
             <div class="col-md-12">
-                <a href="<%=request.getContextPath()%>/front_end/shoppingCart/noodleShop.jsp">
-                    <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-
-                        結帳</h1>
+
+                <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-
+                    結帳</h1>
                 </a>
             </div>
         </div>
@@ -98,28 +105,29 @@ field>div {
                             <th width="100">備註</th>
                         </tr>
                         <%
-							MemberService memSrv = new MemberService();
-							MemberVO memVO = memSrv.getOne_Member("M000001");
-							System.out.println(memVO);
-							session.setAttribute("memVO", memVO);
-						%>
+                    MemberService memSrv = new MemberService();
+                    MemberVO memVO = memSrv.getOne_Member("M000001");
+                    System.out.println(memVO);
+                    session.setAttribute("memVO", memVO);
+                    %>
 
 
                         <%
-							@SuppressWarnings("unchecked")
-							Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
-							String amount = (String) request.getAttribute("amount");
-						%>
+                    @SuppressWarnings("unchecked")
+                    Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
+                    String amount = (String) request.getAttribute("amount");
+                    
+                    %>
                         <%
-							if (buylist != null && buylist.size() != 0) {
+                    if (buylist != null && buylist.size() != 0) {
 
-								for (int i = 0; i < buylist.size(); i++) {
-									MenuVO mv = buylist.get(i);
-									String name = mv.getMenu_Id();
-									Integer total = mv.getMenu_Price() * mv.getMenu_quantity();
-									Integer price = mv.getMenu_Price();
-									Integer quantity = mv.getMenu_quantity();
-						%>
+                    for (int i = 0; i < buylist.size(); i++) {
+                    MenuVO mv = buylist.get(i);
+                    String name = mv.getMenu_Id();
+                    Integer total = mv.getMenu_Price() * mv.getMenu_quantity();
+                    Integer price = mv.getMenu_Price();
+                    Integer quantity = mv.getMenu_quantity();
+                    %>
                         <tr>
                             <td width="200">
                                 <%=name%>
@@ -136,15 +144,15 @@ field>div {
                             <td width="120"></td>
                         </tr>
                         <%
-							}
+                }
 							} else if (buylist == null) { //發現購物車為空將提示
-						%>
+                          %>
                         <tr>
                             <td colspan='5' style='height: 150px; vertical-align: middle'><b class='center'>購物車裡沒有餐點!</b></td>
                         </tr>
                         <%
-							}
-						%>
+                    }
+                    %>
                         <c:if test="${not empty shoppingcart}">
 
                             <tr class="">
@@ -171,39 +179,48 @@ field>div {
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="<%=request.getContextPath()%>/front_end/orderform/checkoutServlet.do">
+                    <form method="post" action="checkoutServlet.do">
                         <%--送去orferform Serbvlet --%>
-                        <!--                     	<input type="hidden" name="action" value="insert"> -->
-                        <c:set var="action" value="insert" scope="session" />
+                        <input type="hidden" name="action" value="insert">
+                        <%--                         <c:set var="action" value="insert" scope="session" /> --%>
                         <legend>
                             <b>點餐資訊</b>
                         </legend>
                         <div class="form-row">
-                        
-                        <!--取餐方式 -->
+
+                            <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
-                                取餐方式: <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" /> <label class="form-check-label">
-                                    外帶 </label> <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;"> <label class="form-check-label">外送</label>
+                                <b>取餐方式:</b>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" />
+                                <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick='takeAway();'>
+                                <label class="form-check-label"><b>外送</b></label>
+                                <div class='errorMsg'>${errorMsgs.eatIn_takeAway}</div>
+
                             </p>
                             <!-- choose branch -->
                             <div class="form-group col-md-8">
                                 <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
-                                <b>取餐分店:</b> <select name="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;" onchange="submit()">
+                                <b>取餐分店:</b> <select name="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;">
                                     <option selected>請選擇
                                         <c:forEach var="brVO" items="${branchSvc.all}">
                                     <option value="${brVO.branch_No}">${brVO.branch_Name}
                                         </c:forEach> <input type="hidden" name="location" value="Checkout.jsp">
                                 </select>
+                                <div class='errorMsg'>${errorMsgs.branch_no }</div>
                             </div>
                             <!-- choose address -->
-                            <div class="form-group col-md-6">
-                                <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
+                            <div id='address' class='col-12 col-md-12' style="display:none;">
+                                <div class="form-group col-md-6" style="padding-left:0px">
+                                    <b>鄉鎮區市:</b> <br> <select class="custom-select col-md-4" style="display: inline" class="nice-select" name="mem_Recounty" id="city-list" style="display: none"></select> <select class="custom-select col-md-4" name="mem_Retown" class="nice-select custom-select" id="sector-list" style="display:"></select>
+                                    <div class='errorMsg'>${errorMsgs.countytwon}</div>
+                                </div>
+                                <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
+                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
+                                    <input type="hidden" name="deliv_addres">
+                                    <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-8" style="width: 80%; display:;">
-                                <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr"  	style="width: 80%; margin-top: 10px;">
-                                <input type="hidden" name="deliv_addres">
-                            </div>
-
 
                             <!-- 取餐時間 -->
 
@@ -220,63 +237,69 @@ field>div {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class='errorMsg'>${errorMsgs.time}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- payment -->
-                            <p class='col-12 col-md-8' style="padding-left: 5px;">
-                                <b>付款方式:</b> <br> <label>
-                                    <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button>
-                                </label> <label>
-                                    <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button>
+                            <!--                             <p class='col-12 col-md-8' style="padding-left: 5px;"> -->
+                            <!--                                 <b>付款方式:</b> <br> <label> -->
+                            <!--                                     <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button> -->
+                            <!--                                 </label> <label> -->
+                            <!--                                     <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button> -->
 
+                            <!--                                 </label> -->
+                            <!--                             </p> -->
+
+                            <div class="btn-group btn-group-toggle col-12 col-md-8" data-toggle="buttons" style="padding-left: 5px;">
+                                <b>付款方式:</b>
+                                <label class="btn btn-secondary active" onclick="cash()">
+                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off"> 現金
                                 </label>
-                            </p>
+                                <label class="btn btn-secondary" onclick="cardShow()">
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off"> 信用卡
+                                </label>
+                            </div><br>
                             <!-- credit card -->
                             <div id="card" class="demo-container" style="margin: 10px; display: none;">
                                 <div class="card-wrapper"></div>
 
                                 <div class="form-container active" style="margin: 10px;">
-                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;"> 
-                                    <input placeholder="Full name" type="text" name="name" style="margin: 5px;"> 
-                                    <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;"> 
+                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;">
+                                    <input placeholder="Full name" type="text" name="name" style="margin: 5px;">
+                                    <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;">
                                     <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
                                 </div>
                             </div>
-
                             <p class="form-group col-12 col-md-8">
                                 <label for="textarea">備註:</label>
                                 <textarea name="ps" id="textarea" class="form-control" cols="45" rows="4" style="resize: none; margin: auto;"></textarea>
                             </p>
 
-                            <!-- 						<p> -->
-                            <!-- 							<label for="time">Example time</label> <input type="time" -->
-                            <!-- 								id="time" /> -->
-                            <!-- 						</p> -->
 
-                            <!-- 						<p> -->
-                            <!-- 							<label for="output">Example output</label> -->
-                            <!-- 							<output name="result" id="output">100</output> -->
-                            <!-- 						</p> -->
                         </div>
                 </fieldset>
             </div>
         </div>
     </div>
     <!-- submit order -->
+    <%--     <c:if test="${not empty shoppingcart}"><!--確認購物車不為空 --> --%>
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-                <button class="btn btn-ligth" onclick="window.location.href='<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp' style=" margin: 5px;">繼續點餐</button>
+                <a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
 
-                <button type="submit" class="btn mr-auto" style="margin: 5px;">結帳</button>
-                </form>
+                <button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
+
             </div>
         </div>
     </div>
-
-
+    </form>
+    <%-- 	</c:if> --%>
+    <%-- 	<c:if test="${empty shoppingcart}"> --%>
+    <a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
+    <%-- 	</c:if> --%>
 
     <!-- Modal -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -297,7 +320,7 @@ field>div {
 					// 					for (CouponhistoryVO CouponhVO : list) {
 					// 						System.out.println(CouponhVO.getCoup_sn());
 					// 					}
-				%>
+                    %>
                 <!-- just for test -->
                 <%-- 				<c:out value="${memVO}" --%>
                 <%-- 					default="幹沒值!" /> --%>
@@ -345,8 +368,8 @@ field>div {
             $('#card').hide();
         }
 
-        function takeaway() {
-
+        function takeAway() {
+            $('#address').show();
         }
 
         function delivery() {

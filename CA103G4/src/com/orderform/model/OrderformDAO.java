@@ -39,8 +39,14 @@ public class OrderformDAO implements OrderformDAO_interface {
 																															// 寫方法
 																															// 進service
 																															// 給deliverey的
-	private static final String SELECT_ORDER_BY_MEMBUYED = "SELECT ORDER_NO, ORDER_PRICE FROM ORDERFORM WHERE MEM_NO=?";
+	private static final String SELECT_ORDER_BY_MEMBUYED = "SELECT ORDER_NO,MEM_NO, ORDER_PRICE FROM ORDERFORM WHERE MEM_NO=?";
 
+	private static final String SELECT_ONE_STMT=
+			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM WHERE MEM_NO=?";
+	private static final String SELECT_ALL_STMT=
+			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM ORDER BY MEM_NO";
+	
+	
 	@Override
 	public void insert(OrderformVO orderformVO) {
 
@@ -332,14 +338,14 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
-				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setDek_no(rs.getString("dek_no"));
-				orderformVO.setMem_no(rs.getString("mem_no"));
-				orderformVO.setDeliv_no(rs.getString("deliv_no"));
-				orderformVO.setOrder_type(rs.getInt("order_type"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
-				orderformVO.setOrder_status(rs.getInt("order_status"));
-				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
+				orderformVO.setOrder_no(rs.getString("order_No"));
+				orderformVO.setDek_no(rs.getString("dek_No"));
+				orderformVO.setMem_no(rs.getString("mem_No"));
+				orderformVO.setDeliv_no(rs.getString("deliv_No"));
+				orderformVO.setOrder_type(rs.getInt("order_Type"));
+				orderformVO.setOrder_price(rs.getInt("order_Price"));
+				orderformVO.setOrder_status(rs.getInt("order_Status"));
+				orderformVO.setOrder_pstatus(rs.getInt("order_Pstatus"));
 
 				list.add(orderformVO); // Store the row in the list
 			}
@@ -393,15 +399,15 @@ public class OrderformDAO implements OrderformDAO_interface {
 			while (rs.next()) {
 				// empVO 也稱為 Domain objects
 				orderformVO = new OrderformVO();
-				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setDek_no(rs.getString("dek_no"));
-				orderformVO.setMem_no(rs.getString("mem_no"));
-				orderformVO.setBranch_no(rs.getString("branch_no"));
-				orderformVO.setDeliv_no(rs.getString("deliv_no"));
-				orderformVO.setOrder_type(rs.getInt("order_type"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
-				orderformVO.setOrder_status(rs.getInt("order_status"));
-				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				orderformVO.setOrder_no(rs.getString("order_No"));
+				orderformVO.setDek_no(rs.getString("dek_No"));
+				orderformVO.setMem_no(rs.getString("mem_No"));
+				orderformVO.setBranch_no(rs.getString("branch_No"));
+				orderformVO.setDeliv_no(rs.getString("deliv_No"));
+				orderformVO.setOrder_type(rs.getInt("order_Type"));
+				orderformVO.setOrder_price(rs.getInt("order_Price"));
+				orderformVO.setOrder_status(rs.getInt("order_Status"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_Addres"));
 				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
 
 				list.add(orderformVO); // Store the row in the list
@@ -567,8 +573,8 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
-				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				orderformVO.setOrder_no(rs.getString("order_No"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_Addres"));
 				list.add(orderformVO);
 			}
 
@@ -604,7 +610,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	
 	@Override
 	public List<OrderformVO> getOrderNoByMemNo(String mem_No) {
-		List<OrderformVO> list = new ArrayList<OrderformVO>();
+		List<OrderformVO> list = new ArrayList();
 		OrderformVO orderformVO = null;
 
 		Connection con = null;
@@ -615,13 +621,14 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ORDER_BY_MEMBUYED);
+			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
-				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setMem_no(rs.getString("mem_no"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_no(rs.getString("order_No"));
+				orderformVO.setMem_no(rs.getString("mem_No"));
+				orderformVO.setOrder_price(rs.getInt("order_Price"));
 				list.add(orderformVO);
 			}
 
@@ -653,6 +660,64 @@ public class OrderformDAO implements OrderformDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	
+	
+	@Override
+	public OrderformVO findByForeignKey(String mem_No) {
+
+		OrderformVO orderformVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ONE_STMT);
+
+			pstmt.setString(1, mem_No);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// deliveryVO 也稱為 Domain objects
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setMem_no(rs.getString("mem_no"));
+				orderformVO.setOrder_price(rs.getInt("order_price"));
+
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return orderformVO;
 	}
 	
 

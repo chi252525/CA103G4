@@ -69,7 +69,7 @@ body {
 <body>
 <jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 <div class="py-5 " >
-    <div class="container">
+    <div class="container-fluid px-5">
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-tabs">
@@ -174,11 +174,18 @@ body {
 									pattern="yyyy/MM/dd-HH:mm" /></td>
                             <td><fmt:formatDate value="${activityVO.act_End}"
 									pattern="yyyy/MM/dd-HH:mm" /></td>
-                            <c:if test="${activityVO.act_Status==1}"><td>上架中</td></c:if>
-						   <c:if test="${activityVO.act_Status==0}"><td>下架</td></c:if>
+                         <td>  ${(activityVO.act_Status==1)?'上架中':'已下架'}</td>
                              <td>
-                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
+                             <input type="hidden" name="act_No"      value="${activityVO.act_No}">
+                             <input type="hidden" name="act_Status"      value="${activityVO.act_Status}">
+                             
+                             ${activityVO.act_Status==0?
+                             <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>:
                              <button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
+                              }
+                             </FORM>
+                             
                              </td>
                               <td>
                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do" style="margin-bottom: 0px;">
