@@ -81,6 +81,9 @@ public class EmpService {
 		return empVO;
 	}
 	
+	public List<EmpVO> getEmpAllByBranchNo(String branch_No) {
+		return dao.EmpVOfindByBranchNo(branch_No);
+	}
 	
 	
 	
