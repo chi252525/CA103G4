@@ -22,8 +22,8 @@
 
 
 <!--credit card-->
-<script src="<%=request.getContextPath()%>/front_end/shoppingCart/js/card.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/shoppingCart/css/card.css">
+<script src="js/card.js"></script>
+<link rel="stylesheet" href="css/card.css">
 <!-- address choosing -->
 <script src="<%=request.getContextPath()%>/front_end/member/js/selectaddress.js"></script>
 <style>
@@ -43,6 +43,14 @@
 .text-center {
 	text-align: center;
 }
+
+.errorMsg{
+	color:red;
+	font-style: oblique;
+	font-weight: bold;
+	margin-left:50%;
+	
+}
 </style>
 
 <head>
@@ -50,7 +58,7 @@
     <title>Insert title here</title>
 </head>
 
-<body>
+<body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <%
 		MemberService memSrv = new MemberService();         //模擬登入
 		MemberVO memVO = memSrv.getOne_Member("M000005");
@@ -66,13 +74,13 @@
                         <option selected>Open this select menu</option>
                         <option value="1">信用卡</option>
                     </select>
-                    <h3>儲值帳戶</h3>
+                    <h3 style="margin-top:15px;">儲值帳戶</h3>
                     <select class="custom-select" name="mem_No">
                         <option selected>Open this select menu</option>
-                        <option value="${memVO.mem_No}">${memVO.mem_Id}</option>
+                        <option value="${memVO.mem_No}" ${(memVO.mem_No==mem_No)? 'selected' :'' }>${memVO.mem_Id}</option>
                     </select>
-						<input type="hidden" name="stor_Point" value="${stor_Point}">
-						<input type="hidden" name="stor_Status" value="1">
+                    <input type="hidden" name="stor_Point" value="${stor_Point}">
+
                     <!-- credit card -->
                     <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
                         <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
@@ -96,12 +104,13 @@
                         </div>
 
                     </div>
-
+                    <a href="addNewtransaction.jsp" class="btn btn-light">上一步</a>
                     <button type="submit" class="btn btn-light" name="action" value="insert">確認送出</button>
                 </form>
             </div>
             <div class="col-md-4 .offset-md-4" style="margin: 60px">
-             	   要儲值的商品為: ${stor_Point} 點</div>
+                <h1> 要儲值的商品為: ${stor_Point} 竹幣</h1>
+            </div>
         </div>
     </div>
     <jsp:include page="/front_end/footer.jsp" />

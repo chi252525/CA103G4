@@ -164,7 +164,7 @@ code {
     <title>Insert title here</title>
 </head>
 
-<body>
+<body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <div class="container col-12" style="height:400px">
         <div class="row">
             <div class="col-md-6 center">
@@ -176,19 +176,19 @@ code {
                 <form method="post" action="storedrecord.do">
                     <div class="inputGroup">
                         <input id="radio1" name="stor_Point" type="radio" value="500" />
-                        <label for="radio1">500</label>
+                        <label for="radio1">500竹幣</label>
                     </div>
                     <div class="inputGroup">
                         <input id="radio2" name="stor_Point" type="radio" value="1000" />
-                        <label for="radio2">1000</label>
+                        <label for="radio2">1000竹幣</label>
                     </div>
                     <div class="inputGroup">
                         <input id="radio2" name="stor_Point" type="radio" value="1500" />
-                        <label for="radio2">1500</label>
+                        <label for="radio2">1500竹幣</label>
                     </div>
                     <div class="inputGroup">
                         <input id="radio2" name="stor_Point" type="radio" value="2000" />
-                        <label for="radio2">2000</label>
+                        <label for="radio2">2000竹幣</label>
                     </div>
                     <button type="submit" class="btn" name="action" value="getPoint">儲值點數</button>
                 </form>

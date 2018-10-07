@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -193,77 +194,94 @@ public class StoredrecordServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
+
 				String mem_No = req.getParameter("mem_No");
-//				String regexMem = "^M\\d{6}$";
-				MemberService memsrv = new MemberService();
-				List<MemberVO> memlist = memsrv.getAll();
+				String card_number = null;
+				String full_name = null;
+				String expiry = null;
+				String cvc = null;
+				// 信用卡資料判斷
+				card_number = req.getParameter("number");// 取得卡號
+				String card_number_regx = "^\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}$";
 
-//				if (mem_No == null || mem_No.trim().length() == 0) {
-//					errorMsgs.add("請輸入會員編號");
-//				} else if (!mem_No.matches(regexMem)) {
-//					errorMsgs.add("會員編號必須是大寫英文字母A-Z加上5個數字");
-//				}
-				MemberVO memVO = memsrv.getOne_Member(mem_No);
-				// 判斷member 資料庫裡是否有輸入的會員編號mem_No
-//				if (!memlist.contains(memVO)) {
-//					errorMsgs.add("會員編號不存在");
-//				}
-				Timestamp stor_Date = new Timestamp(System.currentTimeMillis()); ;
-//				try {
-//					stor_Date = Timestamp.valueOf(req.getParameter("stor_Date").trim());
-//				} catch (IllegalArgumentException ie) {
-//					stor_Date = new Timestamp(System.currentTimeMillis());
-//					errorMsgs.add("請選取日期");
-//				}
-//				try {
-				System.out.println("stor_Point="+req.getParameter("stor_Point"));
-				 Integer stor_Point = new Integer(req.getParameter("stor_Point"));
-//				} catch (NumberFormatException ne) {
-//					errorMsgs.add("點數請輸入數字");
-//				}
+				if (card_number == null || card_number.trim().length() == 0) {
+					errorMsgs.put("card_number", "請輸入卡號");
 
-//				Integer drew_Point = null;
-//				try {
-//					drew_Point = Integer.parseInt(req.getParameter("drew_Point").trim());
-//				} catch (NumberFormatException ne) {
-//					errorMsgs.add("點數請輸入數字");
-//				}
-				Integer stor_Status = null;
-				try {
-					System.out.println("stor_Status="+req.getParameter("stor_Status"));
-					stor_Status = Integer.parseInt(req.getParameter("stor_Status"));
-					if (stor_Status != 1 && stor_Status != 0) {
-						stor_Status = 0;
-						errorMsgs.put("stor_Status","請輸入1或0");
-					}
-				} catch (NumberFormatException ne) {
-					stor_Status = 0;
-					errorMsgs.put("stor_Status","狀態請輸入1或0");
+				} else if (!card_number.matches(card_number_regx)) {
+					errorMsgs.put("card_number", "卡號為16位阿拉伯數字");
 				}
 
-				StoredrecordVO srVO = new StoredrecordVO();
-				srVO.setMem_No(mem_No);
-				srVO.setStor_Date(stor_Date);
-				srVO.setStor_Point(stor_Point);
-//				srVO.setDrew_Point(drew_Point);
-				srVO.setStor_Status(stor_Status);
+				full_name = req.getParameter("name");// 取得持卡人姓名
+				String full_name_regx = "^[(\u4e00-\u9fa5)(a-zA-Z)]++-[(\\u4e00-\\u9fa5)(a-zA-Z)]++";
+
+				if (full_name == null || full_name.trim().length() == 0) {
+
+					errorMsgs.put("full_name", "請輸入持卡人姓名");
+				} else if (!full_name.trim().matches(full_name_regx)) {
+					errorMsgs.put("full_name", "持卡人姓名為中英文字且不可有空格(eg.Kevin-Tsai)");
+				}
+
+				expiry = req.getParameter("expiry");// 取得卡片期限
+				String expiry_regx = "^0[1-9]||1[0-2]\\s/\\s\\d{2}$";
+
+				if (expiry == null || expiry.trim().length() == 0) {
+					errorMsgs.put("expiry", "請輸卡限");
+
+				} else if (!expiry.matches(expiry_regx)) {
+					errorMsgs.put("expiry", "年月格式:MM/YY");
+				}
+
+				cvc = req.getParameter("cvc");// 取得安全碼
+				String cvc_regx = "^\\d{3}$";
+				if (cvc == null || cvc.trim().length() == 0) {
+
+					errorMsgs.put("cvc", "請輸入安全碼");
+				} else if (!cvc.matches(cvc_regx)) {
+					errorMsgs.put("cvc", "安全碼須為3個數字");
+				}
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("StoredrecordVO", srVO);// 含有輸入格式錯誤的empVO物件,也存入req
-					req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
-					return;// 有錯誤,返回addStoredrecord
+					// 剛寫的錯誤資料依然回傳
+
+					// credit card
+					req.setAttribute("card_number", card_number);
+					req.setAttribute("name", full_name);
+					req.setAttribute("expiry", expiry);
+					req.setAttribute("cvc", cvc);
+					req.setAttribute("mem_No", mem_No);
+
+					RequestDispatcher failureView = req.getRequestDispatcher("addNewtransaction2.jsp");
+					failureView.forward(req, res);
+					return;// 中斷
 				}
-				// =============開始新增====================
+
+				Timestamp stor_Date = new Timestamp(System.currentTimeMillis());
+				Integer stor_Point = new Integer(req.getParameter("stor_Point"));
+//				System.out.println("stor_Point="+req.getParameter("stor_Point"));
+				Integer stor_Status = null;
+
+//				StoredrecordVO srVO = new StoredrecordVO();
+//				srVO.setMem_No(mem_No);
+//				srVO.setStor_Date(stor_Date);
+//				srVO.setStor_Point(stor_Point);
+//				srVO.setStor_Status(stor_Status);
+//
+//				if (!errorMsgs.isEmpty()) {
+//					req.setAttribute("StoredrecordVO", srVO);// 含有輸入格式錯誤的empVO物件,也存入req
+//					req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
+//					return;// 有錯誤,返回addStoredrecord
+//				}
+				// =============開始儲值(儲值成功)====================
 				StoredrecordService stsvc = new StoredrecordService();
+				stor_Status = 1;
 				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
-				req.getRequestDispatcher("/front_end/storedrecord/listAllStoredrecord.jsp").forward(req, res);
-				// =====================其他可能錯誤=========================
+				req.getRequestDispatcher(req.getContextPath()+"/front_end/menu/listAllMenu4.jsp").forward(req, res);
+				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
-				errorMsgs.put("修改資料失敗:" , e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/addStoredrecord.jsp").forward(req, res);
+				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");
+				req.getRequestDispatcher("addNewtransaction2.jsp").forward(req, res);
 			}
 		}
 
