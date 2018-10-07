@@ -78,6 +78,7 @@ public class MenuServlet extends HttpServlet{
 				errorMsgs.add("無法取得資料" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/select_page.jsp");
 				failureView.forward(req, res);
+				
 			}
 			
 		}
@@ -379,6 +380,89 @@ public class MenuServlet extends HttpServlet{
 			}
 			
 		}
+		
+		
+		if("getOne_For_Update2".equals(action)){  // 來自listAllMenu1-1.jsp的請求
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數****************************************/
+				String menu_No = req.getParameter("menu_No").trim();
+				
+				/***************************2.開始查詢資料****************************************/
+				MenuService menuSvc = new MenuService();
+				MenuVO menuVO = menuSvc.getOneMenu(menu_No);
+								
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("menuVO", menuVO);
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/Menu_management.jsp");
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("無法取得要修改的資料" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/Menu_management.jsp.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
+		
+		if("update2".equals(action)) {  
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				/***************************1.接收請求參數****************************************/
+				String menu_No = req.getParameter("menu_No").trim();
+				
+//***********************************************************************************************
+				
+				//無輸入OR格式不正確
+				String str = req.getParameter("menu_Status");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入餐點狀態");
+				}
+				Integer menu_Status = null;
+				try {
+					menu_Status = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("餐點狀態格式不正確");
+				}
+				
+				MenuVO menuVO = new MenuVO();
+				menuVO.setMenu_No(menu_No);
+				menuVO.setMenu_Status(menu_Status);
+				
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("menuVO", menuVO);  // 含有輸入格式錯誤的menuVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/menu/Menu_management.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				
+				/***************************2.開始修改資料****************************************/
+				MenuService menuSvc = new MenuService();
+				menuVO = menuSvc.updateMenu2(menu_No, menu_Status);
+								
+				/***************************3.修改完成,準備轉交(Send the Success view)************/
+				req.setAttribute("menuVO", menuVO);  // 資料庫修改成功後,正確的的menuVO物件,存入req
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/menu/Menu_management.jsp");
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("資料修改失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/menu/Menu_management.jsp");
+				failuerView.forward(req, res);
+			}
+		}
+		
+		
+
 		
 		
 		

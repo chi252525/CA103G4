@@ -42,7 +42,7 @@
 <style>
   table {
     
-	width: 960px;
+	width: 1440px;
 	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -54,13 +54,13 @@
   table, th, td {
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
-    text-align: left;
+    text-align: center;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
   th, td {
     padding: 5px;
-    text-align: left;
+    text-align: center;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
@@ -69,44 +69,12 @@
 
 </style>
 
-<script type="text/javascript">
-
-$(document).ready(function (){
-
-    function format_float(num, pos)
-    {
-        var size = Math.pow(10, pos);
-        return Math.round(num * size) / size;
-    }
-
-    function preview(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            var index = 0//input.name.slice(-1);
-            reader.onload = function (e) {
-                $('.preview:eq('+index+')').attr('src', e.target.result);
-                var KB = format_float(e.total / 1024,2);
-                $('.size:eq('+index+')').text("檔案大小：" + KB + " KB");               
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-    }
-
-    $("body").on("change", ".menu_Photo", function (){
-        preview(this);
-    })
-    
-})
-</script>
 
 </head>
 <body bgcolor='white'>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
-
+1111111111111111111111111111111111111111111111111111111111
 <table id="table-1">
 	<tr><td>
 		 <h3>資料修改 - update_menu_input.jsp</h3>
@@ -132,44 +100,44 @@ $(document).ready(function (){
 		<td>餐點編號:<font color=red><b>*</b></font></td>
 		<td><%=menuVO.getMenu_No()%></td>
 	</tr>
-	<tr>
-		<td>餐點名稱:</td>
-		<td><input type="TEXT" name="menu_Id" size="45"	value="<%=menuVO.getMenu_Id()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點類型:</td>
-		<td><input type="TEXT" name="menu_Type" size="45"	value="<%=menuVO.getMenu_Type()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點價格:</td>
-		<td><input type="TEXT" name="menu_Price" size="45"	value="<%=menuVO.getMenu_Price()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點介紹:</td>
-		<td><input type="textarea" name="menu_Intro" size="45"	value="<%=menuVO.getMenu_Intro()%>" /></td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>餐點名稱:</td> -->
+<%-- 		<td><input type="hidden" name="menu_Id" size="45"	value="<%=menuVO.getMenu_Id()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點類型:</td> -->
+<%-- 		<td><input type="hidden" name="menu_Type" size="45"	value="<%=menuVO.getMenu_Type()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點價格:</td> -->
+<%-- 		<td><input type="hidden" name="menu_Price" size="45"	value="<%=menuVO.getMenu_Price()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點介紹:</td> -->
+<%-- 		<td><input type="hidden" name="menu_Intro" size="45"	value="<%=menuVO.getMenu_Intro()%>" /></td> --%>
+<!-- 	</tr> -->
 	
-	<tr>
-		<td>餐點圖片:</td>
-		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>餐點圖片:</td> -->
+<!-- 		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td> -->
+<!-- 	</tr> -->
 	
 	<tr>
 		<td>餐點狀態:</td>
-		<td><input type="number" name="menu_Status" max="1" min="0" size="3" value="<%=menuVO.getMenu_Status()%>" /></td>
+		<td><input type="number" name="menu_Status" max="1" min="0" size="45" value="<%=menuVO.getMenu_Status()%>" /></td>
 	</tr>
-	<tr>
-		<td>
-	        <p>ImgPreview</p>
-	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
-	        <div class="size"></div>
-		</td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td> -->
+<!-- 	        <p>ImgPreview</p> -->
+<!-- 	     	<img class="preview" style="max-width: 200px; max-height: 200px;"> -->
+<!-- 	        <div class="size"></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 	
 </table>
 
 <br>
-<input type="hidden" name="action" value="update">
+<input type="hidden" name="action" value="update2">
 <input type="hidden" name="menu_No" value="<%=menuVO.getMenu_No()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>

@@ -53,8 +53,8 @@ public class MenuDAO implements MenuDAO_interface {
 			"ON MENU.MENU_NO=orderinvoice.menu_no " + 
 			"WHERE orderinvoice.menu_no IS NOT NULL AND " + 
 			"mem_no=?";
-	
-	
+	//只依據menu_No去修改Menu_status
+	private static final String UPDATE_STMT2 = "UPDATE MENU SET MENU_STATUS=? WHERE MENU_NO=?";
 	
 	@Override
 	public void insert(MenuVO menuVO) {
@@ -75,7 +75,7 @@ public class MenuDAO implements MenuDAO_interface {
 			pstmt.setString(4, menuVO.getMenu_Intro());
 			pstmt.setBytes(5, menuVO.getMenu_Photo());
 			pstmt.setInt(6, menuVO.getMenu_Status());
-			int rowCount =pstmt.executeUpdate();
+			int rowCount = pstmt.executeUpdate();
 //			System.out.println("新增 " + rowCount + " 筆資料");
 			
 		} catch (SQLException se) {
@@ -367,6 +367,43 @@ public class MenuDAO implements MenuDAO_interface {
 		}
 		return menuVOList;
 	}
+	
+	@Override
+	public void update2(MenuVO menuVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT2);
+
+			pstmt.setInt(1, menuVO.getMenu_Status());
+			pstmt.setString(2, menuVO.getMenu_No());
+			
+			int rowCount =pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
 	
 	
 }

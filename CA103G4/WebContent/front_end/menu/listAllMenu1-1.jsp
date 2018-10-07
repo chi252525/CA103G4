@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>listAllMenu.jsp</title>
+<title>listAllMenu1-1.jsp</title>
 
 <style>
   table#table-1 {
@@ -73,7 +73,7 @@
 <h4></h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>listAllMenu.jsp</h3>
+		 <h3>listAllMenu1-1.jsp</h3>
 		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -91,11 +91,11 @@
 <table>
 	<tr>
 		<th>餐點編號</th>
-		<th>餐點名稱</th>
-		<th>餐點類型</th>
-		<th>餐點價格</th>
-		<th>餐點介紹</th>
-		<th>餐點圖片</th>
+<!-- 		<th>餐點名稱</th> -->
+<!-- 		<th>餐點類型</th> -->
+<!-- 		<th>餐點價格</th> -->
+<!-- 		<th>餐點介紹</th> -->
+<!-- 		<th>餐點圖片</th> -->
 		<th>餐點狀態</th>
 		<th>修改</th>
 <!-- 		<th>刪除</th> -->
@@ -105,17 +105,18 @@
 		
 		<tr>
 			<td>${menuVO.getMenu_No()}</td>
-			<td>${menuVO.getMenu_Id()}</td>
-			<td>${menuVO.getMenu_Type()}</td>
-			<td>${menuVO.getMenu_Price()}</td>
-			<td>${menuVO.getMenu_Intro()}</td>
-			<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td>
+<%-- 			<td>${menuVO.getMenu_Id()}</td> --%>
+<%-- 			<td>${menuVO.getMenu_Type()}</td> --%>
+<%-- 			<td>${menuVO.getMenu_Price()}</td> --%>
+<%-- 			<td>${menuVO.getMenu_Intro()}</td> --%>
+<%-- 			<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td> --%>
 			<td>${menuVO.getMenu_Status()}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="menu_No"  value="${menuVO.menu_No}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Update2">
+			  </FORM>
 			</td>
 <!-- 			<td> -->
 <!-- 			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;"> -->
@@ -123,7 +124,8 @@
 <!-- 			     從page1.file取得的參數，藉由hidden value傳到下個頁面，可以在刪除一筆資料後繼續停留在該頁面 -->
 <%-- 			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> --%>
 <%-- 			     <input type="hidden" name="menu_No" value="${menuVO.menu_No}"> --%>
-<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
+<!-- 			     <input type="hidden" name="action" value="delete"> -->
+<!-- 			  </FORM> -->
 <!-- 			</td> -->
 		</tr>
 		
