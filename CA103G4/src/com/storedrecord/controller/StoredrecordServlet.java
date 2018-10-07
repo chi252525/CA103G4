@@ -277,7 +277,7 @@ public class StoredrecordServlet extends HttpServlet {
 				stor_Status = 1;
 				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
-				req.getRequestDispatcher(req.getContextPath()+"/front_end/menu/listAllMenu4.jsp").forward(req, res);
+				req.getRequestDispatcher(req.getContextPath() + "/front_end/menu/listAllMenu4.jsp").forward(req, res);
 				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
 				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");
@@ -286,9 +286,14 @@ public class StoredrecordServlet extends HttpServlet {
 		}
 
 		if ("getPoint".equals(action)) {
-			Integer stor_Point = new Integer(req.getParameter("stor_Point"));
-			req.setAttribute("stor_Point", stor_Point);
-			req.getRequestDispatcher("/front_end/storedrecord/addNewtransaction2.jsp").forward(req, res);
+			try {
+				Integer stor_Point = new Integer(req.getParameter("stor_Point"));
+				req.setAttribute("stor_Point", stor_Point);
+				req.getRequestDispatcher("/front_end/storedrecord/addNewtransaction2.jsp").forward(req, res);
+			} catch (Exception e) {
+				req.getRequestDispatcher("/front_end/storedrecord/addNewtransaction.jsp").forward(req, res);
+			}
+
 		}
 
 		if ("delete".equals(action)) {
