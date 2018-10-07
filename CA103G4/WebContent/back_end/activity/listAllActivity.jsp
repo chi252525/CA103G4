@@ -177,6 +177,14 @@ body {
                         				已上架
                         			</a>
                    			 	</li>
+                   			 	
+                   			 	
+                   			 	<li class="<%=request.getAttribute("listActsByCompositeQuery") == null ? "" :"active" %>">
+                        			<a class="nav-link" href="#" data-toggle="tab">
+                        				查詢結果
+                        			</a>
+                   			 	</li>
+                   			 	
                     		</ul>
             
             <div id="adTabContent" class="tab-content  ui piled segment">
@@ -187,7 +195,7 @@ body {
 			                        	<thead>
 			                        		<th>#</th>
                             <th>活動名稱</th>
-                            <th>優惠卷類別編號</th>
+                            <th>活動分類</th>
                             <th>預計上架日</th>
                             <th>活動起始日</th>
                             <th>下架日</th>
@@ -212,7 +220,7 @@ body {
 			                        	<thead>
 			                        		<th>#</th>
                             <th>活動名稱</th>
-                            <th>優惠卷類別編號</th>
+                            <th>活動分類</th>
                             <th>預計上架日</th>
                             <th>活動起始日</th>
                             <th>下架日</th>
@@ -231,6 +239,33 @@ body {
 			                        </table> 
 			                      
                     			</div>	
+                    			
+                    			
+                    		<!-- 查詢結果 -->
+                    		
+                    		<div id="offContent" class="tab-pane fade <%=request.getAttribute("listActsByCompositeQuery") == null ? "" :"active" %>">
+			                   	<!-- 未上架的廣告 -->
+			                   		<br>
+			                        <table class="table">
+			                        	<thead>
+			                        		<th>#</th>
+                            <th>活動名稱</th>
+                            <th>活動分類</th>
+                            <th>預計上架日</th>
+                            <th>活動起始日</th>
+                            <th>下架日</th>
+                            <th>狀態</th>
+                            <th>操作</th>
+                            <th>修改</th>
+			                        	</thead>
+			                        	
+			                        	<c:forEach var="activityVO" items="${list}">
+												<%@ include file="Content.file" %>
+										</c:forEach>	
+			            
+			                        </table> 
+                    			</div>
+                    		
                     		
                     			</div>
             

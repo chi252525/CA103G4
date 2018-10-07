@@ -96,6 +96,14 @@
     <url-pattern>/AndroidBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AndroidReservationServlet</servlet-name>
+    <servlet-class>android.com.reservation.controller.AndroidReservationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidReservationServlet</servlet-name>
+    <url-pattern>/AndroidReservationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PerntdServlet</servlet-name>
     <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
   </servlet>

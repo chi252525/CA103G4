@@ -75,16 +75,16 @@ var $JUI1 = $.noConflict(true);
 								<div class="form-group">
 								<label class="text-dark">廣告標題</label> 
 									<input type="text" class="form-control" placeholder="輸入廣告標題"
-										name="act_Name" value="<%=activityVO.getAct_Name()%>"required> 
+										name="act_Name" value="<%=activityVO.getAct_Name()%>" required> 
 								</div>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-md-6">
 											<label for="sel1" class="text-dark">廣告分類</label> 
 											<select	class="form-control" id="sel1" name="act_Cat" >
-												<option value="${(activityVO.act_Cat==AC1)?'selected':'' }">新品上市
-												<option value="${(activityVO.act_Cat==AC2)?'selected':'' }">優惠折扣
-												<option value="${(activityVO.act_Cat==AC3)?'selected':'' }">分店限定
+												<option value="AC1" selected="${(activityVO.act_Cat==AC1)?'selected':'' }">新品上市
+												<option value="AC2" selected="${(activityVO.act_Cat==AC2)?'selected':'' }">優惠折扣
+												<option value="AC3" selected="${(activityVO.act_Cat==AC3)?'selected':'' }">分店限定
 											</select> <label for="sel2" class="text-dark">欲宣傳的優惠卷</label> <select
 												multiple="1" class="form-control" id="sel2" name="coucat_No">
 												<c:forEach var="coucatVO" items="${couSvc.all}">

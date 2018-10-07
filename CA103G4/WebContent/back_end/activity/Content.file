@@ -6,7 +6,20 @@
           <tr ${(activityVO.act_No==param.act_No) ? 'bgcolor=#CCCCFF':''}>
           <td>${activityVO.act_No}</td>
             <td>${activityVO.act_Name}</td>
-            <td>${activityVO.coucat_No}</td>   
+            
+            
+            <c:if test='${activityVO.act_Cat.equals("AC1")}'>
+							<td>新品上市</td>
+						</c:if>
+                <c:if test='${activityVO.act_Cat.equals("AC2")}'>
+							<td>優惠活動</td>
+						</c:if> 
+			   <c:if test='${activityVO.act_Cat.equals("AC3")}'>
+							<td>分店限定</td>
+						</c:if> 
+            
+         
+          
              <td>	<fmt:formatDate value="${activityVO.act_PreAddTime}"
 					pattern="yyyy/MM/dd-HH:mm" /></td>
              <td><fmt:formatDate value="${activityVO.act_Start}"

@@ -28,6 +28,8 @@ import javax.servlet.http.Part;
 
 import com.activity.model.ActivityService;
 import com.activity.model.ActivityVO;
+import com.post.model.PostService;
+import com.post.model.PostVO;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 8 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -319,15 +321,14 @@ public class ActivityServlet extends HttpServlet {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				System.out.println("update in");
-				byte[] pic1 = null;
-				byte[] pic2 = null;
-				ByteArrayOutputStream baos=null;
+				
 				
 				Timestamp preAdd = null ;
 				Timestamp preOff = null ;
 				try {
 					String act_No = req.getParameter("act_No");
 					String act_Name = req.getParameter("act_Name");
+					System.out.println("act_Name"+act_Name);
 					if(act_Name == null || act_Name.trim().length() == 0) {
 						errorMsgs.add("標題：請勿空白");
 					}else if(act_Name.trim().length()<2||act_Name.trim().length()>30){
@@ -350,22 +351,44 @@ public class ActivityServlet extends HttpServlet {
 					}
 					
 					
-					Part act_Carousel = req.getPart("act_Carousel");
-					if(getFileNameFromPart(act_Carousel) == null) {
-						ActivityService actSvc = new ActivityService();
-						ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-						pic1 = advo_DB.getAct_Carousel();
-					}else if(!getFileNameFromPart(act_Carousel).matches(ad_PicReg)) {
-						errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");					}
 					
+					byte[] act_Carousel = null;
+					Part part = req.getPart("act_Carousel");
+					try {
+						String filename = getFileNameFromPart(part);
+						if (filename != null && part.getContentType() != null) {
+							InputStream in = part.getInputStream();
+							act_Carousel = new byte[in.available()];
+							in.read(act_Carousel);
+							in.close();
+						} else {
+							ActivityService actSvc = new ActivityService();
+							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
+							act_Carousel = advo_DB.getAct_Carousel();
+						}
+					} catch (FileNotFoundException fe) {
+						fe.printStackTrace();
+					}
+					
+					
+					byte[] act_Pic = null;
+					Part part2 = req.getPart("act_Pic");
+					try {
+						String filename = getFileNameFromPart(part2);
+						if (filename != null && part2.getContentType() != null) {
+							InputStream in = part2.getInputStream();
+							act_Pic = new byte[in.available()];
+							in.read(act_Pic);
+							in.close();
+						} else {
+							ActivityService actSvc = new ActivityService();
+							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
+							act_Pic = advo_DB.getAct_Pic();
+						}
+					} catch (FileNotFoundException fe) {
+						fe.printStackTrace();
+					}
 
-					Part act_Pic = req.getPart("act_Pic");
-					if(getFileNameFromPart(act_Pic) == null) {
-						ActivityService actSvc = new ActivityService();
-						ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-						pic2 = advo_DB.getAct_Pic();
-					}else if(!getFileNameFromPart(act_Pic).matches(ad_PicReg)) {
-						errorMsgs.add("圖片格式不符(.jpg/jpeg/bmp/gif/png)。");	}
 					//預計上架時間判斷
 					SimpleDateFormat time_format = new SimpleDateFormat("yyyy-MM-dd kk:mm");
 					String addTime = req.getParameter("act_PreAddTime");
@@ -392,8 +415,8 @@ public class ActivityServlet extends HttpServlet {
 					activityVO.setAct_Cat(act_Cat);
 					activityVO.setAct_Name(act_Name);
 					activityVO.setCoucat_No(coucat_No);
-					activityVO.setAct_Carousel(pic1);
-					activityVO.setAct_Pic(pic2);
+					activityVO.setAct_Carousel(act_Carousel);
+					activityVO.setAct_Pic(act_Pic);
 					
 					//以上驗證有錯誤訊息的判斷
 					if(!errorMsgs.isEmpty()) {
@@ -403,38 +426,10 @@ public class ActivityServlet extends HttpServlet {
 						return;
 					}
 					//************************第二步：新增資料**************************
-					if(getFileNameFromPart(act_Carousel) != null) {
-						InputStream is = act_Carousel.getInputStream();
-						baos = new ByteArrayOutputStream();
-						byte[] buf = new byte[is.available()];
-						
-						int len = 0 ;
-						while((len = is.read(buf))!=-1) {
-							baos.write(buf,0,len);
-						}
-						baos.close();
-						is.close();
-						
-						pic1=baos.toByteArray();
-					}
 					
-					if(getFileNameFromPart(act_Pic) != null) {
-						InputStream is = act_Pic.getInputStream();
-						baos = new ByteArrayOutputStream();
-						byte[] buf = new byte[is.available()];
-						
-						int len = 0 ;
-						while((len = is.read(buf))!=-1) {
-							baos.write(buf,0,len);
-						}
-						baos.close();
-						is.close();
-						
-						pic2=baos.toByteArray();
-					}
 					ActivityService actSvc =new ActivityService();
 					actSvc.updateActivity(act_No,coucat_No,act_Cat,
-							act_Name,pic1,pic2,act_Content,preAdd,
+							act_Name,act_Carousel,act_Pic,act_Content,preAdd,
 							preOff);
 					//************************第三步：新增完成，準備提交**************************
 					String url = "/back_end/activity/listAllActivity.jsp";
@@ -461,6 +456,22 @@ public class ActivityServlet extends HttpServlet {
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
 		//取出副檔名
 		String fnameExt = filename.substring(filename.lastIndexOf(".")+1,filename.length()).toLowerCase();
+		if (filename.length() == 0) {
+			return null;
+		}
+		return fnameExt;
+	}
+	
+	public String getFileName(Part part) {
+		
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+//		System.out.println(header);
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename);  //測試用
+		//取出副檔名
+		String fnameExt = filename.substring(filename.lastIndexOf(".")+1,filename.length()).toLowerCase();
+		System.out.println("fnameExt=" + fnameExt);  //測試用
 		if (filename.length() == 0) {
 			return null;
 		}
