@@ -15,12 +15,10 @@ public class jdbcUtil_CompositeQuery {
 
 		String aCondition = null;
 
-		if ("act_No".equals(columnName) || "coucat_No".equals(columnName) ) // 用於其他
+		if ("act_Cat".equals(columnName) || "coucat_No".equals(columnName)) // 用於其他
 			aCondition = columnName + "=" + value;
-		else if ( "act_Name".equals(columnName)) // 用於varchar
+		else if ("act_Name".equals(columnName)|| "act_No".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("act_PreAddTime".equals(columnName))                          // 用於Oracle的date
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
 
 		return aCondition + " ";
 	}
@@ -48,23 +46,23 @@ public class jdbcUtil_CompositeQuery {
 		return whereCondition.toString();
 	}
 
-	public static void main(String argv[]) {
-
-		// 配合 req.getParameterMap()方法 回傳 java.util.Map<java.lang.String,java.lang.String[]> 之測試
-		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("empno", new String[] { "7001" });
-		map.put("ename", new String[] { "KING" });
-		map.put("job", new String[] { "PRESIDENT" });
-		map.put("hiredate", new String[] { "1981-11-17" });
-		map.put("sal", new String[] { "5000.5" });
-		map.put("comm", new String[] { "0.0" });
-		map.put("deptno", new String[] { "10" });
-		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
-
-		String finalSQL = "select * from emp2 "
-				          + jdbcUtil_CompositeQuery.get_WhereCondition(map)
-				          + "order by empno";
-		System.out.println("●●finalSQL = " + finalSQL);
-
-	}
+//	public static void main(String argv[]) {
+//
+//		// 配合 req.getParameterMap()方法 回傳 java.util.Map<java.lang.String,java.lang.String[]> 之測試
+//		Map<String, String[]> map = new TreeMap<String, String[]>();
+//		map.put("empno", new String[] { "7001" });
+//		map.put("ename", new String[] { "KING" });
+//		map.put("job", new String[] { "PRESIDENT" });
+//		map.put("hiredate", new String[] { "1981-11-17" });
+//		map.put("sal", new String[] { "5000.5" });
+//		map.put("comm", new String[] { "0.0" });
+//		map.put("deptno", new String[] { "10" });
+//		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
+//
+//		String finalSQL = "select * from emp2 "
+//				          + jdbcUtil_CompositeQuery.get_WhereCondition(map)
+//				          + "order by empno";
+//		System.out.println("●●finalSQL = " + finalSQL);
+//
+//	}
 }

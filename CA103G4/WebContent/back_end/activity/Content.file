@@ -1,0 +1,58 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<tbody>
+          <tr ${(activityVO.act_No==param.act_No) ? 'bgcolor=#CCCCFF':''}>
+          <td>${activityVO.act_No}</td>
+            <td>${activityVO.act_Name}</td>
+            
+            
+            <c:if test='${activityVO.act_Cat.equals("AC1")}'>
+							<td>新品上市</td>
+						</c:if>
+                <c:if test='${activityVO.act_Cat.equals("AC2")}'>
+							<td>優惠活動</td>
+						</c:if> 
+			   <c:if test='${activityVO.act_Cat.equals("AC3")}'>
+							<td>分店限定</td>
+						</c:if> 
+            
+         
+          
+             <td>	<fmt:formatDate value="${activityVO.act_PreAddTime}"
+					pattern="yyyy/MM/dd-HH:mm" /></td>
+             <td><fmt:formatDate value="${activityVO.act_Start}"
+					pattern="yyyy/MM/dd-HH:mm" /></td>
+            <td><fmt:formatDate value="${activityVO.act_End}"
+					pattern="yyyy/MM/dd-HH:mm" /></td>
+         <td>  ${(activityVO.act_Status==1)?'上架中':'未上架'}</td>
+             <td>
+             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do">
+             <input type="hidden" name="act_No"      value="${activityVO.act_No}">
+           <input type="hidden" name="act_Status"      value="${activityVO.act_Status}">
+             <input type="hidden" name="action" value="RightNow_UpdateStat">
+             ${activityVO.act_Status==0?
+             '<input type="hidden" name="act_Status" value="1">
+             <button type="submit" class="btn btn-success"><span class="lnr lnr-arrow-up"></span></button>':
+             '<input type="hidden" name="act_Status" value="0">
+             <button type="submit" class="btn btn-danger"><span class="lnr lnr-arrow-down"></span></button>'
+              }
+             </FORM>
+                
+             </td>
+              <td>
+               <form METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do"> 
+ 				<input type="hidden" name="act_No"      value="${activityVO.act_No}">
+ 				<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+ 				<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+ 				<input type="hidden" name="action"	    value="getOne_For_Update">
+ 				  ${activityVO.act_Status==0?'
+              <button type="submit" class="btn btn-secondary"><span class="lnr lnr-pencil"></span></button>':
+              '<button type="button" class="btn btn-secondary  disabled"><span class="lnr lnr-pencil"></span></button>'}
+             </form>
+              </td>
+                          </tr>
+                    
+                        </tbody>
+                       

@@ -104,6 +104,7 @@ pageContext.setAttribute("branlist",branlist);
                     <option value="經理">經理</option>
                     <option value="服務生">服務生</option>
                     <option value="外送員">外送員</option>
+                    <option value="櫃台人員">外送員</option>
                     <option value="客服人員">客服人員</option>
                 </select>    
             </td>

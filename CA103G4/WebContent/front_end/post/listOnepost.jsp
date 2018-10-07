@@ -182,6 +182,7 @@ background-color:rgba(253,253,253,0.8);
 									data-toggle="modal" data-target="#reportModal">檢舉此發文</button>
 				</div>
 				<!-- 新增留言區塊 -->
+				<div class="col-12">
 				<form method="post"
 					action="<%=request.getContextPath()%>/reply/replyServlet.do"
 					name="insertform" enctype="multipart/form-data">
@@ -203,6 +204,7 @@ background-color:rgba(253,253,253,0.8);
 						</div>
 					</div>
 				</form>
+				</div>
 				<!-- /*新增留言區塊 -->
 				<script type="text/javascript">
 					

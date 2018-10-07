@@ -68,7 +68,7 @@ public class ActivityDVOTest {
 //		 
 //		 getAll的執行done
 		ActivityJDBCDAO dao =new ActivityJDBCDAO();
-		 List<ActivityVO> licv1=dao.getAll();
+		 List<ActivityVO> licv1=dao.findNewAct();
 		 SimpleDateFormat fmt4=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 E");
 		 for(ActivityVO vo4:licv1) {
 		 System.out.println(vo4.getAct_No());

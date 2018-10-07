@@ -40,7 +40,7 @@
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
     <form method="get" action="branch.do">
-        <div id="div_shadow" class="py-5"">
+        <div id="div_shadow" class="py-5">
 			<div class=" container">
             <div class="row">
                 <div class="col-md-12">

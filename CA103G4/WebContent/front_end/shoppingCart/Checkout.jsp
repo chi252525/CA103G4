@@ -75,6 +75,7 @@
 	font-style: oblique;
 	font-weight: bold;
 	margin-left:50%;
+	
 }
 </style>
 </head>
@@ -191,20 +192,21 @@
                             <!--取餐方式 -->
                             <p class="form-check form-check-inline form-group col-md-4" style="margin-right: : 10px;">
                                 <b>取餐方式:</b>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked="" style="width: 50px;" />
+<%--                                 <c:out value="${eatIntakeAway}" default="幹"></c:out> --%>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="takeaway" value="takeaway" checked style="width: 50px;" onclick="takeAway();" ${(eatIntakeAway=='takeaway' or eatIntakeAway==null)? 'checked' :'' }>
                                 <label id="takeAway" class="form-check-label"><b>外帶</b> </label>
-                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick='takeAway();'>
+                                <input class="form-check-input" type="radio" name="eatIn&takeAway" id="delivery" value="delivery" style="width: 50px;" onclick="Delivery();" ${(eatIntakeAway=='delivery')? 'checked' :'' }>
                                 <label class="form-check-label"><b>外送</b></label>
                                 <div class='errorMsg'>${errorMsgs.eatIn_takeAway}</div>
 
                             </p>
                             <!-- choose branch -->
-                            <div class="form-group col-md-8">
+                            <div id='branch' class="form-group col-md-8">
                                 <jsp:useBean id="branchSvc" scope="page" class="com.branch.model.BranchService" />
-                                <b>取餐分店:</b> <select name="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;">
+                                <b>訂餐分店:</b> <select name="branch_no" class="custom-select align-items-center" id="inputGroupSelect04 stor_No delivery" aria-label="Example select with button addon" size="1" name="branch_No" style="margin-left: 5px !important; width: 50%; margin-right: 8%;display= none;">
                                     <option selected>請選擇
                                         <c:forEach var="brVO" items="${branchSvc.all}">
-                                    <option value="${brVO.branch_No}">${brVO.branch_Name}
+                                    <option value="${brVO.branch_No}" ${(branch_No==brVO.branch_No)? 'selected' :'' }>${brVO.branch_Name}
                                         </c:forEach> <input type="hidden" name="location" value="Checkout.jsp">
                                 </select>
                                 <div class='errorMsg'>${errorMsgs.branch_no }</div>
@@ -216,8 +218,7 @@
                                     <div class='errorMsg'>${errorMsgs.countytwon}</div>
                                 </div>
                                 <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
-                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="mem_Readdr" style="width: 80%; margin-top: 10px;">
-                                    <input type="hidden" name="deliv_addres">
+                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="deliv_addres" style="width: 80%; margin-top: 10px;">
                                     <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
                                 </div>
                             </div>
@@ -230,7 +231,7 @@
                                         <div class="form-group col-md-12" style="padding-left: 5px;">
                                             <b> 取餐時間:</b>
                                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest" style="margin-top: 20px; margin-bottom: 20px;">
-                                                <input name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                                                <input name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" value="${time}">
                                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
@@ -242,15 +243,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- payment -->
-                            <!--                             <p class='col-12 col-md-8' style="padding-left: 5px;"> -->
-                            <!--                                 <b>付款方式:</b> <br> <label> -->
-                            <!--                                     <button type="button" class="btn btn-light" id="takeaway" name="order_pstatus" value="1" onclick="cash()">現金</button> -->
-                            <!--                                 </label> <label> -->
-                            <!--                                     <button type="button" class="btn btn-light" id="delivery" name="order_pstatus" value="2" onclick="cardShow()">信用卡</button> -->
 
-                            <!--                                 </label> -->
-                            <!--                             </p> -->
 
                             <div class="btn-group btn-group-toggle col-12 col-md-8" data-toggle="buttons" style="padding-left: 5px;">
                                 <b>付款方式:</b>
@@ -258,22 +251,38 @@
                                     <input type="radio" name="order_pstatus" value="1" autocomplete="off"> 現金
                                 </label>
                                 <label class="btn btn-secondary" onclick="cardShow()">
-                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off"> 信用卡
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
                                 </label>
                             </div><br>
-                            <!-- credit card -->
-                            <div id="card" class="demo-container" style="margin: 10px; display: none;">
-                                <div class="card-wrapper"></div>
 
-                                <div class="form-container active" style="margin: 10px;">
-                                    <input placeholder="Card number" type="tel" name="number" style="margin: 5px;">
-                                    <input placeholder="Full name" type="text" name="name" style="margin: 5px;">
-                                    <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;">
-                                    <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;">
+                            <c:if test="${order_pstatus ne 1}">
+                                <!-- 只要不為現金就是顯示信用卡 -->
+                                <!-- credit card -->
+                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
+                                    <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
+                                    <div class="form-container active" style="margin: 10px;">
+                                        <div class="form-inline">
+                                            <input placeholder="Card number" type="tel" name="number" style="margin: 5px;" value="${card_number}">
+                                            <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.card_number}</div>
+                                        </div>
+                                        <div class="form-inline">
+                                            <input placeholder="Full name" type="text" name="name" style="margin: 5px;" value="${name}">
+                                            <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.full_name}</div>
+                                        </div>
+                                        <div class="form-inline">
+                                            <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
+                                            <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.expiry}</div>
+                                        </div>
+                                        <div class="form-inline">
+                                            <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
+                                            <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.cvc}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
+                            <!-- ps column -->
                             <p class="form-group col-12 col-md-8">
-                                <label for="textarea">備註:</label>
+                                <label for="textarea"><b>備註:</b></label>
                                 <textarea name="ps" id="textarea" class="form-control" cols="45" rows="4" style="resize: none; margin: auto;"></textarea>
                             </p>
 
@@ -288,19 +297,18 @@
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-                <a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
-
-                <button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
-
+            	<c:if test="${ not empty shoppingcart}">
+                	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
+                	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
+				</c:if>
+				<c:if test="${empty shoppingcart}">
+				<a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
+				</c:if>
             </div>
         </div>
     </div>
     </form>
-    <%-- 	</c:if> --%>
-    <%-- 	<c:if test="${empty shoppingcart}"> --%>
-    <a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" class='btn btn-warning'>點餐去</a>
-    <%-- 	</c:if> --%>
-
+  
     <!-- Modal -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -345,7 +353,7 @@
                 </div>
                 <div class="modal-footer">
                     <form action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
                     <input type="hidden" name="action" value="findMemCoupon"> <input type="text" id="amount" name="amount" value="<%=amount%>">
                     <button type="button" class="btn btn-light">取消</button>
                 </div>
@@ -360,20 +368,23 @@
             container: '.card-wrapper'
         });
 
-        function cardShow() {
-            $('#card').toggle();
+        function cardShow() { //開啟信用卡輸入
+            $('#card').show();
         }
 
-        function cash() {
+        function cash() { //隱藏信用卡輸入
             $('#card').hide();
         }
 
-        function takeAway() {
-            $('#address').show();
+        function takeAway() { //隱藏地址輸入
+
+            $('#address').hide();
         }
 
-        function delivery() {
-            $('#delivery')
+        function Delivery() { //開啟地址輸入
+
+            $('#address').show();
+
         }
         //紀錄選到的CouponValue
         var couponValue; //選告全域變數

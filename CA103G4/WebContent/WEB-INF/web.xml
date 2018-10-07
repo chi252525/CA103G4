@@ -96,6 +96,14 @@
     <url-pattern>/AndroidBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AndroidReservationServlet</servlet-name>
+    <servlet-class>android.com.reservation.controller.AndroidReservationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidReservationServlet</servlet-name>
+    <url-pattern>/AndroidReservationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PerntdServlet</servlet-name>
     <servlet-class>com.perntd.controller.PerntdServlet</servlet-class>
   </servlet>
@@ -166,6 +174,14 @@
   <servlet-mapping>
     <servlet-name>DBGifReader3</servlet-name>
     <url-pattern>/DBGifReader3</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader4</servlet-name>
+    <servlet-class>com.coucat.util.DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader4</servlet-name>
+    <url-pattern>/DBGifReader4</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MemServlet</servlet-name>
@@ -244,6 +260,21 @@
     <servlet-name>ActivityShowSmallPic</servlet-name>
     <url-pattern>/activity/activityshowsmallpic.do</url-pattern>
   </servlet-mapping>
+  
+
+  
+  
+  <servlet>
+    <servlet-name>CoucatShowImage</servlet-name>
+    <servlet-class>com.coucat.controller.CoucatShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoucatShowImage</servlet-name>
+    <url-pattern>/coucat/coucatshowimage.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <servlet>
     <servlet-name>ReplyServlet</servlet-name>
     <servlet-class>com.reply.controller.ReplyServlet</servlet-class>

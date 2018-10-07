@@ -32,7 +32,7 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 	private static final String UPDATE = "UPDATE couponhistory set order_no=?, coup_state=? where coup_sn = ?";
 	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn WHERE COUPONHISTORY.mem_no=?";
 //	private static final String GET_MEM_COUPON=	"SELECT *  FROM COUPONHISTORY  right JOIN coupon ON coupon.coup_sn= COUPONHISTORY.coup_sn right JOIN coucat ON coucat.coucat_no= COUPON.coucat_no WHERE COUPONHISTORY.mem_no= ?";
-	private static final String GET_BY_MEM= "SELECT coup_sn FROM COUPONHISTORY where mem_no = ?";
+	private static final String GET_BY_MEM= "SELECT coup_sn,coup_state FROM COUPONHISTORY where mem_no = ?";
 
 	@Override
 	public void insert(CouponhistoryVO couponhistoryVO) {
@@ -341,6 +341,7 @@ public class CouponhistoryDAO implements CouponhistoryDAO_interface {
 			while (rs.next()) {
 				couponhistoryVO = new CouponhistoryVO();
 				couponhistoryVO.setCoup_sn(rs.getString("coup_sn"));
+				couponhistoryVO.setCoup_state(rs.getInt("coup_state"));
 				list.add(couponhistoryVO);
 			}
 

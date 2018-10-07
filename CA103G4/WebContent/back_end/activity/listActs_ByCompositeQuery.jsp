@@ -44,26 +44,9 @@ body {
 </style>
 </head>
 <body>
-<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+
 <div class="py-5 " >
-    <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a href="<%=request.getContextPath()%>/back_end/activity/listAllCoucat.jsp" class=" nav-link">優惠卷設定</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp">廣告設定</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-     
-      
-      
-      <div class="row">
-      
            <%@ include file="pages/page1_ByCompositeQuery.file" %>
           <!-- 表格 -->
             <div class="col-md-12 p-1">
@@ -85,8 +68,7 @@ body {
                           </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="activityVO" items="${listActs_ByCompositeQuery}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>" >
+                            <c:forEach var="activityVO" items="${listActs_ByCompositeQuery}"  >
                           <tr ${(activityVO.act_No==param.act_No) ? 'bgcolor=#CCCCFF':''}>
                           <td>${activityVO.act_No}</td>
                             <td>${activityVO.act_Name}</td>
@@ -98,19 +80,12 @@ body {
                             <td><fmt:formatDate value="${activityVO.act_End}"
 									pattern="yyyy/MM/dd-HH:mm" /></td>
                             <td>
-                            
-                            
 							<td>上架中</td>
-						
-                            
-                          
-                        
                              <td><button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
                              	<button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
                              </td>
                               <td><button type="button" class="btn btn-secondary"><span class="lnr lnr-pencil"></span></button></td>
                           </tr>
-                    
              </c:forEach>
                         </tbody>
                       </table>
@@ -124,8 +99,8 @@ body {
           </form>
         </div>
       </div>
-    </div>
+   
   </div>
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+
 </body>
 </html>
