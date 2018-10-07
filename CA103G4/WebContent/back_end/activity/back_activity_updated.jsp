@@ -82,13 +82,13 @@ var $JUI1 = $.noConflict(true);
 										<div class="col-md-6">
 											<label for="sel1" class="text-dark">廣告分類</label> 
 											<select	class="form-control" id="sel1" name="act_Cat" >
-												<option value="AC1" selected="${(activityVO.act_Cat==AC1)?'selected':'' }">新品上市
-												<option value="AC2" selected="${(activityVO.act_Cat==AC2)?'selected':'' }">優惠折扣
-												<option value="AC3" selected="${(activityVO.act_Cat==AC3)?'selected':'' }">分店限定
-											</select> <label for="sel2" class="text-dark">欲宣傳的優惠卷</label> <select
-												multiple="1" class="form-control" id="sel2" name="coucat_No">
+												<option value="AC1" ${(activityVO.act_Cat=='AC1')?'selected':'' }>新品上市</option>
+												<option value="AC2" ${(activityVO.act_Cat=='AC2')?'selected':'' }>優惠折扣</option>
+												<option value="AC3" ${(activityVO.act_Cat=='AC3')?'selected':'' }>分店限定</option>
+											</select> <label for="sel2" class="text-dark">欲宣傳的優惠卷</label> 
+											<select	multiple="1" class="form-control" id="sel2" name="coucat_No">
 												<c:forEach var="coucatVO" items="${couSvc.all}">
-													<option value="${coucatVO.coucat_No}">${coucatVO.coucat_Name}
+													<option value="${coucatVO.coucat_No}" ${coucatVO.coucat_No==activityVO.coucat_No?'selected':''}>${coucatVO.coucat_Name}
 												</c:forEach>
 											</select>
 										</div>
@@ -104,7 +104,7 @@ var $JUI1 = $.noConflict(true);
 										<div class="col-md-4">
 											<div class="form-group">
 												<label class="text-dark"><b>預計下架日</b></label> 
-												<input name="act_End"  class="form-control" value="<%=activityVO.getAct_End()%>" id="end_dateTime"  type="text" >
+												<input name="act_PreOffTime"  class="form-control" value="<%=activityVO.getAct_End()%>" id="end_dateTime"  type="text" >
 											</div>
 										</div>
 										<div class="col-md-4"></div>
@@ -147,7 +147,8 @@ var $JUI1 = $.noConflict(true);
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="action" value="update"> <input
+						<input type="hidden" name="action" value="update"> 
+						<input type="hidden" name="act_No" value="<%=activityVO.getAct_No()%>"><input
 							type="hidden" name="emp_No" value="E000000002">
 						<button type="submit" class="btn btn-secondary">確定修改</button>
 						<a

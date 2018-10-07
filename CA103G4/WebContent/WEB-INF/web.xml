@@ -261,6 +261,18 @@
     <url-pattern>/activity/activityshowsmallpic.do</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <servlet-class>com.activity.controller.ScheduleServlet</servlet-class>
+     <load-on-startup></load-on-startup>  
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <url-pattern>/activity/schedule.do</url-pattern>
+  </servlet-mapping>
+  
+  
   <servlet>
     <servlet-name>CoucatShowImage</servlet-name>
     <servlet-class>com.coucat.controller.CoucatShowImage</servlet-class>

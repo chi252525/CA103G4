@@ -34,9 +34,9 @@
              <input type="hidden" name="action" value="RightNow_UpdateStat">
              ${activityVO.act_Status==0?
              '<input type="hidden" name="act_Status" value="1">
-             <button type="submit" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>':
+             <button type="submit" class="btn btn-success"><span class="lnr lnr-arrow-up"></span></button>':
              '<input type="hidden" name="act_Status" value="0">
-             <button type="submit" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>'
+             <button type="submit" class="btn btn-danger"><span class="lnr lnr-arrow-down"></span></button>'
               }
              </FORM>
                 

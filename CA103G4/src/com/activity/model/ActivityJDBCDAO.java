@@ -353,6 +353,8 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				activityVO.setAct_Cat(rs.getString("act_Cat"));
 				activityVO.setAct_Name(rs.getString("act_Name"));
 				activityVO.setAct_Content(rs.getString("act_Content"));
+				activityVO.setAct_Carousel(rs.getBytes("act_Carousel"));
+				activityVO.setAct_Pic(rs.getBytes("act_Pic"));
 				activityVO.setAct_PreAddTime(rs.getTimestamp("act_PreAddTime"));
 				activityVO.setAct_PreOffTime(rs.getTimestamp("act_PreOffTime"));
 				activityVO.setAct_Start(rs.getTimestamp("act_Start"));
