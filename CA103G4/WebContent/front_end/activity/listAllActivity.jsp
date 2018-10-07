@@ -71,6 +71,13 @@ body {
 			height: 80px;
 			background-color: #fa0;
 		}
+div.shavetext{
+white-space: nowrap; 
+    width: 50px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+}
 
 </style>
 </head>
@@ -127,6 +134,7 @@ body {
            
                 
                 </div>
+                
             </div>
 
 
@@ -145,7 +153,7 @@ body {
                                 <div class=" col-md-12">
                                     <div class="row" style="background-color: rgba(255, 255, 255, 0.45)">
                                         <div class=" col-4 px-1 py-1 ">
-                                            <img class="img-fluid d-block mx-auto my-auto" src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${actVO.act_No}">
+                                            <img class="img-fluid d-block mx-auto my-auto" src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${activityVO.act_No}">
                                         </div>
                                         <div class="col-8 py-1 my-2 ">
                                             <div class="col-12">
@@ -154,7 +162,7 @@ body {
                                                 </h5>
                                             </div>
                                             <div class="d-flex ">
-                                                <div class="p-2">
+                                                <div class="p--0">
                                                     活動期間
                                                     <fmt:formatDate value="${activityVO.act_Start}" pattern="yyyy-MM-dd " />
                                                     ~
@@ -167,9 +175,18 @@ body {
                                             <div class="row">
                                                 <h5 class="mb-1 text-dark my-1"></h5>
                                                 <hr>
-                                                <div class="col-12">
-                                                    <p class="my-1">${activityVO.act_Content}</p>
-
+                                                <div class="col-12 shavetext">${activityVO.act_Content}
+                                                  
+											
+											
+											
+											
+												
+											
+											
+											
+											
+											
                                                 </div>
 
                                                 <div class="col-12 ">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,7 +133,7 @@ position: fixed;
 					<p class="lead ml13">竹風堂拉麵 頂級食材 客製化搭配</p>
 					<div class="row  test">
 						<div class="col-md-5 col-6 test">
-							<a class="btn btn-danger btn-lg" href="#">View Our Menu</a>
+							<a class="btn btn-danger btn-lg" href="#">立即訂餐</a>
 						</div>
 						<div class="col-md-5 col-6"></div>
 					</div>
@@ -141,44 +143,6 @@ position: fixed;
 	</div>
 	<!-- End banner Area -->
 	
-	<!-- 廁旁優惠卷 -->
-	<div class="coupon filter-dark" >
-          <div id="carousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-            <!-- 第一個 -->
-              <div class="carousel-item active">
-              
-                <img class="d-block img-fluid px-2 py-2" src="<%=request.getContextPath()%>/res/img/coupon01.jpg" style="height:150px;width:200px";>
-                <div class="carousel-caption">
-                  <h5 style="color:black"> <span class="promo">Test</span></h5>
-                </div>
-                <p class="mb-0" style="color:white" Align="Center">test</p>
-              </div>
-              
-              <!-- 第二個 -->
-             <div class="carousel-item ">
-              
-                <img class="d-block img-fluid px-2 py-2" src="<%=request.getContextPath()%>/res/img/coupon01.jpg" style="height:150px;width:200px";>
-                <div class="carousel-caption">
-                  <h5 style="color:black"> <span class="promo">BOH232</span></h5>
-                </div>
-                <p class="lead mb-0" style="color:white" Align="Center">優惠卷</p>
-              </div>
-              
-            </div>
-            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-          <div class="row">
-            <div class="col-md-12"></div>
-          </div>
-        </div>
 	
 	
 	
@@ -210,19 +174,19 @@ anime.timeline({loop: true})
   });</script>
 
 
-	<script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/easing.min.js"></script>
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/isotope.pkgd.min.js"></script>
-	<script src="js/main.js"></script>
+<!-- 	<script src="js/vendor/jquery-2.2.4.min.js"></script> -->
+<!-- 	<script src="js/popper.min.js"></script> -->
+<!-- 	<script src="js/vendor/bootstrap.min.js"></script> -->
+<!-- 	<script -->
+<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script> -->
+<!-- 	<script src="js/jquery-ui.js"></script> -->
+<!-- 	<script src="js/easing.min.js"></script> -->
+<!-- 	<script src="js/hoverIntent.js"></script> -->
+<!-- 	<script src="js/superfish.min.js"></script> -->
+<!-- 	<script src="js/jquery.ajaxchimp.min.js"></script> -->
+<!-- 	<script src="js/jquery.magnific-popup.min.js"></script> -->
+<!-- 	<script src="js/isotope.pkgd.min.js"></script> -->
+<!-- 	<script src="js/main.js"></script> -->
 
 
 

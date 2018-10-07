@@ -244,6 +244,18 @@
     <servlet-name>ActivityShowSmallPic</servlet-name>
     <url-pattern>/activity/activityshowsmallpic.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CoucatShowImage</servlet-name>
+    <servlet-class>com.coucat.controller.CoucatShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoucatShowImage</servlet-name>
+    <url-pattern>/coucat/coucatshowimage.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <servlet>
     <servlet-name>ReplyServlet</servlet-name>
     <servlet-class>com.reply.controller.ReplyServlet</servlet-class>
