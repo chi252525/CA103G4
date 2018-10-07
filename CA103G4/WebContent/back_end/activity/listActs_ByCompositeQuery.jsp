@@ -44,7 +44,7 @@ body {
 </style>
 </head>
 <body>
-<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+
 <div class="py-5 " >
     <div class="container">
       <div class="row">
@@ -126,6 +126,6 @@ body {
       </div>
     </div>
   </div>
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+
 </body>
 </html>
