@@ -204,46 +204,46 @@ public class ActivityServlet extends HttpServlet {
 		 }
 		   
 		   
-		   if ("listActs_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
-			   System.out.println("listActs_ByCompositeQuery in");
-				List<String> errorMsgs = new LinkedList<String>();
-				// Store this set in the request scope, in case we need to
-				// send the ErrorPage view.
-				req.setAttribute("errorMsgs", errorMsgs);
-
-				try {
-					
-					/***************************1.將輸入資料轉為Map**********************************/ 
-					//採用Map<String,String[]> getParameterMap()的方法 
-					//注意:an immutable java.util.Map 
-					//Map<String, String[]> map = req.getParameterMap();
-					HttpSession session = req.getSession();
-					@SuppressWarnings("unchecked")
-					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
-					System.out.println("map"+map);
-					if (req.getParameter("whichPage") == null){
-						HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
-						session.setAttribute("map",map1);
-						map = map1;
-					} 
-					
-					/***************************2.開始複合查詢***************************************/
-					ActivityService actSvc = new ActivityService();
-					List<ActivityVO> list  = actSvc.getAll(map);
-					
-					/***************************3.查詢完成,準備轉交(Send the Success view)************/
-					req.setAttribute("listActs_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
-					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
-					successView.forward(req, res);
-					
-					/***************************其他可能的錯誤處理**********************************/
-				} catch (Exception e) {
-					errorMsgs.add(e.getMessage());
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
-					failureView.forward(req, res);
-				}
-			}
+//		   if ("listActs_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+//			   System.out.println("listActs_ByCompositeQuery in");
+//				List<String> errorMsgs = new LinkedList<String>();
+//				// Store this set in the request scope, in case we need to
+//				// send the ErrorPage view.
+//				req.setAttribute("errorMsgs", errorMsgs);
+//
+//				try {
+//					
+//					/***************************1.將輸入資料轉為Map**********************************/ 
+//					//採用Map<String,String[]> getParameterMap()的方法 
+//					//注意:an immutable java.util.Map 
+//					//Map<String, String[]> map = req.getParameterMap();
+//					HttpSession session = req.getSession();
+//					@SuppressWarnings("unchecked")
+//					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+//					System.out.println("map"+map);
+//					if (req.getParameter("whichPage") == null){
+//						HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+//						session.setAttribute("map",map1);
+//						map = map1;
+//					} 
+//					
+//					/***************************2.開始複合查詢***************************************/
+//					ActivityService actSvc = new ActivityService();
+//					List<ActivityVO> list  = actSvc.getAll(map);
+//					
+//					/***************************3.查詢完成,準備轉交(Send the Success view)************/
+//					req.setAttribute("listActs_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+//					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+//					successView.forward(req, res);
+//					
+//					/***************************其他可能的錯誤處理**********************************/
+//				} catch (Exception e) {
+//					errorMsgs.add(e.getMessage());
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
+//					failureView.forward(req, res);
+//				}
+//			}
 		   
 		   
 		   //馬上上架/下架
@@ -325,16 +325,17 @@ public class ActivityServlet extends HttpServlet {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				System.out.println("update in");
-				Timestamp preAdd = null ;
-				Timestamp preOff = null ;
+				Timestamp act_PreAddTime = null ;
+				Timestamp act_PreOffTime = null ;
 				try {
+					String act_Status = req.getParameter("act_Status");
 					String act_No = req.getParameter("act_No");
-//					System.out.println("act_No"+act_No);
+					System.out.println("act_No"+act_No);
 					if(act_No == null || act_No.trim().length() == 0) {
 						errorMsgs.add("未取得貼文");
 					}
 					String act_Name = req.getParameter("act_Name");
-//					System.out.println("act_Name"+act_Name);
+					System.out.println("act_Name"+act_Name);
 					if(act_Name == null || act_Name.trim().length() == 0) {
 						errorMsgs.add("標題：請勿空白");
 					}else if(act_Name.trim().length()<2||act_Name.trim().length()>30){
@@ -342,19 +343,19 @@ public class ActivityServlet extends HttpServlet {
 					}
 					
 					String act_Cat = req.getParameter("act_Cat");
-//					System.out.println("act_Cat"+act_Cat);
+					System.out.println("act_Cat"+act_Cat);
 					if(act_Cat == null || act_Cat.trim().length() == 0) {
 						errorMsgs.add("請選擇廣告分類");
 					}
 					
 					String coucat_No = req.getParameter("coucat_No");
-//					System.out.println("coucat_No"+coucat_No);
+					System.out.println("coucat_No"+coucat_No);
 					if(coucat_No == null || coucat_No.trim().length() == 0) {
 						errorMsgs.add("請選擇對應宣傳的優惠卷");
 					}
 					
 					String act_Content = req.getParameter("act_Content");
-//					System.out.println("act_Content"+act_Content);
+					System.out.println("act_Content"+act_Content);
 					if(act_Content == null || act_Content.trim().length() == 0) {
 						errorMsgs.add("內容請勿空白");
 					}
@@ -373,7 +374,7 @@ public class ActivityServlet extends HttpServlet {
 						} else {
 							ActivityService actSvc = new ActivityService();
 							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-							System.out.println("advo_DB"+advo_DB);
+//							System.out.println("advo_DB"+advo_DB);
 							act_Carousel = advo_DB.getAct_Carousel();
 						}
 					} catch (FileNotFoundException fe) {
@@ -399,25 +400,56 @@ public class ActivityServlet extends HttpServlet {
 						fe.printStackTrace();
 					}
 
-					//預計上架時間判斷
-					SimpleDateFormat time_format = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-					String addTime = req.getParameter("act_PreAddTime");
-//					System.out.println("addTime"+addTime);
-					if(addTime == null ||addTime.trim().length() == 0){
+					
+				    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				    try {
+				    String	act_PreAddTimestr=req.getParameter("act_PreAddTime");
+				    if(act_PreAddTimestr == null ||act_PreAddTimestr.trim().length() == 0){
 						errorMsgs.add("預計上架時間：請勿空白。");
 					}else {
-						Date temp_addTime = time_format.parse(addTime);
-						preAdd = new Timestamp(temp_addTime.getTime());
+				    java.util.Date act_PreAddTimedate = dateFormat.parse(act_PreAddTimestr.trim());
+				    act_PreAddTime = new java.sql.Timestamp(act_PreAddTimedate.getTime());
 					}
-					//下架時間非必填 
-					String offTime = req.getParameter("act_PreOffTime");
+				    System.out.println("act_PreAddTime"+act_PreAddTime);
+				    }catch(ParseException e) {
+				    	e.printStackTrace();
+				    }
+					
+					
+					//預計上架時間判斷
+//					SimpleDateFormat time_format = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+//					String addTime = req.getParameter("act_PreAddTime");
+//					System.out.println("addTime"+addTime);
+//					if(addTime == null ||addTime.trim().length() == 0){
+//						errorMsgs.add("預計上架時間：請勿空白。");
+//					}else {
+//						Date temp_addTime = time_format.parse(addTime);
+//						act_PreAddTime = new Timestamp(temp_addTime.getTime());
+//					}
+//				
+				    
+//				    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				    try {
+				    String	act_PreOffTimestr=req.getParameter("act_PreOffTime");
+				    if(act_PreOffTimestr == null ||act_PreOffTimestr.trim().length() == 0){
+						errorMsgs.add("預計下架時間：請勿空白。");
+					}else {
+				    java.util.Date act_PreOffTimedate = dateFormat.parse(act_PreOffTimestr.trim());
+				    act_PreOffTime = new java.sql.Timestamp(act_PreOffTimedate.getTime());
+					}
+				    System.out.println("act_PreOffTimestr"+act_PreOffTimestr);
+				    }catch(ParseException e) {
+				    	e.printStackTrace();
+				    }
+
+//					String offTime = req.getParameter("act_PreOffTime");
 //					System.out.println("offTime"+offTime);
-					SimpleDateFormat time_format2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-					if(offTime.trim().length() > 0) {
-						Date temp_offtime = time_format2.parse(offTime);
-						preOff = new Timestamp(temp_offtime.getTime());
-						
-					}
+//					SimpleDateFormat time_format2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+//					if(offTime.trim().length() > 0) {
+//						Date temp_offtime = time_format2.parse(offTime);
+//						act_PreOffTime = new Timestamp(temp_offtime.getTime());
+//						
+//					}
 //					//預定上架時間與下架時間有輸入的判斷
 //					if(preAdd != null && preOff !=null) {
 //						if(preAdd.getTime() >= preOff.getTime()) {
@@ -429,9 +461,11 @@ public class ActivityServlet extends HttpServlet {
 					activityVO.setAct_Cat(act_Cat);
 					activityVO.setAct_Name(act_Name);
 					activityVO.setCoucat_No(coucat_No);
+					activityVO.setAct_Content(act_Content);
 					activityVO.setAct_Carousel(act_Carousel);
 					activityVO.setAct_Pic(act_Pic);
-					
+					activityVO.setAct_PreAddTime(act_PreAddTime);
+					activityVO.setAct_PreOffTime(act_PreOffTime);
 					//以上驗證有錯誤訊息的判斷
 					if(!errorMsgs.isEmpty()) {
 						req.setAttribute("activityVO", activityVO);
@@ -443,9 +477,14 @@ public class ActivityServlet extends HttpServlet {
 					
 					ActivityService actSvc =new ActivityService();
 					actSvc.updateActivity(act_No,coucat_No,act_Cat,
-							act_Name,act_Carousel,act_Pic,act_Content,preAdd,
-							preOff);
+							act_Name,act_Carousel,act_Pic,act_Content,act_PreAddTime,
+							act_PreOffTime);
+					if(act_Status.equals("0")) {
+						req.setAttribute("display", "display");
+					}
 					//************************第三步：新增完成，準備提交**************************
+					
+					req.setAttribute("activityVO", activityVO); 
 					String url = "/back_end/activity/listAllActivity.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
