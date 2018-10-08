@@ -36,9 +36,63 @@ public class ResDAO implements ResDAO_interface{
 		"DELETE FROM RESERVATION where RES_NO = ?";
 	private static final String UPDATE =
 		"UPDATE RESERVATION set MEM_NO=? ,DEK_NO=? ,RES_TIMEBG=? ,RES_TIMEFN=? ,RES_PEOPLE=? ,RES_STATUS=? where RES_NO = ?";
+	
+	private static final String GET_DEKNO_STMT = 
+			"select * from RESERVATION";
 	     
 	
 	
+	@Override
+	public List<String> findDekIdWithResTimefn() {
+		List<String> list = new ArrayList<>();
+		DeskDAO_interface ddao = new DeskDAO();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_DEKNO_STMT);
+			rs = pstmt.executeQuery();
+		
+		    while(rs.next()) {
+		    	if(rs.getTimestamp("res_timefn").getTime() >= System.currentTimeMillis()) {
+		    		String dek_no = rs.getString("dek_no");
+					list.add(ddao.findByPrimaryKey(dek_no).getDek_id());
+		    	}
+		    }
+	
+		
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	@Override
 	public String addWithBranchNo(String branchNo, ResVO resVO, String seatStr) {
 		Connection con = null;

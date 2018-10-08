@@ -23,6 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
+import android.com.reservation.model.*;
+
 @WebListener
 @ServerEndpoint("/AndroidMyBookingServer/{myName}")
 public class AndroidMyBookingServer implements ServletContextListener{
@@ -58,9 +60,15 @@ public class AndroidMyBookingServer implements ServletContextListener{
 		System.out.println("現在在線人數:" + allSessions.size());
 		
 		// 手機端新連線進入時會將context裡的map資訊推播出去
+		ResDAO_interface resdao = new ResDAO();
+		List<String> dekIdArray = resdao.findDekIdWithResTimefn();
+		StringBuilder sb = new StringBuilder();
+		for(String str : dekIdArray) {
+			sb.append(str.substring(0,str.length()-1)+":");
+		}
+		
 		Set<String> set = resInputMap.keySet();
         Iterator<String> it = set.iterator();
-        StringBuilder sb = new StringBuilder();
         while(it.hasNext()) {
     		Object myKey = it.next();
             sb.append(myKey.toString().substring(0,myKey.toString().length()-1)+":");
@@ -129,7 +137,18 @@ public class AndroidMyBookingServer implements ServletContextListener{
 		        session.getAsyncRemote().sendText(sb.toString()+"clear");
 			}
 		}
+		
+		for (Session session : allSessions) {
+			if (session.isOpen()) {
+				ResDAO_interface resdao = new ResDAO();
+				List<String> dekIdArray = resdao.findDekIdWithResTimefn();
+				StringBuilder sb = new StringBuilder();
+				for(String str : dekIdArray) {
+					sb.append(str.substring(0,str.length()-1)+":");
+				}
+		        session.getAsyncRemote().sendText(sb.toString()+"add");
+			}
+		}
 	}
-
 }
 
