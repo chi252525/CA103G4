@@ -162,16 +162,14 @@ body {
 
 								</form>
 
-
 							</div>
-
-
-
 						</div>
 						<div class="float-right ">
-							<a class="btn btn-info btn-sm    "
+							<a class="btn btn-info btn-sm"
 								href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
-							<a class="btn btn-info btn-sm  "
+							
+							
+							<a class="btn btn-info btn-sm"
 								href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
 
 
@@ -209,7 +207,7 @@ body {
 					<div class="card">
 						<img class="card-img img-fluid"
 							src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
-							alt="Card image">
+							alt="Card image" style="width:400px;height:300px;">
 						<div
 							class="card-img-overlay d-flex justify-content-center align-items-center">
 							<h2 class="display-5" class="text-primary ">

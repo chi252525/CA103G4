@@ -171,8 +171,8 @@ body {
 				</c:forEach>
 			</ul>
 		</c:if>
-		
-		
+
+
 
 
 		<%@ include file="pages/page1.file"%>
@@ -203,7 +203,9 @@ body {
 							<th>活動名稱</th>
 							<th>活動分類</th>
 							<th>預計上架日</th>
+							<th>開始日</th>
 							<th>預計下架日</th>
+							<th>結束日</th>
 							<th>狀態</th>
 							<th>操作</th>
 							<th>修改</th>
@@ -229,7 +231,9 @@ body {
 							<th>活動名稱</th>
 							<th>活動分類</th>
 							<th>預計上架日</th>
+							<th>開始日</th>
 							<th>預計下架日</th>
+							<th>結束日</th>
 							<th>狀態</th>
 							<th>操作</th>
 							<th>修改</th>

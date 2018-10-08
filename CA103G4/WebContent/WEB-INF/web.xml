@@ -265,7 +265,7 @@
    <servlet>
     <servlet-name>ScheduleServlet</servlet-name>
     <servlet-class>com.activity.controller.ScheduleServlet</servlet-class>
-    <load-on-startup>10</load-on-startup>
+ <load-on-startup>10</load-on-startup> 
   </servlet>
   <servlet-mapping>
     <servlet-name>ScheduleServlet</servlet-name>

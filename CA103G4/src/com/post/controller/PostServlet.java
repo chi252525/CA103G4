@@ -390,7 +390,8 @@ public class PostServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("list", list); // 將list存到req中
+				HttpSession session = req.getSession();
+				session.setAttribute("list", list); // 將list存到req中
 				String url = "/front_end/post/listPostByQuery.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

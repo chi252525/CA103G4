@@ -45,7 +45,7 @@ public class ScheduleServlet extends HttpServlet {
 				long onTime = 0;// 排程器的預計上架時間
 				long offTime = 0;// 排程器的預計下架時間
 
-				System.out.println("************start**************");
+//				System.out.println("************廣告排程檢查start**************");
 				@SuppressWarnings("unchecked")
 				List<ActivityVO> activityList = (List<ActivityVO>) context.getAttribute("list");
 				if (activityList.size() != 0) {
@@ -56,21 +56,20 @@ public class ScheduleServlet extends HttpServlet {
 							onTime = actVO.getAct_PreAddTime().getTime();
 							offTime = actVO.getAct_PreOffTime().getTime();
 
-							System.out.println(actVO.getAct_No() + "=執行時間：" + nowTime + "("
-									+ time_format.format(nowTime) + ")；預計上架時間："
-									+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
-									+ time_format.format(offTime) + ")");
+//							System.out.println(actVO.getAct_No() + "=執行時間：" + nowTime + "("
+//									+ time_format.format(nowTime) + ")；預計上架時間："
+//									+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
+//									+ time_format.format(offTime) + ")");
 							// 上架
-							if ((nowTime - 5000) == onTime) {
-								actSvc.updateAct(actVO.getAct_No(), 1, actVO);
+							if ( (nowTime-5000)  >= onTime) {
+								actSvc.updateAct(actVO.getAct_No(), 0, actVO);
 								System.out.println("*********已順利將" + actVO.getAct_No() + "上架了*************");
-								activityList.remove(actVO);
 								
 							// 下架
-							} else if ((nowTime - 5000) == offTime) {
-								actSvc.updateAct(actVO.getAct_No(), 0, actVO);
+							} else if ((nowTime-5000) >= offTime) {
+								actSvc.updateAct(actVO.getAct_No(), 1, actVO);
 								System.out.println("*********已順利將" + actVO.getAct_No() + "下架了*************");
-								activityList.remove(actVO);
+								
 
 							}
 

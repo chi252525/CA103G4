@@ -28,7 +28,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 	// 新增一個 廣告backend
 	private static final String INSERT_STMT = "INSERT INTO ACTIVITY(ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,'0'),?,?,?,?,?,?,?,?,?,?,0,0)";
 	//// 修改廣告資訊(必須在下架狀態才能修改)backend
-	private static final String UPDATE_STMT = "UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=? WHERE ACT_NO=?";
+	private static final String UPDATE_STMT = "UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=? ,act_Start=?,act_End=?,act_Status=0 WHERE ACT_NO=?";
 	// 取得一個廣告活動
 	private static final String GET_ONE_STMT = "SELECT * FROM ACTIVITY WHERE ACT_NO=?";
 	/// ***更動廣告為馬上上架***(上/下架也會更新成實際上下架時間)backend
@@ -116,7 +116,10 @@ public class ActivityDAO implements ActivityDAO_interface {
 			pstmt.setString(6, activityVO.getAct_Content());
 			pstmt.setTimestamp(7, activityVO.getAct_PreAddTime());
 			pstmt.setTimestamp(8, activityVO.getAct_PreOffTime());
-			pstmt.setString(9, activityVO.getAct_No());
+			//開始日結束日與預計設定的時間相同
+			pstmt.setTimestamp(9, activityVO.getAct_PreAddTime());
+			pstmt.setTimestamp(10, activityVO.getAct_PreOffTime());
+			pstmt.setString(11, activityVO.getAct_No());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
 
@@ -399,7 +402,6 @@ public class ActivityDAO implements ActivityDAO_interface {
 				con = ds.getConnection();
 				// 更新成馬上上架
 				pstmt = con.prepareStatement(UPDATE_ADONSTAT_STMT);
-
 				// 正要馬上上架的時間大於這則廣告原有預計下架時間，把預計下架時間跟實際下架時間清空
 				if (System.currentTimeMillis() >= activityVO.getAct_PreOffTime().getTime()) {
 					pstmt.setTimestamp(1, null);
