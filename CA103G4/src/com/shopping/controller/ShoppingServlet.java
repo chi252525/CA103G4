@@ -143,8 +143,9 @@ public class ShoppingServlet extends HttpServlet {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
 			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
-			
-			res.getWriter().print(amount);//輸出前端
+//			res.setContentType("application/json");
+			System.out.println("折價後回前的amount="+amount);
+			res	.getWriter().print(amount);//輸出前端
 			}
 
 	}

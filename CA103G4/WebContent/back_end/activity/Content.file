@@ -22,9 +22,7 @@
           
              <td>	<fmt:formatDate value="${activityVO.act_PreAddTime}"
 					pattern="yyyy/MM/dd-HH:mm" /></td>
-             <td><fmt:formatDate value="${activityVO.act_Start}"
-					pattern="yyyy/MM/dd-HH:mm" /></td>
-            <td><fmt:formatDate value="${activityVO.act_End}"
+            <td><fmt:formatDate value="${activityVO.act_PreOffTime}"
 					pattern="yyyy/MM/dd-HH:mm" /></td>
          <td>  ${(activityVO.act_Status==1)?'上架中':'未上架'}</td>
              <td>
