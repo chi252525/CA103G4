@@ -104,7 +104,7 @@ var $JUI1 = $.noConflict(true);
 										<div class="col-md-4">
 											<div class="form-group">
 												<label class="text-dark"><b>預計下架日</b></label> 
-												<input name="act_PreOffTime"  class="form-control" value="<%=activityVO.getAct_End()%>" id="end_dateTime"  type="text" >
+												<input name="act_PreOffTime"  class="form-control" value="<%=activityVO.getAct_PreOffTime()%>" id="end_dateTime"  type="text" >
 											</div>
 										</div>
 										<div class="col-md-4"></div>
@@ -148,6 +148,7 @@ var $JUI1 = $.noConflict(true);
 							</div>
 						</div>
 						<input type="hidden" name="action" value="update"> 
+						<input type="hidden" name="act_Status" value="0"> 
 						<input type="hidden" name="act_No" value="<%=activityVO.getAct_No()%>"><input
 							type="hidden" name="emp_No" value="E000000002">
 						<button type="submit" class="btn btn-secondary">確定修改</button>
@@ -168,22 +169,22 @@ $(function(){
 	  format:'Y-m-d H:i',
 	  onShow:function(){
 	   this.setOptions({
-// 	    maxDate:$('#end_dateTime').val()?$('#end_dateTime').val():false
+ 	    maxDate:$('#end_dateTime').val()?$('#end_dateTime').val():false
 	   })
 	  },
 	  timepicker:true,
-	  step: 30
+	  step: 1
 	 });
 	 
 	 $JUI1('#end_dateTime').datetimepicker({
 	  format:'Y-m-d H:i',
 	  onShow:function(){
 	   this.setOptions({
-// 	    minDate:$('#start_dateTime').val()?$('#start_dateTime').val():false
+ 	    minDate:$('#start_dateTime').val()?$('#start_dateTime').val():false
 	   })
 	  },
 	  timepicker:true,
-	  step: 30
+	  step: 1
 	 });
 });
 

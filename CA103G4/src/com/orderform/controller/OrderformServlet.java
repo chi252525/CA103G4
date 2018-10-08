@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,21 +39,72 @@ public class OrderformServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			//接受參數
 			//訂單參數
-			String dekno = req.getParameter("dek_no");
-			String memno = req.getParameter("mem_no");
-			String brano = req.getParameter("branch_no");
-			Integer ordertyp = new Integer(req.getParameter("order_type").trim());
-			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
-			String addres = req.getParameter("deliv_addres");
-			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());//信用卡表已付款2; 現金表1未付款
+			System.out.println("進來了!");
+			//內用有桌號，否則空值
+			String dekno;
+			if (("0").equals((String)req.getAttribute("order_type"))) {
+				dekno = req.getParameter("dek_no");
+			} else {
+				dekno = null;
+			}
+			
+			//從session取得會員的編號
+			String memno = (String) req.getSession().getAttribute("memNo");
+			
+			//取得當前分店編號(要寫死?)
+			String brano = (String)req.getAttribute("branch_no");
+			
+			//取得訂單金額
+			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));	
+			
+			//看訂單類型，若是外送則收到外送地址
+			Integer ordertype = null;
+			String addres;
+			if (("delivery").equals((String)req.getAttribute("order_type"))) {
+				ordertype = 2;
+				addres = req.getParameter("deliv_addres");	
+			} else if(("takeaway").equals((String)req.getAttribute("order_type"))) {
+				ordertype = 1;
+				addres = null;
+			} else {
+				ordertype = 0;
+				addres = null;
+			}
+			
+			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
+			Integer orderpa;
+			if (req.getAttribute("card_number") != null) {
+				orderpa = 2;
+				req.setAttribute("card_number",req.getAttribute("card_number"));
+			} else {
+				orderpa = 1;
+			} //信用卡表已付款2; 現金表1未付款
+			req.setAttribute("time", req.getAttribute("time"));
+			req.setAttribute("ps", req.getAttribute("ps"));
+			
+			
 			//明細參數
 			List<OrderinvoiceVO> list = new ArrayList<>();//等前端 更改 
-			String[] oinlist = req.getParameterValues("invoice");
+
+			Vector<MenuVO> inv = new Vector<>();
+			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
+			String[] oinlist = new String[inv.size()];
+			
+			for (int z = 0 ; z < inv.size() ; z++){
+                String eat = String.valueOf(inv.get(z).getMenu_No());
+                oinlist[z] = eat;
+                System.out.println("eat:"+eat);
+           }
+			
 			OrderinvoiceVO oin = null;
 			
 			for (int i = 0; i < oinlist.length; i++) {
 				oin = new OrderinvoiceVO();
-				oin.setOrder_no(oinlist[i]);
+				if (("M").equals(String.valueOf(oinlist[i].charAt(0)))) {
+					oin.setMenu_no(oinlist[i]);
+				} else {
+					oin.setCustom_no(oinlist[i]);
+				}
 				list.add(oin);
 			}
 			
@@ -61,7 +112,7 @@ public class OrderformServlet extends HttpServlet {
 			orderformVO.setDek_no(dekno);
 			orderformVO.setMem_no(memno);
 			orderformVO.setBranch_no(brano);
-			orderformVO.setOrder_type(ordertyp);
+			orderformVO.setOrder_type(ordertype);
 			orderformVO.setOrder_price(orderpri);
 			orderformVO.setDeliv_addres(addres);
 			orderformVO.setOrder_pstatus(orderpa);
@@ -69,9 +120,9 @@ public class OrderformServlet extends HttpServlet {
 			OrderformService ordSvc = new OrderformService();
 			ordSvc.addOrd(orderformVO, list);
 			//準備轉交
-//			String url = "select_page.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
+			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 			
 		}
 		
@@ -81,10 +132,10 @@ public class OrderformServlet extends HttpServlet {
 			String dekno = req.getParameter("dek_no");
 			String memno = req.getParameter("mem_no");
 			String brano = req.getParameter("branch_no");
-			Integer ordertyp = new Integer(req.getParameter("order_type").trim());
-			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
+			Integer ordertyp = Integer.parseInt(req.getParameter("order_type"));
+			Double orderpri = Double.parseDouble(req.getParameter("order_price"));	
 			String addres = req.getParameter("deliv_addres");
-			Integer orderpa = new Integer(req.getParameter("order_pstatus").trim());
+			Integer orderpa = Integer.parseInt(req.getParameter("order_pstatus"));
 			//明細參數
 			List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();//等前端 更改 
 			list = (List<OrderinvoiceVO>)req.getAttribute("invoice");

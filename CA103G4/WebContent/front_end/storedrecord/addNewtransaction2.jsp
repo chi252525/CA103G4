@@ -51,6 +51,121 @@
 	margin-left:50%;
 	
 }
+ .demo-container {
+            width: 100%;
+            max-width: 350px;
+            margin: 50px auto;
+        }
+
+        form {
+            margin: 30px;
+        }
+        input {
+            width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        .card_data{
+        	border-radius:10px;
+        	border-radius: 6px;
+   		 	border: 1px solid #C1E4FE;
+        	 width:250px;
+        	margin:auto;
+        }
+        
+        .perchase{
+        	border-radius: 50em;
+			border: 1px solid #C1E4FE;
+			background: #b35900;
+			width: 100%;
+			height:40px;
+			margin-top:10px;
+			color: #FFFFFF;
+        }
+        
+        .perchase:hover{
+        	cursor: pointer;
+    		background: #cc6600;
+   			 border: 1px solid #4EB7F5;
+        }
+        
+        .header {
+    height: 72px;
+    padding: 0 30px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 1px solid #DFE5EB;
+}
+
+.summary {
+    opacity: 1;
+    width: 366px;
+    will-change: transform, opacity;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    width: 100%;	
+    margin: 0px 0 0 0;
+    padding: 0;
+    list-style: none;
+    opacity:0.8;
+}
+
+.detPurchase {
+    padding: 30px;
+    overflow: hidden;
+    transform-origin: top center;
+}
+
+.summary li {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    font-size: 14px;
+    position: relative;
+    color: #162D3D;
+    margin-bottom: 12px;
+    line-height: 18px;
+    font-family: "Helvetica55";
+}
+
+@media (max-width: 37.5em)
+.summary {
+    width: 100%;
+}
+
+.summary li:last-child {
+    padding: 12px 0;
+    margin: 24px 0 0 0;
+    border-top: 1px solid #DFE5EB;
+    border-bottom: 1px solid #DFE5EB;
+    font-family: "Helvetica65";
+}
+
+.detPurchase span {
+    margin: 18px 0 0 0;
+    font-size: 14px;
+    color: #32536A;
+    font-family: "Helvetica55";
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    
+}
+
+
+
+
 </style>
 
 <head>
@@ -67,8 +182,9 @@
 	%>
     <div class="container col-12" style="height: 400px">
         <div class="row">
-            <div class="col-md-6" style="margin: 60px">
+            <div class="col-md-4" style="margin: 40px">
                 <form method="post" action="storedrecord.do">
+                <div class="col-12 col-md-12 summary" style="padding:30px;">
                     <h3>付款方式</h3>
                     <select class="custom-select">
                         <option selected>Open this select menu</option>
@@ -80,41 +196,77 @@
                         <option value="${memVO.mem_No}" ${(memVO.mem_No==mem_No)? 'selected' :'' }>${memVO.mem_Id}</option>
                     </select>
                     <input type="hidden" name="stor_Point" value="${stor_Point}">
-
+				</div>
                     <!-- credit card -->
-                    <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
+                    <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;margin-top:50px;">
                         <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
-                        <div class="form-container active" style="margin: 10px;">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icons-cards.svg" type=""></img>
+                        <div class="form-container active" style="margin: 10px;width:350px;">
                             <div class="form-inline">
-                                <input placeholder="Card number" type="tel" name="number" style="margin: 5px;" value="${card_number}">
+                                <input class="card_data" placeholder="Card number" type="tel" name="number" style="margin: 5px;" value="${card_number}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.card_number}</div>
                             </div>
                             <div class="form-inline">
-                                <input placeholder="Full name" type="text" name="name" style="margin: 5px;" value="${name}">
+                                <input class="card_data" placeholder="Full name" type="text" name="name" style="margin: 5px;" value="${name}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.full_name}</div>
                             </div>
                             <div class="form-inline">
-                                <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
+                                <input class="card_data" placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.expiry}</div>
                             </div>
-                            <div class="form-inline">
-                                <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
+                            <div clas確認s="form-inline">
+                                <input class="card_data" placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.cvc}</div>
+                            </div>
+                            <div>
+                                <!--                     <a href="addNewtransaction.jsp" class="btn btn-light">上一步</a> -->
                             </div>
                         </div>
 
                     </div>
-                    <a href="addNewtransaction.jsp" class="btn btn-light">上一步</a>
-                    <button type="submit" class="btn btn-light" name="action" value="insert">確認送出</button>
+
                 </form>
             </div>
-            <div class="col-md-4 .offset-md-4" style="margin: 60px">
-                <h1> 要儲值的商品為: ${stor_Point} 竹幣</h1>
+            <div class="col-10 col-sm-8 col-md-4 .offset-md-6" style="margin-top: 69px;margin-left:160px;">
+                <div class="summary stepCard">
+                    <div class="header">
+                        <h3> 要購買的商品為:</h3>
+                    </div>
+                    <div class="detPurchase">
+                        <ul class="summary">
+                            <li class="sProduct">
+                                <b>${stor_Point} 竹幣</b>
+                                <c>$ ${stor_Point}</c>
+                            </li>
+                            <li class="sSubtotal">
+                                <b>Subtotal</b>
+                                <c>$ ${stor_Point}</c>
+                            </li>
+                            <li class="sVat">
+                                <b>VAT (17.00%)</b>
+                                <c>$ ${stor_Point*0.17}</c>
+                            </li>
+                            <li class="sTotal">
+                                <b>Total</b>
+                                <c>$ ${stor_Point*1.17}</c>
+                            </li>
+                        </ul>
+                        <button type="submit" class="perchase" name="action" value="insert"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/Lock.svg" type="image/svg+xml" style="margin:5px; border-radius: 50em;"><b>確認購買</b></button><br>
+                        <span style="width: 100%;"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icon-sslSmall.svg" type="image/svg+xml" style="margin-right:20px;"></img>Safe & Secure Payment</span>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-    <jsp:include page="/front_end/footer.jsp" />
+        <jsp:include page="/front_end/footer.jsp" />
+        <script>
+            new Card({
+                form: document.querySelector('form'),
+                container: '.card-wrapper'
+            });
 
+        </script>
 </body>
 
 </html>

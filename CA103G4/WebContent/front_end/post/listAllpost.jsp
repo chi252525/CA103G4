@@ -49,9 +49,11 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 <!-- Chart js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" ></script>
-	
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
 <style>
 html {
 	height: 100%;
@@ -77,9 +79,6 @@ body {
 .navbar-self {
 	margin-bottom: 0px;
 }
-
-
-
 </style>
 </head>
 <body
@@ -107,153 +106,153 @@ body {
 
 		<div class="row">
 			<!-- 查詢BAR開始 -->
-			
 
-			
-			
-			
-			
-			
 			<div class=" d-flex mx-2">
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
 					<div class="card-header">查詢貼文</div>
 					<div class="card-body py-1 px-2">
-				
-									<div class="d-flex justify-content-end">
-  <div class="p-2 "></div>
 
- 
-</div>
-		<div class="d-flex  ">
-  <div class="p-1"><form METHOD="post" class="form-inline"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do">
-										<input type="month" name="bdaymonth" value="date"
-											class="form-control " required="required"> <input
-											type="hidden" name="action" value="getYear_and_Month_Post">
-										<button type="submit" class="btn btn-default">送出</button>
-									</form></div>
-  <div class="p-1">	<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-										class="form-inline">
-										<div class="form-group">
-											<select size="1" class="form-control" name="post_No">
-												<c:forEach var="postVO" items="${postSvc2.all}">
-													<option value="${postVO.post_No}">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}
-												</c:forEach>
-											</select>
-										</div>
-										<div class="input-group-append">
-											<button type="submit" class="btn btn-default">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-										</div>
-									</FORM></div>
-</div>				
-				<div class="d-flex  justify-content-start"> <div class="p-1">	
-					<form METHOD="post"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-										class="form-inline ">
-										<div class="col-xs-2 input-group">
-											<input class="form-control" name="keyword" type="search"
-												placeholder="搜尋關鍵字">
-										</div>
-										<div class="input-group-append">
-											<button class="btn btn-default" type="submit" name="action"
-												value="keyword">搜尋</button>
-										</div>
+						<div class="d-flex justify-content-end">
+							<div class="p-2 "></div>
 
-									</form>
-									
-									
-				</div>
-				
-				
-				
-				</div>
-				<div class="float-right ">
-				<a class="btn btn-info btn-sm    "
-										href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
-				<a class="btn btn-info btn-sm  "
-										href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
-									
-										
+
+						</div>
+						<div class="d-flex  ">
+							<div class="p-1">
+								<form METHOD="post" class="form-inline"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do">
+									<input type="month" name="bdaymonth" value="date"
+										class="form-control " required="required"> <input
+										type="hidden" name="action" value="getYear_and_Month_Post">
+									<button type="submit" class="btn btn-default">送出</button>
+								</form>
+							</div>
+							<div class="p-1">
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+									class="form-inline">
+									<div class="form-group">
+										<select size="1" class="form-control" name="post_No">
+											<c:forEach var="postVO" items="${postSvc2.all}">
+												<option value="${postVO.post_No}">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}
+											</c:forEach>
+										</select>
 									</div>
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-default">送出</button>
+										<input type="hidden" name="action" value="getOne_For_Display">
+									</div>
+								</FORM>
+							</div>
+						</div>
+						<div class="d-flex  justify-content-start">
+							<div class="p-1">
+								<form METHOD="post"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+									class="form-inline ">
+									<div class="col-xs-2 input-group">
+										<input class="form-control" name="keyword" type="search"
+											placeholder="搜尋關鍵字">
+									</div>
+									<div class="input-group-append">
+										<button class="btn btn-default" type="submit" name="action"
+											value="keyword">搜尋</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+						<div class="float-right ">
+							<a class="btn btn-info btn-sm"
+								href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
+							
+							
+							<a class="btn btn-info btn-sm"
+								href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
+
+
+						</div>
 					</div>
 				</div>
-			
+
 
 
 			</div>
-			
-			
-			<div class="d-flex p-2" >
-<canvas id="myChart"  style="background-color:rgba(255,255,255,0.45);width:420px; height:250px"></canvas></div>
-</div>
-			
-			
-				<!-- */查詢BAR -->
 
-			<div class="row">
-				<div class="col-md-12 mt-1">
-					<!-- 共幾篇貼文 -->
-					<c:if test="${not empty list}">
+
+			<div class="d-flex p-2">
+				<canvas id="myChart"
+					style="background-color: rgba(255, 255, 255, 0.45); width: 420px; height: 250px"></canvas>
+			</div>
+		</div>
+
+
+		<!-- */查詢BAR -->
+
+		<div class="row">
+			<div class="col-md-12 mt-1">
+				<!-- 共幾篇貼文 -->
+				<c:if test="${not empty list}">
 				共 <span>${list.size()}</span> 篇
 				</c:if>
 
-					<%@ include file="pages/page1.file"%>
-					<!-- /*共幾篇貼文 -->
-				</div>
-				<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>">
-					<div class="col-md-4 col-4 px-2 py-4 ">
-							<div class="card">
-							<img class="card-img img-fluid"
-								src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
-								alt="Card image">
-							<div
-								class="card-img-overlay d-flex justify-content-center align-items-center">
-								<h2 class="display-5" class="text-primary ">
-									<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
-								</h2>
-							</div>
-						</div>
-
-						<div class="card px-2"
-							style="background-color: rgba(255, 255, 255, 0.45)">
-							<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
-							<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
-							<p style="text-align: right;" class="my-0">by
-								${memSvc.getOne_Member(postVO.mem_No).mem_Name}
-								<span class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span></p>
-							
-							<!-- 查看單一貼文action -->
-							<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-								style="margin-bottom: 0px;">
-								<input type="hidden" name="post_No" value="${postVO.post_No}" />
-								<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
-								<!-- 查單一貼文 -->
-								<input type="hidden" name="action" value="getOne_For_Display" />
-								<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
-									&raquo;</button>
-							</FORM>
-
+				<%@ include file="pages/page1.file"%>
+				<!-- /*共幾篇貼文 -->
+			</div>
+			<c:forEach var="postVO" items="${list}" begin="<%=pageIndex%>"
+				end="<%=pageIndex+rowsPerPage-1%>">
+				<div class="col-md-4 col-4 px-2 py-4 ">
+					<div class="card">
+						<img class="card-img img-fluid"
+							src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
+							alt="Card image" style="width:400px;height:300px;">
+						<div
+							class="card-img-overlay d-flex justify-content-center align-items-center">
+							<h2 class="display-5" class="text-primary ">
+								<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
+							</h2>
 						</div>
 					</div>
-				</c:forEach>
-				<div class="col-12">
-					<%@ include file="pages/page2.file"%></div>
-			</div>
-		
+
+					<div class="card px-2"
+						style="background-color: rgba(255, 255, 255, 0.45)">
+						<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
+						<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+						<p style="text-align: right;" class="my-0">
+							by ${memSvc.getOne_Member(postVO.mem_No).mem_Name} <span
+								class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span>
+						</p>
+
+						<!-- 查看單一貼文action -->
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+							style="margin-bottom: 0px;">
+							<input type="hidden" name="post_No" value="${postVO.post_No}" />
+							<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
+							<!-- 查單一貼文 -->
+							<input type="hidden" name="action" value="getOne_For_Display" />
+							<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
+								&raquo;</button>
+						</FORM>
+
+					</div>
+				</div>
+			</c:forEach>
 			<div class="col-12">
-<%
+				<%@ include file="pages/page2.file"%></div>
+		</div>
+
+		<div class="col-12">
+			<%
 	PostService postSvc1 = new PostService();
 	Map<Integer, Integer> map = postSvc.getCountByEva();
 	pageContext.setAttribute("map", map);
 %>
 
 
-<script>
+			<script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
   type: 'bar',
@@ -286,12 +285,12 @@ var myChart = new Chart(ctx, {
 });
 
 </script>
-	
-			
-			
+
+
+
 		</div>
-		
-		
+
+
 
 
 	</div>

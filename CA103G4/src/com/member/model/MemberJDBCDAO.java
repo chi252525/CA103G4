@@ -363,6 +363,12 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		return memVO;
 	}
 
+	@Override
+	public List<MemberVO> getCouponByMem(String mem_No) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //	@Override
 //	public MemberVO compareMemId(String mem_Id) {
 //		// TODO Auto-generated method stub

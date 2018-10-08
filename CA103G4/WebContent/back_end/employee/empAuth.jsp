@@ -88,7 +88,7 @@ body {
 			</c:forEach>
 								
 			</div>
-			<div class="col-md-2" style="vertical-align: middle;line-height::120px"><a  href="<%=request.getContextPath() %>/empauth.do?emp_No=${emp_list.emp_No}&action=updateAuthor" class="btn btn-warning btn-sm " style="margin-top:45px;">修改</a></div>
+			<div class="col-md-2" style="vertical-align: middle;line-height::120px"><a  href="<%=request.getContextPath() %>/empauth.do?emp_No=${emp_list.emp_No}&action=updateAuthor&whichPage=<%=whichPage%>" class="btn btn-warning btn-sm " style="margin-top:45px;">修改</a></div>
 		</div>
 	</c:forEach>
 

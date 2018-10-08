@@ -91,7 +91,8 @@ body {
 
 				<div class="card">
 					<div class="card-body">
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/activity/activityServlet.do">
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/activity/activityServlet.do">
 							<div class="d-flex flex-wrap ">
 								<div class="item">
 									<label for="sel1" class="text-dark">分類</label> <select
@@ -114,11 +115,13 @@ body {
 								</div>
 								<div class="item">
 									<label for="sel1" class="text-dark">活動開始日從:</label> <input
-										type="text" id="datepicker1" name="act_Start1" class="form-control">
+										type="text" id="datepicker1" name="act_Start1"
+										class="form-control">
 								</div>
 								<div class="item">
 									<label for="sel1" class="text-dark">到</label> <input
-										type="text" name="act_Start2" id="datepicker2" class="form-control">
+										type="text" name="act_Start2" id="datepicker2"
+										class="form-control">
 								</div>
 
 								<div class="item">
@@ -170,24 +173,28 @@ body {
 		</c:if>
 
 
+
+
 		<%@ include file="pages/page1.file"%>
 
 
 		<!-- 表格 -->
 		<div class="col-md-12 p-1">
 			<ul id="myTab" class="nav nav-tabs">
-				<li>
-					<a class="nav-link <%=request.getAttribute("display") == null ? "active" : ""%>" href="#offContent" data-toggle="tab" aria-controls="offContent" aria-selected="true"> 未上架 </a>
-				</li>
-				<li
-					>
-					<a class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>" href="#onContent" data-toggle="tab"> 已上架 </a>
-				</li>
-				
+				<li><a
+					class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>"
+					href="#offContent" data-toggle="tab" aria-controls="offContent">
+						未上架 </a></li>
+				<li><a
+					class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>"
+					href="#onContent" data-toggle="tab"> 已上架 </a></li>
+
 			</ul>
 
 			<div id="myTabContent" class="tab-content">
-				<div id="offContent" class="tab-pane fade  <%=request.getAttribute("display") == null ? "" : "active show"%>" id="offContent">
+				<div id="offContent"
+					class="tab-pane fade  <%=request.getAttribute("display") == null ? "" : "active show"%>"
+					id="offContent">
 					<!-- 未上架的廣告 -->
 					<br>
 					<table class="table">
@@ -196,8 +203,9 @@ body {
 							<th>活動名稱</th>
 							<th>活動分類</th>
 							<th>預計上架日</th>
-							<th>活動起始日</th>
-							<th>下架日</th>
+							<th>開始日</th>
+							<th>預計下架日</th>
+							<th>結束日</th>
 							<th>狀態</th>
 							<th>操作</th>
 							<th>修改</th>
@@ -214,7 +222,8 @@ body {
 
 				<!--已上架的廣告  -->
 				<div id="onContent"
-					class="tab-pane fade  <%=request.getAttribute("display") == null ? "active show" : ""%>" id="onContent">
+					class="tab-pane fade  <%=request.getAttribute("display") == null ? "active show" : ""%>"
+					id="onContent">
 					<br>
 					<table class="table">
 						<thead>
@@ -222,8 +231,9 @@ body {
 							<th>活動名稱</th>
 							<th>活動分類</th>
 							<th>預計上架日</th>
-							<th>活動起始日</th>
-							<th>下架日</th>
+							<th>開始日</th>
+							<th>預計下架日</th>
+							<th>結束日</th>
 							<th>狀態</th>
 							<th>操作</th>
 							<th>修改</th>
@@ -239,11 +249,12 @@ body {
 					</table>
 
 				</div>
-				
-				
+
+
 				<!--已上架的廣告  -->
 				<div id="queryContent"
-					class="tab-pane fade  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active show"%>" id="queryContent">
+					class="tab-pane fade  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active show"%>"
+					id="queryContent">
 					<br>
 					<table class="table">
 						<thead>
@@ -259,7 +270,7 @@ body {
 						</thead>
 
 						<c:forEach var="activityVO" items="${listActs_ByCompositeQuery}">
-								<%@ include file="Content.file"%>
+							<%@ include file="Content.file"%>
 						</c:forEach>
 
 

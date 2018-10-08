@@ -5,6 +5,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.activity.model.*"%>
+
+
+
 <%
 	ActivityService actSvc = new ActivityService();
 	List<ActivityVO> list = actSvc.findNewAct();

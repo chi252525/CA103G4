@@ -12,7 +12,7 @@ public class OrderformVO {
 	private String branch_no;
 	private String deliv_no;
 	private Integer order_type;
-	private Integer order_price;
+	private Double order_price;
 	private Integer order_status;
 	private String deliv_addres;
 	private Integer order_pstatus;
@@ -23,7 +23,7 @@ public class OrderformVO {
 	
 	
 	public OrderformVO(String order_no, String dek_no, String mem_no, String branch_no, String deliv_no,
-			Integer order_type, Integer order_price, Integer order_status, String deliv_addres, Integer order_pstatus,
+			Integer order_type, Double order_price, Integer order_status, String deliv_addres, Integer order_pstatus,
 			Date order_date) {
 		super();
 		this.order_no = order_no;
@@ -78,10 +78,10 @@ public class OrderformVO {
 	public void setOrder_type(Integer order_type) {
 		this.order_type = order_type;
 	}
-	public Integer getOrder_price() {
+	public Double getOrder_price() {
 		return order_price;
 	}
-	public void setOrder_price(Integer order_price) {
+	public void setOrder_price(Double order_price) {
 		this.order_price = order_price;
 	}
 	public Integer getOrder_status() {

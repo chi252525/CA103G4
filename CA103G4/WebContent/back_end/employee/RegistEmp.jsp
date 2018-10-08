@@ -73,10 +73,10 @@ pageContext.setAttribute("branlist",branlist);
             </td>
         </tr>
         <tr>
-            <td class="td1" ><label for="emp_Acnum" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Acnum" name="emp_Acnum" value="${empVO.emp_Acnum}"></td>
+            <td class="td1" ><label for="emp_Acnum" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Acnum" name="emp_Acnum" value="${empVOregist.emp_Acnum}"></td>
         </tr>
         <tr>
-            <td class="td1"><label for="emp_Psw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control-sm empinput" id="emp_Psw" name="emp_Psw" value="${empVO.emp_Psw }"></td>
+            <td class="td1"><label for="emp_Psw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control-sm empinput" id="emp_Psw" name="emp_Psw" value="${empVOregist.emp_Psw }"></td>
         </tr>
         <tr>
             <td class="td1">性別</td>
@@ -89,11 +89,11 @@ pageContext.setAttribute("branlist",branlist);
         </tr>
 
         <tr>
-            <td class="td1"><label for="emp_Name" class="col-form-label">員工姓名</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Name" name="emp_Name" value="${empVO.emp_Name }">
+            <td class="td1"><label for="emp_Name" class="col-form-label">員工姓名</label></td><td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Name" name="emp_Name" value="${empVOregist.emp_Name }">
         </tr>
         <tr>
             <td class="td1"><label for="emp_Tel" class="col-form-label">員工電話</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Tel" name="emp_Tel" value="${empVO.emp_Tel }"></td>
+            <td class="td2" ><input type="text" class="form-control-sm empinput" id="emp_Tel" name="emp_Tel" value="${empVOregist.emp_Tel }"></td>
         </tr>        
 
         <tr>

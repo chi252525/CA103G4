@@ -27,7 +27,7 @@ public class ShoppingServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
-		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action))&&(!("findMemCoupon").equals(action))) {
+		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action)) && (!("findMemCoupon").equals(action))) {
 
 			// 刪除餐點
 			if ("DELETE".equals(action)) {
@@ -36,16 +36,16 @@ public class ShoppingServlet extends HttpServlet {
 				int d = Integer.parseInt(del);
 				buylist.remove(d);
 //				try {
-					System.out.println("目前購物車內容:");
-					if (buylist.size() != 0) {
-						for (MenuVO x : buylist) {
-							System.out.println(x.getMenu_Id() + "有" + x.getMenu_quantity() + "碗");
-						}
-					} else {
-						System.out.println("沒東西 !");
+				System.out.println("目前購物車內容:");
+				if (buylist.size() != 0) {
+					for (MenuVO x : buylist) {
+						System.out.println(x.getMenu_Id() + "有" + x.getMenu_quantity() + "碗");
 					}
-					res.sendRedirect("Cart.jsp");
-					return;//被免被下面的forward或redirect 導致exception
+				} else {
+					System.out.println("沒東西 !");
+				}
+				res.sendRedirect("Cart.jsp");
+				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
 //				}
@@ -79,7 +79,7 @@ public class ShoppingServlet extends HttpServlet {
 			}
 
 			session.setAttribute("shoppingcart", buylist);
-			String url = req.getContextPath()+"/front_end/menu/listAllMenu4.jsp";// send back
+			String url = req.getContextPath() + "/front_end/menu/listAllMenu4.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);
@@ -99,53 +99,66 @@ public class ShoppingServlet extends HttpServlet {
 					Integer quantity = menuVO.getMenu_quantity();
 					total += (price * quantity);
 				}
-				
+
 				String amount = String.valueOf(total);
 				req.setAttribute("amount", amount);
 				String url = "Checkout.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
-				
+
 			}
 		}
 		// 餐點數量加減按鈕(未完成)
 		else if ("addCart".equals(action)) {
 			//
+			try {
 //			String currentQuantity = req.getParameter("quantity");//獲取前端購物車商品數量
 //			System.out.println("數量=" + currentQuantity);
-			MenuVO aMenuVO = getMenuVO(req);
-			if (buylist.contains(aMenuVO)) {
-				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));
-				innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() + 1);
-//				JSONObject jsobj = new JSONObject();
-//
+				MenuVO aMenuVO = getMenuVO(req);// get點擊的餐點
+//			if (buylist.contains(aMenuVO)) {
+//				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));
+
+				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));// 得到車裡與點擊餐點相同的餐
+				innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() + 1);// 將其數量+1
+
+				res.setCharacterEncoding("UTF-8");
+				res.setContentType("text/plain");
+				JSONObject jso = new JSONObject();
+				jso.put("memid", innerMenuVO.getMenu_Id());
+//			
 //				try {
-//					jsobj.put("menuquantity", innerMenuVO.getMenu_quantity());
-//					jsobj.put("memid", innerMenuVO.getMenu_Id());
+				jso.put("memprice", innerMenuVO.getMenu_Price());
+				jso.put("memid", innerMenuVO.getMenu_Id());
+				jso.put("memquantity", innerMenuVO.getMenu_quantity());
+				res.getWriter().print(jso);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 //				} catch (JSONException e) {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-				// session.setAttribute("item", jsobj);
-				// res.getWriter().print(jsobj.toString());//輸出資料到前端
-			} else {
-				buylist.add(aMenuVO);
-			}
+			// session.setAttribute("item", jsobj);
+			// res.getWriter().print(jsobj.toString());//輸出資料到前端
+//			} else {
+//				buylist.add(aMenuVO);
+//			}
 
 			session.setAttribute("shoppingcart", buylist);
-			String url = "Cart.jsp";// send back
+//			String url = "Cart.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
-			res.sendRedirect(url);
-			return;
+//			res.sendRedirect(url);
+//			return;
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
 			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
-			
-			res.getWriter().print(amount);//輸出前端
-			}
+//			res.setContentType("application/json");
+			System.out.println("折價後回前的amount=" + amount);
+			res.getWriter().print(amount);// 輸出前端
+		}
 
 	}
 

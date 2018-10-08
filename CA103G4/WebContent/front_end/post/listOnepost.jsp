@@ -196,7 +196,7 @@ background-color:rgba(253,253,253,0.8);
 								</div>
 								<input type="hidden" id="post_No" name="post_No"
 									value="${postVO.post_No}" /> <input type="hidden" id="mem_No"
-									name="mem_No" value="M000001" /> <input type="hidden"
+									name="mem_No" value="${memVO.mem_No}" /> <input type="hidden"
 									name="action" value="insert">
 								<button type="submit"
 									class="btn btn-primary btn-sm onclick=addMsg()">送出</button>
@@ -253,7 +253,7 @@ background-color:rgba(253,253,253,0.8);
 <div class="btn-group">
  
   <a href="<%=request.getContextPath()%>/reply/replyServlet.do?action=delete&rply_No=${replyVO.rply_No}" 
-  class="btn btn-default btn-sm ${('M000001'==replyVO.mem_No)?'':'disabled'}" onclick="deleteConfirm()">刪除</a>
+  class="btn btn-default btn-sm ${(memVO.mem_No==replyVO.mem_No)?'':'disabled'}" onclick="deleteConfirm()">刪除</a>
   
   
   
@@ -328,7 +328,7 @@ background-color:rgba(253,253,253,0.8);
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
 					data-dismiss="modal">不檢舉了</button>
-				<input type="hidden" name="mem_No" value="M000001"/>
+				<input type="hidden" name="mem_No" value="${memVO.mem_No}"/>
 				<input type="hidden" name="post_No" value="${postVO.post_No}"/>
 				<button type="submit" class="btn btn-primary" name="action" value="insert">同意並送出</button>
 			</div>

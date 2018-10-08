@@ -11,4 +11,5 @@ public interface ResDAO_interface {
     public ResVO findByPrimaryKey(String res_no);
     public List<ResVO> getAll();
     public String addWithBranchNo(String branchNo, ResVO resVO, String seatStr);
+    public List<String> findDekIdWithResTimefn();
 }

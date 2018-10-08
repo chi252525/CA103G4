@@ -227,23 +227,20 @@ a {
 					%>
 
                     <tr>
-                        <td width="200"><span id="item_id">
-                                <%=menuVO.getMenu_Id()%></span>
+                        <td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
+                        <input id=no_Col<%=index%> type="hidden" value=<%=menuVO.getMenu_No() %>><!-- 竊取餐點pk -->
                         </td>
                         <td width="100">
-                            <%=menuVO.getMenu_Price()%>
+                            <span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
                         </td>
-                        <FORM method="post" action="ShoppingServlet.do">
-                            <td id="cartAll" width="100">
-                                <button type="button" id="add" class="" style="background-color: antiquewhite">
-                                    <input type="hidden" name="action" value="addCart"> <i class="far fa-plus-square"></i>
-                                </button> <input type="hidden" name="price" value="<%=menuVO.getMenu_Price()%>"> <input type="hidden" name="quantity" value="<%=menuVO.getMenu_quantity()%>"> <input type="hidden" name="menuid" value="<%=menuVO.getMenu_Id()%>">
-                                <input type="hidden" name="menuno" value="<%menuVO.getMenu_No();%>"><span id=item_quantity>
-                        </FORM>
-                        <%=menuVO.getMenu_quantity()%></span>
-                        <button class="" style="background-color: antiquewhite">
-                            <i class="far fa-minus-square" onclick="minus()"></i>
-                        </button>
+                        <td  width="100">
+                            <button type="button" id="add" class="" style="background-color: antiquewhite" onclick="add<%=index%>()">
+                                <i class="far fa-plus-square"></i>
+                            </button>
+                                <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
+                            <button class="" style="background-color: antiquewhite">
+                                <i class="far fa-minus-square" onclick="minus()"></i>
+                            </button>
                         </td>
 
                         <td width="100">
@@ -275,7 +272,7 @@ a {
                     <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳" class="btn btn-warning">
                 </form>
                 <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
-                     <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
+                    <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
                 </form>
             </div>
         </div>
@@ -370,6 +367,7 @@ a {
     </c:if>
 
     <script>
+    console.log($('#quantity_Col').val());
         //         $(document).ready(function() {
         //             $('#cart').DataTable();
         //         });
@@ -379,7 +377,7 @@ a {
         //                 select: true
         //             });
         <%if(buylist!=null){
-        for (int i = 0; i < buylist.size(); i++) {%>
+       		 for (int i = 0; i < buylist.size(); i++) {%>
         $(function() {
             $("#delete<%=i%>").click(function() {
                 //alert("11");
@@ -405,22 +403,27 @@ a {
                 });
             });
         });
-        <%}
-        }
-        %>
-
-        function add() {
+       
+		
+        function add<%=i%>() {
             $.ajax({
                 type: "post",
                 url: "ShoppingServlet.do",
                 data: {
                     "action": "addCart",
-                    "quantity": $('#item_id').val(),
-                    "menuid": $('#item_quantity').val()
+                    "quantity": $("#quantity_Col<%=i%>").text(), 
+                    "price": $("#price_Col<%=i%>").text(),
+                    "menuid": $("#id_Col<%=i%>").text(),
+                    "menuno": $('#no_Col<%=i%>').val()
+                                      
                 },
                 dataType: "json",
-                success: function(quantity) {
-                    $("#item_quantity").html(quantity.menuquantity);
+                success: function(menuVO) {
+                	alert(menuVO);
+                	$("#quantity_Col<%=i%>").html(menuVO.memquantity);
+                    $("#price_Col<%=i%>").html(menuVO.memprice);
+                    $("#id_Col<%=i%>").html(menuVO.memid);
+
                 },
                 error: function() {
                     alert("連線失敗!");
@@ -428,9 +431,13 @@ a {
             })
         }
 
-        function minus() {
-            document.getElementById("item").innerHTML--
+        <%
+       		 }
         }
+        %>
+//         function minus() {
+//             document.getElementById("item").innerHTML--
+//         }
 
     </script>
     <jsp:include page="/front_end/footer.jsp" flush="true" />
