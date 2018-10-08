@@ -67,7 +67,7 @@ public class EmpServlet extends HttpServlet{
 				String emp_NameReq = "^[(\u4e00-\u9fa5)(_a-zA-Z)]+$";
 				if(emp_Name == null || emp_Name.length() == 0) {
 					errorMsgs.add("員工姓名尚未填寫");
-				}else if (!emp_Name.matches(emp_NameReq)) {
+				}else if (!(emp_Name.matches(emp_NameReq))) {
 					errorMsgs.add("員工姓名僅可填寫中文與英文");
 				}
 				//電話檢查				
@@ -75,8 +75,8 @@ public class EmpServlet extends HttpServlet{
 				String emp_TelReq = "^\\d{0,10}$";
 				if(emp_Tel == null || emp_Tel.length()==0) {
 					errorMsgs.add("員工電話尚未填寫");
-				}else if(!emp_Tel.matches(emp_TelReq)) {
-					errorMsgs.add("電話僅可填數字及最長10字");
+				}else if(!(emp_Tel.matches(emp_TelReq))) {
+					errorMsgs.add("電話僅可填數字或10碼內");
 				}
 				//職稱選擇
 				String emp_Pos = req.getParameter("emp_Pos");
@@ -139,8 +139,8 @@ public class EmpServlet extends HttpServlet{
 				EmpService empsvc = new EmpService();
 				empsvc.addEmpWithAutoKeys(branch_No, emp_Acnum, emp_Psw, emp_Name, emp_Gender, emp_Pos, emp_Tel, emp_Photo, empauthorlist);
 				
-				res.sendRedirect(req.getContextPath()+"/back_end/employee/RegistEmp.jsp");
-				
+		
+				res.sendRedirect(req.getContextPath()+"/back_end/back_index.jsp");
 				
 			}catch(Exception e) {
 				errorMsgs.add("資料新增失敗");
@@ -187,6 +187,7 @@ public class EmpServlet extends HttpServlet{
 				
 				/***************************2.帳號密碼皆正確****************************************/
 				System.out.println("帳密都沒錯");
+				
 				
 				HttpSession session = req.getSession();
 				session.setAttribute("empVO", empVO);
