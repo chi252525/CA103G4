@@ -41,7 +41,7 @@
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:150px;
-	font-family: 'Noto Sans TC', sans-serif;
+/* 	font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
     font-size: 20;
   }
@@ -49,34 +49,35 @@
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
     text-align: center;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
   th, td {
     padding: 5px;
     text-align: center;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
-  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-  body{background-image:url("images/woodbackground3.png");}
+/*   @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css); */
+/*   body{background-image:url("images/woodbackground3.png");} */
 
 </style>
 
 
 </head>
-<body bgcolor='white'>
+<body>
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 
-<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
-<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
+<%-- <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include> --%>
+<%-- <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner"> --%>
 
-<h4></h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>listAllMenu.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
+<!-- <h4></h4> -->
+<!-- <table id="table-1"> -->
+<!-- 	<tr><td> -->
+<!-- 		 <h3>listAllMenu.jsp</h3> -->
+<!-- 		 <h4><a href="select_page.jsp">回首頁</a></h4> -->
+<!-- 	</td></tr> -->
+<!-- </table> -->
 
 <%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
@@ -87,7 +88,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<div class="container.fluid" style=height:1920px;">
 <table>
 	<tr>
 		<th>餐點編號</th>
@@ -130,6 +131,8 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
+</div>
 
+<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>
