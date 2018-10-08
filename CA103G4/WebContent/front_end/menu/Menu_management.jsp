@@ -76,49 +76,6 @@
 </style>
 
 
-<style>
-		.black_overlay{
-			display: none;
-/* 			position: absolute; */
-			top: 0%;
-			left: 0%;
- 			width: 100%;
-  			height: 1920px;
-			background-color: black;
-			z-index:1001;
-			-moz-opacity: 0.8;
-			opacity:.80;
-			filter: alpha(opacity=80);
-/*  			background-size:cover;    */
-/* 			min-height:1080px;  */
-/*  			background-repeat: no-repeat; */
-/*  			background-position:center;   */
-/*  			background-attachment:fixed;  */
- 			position:relative; 
-   			margin-top:-200px;  
-			
-			
-		}
-		.white_content {
-			display: none;
-			position: absolute;
-			top: 25%;
-			left: 25%;
-			width: 50%;
- 			height: 60%;
-			padding: 16px;
-/* 			border: 16px solid orange; */
-			border-radius: 20px;
-			background-color: rgba(255,255,255,0.7);
-			z-index:1002;
-/*  			overflow: auto; */
-		}
-</style>
-
-
-
-
-
 
 
 
@@ -128,19 +85,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/menu/css/theme.css" />
   
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 
 
 
 </head>
-<body bgcolor='white'>
+<body>
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 
 
 
-
-<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
-<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
+<%-- <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include> --%>
+<%-- <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner"> --%>
 
 
 
@@ -162,9 +123,9 @@
 
 
 <div class="h-100 py-5">
-	<div class="container.fluid" style="margin-left:150px;">
-		<div class="row" style="width:1600px;">
-			<div class="col-md-12 mt-3">
+	<div class="container.fluid" style="margin-left:150px; margin-bottom:100px;">
+		<div class="row" style="width:1600px; margin-bottom:0px;">
+			<div class="col-md-12 mt-3" style="height:10px;">
 				<%@ include file="page1.file"%><br>
 	
 			</div>
@@ -193,11 +154,13 @@
 									  	<input type="hidden" name="menu_No" value="${menuVO.getMenu_No()}">
 										上下架  <input type="number" name="menu_Status" size="3" max="1" min="0" value="${menuVO.getMenu_Status()}" style="width: 50px; margin-top:5px;">
 									  </div>
-									  <div style="width:40px;">
+									  <div style="width:80px;">
 <!-- 						              	 <a href="#" class="btn btn-primary" style="background-color:#dc3545; border-color:#dc3545; margin-left:0px;">確認</a> -->
 						              	<input type="hidden" name="action" value="update2">
 <%-- 										<input type="hidden" name="menu_No" value="${menuVO.getMenu_No()}"> --%>
-										<button type="submit" value="確認" class="btn btn-danger" data-toggle="modal" data-target="#HACK" style="background-color:#dc3545; border-color:#dc3545; color:#fff; margin-left:0px; border-radius:5px;">
+<!-- 										<button type="submit" value="確認" class="btn btn-danger" data-toggle="modal" data-target="#HACK" style="background-color:#dc3545; border-color:#dc3545; color:#fff; margin-left:0px; border-radius:5px;"> -->
+<!-- 										確認</button> -->
+										<button type="submit" value="確認" style="background-color:#dc3545; border-color:#dc3545; color:#fff; margin-left:0px; border-radius:5px; margin-top:5px;">
 										確認</button>
 						              </div>
 					              </div>
@@ -240,22 +203,6 @@
 <!-- </div> -->
 
 
-<div class="modal fade" id="HACK">
-	<div class="modal-dialog">
-		<div class="modal-content bg-warning text-danger">
-			<div class="modal-header">
-				<h5 class="modal-title">請告訴我們原因</h5>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary"
-					data-dismiss="modal">不檢舉了</button>
-				<input type="hidden" name="mem_No" value="M000001"/>
-				<input type="hidden" name="post_No" value="${postVO.post_No}"/>
-				<button type="submit" class="btn btn-primary" name="action" value="insert">同意並送出</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
 <script>
@@ -280,16 +227,12 @@ $( this ).dialog( "close" );
 
 
   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 
 
 
 
-
-
+	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>

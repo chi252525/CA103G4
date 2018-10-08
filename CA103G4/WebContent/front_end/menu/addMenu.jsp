@@ -23,7 +23,7 @@
 
 <style>
   table#table-1 {
-	background-color: rgba(255, 255, 255, 0.45);
+	background-color: rgba(77, 80, 120, 0.8);
 /*     border: 2px solid black; */
 	border-radius: 15px;
     text-align: center;
@@ -42,8 +42,8 @@
 <style>
   table {
     
-	width: 1280px;
-	background-color: rgba(255, 255, 255, 0.45);
+	width: 720px;
+	background-color: rgba(77, 80, 120, 0.8);
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:400px;
@@ -55,7 +55,7 @@
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
     text-align: center;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
   th, td {
@@ -64,8 +64,8 @@
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
   }
-  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-  body{background-image:url("images/woodbackground3.png");}
+/*   @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css); */
+/*   body{background-image:url("images/woodbackground3.png");} */
 
 </style>
 
@@ -103,17 +103,18 @@ $(document).ready(function (){
 </script>
 
 </head>
-<body bgcolor='white'>
+<body>
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 
-<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
-<img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
+<%-- <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include> --%>
+<%-- <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner"> --%>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>資料新增 - addMenu.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
+<!-- <table id="table-1"> -->
+<!-- 	<tr><td> -->
+<!-- 		 <h3>新增經典餐點</h3></td><td> -->
+<!-- 		 <h4><a href="select_page.jsp">回首頁</a></h4> -->
+<!-- 	</td></tr> -->
+<!-- </table> -->
 
 <%-- 錯誤列表 --%>
 <c:if test="${not empty errorMsgs}">
@@ -125,150 +126,110 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data">
-<table>
-	<tr>
-		<td>餐點名稱:</td>
-		<td><input type="TEXT" name="menu_Id" size="45"	value="<%=(menuVO==null)?"地獄麻辣拉麵":menuVO.getMenu_Id()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點類型:</td>
-		<td><input type="TEXT" name="menu_Type" size="45"	value="<%=(menuVO==null)?"經典餐點":menuVO.getMenu_Type()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點價格:</td>
-		<td><input type="TEXT" name="menu_Price" size="45"	value="<%=(menuVO==null)?"269":menuVO.getMenu_Price()%>" /></td>
-	</tr>
-	<tr>
-		<td>餐點介紹:</td>
-		<td><input type="TEXT" name="menu_Intro" size="45"	value="<%=(menuVO==null)?"川味麻辣湯頭，搭配辣味肉燥與叉燒肉":menuVO.getMenu_Intro()%>" /></td>
-	</tr>
-	
-	
-	<tr>
-		<td>餐點狀態:</td>
-		<td><input type="TEXT" name="menu_Status" size="45"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" /></td>
-	</tr>
+<!-- <FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data"> -->
+<!-- <table> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點名稱</td> -->
+<%-- 		<td><input type="TEXT" name="menu_Id" size="45"	value="<%=(menuVO==null)?"地獄麻辣拉麵":menuVO.getMenu_Id()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點類型</td> -->
+<%-- 		<td><input type="TEXT" name="menu_Type" size="45"	value="<%=(menuVO==null)?"經典餐點":menuVO.getMenu_Type()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點價格</td> -->
+<%-- 		<td><input type="TEXT" name="menu_Price" size="45"	value="<%=(menuVO==null)?"260":menuVO.getMenu_Price()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點介紹</td> -->
+<%-- 		<td><input type="TEXT" name="menu_Intro" size="45"	value="<%=(menuVO==null)?"川味麻辣湯頭，搭配辣味肉燥與叉燒肉":menuVO.getMenu_Intro()%>" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td>餐點狀態</td> -->
+<%-- 		<td><input type="TEXT" name="menu_Status" size="45"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" /></td> --%>
+<!-- 	</tr> -->
 
-	<tr>
-		<td>餐點圖片:</td>
-		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
-	        <p></p>
-	     	<img class="preview" style="max-width: 200px; max-height: 200px;">
-	        <div class="size"></div>
-		</td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>餐點圖片:</td> -->
+<!-- 		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td> -->
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td></td> -->
+<!-- 		<td> -->
+<!-- 	        <p></p> -->
+<!-- 	     	<img class="preview" style="max-width: 200px; max-height: 200px;"> -->
+<!-- 	        <div class="size"></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 		
-	
-</table>
+<!-- 	<tr> -->
+<!-- 		<td> -->
+<!-- 			<input type="hidden" name="action" value="insert"> -->
+<!-- 	   	 <button type="submit" value="送出新增"> 新增 </button> -->
+<!-- 	    </td> -->
+<!--     </tr> -->
+<!--     <tr> -->
+<!--     </tr> -->
+<!-- </table> -->
+
+<!-- </FORM> -->
 
 
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<div class="container" style="margin-top:100px; position:absulete; margin-left:680px;">
+<div class="row" style="margin:0px auto;">
+<div class=col-6>
+<div class="card" style="padding:30px; border-radius:10px;">
+<FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data">
+	<div class=card-title>
+	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="50"	value="<%=(menuVO==null)?"地獄麻辣拉麵":menuVO.getMenu_Id()%>" />
+	</div>
+		         <input type="hidden" name="menu_Type" size="50"	value="<%=(menuVO==null)?"經典餐點":menuVO.getMenu_Type()%>" />
+	<div class=card-title>
+	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="50"	value="<%=(menuVO==null)?"260":menuVO.getMenu_Price()%>" />
+	</div>
+	<div class=card-title>
+	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="50"	value="<%=(menuVO==null)?"川味麻辣湯頭，搭配辣味肉燥與叉燒肉":menuVO.getMenu_Intro()%>" />
+	</div>
+	<div class=card-title>
+	餐點狀態&nbsp;<input type="TEXT" name="menu_Status" size="50"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" />
+	</div>
+	<div class=card-title>
+	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="50">
+	</div>
+	<div class=card-title>
+		<img class="preview" style="max-width: 200px; max-height: 200px;">
+	</div>
+	<div>
+		<input type="hidden" name="action" value="insert">
+	    <button type="submit" value="送出新增"> 新增 </button>
+	</div>
+</FORM>
+</div>
+</div>
+</div>
+</div>
 
+
+
+
+
+
+
+
+
+
+
+<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 
 
 
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-	<!-- 當第一次進入到addPerntd頁面時，因為在程式一開始宣告的perntdVO並未取到值，所以會產生例外直接進入catch區塊執行該段程式碼 -->
-	<!-- 而controller檢查到錯誤返回處理時，則會因為perntdVO已取到值而執行try區塊裡的程式碼-->
-<% 
-// 	java.sql.Date perntdDate = null;
 
-// 	try {
-// 		//字串先轉java.util.Date型態後再轉java.sql.Date型態
-// 		String dateStr = perntdVO.getPerntd_Date();
-// 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
-// 		java.util.Date date = sdf.parse(dateStr);
-// 		perntdDate = new java.sql.Date(date.getTime());
-// 	} catch (Exception e) {
-// 		//取得當前日期
-// 		perntdDate = new java.sql.Date(System.currentTimeMillis());
-// 	}
-%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y/m/d',         //format:'Y-m-d H:i:s',
-		   value: '<%="2018/10/19"%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-   
-        // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-        //      1.以下為某一天之前的日期無法選擇
-        //      var somedate1 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-
-        
-        //      2.以下為某一天之後的日期無法選擇
-        //      var somedate2 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
 
 
-        //      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-        //      var somedate1 = new Date('2017-06-15');
-        //      var somedate2 = new Date('2017-06-25');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //		             ||
-        //		            date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-        
-</script>
 </html>
