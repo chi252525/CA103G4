@@ -52,10 +52,10 @@ public class OrderformServlet extends HttpServlet {
 			String memno = (String) req.getSession().getAttribute("memNo");
 			
 			//取得當前分店編號(要寫死?)
-			String brano = req.getParameter("branch_no");
+			String brano = (String)req.getAttribute("branch_no");
 			
 			//取得訂單金額
-			Double orderpri = Double.parseDouble(req.getParameter("amount"));	
+			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));	
 			
 			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
@@ -120,7 +120,7 @@ public class OrderformServlet extends HttpServlet {
 			OrderformService ordSvc = new OrderformService();
 			ordSvc.addOrd(orderformVO, list);
 			//準備轉交
-			String url = "seeorderinvoice.jsp";
+			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
