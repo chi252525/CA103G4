@@ -63,7 +63,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setString(3, orderformVO.getBranch_no());
 			pstmt.setString(4, orderformVO.getDeliv_no());
 			pstmt.setInt(5, orderformVO.getOrder_type());
-			pstmt.setInt(6, orderformVO.getOrder_price());
+			pstmt.setDouble(6, orderformVO.getOrder_price());
 			pstmt.setInt(7, orderformVO.getOrder_status());
 			pstmt.setString(8, orderformVO.getDeliv_addres());
 			pstmt.setInt(9, orderformVO.getOrder_pstatus());
@@ -196,7 +196,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO.setBranch_no(rs.getString("branch_no"));
 				orderformVO.setDeliv_no(rs.getString("deliv_no"));
 				orderformVO.setOrder_type(rs.getInt("order_type"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_price(rs.getDouble("order_price"));
 				orderformVO.setOrder_status(rs.getInt("order_status"));
 				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
 				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
@@ -257,7 +257,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO.setBranch_no(rs.getString("branch_no"));
 				orderformVO.setDeliv_no(rs.getString("deliv_no"));
 				orderformVO.setOrder_type(rs.getInt("order_type"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_price(rs.getDouble("order_price"));
 				orderformVO.setOrder_status(rs.getInt("order_status"));
 				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
 				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
@@ -343,7 +343,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO.setMem_no(rs.getString("mem_No"));
 				orderformVO.setDeliv_no(rs.getString("deliv_No"));
 				orderformVO.setOrder_type(rs.getInt("order_Type"));
-				orderformVO.setOrder_price(rs.getInt("order_Price"));
+				orderformVO.setOrder_price(rs.getDouble("order_Price"));
 				orderformVO.setOrder_status(rs.getInt("order_Status"));
 				orderformVO.setOrder_pstatus(rs.getInt("order_Pstatus"));
 
@@ -405,7 +405,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO.setBranch_no(rs.getString("branch_No"));
 				orderformVO.setDeliv_no(rs.getString("deliv_No"));
 				orderformVO.setOrder_type(rs.getInt("order_Type"));
-				orderformVO.setOrder_price(rs.getInt("order_Price"));
+				orderformVO.setOrder_price(rs.getDouble("order_Price"));
 				orderformVO.setOrder_status(rs.getInt("order_Status"));
 				orderformVO.setDeliv_addres(rs.getString("deliv_Addres"));
 				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
@@ -461,7 +461,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setString(2, orderformVO.getMem_no());
 			pstmt.setString(3, orderformVO.getBranch_no());
 			pstmt.setInt(4, orderformVO.getOrder_type());
-			pstmt.setInt(5, orderformVO.getOrder_price());
+			pstmt.setDouble(5, orderformVO.getOrder_price());
 			pstmt.setString(6, orderformVO.getDeliv_addres());
 			pstmt.setInt(7, orderformVO.getOrder_pstatus());
 
@@ -628,7 +628,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_No"));
 				orderformVO.setMem_no(rs.getString("mem_No"));
-				orderformVO.setOrder_price(rs.getInt("order_Price"));
+				orderformVO.setOrder_price(rs.getDouble("order_Price"));
 				list.add(orderformVO);
 			}
 
@@ -686,7 +686,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_no"));
 				orderformVO.setMem_no(rs.getString("mem_no"));
-				orderformVO.setOrder_price(rs.getInt("order_price"));
+				orderformVO.setOrder_price(rs.getDouble("order_price"));
 
 			}
 

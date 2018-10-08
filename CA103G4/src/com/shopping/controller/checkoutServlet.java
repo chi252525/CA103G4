@@ -152,7 +152,7 @@ public class checkoutServlet extends HttpServlet {
 				req.setAttribute("ps", ps); //備註
 				req.setAttribute("amount", amount);//總金額
 				System.out.println("全數通過,要去新增訂單囉!");
-				req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req, res);
+				req.getRequestDispatcher("/front_end/orderform/orderform.do").forward(req, res);
 				return;
 
 				/*************************** 其他可能的錯誤處理 **********************************/
