@@ -129,7 +129,7 @@ public class MemServlet extends HttpServlet{
 				} 
 				//姓名驗證
 				String mem_Name = req.getParameter("mem_Name");
-				String mem_NameReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				String mem_NameReg = "^[(\u4e00-\u9fa5)(_a-zA-Z0-9)]+$";
 				if (mem_Name == null || (mem_Name.trim()).length() == 0) {
 					errorMsgs.add("尚未填寫姓名");
 				}else if(!mem_Name.trim().matches(mem_NameReg)) {

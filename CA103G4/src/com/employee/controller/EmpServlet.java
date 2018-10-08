@@ -64,19 +64,19 @@ public class EmpServlet extends HttpServlet{
 				}
 				//姓名檢查
 				String emp_Name = req.getParameter("emp_Name").trim();
-				String emp_NameReq = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				String emp_NameReq = "^[(\u4e00-\u9fa5)(_a-zA-Z)]+$";
 				if(emp_Name == null || emp_Name.length() == 0) {
 					errorMsgs.add("員工姓名尚未填寫");
-				}else if (!(emp_Name.matches(emp_NameReq))) {
+				}else if (!emp_Name.matches(emp_NameReq)) {
 					errorMsgs.add("員工姓名僅可填寫中文與英文");
 				}
 				//電話檢查				
 				String emp_Tel = req.getParameter("emp_Tel");
-				String emp_TelReq = "^[0-9]+$";
+				String emp_TelReq = "^\\d{0,10}$";
 				if(emp_Tel == null || emp_Tel.length()==0) {
 					errorMsgs.add("員工電話尚未填寫");
-				}else if(!(emp_Tel.matches(emp_TelReq))) {
-					errorMsgs.add("電話僅可填數字");
+				}else if(!emp_Tel.matches(emp_TelReq)) {
+					errorMsgs.add("電話僅可填數字及最長10字");
 				}
 				//職稱選擇
 				String emp_Pos = req.getParameter("emp_Pos");
@@ -109,25 +109,25 @@ public class EmpServlet extends HttpServlet{
 				/***************************2.開始新增資料****************************************/
 				
 				
-				EmpVO empVO = new EmpVO();
-				empVO.setBranch_No(branch_No);
+				EmpVO empVOregist = new EmpVO();
+				empVOregist.setBranch_No(branch_No);
 				System.out.println("branch_No="+branch_No);
-				empVO.setEmp_Acnum(emp_Acnum);
+				empVOregist.setEmp_Acnum(emp_Acnum);
 				System.out.println("emp_Acnum="+emp_Acnum);
-				empVO.setEmp_Psw(emp_Psw);
+				empVOregist.setEmp_Psw(emp_Psw);
 				System.out.println("emp_Psw="+emp_Psw);
-				empVO.setEmp_Name(emp_Name);
+				empVOregist.setEmp_Name(emp_Name);
 				System.out.println("emp_Name="+emp_Name);
-				empVO.setEmp_Gender(emp_Gender);
+				empVOregist.setEmp_Gender(emp_Gender);
 				System.out.println("emp_Gender="+emp_Gender);
-				empVO.setEmp_Tel(emp_Tel);
+				empVOregist.setEmp_Tel(emp_Tel);
 				System.out.println("emp_Tel="+emp_Tel);
-				empVO.setEmp_Pos(emp_Pos);
+				empVOregist.setEmp_Pos(emp_Pos);
 				System.out.println("emp_Pos="+emp_Pos);
 				
 				
 				if(!(errorMsgs.isEmpty())) {					
-					req.setAttribute("empVO", empVO);  // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("empVOregist", empVOregist);  // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/employee/RegistEmp.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
@@ -139,7 +139,7 @@ public class EmpServlet extends HttpServlet{
 				EmpService empsvc = new EmpService();
 				empsvc.addEmpWithAutoKeys(branch_No, emp_Acnum, emp_Psw, emp_Name, emp_Gender, emp_Pos, emp_Tel, emp_Photo, empauthorlist);
 				
-				res.sendRedirect(req.getContextPath()+"/back_end/employee/back_index.jsp");
+				res.sendRedirect(req.getContextPath()+"/back_end/employee/RegistEmp.jsp");
 				
 				
 			}catch(Exception e) {
