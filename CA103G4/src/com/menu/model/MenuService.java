@@ -54,4 +54,20 @@ public class MenuService {
 	public List<MenuVO> getAll() {
 		return dao.getAll();
 	}
+
+	public MenuVO updateMenu2(String menu_no, Integer menu_status) {
+
+		MenuVO menuVO = new MenuVO();
+
+		menuVO.setMenu_No(menu_no);
+		menuVO.setMenu_Status(menu_status);
+
+		dao.update2(menuVO);
+
+		return menuVO;
+		
+
+	}
+
+
 }
