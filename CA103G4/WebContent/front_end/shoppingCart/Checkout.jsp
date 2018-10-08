@@ -77,6 +77,43 @@
 	margin-left:50%;
 	
 }
+
+	.perchase{
+        	border-radius: 50em;
+			border: 1px solid #C1E4FE;
+			background: #3899EC;
+			width: 250px;
+			height:40px;
+			margin-top:10px;
+        }
+        
+	.perchase:hover{
+        	background:#5cabf0;
+        }
+        
+         .card_data{
+        	border-radius:10px;
+        	border-radius: 6px;
+   		 	border: 1px solid #C1E4FE;
+        	 width:250px;
+        	margin:auto;
+        }
+        
+        .summary {
+    opacity: 1;
+    width: 366px;
+    will-change: transform, opacity;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    width: 100%;	
+    margin: 0px 0 0 0;
+    padding: 0;
+    list-style: none;
+    opacity:0.8;
+}
 </style>
 </head>
 
@@ -162,8 +199,8 @@
                                     <input id="coupon" class="btn btn-sm btn-light" type="button" data-toggle="modal" data-target="#couponModal" value="Coupon" style="background-image: url(''); width: 20%">
 
                                     <h4>
-                                        總計 <span id="price">$
-                                            <%=amount%></span>
+                                     	   總計 <span id="price">$ <%=amount%></span>
+                                     	   
                                     </h4>
                                 </td>
                             </tr>
@@ -260,21 +297,22 @@
                                 <!-- credit card -->
                                 <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
                                     <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icons-cards.svg" type=""style="margin-top:5px;"></img>
                                     <div class="form-container active" style="margin: 10px;">
                                         <div class="form-inline">
-                                            <input placeholder="Card number" type="tel" name="number" style="margin: 5px;" value="${card_number}">
+                                            <input class="card_data" placeholder="Card number" type="tel" name="number" style="margin: 5px;" value="${card_number}">
                                             <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.card_number}</div>
                                         </div>
                                         <div class="form-inline">
-                                            <input placeholder="Full name" type="text" name="name" style="margin: 5px;" value="${name}">
+                                            <input class="card_data" placeholder="Full name" type="text" name="name" style="margin: 5px;" value="${name}">
                                             <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.full_name}</div>
                                         </div>
                                         <div class="form-inline">
-                                            <input placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
+                                            <input class="card_data" placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
                                             <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.expiry}</div>
                                         </div>
                                         <div class="form-inline">
-                                            <input placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
+                                            <input class="card_data" placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
                                             <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.cvc}</div>
                                         </div>
                                     </div>
@@ -299,6 +337,7 @@
             <div class="d-flex ml-auto">
             	<c:if test="${ not empty shoppingcart}">
                 	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
+                	<input id="forOrderAmount" type="hidden" name="amount" value="<%=amount %>>"><!-- 傳遞金額 -->
                 	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
 				</c:if>
 				<c:if test="${empty shoppingcart}">
@@ -410,10 +449,9 @@
                 },
                 dataType: "html",
                 success: function(amount) {
-                    //                     alert("折價成功!");
-                    $('#price').html(
-                        "<font style=color:red>\$" + amount +
-                        "</font>");
+                      alert(amount);
+                    $('#price').html("<font style=color:red>\$ " + amount + "</font>");
+            		$('#forOrderAmount').val(amount);
                 },
                 error: function() {
                     alert("reduce ajax error!")

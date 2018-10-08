@@ -233,17 +233,14 @@ a {
                         <td width="100">
                             <%=menuVO.getMenu_Price()%>
                         </td>
-                        <FORM method="post" action="ShoppingServlet.do">
-                            <td id="cartAll" width="100">
-                                <button type="button" id="add" class="" style="background-color: antiquewhite">
-                                    <input type="hidden" name="action" value="addCart"> <i class="far fa-plus-square"></i>
-                                </button> <input type="hidden" name="price" value="<%=menuVO.getMenu_Price()%>"> <input type="hidden" name="quantity" value="<%=menuVO.getMenu_quantity()%>"> <input type="hidden" name="menuid" value="<%=menuVO.getMenu_Id()%>">
-                                <input type="hidden" name="menuno" value="<%menuVO.getMenu_No();%>"><span id=item_quantity>
-                        </FORM>
-                        <%=menuVO.getMenu_quantity()%></span>
-                        <button class="" style="background-color: antiquewhite">
-                            <i class="far fa-minus-square" onclick="minus()"></i>
-                        </button>
+                        <td id="quantity_Col<%=index%>>" width="100">
+                            <button type="button" id="add" class="" style="background-color: antiquewhite" onclick="add()">
+                                <i class="far fa-plus-square"></i>
+                            </button>
+                                <%=menuVO.getMenu_quantity()%>
+                            <button class="" style="background-color: antiquewhite">
+                                <i class="far fa-minus-square" onclick="minus()"></i>
+                            </button>
                         </td>
 
                         <td width="100">
@@ -275,7 +272,7 @@ a {
                     <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳" class="btn btn-warning">
                 </form>
                 <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
-                     <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
+                    <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
                 </form>
             </div>
         </div>
@@ -370,6 +367,7 @@ a {
     </c:if>
 
     <script>
+    console.log($('#quantity_Col').val());
         //         $(document).ready(function() {
         //             $('#cart').DataTable();
         //         });
@@ -409,28 +407,28 @@ a {
         }
         %>
 
-        function add() {
-            $.ajax({
-                type: "post",
-                url: "ShoppingServlet.do",
-                data: {
-                    "action": "addCart",
-                    "quantity": $('#item_id').val(),
-                    "menuid": $('#item_quantity').val()
-                },
-                dataType: "json",
-                success: function(quantity) {
-                    $("#item_quantity").html(quantity.menuquantity);
-                },
-                error: function() {
-                    alert("連線失敗!");
-                }
-            })
-        }
+//         function add() {
+//             $.ajax({
+//                 type: "post",
+//                 url: "ShoppingServlet.do",
+//                 data: {
+//                     "action": "addCart",
+<%--                     "quantity": <%=menuVO.getMenu_quantity()%>,  --%>
+//                     "menuid": $('#item_quantity').val()
+//                 },
+//                 dataType: "json",
+//                 success: function(quantity) {
+//                     $("#item_quantity").html(quantity.menuquantity);
+//                 },
+//                 error: function() {
+//                     alert("連線失敗!");
+//                 }
+//             })
+//         }
 
-        function minus() {
-            document.getElementById("item").innerHTML--
-        }
+//         function minus() {
+//             document.getElementById("item").innerHTML--
+//         }
 
     </script>
     <jsp:include page="/front_end/footer.jsp" flush="true" />
