@@ -30,7 +30,8 @@ public class checkoutServlet extends HttpServlet {
 		String eatIn_takeAway = req.getParameter("eatIn&takeAway"); // 取得用餐方式
 		String branch_No = req.getParameter("branch_no"); // 取得分店編號
 		String ps = req.getParameter("ps");
-
+		String amount = req.getParameter("amount");
+		System.out.println("amount="+amount);
 		if ("insert".equals(action)) {// 來自checkout.jsp的請求
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -129,6 +130,7 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("name", full_name);
 					req.setAttribute("expiry", expiry);
 					req.setAttribute("cvc", cvc);
+					req.setAttribute("amount", amount);//總金額
 
 					req.setAttribute("order_pstatus", order_pstatus);// 回給錯誤頁面判斷是否顯示信用卡 1為顯示
 					RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
@@ -148,6 +150,7 @@ public class checkoutServlet extends HttpServlet {
 				req.setAttribute("order_pstatus", order_pstatus); 
 				req.setAttribute("time", time);//取餐時間
 				req.setAttribute("ps", ps); //備註
+				req.setAttribute("amount", amount);//總金額
 				System.out.println("全數通過,要去新增訂單囉!");
 				req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req, res);
 				return;
