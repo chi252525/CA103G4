@@ -51,7 +51,7 @@
 
 	<%-- s以下是新增外送派送單 --%>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
-	<input type="submit" value="+新增派送單" class="btn btn-dark" value="Submit Button"> 
+	<input type="submit" value="+新增外送單" class="btn btn-dark" value="Submit Button"> 
 	<input type="hidden" name="action" value="selectOrd">
 	</FORM>
 	

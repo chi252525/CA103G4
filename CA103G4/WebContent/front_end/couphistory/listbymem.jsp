@@ -13,7 +13,7 @@
 
 <%
 CouponhistoryService couponhistorySvc = new CouponhistoryService();
-List<CouponhistoryVO> list = couponhistorySvc.getByMem("M000001");
+List<CouponhistoryVO> list = couponhistorySvc.getByMem((String)session.getAttribute("memNo"));
 pageContext.setAttribute("ByName",list);
 %>
 
@@ -127,7 +127,7 @@ pageContext.setAttribute("ByName",list);
       </div>
       
       <div class="textc">
-      		<br>
+      
          <h1>
          	優惠券名稱: ${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}
          </h1>
