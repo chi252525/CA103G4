@@ -50,8 +50,8 @@
 </style>
 </head>
 <body>
-
-<div class="py-5 text-white">
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+<div class=" text-white">
 	<div class="container">
 		<div class="row">
 				<div class="col-md-12">
@@ -232,6 +232,6 @@ $(function(){
 								</script>
 
 
-
+<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>

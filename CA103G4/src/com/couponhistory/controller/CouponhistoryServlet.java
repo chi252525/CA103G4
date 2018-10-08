@@ -5,17 +5,17 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.coupon.model.CouponService;
 import com.coupon.model.CouponVO;
 import com.couponhistory.model.CouponhistoryService;
 import com.couponhistory.model.CouponhistoryVO;
-import com.member.model.MemberVO;
 
 public class CouponhistoryServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req,HttpServletResponse res)
@@ -31,7 +31,12 @@ public class CouponhistoryServlet extends HttpServlet {
 		if("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			res.setContentType("text/plain");
+			res.setCharacterEncoding("UTF-8");
+
+			PrintWriter out = res.getWriter();
+			JSONObject obj = new JSONObject();
+
 			try {
 				
 				String mem_No = req.getParameter("mem_No");
@@ -46,24 +51,37 @@ public class CouponhistoryServlet extends HttpServlet {
 				if(couponlist.size()==0) {
 					errorMsgs.add("優惠卷已取完");
 				}
+
 				CouponVO oneCouponNotSendedVO = couponlist.get(0);//取出第一個
 				String oneCoupon_Sn= oneCouponNotSendedVO.getCoup_Sn();
 				
-				/*******************開始設定資料*********************/
-				CouponhistoryService chSvc= new CouponhistoryService();
-				CouponhistoryVO chVO= new CouponhistoryVO();
-				chVO.setCoup_sn(oneCoupon_Sn);
-				chVO.setMem_no(mem_No);
-				chVO.setCoup_state(0);//未使用的狀態
-				chSvc.insertOneCouponRecord(oneCoupon_Sn, mem_No, 0);
-				/**********************取完後更新狀態為已取用*****************************/
-				Csvc.updateCouoponStatus(oneCoupon_Sn);
-				res.setContentType("text/plain");
-				res.setCharacterEncoding("UTF-8");
-
-				PrintWriter out = res.getWriter();
-				out.print("已取得!!");
-				
+				/**********************************************************/
+			 	CouponhistoryService couSvc = new CouponhistoryService();
+			 	List<CouponhistoryVO> couList = couSvc.getByMem(mem_No);
+			 	for(CouponhistoryVO vo:couList) {
+			 		if(vo.getCoup_sn().equals(oneCoupon_Sn)){
+			 			errorMsgs.add("優惠卷已取過了!!");
+			 			break;
+			 		}
+			 	}
+			 	if(errorMsgs.isEmpty()) {
+					/*******************開始設定資料*********************/
+					CouponhistoryService chSvc= new CouponhistoryService();
+					CouponhistoryVO chVO= new CouponhistoryVO();
+					chVO.setCoup_sn(oneCoupon_Sn);
+					chVO.setMem_no(mem_No);
+					chVO.setCoup_state(0);//未使用的狀態
+					chSvc.insertOneCouponRecord(oneCoupon_Sn, mem_No, 0);
+					/**********************取完後更新狀態為已取用*****************************/
+					Csvc.updateCouoponStatus(oneCoupon_Sn);
+					obj.put("status", "success");
+					obj.put("msg", "已取得!!");
+					out.print(obj);
+			 	} else {
+					obj.put("status", "failure");
+					obj.put("msg", errorMsgs.get(0));
+			 		out.print(obj);
+			 	}
 //				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 //				String url = "/front_end/activity/listAllActivity.jsp";
 //
@@ -74,7 +92,7 @@ public class CouponhistoryServlet extends HttpServlet {
 				errorMsgs.add("取得優惠卷失敗:" + e.getMessage());
 //				req.getRequestDispatcher("/front_end/activity/listAllActivity.jsp").forward(req, res);
 				res.setCharacterEncoding("UTF-8");
-				PrintWriter out = res.getWriter();
+				out = res.getWriter();
 				out.print("未取得!!");
 			}
 			
