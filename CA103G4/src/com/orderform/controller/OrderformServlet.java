@@ -39,7 +39,7 @@ public class OrderformServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			//接受參數
 			//訂單參數
-			
+			System.out.println("進來了!");
 			//內用有桌號，否則空值
 			String dekno;
 			if ((int)req.getAttribute("order_type") == 0) {
@@ -68,7 +68,7 @@ public class OrderformServlet extends HttpServlet {
 				addres = null;
 			}
 			
-			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得信用卡資訊//分店、信用卡末四碼、備註、時間、外送地址
+			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
 			if (req.getAttribute("card_number") != null || ((String) req.getAttribute("card_number")).trim().length() != 0) {
 				orderpa = 2;
@@ -86,7 +86,6 @@ public class OrderformServlet extends HttpServlet {
 			Vector inv = new Vector();
 			inv = (Vector) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			String[] oinlist = new String[inv.size()];
-			
 			
 			for (int z = 0 ; z < inv.size() ; z++){
                 String eat = (String)inv.get(z);
