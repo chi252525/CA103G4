@@ -148,6 +148,7 @@ var $JUI1 = $.noConflict(true);
 							</div>
 						</div>
 						<input type="hidden" name="action" value="update"> 
+						<input type="hidden" name="act_Status" value="0"> 
 						<input type="hidden" name="act_No" value="<%=activityVO.getAct_No()%>"><input
 							type="hidden" name="emp_No" value="E000000002">
 						<button type="submit" class="btn btn-secondary">確定修改</button>

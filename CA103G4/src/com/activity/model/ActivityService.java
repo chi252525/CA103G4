@@ -44,7 +44,7 @@ public class ActivityService {
 		activityVO.setAct_Content(act_Content);
 		activityVO.setAct_PreAddTime(act_PreAddTime);
 		activityVO.setAct_PreOffTime(act_PreOffTime);
-		
+		dao.update(activityVO);
 		return activityVO;
 	}
 
