@@ -452,12 +452,13 @@
                       alert(amount);
                     $('#price').html("<font style=color:red>\$ " + amount + "</font>");
             		$('#forOrderAmount').val(amount);
+            		$('#couponUse').attr('disabled',true);
                 },
                 error: function() {
                     alert("reduce ajax error!")
                 }
             })
-            $('#couponUse').attr('disable',true);
+            
             
         }
 
