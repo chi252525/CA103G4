@@ -20,13 +20,16 @@ public class ScheduleServlet {
     
    public void init() {
 	   timer = new Timer();
-		SimpleDateFormat time_format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
 	   
 		TimerTask task = new TimerTask() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
+				
+				
+				
+				
+				
 				
 			}
 			
@@ -36,6 +39,11 @@ public class ScheduleServlet {
 	   
 	   
    }
+   
+   public void destroy() {
+		timer.cancel();
+		System.out.println("排程器結束");
+	}
 	
 	
 	

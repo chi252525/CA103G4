@@ -1,3 +1,4 @@
+
 package com.activity.model;
 
 import java.util.*;
@@ -634,7 +635,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 			con = ds.getConnection();
 			String finalSQL = "select * from activity "
 					+ jdbcUtil_CompositeQuery.get_WhereCondition(map)
-					+ "order by empno";
+					+ "order by Act_No";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
 			rs = pstmt.executeQuery();
