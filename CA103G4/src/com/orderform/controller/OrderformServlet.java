@@ -40,20 +40,27 @@ public class OrderformServlet extends HttpServlet {
 			//接受參數
 			//訂單參數
 			
+			//內用有桌號，否則空值
 			String dekno;
-			if (req.getParameter("dek_no") != null || req.getParameter("dek_no").trim().length() != 0) {
+			if ((int)req.getAttribute("order_type") == 0) {
 				dekno = req.getParameter("dek_no");
 			} else {
-				dekno = "D000000001";
+				dekno = null;
 			}
-			String memno = (String) req.getSession().getAttribute("mem_no");
-			String brano = req.getParameter("branch_No");
-			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
 			
+			//從session取得會員的編號
+			String memno = (String) req.getSession().getAttribute("mem_no");
+			
+			//取得當前分店編號(要寫死?)
+			String brano = req.getParameter("branch_No");
+			
+			//取得訂單金額
+			Integer orderpri = new Integer(req.getParameter("amount"));	
+			
+			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
 			String addres;
-			if (req.getAttribute("order_type") != null || ((String)req.getAttribute("order_type")).trim().length() != 0) {
-				req.setAttribute("order_type", req.getAttribute("order_type"));
+			if ((int)req.getAttribute("order_type") == 2) {
 				ordertype = (Integer) req.getAttribute("order_type");
 				addres = req.getParameter("deliv_addres");	
 			} else {
@@ -61,6 +68,7 @@ public class OrderformServlet extends HttpServlet {
 				addres = null;
 			}
 			
+			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得信用卡資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
 			if (req.getAttribute("card_number") != null || ((String) req.getAttribute("card_number")).trim().length() != 0) {
 				orderpa = 2;
@@ -68,7 +76,6 @@ public class OrderformServlet extends HttpServlet {
 			} else {
 				orderpa = 1;
 			} //信用卡表已付款2; 現金表1未付款
-
 			req.setAttribute("time", req.getAttribute("time"));
 			req.setAttribute("ps", req.getAttribute("ps"));
 			
@@ -103,7 +110,7 @@ public class OrderformServlet extends HttpServlet {
 			orderformVO.setMem_no(memno);
 			orderformVO.setBranch_no(brano);
 			orderformVO.setOrder_type(ordertype);
-//			orderformVO.setOrder_price(orderpri);
+			orderformVO.setOrder_price(orderpri);
 			orderformVO.setDeliv_addres(addres);
 			orderformVO.setOrder_pstatus(orderpa);
 			//開始新增

@@ -337,7 +337,7 @@
             <div class="d-flex ml-auto">
             	<c:if test="${ not empty shoppingcart}">
                 	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
-                	<input id="forOrderAmount" type="hidden" name="amount" value="<%=amount %>>"><!-- 傳遞金額 -->
+                	<input id="forOrderAmount" type="hidden" name="amount" value="<%=amount %>"><!-- 傳遞金額 -->
                 	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
 				</c:if>
 				<c:if test="${empty shoppingcart}">
@@ -392,7 +392,7 @@
                 </div>
                 <div class="modal-footer">
                     <form action="<%request.getContextPath();%>/front_end/shoppingCart/ShoppingServlet.do"></form>
-                    <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
+                    <button id="couponUse" type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal" onclick="reducePrice()">使用</button>
                     <input type="hidden" name="action" value="findMemCoupon"> <input type="text" id="amount" name="amount" value="<%=amount%>">
                     <button type="button" class="btn btn-light">取消</button>
                 </div>
@@ -452,11 +452,14 @@
                       alert(amount);
                     $('#price').html("<font style=color:red>\$ " + amount + "</font>");
             		$('#forOrderAmount').val(amount);
+            		$('#couponUse').attr('disabled',true);
                 },
                 error: function() {
                     alert("reduce ajax error!")
                 }
             })
+            
+            
         }
 
     </script>
