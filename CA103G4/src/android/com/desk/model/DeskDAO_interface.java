@@ -6,6 +6,7 @@ import android.com.branch.model.BranchVO;
 import android.com.orderform.model.OrderformVO;
 
 public interface DeskDAO_interface {
+	public String insert(DeskVO deskVO, Connection con);
 	public void insert(DeskVO deskVO);
     public void update(DeskVO deskVO);
     public void updateDekStatus(String dek_no, Connection con);

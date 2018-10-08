@@ -165,32 +165,37 @@ code {
 </head>
 
 <body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
-    <div class="container col-12" style="height:400px">
+    <div class="container-fluid col-12" style="height:400px">
         <div class="row">
-            <div class="col-md-6 center">
-
+            <div class="col-md-8" style="margin-top: 10%;padding-left: 0px;">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="images/ad_01.png" alt="First slide" style="">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/ad_07.png" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/ad_06.png" alt="Third slide">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="list-group mr-auto col-12 col-md-4 offset-md-8" id="list-tab" role="tablist" style="height: 100%">
+            <div class="list-group mr-auto col-12 col-md-4" id="list-tab" role="tablist" style="height: 100% ;font-size:20px;">
 
-                <h2>竹風堂-竹幣儲值</h2>
+                <h2 style="margin-top: 30%;">竹風堂-竹幣儲值</h2>
                 <form method="post" action="storedrecord.do">
-                    <div class="inputGroup">
-                        <input id="radio1" name="stor_Point" type="radio" value="500" />
-                        <label for="radio1">500竹幣</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="radio2" name="stor_Point" type="radio" value="1000" />
-                        <label for="radio2">1000竹幣</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="radio2" name="stor_Point" type="radio" value="1500" />
-                        <label for="radio2">1500竹幣</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="radio2" name="stor_Point" type="radio" value="2000" />
-                        <label for="radio2">2000竹幣</label>
-                    </div>
-                    <button type="submit" class="btn" name="action" value="getPoint">儲值點數</button>
+
+                    <select name="stor_Point" class="custom-select custom-select-lg mb-3" size="5" style="height:90%">
+                        <option selected style="font-size:40px;" value="請選擇">產品選擇</option>
+                        <option value="500">500竹幣</option>
+                        <option value="1000">1000竹幣</option>
+                        <option value="1500">1500竹幣</option>
+                        <option value="2000">2000竹幣</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-lg" name="action" value="getPoint">儲值點數</button>
                 </form>
             </div>
 

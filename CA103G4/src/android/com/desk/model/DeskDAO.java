@@ -42,6 +42,48 @@ public class DeskDAO implements DeskDAO_interface{
 	
 	
 	@Override
+	public String insert(DeskVO deskVO, Connection con) {
+		PreparedStatement pstmt = null;
+		String next_dek_no = null;
+		
+		try {
+			
+			String[] cols = { "dek_no" };
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
+			
+			pstmt.setString(1, deskVO.getBranch_no());
+			pstmt.setString(2, deskVO.getDek_id());
+			pstmt.setInt(3, deskVO.getDek_set());
+			pstmt.setInt(4, deskVO.getDek_status());
+			pstmt.executeUpdate();
+			
+			// 取得對應的自增主鍵值
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_dek_no = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_dek_no + "(剛新增成功的桌位流水號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return next_dek_no;
+	}
+
+	@Override
 	public List<DeskVO> getByDekNo(List<OrderformVO> orderList) {
 		List<DeskVO> list = new ArrayList<DeskVO>();
 		DeskVO deskVO = null;

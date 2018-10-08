@@ -51,6 +51,9 @@ public class AndroidMyBookingServer implements ServletContextListener{
 		System.out.println(userSession.getId() + ": 已連線");
 		System.out.println(myName + ": 已連線");
 		System.out.println("現在在線人數:" + allSessions.size());
+		
+		userSession.getAsyncRemote().sendObject(resInputMap);
+		userSession.getAsyncRemote().sendText("myID="+userSession.getId());
 	}
 	
 	@OnMessage

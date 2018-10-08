@@ -31,7 +31,7 @@ a.list-group-item:hover{
 }
 body{
     background-color: #CC0000;
-    z-index=-1;
+    z-index:-2;
 }
 .button {
     font-family: 'Senty Golden Bell';
@@ -101,5 +101,8 @@ body{
         transform:rotate(36000deg);
     }
    
+}
+.modal-backdrop fade show{
+	z-index:1;
 }
  
