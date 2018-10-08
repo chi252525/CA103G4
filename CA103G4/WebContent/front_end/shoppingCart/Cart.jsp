@@ -227,17 +227,17 @@ a {
 					%>
 
                     <tr>
-                        <td width="200"><span id="item_id">
-                                <%=menuVO.getMenu_Id()%></span>
+                        <td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
+                        <input id=no_Col<%=index%> type="hidden" value=<%=menuVO.getMenu_No() %>><!-- 竊取餐點pk -->
                         </td>
                         <td width="100">
-                            <%=menuVO.getMenu_Price()%>
+                            <span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
                         </td>
-                        <td id="quantity_Col<%=index%>>" width="100">
-                            <button type="button" id="add" class="" style="background-color: antiquewhite" onclick="add()">
+                        <td  width="100">
+                            <button type="button" id="add" class="" style="background-color: antiquewhite" onclick="add<%=index%>()">
                                 <i class="far fa-plus-square"></i>
                             </button>
-                                <%=menuVO.getMenu_quantity()%>
+                                <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
                             <button class="" style="background-color: antiquewhite">
                                 <i class="far fa-minus-square" onclick="minus()"></i>
                             </button>
@@ -377,7 +377,7 @@ a {
         //                 select: true
         //             });
         <%if(buylist!=null){
-        for (int i = 0; i < buylist.size(); i++) {%>
+       		 for (int i = 0; i < buylist.size(); i++) {%>
         $(function() {
             $("#delete<%=i%>").click(function() {
                 //alert("11");
@@ -403,29 +403,38 @@ a {
                 });
             });
         });
-        <%}
+       
+		
+        function add<%=i%>() {
+            $.ajax({
+                type: "post",
+                url: "ShoppingServlet.do",
+                data: {
+                    "action": "addCart",
+                    "quantity": $("#quantity_Col<%=i%>").text(), 
+                    "price": $("#price_Col<%=i%>").text(),
+                    "menuid": $("#id_Col<%=i%>").text(),
+                    "menuno": $('#no_Col<%=i%>').val()
+                                      
+                },
+                dataType: "json",
+                success: function(menuVO) {
+                	alert(menuVO);
+                	$("#quantity_Col<%=i%>").html(menuVO.memquantity);
+                    $("#price_Col<%=i%>").html(menuVO.memprice);
+                    $("#id_Col<%=i%>").html(menuVO.memid);
+
+                },
+                error: function() {
+                    alert("連線失敗!");
+                }
+            })
+        }
+
+        <%
+       		 }
         }
         %>
-
-//         function add() {
-//             $.ajax({
-//                 type: "post",
-//                 url: "ShoppingServlet.do",
-//                 data: {
-//                     "action": "addCart",
-<%--                     "quantity": <%=menuVO.getMenu_quantity()%>,  --%>
-//                     "menuid": $('#item_quantity').val()
-//                 },
-//                 dataType: "json",
-//                 success: function(quantity) {
-//                     $("#item_quantity").html(quantity.menuquantity);
-//                 },
-//                 error: function() {
-//                     alert("連線失敗!");
-//                 }
-//             })
-//         }
-
 //         function minus() {
 //             document.getElementById("item").innerHTML--
 //         }
