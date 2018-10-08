@@ -140,14 +140,14 @@ public class checkoutServlet extends HttpServlet {
 				/****************************
 				 * 3.新增完成,準備轉交(Send data to orderForm servlet)
 				 ***********/
-				req.setAttribute("card_number", card_number);
-
-				req.setAttribute("branch_no", branch_No);
-				req.setAttribute("order_type", eatIn_takeAway);
-				req.setAttribute("deliv_addres", address);
-				req.setAttribute("order_pstatus", order_pstatus);
-				req.setAttribute("time", time);
-				req.setAttribute("ps", ps);
+				req.setAttribute("card_number", card_number);//顯示卡片後四碼用
+				
+				req.setAttribute("branch_no", branch_No);//分店名稱
+				req.setAttribute("order_type", eatIn_takeAway);//外送或內用
+				req.setAttribute("deliv_addres", address);//地址
+				req.setAttribute("order_pstatus", order_pstatus); 
+				req.setAttribute("time", time);//取餐時間
+				req.setAttribute("ps", ps); //備註
 				System.out.println("全數通過,要去新增訂單囉!");
 				req.getRequestDispatcher(req.getContextPath() + "/front_end/orderform/orderform.do").forward(req, res);
 				return;
