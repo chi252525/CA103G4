@@ -54,8 +54,8 @@ public class OrderformServlet extends HttpServlet {
 			//取得當前分店編號(要寫死?)
 			String brano = req.getParameter("branch_No");
 			
-			//取得訂單價格
-			Integer orderpri = new Integer(req.getParameter("order_price").trim());	
+			//取得訂單金額
+			Integer orderpri = new Integer(req.getParameter("amount"));	
 			
 			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
@@ -110,7 +110,7 @@ public class OrderformServlet extends HttpServlet {
 			orderformVO.setMem_no(memno);
 			orderformVO.setBranch_no(brano);
 			orderformVO.setOrder_type(ordertype);
-//			orderformVO.setOrder_price(orderpri);
+			orderformVO.setOrder_price(orderpri);
 			orderformVO.setDeliv_addres(addres);
 			orderformVO.setOrder_pstatus(orderpa);
 			//開始新增
