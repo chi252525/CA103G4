@@ -36,4 +36,7 @@ public class EmpauthorityService {
 				
 	}
 	
+	public void DeletrbyEmpNo(String emp_No,List<EmpauthorityVO> empauthorlist ) {
+		dao.delete2(emp_No, empauthorlist);
+	}
 }

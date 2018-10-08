@@ -31,7 +31,9 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 	private static final String INSERT_STMT=
 			"INSERT INTO EMPAUTHORITY(EMP_NO,FEA_NO) VALUES(?,?)";
 	private static final String FINDBY_EMPNO=
-			"SELECT FEA_NO FROM EMPAUTHORITY WHERE EMP_NO=?";
+			"SELECT FEA_NO FROM EMPAUTHORITY WHERE EMP_NO=? ORDER BY FEA_NO";
+	private static final String DELETEBY_EMPNO=
+			"DELETE FROM EMPAUTHORITY WHERE EMP_NO=?";
 	
 
 	@Override
@@ -78,7 +80,7 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				EmpauthorityVO empauthorVO = new EmpauthorityVO();
-				empauthorVO.setFea_No(rs.getString(1));
+				empauthorVO.setFea_No(rs.getString("FEA_NO"));
 				empauthlist.add(empauthorVO);
 			}
 			
@@ -113,17 +115,21 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 	
 		PreparedStatement pstmt = null;
 		try {
+//			con = ds.getConnection();
 			pstmt=con.prepareStatement(INSERT_STMT);
-			System.out.println("從員工新增過來的連線成功");
+			System.out.println("上一個過來的連線成功");
 			System.out.println(empauthorVO.getEmp_No());
 			System.out.println(empauthorVO.getFea_No());
-			pstmt.setString(1, empauthorVO.getEmp_No());
-			System.out.println("111111111111111111111111");
-			pstmt.setString(2, empauthorVO.getFea_No());
-			System.out.println("222222222222222222222222");
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("新增 "+rowCount+" 筆員工權限");
 			
+			pstmt.setString(1, empauthorVO.getEmp_No());
+			System.out.println("pstmt放入empauthorVO.getEmp_No()");
+			
+			pstmt.setString(2, empauthorVO.getFea_No());
+			System.out.println("pstmt放入empauthorVO.getFea_No()");
+			
+			pstmt.executeUpdate();
+
+			System.out.println("新增會員權限OK");
 			
 			
 		} catch (SQLException se) {
@@ -152,6 +158,88 @@ public class EmpauthorityDAO implements EmpauthorityDAO_interface{
 			
 		}
 		
+	}
+
+	@Override
+	public void delete(String emp_No) {
+		// TODO Auto-generated method stub
+		Connection con=null;
+		PreparedStatement pstmt= null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt=con.prepareStatement(DELETEBY_EMPNO);
+			pstmt.setString(1, emp_No);
+			int rowCount = pstmt.executeUpdate();
+			System.out.println("已刪除"+rowCount+"筆資料");
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+		}
+	}
+
+	@Override
+	public void delete2(String emp_No, List<EmpauthorityVO> empauthorlist) {
+		// TODO Auto-generated method stub
+		Connection con= null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETEBY_EMPNO);
+			pstmt.setString(1, emp_No);
+			int rowCount = pstmt.executeUpdate();
+			System.out.println("已刪除"+rowCount+"筆資料");
+			
+			//現在開始新增員工權限
+			EmpauthorityDAO dao = new EmpauthorityDAO();
+
+			for(EmpauthorityVO empauthorVO : empauthorlist) {
+				empauthorVO.setEmp_No(emp_No);
+				dao.insert2(empauthorVO, con);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!= null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

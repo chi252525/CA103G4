@@ -46,8 +46,8 @@ public class EmpauthServlet extends HttpServlet {
 				
 
 				// 送出的empVOauth、empauthList 送給OneEmpAuth.jsp
-				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/empAuth.jsp");
-//				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/OneEmpAuth.jsp");
+//				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/empAuth.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/OneEmpAuth.jsp");
 				successView.forward(req, res);
 				return;
 
@@ -56,6 +56,35 @@ public class EmpauthServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-				
+		
+		if("changeAuth".equals(action)) {
+		try {	
+			String emp_No = req.getParameter("emp_No");
+			System.out.println("員工編號："+emp_No);
+			List<EmpauthorityVO> empauthorlist = new ArrayList();
+			String valuse[] =req.getParameterValues("fea_No");
+			if(valuse!=null) {
+				for(int i=0 ; i< valuse.length ; i++ ) {
+				System.out.println("選取功能"+valuse[i]);	
+				EmpauthorityVO empauthVO = new EmpauthorityVO();
+				empauthVO.setEmp_No(emp_No);
+				empauthVO.setFea_No(valuse[i]);
+				empauthorlist.add(empauthVO);
+				}			
+			}
+			
+			EmpauthorityService empauthsvc = new EmpauthorityService();
+			//呼叫刪除需兩個參數1.String emp_No 2.empauthorlist;
+			empauthsvc.DeletrbyEmpNo(emp_No, empauthorlist);
+			
+			
+			RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/empAuth.jsp");
+			successView.forward(req, res);
+			return;
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}	
+		}
 	}
 }

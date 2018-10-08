@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ page import="com.employee.model.*"%> 
+<%@ page import="com.empauthority.model.*"%> 
+<%@ page import="java.util.*" %>
+<% 
+EmpVO empVO = (EmpVO)session.getAttribute("empVO");
+EmpauthorityService empauthsvc = new EmpauthorityService();
+List<EmpauthorityVO> empfealist = new ArrayList();
+
+if(empVO!=null){
+empfealist = empauthsvc.oneEmpFealist(empVO.getEmp_No());
+pageContext.setAttribute("empfealist",empfealist);
+}
+%>    
+    
 <!DOCTYPE html>
 <html>
     <head>
@@ -127,21 +142,41 @@
 <!--   first page       -->
             
             <div class="list-group" id="first-page" >
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" ><img src="/CA103G4/back_end/img/pen_.png" width="17%">&nbsp;訂單管理</a>
-                
-                <a href="#" id="btn1" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/table.png" width="17%">&nbsp;訂位管理</a>
-                
+            	<c:set var="flag" value="true"></c:set>
+			<c:forEach var="empauthfeaVO" items="${empfealist}">
+					<c:if test="${empauthfeaVO.fea_No == 'F001'}">			
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1;"><img src="/CA103G4/back_end/img/pen_.png" width="17%">&nbsp;訂單管理</a>
+                	</c:if>  
+                	                	
+                    <c:if test="${empauthfeaVO.fea_No == 'F004'}">       
+                <a href="#" id="btn1" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/table.png" width="17%">&nbsp;訂位管理</a>                	
+                	</c:if>
+                	
+                	<c:if test="${empauthfeaVO.fea_No == 'F003'}">		                
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/deliver.png" width="17%">&nbsp;外送管理</a>
-                
+                	</c:if>
+                	
+                	<c:if test="${empauthfeaVO.fea_No == 'F002'}">
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
-                
+                	</c:if>
+                	
+                	<c:if test="${empauthfeaVO.fea_No == 'F005'}">
                 <a href="#" id="btn3" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/employee.png" width="18%">&nbsp;員工管理</a>
-                
+                	</c:if>
+                	
+                	<c:if test="${empauthfeaVO.fea_No == 'F008'}">
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/chat.png" width="17%">&nbsp;即時線上客服</a>
-                
+                	</c:if>
+                	
+               		<c:if test="${empauthfeaVO.fea_No == 'F006'}">
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
-                
+                	</c:if>
+                	
+                	<c:if test="${empauthfeaVO.fea_No == 'F007'}">
                 <a href="#"  id="btn2" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/00.png" width="18%">&nbsp;收營結帳管理</a>
+            		</c:if>
+            		
+            	</c:forEach>
             </div>
             
 <!--     second page    -->
@@ -190,7 +225,7 @@
                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        </button>
 
-                       <a href="${(empVO==null)? '/CA103G4/back_end/employee/empLogin.jsp' : '/CA103G4/emplogout.do'}" style="text-decoration:none;color:black;"><div><b>${(empVO==null)? "登入&nbsp;":"登出&nbsp;"}</b>
+                       <a href="${(empVO==null)? '/CA103G4/back_end/employee/empLogin.jsp' : '/chiapao/emplogout.do'}" style="text-decoration:none;color:black;"><div><b>${(empVO==null)? "登入&nbsp;":"登出&nbsp;"}</b>
                        <b class="fas fa-sign-in-alt" style="margin-right:auto;" ${(empVO==null)?  '':'hidden'}></b><b class="fas fa-sign-out-alt" style="margin-right:auto;"  ${(empVO==null)?  'hidden':''} ></b></div></a>
                        <div style="margin-left:auto;"><b>Hello~</b></div>&nbsp;
                        <i class="fas fa-chevron-left"></i><div><span><b>${(empVO==null)?  "竹風堂":empVO.emp_Pos}</b></span></div><i class="fas fa-chevron-right"></i>

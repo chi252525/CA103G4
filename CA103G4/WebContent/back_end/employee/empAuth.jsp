@@ -20,18 +20,6 @@ pageContext.setAttribute("listemp",listemp);
 <html>
 <head>
 	<title>empAuthor</title>
-<!-- 	        Bootstrap CSS -->
-<!--         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-<!--         linearicons CSS -->
-<!--         <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"> -->
-<!--         h&f CSS -->
-<!--         your  CSS ============================================= -->
-
-        
-<!--        Bootstrap JS -->
-<!--         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<!--         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
-<!--         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
 <style type="text/css">
 #back {
@@ -47,10 +35,10 @@ body {
 	background-position: center;
 	background-size: cover;
 }
-.modal-content {
-    z-index: 10000;
-    position: absolute;
-    }
+
+/* hr{ */
+/*     margin-bottom: 0 !important; */
+/* } */
 </style>   
 </head>
 <body>
@@ -63,22 +51,26 @@ body {
 			${branchVO.branch_Name}
 		</c:if>
 	</c:forEach>
+<%@ include file="pages/page1.file"  %>		
 <HR>
 	<div class="row" style="text-align:center;">
-		<div class="col-md-2">員工編號</div>
+		<div class="col-md-2">員工編號</div>		
 		<div class="col-md-2">員工姓名</div>
+		<div class="col-md-2">員工職稱</div>
 		<div class="col-md-2">員工照片</div>
 		<div class="col-md-2">員工權限</div>
 		<div class="col-md-2">修改</div>
 	</div>
 
-	<c:forEach var="emp_list" items="${listemp}">
-<HR>
+	<c:forEach var="emp_list" items="${listemp}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<HR style="margin-bottom: 0 !important;">
+
 		<div class="row" style="text-align:center;">
-			<div class="col-md-2">${emp_list.emp_No}</div>
-			<div class="col-md-2">${emp_list.emp_Name}</div>
-			<div class="col-md-2"><img src="<%=request.getContextPath()%>/empshow.do?emp_No=${emp_list.emp_No}" style="height:80px;width:80px;border-radius:50%" ></div>
-			<div class="col-md-2">						
+			<div class="col-md-2" style="vertical-align: middle;line-height:120px;">${emp_list.emp_No}</div>
+			<div class="col-md-2" style="vertical-align: middle;line-height:120px">${emp_list.emp_Name}</div>
+			<div class="col-md-2" style="vertical-align: middle;line-height:120px">${emp_list.emp_Pos}</div>
+			<div class="col-md-2" style="vertical-align: middle;line-height:120px"><img src="<%=request.getContextPath()%>/empshow.do?emp_No=${emp_list.emp_No}" style="height:80px;width:80px;border-radius:50%" ></div>
+			<div class="col-md-2" style="vertical-align: middle;line-height::120px">						
 <%
 	EmpauthorityService empauth = new EmpauthorityService();
 	List<EmpauthorityVO> empFeaList = new ArrayList();
@@ -96,17 +88,17 @@ body {
 			</c:forEach>
 								
 			</div>
-			<div class="col-md-2"><a href="<%=request.getContextPath() %>/empauth.do?emp_No=${emp_list.emp_No}&action=updateAuthor" class="btn btn-warning btn-sm " >修改</a></div>
+			<div class="col-md-2" style="vertical-align: middle;line-height::120px"><a  href="<%=request.getContextPath() %>/empauth.do?emp_No=${emp_list.emp_No}&action=updateAuthor" class="btn btn-warning btn-sm " style="margin-top:45px;">修改</a></div>
 		</div>
 	</c:forEach>
 
 </div>
-
+<%@ include file="pages/page2.file" %>
 <c:if test="${openModal != null}">
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content" style="z-index:10000;position:absolute">
+    <div class="modal-content" style="z-index:2">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">修改權限</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

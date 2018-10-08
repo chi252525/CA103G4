@@ -194,7 +194,7 @@ public class EmpServlet extends HttpServlet{
 				
 				/***************************3.登入完成************/
 
-				res.sendRedirect(req.getContextPath()+"/back_end/employee/back_index.jsp");
+				res.sendRedirect(req.getContextPath()+"/back_end/back_index.jsp");
 				
 				
 				

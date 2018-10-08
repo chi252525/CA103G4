@@ -39,7 +39,7 @@ body {
 <jsp:include page="/back_end/PostHeader.jsp"></jsp:include> 
 
 
-<img class="container col-12 rounded " src="<%=request.getContextPath()%>/front_end/img/LOGO-04.png" style="padding-left:200px;max-width:90% ;max-height:90%;">
+<img class="container col-12 rounded " src="<%=request.getContextPath()%>/front_end/img/LOGO-04.png"  style="padding-left:200px;max-width:90% ;max-height:90%;">
 
 
 <jsp:include page="/back_end/PostFooter.jsp"></jsp:include>	
