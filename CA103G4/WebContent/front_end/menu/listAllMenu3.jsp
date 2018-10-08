@@ -10,6 +10,10 @@
     pageContext.setAttribute("list",list);
 %>
 
+<% 
+	MenuVO menuVO = (MenuVO) request.getAttribute("menuVO");
+%>
+
 <jsp:useBean id="menuDAO"  scope="page" class="com.menu.model.MenuDAO" />
 
 
@@ -181,9 +185,13 @@
 				            	src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"
 				            
 				            	alt="Card image cap" style="margin-top:20px;">
-				            </a>	
+				            </a>
+
 				            <div class="card-body">
 				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id} <br> </h5>
+					              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" style="width:50px;">
+								   詳情
+						    	  </button>	
 				              <h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>
 <%-- 				              <h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Status} ${menuVO.menu_Status}</h5> --%>
 <%-- 				              <h5 class="card-title">${menuVO.menu_Status}</h5> --%>
@@ -211,6 +219,35 @@
   			</div>
     	</div>
 	</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+      <jsp:include page="listOneMenu3.jsp" />
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -245,7 +282,40 @@ $( this ).dialog( "close" );
 
 
 
+<%--         <c:forEach var="menuVO" items="${list}"> --%>
 
+        
+<%-- 	        <c:if test="${menuVO.menu_No == 'M001'}"> --%>
+<!-- 		        <div class="card-img-top"> -->
+<%-- 					<img src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=M001" /> --%>
+<!-- 				</div> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Id()} --%>
+<!-- 				</h5> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Price()} --%>
+<!-- 				</h5> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Intro()} --%>
+<!-- 				</h5> -->
+<%-- 			</c:if> --%>
+			
+<%-- 			<c:if test="${menuVO.menu_No == 'M003'}"> --%>
+<!-- 		        <div class="card-img-top"> -->
+<%-- 					<img src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=M003" /> --%>
+<!-- 				</div> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Id()} --%>
+<!-- 				</h5> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Price()} --%>
+<!-- 				</h5> -->
+<!-- 				<h5 class="card-title"> -->
+<%-- 					${menuVO.getMenu_Intro()} --%>
+<!-- 				</h5> -->
+<%-- 			</c:if> --%>
+			
+<%-- 		</c:forEach> --%>
 
 
 
