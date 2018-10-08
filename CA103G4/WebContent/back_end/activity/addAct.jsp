@@ -158,7 +158,7 @@ $(function(){
 	   })
 	  },
 	  timepicker:true,
-	  step: 30
+	  step: 1
 	 });
 	 
 	 $JUI('#end_dateTime').datetimepicker({
@@ -169,7 +169,7 @@ $(function(){
 	   })
 	  },
 	  timepicker:true,
-	  step: 30
+	  step: 1
 	 });
 });
 

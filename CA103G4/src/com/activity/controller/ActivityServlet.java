@@ -392,7 +392,7 @@ public class ActivityServlet extends HttpServlet {
 						} else {
 							ActivityService actSvc = new ActivityService();
 							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-							System.out.println("advo_DB"+advo_DB);
+//							System.out.println("advo_DB"+advo_DB);
 							act_Pic = advo_DB.getAct_Pic();
 						}
 					} catch (FileNotFoundException fe) {
@@ -419,11 +419,11 @@ public class ActivityServlet extends HttpServlet {
 						
 					}
 //					//預定上架時間與下架時間有輸入的判斷
-					if(preAdd != null && preOff !=null) {
-						if(preAdd.getTime() >= preOff.getTime()) {
-							errorMsgs.add("請修改上架時間：不得大於等於下架時間");
-						}
-					}
+//					if(preAdd != null && preOff !=null) {
+//						if(preAdd.getTime() >= preOff.getTime()) {
+//							errorMsgs.add("請修改上架時間：不得大於等於下架時間");
+//						}
+//					}
 					ActivityVO activityVO= new ActivityVO();
 					activityVO.setAct_No(act_No);
 					activityVO.setAct_Cat(act_Cat);

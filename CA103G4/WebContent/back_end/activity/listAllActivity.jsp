@@ -177,11 +177,10 @@ body {
 		<div class="col-md-12 p-1">
 			<ul id="myTab" class="nav nav-tabs">
 				<li>
-					<a class="nav-link <%=request.getAttribute("display") == null ? "active" : ""%>" href="#offContent" data-toggle="tab" aria-controls="offContent" aria-selected="true"> 未上架 </a>
+					<a class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>" href="#offContent" data-toggle="tab" aria-controls="offContent" > 未上架 </a>
 				</li>
-				<li
-					>
-					<a class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>" href="#onContent" data-toggle="tab"> 已上架 </a>
+				<li>
+					<a class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>" href="#onContent" data-toggle="tab" > 已上架 </a>
 				</li>
 				
 			</ul>
