@@ -1,3 +1,4 @@
+
 package com.activity.model;
 
 import java.util.*;
@@ -25,7 +26,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 		}
 	}
 	// 新增一個 廣告backend
-	private static final String INSERT_STMT = "INSERT INTO ACTIVITY(ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,'0'),?,?,?,?,?,?,?,?,?,?,1,0)";
+	private static final String INSERT_STMT = "INSERT INTO ACTIVITY(ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,'0'),?,?,?,?,?,?,?,?,?,?,0,0)";
 	//// 修改廣告資訊(必須在下架狀態才能修改)backend
 	private static final String UPDATE_STMT = "UPDATE ACTIVITY SET Coucat_No=?,ACT_CAT=?,ACT_NAME=?,ACT_CAROUSEL=?,ACT_PIC=?,ACT_CONTENT=?,act_PreAddTime=?,act_PreOffTime=? WHERE ACT_NO=?";
 	// 取得一個廣告活動
@@ -634,7 +635,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 			con = ds.getConnection();
 			String finalSQL = "select * from activity "
 					+ jdbcUtil_CompositeQuery.get_WhereCondition(map)
-					+ "order by empno";
+					+ "order by Act_No";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
 			rs = pstmt.executeQuery();
