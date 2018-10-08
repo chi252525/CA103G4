@@ -52,7 +52,7 @@ public class ActivityServlet extends HttpServlet {
 		 if ("getOne_For_Display".equals(action)) { 
 	        	List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("跳進getOne_For_Display");
+
 				try {
 					/***************************1.接收請求參數  取得單一貼文**********************/
 									
@@ -95,7 +95,7 @@ public class ActivityServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				String act_Name = req.getParameter("act_Name");
-				System.out.println(act_Name);
+//				System.out.println(act_Name);
 				if (act_Name == null || act_Name.trim().length() == 0) {
 					errorMsgs.add("活動名稱: 請勿空白");
 				}
@@ -146,7 +146,7 @@ public class ActivityServlet extends HttpServlet {
 			    try {
 			    java.util.Date act_PreAddTimestr = dateFormat.parse(req.getParameter("act_PreAddTime").trim());
 			    act_PreAddTime = new java.sql.Timestamp(act_PreAddTimestr.getTime());
-			    System.out.println("act_PreAddTime"+act_PreAddTime);
+//			    System.out.println("act_PreAddTime"+act_PreAddTime);
 			    }catch(ParseException e) {
 			    	e.printStackTrace();
 
@@ -158,7 +158,7 @@ public class ActivityServlet extends HttpServlet {
 			    SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
 			    try {
 			    java.util.Date act_PreOffTimestr = dateFormat1.parse(req.getParameter("act_PreOffTime").trim());
-			    System.out.println("act_PreOffTimestr"+act_PreOffTimestr);
+//			    System.out.println("act_PreOffTimestr"+act_PreOffTimestr);
 			    act_PreOffTime = new java.sql.Timestamp(act_PreOffTimestr.getTime());
 			    }catch(ParseException e) {
 			    	e.printStackTrace();
@@ -166,9 +166,9 @@ public class ActivityServlet extends HttpServlet {
 			    }
 				
 				java.sql.Timestamp act_Start = act_PreAddTime;
-				System.out.println("act_PreAddTime"+act_PreAddTime);
+//				System.out.println("act_PreAddTime"+act_PreAddTime);
 				java.sql.Timestamp act_End = act_PreOffTime;
-				System.out.println("act_PreOffTime"+act_PreOffTime);
+//				System.out.println("act_PreOffTime"+act_PreOffTime);
 				ActivityVO activityVO = new ActivityVO();
 				activityVO.setCoucat_No(coucat_No);
 				activityVO.setAct_Cat(act_Cat);
@@ -295,7 +295,6 @@ public class ActivityServlet extends HttpServlet {
 			if("getOne_For_Update".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("getOne_For_Update in");
 				String requestURL = req.getParameter("requestURL");
 				
 				try {
@@ -324,7 +323,7 @@ public class ActivityServlet extends HttpServlet {
 			if("update".equals(action)){
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				System.out.println("update in");
+//				System.out.println("update in");
 				Timestamp act_PreAddTime = null ;
 				Timestamp act_PreOffTime = null ;
 				try {
@@ -335,7 +334,6 @@ public class ActivityServlet extends HttpServlet {
 						errorMsgs.add("未取得貼文");
 					}
 					String act_Name = req.getParameter("act_Name");
-					System.out.println("act_Name"+act_Name);
 					if(act_Name == null || act_Name.trim().length() == 0) {
 						errorMsgs.add("標題：請勿空白");
 					}else if(act_Name.trim().length()<2||act_Name.trim().length()>30){
@@ -343,19 +341,16 @@ public class ActivityServlet extends HttpServlet {
 					}
 					
 					String act_Cat = req.getParameter("act_Cat");
-					System.out.println("act_Cat"+act_Cat);
 					if(act_Cat == null || act_Cat.trim().length() == 0) {
 						errorMsgs.add("請選擇廣告分類");
 					}
 					
 					String coucat_No = req.getParameter("coucat_No");
-					System.out.println("coucat_No"+coucat_No);
 					if(coucat_No == null || coucat_No.trim().length() == 0) {
 						errorMsgs.add("請選擇對應宣傳的優惠卷");
 					}
 					
 					String act_Content = req.getParameter("act_Content");
-					System.out.println("act_Content"+act_Content);
 					if(act_Content == null || act_Content.trim().length() == 0) {
 						errorMsgs.add("內容請勿空白");
 					}
@@ -374,7 +369,6 @@ public class ActivityServlet extends HttpServlet {
 						} else {
 							ActivityService actSvc = new ActivityService();
 							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-//							System.out.println("advo_DB"+advo_DB);
 							act_Carousel = advo_DB.getAct_Carousel();
 						}
 					} catch (FileNotFoundException fe) {
@@ -393,7 +387,6 @@ public class ActivityServlet extends HttpServlet {
 						} else {
 							ActivityService actSvc = new ActivityService();
 							ActivityVO advo_DB = actSvc.getOneActivity(act_No);
-//							System.out.println("advo_DB"+advo_DB);
 							act_Pic = advo_DB.getAct_Pic();
 						}
 					} catch (FileNotFoundException fe) {
@@ -415,20 +408,8 @@ public class ActivityServlet extends HttpServlet {
 				    	e.printStackTrace();
 				    }
 					
-					
-					//預計上架時間判斷
-//					SimpleDateFormat time_format = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-//					String addTime = req.getParameter("act_PreAddTime");
-//					System.out.println("addTime"+addTime);
-//					if(addTime == null ||addTime.trim().length() == 0){
-//						errorMsgs.add("預計上架時間：請勿空白。");
-//					}else {
-//						Date temp_addTime = time_format.parse(addTime);
-//						act_PreAddTime = new Timestamp(temp_addTime.getTime());
-//					}
-//				
-				    
-//				    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				
+
 				    try {
 				    String	act_PreOffTimestr=req.getParameter("act_PreOffTime");
 				    if(act_PreOffTimestr == null ||act_PreOffTimestr.trim().length() == 0){
@@ -442,14 +423,6 @@ public class ActivityServlet extends HttpServlet {
 				    	e.printStackTrace();
 				    }
 
-//					String offTime = req.getParameter("act_PreOffTime");
-//					System.out.println("offTime"+offTime);
-//					SimpleDateFormat time_format2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-//					if(offTime.trim().length() > 0) {
-//						Date temp_offtime = time_format2.parse(offTime);
-//						act_PreOffTime = new Timestamp(temp_offtime.getTime());
-//						
-//					}
 //					//預定上架時間與下架時間有輸入的判斷
 //					if(preAdd != null && preOff !=null) {
 //						if(preAdd.getTime() >= preOff.getTime()) {

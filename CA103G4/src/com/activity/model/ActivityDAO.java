@@ -62,7 +62,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
@@ -106,7 +106,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
@@ -155,7 +155,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYDATEBETWEEN);
 			pstmt.setTimestamp(1, act_Start1);
 			pstmt.setTimestamp(2, act_Start2);
@@ -280,7 +280,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 		List<ActivityVO> activitylist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYACTCATA);
 			pstmt.setString(1, act_Cata);
 			rs = pstmt.executeQuery();
@@ -337,7 +337,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			System.out.println("Connecting to database successfully! (連線成功！)");
+//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, act_No);
 			rs = pstmt.executeQuery();

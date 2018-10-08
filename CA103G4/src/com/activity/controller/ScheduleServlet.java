@@ -61,13 +61,13 @@ public class ScheduleServlet extends HttpServlet {
 									+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
 									+ time_format.format(offTime) + ")");
 							// 上架
-							if ((nowTime - 5000) <= onTime) {
+							if ((nowTime - 5000) == onTime) {
 								actSvc.updateAct(actVO.getAct_No(), 1, actVO);
 								System.out.println("*********已順利將" + actVO.getAct_No() + "上架了*************");
 								activityList.remove(actVO);
 								
 							// 下架
-							} else if ((nowTime - 5000) <= offTime) {
+							} else if ((nowTime - 5000) == offTime) {
 								actSvc.updateAct(actVO.getAct_No(), 0, actVO);
 								System.out.println("*********已順利將" + actVO.getAct_No() + "下架了*************");
 								activityList.remove(actVO);
@@ -86,7 +86,7 @@ public class ScheduleServlet extends HttpServlet {
 		@SuppressWarnings("deprecation")
 		Calendar cal = new GregorianCalendar(2018, start_time.getMonth(), start_time.getDate(), start_time.getHours(),
 				start_time.getMinutes(), 0);
-		timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 60 * 1000);
+		timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 30 * 1000);
 		System.out.println("開啟伺服器時間：" + time_format.format(start_time) + ";排程器時間:" + cal.getTime());
 	}
 
