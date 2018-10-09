@@ -18,6 +18,7 @@ import javax.servlet.http.Part;
 
 import com.custommeals.model.*;
 import com.ingredientcombination.model.IngredientCombinationVO;
+import com.ingredients.model.*;
 
 @MultipartConfig
 public class CustommealsServlet extends HttpServlet{
@@ -321,7 +322,9 @@ public class CustommealsServlet extends HttpServlet{
 					
 
 					
-					List<IngredientCombinationVO> list = new ArrayList();
+					List<IngredientCombinationVO> list = new ArrayList<>();
+					List<IngredientsVO> ingredientsList = new ArrayList<>();
+					IngredientsDAO_interface idao = new IngredientsDAO();
 					String values[] = req.getParameterValues("ingredients");
 					if (values != null) {
 						for (int i = 0; i < values.length; i++) {
@@ -329,6 +332,7 @@ public class CustommealsServlet extends HttpServlet{
 							IngredientCombinationVO ingt = new IngredientCombinationVO();
 							ingt.setIngdt_Id(values[i]);
 							list.add(ingt);
+							ingredientsList.add(idao.findByPrimaryKey(values[i]));
 						}
 					}
 	
@@ -337,9 +341,18 @@ public class CustommealsServlet extends HttpServlet{
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setIngredientsList(ingredientsList);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
+//					System.out.println(custommealsVO.getcustom_No());
+//					System.out.println(custommealsVO.getcustom_Name());
+//					System.out.println(custommealsVO.getcustom_Price());
+//					for(IngredientsVO ivo : ingredientsList) {
+//						System.out.println(ivo.getingdt_Id());
+//						System.out.println(ivo.getingdt_Name());
+//						System.out.println(ivo.getingdt_Price());
+//					}
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
 					successView.forward(req, res);
 					
