@@ -1,17 +1,28 @@
 package com.storedrecord.model;
 
 import java.util.*;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StoredrecordDAO implements StoredrecordDAO_interface {
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER = "CA103";
-	private static final String PASSWORD = "123456";
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static final String INSERT_STMT = "INSERT INTO STOREDRECORD (stor_NO, MEM_NO,  STOR_DATE, STOR_POINT, DREW_POINT, STOR_STATUS)"
 			+ "VALUES( ('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), ?, ?, ?, ?, ?)";
 
@@ -21,20 +32,15 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	private static final String FINDBY_MEM_NO = "SELECT * FROM STOREDRECORD WHERE MEM_NO=?";
 	private static final String FINDBY_MON_YEAR = "SELECT * FROM STOREDRECORD WHERE extract(MONTH from STOR_DATE )=? AND extract(YEAR from STOR_DATE )=?";
 	private static final String DELETE_STMT = "DELETE FROM STOREDRECORD WHERE stor_No = ?";
-	static {
-		try {
-			Class.forName(DRIVER);
-		} catch (ClassNotFoundException ce) {
-			ce.printStackTrace();
-		}
-	}
+	
 
 	@Override
 	public void insert(StoredrecordVO STOREDRECORD) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(INSERT_STMT);
 //			pstmt.setString(1, STOREDRECORD.getStor_No());
@@ -74,7 +80,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, STOREDRECORD.getMem_No());
@@ -116,7 +122,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBY_stor_NO);
 			pstmt.setString(1, stor_No);
@@ -170,7 +176,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
 
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
@@ -224,7 +230,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		ResultSet rs = null;
 		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBY_MEM_NO);
 			pstmt.setString(1, mem_No);
@@ -277,7 +283,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, stor_No);
 			pstmt.executeUpdate();
@@ -311,7 +317,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 		ResultSet rs = null;
 		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
 		try {
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(FINDBY_MON_YEAR);
 			pstmt.setInt(1, Mon);
 			pstmt.setInt(2, Year);

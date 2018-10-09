@@ -8,7 +8,8 @@
 	
 %>
 <!-- header -->
-<jsp:include page="/front_end/header.jsp" />
+	<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+
 <html>
 
 <head>
@@ -133,7 +134,7 @@
 			</div>
 		</div>
 		<!-- footer -->
-		<jsp:include page="/front_end/footer.jsp" />
+	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 		<!--Timestampicker-->
 		<script type="text/javascript">
 			$(function() {

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.storedrecord.model.*"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	List<StoredrecordVO> list = (List<StoredrecordVO>) session.getAttribute("list");
 	System.out.println("list="+list);
@@ -41,7 +41,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <a id="a1" href="transaction_query.jsp"><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">¿x≠»¨ˆø˝</h1></a>
+                        <a id="a1" href="transaction_query.jsp"><h1 class=" d-flex justify-content-start" style="font-weight: bolder;">ÂÑ≤ÂÄºÁ¥ÄÈåÑ</h1></a>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
             <div class="container">
                 <div class="row ">
                     <div id="div1" class="col-md-12 d-flex" style="margin-top: 10px">
-                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="¿x≠»≥Ê∏π ,∑|≠˚Ωs∏π"><input type="hidden" name="action" value="findByMem_no">
+                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="ÂÑ≤ÂÄºÂñÆËôü ,ÊúÉÂì°Á∑®Ëôü"><input type="hidden" name="action" value="findByMem_no">
                         <button class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
                             <i class="fas fa-search" style="font-size: 20px; color: grey"></i>
                         </button>
@@ -82,12 +82,12 @@
                         <table class="table datatable">
                             <thead>
                                 <tr>
-                                    <th>#¿x≠»¨y§Ù≥Ê∏π</th>
-                                    <th>∑|≠˚Ωs∏π</th>
-                                    <th>¿x≠»§È¥¡</th>
-                                    <th>¿x≠»¬Iº∆</th>
-                                    <th>¶^ıX¶ÀπÙ</th>
-                                    <th>¿x≠»™¨∫A</th>
+                                    <th>#ÂÑ≤ÂÄºÊµÅÊ∞¥ÂñÆËôü</th>
+                                    <th>ÊúÉÂì°Á∑®Ëôü</th>
+                                    <th>ÂÑ≤ÂÄºÊó•Êúü</th>
+                                    <th>ÂÑ≤ÂÄºÈªûÊï∏</th>
+                                    <th>ÂõûÈ•ãÁ´πÂπ£</th>
+                                    <th>ÂÑ≤ÂÄºÁãÄÊÖã</th>
                                 </tr>
                             </thead>
                             <%@ include file="page1.file"%>
@@ -96,10 +96,10 @@
                                     <tr>
                                         <td>${StoredrecordVO.stor_No}</td>
                                         <td>${StoredrecordVO.mem_No}</td>
-                                        <td>${StoredrecordVO.stor_Date}</td>
+                                        <td><fmt:formatDate value="${StoredrecordVO.stor_Date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         <td>${StoredrecordVO.stor_Point}</td>
                                         <td>${StoredrecordVO.drew_Point}</td>
-                                        <td>${(StoredrecordVO.stor_Status==1)?'¶®•\':'•¢±—'}</td>
+                                        <td>${(StoredrecordVO.stor_Status==1)?'ÊàêÂäü':'Â§±Êïó'}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

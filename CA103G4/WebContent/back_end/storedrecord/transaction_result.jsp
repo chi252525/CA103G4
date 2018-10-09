@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.storedrecord.model.*"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	List<StoredrecordVO> list = (List<StoredrecordVO>) session.getAttribute("list");
 	System.out.println("list="+list);
 	session.setAttribute("list", list);
 %>
-<jsp:include page="/front_end/header.jsp" />
+	<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 <html>
 
 <head>
@@ -33,10 +33,15 @@
 
     <!-- My css for transaction page-->
     <link rel="stylesheet" href="css/transaction_css.css">
+    
+    <style>
+    
+    </style>
 </head>
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
     <form method="post" action="storedrecord.do">
+    	<input type="hidden" name="location" value="backEnd"> <!--本網頁路徑提示 -->
         <div id="div_shadow" class="py-5">
             <div class="container">
                 <div class="row">
@@ -46,11 +51,17 @@
                 </div>
             </div>
         </div>
+        <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
         <div class="py-1" style="">
             <div class="container">
                 <div class="row ">
                     <div id="div1" class="col-md-12 d-flex" style="margin-top: 10px">
-                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="儲值單號 ,會員編號"><input type="hidden" name="action" value="findByMem_no">
+                    	<select class="custom-select align-items-center" name="mem_No" style="width:30%;">
+						<option selected>會員編號
+						<c:forEach var="memVO" items="${memSvc.all}">
+							<option value="${memVO.mem_No}">${memVO.mem_No}
+						</c:forEach>
+						</select><input type="hidden" name="action" value="findByMem_no">
                         <button class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
                             <i class="fas fa-search" style="font-size: 20px; color: grey"></i>
                         </button>
@@ -96,7 +107,7 @@
                                     <tr>
                                         <td>${StoredrecordVO.stor_No}</td>
                                         <td>${StoredrecordVO.mem_No}</td>
-                                        <td>${StoredrecordVO.stor_Date}</td>
+                                        <td><fmt:formatDate value="${StoredrecordVO.stor_Date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         <td>${StoredrecordVO.stor_Point}</td>
                                         <td>${StoredrecordVO.drew_Point}</td>
                                         <c:choose>
@@ -117,7 +128,7 @@
             </div>
         </div>
 
-        <jsp:include page="/front_end/footer.jsp" />
+	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
         <!--Timestampicker-->
         <script>
             $(function() {
