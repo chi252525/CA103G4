@@ -358,7 +358,8 @@
 								        <h4>組合區</h4>
 								      </div>
 									      <ul class="task-list2" id="combination"></ul>								  		
-									  <form method="post" id="sform" action="custommeals.do" name="form1">
+<!-- 									  <form method="post" id="sform" action="custommeals.do" name="form1"> -->
+									  <form method="post" id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do">
 <div class="container">
 										
 	<div class="row">
@@ -564,11 +565,24 @@
 
 <footer>
 </footer>
- <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+  
+    
+<!--   	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" -->
+<!-- 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
+<!-- 		crossorigin="anonymous"></script> -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
 
   
 
@@ -596,7 +610,38 @@
             });
         });
     </script>
-        
+    
+    <script>
+			$(function() {
+				$("#dialog").dialog({
+					modal : true,
+					buttons : {
+						Ok : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+			//Java完美操縱javaScript , 加入餐點進購物車
+		<%for (int i = 0; i < 12; i++) {%>
+			$(function() {
+				$(".submit").eq(
+		<%=i%>
+			).click(function() {
+					swal({
+						title : "加入購物車",
+						html : "成功",
+						type : "success"
+					}).then(function() {
+						$(".shoppingForm").eq(
+		<%=i%>
+			).submit();
+					});
+				});
+			});
+		<%}%>
+    </script>
+    
     <script>
 //         jQuery(function($) {
 //         	var count = 0;

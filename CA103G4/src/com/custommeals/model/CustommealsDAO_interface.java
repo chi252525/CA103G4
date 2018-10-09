@@ -13,6 +13,6 @@ public interface CustommealsDAO_interface {
 	public List<CustommealsVO> getAll();
 	public List<CustommealsVO> getMealByMemBuyed(String mem_No);
 	public List<CustommealsVO> getMealByMem(String mem_No);
-	public void insertWithIngredientCombination(CustommealsVO custommealsVO, List<IngredientCombinationVO> list);
+	public String insertWithIngredientCombination(CustommealsVO custommealsVO, List<IngredientCombinationVO> list);
 	public void updateNameOnly( String custom_Name,String custom_No) ;
 }

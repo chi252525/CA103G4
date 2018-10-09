@@ -8,6 +8,7 @@ public class CustommealsVO extends MenuVO  {
 	private String mem_No;
 	private String custom_Name;
 	private Integer custom_Price;
+	private Integer custom_Quantity;
 //	private byte[] custom_Photo;
 
 	public CustommealsVO() {
@@ -15,16 +16,26 @@ public class CustommealsVO extends MenuVO  {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CustommealsVO(String custom_No, String mem_No, String custom_Name, Integer custom_Price) {
+	public CustommealsVO(String custom_No, String mem_No, String custom_Name, Integer custom_Price, Integer custom_Quantity) {
 		super();
 		this.custom_No = custom_No;
 		this.mem_No = mem_No;
 		this.custom_Name = custom_Name;
 		this.custom_Price = custom_Price;
+		this.custom_Quantity = custom_Quantity;
 //		this.custom_Photo = custom_Photo;
+		
 	}
 
 	
+	public Integer getcustom_Quantity() {
+		return custom_Quantity;
+	}
+
+	public void setcustom_Quantity(Integer custom_Quantity) {
+		this.custom_Quantity = custom_Quantity;
+	}
+
 	public String getcustom_No() {
 		// TODO Auto-generated method stub
 		return custom_No;

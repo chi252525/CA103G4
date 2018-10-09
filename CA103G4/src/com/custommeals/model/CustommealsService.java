@@ -59,18 +59,18 @@ public class CustommealsService {
 			return dao.getMealByMemBuyed(mem_No);
 		}
 		
-		public CustommealsVO addCustommealsAutoKeys(String mem_no, String custom_name, Integer custom_price,List<IngredientCombinationVO> list) {
+		public String addCustommealsAutoKeys(String mem_no, String custom_name, Integer custom_price,List<IngredientCombinationVO> list) {
 
 			CustommealsVO custommealsVO = new CustommealsVO();
 
 			custommealsVO.setmem_No(mem_no);
 			custommealsVO.setcustom_Name(custom_name);
 			custommealsVO.setcustom_Price(custom_price);
-			dao.insertWithIngredientCombination(custommealsVO, list);
+			
 
 	
 
-			return custommealsVO;
+			return dao.insertWithIngredientCombination(custommealsVO, list);
 		}
 		
 		
