@@ -6,6 +6,11 @@
   MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); //MenuServlet.java(Controller), 存入req的menuVO物件
 %>
 
+<%
+//   MenuDAO dao = new MenuDAO();
+//   MenuVO menuVO2 = dao.findByPrimaryKey(menuVO.getMenu_No());
+%>
+
 <html>
 <head>
 <title>餐點資料 - listOneMenu.jsp</title>
@@ -21,22 +26,22 @@
 
 
 
-11111111111111111111111111111111111111111111fffffffffffffffff
+MODAL跳出頁面<br>
+MODAL跳出頁面
 <img class="card-img-top" src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"
 	alt="Card image cap" style="margin-top:20px;">
 <img src="/CA103G4/front_end/custommeals/images/06.png" alt="蔬菜麵" style="max-width:80px">
+<img src="/CA103G4/front_end/custommeals/images/01.png" alt="細拉麵" style="max-wi3265dth:80px">
 
-<table>
-	<tr>
 <%-- 		<td rowspan="4"><img src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"  --%>
 <!-- 					style="width: 450px; max-height: 600px;"></td> -->
-		<tr><td><%=menuVO.getMenu_Id()%></td></tr>
-		<tr><td><%=menuVO.getMenu_Price()%></td></tr>
-		<tr><td><%=menuVO.getMenu_Intro()%></td></tr>
+		${menuVO.getMenu_Id()}
+		${menuVO.getMenu_Price()}
+		${menuVO.getMenu_Intro()}
 
 		
-	</tr>
-</table>
+	
+
 
 </body>
 </html>
