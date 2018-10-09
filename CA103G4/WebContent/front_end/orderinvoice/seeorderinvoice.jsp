@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.orderinvoice.model.*"%>
 
-<%-- <jsp:useBean id="couponhistorySvc" scope="page" class="com.couponhistory.model.CouponhistoryService" /> --%>
+<jsp:useBean id="couponhistorySvc" scope="page" class="com.couponhistory.model.CouponhistoryService" />
 
 <%-- 存取會員編號 --%>
 <%-- <% --%>
@@ -53,7 +53,7 @@
 	
   .tes{
   	width: 600px;
-	height: 200px;
+	height: 250px;
   }
 	
  
@@ -63,32 +63,54 @@
 
 </head>
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ames">
+					<div class="card-body">
+						<h1 class="card-title">取餐資訊</h1>
+						<h2 class="card-subtitle mb-2 text-muted"><%= request.getAttribute("ordNo")%></h2>
+						<p class="card-text h4">分店名稱:<%= request.getAttribute("braName")%></p>
+						<p class="card-text h4">分店位址:<%= request.getAttribute("braAdr")%></p>
+						<p class="card-text h4">取餐時間:<%= request.getAttribute("time")%></p>	
+						
+						<c:if test="<%= request.getAttribute(\"deliv_addres\") != null %>">
+						<p class="card-text h4">外送地址:<%= request.getParameter("deliv_addres")%></p>
+						</c:if>
 
-<div class="card text-center ames">
-		<div class="card-header">
-			取餐資訊
-		</div>
-		<div class="card-body">
-			<h5 class="card-title"><%= request.getAttribute("ordNo")%></h5>
-			<p class="card-text">分店名稱:<%= request.getAttribute("braName")%></p>
-			<p class="card-text">取餐時間:<%= request.getAttribute("time")%></p>
-			
-			<c:if test="<%=request.getAttribute(\"deliv_addres\") != null %>">
-			<p class="card-text">外送地址:<%= request.getParameter("deliv_addres")%></p>
-			</c:if>
-			<c:if test="<%=request.getAttribute(\"deliv_addres\") == null %>">
-			<p class="card-text">外送地址:無</p>
-			</c:if>
-			
-			<p class="card-text">信用卡末四碼:<%= request.getAttribute("card_number")%></p>
-			<p class="card-text">總金額:<%= request.getAttribute("amount")%></p>
-			<p class="card-text">備註:</p>
-			<p class="card-text tes"><%= request.getAttribute("ps")%></p>
-			
-			<a href="#" class="btn btn-primary">確認</a>
-		</div>
-		<div class="card-footer text-muted">
-			電話:<%= request.getAttribute("braTel")%>
+						<c:if test="<%= request.getAttribute(\"card_number\") != null %>">						
+						<p class="card-text h4">付款方式:信用卡</p>
+						<p class="card-text h4">信用卡末四碼:<%= request.getAttribute("card_number")%></p>
+						</c:if>
+
+						<c:if test="<%= request.getAttribute(\"card_number\") == null && request.getAttribute(\"point\") == null%>">						
+						<p class="card-text h4">付款方式:現金</p>
+						</c:if>
+
+						<c:if test="<%= request.getAttribute(\"point\") != null%>">						
+						<p class="card-text h4">付款方式:</p>
+						</c:if>
+						
+						<p class="card-text h4">總金額:<%= request.getAttribute("amount")%></p>
+						<p class="card-text h4 tes">備註:<br><%= request.getAttribute("ps")%></p>
+
+						<%-- 按鈕  --%>
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+									<div class="col-1">
+									<a href="#" class="card-link">確認</a>
+									</div>
+								<div class="col">
+								</div>
+							</div>			
+						</div>
+						
+					</div>
+				</div>			
+			</div>
 		</div>
 	</div>
 

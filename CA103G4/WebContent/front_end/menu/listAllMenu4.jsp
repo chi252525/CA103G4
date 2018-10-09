@@ -114,67 +114,7 @@ body {
 }
 </style>
 
-<style>
-/* * { */
-/*   font size: 62.5%; */
-/*   box-sizing: border-box; */
-/*   outline: none; */
-/* } */
-/* input { */
-/*   display:block; */
-/*   padding: 10px; */
-/*   position: relative; */
-/*   border: 1px solid black; */
-/*   width: 80px; */
-/* } */
-/* input:focus { */
-/*   outline-color: springgreen; */
-/* } */
-/* input[type=number]::-webkit-inner-spin-button {  */
-/*   position: absolute; */
-/*   top: 0; */
-/*   bottom: 0; */
-/*   right: 0; */
-/*   padding: 10px; */
-/*   opacity: 1; */
-/*   cursor: pointer; */
-/* } */
-/* input[type=number]::-webkit-inner-spin-button:hover {  */
-/* } */
-/* input[type=number]::-webkit-inner-spin-button:before { */
-/*   font-family: "FontAwesome"; */
-/*   font-size: 1.4rem; */
-/*   content: '\f106'; */
-/*   position: absolute; */
-/*   top: 0; */
-/*   bottom: 50%; */
-/*   right: 0; */
-/*   left: 0; */
-/*   border-left: 1px solid black; */
-/*   border-bottom: 1px solid black; */
-/*   display: flex; */
-/*   justify-content: center; */
-/*   align-items: center; */
-/*   background: white; */
-/*   cursor: pointer; */
-/* } */
-/* input[type=number]::-webkit-inner-spin-button:after { */
-/*   font-family: "FontAwesome"; */
-/*   font-size: 1.4rem; */
-/*   content: '\f107'; */
-/*   position: absolute; */
-/*   top: 50%; */
-/*   bottom: 0; */
-/*   right: 0; */
-/*   left: 0; */
-/*   border-left: 1px solid black; */
-/*   display: flex; */
-/*   justify-content: center; */
-/*   align-items: center; */
-/*   background: white; */
-/*   cursor: pointer; */
-/* } */
-</style>
+
 
 
 
@@ -214,21 +154,7 @@ body {
 
 
 
-	<!-- 		<p>燈箱點這裡  -->
-	<!-- 		    <a href = "javascript:void(0)"  -->
-	<%-- 		    onclick = "document.getElementById('light').style.display='block'; --%>
-	<%-- <!-- 					   document.getElementById('fade').style.display='block'">點這裡</a> --> --%>
-	<!-- 		</p> -->
 
-	<!-- 		<div id="light" class="white_content">  -->
-	<%-- 			<jsp:include page="listOneMenu2.jsp" /> --%>
-	<!-- 		    <a href = "javascript:void(0)"  -->
-	<%-- 		    onclick = "document.getElementById('light').style.display='none'; --%>
-	<%-- <!-- 		    		   document.getElementById('fade').style.display='none'">關閉</a> --> --%>
-	<!--         </div> -->
-
-	<!-- 		<div id="fade" class="black_overlay"> -->
-	<!-- 		</div> -->
 
 
 

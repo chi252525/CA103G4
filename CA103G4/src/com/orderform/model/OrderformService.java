@@ -16,7 +16,7 @@ public class OrderformService {
 	public OrderformVO addOrd(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
 
 		OrderformVO orderformInVO = new OrderformVO();
-		dao.insertWithInvoice(orderformVO, list);
+		orderformInVO = dao.insertWithInvoice(orderformVO, list);
 
 		return orderformInVO;
 	}
