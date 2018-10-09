@@ -354,11 +354,12 @@ public class StoredrecordServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String mem_No = req.getParameter("mem_No");
-
+				String period = req.getParameter("monthAndYear");
+				String year = period.split("/")[1];
+				String month = period.split("/")[0];
 				// =========query=========================
 				StoredrecordService srvc = new StoredrecordService();
-				List<StoredrecordVO> list = srvc.findByMem_no(mem_No);
+				List<StoredrecordVO> list = srvc.findByMon_Year(Integer.parseInt(month), Integer.parseInt(year));
 				if (list.size() == 0) {
 					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
 					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
