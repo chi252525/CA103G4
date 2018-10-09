@@ -33,11 +33,11 @@
                  <a class="nav-item nav-link p aboutUs nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file main-icon" aria-hidden="true"></i><c class="icon-font">關於我們資料編輯</c></a></li>
               &nbsp; &nbsp;
               <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p material nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-coffee main-icon" aria-hidden="true"></i><c class="icon-font">食品項目管理</c>
+                 <a class="nav-item nav-link p material nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-coffee main-icon" aria-hidden="true"></i><c class="icon-font">餐點項目管理</c>
                  </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">產品項目管理</a>
-                      <a class="dropdown-item" href="#">餐點管理</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/addMenu.jsp">新增經典餐點</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/Menu_management.jsp">經典餐點上下架</a>
                     </div>
               </li>
               &nbsp; &nbsp;
