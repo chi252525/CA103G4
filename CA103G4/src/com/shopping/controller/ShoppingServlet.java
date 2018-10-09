@@ -27,7 +27,8 @@ public class ShoppingServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
-		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action)) && (!("findMemCoupon").equals(action))) {
+		if (!("CHECKOUT").equals(action) && (!("addCart").equals(action)) && (!("findMemCoupon").equals(action))
+				&& (!("minusCart").equals(action))) { // 若action不等同上述四個 (action=checkout)
 
 			// 刪除餐點
 			if ("DELETE".equals(action)) {
@@ -151,6 +152,26 @@ public class ShoppingServlet extends HttpServlet {
 //			rd.forward(req, res);
 //			res.sendRedirect(url);
 //			return;
+		} else if ("minusCart".equals(action)) {
+			try {
+				MenuVO aMenuVO = getMenuVO(req);// get點擊的餐點
+				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));// 得到車裡與點擊餐點相同的餐
+				if (innerMenuVO.getMenu_quantity() > 1) { //大於0才可以減
+					innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() - 1);// 將其數量-1
+				}
+				res.setCharacterEncoding("UTF-8");
+				res.setContentType("text/plain");
+				JSONObject jso = new JSONObject();
+				jso.put("memprice", innerMenuVO.getMenu_Price());
+				jso.put("memid", innerMenuVO.getMenu_Id());
+				jso.put("memquantity", innerMenuVO.getMenu_quantity());
+				res.getWriter().print(jso);
+				jso.put("memid", innerMenuVO.getMenu_Id());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
@@ -159,7 +180,6 @@ public class ShoppingServlet extends HttpServlet {
 			System.out.println("折價後回前的amount=" + amount);
 			res.getWriter().print(amount);// 輸出前端
 		}
-
 	}
 
 	@Override

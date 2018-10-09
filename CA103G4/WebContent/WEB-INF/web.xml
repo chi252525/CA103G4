@@ -320,6 +320,9 @@
     <servlet-name>ResServlet</servlet-name>
     <url-pattern>/back_end/res/res.do</url-pattern>
   </servlet-mapping>
+  
+  
+  
   <servlet>
     <servlet-name>EmpServlet</servlet-name>
     <servlet-class>com.employee.controller.EmpServlet</servlet-class>

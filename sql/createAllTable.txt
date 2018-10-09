@@ -583,48 +583,58 @@ NOCACHE;
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂信義店', '台北', '信義區','110台北市信義區松壽路28號' ,'25°02''08.2"N 121°34''05.1"E' ,'121.568083', '25.035611', '週日~週四 11:00 - 21:30
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂信義店', '台北市', '信義區','110台北市信義區松壽路28號' ,'25°02''08.2"N 121°34''05.1"E' ,'121.568083', '25.035611', '週日~週四 11:00 - 21:30
 週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '022455678', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂微風台北車站店', '台北', '中正區','100台北市中正區北平西路3號2樓' ,'25°02''52.0"N 121°31''02.6"E' ,'121°31''02.6"E', '25°02''52.0"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 0, '0223709222', 20);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂微風台北車站店', '台北市', '中正區','100台北市中正區北平西路3號2樓' ,'25°02''52.0"N 121°31''02.6"E' ,'121°31''02.6"E', '25°02''52.0"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 0, '0223709222', 20);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂一風堂桃園高鐵店', '桃園', '中壢區','320桃園市中壢區高鐵北路一段6號' ,'25°00''52.2"N 121°13''03.4"E' ,'121°13''03.4"E', '25°00''52.2"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 0, '032613220', 45);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂一風堂桃園高鐵店', '桃園市', '中壢區','320桃園市中壢區高鐵北路一段6號' ,'25°00''52.2"N 121°13''03.4"E' ,'121°13''03.4"E', '25°00''52.2"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 0, '032613220', 45);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂中壢本店', '桃園', '中壢區','320桃園市中壢區中大路300號' ,'24°58''05.0"N 121°11''30.5"E' ,'121°11''30.5"E', '24°58''05.0"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '034257387', 100);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂中壢本店', '桃園市', '中壢區','320桃園市中壢區中大路300號' ,'24°58''05.0"N 121°11''30.5"E' ,'121°11''30.5"E', '24°58''05.0"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '034257387', 100);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台中秀泰文心店', '台中', '南屯區','408台中市南屯區文心南路289號' ,'24°07''47.7"N 120°38''45.9"E' ,'120°38''45.9"E', '24°07''47.7"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '0424725066', 40);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台中秀泰文心店', '台中市', '南屯區','408台中市南屯區文心南路289號' ,'24°07''47.7"N 120°38''45.9"E' ,'120°38''45.9"E', '24°07''47.7"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '0424725066', 40);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂嘉義秀泰店', '嘉義', '西區','600嘉義市西區文化路299號2樓' ,'23°29''08.5"N 120°26''52.2"E' ,'120°26''52.2"E', '23°29''08.5"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '052376148', 35);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂嘉義秀泰店', '嘉義市', '西區','600嘉義市西區文化路299號2樓' ,'23°29''08.5"N 120°26''52.2"E' ,'120°26''52.2"E', '23°29''08.5"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '052376148', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台南西門店', '台南', '中西區','700台南市中西區西門路一段658號2樓' ,'22°59''13.2"N 120°11''55.8"E' ,'120°11''55.8"E', '22°59''13.2"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '062141222', 30);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台南西門店', '台南市', '中西區','700台南市中西區西門路一段658號2樓' ,'22°59''13.2"N 120°11''55.8"E' ,'120°11''55.8"E', '22°59''13.2"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '062141222', 30);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂漢神巨蛋店', '高雄', '左營區','813高雄市左營區博愛二路777號' ,'22°40''12.1"N 120°18''08.3"E' ,'120°18''08.3"E', '22°40''12.1"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 7, '075227222', 60);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂漢神巨蛋店', '高雄市', '左營區','813高雄市左營區博愛二路777號' ,'22°40''12.1"N 120°18''08.3"E' ,'120°18''08.3"E', '22°40''12.1"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 7, '075227222', 60);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂大魯閣草衙道店', '高雄', '前鎮區','806高雄市前鎮區中安路1號1樓' ,'22°34''57.5"N 120°19''51.9"E' ,'120°19''51.9"E', '22°34''57.5"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '077911733', 35);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂大魯閣草衙道店', '高雄市', '前鎮區','806高雄市前鎮區中安路1號1樓' ,'22°34''57.5"N 120°19''51.9"E' ,'120°19''51.9"E', '22°34''57.5"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '077911733', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂綠島店', '綠島', '綠島鄉','951台東縣綠島鄉漁港13號' ,'22°39''37.8"N 121°28''30.1"E' ,'121°28''30.1"E', '22°39''37.8"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '089671199', 15);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂綠島店', '台東縣', '綠島鄉','951台東縣綠島鄉漁港13號' ,'22°39''37.8"N 121°28''30.1"E' ,'121°28''30.1"E', '22°39''37.8"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '089671199', 15);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂墾丁店', '屏東', '恆春鎮','946屏東縣恆春鎮墾丁路342號' ,'21°56''46.5"N 120°47''40.1"E' ,'120°47''40.1"E', '21°56''46.5"N', '"ot": {"星期日":11:00–15:30 17:00–23:00,"星期一":11:00–15:00 17:00–22:30,"星期二":11:00–15:00 17:00–22:30,"星期三":11:00–15:00 17:00–22:30,"星期四":11:00–15:00 17:00–22:30,"星期五":11:00–15:00 17:00–22:30,"星期六":11:00–15:30 17:00–23:00}', 5, '088861165',55);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂墾丁店', '屏東縣', '恆春鎮','946屏東縣恆春鎮墾丁路342號' ,'21°56''46.5"N 120°47''40.1"E' ,'120°47''40.1"E', '21°56''46.5"N', '週日~週四 11:00 - 21:30
+週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '088861165',55);
 
 --------------------------------------------------------
 --  for Table FEATURE
@@ -685,7 +695,7 @@ Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','af','af','志元','1','服務生','0912345678',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ag','ag','柏叡','1','服務生','0966777222',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ah','ah','春嬌','2','外送員','0987654333',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ai','i','志明','2','外送員','0955165789',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ai','ai','志明','2','外送員','0955165789',null);
 
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','ba','ba','俊麟','1','經理','0933907656',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','bb','bb','志年','1','客服人員','0911222333',null);
@@ -857,69 +867,43 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','01',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','02',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','03',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','04',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','05',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','06',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','07',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','08',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','09',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','10',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','11',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','12',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','13',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','14',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','15',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','16',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','17',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','18',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','19',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','20',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0A',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0B',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0C',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0D',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0D',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0D',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0D',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','0D',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A1:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A2:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A3:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A10:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B1:B2:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B3:B4:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C1:C2:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C5:C6:C7:C8:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C9:C10:C11:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D13:D14:D15:D16:D17:',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0002','01',1,0);
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0003','01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A02',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A03',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A04',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A05',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A06',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A07',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A08',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A09',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','A10',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B02',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B03',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B04',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B05',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B06',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B07',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','B08',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C02',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C03',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C04',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C05',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C06',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C07',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','C08',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D02',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D03',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D04',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','D05',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0002','A01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0002','B01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0002','B02',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0003','A01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0003','B01',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0003','B02',1,0);
 
 --------------------------------------------------------
 --  for Table RESERVATION
@@ -946,9 +930,9 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(member_seq.NEXTVAL), 9, '0'),'M000001','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),4,1);
-Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(member_seq.NEXTVAL), 9, '0'),'M000002','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),2,1);
-Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(member_seq.NEXTVAL), 9, '0'),'M000003','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),4,1);
+Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(reservation_seq.NEXTVAL), 9, '0'),'M000001','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),4,1);
+Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(reservation_seq.NEXTVAL), 9, '0'),'M000002','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),2,1);
+Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) values ('R'||LPAD(to_char(reservation_seq.NEXTVAL), 9, '0'),'M000003','D000000001',TO_DATE('2018-09-01 11:55','YYYY-MM-DD HH24:MI'),TO_DATE('2018-09-01 12:55','YYYY-MM-DD HH24:MI'),4,1);
 
 --------------------------------------------------------
 --  for Table DELIVERY 

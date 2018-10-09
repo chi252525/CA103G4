@@ -42,53 +42,57 @@
 <title>listbymem</title>
 
 <style type="text/css">
- .all{
-    margin-top: 10%;
-  }
  
- .dow{
- 	margin-top: 3%;
-  
+ .ames{
+		width: 800px;
+		height: 700px;
+		background-color: #AA7700;
+		margin: auto; 
+		margin-top: 25%;
+	}
+	
+  .tes{
+  	width: 600px;
+	height: 200px;
   }
-  
-
-  .amos{
-    width: 1200px;
-    background-color: #000;
-    margin: auto; 
-    margin-top: 5%;
-  }
-
-  .item{
-    margin: 5px;
-    width: 1190px;
-    height: 400px;
-    background-color: #880000;
-  }
-
-   .tet{
-    margin-top: 5%;
-  }
-
-  .pimg{
-    margin: 5px;
-    width: 360px;
-    height: 390px;
-    background-color: #FFDDAA;
-  }
-
-  .textc{
-    margin: 5px;
-    width: 810px;
-    height: 390px;
-    background-color: #FFDDAA;
-  }
+	
+ 
 
 
 </style>
 
 </head>
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
+
+<div class="card text-center ames">
+		<div class="card-header">
+			取餐資訊
+		</div>
+		<div class="card-body">
+			<h5 class="card-title"><%= request.getAttribute("ordNo")%></h5>
+			<p class="card-text">分店名稱:<%= request.getAttribute("braName")%></p>
+			<p class="card-text">取餐時間:<%= request.getAttribute("time")%></p>
+			
+			<c:if test="<%=request.getAttribute(\"deliv_addres\") != null %>">
+			<p class="card-text">外送地址:<%= request.getParameter("deliv_addres")%></p>
+			</c:if>
+			<c:if test="<%=request.getAttribute(\"deliv_addres\") == null %>">
+			<p class="card-text">外送地址:無</p>
+			</c:if>
+			
+			<p class="card-text">信用卡末四碼:<%= request.getAttribute("card_number")%></p>
+			<p class="card-text">總金額:<%= request.getAttribute("amount")%></p>
+			<p class="card-text">備註:</p>
+			<p class="card-text tes"><%= request.getAttribute("ps")%></p>
+			
+			<a href="#" class="btn btn-primary">確認</a>
+		</div>
+		<div class="card-footer text-muted">
+			電話:<%= request.getAttribute("braTel")%>
+		</div>
+	</div>
+
+
 
 
 

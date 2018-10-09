@@ -5,8 +5,9 @@
 <%@ page import="com.storedrecord.model.*"%>
 
 <%
-	List<StoredrecordVO> list = (List<StoredrecordVO>) request.getAttribute("list");
-	pageContext.setAttribute("list", list);
+	List<StoredrecordVO> list = (List<StoredrecordVO>) session.getAttribute("list");
+	System.out.println("list="+list);
+	session.setAttribute("list",list);
 %>
 <jsp:include page="/front_end/header.jsp" />
 <html>
