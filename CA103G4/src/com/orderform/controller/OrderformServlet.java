@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
@@ -51,8 +52,15 @@ public class OrderformServlet extends HttpServlet {
 			//從session取得會員的編號
 			String memno = (String) req.getSession().getAttribute("memNo");
 			
-			//取得當前分店編號(要寫死?)
+			//取得當前分店編號
 			String brano = (String)req.getAttribute("branch_no");
+			//取餐用，取得分店名稱
+			BranchService brSvc = new BranchService();
+			String brn = (brSvc.findByBranch_No(brano)).getBranch_Name();
+			req.setAttribute("braName", brn);
+			//取餐用，取得分店電話
+			String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
+			req.setAttribute("braTel", tel);
 			
 			//取得訂單金額
 			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));	
@@ -62,13 +70,16 @@ public class OrderformServlet extends HttpServlet {
 			String addres;
 			if (("delivery").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 2;
-				addres = req.getParameter("deliv_addres");	
+				addres = (String) req.getAttribute("deliv_addres");	
+				req.setAttribute("deliv_addres", addres);
 			} else if(("takeaway").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 1;
 				addres = null;
+				req.setAttribute("deliv_addres", null);
 			} else {
 				ordertype = 0;
 				addres = null;
+				req.setAttribute("deliv_addres", null);
 			}
 			
 			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
@@ -93,7 +104,6 @@ public class OrderformServlet extends HttpServlet {
 			for (int z = 0 ; z < inv.size() ; z++){
                 String eat = String.valueOf(inv.get(z).getMenu_No());
                 oinlist[z] = eat;
-                System.out.println("eat:"+eat);
            }
 			
 			OrderinvoiceVO oin = null;
@@ -118,7 +128,10 @@ public class OrderformServlet extends HttpServlet {
 			orderformVO.setOrder_pstatus(orderpa);
 			//開始新增
 			OrderformService ordSvc = new OrderformService();
-			ordSvc.addOrd(orderformVO, list);
+			orderformVO = ordSvc.addOrd(orderformVO, list);
+			req.setAttribute("ordNo",orderformVO.getOrder_no());
+			
+
 			//準備轉交
 			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
