@@ -135,6 +135,20 @@ public class OrderformServlet extends HttpServlet {
 			System.out.println("selvet:"+orderformVO.getOrder_no());
 			req.setAttribute("ordNo",orderformVO.getOrder_no());
 			
+			//發送簡訊
+			Send se = new Send();
+			String[] tels ={"0933628324"};//測試用
+//			String[] tels ={tel};//上線用
+			
+//			String message = "排程訊息測試";//測試用
+			String message = "\t取餐資訊\n"
+					+ "分店名稱:"+req.getAttribute("braName")
+					+ "\n分店位址:"+req.getAttribute("braAdr")
+					+ "\n取餐時間:"+req.getAttribute("time")
+					+ "\n付款方式:"+req.getAttribute("time")
+					+ "\n總金額:"+req.getAttribute("amount");			
+
+		 	se.sendMessage(tels , message);
 
 			//準備轉交
 			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
