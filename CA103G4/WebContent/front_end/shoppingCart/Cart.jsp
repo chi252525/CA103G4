@@ -34,10 +34,18 @@
     <style>
         th {
 	background-color: darkgoldenrod;
+	
 }
 
 tbody {
 	background-color: bisque;
+	vertical-align: middle !important;
+		
+}
+
+.table td{
+	vertical-align: middle !important;
+
 }
 
 table {
@@ -55,6 +63,8 @@ table {
 	border-radius: 30px;
 	border-style: hidden; /* hide standard table (collapsed) border */
 	box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+	text-align:center !important;
+	
 }
 
 .center {
@@ -234,17 +244,18 @@ a {
                             <span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
                         </td>
                         <td  width="100">
-                            <button type="button" id="add" class="" style="background-color: antiquewhite" onclick="add<%=index%>()">
-                                <i class="far fa-plus-square"></i>
+                            <button id="minus" class="btn btn-light" style="background-color: antiquewhite" onclick="minus<%=index%>()">
+                                <i class="far fa-minus-square"></i>
                             </button>
                                 <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
-                            <button class="" style="background-color: antiquewhite">
-                                <i class="far fa-minus-square" onclick="minus()"></i>
+                            <button type="button" id="add" class="btn btn-light" style="background-color: antiquewhite" onclick="add<%=index%>()">
+                                <i class="far fa-plus-square"></i>
                             </button>
+                           
                         </td>
 
                         <td width="100">
-                            <%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%>
+                            <span id="total_Col<%=index%>"><%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></span>
                         </td>
                         <td width="120">
                             <form name="deleteForm" class="form" action="ShoppingServlet.do" method="POST">
@@ -404,7 +415,7 @@ a {
             });
         });
        
-		
+		//for add quantity button 
         function add<%=i%>() {
             $.ajax({
                 type: "post",
@@ -419,10 +430,11 @@ a {
                 },
                 dataType: "json",
                 success: function(menuVO) {
-                	alert(menuVO);
+//                 	alert();
                 	$("#quantity_Col<%=i%>").html(menuVO.memquantity);
                     $("#price_Col<%=i%>").html(menuVO.memprice);
                     $("#id_Col<%=i%>").html(menuVO.memid);
+                    $('#total_Col<%=i%>').html(menuVO.memprice*menuVO.memquantity);
 
                 },
                 error: function() {
@@ -430,6 +442,33 @@ a {
                 }
             })
         }
+        //for minus button
+        function minus<%=i%>(){
+        	$.ajax({
+                type: "post",
+                url: "ShoppingServlet.do",
+                data: {
+                    "action": "minusCart",
+                    "quantity": $("#quantity_Col<%=i%>").text(), 
+                    "price": $("#price_Col<%=i%>").text(),
+                    "menuid": $("#id_Col<%=i%>").text(),
+                    "menuno": $('#no_Col<%=i%>').val()
+                                      	
+                },
+                dataType: "json",
+                success: function(menuVO) {
+//                 	alert(menuVO);
+                	$("#quantity_Col<%=i%>").html(menuVO.memquantity);
+                    $("#price_Col<%=i%>").html(menuVO.memprice);
+                    $("#id_Col<%=i%>").html(menuVO.memid);
+                    $('#total_Col<%=i%>').html(menuVO.memprice*menuVO.memquantity);
+                },
+                error: function() {
+                    alert("連線失敗!");
+                }
+            })
+        	
+        } 
 
         <%
        		 }

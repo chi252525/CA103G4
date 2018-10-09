@@ -265,10 +265,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-6" style="padding-left: 0px;">
-                                        <div class="form-group col-md-12" style="padding-left: 5px;">
+                                        <div class="form-inline  col-md-12" style="padding-left: 5px;">
                                             <b> 取餐時間:</b>
-                                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest" style="margin-top: 20px; margin-bottom: 20px;">
-                                                <input name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" value="${time}">
+                                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest" style="margin-top: 20px; margin-bottom: 20px;margin-left:5px;">
+                                                <input name="time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" value="${time}" style="margin-left:5px;">
                                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>

@@ -5,8 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.activity.model.*"%>
-
-
+<%@ page import="com.activity.model.*"%>
 
 <%
 	ActivityService actSvc = new ActivityService();
@@ -108,7 +107,7 @@ div.shavetext {
 		<div class="row " style="background-color: rgba(255, 255, 255, 0.45)">
 			<div class="my-4"></div>
 			<!-- 廣告輪播圖開始 -->
-			<div class="container-fulid">
+		
 
 				<div class="carousel slide" data-ride="carousel"
 					id="carouselArchitecture">
@@ -130,7 +129,7 @@ div.shavetext {
 						</c:forEach>
 					</div>
 				</div>
-			</div>
+			
 			<!-- 廣告輪播圖end -->
 
 			<%-- 錯誤表列 --%>
@@ -169,17 +168,17 @@ div.shavetext {
 								<div class="row"
 									style="background-color: rgba(255, 255, 255, 0.45)">
 									<div class=" col-4 px-1 py-1 ">
-										<img class="img-fluid d-block mx-auto my-auto"
+										<img class="img-fluid d-block mx-auto my-auto" style="width:400px;height:250px;"
 											src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${activityVO.act_No}">
 									</div>
 									<div class="col-8 py-1 my-2 ">
-										<div class="col-12">
+										<div class="col-12 mx-0 px-0">
 											<h5>
 												<b>${activityVO.act_Name}</b>
 											</h5>
 										</div>
 										<div class="d-flex ">
-											<div class="p--0">
+											<div class="p-0">
 												活動期間
 												<fmt:formatDate value="${activityVO.act_Start}"
 													pattern="yyyy-MM-dd " />
@@ -187,24 +186,24 @@ div.shavetext {
 												<fmt:formatDate value="${activityVO.act_End}"
 													pattern="yyyy-MM-dd " />
 											</div>
-											<div class="p-2">.${activityVO.act_Views}&nbsp;Views</div>
+											<div class="p-0">.${activityVO.act_Views}&nbsp;Views</div>
 
 										</div>
 
 										<div class="row">
 											<h5 class="mb-1 text-dark my-1"></h5>
 											<hr>
-											<div class="col-12 shavetext">${activityVO.act_Content}
+											<div class="col-12 mt-2 shavetext">${activityVO.act_Content}
 
 
 											</div>
 
 											<div class="col-12 ">
 												<div class="row">
-													<div class="col-8">
+													<div class="col-8 mt-4">
 														<a href="#" class="btn btn-outline-primary btn-sm">More..</a>
 													</div>
-													<div class="col-4">
+													<div class="col-4 mt-4">
 														<button class="btn btn-sm btn-danger"
 															id="${activityVO.act_No}">取得優惠卷</button>
 
@@ -221,15 +220,18 @@ div.shavetext {
                         url: "<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do",
                         data: {
                             "action": "insert",
-                            'mem_No': 'M000001',
+                            'mem_No': '${memVO.mem_No}',
                             'coucat_No': '${activityVO.coucat_No}'
                         },
-                        dataType: "html",
+                        dataType: "json",
                         success: function(result) {
-                            $(".${activityVO.act_No}").html(result);
+                        	if(result.status === 'success')
+                            	$(".${activityVO.act_No}").html(result.msg);
+                        	else
+                        		alert("Oops!沒取到優惠券: "+result.msg);
                         },
                         error: function() {
-                            alert("Oops!沒取到優惠券")
+                            alert("Oops!沒取到優惠券");
                         }
                     })
 

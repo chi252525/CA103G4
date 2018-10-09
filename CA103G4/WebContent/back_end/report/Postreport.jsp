@@ -55,6 +55,8 @@
 </style>
 </head>
 <body>
+
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="col-sm-12 col-12 col-lg-12">
@@ -287,6 +289,6 @@
 	</div>
 
 
-
+<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>

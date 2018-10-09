@@ -36,6 +36,7 @@
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <form method="post" action="storedrecord.do">
+    <input type="hidden" name="location" value="frontEnd"> <!--本網頁路徑提示 -->
         <div id="div_shadow" class="py-5"">
 			<div class=" container">
             <div class="row">

@@ -188,6 +188,7 @@ public class ActivityServlet extends HttpServlet {
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back_end/activity/listAllActivity.jsp";
 
+				req.setAttribute("display", "xxx");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
 				successView.forward(req, res);
 				
@@ -216,16 +217,7 @@ public class ActivityServlet extends HttpServlet {
 					/***************************1.將輸入資料轉為Map**********************************/ 
 					//採用Map<String,String[]> getParameterMap()的方法 
 					//注意:an immutable java.util.Map 
-					//Map<String, String[]> map = req.getParameterMap();
-					HttpSession session = req.getSession();
-					@SuppressWarnings("unchecked")
-					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
-					System.out.println("map"+map);
-					if (req.getParameter("whichPage") == null){
-						HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
-						session.setAttribute("map",map1);
-						map = map1;
-					} 
+					Map<String, String[]> map = req.getParameterMap();
 					
 					/***************************2.開始複合查詢***************************************/
 					ActivityService actSvc = new ActivityService();

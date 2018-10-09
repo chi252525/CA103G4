@@ -273,14 +273,15 @@
                     dataType: "json",
                     success: function(result) { //result 為後端送回來的資料名稱
                         console.log(result);
+                    var str;
                         for (i = 0; i < result.length; i++) {
-
-                            $("#tbody").append("<tr><td>" + result[i].branch_No + "</td><td>" + result[i].branch_Name +
-                                "</td><td>" + result[i].branch_City + "</td><td>" + result[i].branch_Dist +
-                                "</td><td>" + result[i].branch_Addr + "</td><td>" + result[i].branch_Tel +
-                                "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
-                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
+							var str = str + "<tr><td>" + result[i].branch_No + "</td><td>" + result[i].branch_Name +
+	                                "</td><td>" + result[i].branch_City + "</td><td>" + result[i].branch_Dist +
+	                                "</td><td>" + result[i].branch_Addr + "</td><td>" + result[i].branch_Tel +
+	                                "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
+	                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>";
                         }
+                        $("#tbody").html(str);
                         document.getElementById("allbranch").disabled=true;
                     },
                     error: function() {
