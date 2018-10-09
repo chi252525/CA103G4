@@ -48,7 +48,7 @@
 <div class="container col-5 rounded ">
 
 	<form method="post" action="member.do" enctype="multipart/form-data" >
-	<%= memVO.getMem_No()%>			
+			
     <table id="back">
         <tr>
             <td colspan="2" id="img-td">
