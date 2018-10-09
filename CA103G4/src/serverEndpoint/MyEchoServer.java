@@ -17,22 +17,30 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.websocket.CloseReason;
 
-@ServerEndpoint("/MyEchoServer/{myName}")
+@ServerEndpoint("/MyEchoServer/{myName}/{date}/{zone}")
 public class MyEchoServer implements ServletContextListener{
+	
 											  
-private static final Set<Session> allSessions = Collections.synchronizedSet(new HashSet<Session>());
- 
-
-private static final Map<String,String> resInputMap = Collections.synchronizedSortedMap(new TreeMap<String,String>());
-
+private static final Set<Session> onlinePeople = Collections.synchronizedSet(new HashSet<Session>());
+    
+//-----------------------------------------------------------------------------------------------------------------
+	
+private static final Map<String,Map<String,Set<String>>> date1 = Collections.synchronizedSortedMap(new TreeMap<String,Map<String,Set<String>>>());
+    
+private static final Map<String,Set<String>> zoneMS = Collections.synchronizedSortedMap(new TreeMap<String,Set<String>>());
+	
+private static final Set<String> seatS = Collections.synchronizedSet(new HashSet<String>());
+//---------------------------------------------------------------------------------------------------------------------
+	
+private static final Set<String> Mem_seats = Collections.synchronizedSet(new HashSet<String>());
+//----------------------------------------------------------------------------------------------------------------------
 	@Override
 	public void contextInitialized(ServletContextEvent sre) {
 		 ServletContext context = sre.getServletContext();
-
-				 context.setAttribute("resInputMap", resInputMap);
-				 context.setAttribute("onlinePeople", allSessions);
+		 		
+//				 context.setAttribute("resInputMap", resInputMap);
+				 context.setAttribute("date1", date1);
 				 System.out.println("Context setAttribute done!");
-
 		
 	}
 	@Override
@@ -41,46 +49,82 @@ private static final Map<String,String> resInputMap = Collections.synchronizedSo
 	}
 	
 	@OnOpen
-	public void onOpen(@PathParam("myName") String myName,Session userSession) throws IOException {  
-		allSessions.add(userSession);
+	public void onOpen(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession) throws IOException {  //websockets ��session 
+		onlinePeople.add(userSession); 	
+//		Mem_seats.clear();
 		System.out.println(userSession.getId() + ": 已連線");
 		System.out.println(myName + ": 已連線");
-		System.out.println("現在在線人數:" + allSessions.size());
+		System.out.println("日期:" + date);
+		System.out.println("用餐時間:" + zone);
+		System.out.println("現在在線人數:" + onlinePeople.size());
 		
 	}
 
 	
 	@OnMessage
-	public void onMessage(Session userSession, String message) {
-		for (Session session : allSessions) {
+	public void onMessage(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession, String message) {
+		for (Session session : onlinePeople) {
 			
 			if (session.isOpen())
 				session.getAsyncRemote().sendText(message);
-			        
+			         
 		}
 		System.out.println("Message received: " + message);
 		JSONObject  j = new JSONObject(message);
-		String seatMapK = (String) j.get("seat");
-		String seatMapV = (String) j.get("mem_no");
+		String seat = (String) j.get("seat");
+//		String mem_no = (String) j.get("mem_no");
 		Integer status = (Integer) j.get("status");
 		if(status == 1) {
-			resInputMap.put(seatMapK+":", seatMapV);
-			System.out.println("1, Already input a new kV:"+resInputMap);
+			date1.put(date, zoneMS);
+			zoneMS.put(zone, seatS);
+			seatS.add(seat+":");
+			Mem_seats.add(seat+":");
+			
+			Iterator objs = ((date1.get(date)).get(zone)).iterator();
+			while (objs.hasNext())
+			System.out.println("1, Already input a new kV:" + objs.next());
+			
+			Iterator objs2 = Mem_seats.iterator();
+			while (objs2.hasNext())
+			System.out.println("objs2, Already input a new kV:" + objs2.next());
+			
 		}else if(status == 2 || status == 3){
-			resInputMap.remove(seatMapK+":");
-			System.out.println("2、3, Already remove a new kV:"+resInputMap);
+
+			((date1.get(date)).get(zone)).remove(seat+":");
+			Mem_seats.remove(seat+":");
+			
+			Iterator objs = ((date1.get(date)).get(zone)).iterator();
+			while (objs.hasNext())
+			System.out.println("2�B3, Already remove a new kV:" + objs.next());
+			
+			Iterator objs2 = Mem_seats.iterator();
+			while (objs2.hasNext())
+			System.out.println("objs2, Already input a new kV:" + objs2.next());
+		
 		}
 	}
 	
 	@OnError
 	public void onError(Session userSession, Throwable e){
-
+		e.printStackTrace();
 	}
 	
 	@OnClose
-	public void onClose(Session userSession, CloseReason reason) {
-		allSessions.remove(userSession);
+	public void onClose(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession, CloseReason reason) {
+		String str = "";
+		onlinePeople.remove(userSession);
+		Iterator objs2 = Mem_seats.iterator();
+		while (objs2.hasNext()) 
+		str += (String)objs2.next();
+		String [] tokens = str.split(":");
+		for (String token:tokens) {
+			((date1.get(date)).get(zone)).remove(token+":");
+			System.out.println("token remove:" + token+":");
+		}
+		Mem_seats.clear();
+		System.out.println(Mem_seats.isEmpty());
 		System.out.println(userSession.getId() + ": Disconnected: " + Integer.toString(reason.getCloseCode().getCode()));
-	}																	
+																		
+	}
  
 }
