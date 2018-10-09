@@ -218,14 +218,14 @@ public class ActivityServlet extends HttpServlet {
 					//採用Map<String,String[]> getParameterMap()的方法 
 					//注意:an immutable java.util.Map 
 					Map<String, String[]> map = req.getParameterMap();
-					
+					System.out.println("map"+map);
 					/***************************2.開始複合查詢***************************************/
 					ActivityService actSvc = new ActivityService();
 					List<ActivityVO> list  = actSvc.getAll(map);
-					
+					System.out.println("list"+list);
 					/***************************3.查詢完成,準備轉交(Send the Success view)************/
 					req.setAttribute("listActs_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
-					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp"); 
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/

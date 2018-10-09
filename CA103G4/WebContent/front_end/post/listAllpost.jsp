@@ -166,7 +166,7 @@ body {
 						</div>
 						<div class="float-right ">
 							<a class="btn btn-info btn-sm"
-								href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
+								href="<%=request.getContextPath()%>/protected_front/post/addPost.jsp">我要分享</a>
 							
 							
 							<a class="btn btn-info btn-sm"

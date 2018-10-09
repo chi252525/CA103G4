@@ -5,7 +5,6 @@
 <%@ page import="com.post.model.*"%>
 <%@ page import="com.custommeals.model.*"%>
 
-
 <%	
 	PostService postSvc = new PostService();
 	List<PostVO> list = (List<PostVO>) session.getAttribute("list");

@@ -58,8 +58,8 @@ public class ActivityService {
 	public ActivityVO getOneActivity(String act_No) {
 		return dao.findByPrimaryKey(act_No);
 	}
-	public List<ActivityVO> getAll(Map<String, String[]> map){
-		return dao.getAll();
+	public List<ActivityVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	public List<ActivityVO> findHotAct(){
 		return dao.findHotAct();

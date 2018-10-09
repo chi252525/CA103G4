@@ -39,7 +39,7 @@
 <meta property="og:url"
 	content="<%=request.getContextPath()%>/post/listOnepost.jsp" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Your Website Title" />
+<meta property="og:title" content="竹風堂餐點分享" />
 <meta property="og:description" content="Your description" />
 <meta property="og:image"
 	content="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}" />

@@ -69,29 +69,10 @@ body {
                         </thead>
                         <tbody>
                             <c:forEach var="activityVO" items="${listActs_ByCompositeQuery}"  >
-                          <tr ${(activityVO.act_No==param.act_No) ? 'bgcolor=#CCCCFF':''}>
-                          <td>${activityVO.act_No}</td>
-                            <td>${activityVO.act_Name}</td>
-                            <td>${activityVO.coucat_No}</td>   
-                             <td>	<fmt:formatDate value="${activityVO.act_PreAddTime}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                             <td><fmt:formatDate value="${activityVO.act_Start}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                            <td><fmt:formatDate value="${activityVO.act_End}"
-									pattern="yyyy/MM/dd-HH:mm" /></td>
-                            <td>
-							<td>上架中</td>
-                             <td><button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-up"></span></button>
-                             	<button type="button" class="btn btn-secondary"><span class="lnr lnr-arrow-down"></span></button>
-                             </td>
-                              <td><button type="button" class="btn btn-secondary"><span class="lnr lnr-pencil"></span></button></td>
-                          </tr>
+                         <%@ include file="Content.file"%>
              </c:forEach>
                         </tbody>
                       </table>
-                                <br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
                       <%@ include file="pages/page2_ByCompositeQuery.file" %>
               </div>
 
