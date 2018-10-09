@@ -16,13 +16,13 @@ public class jdbcUtil_CompositeQuery {
 		String aCondition = null;
 
 		if ("act_Cat".equals(columnName) || "coucat_No".equals(columnName)) // 用於其他
-			aCondition = columnName + "=" + value;
+			aCondition = columnName + "=" + "'"+value+"'";
 		else if ("act_Name".equals(columnName)|| "act_No".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
 		else if("act_Start".equals(columnName))
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd hh-mm-ss ')>='" + value + "'";
+			aCondition = columnName +" >= TO_Timestamp('"+value+"','mm/dd/yyyy')";
 		else if("act_End".equals(columnName))
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd hh-mm-ss')<='" + value + "'";
+			aCondition = columnName +" <= TO_Timestamp('"+value+"','mm/dd/yyyy')";
 		return aCondition + " ";
 	}
 
@@ -53,12 +53,12 @@ public class jdbcUtil_CompositeQuery {
 
 		// 配合 req.getParameterMap()方法 回傳 java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("act_Cat", new String[] { "7001" });
-		map.put("coucat_No", new String[] { "KING" });
-		map.put("act_Name", new String[] { "PRESIDENT" });
-		map.put("act_No", new String[] { "1981-11-17" });
-		map.put("act_Start", new String[] { "1981-11-17" });
-		map.put("act_End", new String[] { "1981-11-17" });
+		map.put("act_Cat", new String[] { "AC2" });
+		map.put("coucat_No", new String[] { "20181009-000001" });
+		map.put("act_Name", new String[] { "新品" });
+		map.put("act_No", new String[] { "201810-0001" });
+		map.put("act_Start", new String[] { "2018-09-17" });
+		map.put("act_End", new String[] { "2018-09-20" });
 		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
 
 		String finalSQL = "select * from activity "

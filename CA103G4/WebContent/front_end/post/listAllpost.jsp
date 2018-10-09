@@ -14,6 +14,7 @@
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
 	pageContext.setAttribute("list", list);
+	
 %>
 
 
@@ -111,7 +112,7 @@ body {
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
 					<div class="card-header">查詢貼文</div>
-					<div class="card-body py-1 px-2">
+					<div class="card-body py-1 px-0 ">
 
 						<div class="d-flex justify-content-end">
 							<div class="p-2 "></div>
@@ -129,7 +130,24 @@ body {
 								</form>
 							</div>
 							<div class="p-1">
-								<FORM METHOD="post"
+							<form METHOD="post"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+									class="form-inline ">
+									<div class="col-xs-2 input-group">
+										<input class="form-control" name="keyword" type="search"
+											placeholder="搜尋關鍵字">
+									</div>
+									<div class="input-group-append">
+										<button class="btn btn-default" type="submit" name="action"
+											value="keyword">搜尋</button>
+									</div>
+
+								</form>
+							</div>
+						</div>
+						<div class="d-flex  justify-content-start">
+							<div class="p-1">
+									<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 									class="form-inline">
 									<div class="form-group">
@@ -144,29 +162,12 @@ body {
 										<input type="hidden" name="action" value="getOne_For_Display">
 									</div>
 								</FORM>
-							</div>
-						</div>
-						<div class="d-flex  justify-content-start">
-							<div class="p-1">
-								<form METHOD="post"
-									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-									class="form-inline ">
-									<div class="col-xs-2 input-group">
-										<input class="form-control" name="keyword" type="search"
-											placeholder="搜尋關鍵字">
-									</div>
-									<div class="input-group-append">
-										<button class="btn btn-default" type="submit" name="action"
-											value="keyword">搜尋</button>
-									</div>
-
-								</form>
 
 							</div>
 						</div>
 						<div class="float-right ">
 							<a class="btn btn-info btn-sm"
-								href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
+								href="<%=request.getContextPath()%>/protected_front/post/addPost.jsp">我要分享</a>
 							
 							
 							<a class="btn btn-info btn-sm"

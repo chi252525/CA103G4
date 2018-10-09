@@ -8,8 +8,15 @@
 	class="com.coucat.model.CoucatService" />
 <%
 	ActivityService actSvc = new ActivityService();
-	List<ActivityVO> list = actSvc.getAll();
-	pageContext.setAttribute("list", list);
+	List<ActivityVO> list=null;
+	if(request.getAttribute("listActs_ByCompositeQuery")==null){
+		 list = actSvc.getAll();
+		pageContext.setAttribute("list", list);
+	}else{
+		 list =(List<ActivityVO>)session.getAttribute("listActs_ByCompositeQuery");
+		pageContext.setAttribute("listActs_ByCompositeQuery", list);
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -75,17 +82,15 @@ body {
 <body>
 	<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 
-
-
 	<div class="py-2 ">
-		<div class="container-fluid px-5">
+		<div class="container-fluid px-5 mb-5">
 			<div class="row">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a
 						href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp"
 						class=" nav-link">優惠卷設定</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp">廣告設定</a>
+						href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp?action=listActs_ByCompositeQuery">廣告設定</a>
 					</li>
 				</ul>
 
@@ -97,9 +102,10 @@ body {
 								<div class="item">
 									<label for="sel1" class="text-dark">分類</label> <select
 										class="form-control combobox" id="sel1" name="act_Cat">
-										<option value="AC1">新品上市
-										<option value="AC2">優惠折扣
-										<option value="AC3">分店限定
+										<option disabled selected value>--請選擇--</option>
+										<option value="AC1">新品上市</option>
+										<option value="AC2">優惠折扣</option>
+										<option value="AC3">分店限定</option>
 									</select>
 								</div>
 
@@ -115,18 +121,19 @@ body {
 								</div>
 								<div class="item">
 									<label for="sel1" class="text-dark">活動開始日從:</label> <input
-										type="text" id="datepicker1" name="act_Start1"
+										type="text" id="datepicker1" name="act_Start"
 										class="form-control">
 								</div>
 								<div class="item">
 									<label for="sel1" class="text-dark">到</label> <input
-										type="text" name="act_Start2" id="datepicker2"
+										type="text" name="act_End" id="datepicker2"
 										class="form-control">
 								</div>
 
 								<div class="item">
 									<label for="sel1" class="text-dark">優惠卷類別</label> <select
 										size="1" class="form-control combobox" name="coucat_No">
+										<option disabled selected value>--請選擇--</option>
 										<c:forEach var="coucatVO" items="${couSvc1.all}">
 											<option value="${coucatVO.coucat_No}">${coucatVO.coucat_Name}
 										</c:forEach>
@@ -135,171 +142,195 @@ body {
 								<div class="item py-1">
 									<button type="submit"
 										class=" btn btn-sm btn-success float-right mt-5 " value="">送出</button>
-									<input type="hidden" name="action"
-										value="listActs_ByCompositeQuery">
+									<input type="hidden" name="action"	value="listActs_ByCompositeQuery">
 								</div>
 						</FORM>
 					</div>
 				</div>
 			</div>
-
 		</div>
+	</div>
 
 
-		<div class="col-12">
-			<a href="<%=request.getContextPath()%>/back_end/activity/addAct.jsp"
-				class="btn btn-primary btn-sm active float-right" role="button"
-				aria-pressed="true">新增</a>
-		</div>
+	<div class="col-12">
+		<a href="<%=request.getContextPath()%>/back_end/activity/addAct.jsp"
+			class="btn btn-primary btn-sm active float-right" role="button"
+			aria-pressed="true">新增</a>
+	</div>
 
 
 
 
 
-		<script>
+	<script>
 			$(function() {
 				$JUI("#datepicker1").datepicker();
 				$JUI("#datepicker2").datepicker();
 			});
 		</script>
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
 
 
 
-		<%@ include file="pages/page1.file"%>
+<%  int rowsPerPage = 3;  //每頁的筆數    
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+%>
 
+<%  
+    rowNumber=list.size();
+    if (rowNumber%rowsPerPage !=0)
+         pageNumber=rowNumber/rowsPerPage + 1;
+    else pageNumber=rowNumber/rowsPerPage;    
 
-		<!-- 表格 -->
-		<div class="col-md-12 p-1">
-			<ul id="myTab" class="nav nav-tabs">
-				<li><a
-					class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>"
-					href="#offContent" data-toggle="tab" aria-controls="offContent">
-						未上架 </a></li>
-				<li><a
-					class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>"
-					href="#onContent" data-toggle="tab"> 已上架 </a></li>
+    pageIndexArray=new int[pageNumber]; 
+    for (int i=1 ; i<=pageIndexArray.length ; i++)
+         pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
+%>
 
-			</ul>
+<%  try {
+       whichPage = Integer.parseInt(request.getParameter("whichPage"));
+       pageIndex=pageIndexArray[whichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage=1;
+       pageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber>0){
+              whichPage=pageNumber;
+              pageIndex=pageIndexArray[pageNumber-1];
+         }
+    } 
+%>
 
-			<div id="myTabContent" class="tab-content">
-				<div id="offContent"
-					class="tab-pane fade  <%=request.getAttribute("display") == null ? "" : "active show"%>"
-					id="offContent">
-					<!-- 未上架的廣告 -->
-					<br>
-					<table class="table">
-						<thead>
-							<th>#</th>
-							<th>活動名稱</th>
-							<th>活動分類</th>
-							<th>預計上架日</th>
-							<th>開始日</th>
-							<th>預計下架日</th>
-							<th>結束日</th>
-							<th>狀態</th>
-							<th>操作</th>
-							<th>修改</th>
-						</thead>
+<%if (pageNumber>0){%>
+  <b><font color=red
+  >page<%=whichPage%>/<%=pageNumber%></font></b>
+<%}%>
 
-						<c:forEach var="activityVO" items="${list}">
-							<c:if test="${activityVO.act_Status == 0}">
-								<%@ include file="Content.file"%>
-							</c:if>
-						</c:forEach>
+<b>Total<font color=red
+><%=rowNumber%></font>筆</b>
 
-					</table>
-				</div>
+	<!-- 表格 -->
+	<div class="col-md-12 p-1">
+		<ul id="myTab" class="nav nav-tabs">
+			<li><a
+				class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>"
+				href="#offContent" data-toggle="tab" aria-controls="offContent">
+					未上架 </a></li>
+			<li><a
+				class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>"
+				href="#onContent" data-toggle="tab"> 已上架 </a></li>
+			<li><a
+				class="nav-link  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active"%>"
+				href="#queryContent" data-toggle="tab"> 查詢結果 </a></li>
+		</ul>
 
-				<!--已上架的廣告  -->
-				<div id="onContent"
-					class="tab-pane fade  <%=request.getAttribute("display") == null ? "active show" : ""%>"
-					id="onContent">
-					<br>
-					<table class="table">
-						<thead>
-							<th>#</th>
-							<th>活動名稱</th>
-							<th>活動分類</th>
-							<th>預計上架日</th>
-							<th>開始日</th>
-							<th>預計下架日</th>
-							<th>結束日</th>
-							<th>狀態</th>
-							<th>操作</th>
-							<th>修改</th>
-						</thead>
+		<div id="myTabContent" class="tab-content">
+			<div id="offContent"
+				class="tab-pane fade  <%=request.getAttribute("display") == null ? "" : "active show"%>"
+				id="offContent">
+				<!-- 未上架的廣告 -->
+				<br>
+				<table class="table">
+					<thead>
+						<th>#</th>
+						<th>活動名稱</th>
+						<th>活動分類</th>
+						<th>預計上架日</th>
+						<th>開始日</th>
+						<th>預計下架日</th>
+						<th>結束日</th>
+						<th>狀態</th>
+						<th>操作</th>
+						<th>修改</th>
+					</thead>
 
-						<c:forEach var="activityVO" items="${list}">
-							<c:if test="${activityVO.act_Status == 1}">
-								<%@ include file="Content.file"%>
-							</c:if>
-						</c:forEach>
-
-
-					</table>
-
-				</div>
-
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
-
-
-				<!--已上架的廣告  -->
-				<div id="queryContent"
-					class="tab-pane fade  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active show"%>"
-					id="queryContent">
-					<br>
-					<table class="table">
-						<thead>
-							<th>#</th>
-							<th>活動名稱</th>
-							<th>活動分類</th>
-							<th>預計上架日</th>
-							<th>活動起始日</th>
-							<th>下架日</th>
-							<th>狀態</th>
-							<th>操作</th>
-							<th>修改</th>
-						</thead>
-
-						<c:forEach var="activityVO" items="${listActs_ByCompositeQuery}">
+					<c:forEach var="activityVO" items="${list}">
+						<c:if test="${activityVO.act_Status == 0}">
 							<%@ include file="Content.file"%>
-						</c:forEach>
+						</c:if>
+					</c:forEach>
 
-
-					</table>
-
-				</div>
-
+				</table>
 			</div>
 
+			<!--已上架的廣告  -->
+			<div id="onContent"
+				class="tab-pane fade  <%=request.getAttribute("display") == null ? "active show" : ""%>"
+				id="onContent">
+				<br>
+				<table class="table">
+					<thead>
+						<th>#</th>
+						<th>活動名稱</th>
+						<th>活動分類</th>
+						<th>預計上架日</th>
+						<th>開始日</th>
+						<th>預計下架日</th>
+						<th>結束日</th>
+						<th>狀態</th>
+						<th>操作</th>
+						<th>修改</th>
+					</thead>
+
+					<c:forEach var="activityVO" items="${list}">
+						<c:if test="${activityVO.act_Status == 1}">
+							<%@ include file="Content.file"%>
+						</c:if>
+					</c:forEach>
 
 
-
-
+				</table>
+			</div>
 
 		</div>
 
+
 	</div>
+<c:if test="${openModal!=null}">
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+				
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+            </div>
+			
+			<div class="modal-body">
+<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
+               <jsp:include page="listActs_ByCompositeQuery.jsp" />
+<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
+			</div>
+			
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+		
+		</div>
 	</div>
-	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+</div>
+
+        <script>
+    		 $("#basicModal").modal({show: true});
+        </script>
+ </c:if>
+
+
+
 </body>
 </html>

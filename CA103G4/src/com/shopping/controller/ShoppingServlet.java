@@ -157,7 +157,7 @@ public class ShoppingServlet extends HttpServlet {
 			try {
 				MenuVO aMenuVO = getMenuVO(req);// get點擊的餐點
 				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));// 得到車裡與點擊餐點相同的餐
-				if (innerMenuVO.getMenu_quantity() > 0) { //大於0才可以減
+				if (innerMenuVO.getMenu_quantity() > 1) { //大於0才可以減
 					innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() - 1);// 將其數量-1
 				}
 				res.setCharacterEncoding("UTF-8");
