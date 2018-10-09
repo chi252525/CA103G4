@@ -22,7 +22,7 @@ public interface OrderformDAO_interface {
 	
 	public List<OrderformVO> getAll();
 	
-	public void insertWithInvoice(OrderformVO orderformVO , List<OrderinvoiceVO> list);
+	public OrderformVO insertWithInvoice(OrderformVO orderformVO , List<OrderinvoiceVO> list);
 
 	public void updateWithDelivery(OrderformVO orderformVO , Connection con);
 	

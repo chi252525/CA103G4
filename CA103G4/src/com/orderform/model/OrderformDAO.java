@@ -445,10 +445,11 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 	// s綁定訂單主鍵，同時新增多筆訂單明細
 	@Override
-	public void insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
+	public OrderformVO insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
+		
 		try {
 			con = ds.getConnection();
 			con.setAutoCommit(false);
@@ -471,6 +472,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				next_orderno = rs.getString(1);
+				orderformVO.setOrder_no(rs.getString(1));
 				System.out.println("有取得自增主鍵。");
 			} else {
 				System.out.println("未取得自增主鍵。");
@@ -515,7 +517,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 				}
 			}
 		}
-
+		return orderformVO;
 	}
 
 //	外送派送單綁定主鍵，同時更新多筆訂單資料
