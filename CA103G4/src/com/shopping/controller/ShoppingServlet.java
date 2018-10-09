@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.coucat.model.CoucatService;
 import com.coupon.model.CouponService;
+import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
 
 @WebServlet("/front_end/shoppingCart/ShoppingServlet.do")
@@ -207,5 +208,28 @@ public class ShoppingServlet extends HttpServlet {
 		MenuVO.setMenu_quantity((new Integer(quantity)).intValue());
 		MenuVO.setMenu_No(menuno);
 		return MenuVO;
+	}
+	
+
+	private MenuVO getCustommealsVO(HttpServletRequest req) {
+
+		String customno = req.getParameter("customno");
+		String customname = req.getParameter("customname");
+		String price = req.getParameter("price");
+		String quantity = req.getParameter("quantity");
+
+		System.out.println("自訂餐點編號: " + customno);
+		System.out.println("自訂餐點名稱: " + customname);
+		System.out.println("價格=" + price);
+		System.out.println("數量=" + quantity);
+		System.out.println();
+
+		CustommealsVO CustommealsVO = new CustommealsVO();
+
+		CustommealsVO.setcustom_No(customno);
+		CustommealsVO.setcustom_Name(customname);
+		CustommealsVO.setcustom_Price(Integer.valueOf(price));
+		CustommealsVO.setcustom_Quantity((new Integer(quantity)).intValue());
+		return CustommealsVO;
 	}
 }

@@ -320,6 +320,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_Price(custom_Price);
 					
 
+					
 					List<IngredientCombinationVO> list = new ArrayList();
 					String values[] = req.getParameterValues("ingredients");
 					if (values != null) {
@@ -333,13 +334,15 @@ public class CustommealsServlet extends HttpServlet{
 	
 					System.out.println("開始新增資料*");
 					/***************************2.開始新增資料****************************************/
-					CustommealsService custommealsSvc = new CustommealsService();
-					custommealsVO = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
+					CustommealsService custommealsSvc = new CustommealsService();	
+					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
+					custommealsVO.setcustom_No(custom_No);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
 					successView.forward(req, res);
+					
 					/***************************其他可能的錯誤處理**********************************/
 				} catch(Exception e) {
 					errorMsgs.add("資料新增失敗"+e.getMessage());
