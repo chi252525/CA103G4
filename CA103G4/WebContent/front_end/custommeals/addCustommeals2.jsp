@@ -467,9 +467,6 @@
 								     
 		
 								      <br>
-	<!-- 							       <div class="column-button"> -->
-	<!-- 							        <button class="button delete-button" onclick="emptyTrash()">重新選擇</button> -->
-	<!-- 							      </div> -->
 	
 							    </li>
 	
