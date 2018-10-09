@@ -44,6 +44,7 @@ public class StoredrecordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
+		String location = req.getParameter("location");
 		// ==================查單筆儲值紀錄=================
 		if ("findByPrimaryKey".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -325,16 +326,63 @@ public class StoredrecordServlet extends HttpServlet {
 				if (list.size() == 0) {
 					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
 					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
-					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+					if ("frontEnd".equals(location))
+						req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+					else if ("backEnd".equals(location))
+						req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+
 					return;// 有錯誤,返回addStoredrecord
 				}
 
 				// ==========forward result===============
-				req.setAttribute("list", list);
-				req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				session.setAttribute("list", list);
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
 			} catch (Exception e) {
+
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+			}
+		}
+
+		if ("findByMon_Year".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				String mem_No = req.getParameter("mem_No");
+
+				// =========query=========================
+				StoredrecordService srvc = new StoredrecordService();
+				List<StoredrecordVO> list = srvc.findByMem_no(mem_No);
+				if (list.size() == 0) {
+					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
+					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
+					if ("frontEnd".equals(location))
+						req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+					else if ("backEnd".equals(location))
+						req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+
+					return;// 有錯誤,返回addStoredrecord
+				}
+
+				// ==========forward result===============
+				session.setAttribute("list", list);
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
+			} catch (Exception e) {
+
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
 			}
 		}
 	}
