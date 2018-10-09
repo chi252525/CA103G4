@@ -61,6 +61,9 @@ public class OrderformServlet extends HttpServlet {
 			//取餐用，取得分店電話
 			String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
 			req.setAttribute("braTel", tel);
+			//取餐地址
+			String adr = (brSvc.findByBranch_No(brano)).getBranch_Addr();
+			req.setAttribute("braAdr", adr);
 			
 			//取得訂單金額
 			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));	
@@ -129,6 +132,7 @@ public class OrderformServlet extends HttpServlet {
 			//開始新增
 			OrderformService ordSvc = new OrderformService();
 			orderformVO = ordSvc.addOrd(orderformVO, list);
+			System.out.println("selvet:"+orderformVO.getOrder_no());
 			req.setAttribute("ordNo",orderformVO.getOrder_no());
 			
 
