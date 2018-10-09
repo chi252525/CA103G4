@@ -8,8 +8,15 @@
 	class="com.coucat.model.CoucatService" />
 <%
 	ActivityService actSvc = new ActivityService();
-	List<ActivityVO> list = actSvc.getAll();
-	pageContext.setAttribute("list", list);
+	List<ActivityVO> list=null;
+	if(request.getAttribute("listActs_ByCompositeQuery")==null){
+		 list = actSvc.getAll();
+		pageContext.setAttribute("list", list);
+	}else{
+		 list =(List<ActivityVO>)session.getAttribute("listActs_ByCompositeQuery");
+		pageContext.setAttribute("listActs_ByCompositeQuery", list);
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -126,8 +133,7 @@ body {
 								<div class="item">
 									<label for="sel1" class="text-dark">優惠卷類別</label> <select
 										size="1" class="form-control combobox" name="coucat_No">
-										<option disabled selected value>-- select an option
-											--</option>
+										<option disabled selected value>--請選擇--</option>
 										<c:forEach var="coucatVO" items="${couSvc1.all}">
 											<option value="${coucatVO.coucat_No}">${coucatVO.coucat_Name}
 										</c:forEach>
@@ -175,8 +181,46 @@ body {
 
 
 
-	<%@ include file="pages/page1.file"%>
+<%  int rowsPerPage = 3;  //每頁的筆數    
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+%>
 
+<%  
+    rowNumber=list.size();
+    if (rowNumber%rowsPerPage !=0)
+         pageNumber=rowNumber/rowsPerPage + 1;
+    else pageNumber=rowNumber/rowsPerPage;    
+
+    pageIndexArray=new int[pageNumber]; 
+    for (int i=1 ; i<=pageIndexArray.length ; i++)
+         pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
+%>
+
+<%  try {
+       whichPage = Integer.parseInt(request.getParameter("whichPage"));
+       pageIndex=pageIndexArray[whichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage=1;
+       pageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber>0){
+              whichPage=pageNumber;
+              pageIndex=pageIndexArray[pageNumber-1];
+         }
+    } 
+%>
+
+<%if (pageNumber>0){%>
+  <b><font color=red
+  >page<%=whichPage%>/<%=pageNumber%></font></b>
+<%}%>
+
+<b>Total<font color=red
+><%=rowNumber%></font>筆</b>
 
 	<!-- 表格 -->
 	<div class="col-md-12 p-1">
@@ -188,7 +232,9 @@ body {
 			<li><a
 				class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>"
 				href="#onContent" data-toggle="tab"> 已上架 </a></li>
-
+			<li><a
+				class="nav-link  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active"%>"
+				href="#queryContent" data-toggle="tab"> 查詢結果 </a></li>
 		</ul>
 
 		<div id="myTabContent" class="tab-content">
@@ -248,13 +294,43 @@ body {
 
 				</table>
 			</div>
+
 		</div>
 
 
 	</div>
+<c:if test="${openModal!=null}">
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+				
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+            </div>
+			
+			<div class="modal-body">
+<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
+               <jsp:include page="listActs_ByCompositeQuery.jsp" />
+<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
+			</div>
+			
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+		
+		</div>
+	</div>
+</div>
+
+        <script>
+    		 $("#basicModal").modal({show: true});
+        </script>
+ </c:if>
 
 
 
-	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>

@@ -58,8 +58,6 @@ public class PostServlet extends HttpServlet {
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 
-				
-			
 				HttpSession session = req.getSession();
 				session.setAttribute("postVO", postVO);
 				String url = "/front_end/post/listOnepost.jsp";
@@ -69,7 +67,7 @@ public class PostServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPost.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -88,13 +86,13 @@ public class PostServlet extends HttpServlet {
 				PostVO postVO = postSvc.getOne_Post(post_No);
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("postVO", postVO);
-				String url = "/front_end/post/update_post_input.jsp";
+				String url = "/protected_front/post/update_post_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/listPostByMember.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -107,20 +105,20 @@ public class PostServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String post_No = req.getParameter("post_No");
-				System.out.println("post_No=" + post_No);
+//				System.out.println("post_No=" + post_No);
 				String custom_Name = req.getParameter("custom_Name");
-				System.out.println("custom_Name=" + custom_Name);
+//				System.out.println("custom_Name=" + custom_Name);
 				
 				if (post_No == null || (post_No.trim()).length() == 0) {
 					errorMsgs.add("請輸入貼文編號");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/listPostByMember.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 				String mem_No = req.getParameter("mem_No");
-				System.out.println("接收請求參數mem_No" + mem_No);
+//				System.out.println("接收請求參數mem_No" + mem_No);
 				if (mem_No == null || (mem_No.trim()).length() == 0) {
 					errorMsgs.add("請輸入會員編號");
 				}
@@ -168,7 +166,7 @@ public class PostServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("postVO", postVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/update_post_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/update_post_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -187,13 +185,13 @@ public class PostServlet extends HttpServlet {
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("postVO", postVO); // 資料庫update成功後,正確的的VO物件,存入req
 				System.out.println("req.setAttribute" + postVO);
-				String url = "/front_end/post/listPostByMember.jsp";
+				String url = "/protected_front/post/listPostByMember.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/update_post_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/update_post_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -206,7 +204,7 @@ public class PostServlet extends HttpServlet {
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String mem_No = req.getParameter("mem_No");
-				System.out.println("新增 會員編號: " + mem_No);
+//				System.out.println("新增 會員編號: " + mem_No);
 				String custom_No = req.getParameter("custom_No");
 				if (custom_No == null || custom_No.trim().length() == 0) {
 					errorMsgs.add("餐點編號請勿空白");
@@ -220,7 +218,7 @@ public class PostServlet extends HttpServlet {
 					post_Eva = new Integer(req.getParameter("post_Eva").trim());
 				} catch (NumberFormatException e) {
 					post_Eva = 5;
-					errorMsgs.add("評價請填數字1-5.");
+					errorMsgs.add("評價請填寫");
 				}
 
 				byte[] post_Photo = null;
@@ -254,7 +252,7 @@ public class PostServlet extends HttpServlet {
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/addPost.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/addPost.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -281,7 +279,7 @@ public class PostServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listPostByMember.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/post/listPostByMember.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -295,7 +293,7 @@ public class PostServlet extends HttpServlet {
 
 				String date = req.getParameter("bdaymonth");
 				if (date == null || date.trim().length() == 0) {
-					System.out.println("跳進errorMsgs");
+//					System.out.println("跳進errorMsgs");
 					errorMsgs.add("請填寫有效日期");
 				}
 				System.out.println("date=" + date);
@@ -324,7 +322,7 @@ public class PostServlet extends HttpServlet {
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				HttpSession session = req.getSession();
 				session.setAttribute("list", list);
-				System.out.println("session.setAttributelist=" + list);
+//				System.out.println("session.setAttributelist=" + list);
 
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/post/listPostByQuery.jsp");
 				successView.forward(req, res);
@@ -345,9 +343,9 @@ public class PostServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 
-        	System.out.println("跳進keyword");
+//        	System.out.println("跳進keyword");
 				String keyword = req.getParameter("keyword"); // 使用者輸入的值
-        	System.out.println("keyword的req.getParameter"+keyword);
+//        	System.out.println("keyword的req.getParameter"+keyword);
 				/*************************** 2.開始查詢資料 *****************************************/
 				PostService postSvc = new PostService();
 				List<PostVO> list = postSvc.getAllByKeywordOrderByViews(keyword.trim());
@@ -424,7 +422,7 @@ public class PostServlet extends HttpServlet {
 				/***************************修改貼文狀態******************************/
 				PostService postSvc = new PostService();
 				postSvc.updatePostStatus(post_No);
-				System.out.println("updatePostStatus");
+//				System.out.println("updatePostStatus");
 				/***************************同時修改Report處理狀態******************************/
 				ReportService rptSvc = new ReportService();
 				rptSvc.updateReportStatus(rpt_No);
