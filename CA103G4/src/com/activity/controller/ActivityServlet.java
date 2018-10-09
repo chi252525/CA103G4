@@ -226,6 +226,9 @@ public class ActivityServlet extends HttpServlet {
 					/***************************3.查詢完成,準備轉交(Send the Success view)************/
 					HttpSession session= req.getSession();
 					session.setAttribute("listActs_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+					//Bootstrap_modal
+//					boolean openModal=true;
+//					req.setAttribute("openModal",openModal );
 					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp"); 
 					successView.forward(req, res);
 					
