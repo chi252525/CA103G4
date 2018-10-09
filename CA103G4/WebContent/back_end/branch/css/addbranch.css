@@ -1,0 +1,62 @@
+      
+body{      	
+	font-family: Montserrat, Arial, "·L³n¥¿¶ÂÅé", "Microsoft JhengHei" !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+
+
+
+#back {
+	background-color: rgba(200, 200, 200, 0.8);
+	margin-top: 90px;
+	margin-bottom: 40px;
+	border-radius: 2rem;
+	box-shadow:3px 3px 5px 6px #cccccc;
+	
+}
+
+input{
+	width:200px;
+	border-radius: 0.5rem;
+}
+
+.td1 {
+	width: 20%;
+	text-align: center;
+	padding-right:20px;
+	
+}
+
+.td2 {
+	width: 40%;
+	text-align: center;
+	padding-right:20px;
+}
+
+.td3 {
+	width: 20%;
+	text-align: center;
+	padding-right:20px;
+}
+
+.td4 {
+	width: 40%;
+	text-align: center;
+	padding-right:20px;
+}
+
+.tdbtn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 2px;
+	width:50px;
+}
