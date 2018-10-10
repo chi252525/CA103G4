@@ -3,34 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.activity.model.*"%>
-<%@ page import="com.activity.model.*"%>
+
 
 <%
 	ActivityService actSvc = new ActivityService();
-	List<ActivityVO> list = actSvc.findNewAct();
-	pageContext.setAttribute("list", list);
+	List<ActivityVO> list = null;
+	if (request.getAttribute("actlist") == null) {
+		list = actSvc.findNewAct();
+		pageContext.setAttribute("list", list);
+	} else {
+		list = (List<ActivityVO>) request.getAttribute("actlist");
+		pageContext.setAttribute("list", list);
+	}
 %>
+
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>活動快訊</title>
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-
-
 <!-- linearicons CSS -->
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-
 <!--JS BS4-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
 <script
@@ -52,7 +53,7 @@ html {
 }
 
 body {
-	background-image: url(img/woodbackground3.png);
+
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -100,38 +101,31 @@ div.shavetext {
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
 	<!--your html start==================================================================================-->
-
 	<script>$('.carousel').carousel()</script>
-
 	<div class="container ">
 		<div class="row " style="background-color: rgba(255, 255, 255, 0.45)">
 			<div class="my-4"></div>
 			<!-- 廣告輪播圖開始 -->
-		
-
-				<div class="carousel slide" data-ride="carousel"
-					id="carouselArchitecture">
-					<ol class="carousel-indicators">
-						<c:forEach varStatus="s" items="${list}">
-							<li data-target="#carouselArchitecture"
-								data-slide-to="${s.index}" class=" ${s.first?'active':''}">
-								<i></i>
-							</li>
-						</c:forEach>
-					</ol>
-					<div class="carousel-inner" role="listbox">
-						<c:forEach varStatus="s" var="actVO" items="${list}">
-							<div class="carousel-item ${s.first?'active':''}">
-								<img class="img-fluid"
-									src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=${actVO.act_No}"
-									data-holder-rendered="true">
-							</div>
-						</c:forEach>
-					</div>
+			<div class="carousel slide" data-ride="carousel"
+				id="carouselArchitecture">
+				<ol class="carousel-indicators">
+					<c:forEach varStatus="s" items="${list}">
+						<li data-target="#carouselArchitecture" data-slide-to="${s.index}"
+							class=" ${s.first?'active':''}"><i></i></li>
+					</c:forEach>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<c:forEach varStatus="s" var="actVO" items="${list}">
+						<div class="carousel-item ${s.first?'active':''}">
+							<img class="img-fluid"
+								src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=${actVO.act_No}"
+								data-holder-rendered="true">
+						</div>
+					</c:forEach>
 				</div>
-			
-			<!-- 廣告輪播圖end -->
+			</div>
 
+			<!-- 廣告輪播圖end -->
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color: red">請修正以下錯誤:</font>
@@ -141,24 +135,35 @@ div.shavetext {
 					</c:forEach>
 				</ul>
 			</c:if>
-
-			<!-- 搜尋開始 -->
-			<div class="row">
-				<div class="my-1 col-12"></div>
-			</div>
-
 		</div>
-
-
 		<!-- 分頁及內容開始 -->
 		<div class="my-1 col-12">
+			<div class="row">
+				<div class="col-12 px-0">
+					<div class="card border-secondary "	style="background-color: rgba(255, 255, 255, 0.45)">
+						<div class="card-body text-secondary">
+							<div class="col-4 px-0">
+								<form method="post"	action="<%=request.getContextPath()%>/activity/activityServlet.do">
+									<input type="hidden" name="action" value="findbyactcata">
+									<select class="form-control combobox" name="act_Cat"
+										onchange="submit()">
+										<option disabled selected>--請選擇--</option>
+										<option value="AC1">新品上市</option>
+										<option value="AC2">優惠折扣</option>
+										<option value="AC3">分店限定</option>
+									</select>
+								</form>
+							</div>
+						</div>
+					</div>
 
+				</div>
+			</div>
 			<%@ include file="pages/page1.file"%>
 		</div>
 
 		<c:forEach var="activityVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
-
 			<div class="col-12"
 				style="background-color: rgba(255, 255, 255, 0.45)">
 				<div class="py-4 px-2">
@@ -168,7 +173,8 @@ div.shavetext {
 								<div class="row"
 									style="background-color: rgba(255, 255, 255, 0.45)">
 									<div class=" col-4 px-1 py-1 ">
-										<img class="img-fluid d-block mx-auto my-auto" style="width:400px;height:250px;"
+										<img class="img-fluid d-block mx-auto my-auto"
+											style="width: 400px; height: 250px;"
 											src="<%=request.getContextPath()%>/activity/activityshowsmallpic.do?act_No=${activityVO.act_No}">
 									</div>
 									<div class="col-8 py-1 my-2 ">
@@ -194,14 +200,13 @@ div.shavetext {
 											<h5 class="mb-1 text-dark my-1"></h5>
 											<hr>
 											<div class="col-12 mt-2 shavetext">${activityVO.act_Content}
-
-
 											</div>
-
 											<div class="col-12 ">
 												<div class="row">
 													<div class="col-8 mt-4">
-														<a href="#" class="btn btn-outline-primary btn-sm">More..</a>
+														<a
+															href="<%=request.getContextPath()%>/activity/activityServlet.do?action=getOne_For_Display&act_No=${activityVO.act_No}"
+															class="btn btn-outline-primary btn-sm">More..</a>
 													</div>
 													<div class="col-4 mt-4">
 														<button class="btn btn-sm btn-danger"
@@ -211,34 +216,33 @@ div.shavetext {
 															style="color: red;"></p>
 													</div>
 												</div>
-												<script type="text/javascript">
+			<script type="text/javascript">
             
             $(document).ready(function() {
 				$("#${activityVO.act_No}").click(function() {
 					$.ajax({
                         type: "post",
                         url: "<%=request.getContextPath()%>/couponhistory/CouponhistoryServlet.do",
-                        data: {
-                            "action": "insert",
-                            'mem_No': '${memVO.mem_No}',
-                            'coucat_No': '${activityVO.coucat_No}'
-                        },
-                        dataType: "json",
-                        success: function(result) {
-                        	if(result.status === 'success')
-                            	$(".${activityVO.act_No}").html(result.msg);
-                        	else
-                        		alert("Oops!沒取到優惠券: "+result.msg);
-                        },
-                        error: function() {
-                            alert("Oops!沒取到優惠券");
-                        }
-                    })
+						data : {
+								"action" : "insert",
+								'mem_No' : '${memVO.mem_No}',
+								'coucat_No' : '${activityVO.coucat_No}'
+								},
+						dataType : "json",
+						success : function(result) {
+							if (result.status === 'success')
+							$(".${activityVO.act_No}").html(result.msg);
+							else
+							alert("Oops!沒取到優惠券: "+ result.msg);
+							},
+						error : function() {
+								alert("Oops!沒取到優惠券");
+									}
+								})
 
-				});
-			});
-
-            </script>
+								});
+						});
+												</script>
 											</div>
 										</div>
 									</div>
