@@ -37,5 +37,5 @@
   >第<%=whichPage%>/<%=pageNumber%>頁</font></b>
 <%}%>
 
-<b>●符 合 查 詢 條 件 如 下 所 示: 共<font color=#b37700
+<b> 共<font color=#b37700
 ><%=rowNumber%></font>筆</b>

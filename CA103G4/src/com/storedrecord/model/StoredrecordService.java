@@ -55,4 +55,9 @@ public class StoredrecordService {
 	public List<StoredrecordVO> findByMon_Year(int Mon, int Year){
 		return dao.findByMon_Year(Mon, Year);
 	}
+	
+	public List<StoredrecordVO> findByMon_Year_memNo(int Mon, int Year, String mem_No){
+		return dao.findByMon_Year_MemNo(Mon, Year, mem_No);
+	}
+	
 }

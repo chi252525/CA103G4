@@ -342,7 +342,8 @@ public class StoredrecordServlet extends HttpServlet {
 					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
 			} catch (Exception e) {
 
-				errorMsgs.add("無法取得資料:" + e.getMessage());
+				errorMsgs.add("無法取得資料 ,請聯絡管理員");
+				System.out.println(e);
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 				else if ("backEnd".equals(location))
@@ -379,7 +380,46 @@ public class StoredrecordServlet extends HttpServlet {
 					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
 			} catch (Exception e) {
 
-				errorMsgs.add("無法取得資料:" + e.getMessage());
+				errorMsgs.add("無法取得紀錄,請聯絡管理員");
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+			}
+		}
+		
+		if ("findByMon_Year_memNo".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				MemberVO memVO =  (MemberVO) session.getAttribute("memVO");
+				String mem_No = memVO.getMem_No();
+				String period = req.getParameter("monthAndYear");
+				String year = period.split("/")[1];
+				String month = period.split("/")[0];
+				// =========query=========================
+				StoredrecordService srvc = new StoredrecordService();
+				List<StoredrecordVO> list = srvc.findByMon_Year_memNo(Integer.parseInt(month), Integer.parseInt(year), mem_No);
+				if (list.size() == 0) {
+					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
+					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req
+					if ("frontEnd".equals(location))
+						req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+					else if ("backEnd".equals(location))
+						req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+
+					return;// 有錯誤,返回addStoredrecord
+				}
+
+				// ==========forward result===============
+				session.setAttribute("strlist", list);
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
+			} catch (Exception e) {
+
+				errorMsgs.add("無法取得紀錄,請聯絡管理員");
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 				else if ("backEnd".equals(location))

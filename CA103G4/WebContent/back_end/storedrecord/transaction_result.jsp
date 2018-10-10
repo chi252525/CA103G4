@@ -32,13 +32,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
     <!-- My css for transaction page-->
-    <link rel="stylesheet" href="css/transaction_css.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/storedrecord/css/transaction_back_end.css">
 
     <style>
     </style>
 </head>
 
-<body class="shadow-lg w-100" style="background-color: antiquewhite">
+<body class="shadow-lg w-100" >
     <form method="post" action="storedrecord.do">
         <input type="hidden" name="location" value="backEnd">
         <!--本網頁路徑提示 -->
@@ -46,7 +46,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <a id="a1" href="transaction_mang.jsp""><h1
+                        <a id="a1" href="<%=request.getContextPath() %>/back_end/storedrecord/transaction_mang.jsp""><h1
 								class=" d-flex justify-content-start" style="font-weight: bolder;">儲值管理</h1></a>
                     </div>
                 </div>
@@ -84,20 +84,24 @@
                         <!--                                 </div> -->
                         <!--                             </div> -->
                         <!--                         </div> -->
+                        
+                        <form method="post" action="<%=request.getContextPath()%>/front_end/storedrecord/storedrecord.do">
                         <div class="container">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker11" />
+                                        <input name="monthAndYear"type="text" class="form-control datetimepicker-input" data-target="#datetimepicker11"/>
                                         <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
+                                        <button class="btn btn-light" type=submit style=;>顯示</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <input type=hidden name=action value=findByMon_Year>
+                        <input type=hidden name=location value=backEnd>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -111,8 +115,8 @@
                                         <th>#儲值流水單號</th>
                                         <th>會員編號</th>
                                         <th>儲值日期</th>
-                                        <th>儲值點數</th>
-                                        <th>回饋竹幣</th>
+                                        <th>儲值竹幣</th>
+<!--                                         <th>回饋竹幣</th> -->
                                         <th>儲值狀態</th>
                                     </tr>
                                 </thead>
@@ -126,7 +130,7 @@
                                                 <fmt:formatDate value="${StoredrecordVO.stor_Date}" pattern="yyyy-MM-dd HH:mm:ss" />
                                             </td>
                                             <td>${StoredrecordVO.stor_Point}</td>
-                                            <td>${StoredrecordVO.drew_Point}</td>
+<%--                                             <td>${StoredrecordVO.drew_Point}</td> --%>
                                             <c:choose>
                                                 <c:when test="${StoredrecordVO.stor_Status==1}">
                                                     <td>成功</td>
@@ -169,7 +173,7 @@
 
             </script>
 
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!--             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </form>

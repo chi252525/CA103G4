@@ -17,7 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- font aewsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="theme.css" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
     <!-- Bootsraps-->
@@ -30,7 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
     <!-- My <css></css> for transaction page-->
-    <link rel="stylesheet" href="css/transaction_css.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/storedrecord/css/transaction_back_end.css">
 
 </head>
 
@@ -85,20 +84,21 @@
                         <!-- mounthpicker -->
                         <form method="post" action="<%=request.getContextPath()%>/front_end/storedrecord/storedrecord.do">
                         <div class="container">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
-                                        <input name="monthAndYear"type="text" class="form-control datetimepicker-input" data-target="#datetimepicker11"  onchange="submit()"/>
+                                        <input name="monthAndYear"type="text" class="form-control datetimepicker-input" data-target="#datetimepicker11"/>
                                         <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
+                                        <button class="btn btn-light" type=submit style=;>顯示</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <input type=hidden name=action value=findByMon_Year>
+                        <input type=hidden name=action value=findByMon_Year_memNo>
                         <input type=hidden name=location value=backEnd>
-                        <button type=submit>查詢</button>
+                        
                         </form>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                                         <th>會員編號</th>
                                         <th>儲值日期</th>
                                         <th>儲值點數</th>
-                                        <th>回饋竹幣</th>
+<!--                                         <th>回饋竹幣</th> -->
                                         <th>儲值完成狀態</th>
                                     </tr>
                                 </thead>

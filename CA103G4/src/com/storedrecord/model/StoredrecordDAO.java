@@ -22,7 +22,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static final String INSERT_STMT = "INSERT INTO STOREDRECORD (stor_NO, MEM_NO,  STOR_DATE, STOR_POINT, DREW_POINT, STOR_STATUS)"
 			+ "VALUES( ('B'| |LPAD(storedrecord_NO_seq.NEXTVAL,9,'0')), ?, ?, ?, ?, ?)";
 
@@ -31,8 +31,8 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	private static final String GETALL = "SELECT * FROM STOREDRECORD order by stor_NO";
 	private static final String FINDBY_MEM_NO = "SELECT * FROM STOREDRECORD WHERE MEM_NO=?";
 	private static final String FINDBY_MON_YEAR = "SELECT * FROM STOREDRECORD WHERE extract(MONTH from STOR_DATE )=? AND extract(YEAR from STOR_DATE )=?";
+	private static final String FINDBY_MON_YEAR_MemNo = "SELECT * FROM STOREDRECORD WHERE extract(MONTH from STOR_DATE )=? AND extract(YEAR from STOR_DATE )=? AND MEM_NO=?";
 	private static final String DELETE_STMT = "DELETE FROM STOREDRECORD WHERE stor_No = ?";
-	
 
 	@Override
 	public void insert(StoredrecordVO STOREDRECORD) {
@@ -128,7 +128,7 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			pstmt.setString(1, stor_No);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
+
 				STOREDRECORD = new StoredrecordVO();
 				STOREDRECORD.setStor_No(rs.getString("stor_No"));
 				STOREDRECORD.setMem_No(rs.getString("mem_No"));
@@ -321,6 +321,52 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			pstmt = conn.prepareStatement(FINDBY_MON_YEAR);
 			pstmt.setInt(1, Mon);
 			pstmt.setInt(2, Year);
+			rs = pstmt.executeQuery();
+			System.out.println("查完囉!");
+			while (rs.next()) {
+				storedrecordvo = new StoredrecordVO();
+				storedrecordvo.setStor_No(rs.getString("STOR_NO"));
+				storedrecordvo.setMem_No(rs.getString("MEM_NO"));
+				storedrecordvo.setStor_Date(rs.getTimestamp("STOR_DATE"));
+				storedrecordvo.setStor_Point(rs.getInt("STOR_POINT"));
+				storedrecordvo.setDrew_Point(rs.getInt("DREW_POINT"));
+				storedrecordvo.setStor_Status(rs.getInt("STOR_STATUS"));
+				STOREDRECORDlist.add(storedrecordvo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return STOREDRECORDlist;
+	}
+
+	@Override
+	public List<StoredrecordVO> findByMon_Year_MemNo(int Mon, int Year, String mem_No) {
+		StoredrecordVO storedrecordvo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<StoredrecordVO> STOREDRECORDlist = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(FINDBY_MON_YEAR_MemNo);
+			pstmt.setInt(1, Mon);
+			pstmt.setInt(2, Year);
+			pstmt.setString(3, mem_No);
 			rs = pstmt.executeQuery();
 			System.out.println("查完囉!");
 			while (rs.next()) {

@@ -36,89 +36,101 @@
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <form method="post" action="storedrecord.do">
-    <input type="hidden" name="location" value="frontEnd"> <!--本網頁路徑提示 -->
-        <div id="div_shadow" class="py-5"">
+        <!--本網頁路徑提示 -->
+        <input type="hidden" name="location" value="frontEnd">
+        <input type=hidden name=action value=findByMon_Year_memNo>
+        <div id="div_shadow" class="py-5">
 			<div class=" container">
-            <div class="row">
-                <div class="col-md-12">
-                    <a id="a1" href="transaction_query.jsp" "><h1 class=" d-flex justify-content-start">儲值紀錄</h1></a>
-                    <div id="div1" class="col-md-12 d-flex">
-                        <input id="stor_No" class="form-control" type="text" name="mem_No" placeholder="儲值單號 ,會員編號"> <input type="hidden" name="action" value="findByMem_no">
-                        <button type="submit" class="btn btn-sm align-items-center" style="height: 35px; width: 35px; background-color: antiquewhite;">
-                            <i class="fas fa-search" style="font-size: 20px; color: grey"></i>
-                        </button>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                            </div>
-                                        </div>
+            	<div class="row">
+                	<div class="col-md-12">
+                    	<a id="a1" href="transaction_query.jsp"><h1 class=" d-flex justify-content-start">儲值紀錄</h1></a>
+                	</div>
+            	</div>
+        </div>
+        </div>
+        <div id="div1" class="col-md-12 d-flex">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
+                                <input name="monthAndYear" type="text" placeholder="請輸入年月" class="form-control datetimepicker-input" data-target="#datetimepicker11"  />
+                                <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-sm align-items-center" style="height: 35px; width: 35px;background-color:#721c2400;;margin-left:5px;">
+                        <i class="fas fa-search" style="font-size: 20px; color: #c5c5ca"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="shadow p-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12" style="">
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>#儲值流水單號</th>
-                                    <th>會員編號</th>
-                                    <th>儲值日期</th>
-                                    <th>儲值點數</th>
-                                    <th>回饋竹幣</th>
-                                    <th>儲值完成狀態</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <c:if test="${not empty errorMsgs}">
-                                    <c:forEach var="errorObj" items="${errorMsgs}">
-                                        <tr valign="middle">
-                                            <td class="text-center" colspan="6" rowspan="6" style="vertical-align: middle;font-size:20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    <tr style="height:30px;"></tr>
-                                    <tr style="height:30px;"></tr>
-                                    <tr style="height:30px;"></tr>
-                                    <tr style="height:30px;"></tr>
-                                    <tr style="height:30px;"></tr>
-                                    <tr style="height:30px;"></tr>
-                                </c:if>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- footer -->
-        <jsp:include page="/front_end/footer.jsp" />
-        <!--Timestampicker-->
-        <script type="text/javascript">
-            $(function() {
-                $('#datetimepicker2').datetimepicker({
-                    locale: 'ru'
-                });
-            });
-
-        </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </form>
+    <div class="shadow p-2">
+        <div class="container">
+            <div class="row">
+                <div id="datatable" class="col-md-12" style="">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>#儲值流水單號</th>
+                                <th>會員編號</th>
+                                <th>儲值日期</th>
+                                <th>儲值竹幣</th>
+<!--                                 <th>回饋竹幣</th> -->
+                                <th>儲值完成狀態</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <c:if test="${not empty errorMsgs}">
+                                <c:forEach var="errorObj" items="${errorMsgs}">
+                                    <tr valign="middle">
+                                        <td class="text-center" colspan="6" rowspan="6" style="vertical-align: middle;font-size:20px; color: sienna; padding-top: 20px; font-weight: bold;">${errorObj}</td>
+                                    </tr>
+                                </c:forEach>
+                                <tr style="height:30px;"></tr>
+                                <tr style="height:30px;"></tr>
+                                <tr style="height:30px;"></tr>
+                                <tr style="height:30px;"></tr>
+                                <tr style="height:30px;"></tr>
+                                <tr style="height:30px;"></tr>
+                            </c:if>
+                            <c:if test="${empty errorMsgs}">
+                                <tr></tr>
+                            </c:if>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Timestampicker-->
+    <script type="text/javascript">
+        //             $(function() {
+        //                 $('#datetimepicker2').datetimepicker({
+        //                     locale: 'ru'
+        //                 });
+        //             });
+
+        $(function() {
+            $('#datetimepicker11').datetimepicker({
+                viewMode: 'years',
+                format: 'MM/YYYY'
+            });
+        });
+
+    </script>
+    <!--         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+<!-- footer -->
+<jsp:include page="/front_end/footer.jsp" />
 
 </html>
