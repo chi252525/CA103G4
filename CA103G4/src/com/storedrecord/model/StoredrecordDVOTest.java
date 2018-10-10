@@ -1,5 +1,6 @@
 package com.storedrecord.model;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class StoredrecordDVOTest {
 		StoredrecordDAO dao = new StoredrecordDAO();
 		dao.insert(storedrecordvo);
 		System.out.println("新增成功!");
+		
 
 		// update
 //		StoredrecordVO storedrecordvo2 = new StoredrecordVO();

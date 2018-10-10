@@ -185,14 +185,14 @@ public class StoredrecordServlet extends HttpServlet {
 
 				// ================改完，轉交===================
 				req.setAttribute("storedrecordVO", srVo);
-				req.getRequestDispatcher("front-end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("front_end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
 			}
 		}
-		if ("insert".equals(action)) {
+		if ("insertWithMemUpdate".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -275,10 +275,12 @@ public class StoredrecordServlet extends HttpServlet {
 //				}
 				// =============開始儲值(儲值成功)====================
 				StoredrecordService stsvc = new StoredrecordService();
-				stor_Status = 1;
-				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);
+				stor_Status = 0;
+				StoredrecordVO storVO =stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);//先新增一筆狀態為失敗的儲值紀錄
+				
+				stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
-				req.getRequestDispatcher(req.getContextPath() + "/front_end/menu/listAllMenu4.jsp").forward(req, res);
+				req.getRequestDispatcher("/front_end/storedrecord/transactionScess.jsp").forward(req, res);
 				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
 				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");
@@ -381,6 +383,7 @@ public class StoredrecordServlet extends HttpServlet {
 			} catch (Exception e) {
 
 				errorMsgs.add("無法取得紀錄,請聯絡管理員");
+				req.setAttribute("stor_Status", "儲值失敗");
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 				else if ("backEnd".equals(location))

@@ -186,7 +186,7 @@ code {
 
                 <h2 style="margin-top: 30%;">竹風堂-竹幣儲值</h2>
                 <form method="post" action="storedrecord.do">
-
+					
                     <select name="stor_Point" class="custom-select custom-select-lg mb-3" size="5" style="height:90%">
                         <option selected style="font-size:40px;" value="請選擇">產品選擇</option>
                         <option value="500">500竹幣</option>

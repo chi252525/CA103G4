@@ -175,28 +175,28 @@
 
 <body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
     <%
-		MemberService memSrv = new MemberService();         //模擬登入
-		MemberVO memVO = memSrv.getOne_Member("M000005");
-		System.out.println(memVO);
-		session.setAttribute("memVO", memVO);
+// 		MemberService memSrv = new MemberService();         //模擬登入
+// 		MemberVO memVO = memSrv.getOne_Member("M000005");
+// 		System.out.println(memVO);
+// 		session.setAttribute("memVO", memVO);
 	%>
     <div class="container col-12" style="height: 400px">
         <div class="row">
             <div class="col-md-4" style="margin: 40px">
                 <form method="post" action="storedrecord.do">
-                <div class="col-12 col-md-12 summary" style="padding:30px;">
-                    <h3>付款方式</h3>
-                    <select class="custom-select">
-                        <option selected>Open this select menu</option>
-                        <option value="1">信用卡</option>
-                    </select>
-                    <h3 style="margin-top:15px;">儲值帳戶</h3>
-                    <select class="custom-select" name="mem_No">
-                        <option selected>Open this select menu</option>
-                        <option value="${memVO.mem_No}" ${(memVO.mem_No==mem_No)? 'selected' :'' }>${memVO.mem_Id}</option>
-                    </select>
-                    <input type="hidden" name="stor_Point" value="${stor_Point}">
-				</div>
+                    <div class="col-12 col-md-12 summary" style="padding:30px;">
+                        <h3>付款方式</h3>
+                        <select class="custom-select">
+                            <option selected>Open this select menu</option>
+                            <option value="1">信用卡</option>
+                        </select>
+                        <h3 style="margin-top:15px;">儲值帳戶</h3>
+                        <select class="custom-select" name="mem_No">
+                            <option selected>Open this select menu</option>
+                            <option value="${memVO.mem_No}" ${(memVO.mem_No==mem_No)? 'selected' :'' }>${mem_Id}</option>
+                        </select>
+                        <input type="hidden" name="stor_Point" value="${stor_Point}">
+                    </div>
                     <!-- credit card -->
                     <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;margin-top:50px;">
                         <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
@@ -225,7 +225,7 @@
 
                     </div>
 
-                </form>
+
             </div>
             <div class="col-10 col-sm-8 col-md-4 .offset-md-6" style="margin-top: 69px;margin-left:160px;">
                 <div class="summary stepCard">
@@ -251,11 +251,12 @@
                                 <c>$ ${stor_Point*1.17}</c>
                             </li>
                         </ul>
-                        <button type="submit" class="perchase" name="action" value="insert"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/Lock.svg" type="image/svg+xml" style="margin:5px; border-radius: 50em;"><b>確認購買</b></button><br>
+                        <button type="submit" class="perchase" name="action" value="insertWithMemUpdate"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/Lock.svg" type="image/svg+xml" style="margin:5px; border-radius: 50em;"><b>確認購買</b></button><br>
                         <span style="width: 100%;"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icon-sslSmall.svg" type="image/svg+xml" style="margin-right:20px;"></img>Safe & Secure Payment</span>
-
+                        </form>
                     </div>
-
+                    <div class="errorMsg" style="margin: auto;">${errorMsgs.stor_failur}</div>
+	
                 </div>
             </div>
         </div>

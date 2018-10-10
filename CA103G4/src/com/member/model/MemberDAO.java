@@ -18,10 +18,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class MemberDAO implements MemberDAO_interface{
-	
+public class MemberDAO implements MemberDAO_interface {
+
 	private static DataSource ds = null;
-	
+
 	static {
 		try {
 			Context ctx = new InitialContext();
@@ -30,20 +30,16 @@ public class MemberDAO implements MemberDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	public static final String INSERT_STMT=
-			"INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) " + 
-			"VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	public static final String UPDATE_STMT=
-			"UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR=?, MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=?, MEM_PHOTO=? WHERE MEM_ID =?";
-	public static final String CHANGESTATUS_STMT=
-			"UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
-	public static final String GETALL=
-			"SELECT * FROM MEMBER";
-	public static final String GET_ONE_MEMBER="SELECT * FROM MEMBER WHERE MEM_NO=?";
-	public static final String GET_ONE_BY_ID="SELECT * FROM MEMBER WHERE MEM_ID=?";
-//	public static final String COMPARE_ID = "SELECT MEM_ID FROM MEMBER WHERE MEM_ID LIKE ?";
-	
+	public static final String INSERT_STMT = "INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_PHOTO) "
+			+ "VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String UPDATE_STMT = "UPDATE MEMBER SET MEM_PW=? , MEM_NAME=? , MEM_GENDER=? , MEM_BIR=?, MEM_MAIL=? , MEM_PHONE=? , MEM_RECEIVER=? , MEM_REPNO=?, MEM_RECOUNTY =?, MEM_RETOWN=? ,MEM_READDR=? , MEM_CARDNUM=? , MEM_CARDDUE=?, MEM_PHOTO=? WHERE MEM_ID =?";
+	public static final String CHANGESTATUS_STMT = "UPDATE MEMBER SET MEM_STATUS=? WHERE MEM_ID = ?";
+	public static final String GETALL = "SELECT * FROM MEMBER";
+	public static final String GET_ONE_MEMBER = "SELECT * FROM MEMBER WHERE MEM_NO=?";
+	public static final String GET_ONE_BY_ID = "SELECT * FROM MEMBER WHERE MEM_ID=?";
+	public static final String UPDATE_STMT2 = "UPDATE MEMBER SET MEM_BONUS=? WHERE MEM_NO =?";
 
+//	public static final String COMPARE_ID = "SELECT MEM_ID FROM MEMBER WHERE MEM_ID LIKE ?";
 
 	@Override
 	public void insert(MemberVO memVO) {
@@ -68,14 +64,14 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(12, memVO.getMem_Readdr());
 			pstmt.setString(13, memVO.getMem_Cardnum());
 			pstmt.setString(14, memVO.getMem_Carddue());
-			pstmt.setBytes(15,memVO.getMem_Photo());
+			pstmt.setBytes(15, memVO.getMem_Photo());
 			int rowCount = pstmt.executeUpdate();
-			System.out.println("新增 "+rowCount+" 會員資料");
+			System.out.println("新增 " + rowCount + " 會員資料");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -83,7 +79,7 @@ public class MemberDAO implements MemberDAO_interface{
 					e.printStackTrace();
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -92,8 +88,7 @@ public class MemberDAO implements MemberDAO_interface{
 				}
 			}
 		}
-		
-		
+
 	}
 
 	@Override
@@ -101,7 +96,7 @@ public class MemberDAO implements MemberDAO_interface{
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
@@ -119,16 +114,16 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(11, memVO.getMem_Readdr());
 			pstmt.setString(12, memVO.getMem_Cardnum());
 			pstmt.setString(13, memVO.getMem_Carddue());
-			pstmt.setBytes(14,memVO.getMem_Photo());
+			pstmt.setBytes(14, memVO.getMem_Photo());
 			pstmt.setString(15, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
-			System.out.println("修改 "+rowCount+" 筆資料");
-					
+			System.out.println("修改 " + rowCount + " 筆資料");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
-			if(pstmt!=null) {
+		} finally {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -136,7 +131,7 @@ public class MemberDAO implements MemberDAO_interface{
 					e.printStackTrace();
 				}
 			}
-			if(con!=null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -145,16 +140,15 @@ public class MemberDAO implements MemberDAO_interface{
 				}
 			}
 		}
-		
-		
+
 	}
 
 	@Override
 	public void changeStatus(MemberVO memVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
-		PreparedStatement pstmt=null;
-		
+		PreparedStatement pstmt = null;
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(CHANGESTATUS_STMT);
@@ -162,14 +156,13 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt.setString(1, memVO.getMem_Status());
 			pstmt.setString(2, memVO.getMem_Id());
 			int rowCount = pstmt.executeUpdate();
-			System.out.println("修改狀態"+rowCount+"筆");
-			
-			
+			System.out.println("修改狀態" + rowCount + "筆");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(pstmt!=null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -177,7 +170,7 @@ public class MemberDAO implements MemberDAO_interface{
 					e.printStackTrace();
 				}
 			}
-			if(con!=null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -186,24 +179,24 @@ public class MemberDAO implements MemberDAO_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
 	public List<MemberVO> getAll() {
 		// TODO Auto-generated method stub
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		List<MemberVO> memberlist = new ArrayList<>();
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GETALL);
 			System.out.println("連線成功");
 			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				MemberVO memVO = new MemberVO();
 				memVO.setMem_No(rs.getString("mem_No"));
 				memVO.setMem_Id(rs.getString("mem_Id"));
@@ -224,15 +217,15 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Credate(rs.getDate("mem_Credate"));
 				memVO.setMem_Status(rs.getString("mem_Status"));
 				memVO.setMem_Photo(rs.getBytes("mem_Photo"));
-								
+
 				memberlist.add(memVO);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(pstmt!=null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -240,7 +233,7 @@ public class MemberDAO implements MemberDAO_interface{
 					e.printStackTrace();
 				}
 			}
-			if(con!=null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -249,26 +242,27 @@ public class MemberDAO implements MemberDAO_interface{
 				}
 			}
 		}
-				
+
 		return memberlist;
 	}
-	
+
 	public byte[] getPictureByte(String path) throws IOException {
-			
-			File file = new File(path);
-			FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			byte[] buffer = new byte[fis.available()];
-			int i;
-			while ((i = fis.read(buffer))!= -1) {
-				baos.write(buffer, 0, i);
-			}
-			baos.close();
-			fis.close();
+
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[fis.available()];
+		int i;
+		while ((i = fis.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		fis.close();
 		return baos.toByteArray();
-		
+
 	}
-	//Ning add
+
+	// Ning add
 	@Override
 	public MemberVO findByPrimaryKey(String mem_No) {
 		MemberVO memVO = null;
@@ -281,7 +275,7 @@ public class MemberDAO implements MemberDAO_interface{
 			pstmt = con.prepareStatement(GET_ONE_MEMBER);
 			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
-  
+
 			while (rs.next()) {
 				memVO = new MemberVO();
 				memVO.setMem_Id(rs.getString("mem_Id"));
@@ -305,8 +299,7 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_No(rs.getString("mem_No"));
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -333,8 +326,7 @@ public class MemberDAO implements MemberDAO_interface{
 		return memVO;
 	}
 
-	
-	//chiapao add for member login
+	// chiapao add for member login
 	@Override
 	public MemberVO findById(String mem_Id) {
 		// TODO Auto-generated method stub
@@ -346,12 +338,12 @@ public class MemberDAO implements MemberDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(GET_ONE_BY_ID);
 			pstmt.setString(1, mem_Id);
-			ResultSet rs= pstmt.executeQuery();
-			
-			while(rs.next()) {
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
 
 				memVO = new MemberVO();
-				
+
 				memVO.setMem_No(rs.getString("mem_No"));
 				memVO.setMem_Pw(rs.getString("mem_Pw"));
 				memVO.setMem_Name(rs.getString("mem_Name"));
@@ -369,10 +361,10 @@ public class MemberDAO implements MemberDAO_interface{
 				memVO.setMem_Bonus(rs.getInt("mem_Bonus"));
 				memVO.setMem_Credate(rs.getDate("mem_Credate"));
 				memVO.setMem_Status(rs.getString("mem_Status"));
-				memVO.setMem_Photo(rs.getBytes("mem_photo"));				
-												
+				memVO.setMem_Photo(rs.getBytes("mem_photo"));
+
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -392,15 +384,54 @@ public class MemberDAO implements MemberDAO_interface{
 				}
 			}
 		}
-		
-		
+
 		return memVO;
 	}
 
 	@Override
 	public List<MemberVO> getCouponByMem(String mem_No) {
-			
+
 		return null;
+	}
+
+	@Override
+	public void update2(String mem_No, Integer stor_point ,Connection con) {
+		
+		PreparedStatement pstmt = null;
+
+		try {
+//			con = ds.getConnection();.
+			pstmt = con.prepareStatement(UPDATE_STMT2);
+			System.out.println("修改連線成功");
+			MemberVO memVO = findByPrimaryKey(mem_No);
+			pstmt.setInt(1, memVO.getMem_Bonus()+stor_point);//原本點數加上儲值點數
+			pstmt.setString(2, memVO.getMem_No());
+			int rowCount = pstmt.executeUpdate();
+			System.out.println("修改 " + rowCount + " 筆會員的點數資料");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				System.err.print("Transaction is being ");
+				System.err.println("rolled back-由-member");
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				
+				throw new RuntimeException("rollback error occured. "
+						+ e1.getMessage());
+			}
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
 	}
 
 //	@Override
@@ -408,6 +439,5 @@ public class MemberDAO implements MemberDAO_interface{
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-	
-	
+
 }

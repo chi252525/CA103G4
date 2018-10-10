@@ -130,7 +130,12 @@
         <div class="hovereffect center" style="width: 1000px;height:333.33px;margin-bottom: 5%;">
             <img src="images/ad_03.png" class="rounded d-block img-responsive" alt="..." style="align-self: center;width:100%; ">
             <div class="overlay">
+            <c:if test="${empty errorMsgs }">
                 <h1 style="color:white;">儲值成功</h1>
+            </c:if>
+            <c:if test="${not empty errorMsgs}">
+            	<h1 style="color:white;">${errorMsgs.stor_failur }</h1>
+            </c:if>
                 <p>
                     <a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin:25%;">去點餐</a>
                 </p>
