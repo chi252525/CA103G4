@@ -12,8 +12,6 @@
 <%-- %> --%>
 
 
-
-
 <!DOCTYPE html>
 <html>
 
@@ -64,6 +62,7 @@
 </head>
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
 	
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -94,7 +93,17 @@
 						
 						<p class="card-text h4">總金額:<%= request.getAttribute("amount")%></p>
 						<p class="card-text h4 tes">備註:<br><%= request.getAttribute("ps")%></p>
-
+						
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+						<p class="card-text h4"><%= request.getAttribute("braName")%>，祝您用餐愉快！</p>
+								<div class="col">
+								</div>
+							</div>			
+						</div>
+						
 						<%-- 按鈕  --%>
 						<div class="container">
 							<div class="row">
@@ -102,6 +111,7 @@
 								</div>
 									<div class="col-1">
 									<a href="#" class="card-link">確認</a>
+									<!-- 連到哪要改一下 -->
 									</div>
 								<div class="col">
 								</div>
@@ -113,6 +123,7 @@
 			</div>
 		</div>
 	</div>
+
 
 
 
