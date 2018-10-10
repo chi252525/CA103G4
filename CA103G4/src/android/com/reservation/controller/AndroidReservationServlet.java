@@ -3,6 +3,8 @@ package android.com.reservation.controller;
 import android.com.reservation.model.*;
 import android.com.desk.model.*;
 import android.com.main.ImageUtil;
+import android.com.main.Send;
+import android.com.member.model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,13 +47,30 @@ public class AndroidReservationServlet extends HttpServlet {
 			writeText(res, gson.toJson(resList));
 		}
 		else if("add".equals(action)) {
-			String orderJson = jsonObject.get("reservation").getAsString();
-			ResVO resVO = gson.fromJson(orderJson, ResVO.class);
+			String resJson = jsonObject.get("reservation").getAsString();
+			ResVO resVO = gson.fromJson(resJson, ResVO.class);
 			String branchNo = jsonObject.get("branch_no").getAsString();
+			String branchName = jsonObject.get("branch_name").getAsString();
 			String seatStr = jsonObject.get("seatStr").getAsString();
 			String res_no = dao.addWithBranchNo(branchNo, resVO, seatStr);
 			if (!"-1".equals(res_no)) {
 				resVO = dao.findByPrimaryKey(res_no);
+				MemberDAO_interface mdao = new MemberDAO();
+				MemberVO memVO = mdao.findByPrimaryKey(resVO.getMem_no());
+				
+				// 訂位成功時發送簡訊
+				Send se = new Send();
+			 	String[] tel ={memVO.getMem_Phone()};//,"0977777777","0988888888"};
+			 	StringBuilder message = new StringBuilder()
+			 			.append("竹風堂通知您:親愛的顧客您好，您於本次訂位之資訊如下，")
+			 			.append("分店:")
+			 			.append(branchName)
+			 			.append("，時間:")
+			 			.append(resVO.getRes_timebg().toString().substring(0, 16))
+			 			.append("，人數:")
+			 			.append(resVO.getRes_people().toString());
+			 			
+			 	se.sendMessage(tel , message.toString());
 			}
 			writeText(res, gson.toJson(resVO));
 		}
