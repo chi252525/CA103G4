@@ -62,6 +62,13 @@ pageContext.setAttribute("forOut",list);
     text-align: center;
   }
 </style>
+<!-- https://www.toodoo.com/db/color.html 色碼表-->
+<style type="text/css">
+
+	.btncolor{
+		background-color: #FF7F50;
+	}
+</style>
 
 </head>
 <body bgcolor='white'>
@@ -91,7 +98,12 @@ pageContext.setAttribute("forOut",list);
 </c:forEach>
 
 <tr>
-	<td>${orderformVO.order_no}</td>
+
+	<td>
+	<button type="button" class="btn btncolor" data-toggle="modal" data-target="#Joo${orderformVO.order_no}">
+  	${orderformVO.order_no}
+	</button>
+	</td>
 	
 	<c:if test="${orderformVO.order_type == 0}">
 	<td>內用</td>		
@@ -120,6 +132,8 @@ pageContext.setAttribute("forOut",list);
 	<% count = 0; %>
 	
 	</tr>
+	
+
 </c:forEach>
 	
 </table>
@@ -130,12 +144,41 @@ pageContext.setAttribute("forOut",list);
 
 
 
+
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostFooter.jsp" flush="true"/>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+<c:forEach var="orderformVO" items="${forOut}">
+<!-- Modal -->
+	<div class="modal fade" id="Joo${orderformVO.order_no}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">選取完成的餐點</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form  METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+	      <div class="modal-body">
+	      
+	      
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary">確認出餐</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+	      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+</c:forEach>
+
 
 </body>
 
