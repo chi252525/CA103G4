@@ -6,7 +6,7 @@
 <%@ page import="com.activity.model.*"%>
 <jsp:useBean id="couSvc1" scope="page"
 	class="com.coucat.model.CoucatService" />
-<jsp:useBean id="listActs_ByCompositeQuery" scope="request"
+<jsp:useBean id="listActs_ByCompositeQuery" scope="session"
 	type="java.util.List<ActivityVO>" />
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
 html {
 	height: 100%;
 	font-family: 'PT Sans', Microsoft JhengHei, sans-serif;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 body {
@@ -58,12 +58,10 @@ body {
 
 	<div class="py-5 ">
 		<div class="row">
-			<%@ include file="pages/page1_ByCompositeQuery.file"%>
+		
 			<!-- 表格 -->
-			<div class="col-md-12 p-1">
+			<div class="col-sm-12 p-1">
 				<form>
-					<div class="row">
-						<div class="col-md-12">
 							<table class="table">
 								<thead>
 									<tr>
@@ -85,10 +83,7 @@ body {
 									</c:forEach>
 								</tbody>
 							</table>
-							<%@ include file="pages/page2_ByCompositeQuery.file"%>
-						</div>
-
-					</div>
+						
 				</form>
 			</div>
 		</div>
