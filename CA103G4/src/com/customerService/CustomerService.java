@@ -53,14 +53,14 @@ public class CustomerService {
 		allsession.remove(usersession);
 		for (Session s : allsession) {
 			if (s.isOpen()) {
-				//���H���u�����t�ΰT��
-				s.getAsyncRemote().sendText("{\"username\":\""+username+"\",\"type\":\"sysMsg\",\"message\":\" ���}�ȪA�t��!\"}");
+				//有人離線推播系統訊息
+				s.getAsyncRemote().sendText("{\"username\":\""+username+"\",\"type\":\"sysMsg\",\"message\":\" 離開客服系統!\"}");
 			}
 		}
 		
 		
-		System.out.println("SessionID: " + usersession.getId() + " userName: " + username + " : " + "IP��}: "
-				+ usersession.getRequestURI() + " ���}�F " + reason.getCloseCode().getCode());
+		System.out.println("SessionID: " + usersession.getId() + " userName: " + username + " : " + "IP位址: "
+				+ usersession.getRequestURI() + " 離開了 " + reason.getCloseCode().getCode());
 	}
 
 }
