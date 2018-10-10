@@ -1,4 +1,4 @@
-package com.orderform.model;
+package com.orderform.smsservice;
 
 import java.io.*;
 import java.net.*;

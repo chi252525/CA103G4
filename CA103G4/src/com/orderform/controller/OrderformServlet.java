@@ -21,6 +21,7 @@ import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
 import com.orderform.model.*;
+import com.orderform.smsservice.Send;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformServlet extends HttpServlet {
@@ -39,29 +40,31 @@ public class OrderformServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if ("insert".equals(action)) {
-			//接受參數
-			//訂單參數
-			if (iord != null) {
-				String brano = (String)req.getAttribute("branch_no");
-				
-				BranchService brSvc = new BranchService();
-				String brn = (brSvc.findByBranch_No(brano)).getBranch_Name();
-				req.setAttribute("braName", brn);
-				//取餐用，取得分店電話
-				String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
-				req.setAttribute("braTel", tel);
-				//取餐地址
-				String adr = (brSvc.findByBranch_No(brano)).getBranch_Addr();
-				req.setAttribute("braAdr", adr);
-				
-				req.setAttribute("ordNo", iord);
-				
-				String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-				return;
-			}
 			
+			//取餐資訊處理(使用存取訂單主鍵)(暫時失敗)
+//			if (iord != null) {
+//				String brano = (String)req.getAttribute("branch_no");
+//				
+//				BranchService brSvc = new BranchService();
+//				String brn = (brSvc.findByBranch_No(brano)).getBranch_Name();
+//				req.setAttribute("braName", brn);
+//				//取餐用，取得分店電話
+//				String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
+//				req.setAttribute("braTel", tel);
+//				//取餐地址
+//				String adr = (brSvc.findByBranch_No(brano)).getBranch_Addr();
+//				req.setAttribute("braAdr", adr);
+//				
+//				req.setAttribute("ordNo", iord);
+//				
+//				String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, res);
+//				
+//				return;
+//			}
+			//接受參數
+			//訂單參數			
 			//內用有桌號，否則空值
 			String dekno;
 			if (("0").equals((String)req.getAttribute("order_type"))) {
@@ -78,16 +81,17 @@ public class OrderformServlet extends HttpServlet {
 			//取餐用，取得分店名稱
 			BranchService brSvc = new BranchService();
 			String brn = (brSvc.findByBranch_No(brano)).getBranch_Name();
-			req.setAttribute("braName", brn);
+			req.getSession().setAttribute("braName", brn);
 			//取餐用，取得分店電話
 			String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
-			req.setAttribute("braTel", tel);
+			req.getSession().setAttribute("braTel", tel);
 			//取餐地址
 			String adr = (brSvc.findByBranch_No(brano)).getBranch_Addr();
-			req.setAttribute("braAdr", adr);
+			req.getSession().setAttribute("braAdr", adr);
 			
 			//取得訂單金額
-			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));	
+			Double orderpri = Double.parseDouble((String) req.getAttribute("amount"));
+			req.getSession().setAttribute("amount", orderpri);
 			
 			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
@@ -95,27 +99,27 @@ public class OrderformServlet extends HttpServlet {
 			if (("delivery").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 2;
 				addres = (String) req.getAttribute("deliv_addres");	
-				req.setAttribute("deliv_addres", addres);
+				req.getSession().setAttribute("deliv_addres", addres);
 			} else if(("takeaway").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 1;
 				addres = null;
-				req.setAttribute("deliv_addres", null);
+				req.getSession().setAttribute("deliv_addres", null);
 			} else {
 				ordertype = 0;
 				addres = null;
-				req.setAttribute("deliv_addres", null);
+				req.getSession().setAttribute("deliv_addres", null);
 			}
 			
 			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
 			if (req.getAttribute("card_number") != null) {
 				orderpa = 2;
-				req.setAttribute("card_number",req.getAttribute("card_number"));
+				req.getSession().setAttribute("card_number",req.getAttribute("card_number"));
 			} else {
 				orderpa = 1;
 			} //信用卡表已付款2; 現金表1未付款
-			req.setAttribute("time", req.getAttribute("time"));
-			req.setAttribute("ps", req.getAttribute("ps"));
+			req.getSession().setAttribute("time", req.getAttribute("time"));
+			req.getSession().setAttribute("ps", req.getAttribute("ps"));
 			
 			
 			//明細參數
@@ -154,7 +158,7 @@ public class OrderformServlet extends HttpServlet {
 			OrderformService ordSvc = new OrderformService();
 			orderformVO = ordSvc.addOrd(orderformVO, list);
 			System.out.println("selvet:"+orderformVO.getOrder_no());
-			req.setAttribute("ordNo",orderformVO.getOrder_no());
+			req.getSession().setAttribute("ordNo",orderformVO.getOrder_no());
 			
 			iord = (String) req.getAttribute("ordNo");
 			
@@ -168,22 +172,25 @@ public class OrderformServlet extends HttpServlet {
 			String message = null; 
 			if (ordertype == 1) {
 				message= "\t取餐資訊\n"
-						+ "訂單編號:"+req.getAttribute("ordNo")
-						+ "\n分店位址:"+req.getAttribute("braAdr")
-						+ "\n取餐時間:"+req.getAttribute("time");			
+						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
+						+ "\n分店位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n取餐時間:"+req.getSession().getAttribute("time");			
 			} else if (ordertype == 2) {
 				message= "\t取餐資訊\n"
-						+ "訂單編號:"+req.getAttribute("ordNo")
-						+ "\n取餐位址:"+req.getAttribute("braAdr")
-						+ "\n取餐時間:"+req.getAttribute("time");	
+						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
+						+ "\n取餐位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n取餐時間:"+req.getSession().getAttribute("time");	
 			}
 			
 		 	se.sendMessage(tels , message);
 
 			//準備轉交
-			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+//			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+		 	
+		 	String url = req.getContextPath() + "/front_end/orderinvoice/seeorderinvoice.jsp";
+		 	res.sendRedirect(url);
 			
 		}
 		

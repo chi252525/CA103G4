@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.orderinvoice.model.*"%>
 
-<jsp:useBean id="couponhistorySvc" scope="page" class="com.couponhistory.model.CouponhistoryService" />
+
 
 <!DOCTYPE html>
 <html>
@@ -63,36 +63,36 @@
 				<div class="card ames">
 					<div class="card-body">
 						<h1 class="card-title">取餐資訊</h1>
-						<h2 class="card-subtitle mb-2 text-muted"><%= session.getAttribute("ordNo")%></h2>
-						<p class="card-text h4">分店名稱:<%= session.getAttribute("braName")%></p>
-						<p class="card-text h4">分店位址:<%= session.getAttribute("braAdr")%></p>
-						<p class="card-text h4">取餐時間:<%= session.getAttribute("time")%></p>	
+						<h2 class="card-subtitle mb-2 text-muted"><%= request.getAttribute("ordNo")%></h2>
+						<p class="card-text h4">分店名稱:<%= request.getAttribute("braName")%></p>
+						<p class="card-text h4">分店位址:<%= request.getAttribute("braAdr")%></p>
+						<p class="card-text h4">取餐時間:<%= request.getAttribute("time")%></p>	
 						
-						<c:if test="<%= session.getAttribute(\"deliv_addres\") != null %>">
+						<c:if test="<%= request.getAttribute(\"deliv_addres\") != null %>">
 						<p class="card-text h4">外送地址:<%= request.getParameter("deliv_addres")%></p>
 						</c:if>
 
-						<c:if test="<%= session.getAttribute(\"card_number\") != null %>">						
+						<c:if test="<%= request.getAttribute(\"card_number\") != null %>">						
 						<p class="card-text h4">付款方式:信用卡</p>
-						<p class="card-text h4">信用卡末四碼:<%= session.getAttribute("card_number")%></p>
+						<p class="card-text h4">信用卡末四碼:<%= request.getAttribute("card_number")%></p>
 						</c:if>
 
-						<c:if test="<%= session.getAttribute(\"card_number\") == null && session.getAttribute(\"point\") == null%>">						
+						<c:if test="<%= request.getAttribute(\"card_number\") == null && request.getAttribute(\"point\") == null%>">						
 						<p class="card-text h4">付款方式:現金</p>
 						</c:if>
 
-						<c:if test="<%= session.getAttribute(\"point\") != null%>">						
+						<c:if test="<%= request.getAttribute(\"point\") != null%>">						
 						<p class="card-text h4">付款方式:</p>
 						</c:if>
 						
-						<p class="card-text h4">總金額:<%= session.getAttribute("amount")%></p>
-						<p class="card-text h4 tes">備註:<br><%= session.getAttribute("ps")%></p>
+						<p class="card-text h4">總金額:<%= request.getAttribute("amount")%></p>
+						<p class="card-text h4 tes">備註:<br><%= request.getAttribute("ps")%></p>
 						
 						<div class="container">
 							<div class="row">
 								<div class="col">
 								</div>
-						<p class="card-text h4"><%= session.getAttribute("braName")%>，祝您用餐愉快！</p>
+						<p class="card-text h4"><%= request.getAttribute("braName")%>，祝您用餐愉快！</p>
 								<div class="col">
 								</div>
 							</div>			
@@ -117,6 +117,10 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
 
 
 <jsp:include page="/front_end/footer.jsp" flush="true" />
