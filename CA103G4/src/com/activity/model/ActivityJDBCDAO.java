@@ -59,49 +59,58 @@ public class ActivityJDBCDAO implements ActivityDAO_interface{
 				"SELECT * FROM ACTIVITY WHERE act_Status=1 ORDER BY act_PreAddTime DESC";
 	
 	
-	@Override
-	public void insert(ActivityVO activityVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connecting to database successfully! (連線成功！)");
-			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, activityVO.getCoucat_No());
-			pstmt.setString(2, activityVO.getAct_Cat());
-			pstmt.setString(3, activityVO.getAct_Name());
-			pstmt.setBytes(4, activityVO.getAct_Carousel());
-			pstmt.setBytes(5, activityVO.getAct_Pic());
-			pstmt.setString(6, activityVO.getAct_Content());
-			pstmt.setTimestamp(7, activityVO.getAct_PreAddTime());
-			pstmt.setTimestamp(8, activityVO.getAct_PreOffTime());
-			pstmt.setTimestamp(9, activityVO.getAct_Start());
-			pstmt.setTimestamp(10, activityVO.getAct_End());
-			int rowCount =pstmt.executeUpdate();
-			System.out.println("新增 " + rowCount + " 筆資料");
-
-			// Handle any SQL errors
-		}catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+		@Override
+		public String insert(ActivityVO activityVO) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String next_act_No = null;
+			try {
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+//				System.out.println("Connecting to database successfully! (連線成功！)");
+				int cols[] = {1};
+				pstmt = con.prepareStatement(INSERT_STMT,cols);
+				pstmt.setString(1, activityVO.getCoucat_No());
+				pstmt.setString(2, activityVO.getAct_Cat());
+				pstmt.setString(3, activityVO.getAct_Name());
+				pstmt.setBytes(4, activityVO.getAct_Carousel());
+				pstmt.setBytes(5, activityVO.getAct_Pic());
+				pstmt.setString(6, activityVO.getAct_Content());
+				pstmt.setTimestamp(7, activityVO.getAct_PreAddTime());
+				pstmt.setTimestamp(8, activityVO.getAct_PreOffTime());
+				pstmt.setTimestamp(9, activityVO.getAct_Start());
+				pstmt.setTimestamp(10, activityVO.getAct_End());
+				int rowCount = pstmt.executeUpdate();
+				System.out.println("新增 " + rowCount + " 筆資料");
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					next_act_No = rs.getString(1);
+					System.out.println("自增主鍵值 = " + next_act_No );
+				} else {
+					System.out.println("未取得自增主鍵值");
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
 				}
 			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+			return next_act_No;
 		}
-	}
 	
 	@Override
 	public void update(ActivityVO activityVO) {
