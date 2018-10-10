@@ -358,8 +358,8 @@
 								        <h4>組合區</h4>
 								      </div>
 									      <ul class="task-list2" id="combination"></ul>								  		
-<!-- 									  <form method="post" id="sform" action="custommeals.do" name="form1"> -->
-									  <form method="post" id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do">
+									  <form method="post" id="sform" action="custommeals.do" name="form1">
+<%-- 									  <form method="post" id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do"> --%>
 <div class="container">
 										
 	<div class="row">

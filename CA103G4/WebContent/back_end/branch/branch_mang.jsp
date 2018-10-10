@@ -9,8 +9,7 @@
 	//List<BranchVO> list = (List<BranchVO>) request.getAttribute("list");
 	//pageContext.setAttribute("list", list);
 %>
-<!-- header -->
-<%-- <jsp:include page="/front_end/header.jsp" /> --%>
+
 <html>
 
 <head>
@@ -22,15 +21,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
     <!-- Bootsraps-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- datepicker-->
+
     <!-- <script type="text/javascript" -->
-    <!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<!--             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<!--         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    
+    
     <!-- <script -->
-    <!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
     <!-- My <css></css> for transaction page-->
@@ -39,13 +39,15 @@
 </head>
 
 <body class="shadow-lg w-100" style="background-color: antiquewhite">
+<!-- header -->
+<jsp:include page="/back_end/HeadquarterHeader.jsp" />
     <form method="get" action="branch.do">
         <div id="div_shadow" class="py-5">
 			<div class=" container">
             <div class="row">
                 <div class="col-md-12">
                     <a id="a1" href="branch_mang.jsp">
-                        <h1 class="d-flex justify-content-start">分店管理</h1>
+                        <h1 class="d-flex justify-content-start" style="color:#ac7339;">分店管理</h1>
                     </a>
                 </div>
             </div>
@@ -205,9 +207,6 @@
             </div>
         </div>
 
-        <!-- footer -->
-        <%-- 		<jsp:include page="/front_end/footer.jsp" /> --%>
-        <!--Timestampicker-->
 
         <script>
             //Ajax查全部分店資料
@@ -282,16 +281,14 @@
                     dataType: "json",
                     success: function(result) { //result 為後端送回來的資料名稱
                         console.log(result);
-                    var str ; 
                         for (i = 0; i < result.length; i++) {
 
-                            str = str +"<tr><td>" + result[i].branch_No + "</td><td>" + result[i].branch_Name +
+                            $("#tbody").append("<tr><td>" + result[i].branch_No + "</td><td>" + result[i].branch_Name +
                                 "</td><td>" + result[i].branch_City + "</td><td>" + result[i].branch_Dist +
                                 "</td><td>" + result[i].branch_Addr + "</td><td>" + result[i].branch_Tel +
                                 "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
-                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>";
+                                "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
                         }
-                        $("#tbody").html(str);
                         document.getElementById("allbranch").disabled=true;
                     },
                     error: function() {
@@ -301,12 +298,9 @@
             }
 
         </script>
-        <!-- 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" -->
-        <!-- 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
-        <!-- 			crossorigin="anonymous"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     </form>
+    <jsp:include page="/back_end/HeadquarterFooter.jsp" />
 </body>
 
 </html>
