@@ -30,7 +30,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, ?)";
 	private static final String INSERT_STMT2 = "INSERT INTO orderinvoice (invo_no,order_no,menu_no,custom_no,invo_status) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'), ?, ?, ?, 1)";
 	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no DESC";
-	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ?";
+	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice where order_no = ? and invo_status = 1";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 	private static final String GET_MEALINVOICE ="SELECT MENU_NO, CUSTOMMEALS_NO FROM ORDERINVOICE WHERE ORDER_NO=?";

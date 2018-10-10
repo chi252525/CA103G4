@@ -167,18 +167,18 @@ public class OrderformServlet extends HttpServlet {
 			String[] tels ={"0933628324"};//測試用
 //			String[] tels ={tel};//上線用
 			
-//			String message = "排程訊息測試";//測試用
-			
 			String message = null; 
 			if (ordertype == 1) {
+				//外帶
 				message= "\t取餐資訊\n"
 						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
-						+ "\n分店位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n分店地址:"+req.getSession().getAttribute("braAdr")
 						+ "\n取餐時間:"+req.getSession().getAttribute("time");			
 			} else if (ordertype == 2) {
+				//外送
 				message= "\t取餐資訊\n"
 						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
-						+ "\n取餐位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n取餐地址:"+req.getSession().getAttribute("deliv_addres")
 						+ "\n取餐時間:"+req.getSession().getAttribute("time");	
 			}
 			

@@ -35,95 +35,69 @@
 
 <style type="text/css">
  
- .ames{
-		width: 800px;
-		height: 700px;
-		background-color: #AA7700;
+   .ttp{
+		margin-top: 10%;
+	}
+
+	.amrs{
+		width: 1200px;
+		height: 60px;
+		background-color: #FFDDAA;
 		margin: auto; 
-		margin-top: 25%;
+		margin-top: 0%;
 	}
 	
-  .tes{
-  	width: 600px;
-	height: 250px;
-  }
-	
- 
-
+	.tes{
+		width: 600px;
+		height: 250px;
+	}
 
 </style>
 
 </head>
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
-	
+<%-- 背景 --%>
+<jsp:include page="/back_end/PostHeader.jsp" flush="true"/>
 	
 	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="card ames">
-					<div class="card-body">
-						<h1 class="card-title">取餐資訊</h1>
-						<h2 class="card-subtitle mb-2 text-muted"><%= request.getAttribute("ordNo")%></h2>
-						<p class="card-text h4">分店名稱:<%= request.getAttribute("braName")%></p>
-						<p class="card-text h4">分店位址:<%= request.getAttribute("braAdr")%></p>
-						<p class="card-text h4">取餐時間:<%= request.getAttribute("time")%></p>	
-						
-						<c:if test="<%= request.getAttribute(\"deliv_addres\") != null %>">
-						<p class="card-text h4">外送地址:<%= request.getParameter("deliv_addres")%></p>
-						</c:if>
-
-						<c:if test="<%= request.getAttribute(\"card_number\") != null %>">						
-						<p class="card-text h4">付款方式:信用卡</p>
-						<p class="card-text h4">信用卡末四碼:<%= request.getAttribute("card_number")%></p>
-						</c:if>
-
-						<c:if test="<%= request.getAttribute(\"card_number\") == null && request.getAttribute(\"point\") == null%>">						
-						<p class="card-text h4">付款方式:現金</p>
-						</c:if>
-
-						<c:if test="<%= request.getAttribute(\"point\") != null%>">						
-						<p class="card-text h4">付款方式:</p>
-						</c:if>
-						
-						<p class="card-text h4">總金額:<%= request.getAttribute("amount")%></p>
-						<p class="card-text h4 tes">備註:<br><%= request.getAttribute("ps")%></p>
-						
-						<div class="container">
-							<div class="row">
-								<div class="col">
-								</div>
-						<p class="card-text h4"><%= request.getAttribute("braName")%>，祝您用餐愉快！</p>
-								<div class="col">
-								</div>
-							</div>			
-						</div>
-						
-						<%-- 按鈕  --%>
-						<div class="container">
-							<div class="row">
-								<div class="col">
-								</div>
-									<div class="col-1">
-									<a href="#" class="card-link">確認</a>
-									<!-- 連到哪要改一下 -->
-									</div>
-								<div class="col">
-								</div>
-							</div>			
-						</div>
-						
-					</div>
-				</div>			
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do" name="First"  class="form-inline" role="form">
+		
+		<div class="form-row align-items-center">
+		
+			<div class="input-group-prepend" style=" margin-right:70px;">
+				 <span class="input-group-text">派送單編號:</span>
+				 <input type="text" name="deliv_no">
 			</div>
+			
+			<div class="input-group-prepend" style=" margin-right:70px;">
+			 <span class="input-group-text">員工姓名</span>
+			 <select size="1" name="emp_no" class="form-control" id="exampleSelect1">
+	 			<option  value="">
+				<c:forEach var="empVO" items="${empSvc.all}">
+				<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
+				</c:forEach>
+			</select>
+			</div>
+			
+			<div class="input-group-prepend" style=" margin-right:70px;">
+	  			<span class="input-group-text">派送單狀態:</span>
+	  			<input type="text" name="deliv_status">
+	  		</div>
+	  		
+			 <div class="input-group-prepend" style=" margin-right:30px;">
+				 <input type="hidden" name="action" value="get_By_Key"> 
+				 <input type="submit" value="開始搜尋" class="btn btn-dark" value="Submit Button">
+			 </div>
 		</div>
+	</FORM>
+	<br>
 	</div>
 
 
 
 
-
-
-<jsp:include page="/front_end/footer.jsp" flush="true" />
+<%-- 背景 --%>
+<jsp:include page="/back_end/PostFooter.jsp" flush="true"/>
 </body>
 
 </html>

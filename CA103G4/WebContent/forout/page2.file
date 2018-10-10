@@ -1,0 +1,42 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<div class="container">
+<div class="row justify-content-md-center">
+<div class="col-md-auto">
+ <ul class="pagination">
+  <%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex>=rowsPerPage){%>
+         <li class="page-item"><A href="<%=request.getContextPath()%>/forout/forOut.jsp?whichPage=1" class="page-link">至第一頁</A></li>&nbsp;
+         <li class="page-item"><A href="<%=request.getContextPath()%>/forout/forOut.jsp?whichPage=<%=whichPage-1%>" class="page-link">上一頁 </A></li>
+    <%}%>
+  
+    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+         <li class="page-item"><td><A href="<%=request.getContextPath()%>/forout/forOut.jsp?whichPage=<%=whichPage+1%>" class="page-link">下一頁 </A></li>&nbsp;
+         <li class="page-item"><td><A href="<%=request.getContextPath()%>/forout/forOut.jsp?whichPage=<%=pageNumber%>" class="page-link">至最後一頁</A></li>&nbsp;
+    <%}%>
+  <%}%>  
+ </ul>
+ 
+	<div class="form-row align-items-center">
+	<div class="input-group-prepend" style=" margin-right:70px;">
+	  <%if ( pageNumber > 1) {%>
+	    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forout/forOut.jsp"  class="form-inline" role="form">   
+	       <select size="1" name="whichPage">
+	         <%for (int i=1; i<=pageNumber; i++){%>
+	            <option value="<%=i%>">跳至第<%=i%>頁
+	         <%}%> 
+	       </select>
+	       
+	       <div class="input-group-prepend" style=" margin-right:30px;">
+	       <input type="submit" value="確定" class="btn btn-light" value="Submit Button">
+	       <input type="hidden" name="action" value="get_By_Key">  
+	       </div>
+	    </FORM>
+	  <%}%>
+	</div>
+	</div>
+  
+</div>
+</div>
+</div>
