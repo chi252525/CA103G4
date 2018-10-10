@@ -38,7 +38,6 @@ public class OrderinvoiceServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
 	
 		
 	}
