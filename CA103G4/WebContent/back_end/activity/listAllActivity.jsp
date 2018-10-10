@@ -18,6 +18,8 @@
 	}
 	
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -301,24 +303,26 @@ body {
 	</div>
 <c:if test="${openModal!=null}">
 
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 				
 			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+                <h5 class="modal-title" id="myModalLabel">查詢結果</h5>
             </div>
 			
 			<div class="modal-body">
+			<div class="container-fluid">
+			
 <!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
                <jsp:include page="listActs_ByCompositeQuery.jsp" />
 <!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
 			</div>
+			</div>
 			
 			<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary">確定</button>
             </div>
 		
 		</div>
@@ -326,7 +330,7 @@ body {
 </div>
 
         <script>
-    		 $("#basicModal").modal({show: true});
+    		 $("#exampleModalLong").modal({show: true});
         </script>
  </c:if>
 
