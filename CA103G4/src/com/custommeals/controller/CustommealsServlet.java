@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.ingredientcombination.model.IngredientCombinationVO;
+import com.ingredients.model.*;
 
 import com.menu.model.MenuVO;
 
@@ -330,9 +331,13 @@ public class CustommealsServlet extends HttpServlet{
 					
 
 					
+
 					
 					
 					
+
+
+
 
 					List<IngredientCombinationVO> list = new ArrayList<>();
 					List<IngredientsVO> ingredientsList = new ArrayList<>();
@@ -359,11 +364,13 @@ public class CustommealsServlet extends HttpServlet{
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
 
+
 					
 					
 
 					
 					
+
 
 //					System.out.println(custommealsVO.getcustom_No());
 //					System.out.println(custommealsVO.getcustom_Name());
