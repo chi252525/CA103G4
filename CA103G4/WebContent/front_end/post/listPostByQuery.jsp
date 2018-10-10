@@ -52,6 +52,11 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+<!-- Chart js -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
 <style>
 html {
@@ -103,100 +108,89 @@ body {
 		<div class="row">
 			<!-- 查詢BAR開始 -->
 			<div class="col-md-12">
+			<div class="row">
+			<!-- 查詢BAR開始 -->
+
+			<div class=" d-flex mx-2">
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
 					<div class="card-header">查詢貼文</div>
-					<div class="card-body py-1 px-2">
-						<div class="row">
-							<div class="col-12">
+					<div class="card-body py-1 px-0 ">
 
-								<div class="col-2 ml-auto">
-									<a class="btn btn-info btn-sm px-3 btn-block mt-2"
-										href="<%=request.getContextPath()%>/front_end/post/addPost.jsp">我要分享</a>
-								</div>
-							</div>
+						<div class="d-flex justify-content-end">
+							<div class="p-2 "></div>
+
+
 						</div>
-
-						<fieldset class="form-group">
-							<div class="row">
-
-
-								<!-- 搜尋年月 -->
-								<div class="col-sm-4">
-									<form METHOD="post" class="form-inline"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do">
-										<input type="month" name="bdaymonth" value="date"
-											class="form-control " required="required"> <input
-											type="hidden" name="action" value="getYear_and_Month_Post">
-										<button type="submit" class="btn btn-default">送出</button>
-									</form>
-								</div>
-								<div class="col-sm-4 my-1">
-									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-										class="form-inline">
-
-										<div class="form-group">
-											<select size="1" class="form-control" name="post_No">
-												<c:forEach var="postVO" items="${postSvc2.all}">
-													<option value="${postVO.post_No}">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}
-												</c:forEach>
-											</select>
-										</div>
-										<div class="input-group-append">
-											<button type="submit" class="btn btn-default">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-										</div>
-									</FORM>
-
-
-								</div>
-
-								<div class="col-sm-8 ">
-
-									<form METHOD="post"
-										ACTION="<%=request.getContextPath()%>/post/postServlet.do"
-										class="form-inline ">
-										<div class="col-xs-2 input-group">
-											<input class="form-control" name="keyword" type="search"
-												placeholder="搜尋關鍵字">
-										</div>
-										<div class="input-group-append">
-											<button class="btn btn-default" type="submit" name="action"
-												value="keyword">搜尋</button>
-										</div>
-
-									</form>
-
-								</div>
-
-
-
-
-
-
-								<div class="col-sm-4 my-1">
-									
-
-									<div class="btn-group float-right ">
-										<button class="btn btn-secondary btn-sm dropdown-toggle"
-											type="button" data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">排序</button>
-										<div class="dropdown-menu">
-											<form method="post" action="<%=request.getContextPath() %>/post/postServlet.do">
-											<button  type="submit" name="action" value="orderbyViews">依點閱人氣</button>
-											</form>
-											<a	href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
-										</div>
+						<div class="d-flex  ">
+							<div class="p-1">
+								<form METHOD="post" class="form-inline"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do">
+									<input type="month" name="bdaymonth" value="date"
+										class="form-control " required="required"> <input
+										type="hidden" name="action" value="getYear_and_Month_Post">
+									<button type="submit" class="btn btn-default">送出</button>
+								</form>
+							</div>
+							<div class="p-1">
+							<form METHOD="post"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+									class="form-inline ">
+									<div class="col-xs-2 input-group">
+										<input class="form-control" name="keyword" type="search"
+											placeholder="搜尋關鍵字">
+									</div>
+									<div class="input-group-append">
+										<button class="btn btn-default" type="submit" name="action"
+											value="keyword">搜尋</button>
 									</div>
 
-								</div>
+								</form>
 							</div>
+						</div>
+						<div class="d-flex  justify-content-start">
+							<div class="p-1">
+									<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+									class="form-inline">
+									<div class="form-group">
+										<select size="1" class="form-control" name="post_No">
+											<c:forEach var="postVO" items="${postSvc2.all}">
+												<option value="${postVO.post_No}">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}
+											</c:forEach>
+										</select>
+									</div>
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-default">送出</button>
+										<input type="hidden" name="action" value="getOne_For_Display">
+									</div>
+								</FORM>
 
-						</fieldset>
+							</div>
+						</div>
+						<div class="float-right ">
+							<a class="btn btn-info btn-sm"
+								href="<%=request.getContextPath()%>/protected_front/post/addPost.jsp">我要分享</a>
+							
+							
+							<a class="btn btn-info btn-sm"
+								href="<%=request.getContextPath()%>/post/postServlet.do?action=orderbyViews">依點閱人氣</a>
+
+
+						</div>
 					</div>
 				</div>
-				<!-- */查詢BAR -->
+
+
+
+			</div>
+
+
+			<div class="d-flex p-2">
+				<canvas id="myChart"
+					style="background-color: rgba(255, 255, 255, 0.45); width: 420px; height: 250px"></canvas>
+			</div>
+		</div>	
 
 
 
@@ -247,7 +241,46 @@ body {
 						</div>
 					</div>
 				</c:forEach>
+				<%
+	PostService postSvc1 = new PostService();
+	Map<Integer, Integer> map = postSvc.getCountByEva();
+	pageContext.setAttribute("map", map);
+%>
+
+
+			<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
 		
+    labels: [ <c:forEach var="message" items="${map}">'${message.key}星',</c:forEach>  ],   
+		 datasets: [{
+      backgroundColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+         'rgba(255, 206, 86, 1)',
+          'rgba(255, 206, 86, 1)'
+      ],
+      borderColor: [
+        'rgba(255,255,255,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(75, 192, 192, 1)'
+      ],
+      borderWidth: 1,
+      label: '竹風堂餐點評比',
+      data: [ <c:forEach var="message" items="${map}"> '${message.value}',</c:forEach>]
+   
+ 
+    }]
+  }
+});
+
+</script>
 
 		</div>
 			<div class="col-12">

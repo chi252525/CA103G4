@@ -1,5 +1,8 @@
 package com.custommeals.model;
 
+import java.util.List;
+
+import com.ingredients.model.IngredientsVO;
 import com.menu.model.MenuVO;
 
 public class CustommealsVO extends MenuVO  {
@@ -9,6 +12,7 @@ public class CustommealsVO extends MenuVO  {
 	private String custom_Name;
 	private Integer custom_Price;
 	private Integer custom_Quantity;
+	private List<IngredientsVO> ingredientsList;
 //	private byte[] custom_Photo;
 
 	public CustommealsVO() {
@@ -27,7 +31,14 @@ public class CustommealsVO extends MenuVO  {
 		
 	}
 
-	
+	public List<IngredientsVO> getIngredientsList() {
+		return ingredientsList;
+	}
+
+	public void setIngredientsList(List<IngredientsVO> ingredientsList) {
+		this.ingredientsList = ingredientsList;
+	}
+
 	public Integer getcustom_Quantity() {
 		return custom_Quantity;
 	}

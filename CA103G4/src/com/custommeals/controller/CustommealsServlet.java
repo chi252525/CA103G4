@@ -1,23 +1,27 @@
 package com.custommeals.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.HttpSession;
 
-import com.custommeals.model.*;
+import com.custommeals.model.CustommealsService;
+import com.custommeals.model.CustommealsVO;
 import com.ingredientcombination.model.IngredientCombinationVO;
+
+import com.menu.model.MenuVO;
+
+import com.ingredients.model.*;
+
 
 @MultipartConfig
 public class CustommealsServlet extends HttpServlet{
@@ -31,6 +35,9 @@ public class CustommealsServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
+		System.out.println("*****************CustommealsServlet*********************");
+		System.out.println("session id = "+session.getId());
 		
 		
 			if("getOne_For_Display".equals(action)) {  // 來自select_page.jsp的請求
@@ -285,7 +292,8 @@ public class CustommealsServlet extends HttpServlet{
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				
-
+				
+				
 				try {
 	//				無輸入OR長度超出範圍
 					String mem_No = req.getParameter("mem_No").trim();
@@ -318,10 +326,18 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setmem_No(mem_No);
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
+
 					
 
 					
-					List<IngredientCombinationVO> list = new ArrayList();
+					
+					
+					
+
+					List<IngredientCombinationVO> list = new ArrayList<>();
+					List<IngredientsVO> ingredientsList = new ArrayList<>();
+					IngredientsDAO_interface idao = new IngredientsDAO();
+
 					String values[] = req.getParameterValues("ingredients");
 					if (values != null) {
 						for (int i = 0; i < values.length; i++) {
@@ -329,6 +345,7 @@ public class CustommealsServlet extends HttpServlet{
 							IngredientCombinationVO ingt = new IngredientCombinationVO();
 							ingt.setIngdt_Id(values[i]);
 							list.add(ingt);
+							ingredientsList.add(idao.findByPrimaryKey(values[i]));
 						}
 					}
 	
@@ -337,14 +354,31 @@ public class CustommealsServlet extends HttpServlet{
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setIngredientsList(ingredientsList);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
+
+					
+					
+
+					
+					
+
+//					System.out.println(custommealsVO.getcustom_No());
+//					System.out.println(custommealsVO.getcustom_Name());
+//					System.out.println(custommealsVO.getcustom_Price());
+//					for(IngredientsVO ivo : ingredientsList) {
+//						System.out.println(ivo.getingdt_Id());
+//						System.out.println(ivo.getingdt_Name());
+//						System.out.println(ivo.getingdt_Price());
+//					}
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
 				} catch(Exception e) {
+					e.printStackTrace();
 					errorMsgs.add("資料新增失敗"+e.getMessage());
 					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals2.jsp");
 					failuerView.forward(req, res);

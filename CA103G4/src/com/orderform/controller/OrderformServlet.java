@@ -2,6 +2,7 @@ package com.orderform.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -24,7 +25,7 @@ import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	String iord;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -40,7 +41,27 @@ public class OrderformServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			//接受參數
 			//訂單參數
-			System.out.println("進來了!");
+			if (iord != null) {
+				String brano = (String)req.getAttribute("branch_no");
+				
+				BranchService brSvc = new BranchService();
+				String brn = (brSvc.findByBranch_No(brano)).getBranch_Name();
+				req.setAttribute("braName", brn);
+				//取餐用，取得分店電話
+				String tel = (brSvc.findByBranch_No(brano)).getBranch_Tel();
+				req.setAttribute("braTel", tel);
+				//取餐地址
+				String adr = (brSvc.findByBranch_No(brano)).getBranch_Addr();
+				req.setAttribute("braAdr", adr);
+				
+				req.setAttribute("ordNo", iord);
+				
+				String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				return;
+			}
+			
 			//內用有桌號，否則空值
 			String dekno;
 			if (("0").equals((String)req.getAttribute("order_type"))) {
@@ -135,19 +156,28 @@ public class OrderformServlet extends HttpServlet {
 			System.out.println("selvet:"+orderformVO.getOrder_no());
 			req.setAttribute("ordNo",orderformVO.getOrder_no());
 			
+			iord = (String) req.getAttribute("ordNo");
+			
 			//發送簡訊
 			Send se = new Send();
 			String[] tels ={"0933628324"};//測試用
 //			String[] tels ={tel};//上線用
 			
 //			String message = "排程訊息測試";//測試用
-			String message = "\t取餐資訊\n"
-					+ "分店名稱:"+req.getAttribute("braName")
-					+ "\n分店位址:"+req.getAttribute("braAdr")
-					+ "\n取餐時間:"+req.getAttribute("time")
-					+ "\n付款方式:"+req.getAttribute("time")
-					+ "\n總金額:"+req.getAttribute("amount");			
-
+			
+			String message = null; 
+			if (ordertype == 1) {
+				message= "\t取餐資訊\n"
+						+ "訂單編號:"+req.getAttribute("ordNo")
+						+ "\n分店位址:"+req.getAttribute("braAdr")
+						+ "\n取餐時間:"+req.getAttribute("time");			
+			} else if (ordertype == 2) {
+				message= "\t取餐資訊\n"
+						+ "訂單編號:"+req.getAttribute("ordNo")
+						+ "\n取餐位址:"+req.getAttribute("braAdr")
+						+ "\n取餐時間:"+req.getAttribute("time");	
+			}
+			
 		 	se.sendMessage(tels , message);
 
 			//準備轉交
