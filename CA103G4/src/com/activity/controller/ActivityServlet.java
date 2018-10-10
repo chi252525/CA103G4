@@ -28,8 +28,14 @@ import javax.servlet.http.Part;
 
 import com.activity.model.ActivityService;
 import com.activity.model.ActivityVO;
+import com.member.model.MemberVO;
 import com.post.model.PostService;
 import com.post.model.PostVO;
+
+import android.com.main.Send;
+
+import com.member.model.MemberDAO;
+import com.member.model.MemberDAO_interface;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 8 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -139,9 +145,7 @@ public class ActivityServlet extends HttpServlet {
 					errorMsgs.add("活動內容: 請勿空白");
 				}
 				
-				
 				java.sql.Timestamp act_PreAddTime = new Timestamp(System.currentTimeMillis()); 
-				
 			    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
 			    try {
 			    java.util.Date act_PreAddTimestr = dateFormat.parse(req.getParameter("act_PreAddTime").trim());
@@ -185,10 +189,33 @@ public class ActivityServlet extends HttpServlet {
 				actSvc.addActivity(coucat_No,act_Cat,
 						act_Name,act_Carousel,act_Pic,act_Content,act_PreAddTime,act_PreOffTime,
 						act_Start,act_End);
+				
+				// 活動新增成功時發送簡訊給所有會員
+				Send se = new Send();
+				MemberDAO_interface mdao = new MemberDAO();
+				List<MemberVO> memlist= mdao.getAll();
+				
+				for(MemberVO memVO:memlist){
+					String[] tel = {memVO.getMem_Phone()};
+					StringBuilder message = new StringBuilder()
+							.append("親愛的會員")
+							.append(memVO.getMem_Name().toString())
+							.append("，您好:")
+				 			.append("竹風堂最新活動，從")
+				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
+				 			.append("到")
+				 			.append(activityVO.getAct_End().toString().substring(0, 16))
+				 			.append(activityVO.getAct_Name().toString())
+				 			.append("別錯過囉!");
+				 			
+				 	se.sendMessage(tel , message.toString());
+				 
+				}
+			
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back_end/activity/listAllActivity.jsp";
 
-				req.setAttribute("display", "xxx");
+				req.setAttribute("display", "display");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPost.jsp
 				successView.forward(req, res);
 				
@@ -213,7 +240,6 @@ public class ActivityServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 
 				try {
-					
 					/***************************1.將輸入資料轉為Map**********************************/ 
 					//採用Map<String,String[]> getParameterMap()的方法 
 					//注意:an immutable java.util.Map 

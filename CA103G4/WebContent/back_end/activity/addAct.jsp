@@ -209,6 +209,6 @@ $(function(){
 			</script>
 
 
-	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+
 </body>
 </html>

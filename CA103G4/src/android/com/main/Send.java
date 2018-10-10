@@ -33,6 +33,7 @@ public class Send {
       if( ret_code == 0 ) {
            System.out.println("簡訊已送到簡訊中心!");
            System.out.println("MessageID="+mysms.get_message()); //取得MessageID
+           System.out.println("-----------------------------------------"); 
       } else {
            System.out.println("簡訊傳送發生錯誤!");
            System.out.print("ret_code="+ret_code+",");
