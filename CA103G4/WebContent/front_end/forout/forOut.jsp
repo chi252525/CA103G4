@@ -13,6 +13,8 @@ pageContext.setAttribute("forOut",list);
 <%! int count; %>
 
 <jsp:useBean id="ordinSvc" scope="page" class="com.orderinvoice.model.OrderinvoiceService"/>
+<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
+<jsp:useBean id="customSvc" scope="page" class="com.custommeals.model.CustommealsService"/>
 
 <%-- s分頁 --%>
 <jsp:useBean id="forOut" scope="page" type="java.util.List<OrderformVO>" />
@@ -164,16 +166,25 @@ pageContext.setAttribute("forOut",list);
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      <form  METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+	      <form  METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderinvoice/orderinvoice.do">
 	      <div class="modal-body">
 	      
+	      <c:forEach var="ordinVO" items="${ordinSvc.findByOrder_no(orderformVO.order_no)}">
+		      <div class="form-check-inline">
+		 		  <label class="form-check-label">
+			    	 <input type="checkbox" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no} ${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id}
+			      </label>
+			  </div>
+	     	 <br>
+	      </c:forEach>
 	      
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">確認出餐</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+	        <button type="submit" class="btn" style="background-color: #FF7F50">確認出餐</button>
+	        <input type="hidden" name="action" value="addForOut"/>
 	      </div>
 	      </form>
+	      	<button type="button" class="btn" data-dismiss="modal" style="background-color: #A42D00">取消</button>
 	    </div>
 	  </div>
 	</div>

@@ -128,6 +128,14 @@
     <url-pattern>/front_end/orderform/orderform.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>OrderinvoiceServlet</servlet-name>
+    <servlet-class>com.orderinvoice.controller.OrderinvoiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderinvoiceServlet</servlet-name>
+    <url-pattern>/front_end/orderinvoice/orderinvoice.do</url-pattern>
+  </servlet-mapping>  
+  <servlet>
     <servlet-name>CustommealsServlet</servlet-name>
     <servlet-class>com.custommeals.controller.CustommealsServlet</servlet-class>
   </servlet>
