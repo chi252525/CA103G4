@@ -18,8 +18,6 @@
 	}
 	
 %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +43,6 @@
 <script type="text/javascript">
 	var $JUI = $.noConflict(true);
 </script>
-
 <!--Bootstrap JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -62,22 +59,24 @@ html {
 	font-family: 'PT Sans', Microsoft JhengHei, sans-serif;
 	font-size: 20px;
 }
-
 body {
 	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
 	background-position: center;
 }
-
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
-
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
 	height: 151px; /* height:  151px; */
 }
-
 .item {
-	margin-left: 5px;
+	margin-left: 2px;
+}
+.modal-self{
+max-width:90%;
+}
+.modal-dialog-self{
+max-width:90%;
 }
 </style>
 </head>
@@ -143,8 +142,9 @@ body {
 								</div>
 								<div class="item py-1">
 									<button type="submit"
-										class=" btn btn-sm btn-success float-right mt-5 " value="">送出</button>
+										class=" btn btn-sm btn-success float-right mt-4 " value="">送出</button>
 									<input type="hidden" name="action"	value="listActs_ByCompositeQuery">
+								</div>
 								</div>
 						</FORM>
 					</div>
@@ -152,17 +152,7 @@ body {
 			</div>
 		</div>
 	</div>
-
-
-	<div class="col-12">
-		<a href="<%=request.getContextPath()%>/back_end/activity/addAct.jsp"
-			class="btn btn-primary btn-sm active float-right" role="button"
-			aria-pressed="true">新增</a>
-	</div>
-
-
-
-
+	
 
 	<script>
 			$(function() {
@@ -183,49 +173,13 @@ body {
 
 
 
-<%  int rowsPerPage = 3;  //每頁的筆數    
-    int rowNumber=0;      //總筆數
-    int pageNumber=0;     //總頁數      
-    int whichPage=1;      //第幾頁
-    int pageIndexArray[]=null;
-    int pageIndex=0; 
-%>
-
-<%  
-    rowNumber=list.size();
-    if (rowNumber%rowsPerPage !=0)
-         pageNumber=rowNumber/rowsPerPage + 1;
-    else pageNumber=rowNumber/rowsPerPage;    
-
-    pageIndexArray=new int[pageNumber]; 
-    for (int i=1 ; i<=pageIndexArray.length ; i++)
-         pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
-%>
-
-<%  try {
-       whichPage = Integer.parseInt(request.getParameter("whichPage"));
-       pageIndex=pageIndexArray[whichPage-1];
-    } catch (NumberFormatException e) { //第一次執行的時候
-       whichPage=1;
-       pageIndex=0;
-    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
-         if (pageNumber>0){
-              whichPage=pageNumber;
-              pageIndex=pageIndexArray[pageNumber-1];
-         }
-    } 
-%>
-
-<%if (pageNumber>0){%>
-  <b><font color=red
-  >page<%=whichPage%>/<%=pageNumber%></font></b>
-<%}%>
-
-<b>Total<font color=red
-><%=rowNumber%></font>筆</b>
-
 	<!-- 表格 -->
-	<div class="col-md-12 p-1">
+	<div class="col-md-12 p-1 mx-2">
+	<b>Total<font color=red
+><%=list.size()%></font>筆</b>
+<a href="<%=request.getContextPath()%>/back_end/activity/addAct.jsp"
+			class="btn btn-primary btn-sm active float-right" role="button"
+			aria-pressed="true">新增</a>
 		<ul id="myTab" class="nav nav-tabs">
 			<li><a
 				class="nav-link <%=request.getAttribute("display") == null ? "" : "active"%>"
@@ -234,9 +188,6 @@ body {
 			<li><a
 				class="nav-link  <%=request.getAttribute("display") == null ? "active" : ""%>"
 				href="#onContent" data-toggle="tab"> 已上架 </a></li>
-			<li><a
-				class="nav-link  <%=request.getAttribute("listActs_ByCompositeQuery") == null ? "" : "active"%>"
-				href="#queryContent" data-toggle="tab"> 查詢結果 </a></li>
 		</ul>
 
 		<div id="myTabContent" class="tab-content">
@@ -286,43 +237,40 @@ body {
 						<th>操作</th>
 						<th>修改</th>
 					</thead>
-
 					<c:forEach var="activityVO" items="${list}">
 						<c:if test="${activityVO.act_Status == 1}">
 							<%@ include file="Content.file"%>
 						</c:if>
 					</c:forEach>
-
-
 				</table>
 			</div>
-
 		</div>
-
-
 	</div>
 <c:if test="${openModal!=null}">
 
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
+	<div class="modal-dialog modal-dialog-self modal-self" role="document">
+		<div class="modal-content"  >
 				
 			<div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">查詢結果</h5>
             </div>
 			
 			<div class="modal-body">
+			     <!--  设置这个div的大小，超出部分显示滚动条 -->
+        <div id="selectTree" class="ztree" style="height:600px;overflow:auto; "> 
+       
 			<div class="container-fluid">
-			
 <!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
                <jsp:include page="listActs_ByCompositeQuery.jsp" />
 <!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
 			</div>
+			 </div>
 			</div>
 			
 			<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn-primary">確定</button>
+              
             </div>
 		
 		</div>
