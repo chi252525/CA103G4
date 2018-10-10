@@ -147,11 +147,11 @@ background-color:rgba(253,253,253,0.8);
 						class="img-fluid single-gallery-image img-responsive"
 						style="display: block; margin: auto;" alt="Responsive image">
 					<hr>
-					<p>餐點推薦度</p>
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
 					<c:forEach var="ingredientsVO" items="${tags}">
 					
-					<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
+					<span class="label label-default">${ingredientsVO.ingdt_Name}</span><br>
+					<p>參考售價:NT.${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Price}</p>
 					</c:forEach>
 					<p>${postVO.post_Cont}</p>
 					<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>

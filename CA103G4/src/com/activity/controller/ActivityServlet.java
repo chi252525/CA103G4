@@ -69,6 +69,7 @@ public class ActivityServlet extends HttpServlet {
 				
 					/***************************2.開始查詢資料*****************************************/
 					ActivityService actSvc =new ActivityService();
+					actSvc.updateAct_Views(act_No);
 					ActivityVO activityVO= actSvc.getOneActivity(act_No);
 					if (activityVO==null){
 						errorMsgs.add("查無資料");
@@ -82,7 +83,7 @@ public class ActivityServlet extends HttpServlet {
 					
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("activityVO", activityVO);
-					String url = "/front_end/activity/listOnepost.jsp";
+					String url = "/front_end/activity/listOneActivity.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); 
 					successView.forward(req, res);
 
@@ -478,6 +479,7 @@ public class ActivityServlet extends HttpServlet {
 					if(act_Status.equals("0")) {
 						req.setAttribute("display", "display");
 					}
+					
 					//************************第三步：新增完成，準備提交**************************
 					
 					req.setAttribute("activityVO", activityVO); 
@@ -491,6 +493,43 @@ public class ActivityServlet extends HttpServlet {
 					filureView.forward(req, res);
 				}			
 			}
+			
+			
+		if("findbyactcata".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("跳進findbyactcata");
+			try {
+				/***********************1.接收請求參數***********************************************/
+				String act_Cat= req.getParameter("act_Cat");
+//				System.out.println("act_Cat"+act_Cat);
+				if(act_Cat == null || act_Cat.trim().length() == 0) {
+					errorMsgs.add("未接受到優惠卷類別參數");
+				}
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/activity/listAllActivity.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*********************2取出資料**********************************************************/
+				ActivityService actSvc= new ActivityService();
+				List<ActivityVO> actlist=actSvc.getByAct_Cata(act_Cat);
+//				System.out.println("actlist"+actlist);
+				/*******************3.查詢完成轉被轉交**************************************************/
+				req.setAttribute("actlist", actlist);
+				String url="/front_end/activity/listAllActivity.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher filureView = req.getRequestDispatcher("/front_end/activity/listAllActivity.jsp");
+				filureView.forward(req, res);
+			}
+			
+			
+			
+			
+		}
 	}
 	
 	public String getFileNameFromPart(Part part) {

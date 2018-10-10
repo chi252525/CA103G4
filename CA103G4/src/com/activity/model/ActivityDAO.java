@@ -283,7 +283,6 @@ public class ActivityDAO implements ActivityDAO_interface {
 		List<ActivityVO> activitylist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYACTCATA);
 			pstmt.setString(1, act_Cata);
 			rs = pstmt.executeQuery();
