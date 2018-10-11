@@ -8,6 +8,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.reservation.model.ResDAO;
+import com.reservation.model.ResVO;
+
+
+
 
 public class DeskDAO implements DeskDAO_interface{
 	
@@ -48,7 +53,6 @@ public class DeskDAO implements DeskDAO_interface{
 			pstmt.executeUpdate();
 			
 			System.out.println("新增成功");
-			
 			
 	
 		}catch(SQLException se) {
@@ -93,12 +97,12 @@ public class DeskDAO implements DeskDAO_interface{
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
+			
 	
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
+			
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -228,6 +232,76 @@ public class DeskDAO implements DeskDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void insertAutoGK(DeskVO deskVO, ResVO resVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			con.setAutoCommit(false);
+			String [] cols = {"DEK_NO"};
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
+			
+			pstmt.setString(1, deskVO.getBranch_no());
+			pstmt.setString(2, deskVO.getDek_id());
+			pstmt.setInt(3, deskVO.getDek_set());
+			pstmt.setInt(4, deskVO.getDek_status());
+			pstmt.executeUpdate();
+			
+			System.out.println("新增成功");
+			String pk_desk_no = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				pk_desk_no=rs.getString(1);
+			}else {
+				System.out.println("未取得自增主鍵");
+			}
+			
+			rs.close();
+			
+			resVO.setDek_no(pk_desk_no);
+			
+			ResDAO resDao = new ResDAO();
+			resDao.insert2(resVO, con);
+			
+			con.commit();
+			con.setAutoCommit(true);
+			
+	
+		}catch(SQLException xe) {
+			if(con != null) {
+				try {
+					System.err.println("Transaction is begin");
+					System.err.println("rolled back from DeskDAO insertAutoGK");
+					con.rollback();
+				} catch (SQLException e) {
+					throw new RuntimeException("A datsbase error occured."
+							+ e.getMessage());
+				}
+			throw new RuntimeException("A database error occured. "
+					+ xe.getMessage());
+			}
+		}finally{
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 	
 }

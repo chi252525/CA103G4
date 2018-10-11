@@ -8,8 +8,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import java.sql.*;
-//import java.text.Format;
-//import java.text.SimpleDateFormat;
+
 
 
 public class ResDAO implements ResDAO_interface{
@@ -25,7 +24,7 @@ public class ResDAO implements ResDAO_interface{
 	}
 	
 	private static final String INSERT_STMT = 
-		"Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS) VALUES ('R'||LPAD(to_char(reservation_seq.NEXTVAL), 9, '0'),?,?,?,?,?,?)";
+		"Insert into RESERVATION (RES_NO,MEM_NO,DEK_NO,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE) VALUES ('R'||LPAD(to_char(reservation_seq.NEXTVAL), 9, '0'),?,?,?,?,?)";
 	private static final String GET_ALL_STMT = 
 		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION order by RES_NO";
 	private static final String GET_ONE_STMT = 
@@ -50,7 +49,6 @@ public class ResDAO implements ResDAO_interface{
 			pstmt.setTimestamp(3, resVO.getRes_timebg());
 			pstmt.setTimestamp(4, resVO.getRes_timefn());
 			pstmt.setInt(5, resVO.getRes_people());      	
-			pstmt.setInt(6,resVO.getRes_status());
 			
 			
 			
@@ -58,7 +56,7 @@ public class ResDAO implements ResDAO_interface{
 			
 			System.out.println("新增成功");
 			
-//			pstmt.clearParameters();
+
 	
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -103,11 +101,11 @@ public class ResDAO implements ResDAO_interface{
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
+			
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -141,11 +139,11 @@ public class ResDAO implements ResDAO_interface{
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
+		
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -280,6 +278,52 @@ public class ResDAO implements ResDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void insert2(ResVO resVO, Connection con) {
+		
+		PreparedStatement pstmt = null;
+		
+		try {		
+			pstmt = con.prepareStatement(INSERT_STMT);
+			System.out.println("從上一個過來的連線:成功");
+			pstmt.setString(1, resVO.getMem_no());
+			pstmt.setString(2, resVO.getDek_no());
+			pstmt.setTimestamp(3, resVO.getRes_timebg());
+			pstmt.setTimestamp(4, resVO.getRes_timefn());
+			pstmt.setInt(5, resVO.getRes_people());      				
+			pstmt.executeUpdate();
+			
+			System.out.println("新增成功");
+			
+
+	
+		}catch(SQLException se) {
+			
+			try {
+				System.err.println("Transaction is begin");
+				System.err.println("rolled back from ResDAO Insert2");
+				con.rollback();
+			} catch (SQLException e) {
+				throw new RuntimeException("A datsbase error occured."
+						+ se.getMessage());
+
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			
+			
+		}finally{
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}			
+		}
+		
 	}
 	
 }

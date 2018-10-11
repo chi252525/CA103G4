@@ -340,6 +340,12 @@ public class ResJDBCDAO implements ResDAO_interface{
 		
 		}
 	}
+
+	@Override
+	public void insert2(ResVO resVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 
