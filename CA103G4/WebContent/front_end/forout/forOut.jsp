@@ -10,8 +10,6 @@ List<OrderformVO> list = orderfoemSvc.getForOut();
 pageContext.setAttribute("forOut",list);
 %>
 
-<%! int count; %>
-
 <jsp:useBean id="ordinSvc" scope="page" class="com.orderinvoice.model.OrderinvoiceService"/>
 <jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
 <jsp:useBean id="customSvc" scope="page" class="com.custommeals.model.CustommealsService"/>
@@ -95,10 +93,6 @@ pageContext.setAttribute("forOut",list);
 <%-- 員工編號，一開始為下拉式選單和按鈕，點擊後派送單狀態會變為2，成為按鈕，選擇後選單和按鈕會消失 --%><%-- s分頁 --%>
 <c:forEach var="orderformVO" items="${forOut}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
-<c:forEach var="ordinVO" items="${ordinSvc.findByOrder_no(orderformVO.order_no)}">
-<%count++;%>
-</c:forEach>
-
 <tr>
 
 	<td>
@@ -127,11 +121,10 @@ pageContext.setAttribute("forOut",list);
 	<td>${orderformVO.dek_no}</td>
 	</c:if>
 
-	<td>
-	剩餘出餐數量:<%= count %>
-	</td>	
 	
-	<% count = 0; %>
+	<td>
+	剩餘出餐數量:${ordinSvc.findByOrder_no(orderformVO.order_no).menu_nu}
+	</td>	
 	
 	</tr>
 	

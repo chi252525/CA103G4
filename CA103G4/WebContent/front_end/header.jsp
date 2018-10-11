@@ -18,7 +18,19 @@
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <style type="text/css">
-/*navbar*/
+/*header*/
+.dropdown-menu li:hover .sub-menu {
+	visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+
+.nav-link {
+	font-size: 20px;
+}
+
 .lnr-user {
 	color: #FFF;
 	font-size: 20px;
@@ -33,12 +45,13 @@
 .lnr-cart {
 	color: #FFF;
 	font-size: 23px;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 
 .imgicon {
-	margin-top: 5px;
+	margin-top: 10px;
 }
+
 
 .bg-black {
 	background-color: #000000;
@@ -142,7 +155,7 @@ body {
 								
 							<!-- 有登入狀態才會有這裏的會員相關資料 -->
 								<div class="dropdown-menu"
-									aria-labelledby="navbarDropdownMenuLink" style="display: ${(memVO.mem_Name == null )? 'none': ''} ">
+									aria-labelledby="navbarDropdownMenuLink" style="visibility: ${(memVO.mem_Name == null )? 'hidden': ''} ">
 							<!-- 以下可以自己新增相關會員附屬功能 -->
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/memberinfo.jsp">會員基本資料</a>
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/storedrecord/addNewtransaction.jsp">儲值點數</a>
