@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mailservice.MailService;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 import com.storedrecord.model.StoredrecordService;
@@ -185,14 +186,14 @@ public class StoredrecordServlet extends HttpServlet {
 
 				// ================改完，轉交===================
 				req.setAttribute("storedrecordVO", srVo);
-				req.getRequestDispatcher("front-end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
+				req.getRequestDispatcher("front_end/storedrecord/listOneStoredrecord.jsp").forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				req.getRequestDispatcher("/front_end/storedrecord/update_storedrecord_input.jsp").forward(req, res);
 			}
 		}
-		if ("insert".equals(action)) {
+		if ("insertWithMemUpdate".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -275,10 +276,16 @@ public class StoredrecordServlet extends HttpServlet {
 //				}
 				// =============開始儲值(儲值成功)====================
 				StoredrecordService stsvc = new StoredrecordService();
-				stor_Status = 1;
-				stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);
+				stor_Status = 0;
+				StoredrecordVO storVO = stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);// 先新增一筆狀態為失敗的儲值紀錄
+
+				stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
-				req.getRequestDispatcher(req.getContextPath() + "/front_end/menu/listAllMenu4.jsp").forward(req, res);
+				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+				String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "+stor_Point*1.18;
+				
+				new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);
+				req.getRequestDispatcher("/front_end/storedrecord/transactionScess.jsp").forward(req, res);
 				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
 				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");
@@ -335,7 +342,7 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 
 				// ==========forward result===============
-				session.setAttribute("list", list);
+				session.setAttribute("strlist", list);
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
 				else if ("backEnd".equals(location))
@@ -373,7 +380,7 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 
 				// ==========forward result===============
-				session.setAttribute("list", list);
+				session.setAttribute("strlist", list);
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
 				else if ("backEnd".equals(location))
@@ -381,25 +388,27 @@ public class StoredrecordServlet extends HttpServlet {
 			} catch (Exception e) {
 
 				errorMsgs.add("無法取得紀錄,請聯絡管理員");
+				req.setAttribute("stor_Status", "儲值失敗");
 				if ("frontEnd".equals(location))
 					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
 				else if ("backEnd".equals(location))
 					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
 			}
 		}
-		
+
 		if ("findByMon_Year_memNo".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				MemberVO memVO =  (MemberVO) session.getAttribute("memVO");
+				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
 				String mem_No = memVO.getMem_No();
 				String period = req.getParameter("monthAndYear");
 				String year = period.split("/")[1];
 				String month = period.split("/")[0];
 				// =========query=========================
 				StoredrecordService srvc = new StoredrecordService();
-				List<StoredrecordVO> list = srvc.findByMon_Year_memNo(Integer.parseInt(month), Integer.parseInt(year), mem_No);
+				List<StoredrecordVO> list = srvc.findByMon_Year_memNo(Integer.parseInt(month), Integer.parseInt(year),
+						mem_No);
 				if (list.size() == 0) {
 					errorMsgs.add("您目前沒有任何儲值歷史紀錄");
 					// req.setAttribute("list", list);// 含有輸入格式錯誤的empVO物件,也存入req

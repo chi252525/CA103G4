@@ -25,8 +25,10 @@ public class ActivityService {
 		activityVO.setAct_PreOffTime(act_PreOffTime);
 		activityVO.setAct_Start(act_Start);
 		activityVO.setAct_End(act_End);
-
-		dao.insert(activityVO);
+		//為了讓排程器抓到資料 故設定
+		String next_act_No=dao.insert(activityVO);
+		activityVO.setAct_No(next_act_No);
+		activityVO.setAct_Status(0);
 		return activityVO;
 		
 	}

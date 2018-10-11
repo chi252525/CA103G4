@@ -5,7 +5,7 @@
 <%@ page import="com.storedrecord.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	List<StoredrecordVO> list = (List<StoredrecordVO>) session.getAttribute("list");
+	List<StoredrecordVO> list = (List<StoredrecordVO>) session.getAttribute("strlist");
 	System.out.println("strlist=" + list);
 	session.setAttribute("strlist", list);
 %>

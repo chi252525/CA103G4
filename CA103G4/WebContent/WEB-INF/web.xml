@@ -128,6 +128,14 @@
     <url-pattern>/front_end/orderform/orderform.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>OrderinvoiceServlet</servlet-name>
+    <servlet-class>com.orderinvoice.controller.OrderinvoiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderinvoiceServlet</servlet-name>
+    <url-pattern>/front_end/orderinvoice/orderinvoice.do</url-pattern>
+  </servlet-mapping>  
+  <servlet>
     <servlet-name>CustommealsServlet</servlet-name>
     <servlet-class>com.custommeals.controller.CustommealsServlet</servlet-class>
   </servlet>
@@ -204,6 +212,16 @@
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/post/postServlet.do</url-pattern>
   </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>BranchServlet</servlet-name>
+		<servlet-class>com.branch.controller.BranchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BranchServlet</servlet-name>
+		<url-pattern>/branch.do</url-pattern>
+	</servlet-mapping>
+  
   <servlet>
     <servlet-name>PostShowImage</servlet-name>
     <servlet-class>com.post.controller.PostShowImage</servlet-class>
@@ -400,4 +418,18 @@
 		<servlet-name>EmpauthServlet</servlet-name>
 		<url-pattern>/empauth.do</url-pattern>
 	</servlet-mapping>	
+	
+		<servlet>
+		<servlet-name>ScheduleServlet</servlet-name>
+		<servlet-class>com.activity.controller.ScheduleServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ScheduleServlet</servlet-name>
+		<url-pattern>/schedule.do</url-pattern>
+	</servlet-mapping>	
+	
+	
+
+	
 </web-app>

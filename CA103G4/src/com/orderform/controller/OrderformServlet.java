@@ -19,14 +19,17 @@ import javax.websocket.Session;
 import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
+import com.menu.model.MenuService;
 import com.menu.model.MenuVO;
 import com.orderform.model.*;
 import com.orderform.smsservice.Send;
+import com.orderinvoice.model.OrderinvoiceService;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderformServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String iord;
+	int all;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -34,7 +37,7 @@ public class OrderformServlet extends HttpServlet {
 	}
 
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "null" })
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -128,20 +131,26 @@ public class OrderformServlet extends HttpServlet {
 			Vector<MenuVO> inv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			String[] oinlist = new String[inv.size()];
+			String[] qinList = new String[inv.size()];
 			
 			for (int z = 0 ; z < inv.size() ; z++){
                 String eat = String.valueOf(inv.get(z).getMenu_No());
                 oinlist[z] = eat;
+                int quantity = inv.get(z).getMenu_quantity();
+                qinList[z] = String.valueOf(quantity);
            }
 			
 			OrderinvoiceVO oin = null;
+
 			
 			for (int i = 0; i < oinlist.length; i++) {
 				oin = new OrderinvoiceVO();
 				if (("M").equals(String.valueOf(oinlist[i].charAt(0)))) {
 					oin.setMenu_no(oinlist[i]);
+					oin.setMenu_nu(qinList[i]);					
 				} else {
 					oin.setCustom_no(oinlist[i]);
+					oin.setCustom_nu(qinList[i]);
 				}
 				list.add(oin);
 			}
@@ -161,24 +170,24 @@ public class OrderformServlet extends HttpServlet {
 			req.getSession().setAttribute("ordNo",orderformVO.getOrder_no());
 			
 			iord = (String) req.getAttribute("ordNo");
-			
+
 			//發送簡訊
 			Send se = new Send();
 			String[] tels ={"0933628324"};//測試用
 //			String[] tels ={tel};//上線用
 			
-//			String message = "排程訊息測試";//測試用
-			
 			String message = null; 
 			if (ordertype == 1) {
+				//外帶
 				message= "\t取餐資訊\n"
 						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
-						+ "\n分店位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n分店地址:"+req.getSession().getAttribute("braAdr")
 						+ "\n取餐時間:"+req.getSession().getAttribute("time");			
 			} else if (ordertype == 2) {
+				//外送
 				message= "\t取餐資訊\n"
 						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
-						+ "\n取餐位址:"+req.getSession().getAttribute("braAdr")
+						+ "\n取餐地址:"+req.getSession().getAttribute("deliv_addres")
 						+ "\n取餐時間:"+req.getSession().getAttribute("time");	
 			}
 			

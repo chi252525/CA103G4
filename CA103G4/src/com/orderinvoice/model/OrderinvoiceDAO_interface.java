@@ -14,5 +14,9 @@ public interface OrderinvoiceDAO_interface {
 
 	public List<OrderinvoiceVO> getAll();
 	
-	 public void insert2 (OrderinvoiceVO orderinvoiceVO , java.sql.Connection con);
+	public void insert2 (OrderinvoiceVO orderinvoiceVO , java.sql.Connection con);
+	
+	public void updateNu(OrderinvoiceVO orderinvoiceVO);
+	 
+	 
 }

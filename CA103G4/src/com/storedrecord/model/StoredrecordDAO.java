@@ -7,6 +7,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.member.model.MemberDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,14 +37,16 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 	private static final String DELETE_STMT = "DELETE FROM STOREDRECORD WHERE stor_No = ?";
 
 	@Override
-	public void insert(StoredrecordVO STOREDRECORD) {
+	public String insert(StoredrecordVO STOREDRECORD) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String Next_storno = null;//要return的自增主建
 		try {
 			con = ds.getConnection();
-
+			
 			System.out.println("Connecting to database successfully! (連線成功！)");
-			pstmt = con.prepareStatement(INSERT_STMT);
+			String cols[] = {"STOR_NO"};
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 //			pstmt.setString(1, STOREDRECORD.getStor_No());
 			pstmt.setString(1, STOREDRECORD.getMem_No());
 			pstmt.setTimestamp(2, STOREDRECORD.getStor_Date());
@@ -51,7 +55,16 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 			pstmt.setInt(5, STOREDRECORD.getStor_Status());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
-
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				Next_storno = rs.getString(1);
+				System.out.println("自增主鍵值= " + Next_storno +"(剛新增成功的儲值單號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -72,30 +85,57 @@ public class StoredrecordDAO implements StoredrecordDAO_interface {
 				}
 			}
 		}
+		return Next_storno;
 	}
 
+	
 	@Override
 	public void update(StoredrecordVO STOREDRECORD) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
+			
 			con = ds.getConnection();
+			
+			con.setAutoCommit(false);
+			
+			
 			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, STOREDRECORD.getMem_No());
 			pstmt.setTimestamp(2, STOREDRECORD.getStor_Date());
 			pstmt.setInt(3, STOREDRECORD.getStor_Point());
 			pstmt.setInt(4, STOREDRECORD.getDrew_Point());
-			pstmt.setInt(5, STOREDRECORD.getStor_Status());
+			STOREDRECORD.setStor_Status(1);//剛狀態設為1:成功
+			pstmt.setInt(5, STOREDRECORD.getStor_Status());//1代表儲值狀態成功
 			pstmt.setString(6, STOREDRECORD.getStor_No());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("修改" + rowCount + " 筆資料");
-
+			
+			MemberDAO memdao = new MemberDAO();
+			memdao.update2(STOREDRECORD.getMem_No(), STOREDRECORD.getStor_Point(), con);
+			
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("修改儲值編號" + STOREDRECORD.getStor_No() + "給" + STOREDRECORD.getMem_No()+STOREDRECORD.getStor_Point()
+			+ "點");
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
+			
 		} finally {
 			if (pstmt != null) {
 				try {

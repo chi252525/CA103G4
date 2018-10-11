@@ -43,4 +43,8 @@ public class OrderformService {
 	}
 	
 
+	public List<OrderformVO> getForOut() {
+		return dao.forOut();
+	}
+	
 }
