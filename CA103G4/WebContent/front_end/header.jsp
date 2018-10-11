@@ -162,7 +162,7 @@ body {
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/storedrecord/transaction_query.jsp">儲值紀錄</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/orderform/listOneOrderformByMemNo3.jsp">訂單查詢</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/post/listPostByMember.jsp">我的貼文</a>
-									<a class="dropdown-item" href="#">我的優惠卷</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/couphistory/listbymem.jsp">我的優惠卷</a>
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/logout.do" >登出</a>
 								</div>
 							</li>
