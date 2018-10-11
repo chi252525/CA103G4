@@ -92,26 +92,12 @@ public class BranchServlet extends HttpServlet {
 		if ("Update".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
-
 			req.setAttribute("error", errorMsgs);
 			try {
 				String branch_No = req.getParameter("branch_No");
 
-				String regexStor = "^\\d{4}$";
-				if (branch_No == null || branch_No.trim().length() == 0) {
-					errorMsgs.add("請輸入分店編號");
-				} else if (!branch_No.matches(regexStor)) {
-					errorMsgs.add("分店編號必須是4個數字");
-				}
-
 				String branch_City = req.getParameter("branch_City");
-				String regexForZhAndEn = "^[(\\u4e00-\\u9fa5)(a-zA-Z)]$";
-
-				if (branch_City == null || branch_City.trim().length() == 0) {
-					errorMsgs.add("請輸入城市");
-				} else if (!branch_No.matches(regexForZhAndEn)) {
-					errorMsgs.add("分店名稱必須是中英文");
-				}
+				String regexForZhAndEn = "^[(\u4e00-\u9fa5)(_a-zA-Z)(0-9)]+$";
 
 				String branch_Name = req.getParameter("branch_Name").trim();
 
@@ -124,18 +110,12 @@ public class BranchServlet extends HttpServlet {
 
 				String branch_Dist = req.getParameter("branch_Dist");
 
-				if (branch_Name == null || branch_Name.trim().length() == 0) {
-					errorMsgs.add("請輸入分店區域");
-				} else if (!branch_Name.matches(regexForZhAndEn)) {
-
-					errorMsgs.add("分店名稱必須是中英文");
-				}
 
 				String branch_Addr = req.getParameter("branch_Addr");
 
-				if (branch_Name == null || branch_Name.length() == 0) {
+				if (branch_Addr == null || branch_Addr.length() == 0) {
 					errorMsgs.add("請輸入地址");
-				} else if (!branch_Name.matches(regexForZhAndEn)) {
+				} else if (!branch_Addr.matches(regexForZhAndEn)) {
 
 					errorMsgs.add("地址必須是中英文");
 				}
@@ -144,13 +124,10 @@ public class BranchServlet extends HttpServlet {
 
 				branch_Tel = req.getParameter("branch_Tel").trim();
 				String regexForTel = "^\\d{9,10}$";
-				if (branch_Tel.length() != 9 || branch_Tel.length() != 10) {
-
-					branch_Tel = "";
-					errorMsgs.add("電話位數需要9-10位數字");
+				if (branch_Tel == null || branch_Tel.length()==0) {
+					errorMsgs.add("尚未輸入電話");
 				} else if (!branch_Tel.matches(regexForTel)) {
-					branch_Tel = "";
-					errorMsgs.add("請輸入數字");
+					errorMsgs.add("請輸入數字且長度須為9-10個數字");
 				}
 
 				String branch_Pos = req.getParameter("branch_Pos");
@@ -158,16 +135,16 @@ public class BranchServlet extends HttpServlet {
 				String branch_Lan = req.getParameter("branch_Lan");
 				String regexLatLat = "^\\d++$";
 				if (branch_Lan.length() == 0 || branch_Lan == null) {
-					errorMsgs.add("請輸入經緯度");
+					errorMsgs.add("請輸入經度");
 				} else if (branch_Lan.matches(regexLatLat)) {
-					errorMsgs.add("經緯度需為數字");
+					errorMsgs.add("經度需為數字");
 				}
 
 				String branch_Lat = req.getParameter("branch_Lat");
 				if (branch_Lat.length() == 0 || branch_Lat == null) {
 					errorMsgs.add("請輸入經緯度");
 				} else if (branch_Lat.matches(regexLatLat)) {
-					errorMsgs.add("經緯度需為數字");
+					errorMsgs.add("緯度需為數字");
 				}
 
 				String branch_Time = req.getParameter("branch_Time");
@@ -176,17 +153,18 @@ public class BranchServlet extends HttpServlet {
 				}
 				Double branch_Del = null;
 				try {
-					Double.parseDouble(req.getParameter("branch_Del"));
+					branch_Del=Double.parseDouble(req.getParameter("branch_Del"));
 
 				} catch (NullPointerException e) {
 					errorMsgs.add("請輸入外送範圍");
 				} catch (NumberFormatException e) {
-					errorMsgs.add("經緯度需為數字");
+					errorMsgs.add("外送範圍需為數字(單位為km)");
 				}
 
 				Integer branch_Tdesk = null;
+				
 				try {
-					branch_Tdesk = Integer.valueOf(req.getParameter("branch_Tdesk"));
+					branch_Tdesk = Integer.parseInt(req.getParameter("branch_Tdesk"));
 					if (branch_Tdesk == 0 || branch_Tdesk == null) {
 						errorMsgs.add("請輸入桌數");
 					}
@@ -194,23 +172,35 @@ public class BranchServlet extends HttpServlet {
 					errorMsgs.add("桌數需為數字");
 				}
 
-				BranchVO brVO = new BranchVO();
-				// brVO.setBranch_No(branch_No);
-				brVO.setBranch_City(branch_City);
-				brVO.setBranch_Name(branch_Name);
-				brVO.setBranch_Dist(branch_Dist);
-				brVO.setBranch_Addr(branch_Addr);
-				brVO.setBranch_Pos(branch_Pos);
-				brVO.setBranch_Lan(branch_Lan);
-				brVO.setBranch_Lat(branch_Lat);
-				brVO.setBranch_Time(branch_Time);
-				brVO.setBranch_Del(branch_Del);
-				brVO.setBranch_Tel(branch_Tel);
-				brVO.setBranch_Tdesk(branch_Tdesk);
+				BranchVO updateBrVO = new BranchVO();
+				updateBrVO.setBranch_No(branch_No);
+				System.out.println("branch_No"+branch_No);
+				updateBrVO.setBranch_City(branch_City);
+				System.out.println("branch_City="+branch_City);
+				updateBrVO.setBranch_Name(branch_Name);
+				System.out.println("branch_Name="+branch_Name);
+				updateBrVO.setBranch_Dist(branch_Dist);
+				System.out.println("branch_Dist="+branch_Dist);
+				updateBrVO.setBranch_Addr(branch_Addr);
+				System.out.println("branch_Addr="+branch_Addr);
+				updateBrVO.setBranch_Pos(branch_Pos);
+				System.out.println("branch_Pos="+branch_Pos);
+				updateBrVO.setBranch_Lan(branch_Lan);
+				System.out.println("branch_Lan="+branch_Lan);
+				updateBrVO.setBranch_Lat(branch_Lat);
+				System.out.println("branch_Lat="+branch_Lat);
+				updateBrVO.setBranch_Time(branch_Time);
+				System.out.println("branch_Time="+branch_Time);
+				updateBrVO.setBranch_Del(branch_Del);
+				System.out.println("branch_Del="+branch_Del);
+				updateBrVO.setBranch_Tel(branch_Tel);
+				System.out.println("branch_Tel="+branch_Tel);
+				updateBrVO.setBranch_Tdesk(branch_Tdesk);
+				System.out.println("branch_Tdesk="+branch_Tdesk);
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("BranchVO", brVO);// save error object
-					req.getRequestDispatcher("/back_end/branch/update_branch_input.jsp").forward(req, res);
+					req.setAttribute("updateBrVO", updateBrVO);// save error object
+					req.getRequestDispatcher("/back_end/branch/updatebranch.jsp").forward(req, res);
 					return;// 有錯誤,返回
 				}
 
@@ -220,12 +210,12 @@ public class BranchServlet extends HttpServlet {
 						branch_Pos, branch_Lan, branch_Lat, branch_Time, branch_Del, branch_Tel, branch_Tdesk);
 
 				// ================改完，轉交===================
-				req.setAttribute("BranchVO", brVO2);
-				req.getRequestDispatcher("front-end/branch/branch_mang.jsp").forward(req, res);
+//				req.setAttribute("BranchVO", brVO2);
+				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
+				req.getRequestDispatcher("/back_end/branch/updatebranch.jsp").forward(req, res);
 			}
 		}
 		
