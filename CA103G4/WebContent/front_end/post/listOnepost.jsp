@@ -154,12 +154,12 @@ body {
 					
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
 					<c:forEach var="ingredientsVO" items="${tags}">
-
-						<span class="label label-default">${ingredientsVO.ingdt_Name}</span>
-						<br>
+		<span class="badge badge-pill badge-info"><b>${ingredientsVO.ingdt_Name}</b></span>&nbsp;
+				
 						
 			
 					</c:forEach>
+					<br>
 					<p>參考售價:NT.${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Price}</p>
 				
 					<p>${postVO.post_Cont}</p>

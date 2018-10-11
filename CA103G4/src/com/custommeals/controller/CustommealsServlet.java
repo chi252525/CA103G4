@@ -420,7 +420,7 @@ public class CustommealsServlet extends HttpServlet{
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				System.out.println("insert_byPosted");
-				try {
+//				try {
 					//取會員編號
 					String mem_No = req.getParameter("mem_No").trim();
 					if(mem_No == null || mem_No.length() == 0) {
@@ -449,8 +449,8 @@ public class CustommealsServlet extends HttpServlet{
 					List<IngredientsVO> ingredientsList_byPost =idao.findIngtByCustomNo(custom_No);
 					//new一個新的食材搭配VO去新增
 					List<IngredientCombinationVO> ingtCombineList_new = new LinkedList<IngredientCombinationVO>();
-					IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
 					for(IngredientsVO ingtVO_byPost:ingredientsList_byPost) {
+						IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
 						ingtVO_new.setIngdt_Id(ingtVO_byPost.getingdt_Id());
 						ingtCombineList_new.add(ingtVO_new);
 					}
@@ -480,12 +480,12 @@ public class CustommealsServlet extends HttpServlet{
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
-				} catch(Exception e) {
-					e.printStackTrace();
-					errorMsgs.add("資料新增失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
-					failuerView.forward(req, res);
-				}
+//				} catch(Exception e) {
+//					e.printStackTrace();
+//					errorMsgs.add("資料新增失敗"+e.getMessage());
+//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+//					failuerView.forward(req, res);
+//				}
 			}
 			
 			
