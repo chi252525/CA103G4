@@ -282,8 +282,9 @@ public class StoredrecordServlet extends HttpServlet {
 				stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
 				// ================改完，轉交===================
 				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-				String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "+stor_Point*1.18;
-				
+				String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "
+						+ stor_Point * 1.18;
+
 				new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);
 				req.getRequestDispatcher("/front_end/storedrecord/transactionScess.jsp").forward(req, res);
 				// =====================其他可能錯誤(儲值失敗)=========================
@@ -435,5 +436,32 @@ public class StoredrecordServlet extends HttpServlet {
 					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
 			}
 		}
+
+//		==================查點擊的儲值紀錄====================
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+
+			req.setAttribute("error", errorMsgs);
+			try {
+
+				// 查點擊的儲值紀錄
+				StoredrecordService stsvc = new StoredrecordService();
+				List<StoredrecordVO> list = stsvc.getAll();
+				// ==========forward result===============
+				req.setAttribute("strlist", list);
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_result.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_result.jsp").forward(req, res);
+				
+			} catch (Exception e) {
+				errorMsgs.add("無法取得紀錄,請聯絡管理員");
+				if ("frontEnd".equals(location))
+					req.getRequestDispatcher("/front_end/storedrecord/transaction_query.jsp").forward(req, res);
+				else if ("backEnd".equals(location))
+					req.getRequestDispatcher("/back_end/storedrecord/transaction_mang.jsp").forward(req, res);
+			}
+		}
+
 	}
 }

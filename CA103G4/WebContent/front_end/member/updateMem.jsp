@@ -99,11 +99,11 @@
             <td class="td3"><label for="mem_Readdr" class="col-form-label">地址</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Readdr" name="mem_Readdr" value="<%=(memVO.getMem_Readdr()==null)? "":memVO.getMem_Readdr()%>" ></td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Mail" class="col-form-label">信箱</label></td><td class="td2" ><input type="email" class="form-control-sm" id="mem_Mail" name="mem_Mail" value="<%=memVO.getMem_Mail()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Mail" class="col-form-label">信箱</label></td><td class="td2" ><input type="email" class="form-control-sm" id="mem_Mail" name="mem_Mail" value="<%=memVO.getMem_Mail()%>" ></td>
             <td class="td3"><label for="mem_Cardnum" class="col-form-label">信用卡</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Cardnum" name="mem_Cardnum" value="<%=(memVO.getMem_Cardnum()==null)? "":memVO.getMem_Cardnum()%>" ></td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Phone" class="col-form-label">電話</label></td><td class="td2" ><input type="text" class="form-control-sm" id="mem_Phone" name="mem_Phone" value="<%=memVO.getMem_Phone()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Phone" class="col-form-label">電話</label></td><td class="td2" ><input type="text" class="form-control-sm" id="mem_Phone" name="mem_Phone" value="<%=memVO.getMem_Phone()%>" ></td>
             <td class="td3"><label for="mem_Carddue" class="col-form-label">截止日</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Carddue" name="mem_Carddue" value="<%=(memVO.getMem_Carddue()==null)? "":memVO.getMem_Carddue()%>"></td>
         </tr>
         <tr>

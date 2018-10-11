@@ -242,6 +242,7 @@ body {
 				<input type="hidden" name ="action" value="insert_byPosted">
 				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
 				<input type="hidden" id="mem_No"	name="mem_No" value="${memVO.mem_No}" />
+				<input type="hidden" name="requestURL" value="/front_end/post/listAllpost.jsp">
 				<button type="submit"
 					class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
 				</form>
@@ -287,7 +288,7 @@ var myChart = new Chart(ctx, {
       borderWidth: 1,
       label: '竹風堂餐點評比',
       data: [ <c:forEach var="message" items="${map}"> '${message.value}',</c:forEach>]
-   
+    
  
     }]
   }

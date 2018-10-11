@@ -98,8 +98,15 @@
                         </div>
                         <input type=hidden name=action value=findByMon_Year>
                         <input type=hidden name=location value=backEnd>
-                        
                         </form>
+                        <form class="d-flex ml-auto" method="post" action="<%=request.getContextPath()%>/front_end/storedrecord/storedrecord.do">
+                        	<div >
+                            	<button id="allStroed" class="align-self-center btn btn-light btn-xs" type="submit" name="action" value="listAll" >
+                                	<i class="fas fa-globe-asia">全部紀錄</i>
+                            	</button>
+                            	<input type="hidden" name="location" value="backEnd">
+                       		 </div>
+                         </form>
                     </div>
                 </div>
             </div>
