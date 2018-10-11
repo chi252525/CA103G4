@@ -385,10 +385,11 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 	
 	
 	@Override
-	public void insertWithIngredientCombination(CustommealsVO custommealsVO, List<IngredientCombinationVO> list) {
+	public String insertWithIngredientCombination(CustommealsVO custommealsVO, List<IngredientCombinationVO> list) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_custom_No = null;
 
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -409,7 +410,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 			
 			pstmt.executeUpdate();
 			//掘取對應的自增主鍵值
-			String next_custom_No = null;
+			
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				next_custom_No = rs.getString(1);
@@ -465,6 +466,7 @@ public class CustommealsJDBCDAO implements CustommealsDAO_interface{
 				}
 			}
 		}
+		return next_custom_No;
 
 	}
 
