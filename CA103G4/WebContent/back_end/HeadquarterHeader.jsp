@@ -45,12 +45,12 @@
                  <a class="nav-item nav-link p member nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-md main-icon" aria-hidden="true" ></i><c class="icon-font">會員管理</c></a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="<%=request.getContextPath()%>/back_end/report/Postreport.jsp">貼文檢舉管理</a>
-                      <a class="dropdown-item" href="#">儲值管理</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/back_end/storedrecord/transaction_mang.jsp">儲值管理</a>
                     </div>
                  </li>
               &nbsp;&nbsp;
               <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p branch nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-university main-icon" aria-hidden="true"></i><c class="icon-font">分店管理</c></a></li>
+                 <a class="nav-item nav-link p branch nav-link dropdown-toggle" href="<%=request.getContextPath()%>/back_end/branch/branch_mang.jsp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-university main-icon" aria-hidden="true"></i><c class="icon-font">分店管理</c></a></li>
               &nbsp;&nbsp;
               <li class="nav-item dropdown b">
                  <a class="nav-item nav-link p activity nav-link dropdown-toggle" href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users main-icon" aria-hidden="true"></i><c class="icon-font">活動管理</c></a>

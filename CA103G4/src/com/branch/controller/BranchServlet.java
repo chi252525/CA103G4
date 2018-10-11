@@ -414,7 +414,7 @@ public class BranchServlet extends HttpServlet {
 					return;// 有錯誤,返回addbranch
 				}
 				// ==========forward result===============
-				req.setAttribute("list", list);
+				req.setAttribute("brlist", list);
 				if ("findBybranch_City".equals(action))
 					req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 				else if ("findBybranch_CityfonrEnd".equals(action))
@@ -440,7 +440,7 @@ public class BranchServlet extends HttpServlet {
 					return;// 有錯誤,返回addbranch
 				}
 				// ==========forward result===============
-				req.setAttribute("list", list);
+				req.setAttribute("brlist", list);
 				// req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req,
 				// res);
 				// =============print to web page=====================

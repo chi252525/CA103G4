@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type=hidden name=action value=findByMon_Year_memNo>
+                        <input type=hidden name=action value=findByMon_Year>
                         <input type=hidden name=location value=backEnd>
                         
                         </form>

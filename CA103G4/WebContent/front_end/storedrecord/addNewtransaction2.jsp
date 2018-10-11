@@ -255,7 +255,7 @@
                         <span style="width: 100%;"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icon-sslSmall.svg" type="image/svg+xml" style="margin-right:20px;"></img>Safe & Secure Payment</span>
                         </form>
                     </div>
-                    <div class="errorMsg" style="margin: auto;">${errorMsgs.stor_failur}</div>
+                    <div class="errorMsg center" style="margin: auto;">${errorMsgs.stor_failur}</div>
 	
                 </div>
             </div>
