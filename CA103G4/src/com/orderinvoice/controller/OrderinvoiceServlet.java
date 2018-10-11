@@ -20,6 +20,7 @@ import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
+import com.orderform.model.OrderformVO;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderinvoiceServlet extends HttpServlet {
@@ -36,13 +37,34 @@ public class OrderinvoiceServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		
 		if ("updateForOut".equals(action)) {
 			
 			List<OrderinvoiceVO> list = new ArrayList<>();
 			
-			String[] ordnu = req.getParameterValues("out");
+			String[] eatS = req.getParameterValues("out");
+			OrderinvoiceVO orVO = null;
 			
-			for (int i =0; i < ordnu;)
+			String ordno = req.getParameter("odNo");
+			
+			for (int i = 0; i < eatS.length; i++) {
+				    orVO = new OrderinvoiceVO();
+				
+				if (("M").equals(String.valueOf(eatS[i].charAt(0)))) {
+					orVO.setMenu_no(eatS[i]);
+					orVO.setOrder_no(ordno);
+					orVO.setCustom_no(null);
+					orVO.forUpdate();
+				} else {
+					orVO.setCustom_no(eatS[i]);
+					orVO.setOrder_no(ordno);
+					orVO.setMenu_no(null);
+				}
+				
+				list.add(orVO);
+			}
+			
+			
 			
 			
 			

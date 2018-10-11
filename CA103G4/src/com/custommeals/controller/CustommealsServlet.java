@@ -480,7 +480,7 @@ public class CustommealsServlet extends HttpServlet{
 				} catch(Exception e) {
 					e.printStackTrace();
 					errorMsgs.add("資料新增失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listOnePost.jsp");
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
 					failuerView.forward(req, res);
 				}
 			}
