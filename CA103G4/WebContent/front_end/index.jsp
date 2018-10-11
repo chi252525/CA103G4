@@ -17,12 +17,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<!--HomepageCSS============================================= -->
-<link rel="stylesheet" href="css/jquery-ui.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-
-
 <!--JS BS4-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -37,45 +31,7 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 <style>
-/*header*/
-.dropdown-menu li:hover .sub-menu {
-	visibility: visible;
-}
 
-.dropdown:hover .dropdown-menu {
-	display: block;
-}
-
-.nav-link {
-	font-size: 20px;
-}
-
-.lnr-user {
-	color: #FFF;
-	font-size: 20px;
-}
-
-.lnr-alarm {
-	color: #FFF;
-	font-size: 23px;
-	margin-right: 10px;
-}
-
-.lnr-cart {
-	color: #FFF;
-	font-size: 23px;
-	margin-right: 10px;
-}
-
-.imgicon {
-	margin-top: 10px;
-}
-
-#header.header-scrolled {
-	transition: all 0.5s;
-	background: black;
-	border: none
-}
 /*banner*/
 .banner-area {
 	background: url(img/index/ramen-animate.gif) center center/cover;
@@ -102,14 +58,6 @@
 padding:11rem!important;
 
 }
-.coupon{
-position: fixed;
-  top:500px;
-    width: 30%;
-    margin: 0 auto;
-    max-width: 200px;
-    background-color:rgba(0,0,0,0.4)
-}
 
 
    
@@ -133,7 +81,7 @@ position: fixed;
 					<p class="lead ml13">竹風堂拉麵 頂級食材 客製化搭配</p>
 					<div class="row  test">
 						<div class="col-md-5 col-6 test">
-							<a class="btn btn-danger btn-lg" href="#">立即訂餐</a>
+							<a class="btn btn-danger btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">立即訂餐</a>
 						</div>
 						<div class="col-md-5 col-6"></div>
 					</div>

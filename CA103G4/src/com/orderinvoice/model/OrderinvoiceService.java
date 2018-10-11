@@ -22,8 +22,19 @@ private OrderinvoiceDAO_interface dao;
 		return dao.findByOrder_no(order_no);
 	}
 	
+	public int getByOrder_no(String order_no) {
+		
+		return dao.getByOrder_no(order_no);
+	}
 	
 	
+	public OrderinvoiceVO forMnu(String order_no,String menu_nu) {
+		return null;
+	}
+
+	public OrderinvoiceVO forCnu(String order_no,String custom_nu) {
+		return null;
+	}
 	
 	
 	

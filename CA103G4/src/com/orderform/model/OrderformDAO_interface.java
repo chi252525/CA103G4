@@ -32,4 +32,6 @@ public interface OrderformDAO_interface {
 
 	public OrderformVO findByForeignKey(String mem_No);
 	
+	public List<OrderformVO> forOut();
+	
 }

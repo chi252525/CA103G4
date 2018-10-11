@@ -9,6 +9,8 @@ public class OrderinvoiceVO {
 	private String order_no;
 	private String menu_no;
 	private String custom_no;
+	private String menu_nu;
+	private String custom_nu;
 	private Integer invo_status;
 	private List<IngredientsVO> custom_ingdt_List;
 	
@@ -58,5 +60,21 @@ public class OrderinvoiceVO {
 
 	public void setInvo_status(Integer invo_status) {
 		this.invo_status = invo_status;
+	}
+
+	public String getMenu_nu() {
+		return menu_nu;
+	}
+
+	public void setMenu_nu(String menu_nu) {
+		this.menu_nu = menu_nu;
+	}
+
+	public String getCustom_nu() {
+		return custom_nu;
+	}
+
+	public void setCustom_nu(String custom_nu) {
+		this.custom_nu = custom_nu;
 	}
 }

@@ -359,17 +359,11 @@ public class CustommealsServlet extends HttpServlet{
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setcustom_Quantity(1);
 					custommealsVO.setIngredientsList(ingredientsList);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
-
-
-					
-					
-
-					
-					
 
 
 //					System.out.println(custommealsVO.getcustom_No());
@@ -380,7 +374,7 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
@@ -418,6 +412,81 @@ public class CustommealsServlet extends HttpServlet{
 					failureView.forward(req, res);
 				}
 			}
+			
+			
+			
+			if("insert_byPosted".equals(action)){
+				List<String> errorMsgs = new LinkedList<>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				System.out.println("insert_byPosted");
+				try {
+					//取會員編號
+					String mem_No = req.getParameter("mem_No").trim();
+					if(mem_No == null || mem_No.length() == 0) {
+						errorMsgs.add("會員編號:請勿空白");
+					}  else if(mem_No.length() >= 10) {
+						errorMsgs.add("會員編號格式不符");
+					}
+					String custom_No = req.getParameter("custom_No").trim();
+					if(custom_No == null || custom_No.length() == 0) {
+						errorMsgs.add("自訂餐點編號沒取到");
+					} 
+					//查這筆貼文的自訂餐點VO
+					CustommealsService cusSvc = new CustommealsService();
+					CustommealsVO oneCusbyPost_CusVO =cusSvc.getOneCustommeals(custom_No);
+					
+					//新會員也要訂這個自訂餐點，用一個新的VO裝
+					CustommealsVO custommealsVO = new CustommealsVO();
+					custommealsVO.setmem_No(mem_No);
+					custommealsVO.setcustom_Name(oneCusbyPost_CusVO.getcustom_Name());
+					custommealsVO.setcustom_Price(oneCusbyPost_CusVO.getcustom_Price());
+					custommealsVO.setcustom_Quantity(1);
+
+
+					//同時也撈出一樣的食材搭配
+					IngredientsDAO_interface idao = new IngredientsDAO();
+					List<IngredientsVO> ingredientsList_byPost =idao.findIngtByCustomNo(custom_No);
+					//new一個新的食材搭配VO去新增
+					List<IngredientCombinationVO> ingtCombineList_new = new LinkedList<IngredientCombinationVO>();
+					IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
+					for(IngredientsVO ingtVO_byPost:ingredientsList_byPost) {
+						ingtVO_new.setIngdt_Id(ingtVO_byPost.getingdt_Id());
+						ingtCombineList_new.add(ingtVO_new);
+					}
+					
+	
+					System.out.println("開始新增資料*");
+					/***************************2.開始新增資料****************************************/
+					CustommealsService custommealsSvc = new CustommealsService();	
+					String custom_No_new = custommealsSvc.addCustommealsAutoKeys(mem_No, oneCusbyPost_CusVO.getcustom_Name(), oneCusbyPost_CusVO.getcustom_Price(), ingtCombineList_new);
+					custommealsVO.setcustom_No(custom_No_new);
+					custommealsVO.setIngredientsList(ingredientsList_byPost);
+					
+					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+					System.out.println("新增資料...由post新增.完成*");
+
+//					System.out.println(custommealsVO.getcustom_No());
+//					System.out.println(custommealsVO.getcustom_Name());
+//					System.out.println(custommealsVO.getcustom_Price());
+//					for(IngredientsVO ivo : ingredientsList) {
+//						System.out.println(ivo.getingdt_Id());
+//						System.out.println(ivo.getingdt_Name());
+//						System.out.println(ivo.getingdt_Price());
+//					}
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
+					successView.forward(req, res);
+					
+					/***************************其他可能的錯誤處理**********************************/
+				} catch(Exception e) {
+					e.printStackTrace();
+					errorMsgs.add("資料新增失敗"+e.getMessage());
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+					failuerView.forward(req, res);
+				}
+			}
+			
+			
+			
 			
 		}
 

@@ -57,13 +57,15 @@ public class ActivityDAO implements ActivityDAO_interface {
 	private static final String GETALL = "SELECT * FROM ACTIVITY  ORDER BY act_PreAddTime DESC";
 
 	@Override
-	public void insert(ActivityVO activityVO) {
+	public String insert(ActivityVO activityVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_act_No = null;
 		try {
 			con = ds.getConnection();
 //			System.out.println("Connecting to database successfully! (連線成功！)");
-			pstmt = con.prepareStatement(INSERT_STMT);
+			int cols[] = {1};
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
 			pstmt.setString(1, activityVO.getCoucat_No());
 			pstmt.setString(2, activityVO.getAct_Cat());
 			pstmt.setString(3, activityVO.getAct_Name());
@@ -76,7 +78,13 @@ public class ActivityDAO implements ActivityDAO_interface {
 			pstmt.setTimestamp(10, activityVO.getAct_End());
 			int rowCount = pstmt.executeUpdate();
 			System.out.println("新增 " + rowCount + " 筆資料");
-
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_act_No = rs.getString(1);
+				System.out.println("自增主鍵值 = " + next_act_No );
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -98,6 +106,7 @@ public class ActivityDAO implements ActivityDAO_interface {
 				}
 			}
 		}
+		return next_act_No;
 	}
 
 	@Override
@@ -283,7 +292,6 @@ public class ActivityDAO implements ActivityDAO_interface {
 		List<ActivityVO> activitylist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-//			System.out.println("Connecting to database successfully! (連線成功！)");
 			pstmt = con.prepareStatement(FINDBYACTCATA);
 			pstmt.setString(1, act_Cata);
 			rs = pstmt.executeQuery();

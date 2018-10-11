@@ -26,7 +26,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, null, ?, ?, 1, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, null, ?, ?, 0, ?, ?)";
 	private static final String GET_MORE_STMT = "SELECT order_no,dek_no,mem_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where ";
 	private static final String GET_NOTOK_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_status= 1 and order_pstatus!= 2";
 	private static final String GET_ALL_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform order by order_no Desc";
@@ -45,6 +45,9 @@ public class OrderformDAO implements OrderformDAO_interface {
 			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM WHERE MEM_NO=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM ORDER BY MEM_NO";
+	private static final String SELECT_BY_STATUS=
+			"SELECT ORDER_NO, ORDER_TYPE, DEK_NO, ORDER_STATUS FROM ORDERFORM WHERE ORDER_STATUS = 1 ORDER BY ORDER_NO DESC";
+	
 	
 	
 	@Override
@@ -456,7 +459,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			String cols[] = { "ORDER_NO" };
 //			"INSERT(order_no										,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) 
-//			values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?   , ?	  , ?		, null	 , ?		, ?			, 1			, ?			  , ?)";
+//			values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?   , ?	  , ?		, null	 , ?		, ?			,0			, ?			  , ?)";
 			pstmt = con.prepareStatement(INSERT_STMT, cols);
 			pstmt.setString(1, orderformVO.getDek_no());
 			pstmt.setString(2, orderformVO.getMem_no());
@@ -612,7 +615,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	
 	@Override
 	public List<OrderformVO> getOrderNoByMemNo(String mem_No) {
-		List<OrderformVO> list = new ArrayList();
+		List<OrderformVO> list = new ArrayList<>();
 		OrderformVO orderformVO = null;
 
 		Connection con = null;
@@ -723,4 +726,59 @@ public class OrderformDAO implements OrderformDAO_interface {
 	}
 	
 
+	@Override
+	public List<OrderformVO> forOut() {
+		List<OrderformVO> list = new ArrayList<>();
+		OrderformVO orderformVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_STATUS);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setDek_no(rs.getString("dek_no"));
+				orderformVO.setOrder_type(rs.getInt("order_type"));
+				orderformVO.setOrder_status(rs.getInt("order_status"));
+				list.add(orderformVO);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 }

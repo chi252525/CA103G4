@@ -91,7 +91,7 @@ max-width:90%;
 						href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp"
 						class=" nav-link">優惠卷設定</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp?action=listActs_ByCompositeQuery">廣告設定</a>
+						href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp">廣告設定</a>
 					</li>
 				</ul>
 
