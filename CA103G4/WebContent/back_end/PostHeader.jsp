@@ -167,11 +167,8 @@ pageContext.setAttribute("empfealist",empfealist);
                 	<c:if test="${empauthfeaVO.fea_No == 'F008'}">
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/chat.png" width="17%">&nbsp;即時線上客服</a>
 					</c:if>
-<<<<<<< HEAD
-               	
-=======
+
                         	
->>>>>>> parent of 0761564... Revert "Merge branch 'master' of https://github.com/b2778173/CA103G4"
                		<c:if test="${empauthfeaVO.fea_No == 'F006'}">
                 <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/a2853ec9dc4feaaaee66e74ea46a78e2.png" width="12%">&nbsp;&nbsp;食材顯示設定</a>
                 	</c:if>
