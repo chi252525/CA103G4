@@ -176,7 +176,7 @@ public class ShoppingServlet extends HttpServlet {
 				return;
 			}
 		}
-		// 餐點數量加減按鈕(未完成)
+		// 餐點數量加減按鈕(完成)
 		else if ("addCart".equals(action)) {
 			//
 			try {

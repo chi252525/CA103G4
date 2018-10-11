@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.* , com.menu.model.* , com.custommeals.model.*"%>
+<%@ page import="java.util.* ,java.lang.*, com.menu.model.* , com.custommeals.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.couponhistory.model.*"%>
+<%@ page import="com.ingredients.model.*"%>
 <html>
 <jsp:include page="/front_end/header.jsp" flush="true" />
 <!--background image-->
@@ -194,9 +195,13 @@
                             Integer total = cv.getcustom_Price() * cv.getcustom_Quantity();
                             Integer price = cv.getcustom_Price();
                             Integer quantity = cv.getcustom_Quantity();
+                            StringBuilder stb = new StringBuilder();
+                            for(IngredientsVO ig :buylistCustom.get(i).getIngredientsList()){
+                            	stb.append(ig.getingdt_Name()+" ,");
+                            }
                             %>
                                 <tr>
-                                    <td width="200">
+                                    <td width="200" data-toggle="popover" title="客製拉麵食材: " data-content="<%=stb%>">
                                         <%=name%>
                                     </td>
                                     <td width="100">
@@ -493,6 +498,10 @@
             
             
         }
+        //popover
+        $(function () {
+        	  $('[data-toggle="popover"]').popover()
+        	})
 
     </script>
 </body>
