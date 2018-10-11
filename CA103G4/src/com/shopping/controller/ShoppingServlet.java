@@ -25,6 +25,9 @@ public class ShoppingServlet extends HttpServlet {
 
 		@SuppressWarnings("unchecked")
 		List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
+		List<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
+		CustommealsVO custommealsVO = (CustommealsVO) req.getAttribute("custommealsVO");
+		
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
@@ -70,6 +73,22 @@ public class ShoppingServlet extends HttpServlet {
 				}
 
 			}
+			
+			if(custommealsVO != null) {
+				if (buylistCustom == null) {
+					buylistCustom = new Vector<CustommealsVO>();
+					buylistCustom.add(custommealsVO);
+					System.out.println(buylistCustom.get(0).getcustom_Name());
+					
+				} else {
+//					if (buylistCustom.contains(custommealsVO)) {
+//						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
+//						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
+//					} else {
+						buylistCustom.add(custommealsVO);
+//					}
+				}
+			}
 
 			System.out.println("目前購物車內容:");
 			if (buylist != null) {
@@ -81,6 +100,7 @@ public class ShoppingServlet extends HttpServlet {
 			}
 
 			session.setAttribute("shoppingcart", buylist);
+			session.setAttribute("shoppingcartCustom", buylistCustom);
 			String url = req.getContextPath() + "/front_end/menu/listAllMenu4.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
@@ -108,7 +128,6 @@ public class ShoppingServlet extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
-
 			}
 		}
 		// 餐點數量加減按鈕(未完成)

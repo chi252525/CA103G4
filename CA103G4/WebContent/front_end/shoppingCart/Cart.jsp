@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.* , com.menu.model.*"%>
+<%@ page import="java.util.* , com.menu.model.* , com.custommeals.model.*"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -204,8 +205,12 @@ a {
 		Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		System.out.println(request.getContextPath() + "/front_end/shoppingCart/css/shoppingCart.css");
 	%>
+	<%
+		@SuppressWarnings("unchecked")
+		Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
+	%>
     <%
-		if (buylist != null && (buylist.size() > 0)) {
+		if ((buylist != null && (buylist.size() > 0)) || (buylistCustom != null && (buylistCustom.size() > 0))) {
 	%>
     <div id="div_shadow" class="py-5">
         <div class=" container">
@@ -219,7 +224,7 @@ a {
 
     <div class="container">
         <div class="row">
-            <table id="cart" class="table-hover table table-striped" style="width: 100%">
+            <table id="cart" class="table-hover table t able-striped" style="width: 100%">
                 <thead style="margin-bottom: 15px;">
                     <tr>
                         <th width="200">餐點名稱</th>
@@ -232,13 +237,16 @@ a {
                 <tbody id="tbody">
 
                     <%
+                    	if (buylist != null && buylist.size() > 0) {
+                    		
+                    	
 						for (int index = 0; index < buylist.size(); index++) {
 								MenuVO menuVO = buylist.get(index);
 					%>
 
                     <tr>
                         <td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
-                        <input id=no_Col<%=index%> type="hidden" value=<%=menuVO.getMenu_No() %>><!-- 竊取餐點pk -->
+                        <input id="no_Col<%=index%>" type="hidden" value=<%=menuVO.getMenu_No() %>><!-- 竊取餐點pk -->
                         </td>
                         <td width="100">
                             <span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
@@ -266,10 +274,58 @@ a {
                             </form>
                         </td>
                     </tr>
+                    
+                    <%
+						}}
+					%>
+                    
+<!-- ------------------------------------------------------------------分隔線 --------------------------------------------------------------------->
+
+					<%
+					if (buylistCustom != null && buylistCustom.size() > 0) {
+					for (int index = 0; index < buylistCustom.size(); index++) {
+							CustommealsVO custommealsVO = buylistCustom.get(index);
+					%>
+
+                    <tr>
+                        <td width="200"><span id="id_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Name()%></span>
+                        <input id="no_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>" type="hidden" value=<%=custommealsVO.getcustom_No() %>><!-- 竊取餐點pk -->
+                        </td>
+                        <td width="100">
+                            <span id="price_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Price()%></span>
+                        </td>
+                        <td  width="100">
+                            <button id="minus" class="btn btn-light" style="background-color: antiquewhite" onclick="minus<%=(buylist!=null) ? (index+buylist.size()) : index %>()">
+                                <i class="far fa-minus-square"></i>
+                            </button>
+                                <span id="quantity_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Quantity()%></span>
+                            <button type="button" id="add" class="btn btn-light" style="background-color: antiquewhite" onclick="add<%=(buylist!=null) ? (index+buylist.size()) : index %>()">
+                                <i class="far fa-plus-square"></i>
+                            </button>
+                           
+                        </td>
+
+                        <td width="100">
+                            <span id="total_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Price() * custommealsVO.getcustom_Quantity()%></span>
+                        </td>
+                        <td width="120">
+                            <form name="deleteForm" class="form" action="ShoppingServlet.do" method="POST">
+                                <input type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=(buylist!=null) ? (index+buylist.size()) : index %>">
+                                <button id="delete<%=(buylist!=null) ? (index+buylist.size()) : index %>" class="del btn btn-light" type="button" value="刪除" style="background-color: antiquewhite">
+                                    <i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+
+
+
+<!-- ------------------------------------------------------------------分隔線 --------------------------------------------------------------------->
 
                 </tbody>
                 <%
-					}
+					}}
 				%>
             </table>
 
