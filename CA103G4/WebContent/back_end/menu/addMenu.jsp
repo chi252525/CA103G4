@@ -158,14 +158,14 @@ $(document).ready(function (){
 <div class="card" style="padding:30px; border-radius:10px; background-color:rgba(255,255,255,0.8);">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menu/menuServlet.do" name="form1" enctype="multipart/form-data">
 	<div class=card-title>
-	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="70"	value="<%=(menuVO==null)?"地獄麻辣拉麵":menuVO.getMenu_Id()%>" />
+	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="70"	value="<%=(menuVO==null)?"青蔥豚骨拉麵":menuVO.getMenu_Id()%>" />
 	</div>
 		         <input type="hidden" name="menu_Type" size="70"	value="<%=(menuVO==null)?"經典餐點":menuVO.getMenu_Type()%>" />
 	<div class=card-title>
-	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="70"	value="<%=(menuVO==null)?"260":menuVO.getMenu_Price()%>" />
+	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="70"	value="<%=(menuVO==null)?"200":menuVO.getMenu_Price()%>" />
 	</div>
 	<div class=card-title>
-	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="70"	value="<%=(menuVO==null)?"川味麻辣湯頭，搭配辣味肉燥與叉燒肉":menuVO.getMenu_Intro()%>" />
+	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="70"	value="<%=(menuVO==null)?"濃郁豚骨湯頭、青蔥與叉燒肉香味碰撞的完美組合。":menuVO.getMenu_Intro()%>" />
 	</div>
 	<div class=card-title>
 	餐點狀態&nbsp;<input type="TEXT" name="menu_Status" size="70"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" />
