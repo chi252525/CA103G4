@@ -127,6 +127,12 @@ background-color:rgba(253,253,253,0.8);
 					<hr>
 					<p>${activityVO.act_Content}</p>
 					<p class="lnr lnr-eye " style="text-align: right;">${activityVO.act_Views}</p>
+					
+					<div class="col-12">
+					<img class="img-fluid"
+								src="<%=request.getContextPath()%>/coucat/coucatshowimage.do?coucat_No=${actVO.coucat_No}"
+								data-holder-rendered="true"></div>
+					
 				</div>
 					
 				
