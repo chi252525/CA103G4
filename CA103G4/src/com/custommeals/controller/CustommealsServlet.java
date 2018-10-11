@@ -420,7 +420,7 @@ public class CustommealsServlet extends HttpServlet{
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				System.out.println("insert_byPosted");
-				try {
+//				try {
 					//取會員編號
 					String mem_No = req.getParameter("mem_No").trim();
 					if(mem_No == null || mem_No.length() == 0) {
@@ -480,12 +480,12 @@ public class CustommealsServlet extends HttpServlet{
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
-				} catch(Exception e) {
-					e.printStackTrace();
-					errorMsgs.add("資料新增失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
-					failuerView.forward(req, res);
-				}
+//				} catch(Exception e) {
+//					e.printStackTrace();
+//					errorMsgs.add("資料新增失敗"+e.getMessage());
+//					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
+//					failuerView.forward(req, res);
+//				}
 			}
 			
 			
