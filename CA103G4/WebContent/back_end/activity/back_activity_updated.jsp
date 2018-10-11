@@ -26,6 +26,9 @@
 <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath() %>/back_end/activity/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script
+	src="<%=request.getContextPath()%>/back_end/ckeditor/ckeditor.js"></script>
+
 <script type="text/javascript">
 var $JUI1 = $.noConflict(true);
 </script>
@@ -114,11 +117,12 @@ var $JUI1 = $.noConflict(true);
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="form-group">
-											<label for="comment" class="text-dark">廣告內容</label>
-											<textarea class="form-control" rows="9" id="comment"
-												name="act_Content" ><%=activityVO.getAct_Content()%></textarea>
-										</div>
+								
+									<!-- 編輯器區塊 -->
+							<textarea name="act_Content">
+					             <%= (activityVO==null)? "" : activityVO.getAct_Content()%>
+					            </textarea>
+							<!-- //編輯器區塊 -->
 									</div>
 									<div class="col-md-6"></div>
 								</div>
@@ -248,7 +252,17 @@ function onLoadBinaryFile2() {
 				
 				
 			</script>
-
+   <script>
+        CKEDITOR.replace('act_Content', {
+            extraPlugins: 'base64image',
+            removePlugins: 'image',
+            removePlugins: 'resize',
+            height: 700,
+            removeDialogTabs: 'image:advanced;link:advanced',
+        });
+        //            extraPlugins: 'autogrow',
+        //            autoGrow_minHeight: 500,
+    </script>
 
 	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
