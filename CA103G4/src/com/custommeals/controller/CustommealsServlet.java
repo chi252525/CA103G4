@@ -361,7 +361,8 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_No(custom_No);
 					custommealsVO.setcustom_Quantity(1);
 					custommealsVO.setIngredientsList(ingredientsList);
-					
+					String requestURL=req.getParameter("requestURL");
+					req.setAttribute("requestURL",requestURL);
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
 
@@ -473,6 +474,8 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
+					String requestURL=req.getParameter("requestURL");
+					req.setAttribute("requestURL",requestURL);
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
@@ -480,7 +483,7 @@ public class CustommealsServlet extends HttpServlet{
 				} catch(Exception e) {
 					e.printStackTrace();
 					errorMsgs.add("資料新增失敗"+e.getMessage());
-					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listOnePost.jsp");
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listAllpost.jsp");
 					failuerView.forward(req, res);
 				}
 			}

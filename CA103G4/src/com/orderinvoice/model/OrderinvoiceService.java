@@ -28,14 +28,15 @@ private OrderinvoiceDAO_interface dao;
 	}
 	
 	
-	public OrderinvoiceVO forMnu(String order_no,String menu_nu) {
+	public OrderinvoiceVO forUpdate(String order_no,String menu_no,String custom_no) {
+		OrderinvoiceVO oinVO = new OrderinvoiceVO();
+		oinVO.setOrder_no(order_no);
+		oinVO.setMenu_no(menu_no);
+		oinVO.setCustom_no(custom_no);
+		
+		dao.updateSta(oinVO);
 		return null;
 	}
-
-	public OrderinvoiceVO forCnu(String order_no,String custom_nu) {
-		return null;
-	}
-	
 	
 	
 	

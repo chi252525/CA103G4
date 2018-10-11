@@ -81,7 +81,7 @@ padding:11rem!important;
 					<p class="lead ml13">竹風堂拉麵 頂級食材 客製化搭配</p>
 					<div class="row  test">
 						<div class="col-md-5 col-6 test">
-							<a class="btn btn-danger btn-lg" href="#">立即訂餐</a>
+							<a class="btn btn-danger btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">立即訂餐</a>
 						</div>
 						<div class="col-md-5 col-6"></div>
 					</div>
