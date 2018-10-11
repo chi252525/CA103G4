@@ -169,7 +169,7 @@ pageContext.setAttribute("forOut",list);
 	      <c:forEach var="ordinVO" items="${ordinSvc.findByOrder_no(orderformVO.order_no)}">
 		      <div class="form-check-inline">
 		 		  <label class="form-check-label">
-			    	 <input type="checkbox" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}    
+			    	 <input type="checkbox" name="out" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}    
 			    	 														${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id} 
 			      															數量:${(ordinVO.menu_no == mull)? ordinVO.custom_nu:ordinVO.menu_nu}
 			      </label>
@@ -180,7 +180,7 @@ pageContext.setAttribute("forOut",list);
 	      </div>
 	      <div class="modal-footer">
 	        <button type="submit" class="btn" style="background-color: #FF7F50">確認出餐</button>
-	        <input type="hidden" name="action" value="addForOut"/>
+	        <input type="hidden" name="action" value="updateForOut"/>
 	      </div>
 	      </form>
 	      	<button type="button" class="btn" data-dismiss="modal" style="background-color: #A42D00">取消</button>
