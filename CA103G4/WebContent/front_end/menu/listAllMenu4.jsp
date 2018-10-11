@@ -224,6 +224,7 @@ body {
 	                						<input type="hidden" name="price" value="${menuVO.menu_Price}">
 	                						<input type="hidden" name="status" value="${menuVO.menu_Status}">
 	               							<input type="hidden" name="action" value="ADD">
+	               							<input type="hidden" name="requestURL" value="/front_end/menu/listAllMenu4.jsp">
                						</div>
                					</form>
 							</div>
