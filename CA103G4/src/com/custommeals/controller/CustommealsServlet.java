@@ -359,6 +359,7 @@ public class CustommealsServlet extends HttpServlet{
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setcustom_Quantity(1);
 					custommealsVO.setIngredientsList(ingredientsList);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
@@ -373,7 +374,7 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
@@ -439,6 +440,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setmem_No(mem_No);
 					custommealsVO.setcustom_Name(oneCusbyPost_CusVO.getcustom_Name());
 					custommealsVO.setcustom_Price(oneCusbyPost_CusVO.getcustom_Price());
+					custommealsVO.setcustom_Quantity(1);
 
 
 					//同時也撈出一樣的食材搭配
@@ -471,7 +473,7 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
