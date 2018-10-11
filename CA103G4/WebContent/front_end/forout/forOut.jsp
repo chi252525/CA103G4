@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.orderform.model.*"%>
+<%@ page import="com.orderinvoice.model.*"%>
 
 <%
 OrderformService orderfoemSvc = new OrderformService();
@@ -12,7 +13,10 @@ pageContext.setAttribute("forOut",list);
 
 <jsp:useBean id="ordinSvc" scope="page" class="com.orderinvoice.model.OrderinvoiceService"/>
 <jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
-<jsp:useBean id="customSvc" scope="page" class="com.custommeals.model.CustommealsService"/>
+<jsp:useBean id="customSvc" scope="page" class="com.custommeals.model.CustommealsService"/>        
+
+  
+
 
 <%-- s分頁 --%>
 <jsp:useBean id="forOut" scope="page" type="java.util.List<OrderformVO>" />
@@ -77,7 +81,7 @@ pageContext.setAttribute("forOut",list);
 
 
 <%-- 背景 --%>
-<jsp:include page="/back_end/PostHeader.jsp" flush="true"/>
+<jsp:include page="/back_end/PostHeader.jsp" flush="true"/> 
 
 <div class="container">
 
@@ -86,7 +90,7 @@ pageContext.setAttribute("forOut",list);
 		<th style="text-align: center">訂單編號</th>
 		<th style="text-align: center">訂單類型</th>
 		<th style="text-align: center">桌位流水號</th>
-		<th style="text-align: center">訂單狀態</th>
+		<th style="text-align: center">出餐狀態</th>
 	</tr>
 <%-- 分頁 --%>
 <%@ include file="page1.file" %>
@@ -121,9 +125,9 @@ pageContext.setAttribute("forOut",list);
 	<td>${orderformVO.dek_no}</td>
 	</c:if>
 
-	
+
 	<td>
-	剩餘出餐數量:${ordinSvc.findByOrder_no(orderformVO.order_no).menu_nu}
+	剩餘出餐數量:${ordinSvc.getByOrder_no(orderformVO.order_no)}
 	</td>	
 	
 	</tr>
@@ -165,7 +169,9 @@ pageContext.setAttribute("forOut",list);
 	      <c:forEach var="ordinVO" items="${ordinSvc.findByOrder_no(orderformVO.order_no)}">
 		      <div class="form-check-inline">
 		 		  <label class="form-check-label">
-			    	 <input type="checkbox" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no} ${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id}
+			    	 <input type="checkbox" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}    
+			    	 														${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id} 
+			      															數量:${(ordinVO.menu_no == mull)? ordinVO.custom_nu:ordinVO.menu_nu}
 			      </label>
 			  </div>
 	     	 <br>

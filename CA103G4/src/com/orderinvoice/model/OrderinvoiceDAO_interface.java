@@ -17,6 +17,8 @@ public interface OrderinvoiceDAO_interface {
 	public void insert2 (OrderinvoiceVO orderinvoiceVO , java.sql.Connection con);
 	
 	public void updateNu(OrderinvoiceVO orderinvoiceVO);
+	
+	public int getByOrder_no(String order_no);
 	 
 	 
 }
