@@ -38,7 +38,7 @@ public class BranchService {
 			String Branch_Addr, String Branch_Pos, String Branch_Lan, String Branch_Lat, String Branch_Time,
 			Double Branch_Del, String Branch_Tel, Integer Branch_Tdesk) {
 		BranchVO branchVO = new BranchVO();
-		branchVO.setBranch_Name(Branch_No);
+		branchVO.setBranch_No(Branch_No);
 		branchVO.setBranch_Name(Branch_NAME);
 		branchVO.setBranch_City(Branch_City);
 		branchVO.setBranch_Dist(Branch_Dist);
