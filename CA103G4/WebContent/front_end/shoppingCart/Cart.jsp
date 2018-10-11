@@ -1,51 +1,69 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.* , com.menu.model.*"%>
+<%@ page import="java.util.* , com.menu.model.* , com.custommeals.model.*"%>
+<%@ page import="com.post.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="com.member.model.*"%>
+<jsp:useBean id="cusmealSvc1" scope="page" class="com.custommeals.model.CustommealsService" />
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
+<jsp:useBean id="postSvc2" scope="page" class="com.post.model.PostService" />
 <html>
 <jsp:include page="/front_end/header.jsp" flush="true" />
 <!--background image-->
-<img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg" width="100%" height="" alt="">
+<img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
+	width="100%" height="" alt="">
 
 <head>
 
-    <title>竹風堂購物車</title>
-    <!-- <link rel="stylesheet" type="text/css" -->
-    <%-- 	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/shoppingCart.css"> --%>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
+<title>竹風堂購物車</title>
+<!-- <link rel="stylesheet" type="text/css" -->
+<%-- 	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/shoppingCart.css"> --%>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
 
-    <!-- Bootsraps-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<!-- Bootsraps-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
 
-    <!--customized datatable css-->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/shoppingCart/css/branch.css">
+<!--customized datatable css-->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/shoppingCart/css/branch.css">
 
-    <!-- sweet alert2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
-    <!-- font awesome -->
+<!-- sweet alert2 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+	type="text/javascript"></script>
+<!-- font awesome -->
 
-    <style>
-        th {
+<!-- star 評分 套件-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/post/css/starability-all.min.css" />
+
+<style>
+th {
 	background-color: darkgoldenrod;
-	
 }
 
 tbody {
 	background-color: bisque;
 	vertical-align: middle !important;
-		
 }
 
-.table td{
+.table td {
 	vertical-align: middle !important;
-
 }
 
 table {
@@ -55,7 +73,7 @@ table {
 	border-style: hidden;
 	/* 	box-shadow: 0 0 0 1px #000; */
 	-moz-border-radius: 5px !important;
-/* 	 box-shadow:20px 20px 50px 15px grey;	 */
+	/* 	 box-shadow:20px 20px 50px 15px grey;	 */
 }
 
 table {
@@ -63,8 +81,7 @@ table {
 	border-radius: 30px;
 	border-style: hidden; /* hide standard table (collapsed) border */
 	box-shadow: 0 0 0 1px #666; /* this draws the table border  */
-	text-align:center !important;
-	
+	text-align: center !important;
 }
 
 .center {
@@ -80,14 +97,6 @@ table {
 	text-align: center;
 }
 
-.card-body {
-	background-color: #ffe6cc;
-	height: 200px;
-}
-
-.card {
-	height: 400px;
-}
 
 .btn-warning {
 	color: #805500 !important;
@@ -124,7 +133,6 @@ a {
 	background-color: rgba(0, 0, 0, 0.5);
 	-webkit-transition: all 0.4s cubic-bezier(0.88, -0.99, 0, 1.81);
 	transition: all 0.4s cubic-bezier(0.88, -0.99, 0, 1.81);
-	
 }
 
 .hovereffect img {
@@ -196,188 +204,279 @@ a {
 </style>
 </head>
 
-<body background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
+<body
+	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png"
+	width="100%">
 
-    <br>
-    <%
+	<br>
+	<%
 		@SuppressWarnings("unchecked")
 		Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		System.out.println(request.getContextPath() + "/front_end/shoppingCart/css/shoppingCart.css");
 	%>
-    <%
-		if (buylist != null && (buylist.size() > 0)) {
+	<%
+		@SuppressWarnings("unchecked")
+		Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
 	%>
-    <div id="div_shadow" class="py-5">
-        <div class=" container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">風堂購物車</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+	<%
+		if ((buylist != null && (buylist.size() > 0)) || (buylistCustom != null && (buylistCustom.size() > 0))) {
+	%>
+	<div id="div_shadow" class="py-5">
+		<div class=" container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂購物車</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="container">
-        <div class="row">
-            <table id="cart" class="table-hover table table-striped" style="width: 100%">
-                <thead style="margin-bottom: 15px;">
-                    <tr>
-                        <th width="200">餐點名稱</th>
-                        <th width="100">價格</th>
-                        <th width="100">數量</th>
-                        <th width="100">總計</th>
-                        <th width="120">操作</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
+	<div class="container">
+		<div class="row">
+			<table id="cart" class="table-hover table t able-striped"
+				style="width: 100%">
+				<thead style="margin-bottom: 15px;">
+					<tr>
+						<th width="200">餐點名稱</th>
+						<th width="100">價格</th>
+						<th width="100">數量</th>
+						<th width="100">總計</th>
+						<th width="120">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
 
-                    <%
+					<%
+                    	if (buylist != null && buylist.size() > 0) {
+                    		
+                    	
 						for (int index = 0; index < buylist.size(); index++) {
 								MenuVO menuVO = buylist.get(index);
 					%>
 
-                    <tr>
-                        <td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
-                        <input id=no_Col<%=index%> type="hidden" value=<%=menuVO.getMenu_No() %>><!-- 竊取餐點pk -->
-                        </td>
-                        <td width="100">
-                            <span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
-                        </td>
-                        <td  width="100">
-                            <button id="minus" class="btn btn-light" style="background-color: antiquewhite" onclick="minus<%=index%>()">
-                                <i class="far fa-minus-square"></i>
-                            </button>
-                                <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
-                            <button type="button" id="add" class="btn btn-light" style="background-color: antiquewhite" onclick="add<%=index%>()">
-                                <i class="far fa-plus-square"></i>
-                            </button>
-                           
-                        </td>
+					<tr>
+						<td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
+							<input id="no_Col<%=index%>" type="hidden"
+							value=<%=menuVO.getMenu_No() %>>
+						<!-- 竊取餐點pk --></td>
+						<td width="100"><span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
+						</td>
+						<td width="100">
+							<button id="minus" class="btn btn-light"
+								style="background-color: antiquewhite"
+								onclick="minus<%=index%>()">
+								<i class="far fa-minus-square"></i>
+							</button> <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
+							<button type="button" id="add" class="btn btn-light"
+								style="background-color: antiquewhite" onclick="add<%=index%>()">
+								<i class="far fa-plus-square"></i>
+							</button>
 
-                        <td width="100">
-                            <span id="total_Col<%=index%>"><%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></span>
-                        </td>
-                        <td width="120">
-                            <form name="deleteForm" class="form" action="ShoppingServlet.do" method="POST">
-                                <input type="hidden" name="action" value="DELETE"> <input type="hidden" name="del" value="<%=index%>">
-                                <button id="delete<%=index%>" class="del btn btn-light" type="button" value="刪除" style="background-color: antiquewhite">
-                                    <i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+						</td>
 
-                </tbody>
-                <%
-					}
+						<td width="100"><span id="total_Col<%=index%>"><%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></span>
+						</td>
+						<td width="120">
+							<form name="deleteForm" class="form" action="ShoppingServlet.do"
+								method="POST">
+								<input type="hidden" name="action" value="DELETE"> <input
+									type="hidden" name="del" value="<%=index%>">
+								<button id="delete<%=index%>" class="del btn btn-light"
+									type="button" value="刪除" style="background-color: antiquewhite">
+									<i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+
+					<%
+						}}
+					%>
+
+					<!-- ------------------------------------------------------------------分隔線 --------------------------------------------------------------------->
+
+					<%
+					if (buylistCustom != null && buylistCustom.size() > 0) {
+					for (int index = 0; index < buylistCustom.size(); index++) {
+							CustommealsVO custommealsVO = buylistCustom.get(index);
+					%>
+
+					<tr>
+						<td width="200"><span
+							id="id_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Name()%></span>
+							<input
+							id="no_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"
+							type="hidden" value=<%=custommealsVO.getcustom_No() %>>
+						<!-- 竊取餐點pk --></td>
+						<td width="100"><span
+							id="price_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Price()%></span>
+						</td>
+						<td width="100">
+							<button id="minus" class="btn btn-light"
+								style="background-color: antiquewhite"
+								onclick="minus<%=(buylist!=null) ? (index+buylist.size()) : index %>()">
+								<i class="far fa-minus-square"></i>
+							</button> <span
+							id="quantity_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Quantity()%></span>
+							<button type="button" id="add" class="btn btn-light"
+								style="background-color: antiquewhite"
+								onclick="add<%=(buylist!=null) ? (index+buylist.size()) : index %>()">
+								<i class="far fa-plus-square"></i>
+							</button>
+
+						</td>
+
+						<td width="100"><span
+							id="total_Col<%=(buylist!=null) ? (index+buylist.size()) : index %>"><%=custommealsVO.getcustom_Price() * custommealsVO.getcustom_Quantity()%></span>
+						</td>
+						<td width="120">
+							<form name="deleteForm" class="form" action="ShoppingServlet.do"
+								method="POST">
+								<input type="hidden" name="action" value="DELETE"> <input
+									type="hidden" name="del"
+									value="<%=(buylist!=null) ? (index+buylist.size()) : index %>">
+								<button
+									id="delete<%=(buylist!=null) ? (index+buylist.size()) : index %>"
+									class="del btn btn-light" type="button" value="刪除"
+									style="background-color: antiquewhite">
+									<i class="fa fa-trash" style="font-size: 20px; color: #b35900"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+
+
+
+
+					<!-- ------------------------------------------------------------------分隔線 --------------------------------------------------------------------->
+
+				</tbody>
+				<%
+					}}
 				%>
-            </table>
+			</table>
 
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <div class=container>
-        <div class="row">
-            <div class="d-flex inline mx-auto">
-                <form name="checkoutForm" action="ShoppingServlet.do" method="POST" style="margin: 10px;">
-                    <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳" class="btn btn-warning">
-                </form>
-                <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
-                    <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--ads-->
-    <div>
-        <h3 class="col-md-8 col-12" style="margin: auto; margin-top: 100px;">真心推薦</h3>
+	<div class=container>
+		<div class="row">
+			<div class="d-flex inline mx-auto">
+				<form name="checkoutForm" action="ShoppingServlet.do" method="POST"
+					style="margin: 10px;">
+					<input type="hidden" name="action" value="CHECKOUT"> <input
+						style="font-weight: bolder;" type="submit" value="付款結帳"
+						class="btn btn-warning">
+				</form>
+				<form name="checkoutForm"
+					action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp"
+					method="POST" style="margin: 10px;">
+					<input style="font-weight: bolder;" type="submit" value="繼續選購"
+						class="btn btn-warning">
+				</form>
+			</div>
+		</div>
+	</div>
 
-        <div class="card-deck" style="height: 400px; width: 1140px; margin: auto;">
-            <div class="card">
-                <img class="card-img-top" src="img/31178_slow_cooker_pork_ramen_3000.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text
-                        below as a natural lead-in to additional content.</p>
-                    <p class="card-text">
-                        <small class="text-muted"></small>
-                    </p>
-                    <a href="#" class="btn btn-warning">去看看</a>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="img/27346238482_0d2ce7bb73_b.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a
-                        natural lead-in to additional content.</p>
-                    <p class="card-text">
-                        <small class="text-muted"></small>
-                    </p>
-                    <a href="#" class="btn btn-warning">去看看</a>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="img/beeframen-129052-1.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text
-                        below as a natural lead-in to additional content.</p>
-                    <p class="card-text">
-                        <small class="text-muted"></small>
-                    </p>
-                    <a href="#" class="btn btn-warning">去看看</a>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="img/000PPUE410DCEE7B3216CEj.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text
-                        below as a natural lead-in</p>
-                    <p class="card-text">
-                        <small class="text-muted"></small>
-                    </p>
-                    <a href="#" class="btn btn-warning">去看看</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<% 
+	PostService postSvc = new PostService();
+	List<PostVO> list = postSvc.getAllByNewFour();
+	pageContext.setAttribute("list", list);
+	
+%>
+	<!--ads-->
+	<div class="container">
+		<h3 class="col-md-8 col-12" style="margin-top: 100px;">最新自訂餐點推薦</h3>
+		
+		<div class="row">
+		<c:forEach var="postVO" items="${list}">
+			<div class="col-md-4 col-4 px-2 py-4 ">
+				<div class="card">
+					<img class="card-img img-fluid"
+						src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
+						alt="Card image" style="width: 400px; height: 300px;">
+					<div
+						class="card-img-overlay d-flex justify-content-center align-items-center">
+						<h2 class="display-5" class="text-primary ">
+							<b>${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Name}</b>
+						</h2>
+					</div>
+				</div>
 
-    <%
+				<div class="card px-2"
+					style="background-color: rgba(255, 255, 255, 0.45)">
+					<h5 class="card-title text-dark my-2 px-2">${cusmealSvc1.getOneCustommeals(postVO.custom_No).custom_Name}</h5>
+					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
+					<p style="text-align: right;" class="my-0">
+						by ${memSvc.getOne_Member(postVO.mem_No).mem_Name} <span
+							class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</span>
+					</p>
+
+					<!-- 查看單一貼文action -->
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/post/postServlet.do"
+						style="margin-bottom: 0px;">
+						<input type="hidden" name="post_No" value="${postVO.post_No}" />
+						<input type="hidden" name="mem_No" value="${postVO.mem_No}" />
+						<!-- 查單一貼文 -->
+						<input type="hidden" name="action" value="getOne_For_Display" />
+						<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
+							&raquo;</button>
+					</FORM>
+					<c:if test='${memVO.mem_No!=null}'>
+						<form method="post"
+							action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+							<input type="hidden" name="action" value="insert_byPosted">
+							<input type="hidden" name="custom_No" value="${postVO.custom_No}">
+							<input type="hidden" id="mem_No" name="mem_No"
+								value="${memVO.mem_No}" />
+							<button type="submit"
+								class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
+						</form>
+					</c:if>
+				</div>
+			</div>
+		</c:forEach>
+</div>
+	</div>
+
+	<%
 		}
 	%>
-    <c:if test="${empty shoppingcart}">
-        <!-- 	the hover effect example -->
-        <!-- 		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> -->
-        <!-- 			<div class="hovereffect"> -->
-        <!-- 				<img class="img-responsive" src="http://placehold.it/350x200" alt=""> -->
-        <!-- 				<div class="overlay"> -->
-        <!-- 					<h2>Hover effect 1v2</h2> -->
-        <!-- 					<a class="info" href="#">link here</a> -->
-        <!-- 				</div> -->
-        <!-- 			</div> -->
-        <!-- 		</div> -->
-        <div class="center d-flex col-md-12" style="margin-top: 150px;">
-            <div class="hovereffect center" style="width: 500px;height:333.33px;margin-bottom: 5%;">
-                <img class="rounded d-block img-responsive" src="img/stock-photo-traditional-japanese-soup-ramen-with-meat-broth-asian-noodles-seaweed-sliced-pork-eggs-and-709288393X.jpg" alt="Card image cap" style="align-self: center;width:100%; ">
-                <div class="overlay">
+	<c:if test="${empty shoppingcart}">
+		<!-- 	the hover effect example -->
+		<!-- 		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> -->
+		<!-- 			<div class="hovereffect"> -->
+		<!-- 				<img class="img-responsive" src="http://placehold.it/350x200" alt=""> -->
+		<!-- 				<div class="overlay"> -->
+		<!-- 					<h2>Hover effect 1v2</h2> -->
+		<!-- 					<a class="info" href="#">link here</a> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<div class="center d-flex col-md-12" style="margin-top: 150px;">
+			<div class="hovereffect center"
+				style="width: 500px; height: 333.33px; margin-bottom: 5%;">
+				<img class="rounded d-block img-responsive"
+					src="img/stock-photo-traditional-japanese-soup-ramen-with-meat-broth-asian-noodles-seaweed-sliced-pork-eggs-and-709288393X.jpg"
+					alt="Card image cap" style="align-self: center; width: 100%;">
+				<div class="overlay">
+					<a class="info center"
+						href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">點餐去</a>
+				</div>
+			</div>
+		</div>
+		<div class="center" style="">
+			<p class="card-text center"
+				style="color: black; font-size: 25px; margin-top: 25px; margin-bottom: 25px">你的購物車還是空的，肚子不餓嗎?</p>
+			<!-- 			<button class="btn btn-warning" style="width: 500px;" -->
+			<!-- 				onclick="window.location.href='noodleShop.jsp'"> -->
+			<!-- 				<h3>點餐去!</h3> -->
+			<!-- 			</button> -->
+		</div>
 
-                    <a class="info center" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">點餐去</a>
-                </div>
-            </div>
-        </div>
-        <div class="center" style="">
-            <p class="card-text center" style="color: black; font-size: 25px; margin-top: 25px; margin-bottom: 25px">你的購物車還是空的，肚子不餓嗎?</p>
-            <!-- 			<button class="btn btn-warning" style="width: 500px;" -->
-            <!-- 				onclick="window.location.href='noodleShop.jsp'"> -->
-            <!-- 				<h3>點餐去!</h3> -->
-            <!-- 			</button> -->
-        </div>
-
-    </c:if>
-
-    <script>
+	</c:if>
+	<script>
     console.log($('#quantity_Col').val());
         //         $(document).ready(function() {
         //             $('#cart').DataTable();
@@ -479,7 +578,7 @@ a {
 //         }
 
     </script>
-    <jsp:include page="/front_end/footer.jsp" flush="true" />
+	<jsp:include page="/front_end/footer.jsp" flush="true" />
 </body>
 
 </html>
