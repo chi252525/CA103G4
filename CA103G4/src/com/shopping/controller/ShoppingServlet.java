@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.coucat.model.CoucatService;
 import com.coupon.model.CouponService;
 import com.custommeals.model.CustommealsVO;
+import com.ingredients.model.IngredientsVO;
 import com.menu.model.MenuVO;
 
 @WebServlet("/front_end/shoppingCart/ShoppingServlet.do")
@@ -26,8 +27,8 @@ public class ShoppingServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 		List<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
-		CustommealsVO custommealsVO = (CustommealsVO) req.getAttribute("custommealsVO");
-		
+		CustommealsVO custommealsVO = (CustommealsVO) req.getAttribute("custommealsVO");//???
+
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 
@@ -37,7 +38,7 @@ public class ShoppingServlet extends HttpServlet {
 			// 刪除餐點
 			if ("DELETE".equals(action)) {
 
-				String del = req.getParameter("del");
+				String del = req.getParameter("del");// 要刪除物件的index
 				int d = Integer.parseInt(del);
 				buylist.remove(d);
 //				try {
@@ -45,6 +46,30 @@ public class ShoppingServlet extends HttpServlet {
 				if (buylist.size() != 0) {
 					for (MenuVO x : buylist) {
 						System.out.println(x.getMenu_Id() + "有" + x.getMenu_quantity() + "碗");
+					}
+				} else {
+					System.out.println("沒東西 !");
+				}
+				res.sendRedirect("Cart.jsp");
+				return;// 被免被下面的forward或redirect 導致exception
+//				} catch (Exception e) {
+//					
+//				}
+			}
+
+			else if ("DELETEC".equals(action)) {
+
+				String del = req.getParameter("del");// 要刪除物件的index
+				int d = Integer.parseInt(del);
+				buylistCustom.remove(d);
+//				try {
+				System.out.println("目前購物車內容:");
+				if (buylistCustom.size() != 0) {
+					for (CustommealsVO y : buylistCustom) {
+						System.out.println(y.getcustom_Name() + "有食材:");
+						for (IngredientsVO ig : (y.getIngredientsList())) {
+							System.out.println(ig.getingdt_Name() + "價格: " + ig.getingdt_Price());
+						}
 					}
 				} else {
 					System.out.println("沒東西 !");
@@ -73,19 +98,19 @@ public class ShoppingServlet extends HttpServlet {
 				}
 
 			}
-			
-			if(custommealsVO != null) {
+
+			if (custommealsVO != null) {
 				if (buylistCustom == null) {
 					buylistCustom = new Vector<CustommealsVO>();
 					buylistCustom.add(custommealsVO);
 					System.out.println(buylistCustom.get(0).getcustom_Name());
-					
+
 				} else {
 //					if (buylistCustom.contains(custommealsVO)) {
 //						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
 //						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
 //					} else {
-						buylistCustom.add(custommealsVO);
+					buylistCustom.add(custommealsVO);
 //					}
 				}
 			}
@@ -94,6 +119,16 @@ public class ShoppingServlet extends HttpServlet {
 			if (buylist != null) {
 				for (MenuVO x : buylist) {
 					System.out.println(x.getMenu_Id() + "有" + x.getMenu_quantity() + "碗");
+				}
+			} 
+			if(buylistCustom != null) {
+				for (CustommealsVO x : buylistCustom) {
+					System.out.println(x.getcustom_Name() + "有" + x.getcustom_Quantity() + "碗");
+					System.out.println("內含食材有: ");
+					for(IngredientsVO ig : x.getIngredientsList()) {
+						System.out.println(ig.getingdt_Name()+"價格: "+ig.getingdt_Price());
+					}
+					System.out.println("========================");
 				}
 			} else {
 				System.out.println("沒東西 !");
@@ -131,7 +166,6 @@ public class ShoppingServlet extends HttpServlet {
 						total += (price * quantity);
 					}
 				}
-				
 
 				String amount = String.valueOf(total);
 				req.setAttribute("amount", amount);
@@ -187,7 +221,7 @@ public class ShoppingServlet extends HttpServlet {
 			try {
 				MenuVO aMenuVO = getMenuVO(req);// get點擊的餐點
 				MenuVO innerMenuVO = buylist.get(buylist.indexOf(aMenuVO));// 得到車裡與點擊餐點相同的餐
-				if (innerMenuVO.getMenu_quantity() > 1) { //大於0才可以減
+				if (innerMenuVO.getMenu_quantity() > 1) { // 大於0才可以減
 					innerMenuVO.setMenu_quantity(innerMenuVO.getMenu_quantity() - 1);// 將其數量-1
 				}
 				res.setCharacterEncoding("UTF-8");
@@ -203,7 +237,27 @@ public class ShoppingServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if ("findMemCoupon".equals(action)) {
+		} else if ("C_addCart".equals(action)) {
+			try {
+				CustommealsVO aCMenuVO = (CustommealsVO)getMenuVO(req);// get點擊的餐點
+				CustommealsVO innerCMenuVO = buylistCustom.get(buylistCustom.indexOf(aCMenuVO));// 得到車裡與點擊餐點相同的自訂餐
+				if (innerCMenuVO.getMenu_quantity() > 1) { // 大於0才可以減
+					innerCMenuVO.setMenu_quantity(innerCMenuVO.getMenu_quantity() - 1);// 將其數量-1
+				}
+				res.setCharacterEncoding("UTF-8");
+				res.setContentType("text/plain");
+				JSONObject jso = new JSONObject();
+				jso.put("memprice", innerCMenuVO.getcustom_Price());
+				jso.put("memid", innerCMenuVO.getcustom_Name());
+				jso.put("memquantity", innerCMenuVO.getcustom_Quantity());
+				res.getWriter().print(jso);
+//				jso.put("memid", innerCMenuVO.getMenu_Id());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
 			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
@@ -239,7 +293,5 @@ public class ShoppingServlet extends HttpServlet {
 		MenuVO.setMenu_No(menuno);
 		return MenuVO;
 	}
-	
-
 
 }

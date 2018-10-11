@@ -330,6 +330,7 @@ public class CustommealsServlet extends HttpServlet{
 
 					List<IngredientCombinationVO> list = new ArrayList<>();
 					List<IngredientsVO> ingredientsList = new ArrayList<>();
+					custommealsVO.setIngredientsList(ingredientsList);
 					IngredientsService igsvc = new IngredientsService();
 
 					String values[] = req.getParameterValues("ingredients");
