@@ -101,7 +101,7 @@
 											<input type="text"	class="form-control" placeholder="NT." name="coucat_Value">
 										</div>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label class="text-dark">生效日:</label> 
 											<input name="coucat_Valid" id="start_dateTime"    type="text" class="form-control" >
@@ -232,6 +232,5 @@ $(function(){
 								</script>
 
 
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
 </body>
 </html>
