@@ -2,11 +2,11 @@
 
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
-      <div class="row mr-auto">
+      <div class="row ml-auto">
         <div class="my-2 px-3 align-items-center">
           <div class="btn-group">
-        <A href="<%=request.getRequestURI()%>?whichPage=1" class="btn btn-warning">第一頁</A>&nbsp;
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>" class="btn btn-warning ">上一頁</A>&nbsp;
+        <A href="<%=request.getRequestURI()%>?whichPage=1" class="btn btn-outline-primary">第一頁</A>&nbsp;
+        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>" class="btn btn-outline-primary active">上一頁</A>&nbsp;
     	   </div>
         </div>
       </div>
@@ -16,8 +16,8 @@
       <div class="row ml-auto">
         <div class="my-2 px-3 align-items-center">
           <div class="btn-group">
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>" class="btn btn-warning">下一頁</A>&nbsp;
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>" class="btn btn-warning">最末頁</A>&nbsp;
+        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>" class="btn btn-primary">下一頁</A>&nbsp;
+        <A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>" class="btn btn-primary">最末頁</A>&nbsp;
           </div>
         </div>
       </div>

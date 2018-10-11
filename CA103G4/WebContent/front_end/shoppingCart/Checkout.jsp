@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.* , com.menu.model.* , com.custommeals.model.*"%>
+<%@ page import="java.util.* , com.menu.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.couponhistory.model.*"%>
@@ -153,7 +153,6 @@
                         <%
                     @SuppressWarnings("unchecked")
                     Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
-                    Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
                     String amount = (String) request.getAttribute("amount");
                     
                     %>
@@ -183,39 +182,8 @@
                             <td width="120"></td>
                         </tr>
                         <%
-                	}
-                    
-							} 
-                    if (buylistCustom != null && buylistCustom.size() != 0) {
-                    	
-                    	for (int i = 0; i < buylistCustom.size(); i++) {
-                    		CustommealsVO cv = buylistCustom.get(i);
-                            String name = cv.getcustom_Name();
-                            Integer total = cv.getcustom_Price() * cv.getcustom_Quantity();
-                            Integer price = cv.getcustom_Price();
-                            Integer quantity = cv.getcustom_Quantity();
-                            %>
-                                <tr>
-                                    <td width="200">
-                                        <%=name%>
-                                    </td>
-                                    <td width="100">
-                                        <%=price%>
-                                    </td>
-                                    <td width="100">
-                                        <%=quantity%>
-                                    </td>
-                                    <td width="100">
-                                        <%=total%>
-                                    </td>
-                                    <td width="120"></td>
-                                </tr>
-                                <%
-                        	}
-                    	
-                    }
-                    
-                    if (buylist == null && buylistCustom == null) { //發現購物車為空將提示
+                }
+							} else if (buylist == null) { //發現購物車為空將提示
                           %>
                         <tr>
                             <td colspan='5' style='height: 150px; vertical-align: middle'><b class='center'>購物車裡沒有餐點!</b></td>

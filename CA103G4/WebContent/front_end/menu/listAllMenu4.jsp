@@ -195,7 +195,7 @@ body {
 				
 				<c:if test="${menuVO.menu_Status == '1'}">
 
-					<div class="col-md-4">
+					<div class="col-md-3">
 
 						<div class="card" style="background-color: rgba(255, 255, 255, 0.45); margin-bottom: 20px;">
 							<a
@@ -254,7 +254,6 @@ body {
 				}
 			});
 		});
-		
 		//Java完美操縱javaScript , 加入餐點進購物車
 	<%for (int i = 0; i < 12; i++) {%>
 		$(function() {

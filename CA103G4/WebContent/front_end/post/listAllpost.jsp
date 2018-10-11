@@ -237,15 +237,13 @@ body {
 							<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
 								&raquo;</button>
 						</FORM>
-						<c:if test='${memVO.mem_No!=null}'>
 					<form method="post" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
 				<input type="hidden" name ="action" value="insert_byPosted">
 				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
-				<input type="hidden" id="mem_No"	name="mem_No" value="${memVO.mem_No}" />
+				<input type="hidden" id="mem_No"	name="mem_No" value="M000001" />
 				<button type="submit"
-					class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
+					class="btn btn-sm btn-outline-success  float-right ">加入購物車</button>
 				</form>
-				</c:if>
 					</div>
 				</div>
 			</c:forEach>
@@ -287,7 +285,7 @@ var myChart = new Chart(ctx, {
       borderWidth: 1,
       label: '竹風堂餐點評比',
       data: [ <c:forEach var="message" items="${map}"> '${message.value}',</c:forEach>]
-   
+    
  
     }]
   }
