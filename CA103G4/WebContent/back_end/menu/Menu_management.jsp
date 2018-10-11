@@ -141,7 +141,7 @@ body {
 				<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"><br>
 				
 			
-				        <div class="col-md-2">
+				        <div class="col-md-3">
 				       
 				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px;">
 				            <img class="card-img-top" 
