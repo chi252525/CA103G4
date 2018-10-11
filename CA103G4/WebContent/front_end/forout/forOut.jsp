@@ -170,8 +170,8 @@ pageContext.setAttribute("forOut",list);
 		      <div class="form-check-inline">
 		 		  <label class="form-check-label">
 			    	 <input type="checkbox" name="out" class="form-check-input" value="${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}">${(ordinVO.menu_no == mull)? ordinVO.custom_no:ordinVO.menu_no}    
-			    	 														${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id} 
-			      															數量:${(ordinVO.menu_no == mull)? ordinVO.custom_nu:ordinVO.menu_nu}
+					    	 														   ${(ordinVO.menu_no == mull)? (customSvc.getOneCustommeals(ordinVO.custom_no)).custom_Name:menuSvc.getOneMenu(ordinVO.menu_no).menu_Id} 
+					      														      數量: ${(ordinVO.menu_no == mull)? ordinVO.custom_nu:ordinVO.menu_nu}
 			      </label>
 			  </div>
 	     	 <br>
@@ -181,6 +181,7 @@ pageContext.setAttribute("forOut",list);
 	      <div class="modal-footer">
 	        <button type="submit" class="btn" style="background-color: #FF7F50">確認出餐</button>
 	        <input type="hidden" name="action" value="updateForOut"/>
+	        <input type="hidden" name="odNo" value="${orderformVO.order_no}"/>
 	      </div>
 	      </form>
 	      	<button type="button" class="btn" data-dismiss="modal" style="background-color: #A42D00">取消</button>

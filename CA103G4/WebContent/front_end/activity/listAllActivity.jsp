@@ -58,9 +58,11 @@ body {
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
-	font-family: 'Noto Sans TC', sans-serif;
+	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
 	font-weight: 400;
 }
+
+
 
 .promo {
 	background: #ccc;
@@ -93,6 +95,26 @@ div.shavetext {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.button-ning {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #c60909;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button-ning:hover {background-color: #c60909}
+
+.button-ning:active {
+  background-color: #c60909;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 </style>
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
@@ -117,9 +139,11 @@ div.shavetext {
 				<div class="carousel-inner" role="listbox">
 					<c:forEach varStatus="s" var="actVO" items="${list}">
 						<div class="carousel-item ${s.first?'active':''}">
+						<a href="<%=request.getContextPath()%>/activity/activityServlet.do?action=getOne_For_Display&act_No=${actVO.act_No}">
 							<img class="img-fluid"
 								src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=${actVO.act_No}"
 								data-holder-rendered="true">
+								</a>
 						</div>
 					</c:forEach>
 				</div>
@@ -209,7 +233,7 @@ div.shavetext {
 															class="btn btn-outline-primary btn-sm">More..</a>
 													</div>
 													<div class="col-4 mt-4">
-														<button class="btn btn-sm btn-danger"
+														<button class="button-ning"
 															id="${activityVO.act_No}">取得優惠卷</button>
 
 														<p class="mb-0 test ${activityVO.act_No}"

@@ -148,14 +148,8 @@ body {
 						class="img-fluid single-gallery-image img-responsive"
 						style="display: block; margin: auto;" alt="Responsive image">
 					
-					<div class="col-12 test mt-2">
-								<form method="post" action="custommeals.do">
-				<input type="hidden" name ="action" value="insert_byPosted">
-				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
-				<input type="hidden" id="mem_No"	name="mem_No" value="${memVO.mem_No}" />
-				<button type="button"
-					class="btn btn-sm btn-outline-success  float-right ">加入購物車</button>
-				</form>
+					<div class="col-12 mt-2">
+			
 				</div>
 					
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
