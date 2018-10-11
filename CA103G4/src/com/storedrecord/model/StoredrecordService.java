@@ -1,5 +1,6 @@
 package com.storedrecord.model;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class StoredrecordService {
 		dao =new StoredrecordDAO();
 	}
 	
-	public StoredrecordVO addStoredrecord(String mem_No, Timestamp stor_Date_No, Integer stor_Point, Integer drew_Point,Integer stor_Status) {
+	public StoredrecordVO addStoredrecord(String mem_No, Timestamp stor_Date_No, Integer stor_Point, Integer drew_Point,Integer stor_Status) throws SQLException {
 		
 		StoredrecordVO srVO  = new StoredrecordVO();
 		
@@ -20,7 +21,8 @@ public class StoredrecordService {
 		srVO.setDrew_Point(drew_Point);
 		srVO.setStor_Point(stor_Point);
 		srVO.setStor_Status(stor_Status);
-		dao.insert(srVO);
+		String stor_No = dao.insert(srVO);
+		srVO.setStor_No(stor_No);
 		return srVO;	
 	}
 	

@@ -30,7 +30,6 @@
 	       
 	       <div class="input-group-prepend" style=" margin-right:30px;">
 	       <input type="submit" value="確定" class="btn btn-light" value="Submit Button">
-	       <input type="hidden" name="action" value="get_By_Key">  
 	       </div>
 	    </FORM>
 	  <%}%>
