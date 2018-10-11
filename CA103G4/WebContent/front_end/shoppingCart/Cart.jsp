@@ -238,27 +238,23 @@ a {
 					%>
 
                     <tr>
-                        <td width="200"><span id="id_Col<%=index %>">
-                                <%=menuVO.getMenu_Id()%></span>
+                        <td width="200"><span id="id_Col<%=index %>"><%=menuVO.getMenu_Id()%></span>
                             <input id="no_Col<%=index%>" type="hidden" value=<%=menuVO.getMenu_No() %>>
                             <!-- 竊取餐點pk -->
                         </td>
-                        <td width="100"><span id="price_Col<%=index %>">
-                                <%=menuVO.getMenu_Price()%></span>
+                        <td width="100"><span id="price_Col<%=index %>"><%=menuVO.getMenu_Price()%></span>
                         </td>
                         <td width="100">
                             <button id="minus" class="btn btn-light" style="background-color: antiquewhite" onclick="minus<%=index%>()">
                                 <i class="far fa-minus-square"></i>
-                            </button> <span id="quantity_Col<%=index%>">
-                                <%=menuVO.getMenu_quantity()%></span>
+                            </button> <span id="quantity_Col<%=index%>"><%=menuVO.getMenu_quantity()%></span>
                             <button type="button" id="add" class="btn btn-light" style="background-color: antiquewhite" onclick="add<%=index%>()">
                                 <i class="far fa-plus-square"></i>
                             </button>
 
                         </td>
 
-                        <td width="100"><span id="total_Col<%=index%>">
-                                <%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></span>
+                        <td width="100"><span id="total_Col<%=index%>"><%=menuVO.getMenu_Price() * menuVO.getMenu_quantity()%></span>
                         </td>
                         <td width="120">
                             <form name="deleteForm" class="form" action="ShoppingServlet.do" method="POST">
@@ -283,28 +279,24 @@ a {
 					%>
 
                     <tr>
-                        <td width="200"><span id="Cid_Col<%=index %>">
-                                <%=custommealsVO.getcustom_Name()%></span>
+                        <td width="200"><span id="Cid_Col<%=index %>"><%=custommealsVO.getcustom_Name()%></span>
                             <input id="Cno_Col<%=index %>" type="hidden" value=<%=custommealsVO.getcustom_No() %>>
                             <!-- 竊取餐點pk -->
                         </td>
                         <td width="100">
-                            <span id="Cprice_Col<%= index %>">
-                                <%=custommealsVO.getcustom_Price()%></span>
+                            <span id="Cprice_Col<%= index %>"><%=custommealsVO.getcustom_Price()%></span>
                         </td>
                         <td width="100">
                             <button id="minusC" class="btn btn-light" style="background-color: antiquewhite" onclick="minusC<%= index %>()">
                                 <i class="far fa-minus-square"></i>
-                            </button> <span id="Cquantity_Col<%=index %>">
-                                <%=custommealsVO.getcustom_Quantity()%></span>
+                            </button> <span id="Cquantity_Col<%=index %>"><%=custommealsVO.getcustom_Quantity()%></span>
                             <button type="button" id="addC" class="btn btn-light" style="background-color: antiquewhite" onclick="addC<%= index %>()">
                                 <i class="far fa-plus-square"></i>
                             </button>
 
                         </td>
 
-                        <td width="100"><span id="Ctotal_Col<%=index %>">
-                                <%=custommealsVO.getcustom_Price() * custommealsVO.getcustom_Quantity()%></span>
+                        <td width="100"><span id="Ctotal_Col<%=index %>"><%=custommealsVO.getcustom_Price() * custommealsVO.getcustom_Quantity()%></span>
                         </td>
                         <td width="120">
                             <form name="deleteForm" class="formC" action="ShoppingServlet.do" method="POST">
@@ -586,7 +578,7 @@ a {
                 type: "post",
                 url: "ShoppingServlet.do",
                 data: {
-                    "action": "CminusCart",
+                    "action": "C_minusCart",
                     "quantity": $("#Cquantity_Col<%=i%>").text(),
                     "price": $("#Cprice_Col<%=i%>").text(),
                     "menuid": $("#Cid_Col<%=i%>").text(),
