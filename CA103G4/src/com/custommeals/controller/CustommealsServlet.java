@@ -359,6 +359,7 @@ public class CustommealsServlet extends HttpServlet{
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
 					custommealsVO.setcustom_No(custom_No);
+					custommealsVO.setcustom_Quantity(1);
 					custommealsVO.setIngredientsList(ingredientsList);
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req

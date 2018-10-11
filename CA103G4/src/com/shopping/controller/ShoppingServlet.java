@@ -81,12 +81,12 @@ public class ShoppingServlet extends HttpServlet {
 					System.out.println(buylistCustom.get(0).getcustom_Name());
 					
 				} else {
-					if (buylistCustom.contains(custommealsVO)) {
-						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
-						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
-					} else {
+//					if (buylistCustom.contains(custommealsVO)) {
+//						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
+//						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
+//					} else {
 						buylistCustom.add(custommealsVO);
-					}
+//					}
 				}
 			}
 
@@ -128,7 +128,6 @@ public class ShoppingServlet extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
-
 			}
 		}
 		// 餐點數量加減按鈕(未完成)
