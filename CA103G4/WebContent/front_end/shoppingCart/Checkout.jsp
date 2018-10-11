@@ -372,7 +372,7 @@
     <div class=container>
         <div class="row">
             <div class="d-flex ml-auto">
-            	<c:if test="${ not empty shoppingcart}">
+            	<c:if test="${ not empty shoppingcart and empty shoppingcartCustom}">
                 	<a class="btn btn-warning btn-lg" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin: 5px;">繼續點餐</a>
                 	<input id="forOrderAmount" type="hidden" name="amount" value="<%=amount %>"><!-- 傳遞金額 -->
                 	<button type="submit" class="btn btn-warning btn-lg" style="margin: 5px;">結帳</button>
