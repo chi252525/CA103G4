@@ -366,15 +366,15 @@
 		<div style="width:60px;">
 		</div>
 		<div style="width:450px;">													
-										      <div> &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp;</div>
-                                                <input class="form-control" type="hidden" name="mem_No" size="45" value="" /><br>
+										      <div> &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp; 	${memVO.mem_No}</div>
+                                                <input class="form-control" type="hidden" name="mem_No" size="45" value="${memVO.mem_No}" /><br>
 											<div class="form-inline">
                                                 &nbsp;&nbsp;&nbsp;餐點名稱&nbsp;&nbsp;&nbsp;
-                                                <input class="form-control" type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;" value="" required /><br>
+                                                <input class="form-control" type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;" required /><br>
 											</div>
 											<div class="form-inline">
                                                 &nbsp;&nbsp;&nbsp;餐點價格&nbsp;&nbsp;&nbsp;
-                                                <input  class="form-control custom_Price" type="text" id="custom_Price" size="45"  readonly style="margin-top:10px; width:250px;" value="" /><br>
+                                                <input  class="form-control custom_Price" type="text" id="custom_Price" name="custom_Price" size="45"  readonly style="margin-top:10px; width:250px;"  /><br>
 											</div>
 											<table>
 											   <tr style="display: none;">
@@ -618,25 +618,21 @@
 				});
 			});
 			//Java完美操縱javaScript , 加入餐點進購物車
-		<%for (int i = 0; i < 12; i++) {%>
+		
 			$(function() {
-				$(".submit").eq(
-		<%=i%>
-			).click(function() {
+				$("#insert").click(function() {
 					swal({
 						title : "加入購物車",
 						html : "成功",
 						type : "success"
 					}).then(function() {
-						$(".shoppingForm").eq(
-		<%=i%>
-			).submit();
+						$("#sform").submit();
 					});
 				});
 			});
-		<%}%>
 		
 		
+		//開啟新增按鈕
 		$("#getPrice").click(function(){
 			alert('ok');
 			$("#insert").prop("disabled",false);

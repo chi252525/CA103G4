@@ -312,13 +312,13 @@ public class CustommealsServlet extends HttpServlet{
 						errorMsgs.add("自訂餐點名稱長度過長");
 					}
 					//無輸入OR格式不正確
-					String str = req.getParameter("custom_Price");
-					if (str == null || (str.trim()).length() == 0) {
+					String price = req.getParameter("custom_Price");
+					if (price == null || (price.trim()).length() == 0) {
 						errorMsgs.add("請輸入自訂餐點價格");
 					}
 					Integer custom_Price = null;
 					try {
-						custom_Price = new Integer(str);
+						custom_Price = Integer.parseInt(price);
 					} catch (Exception e) {
 						errorMsgs.add("自訂餐點價格格式不正確");
 					}
@@ -328,20 +328,9 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_Name(custom_Name);
 					custommealsVO.setcustom_Price(custom_Price);
 
-					
-
-					
-
-					
-					
-					
-
-
-
-
 					List<IngredientCombinationVO> list = new ArrayList<>();
 					List<IngredientsVO> ingredientsList = new ArrayList<>();
-					IngredientsDAO_interface idao = new IngredientsDAO();
+					IngredientsService igsvc = new IngredientsService();
 
 					String values[] = req.getParameterValues("ingredients");
 					if (values != null) {
@@ -350,7 +339,7 @@ public class CustommealsServlet extends HttpServlet{
 							IngredientCombinationVO ingt = new IngredientCombinationVO();
 							ingt.setIngdt_Id(values[i]);
 							list.add(ingt);
-							ingredientsList.add(idao.findByPrimaryKey(values[i]));
+							ingredientsList.add(igsvc.getOneIngredients(values[i]));
 						}
 					}
 	
