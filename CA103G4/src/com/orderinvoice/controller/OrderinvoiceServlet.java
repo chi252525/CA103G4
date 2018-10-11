@@ -21,6 +21,7 @@ import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
 import com.orderform.model.OrderformVO;
+import com.orderinvoice.model.OrderinvoiceService;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderinvoiceServlet extends HttpServlet {
@@ -37,38 +38,33 @@ public class OrderinvoiceServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
+	
 		if ("updateForOut".equals(action)) {
 			
-			List<OrderinvoiceVO> list = new ArrayList<>();
+			
+			OrderinvoiceService orSvc = new OrderinvoiceService();
 			
 			String[] eatS = req.getParameterValues("out");
-			OrderinvoiceVO orVO = null;
 			
 			String ordno = req.getParameter("odNo");
 			
 			for (int i = 0; i < eatS.length; i++) {
-				    orVO = new OrderinvoiceVO();
 				
 				if (("M").equals(String.valueOf(eatS[i].charAt(0)))) {
-					orVO.setMenu_no(eatS[i]);
-					orVO.setOrder_no(ordno);
-					orVO.setCustom_no(null);
-					orVO.forUpdate();
+					
+					orSvc.forUpdate(ordno, eatS[i], null);
 				} else {
-					orVO.setCustom_no(eatS[i]);
-					orVO.setOrder_no(ordno);
-					orVO.setMenu_no(null);
+					orSvc.forUpdate(ordno, null, eatS[i]);
 				}
 				
-				list.add(orVO);
 			}
 			
-			
-			
-			
-			
+			String url = req.getContextPath() + "/front_end/forout/forOut.jsp";
+		 	res.sendRedirect(url);	
+	
 		}
+		
+		
 		
 	}
 

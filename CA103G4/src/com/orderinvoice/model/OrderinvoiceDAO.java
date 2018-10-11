@@ -35,8 +35,8 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 	private static final String GET_MEALINVOICE ="SELECT MENU_NO, CUSTOMMEALS_NO FROM ORDERINVOICE WHERE ORDER_NO=?";
-	private static final String UPDATESTA = "UPDATE orderinvoice set invo_status=? where order_no = ? and menu_no = ?";
-	private static final String UPDATESTA2 = "UPDATE orderinvoice set invo_status=? where order_no = ? and custom_no= ?";
+	private static final String UPDATESTA = "UPDATE orderinvoice set invo_status=2 where order_no = ? and menu_no = ?";
+	private static final String UPDATESTA2 = "UPDATE orderinvoice set invo_status=2 where order_no = ? and custom_no= ?";
 //	private static final String UPDATENU3 = "UPDATE orderinvoice set invo_status=? where order_no = ?";
 
 	@Override
@@ -338,16 +338,21 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
 			
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATESTA);
-
-			pstmt.setInt(1, orderinvoiceVO.getInvo_status());
-			pstmt.setString(2, orderinvoiceVO.getInvo_no());
-			pstmt.setString(3, orderinvoiceVO.getOrder_no());
-			pstmt.setString(4, orderinvoiceVO.getOrder_no());
-
+			
+			if (orderinvoiceVO.getCustom_no() == null) {
+				pstmt = con.prepareStatement(UPDATESTA);
+				
+				pstmt.setString(1, orderinvoiceVO.getOrder_no());
+				pstmt.setString(2, orderinvoiceVO.getMenu_no());
+			} else {
+				pstmt = con.prepareStatement(UPDATESTA2);
+				
+				pstmt.setString(1, orderinvoiceVO.getOrder_no());
+				pstmt.setString(2, orderinvoiceVO.getCustom_no());
+			}
+			
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -372,6 +377,8 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 		}
 
 	}
+	
+	
 
 	@Override
 	public int getByOrder_no(String order_no) {
