@@ -237,7 +237,13 @@ body {
 							<button type="submit" class="btn btn-info btn-sm btn-block my-2">看更多
 								&raquo;</button>
 						</FORM>
-
+					<form method="post" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+				<input type="hidden" name ="action" value="insert_byPosted">
+				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
+				<input type="hidden" id="mem_No"	name="mem_No" value="M000001" />
+				<button type="submit"
+					class="btn btn-sm btn-outline-success  float-right ">加入購物車</button>
+				</form>
 					</div>
 				</div>
 			</c:forEach>
