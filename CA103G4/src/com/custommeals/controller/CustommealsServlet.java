@@ -380,7 +380,8 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
+//					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
