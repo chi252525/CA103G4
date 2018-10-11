@@ -48,9 +48,9 @@
 	margin-right: 10px;
 }
 
-.imgicon {
-	margin-top: 10px;
-}
+/* .imgicon { */
+/* 	margin-top: 10px; */
+/* } */
 
 
 .bg-black {

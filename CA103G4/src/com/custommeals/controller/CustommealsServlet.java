@@ -204,6 +204,90 @@ public class CustommealsServlet extends HttpServlet{
 			
 			
 			
+//			if("insert".equals(action)){  // 來自addCustommeals.jsp的請求  
+//				List<String> errorMsgs = new LinkedList<>();
+//				req.setAttribute("errorMsgs", errorMsgs);
+////				try {
+//					/***************************1.接收請求參數****************************************/
+//					
+//					//無輸入OR長度超出範圍
+//					String mem_No = req.getParameter("mem_No").trim();
+//					if(mem_No == null || mem_No.length() == 0) {
+//						errorMsgs.add("會員編號:請勿空白");
+//					}  else if(mem_No.length() >= 10) {
+//						errorMsgs.add("會員編號格式不符");
+//					}
+//					
+//										
+//					//無輸入OR長度超出範圍
+//					String custom_Name = req.getParameter("custom_Name").trim();
+//					if(custom_Name == null || custom_Name.length() == 0) {
+//						errorMsgs.add("自訂餐點名稱:請勿空白");
+//					} else if(custom_Name.length() >= 20) {
+//						errorMsgs.add("自訂餐點名稱長度過長");
+//					}
+//					//無輸入OR格式不正確
+//					String str = req.getParameter("custom_Price");
+//					if (str == null || (str.trim()).length() == 0) {
+//						errorMsgs.add("請輸入自訂餐點價格");
+//					}
+//					Integer custom_Price = null;
+//					try {
+//						custom_Price = new Integer(str);
+//					} catch (Exception e) {
+//						errorMsgs.add("自訂餐點價格格式不正確");
+//					}
+//					
+//					
+//					CustommealsVO custommealsVO = new CustommealsVO();
+//					custommealsVO.setmem_No(mem_No);
+//					custommealsVO.setcustom_Name(custom_Name);
+//					custommealsVO.setcustom_Price(custom_Price);
+//					
+//					
+//					if(!errorMsgs.isEmpty()) {
+//						req.setAttribute("custommealsVO", custommealsVO);  // 含有輸入格式錯誤的custommealsVO物件,也存入req
+//						RequestDispatcher failureView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
+//						failureView.forward(req, res);
+//						return; //程式中斷
+//					}
+//					List<IngredientCombinationVO> list = new ArrayList();
+//					IngredientCombinationVO ingt =new 	IngredientCombinationVO();
+//							
+//							
+//							Enumeration en = req.getParameterNames();
+//							while (en.hasMoreElements()) {
+//								String noodle = (String) en.nextElement();
+//								String values[] = req.getParameterValues(noodle);
+//								if (values != null) {
+//									for (int i = 0; i < values.length; i++) {
+//										System.out.println(noodle + " [" + i + "]: " + values[i]);
+//										ingt.setIngdt_Id(values[i]);
+//										list.add(ingt);
+//										
+//									}
+//								}
+//
+//								/***************************2.開始新增資料****************************************/
+//								CustommealsService custommealsSvc = new CustommealsService();
+//								custommealsVO = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price,list);
+//												
+//								/***************************3.新增完成,準備轉交(Send the Success view)************/
+//								req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+//								RequestDispatcher successView = req.getRequestDispatcher("/front_end/custommeals/listAllCustommeals.jsp");
+//								successView.forward(req, res);
+//								
+//								/***************************其他可能的錯誤處理**********************************/
+////							} catch(Exception e) {
+////								errorMsgs.add("資料新增失敗"+e.getMessage());
+////								RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/custommeals/addCustommeals.jsp");
+////								failuerView.forward(req, res);
+////							}
+//					
+//			}
+//			
+//				
+//			}
 			
 			if("insert".equals(action)){
 				List<String> errorMsgs = new LinkedList<>();
@@ -247,18 +331,12 @@ public class CustommealsServlet extends HttpServlet{
 					
 
 					
-//					List<IngredientCombinationVO> list = new ArrayList();
-//					String values[] = req.getParameterValues("ingredients");
-//					if (values != null) {
-//						for (int i = 0; i < values.length; i++) {
-//							System.out.println(values[i]);
-//							IngredientCombinationVO ingt = new IngredientCombinationVO();
-//							ingt.setIngdt_Id(values[i]);
-//							list.add(ingt);
-//						}
-//					}
+
 					
 					
+					
+
+
 
 
 					List<IngredientCombinationVO> list = new ArrayList<>();
@@ -280,19 +358,12 @@ public class CustommealsServlet extends HttpServlet{
 					/***************************2.開始新增資料****************************************/
 					CustommealsService custommealsSvc = new CustommealsService();	
 					String custom_No = custommealsSvc.addCustommealsAutoKeys(mem_No, custom_Name, custom_Price, list);
-<<<<<<< HEAD
 					custommealsVO.setcustom_No(custom_No);
 					custommealsVO.setcustom_Quantity(1);
 					custommealsVO.setIngredientsList(ingredientsList);
-=======
-					custommealsVO.setcustom_No(custom_No);             //
-					custommealsVO.setIngredientsList(ingredientsList); //
->>>>>>> 449530b93e1d636e861735477f79b0770ef66cfd
 					
 					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
 					System.out.println("新增資料完成*");
-
-					
 
 
 //					System.out.println(custommealsVO.getcustom_No());
@@ -303,9 +374,6 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-
-
-//					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/Cart.jsp");
 					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
@@ -344,6 +412,81 @@ public class CustommealsServlet extends HttpServlet{
 					failureView.forward(req, res);
 				}
 			}
+			
+			
+			
+			if("insert_byPosted".equals(action)){
+				List<String> errorMsgs = new LinkedList<>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				System.out.println("insert_byPosted");
+				try {
+					//取會員編號
+					String mem_No = req.getParameter("mem_No").trim();
+					if(mem_No == null || mem_No.length() == 0) {
+						errorMsgs.add("會員編號:請勿空白");
+					}  else if(mem_No.length() >= 10) {
+						errorMsgs.add("會員編號格式不符");
+					}
+					String custom_No = req.getParameter("custom_No").trim();
+					if(custom_No == null || custom_No.length() == 0) {
+						errorMsgs.add("自訂餐點編號沒取到");
+					} 
+					//查這筆貼文的自訂餐點VO
+					CustommealsService cusSvc = new CustommealsService();
+					CustommealsVO oneCusbyPost_CusVO =cusSvc.getOneCustommeals(custom_No);
+					
+					//新會員也要訂這個自訂餐點，用一個新的VO裝
+					CustommealsVO custommealsVO = new CustommealsVO();
+					custommealsVO.setmem_No(mem_No);
+					custommealsVO.setcustom_Name(oneCusbyPost_CusVO.getcustom_Name());
+					custommealsVO.setcustom_Price(oneCusbyPost_CusVO.getcustom_Price());
+					custommealsVO.setcustom_Quantity(1);
+
+
+					//同時也撈出一樣的食材搭配
+					IngredientsDAO_interface idao = new IngredientsDAO();
+					List<IngredientsVO> ingredientsList_byPost =idao.findIngtByCustomNo(custom_No);
+					//new一個新的食材搭配VO去新增
+					List<IngredientCombinationVO> ingtCombineList_new = new LinkedList<IngredientCombinationVO>();
+					IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
+					for(IngredientsVO ingtVO_byPost:ingredientsList_byPost) {
+						ingtVO_new.setIngdt_Id(ingtVO_byPost.getingdt_Id());
+						ingtCombineList_new.add(ingtVO_new);
+					}
+					
+	
+					System.out.println("開始新增資料*");
+					/***************************2.開始新增資料****************************************/
+					CustommealsService custommealsSvc = new CustommealsService();	
+					String custom_No_new = custommealsSvc.addCustommealsAutoKeys(mem_No, oneCusbyPost_CusVO.getcustom_Name(), oneCusbyPost_CusVO.getcustom_Price(), ingtCombineList_new);
+					custommealsVO.setcustom_No(custom_No_new);
+					custommealsVO.setIngredientsList(ingredientsList_byPost);
+					
+					req.setAttribute("custommealsVO", custommealsVO);  // 資料庫新增成功後,正確的custommealsVO物件,存入req
+					System.out.println("新增資料...由post新增.完成*");
+
+//					System.out.println(custommealsVO.getcustom_No());
+//					System.out.println(custommealsVO.getcustom_Name());
+//					System.out.println(custommealsVO.getcustom_Price());
+//					for(IngredientsVO ivo : ingredientsList) {
+//						System.out.println(ivo.getingdt_Id());
+//						System.out.println(ivo.getingdt_Name());
+//						System.out.println(ivo.getingdt_Price());
+//					}
+					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
+					successView.forward(req, res);
+					
+					/***************************其他可能的錯誤處理**********************************/
+				} catch(Exception e) {
+					e.printStackTrace();
+					errorMsgs.add("資料新增失敗"+e.getMessage());
+					RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/post/listOnePost.jsp");
+					failuerView.forward(req, res);
+				}
+			}
+			
+			
+			
 			
 		}
 
