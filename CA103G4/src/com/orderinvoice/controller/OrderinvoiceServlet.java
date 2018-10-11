@@ -20,6 +20,8 @@ import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
+import com.orderform.model.OrderformVO;
+import com.orderinvoice.model.OrderinvoiceService;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderinvoiceServlet extends HttpServlet {
@@ -36,17 +38,33 @@ public class OrderinvoiceServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+	
 		if ("updateForOut".equals(action)) {
 			
-			List<OrderinvoiceVO> list = new ArrayList<>();
 			
-			String[] ordnu = req.getParameterValues("out");
+			OrderinvoiceService orSvc = new OrderinvoiceService();
 			
-			for (int i =0; i < ordnu;)
+			String[] eatS = req.getParameterValues("out");
 			
+			String ordno = req.getParameter("odNo");
 			
+			for (int i = 0; i < eatS.length; i++) {
+				
+				if (("M").equals(String.valueOf(eatS[i].charAt(0)))) {
+					
+					orSvc.forUpdate(ordno, eatS[i], null);
+				} else {
+					orSvc.forUpdate(ordno, null, eatS[i]);
+				}
+				
+			}
 			
+			String url = req.getContextPath() + "/front_end/forout/forOut.jsp";
+		 	res.sendRedirect(url);	
+	
 		}
+		
+		
 		
 	}
 

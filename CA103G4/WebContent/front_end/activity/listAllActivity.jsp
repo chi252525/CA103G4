@@ -58,9 +58,11 @@ body {
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
-	font-family: 'Noto Sans TC', sans-serif;
+	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
 	font-weight: 400;
 }
+
+
 
 .promo {
 	background: #ccc;
