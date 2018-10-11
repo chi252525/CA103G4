@@ -6,6 +6,7 @@
 <%@ page import="java.util.*" %>
 <% 
 EmpVO empVO = (EmpVO)session.getAttribute("empVO");
+
 EmpauthorityService empauthsvc = new EmpauthorityService();
 List<EmpauthorityVO> empfealist = new ArrayList();
 
