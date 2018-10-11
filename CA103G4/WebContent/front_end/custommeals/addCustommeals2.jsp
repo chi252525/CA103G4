@@ -89,8 +89,7 @@
   <button id="add" class="button add-button" onclick="addTask()">Add New Task</button>
 </section>
 -->
-<<<<<<< HEAD
-=======
+
 <body>
 
 <jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
@@ -564,7 +563,6 @@
 
 
 
->>>>>>> 16ad185d382db0b3d929166a9f832c99094649bf
 
 <body>
 
