@@ -98,10 +98,10 @@ public class ShoppingServlet extends HttpServlet {
 			} else {
 				System.out.println("沒東西 !");
 			}
-
+			String requestURL = req.getParameter("requestURL");
 			session.setAttribute("shoppingcart", buylist);
 			session.setAttribute("shoppingcartCustom", buylistCustom);
-			String url = req.getContextPath() + req.getAttribute("requestURL");// send back
+			String url = req.getContextPath() + requestURL;// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);

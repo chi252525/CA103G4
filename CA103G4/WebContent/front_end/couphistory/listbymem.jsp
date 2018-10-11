@@ -72,16 +72,16 @@ pageContext.setAttribute("ByName",list);
 
   .amos{
     width: 1200px;
-    background-color: #000;
-    margin: auto; 
-    margin-top: 5%;
+/*     background-color: #000; */
+/*     margin: auto;  */
+/*     margin-top: 5%; */
   }
 
   .item{
     margin: 5px;
-    width: 1190px;
-    height: 400px;
-    background-color: #880000;
+    width: 1200px;
+/*     height: 400px; */
+/*     background-color: #880000; */
   }
 
    .tet{
@@ -90,16 +90,16 @@ pageContext.setAttribute("ByName",list);
 
   .pimg{
     margin: 5px;
-    width: 360px;
-    height: 390px;
-    background-color: #FFDDAA;
+    width: 480px;
+    height: 340px; 
+    background-color: rgba(255,255,255,0.6);
   }
 
   .textc{
     margin: 5px;
-    width: 810px;
-    height: 390px;
-    background-color: #FFDDAA;
+    width:640px;
+    height: 340px; 
+    background-color: rgba(255,255,255,0.6);
   }
 
 
@@ -115,22 +115,22 @@ pageContext.setAttribute("ByName",list);
 <%-- 分頁 --%>
 <%@ include file="page1.file" %>
 
-<div class="all">
+<div class="all" style="margin-left:380px; margin-top:80px;">
 	<c:if test="${ByName != null}">
 	<c:forEach var="couponhistoryVO" items="${ByName}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
     <div class="d-flex flex-wrap amos">
     <div class="d-flex flex-wrap item">
       <div class="pimg">
       
-      <img src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" style="width: 360px; height: 390px;">
+      <img src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" style="width: 480px; height: 340px;">
           
       </div>
       
-      <div class="textc">
+      <div class="textc" style="padding:20px;">
       
-         <h1>
+         <h3>
          	優惠券名稱: ${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}
-         </h1>
+         </h3>
          
          <h7>
          
@@ -144,7 +144,7 @@ pageContext.setAttribute("ByName",list);
          
          </h7>
          
-         <h2>
+         <h4>
          	
         	<p>優惠券序號: ${couponhistoryVO.coup_sn}</p>
         	
@@ -182,7 +182,7 @@ pageContext.setAttribute("ByName",list);
         	</c:if>
         	</p>
 
-         </h2>
+         </h4>
       </div>
     </div>
     </div>
