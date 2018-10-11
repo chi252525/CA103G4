@@ -25,7 +25,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -86,15 +85,10 @@ public class OrderFragment extends Fragment {
     public class TableAdapter extends BaseAdapter {
 
         private LayoutInflater layoutInflater;
-        private List<DeskVO> deskList = new ArrayList<>();
+        private List<DeskVO> deskList;
 
         private TableAdapter(Context context, List<DeskVO> deskList) {
-            for(DeskVO desk : deskList) {
-                try {
-                    Integer.valueOf(desk.getDek_id().substring(0,1));
-                    this.deskList.add(desk);
-                } catch (NumberFormatException e) {}
-            }
+            this.deskList = deskList;
 
             // 在fragment中需先取得activity後才能調用getSystemService方法
             layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);

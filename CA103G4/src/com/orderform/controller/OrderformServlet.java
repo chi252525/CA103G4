@@ -99,11 +99,11 @@ public class OrderformServlet extends HttpServlet {
 			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
 			String addres;
-			if (("delivery").equals(req.getParameter("eatIn&takeAway"))) {
+			if (("delivery").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 2;
-				addres = req.getParameter("deliv_addres");
+				addres = (String) req.getAttribute("deliv_addres");	
 				req.getSession().setAttribute("deliv_addres", addres);
-			} else if(("takeaway").equals(req.getParameter("eatIn&takeAway"))) {
+			} else if(("takeaway").equals((String)req.getAttribute("order_type"))) {
 				ordertype = 1;
 				addres = null;
 				req.getSession().setAttribute("deliv_addres", null);
@@ -129,14 +129,9 @@ public class OrderformServlet extends HttpServlet {
 			List<OrderinvoiceVO> list = new ArrayList<>();//等前端 更改 
 
 			Vector<MenuVO> inv = new Vector<>();
-			Vector<CustommealsVO> customv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
-			customv = (Vector<CustommealsVO>) req.getSession().getAttribute("shoppingcartCustom");//取得送來的自訂餐點參數
 			String[] oinlist = new String[inv.size()];
 			String[] qinList = new String[inv.size()];
-			String[] costomOinlist = new String[customv.size()];
-			String[] costomQinList = new String[customv.size()];
-			
 			
 			for (int z = 0 ; z < inv.size() ; z++){
                 String eat = String.valueOf(inv.get(z).getMenu_No());
@@ -145,27 +140,18 @@ public class OrderformServlet extends HttpServlet {
                 qinList[z] = String.valueOf(quantity);
            }
 			
-			for (int z = 0 ; z < customv.size() ; z++){
-                String eat = String.valueOf(customv.get(z).getcustom_No());
-                costomOinlist[z] = eat;
-                int quantity = customv.get(z).getcustom_Quantity();
-                costomQinList[z] = String.valueOf(quantity);
-           }
-			
 			OrderinvoiceVO oin = null;
 
 			
 			for (int i = 0; i < oinlist.length; i++) {
 				oin = new OrderinvoiceVO();
-				oin.setMenu_no(oinlist[i]);
-				oin.setMenu_nu(qinList[i]);					
-				list.add(oin);
-			}
-			
-			for (int i = 0; i < costomOinlist.length; i++) {
-				oin = new OrderinvoiceVO();
-				oin.setCustom_no(costomOinlist[i]);
-				oin.setCustom_nu(costomQinList[i]);
+				if (("M").equals(String.valueOf(oinlist[i].charAt(0)))) {
+					oin.setMenu_no(oinlist[i]);
+					oin.setMenu_nu(qinList[i]);					
+				} else {
+					oin.setCustom_no(oinlist[i]);
+					oin.setCustom_nu(qinList[i]);
+				}
 				list.add(oin);
 			}
 			

@@ -69,7 +69,7 @@
 						<p class="card-text h4">取餐時間:<%= session.getAttribute("time")%></p>	
 						
 						<c:if test="<%= session.getAttribute(\"deliv_addres\") != null %>">
-						<p class="card-text h4">外送地址:<%= session.getAttribute("deliv_addres")%></p>
+						<p class="card-text h4">外送地址:<%= request.getParameter("deliv_addres")%></p>
 						</c:if>
 
 						<c:if test="<%= session.getAttribute(\"card_number\") != null %>">						

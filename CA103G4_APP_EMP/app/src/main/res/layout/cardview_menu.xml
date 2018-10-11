@@ -20,7 +20,7 @@
             android:id="@+id/ivMenu_Photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:background="@color/colorWhite"
             android:src="@drawable/nopicture"/>
         <TextView

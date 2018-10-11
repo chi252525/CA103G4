@@ -66,8 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             preferences.edit().putBoolean("login", true)
                     .putString("mem_Id", mem_Id)
                     .putString("mem_Pw", mem_Pw)
-                    .putString("mem_No", memVO.getMem_No())
-                    .putString("mem_Name", memVO.getMem_Name()).apply();
+                    .putString("mem_No", memVO.getMem_No()).apply();
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();

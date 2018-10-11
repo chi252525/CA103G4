@@ -80,8 +80,8 @@ public class PostDAO implements PostDAO_interface{
 	private static final String GET_ALL_BY_HOT_STMT = 
 					"SELECT * FROM POST WHERE POST_STATUS='PS1' ORDER BY POST_VIEWS DESC";
 	
-	// 取得3個發文日期最新的貼文
-	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE POST_STATUS='PS1' AND ROWNUM <=3";
+	// 取得4個發文日期最新的貼文
+	private static final String GET_ALL_BY_NEW_FOUR_STMT = "SELECT * FROM (SELECT * FROM POST ORDER BY POST_TIME DESC )	WHERE POST_STATUS='PS1' AND ROWNUM <=4";
 	
 	// 根據內容搜尋，根據發文時間由新到舊排列	
 	private static final String GET_ALL_BY_KEYWORD_ORDER_BY_VIEWS =

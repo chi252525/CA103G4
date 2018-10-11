@@ -26,7 +26,6 @@
         <activity android:name=".activity.OrderActivity" />
         <activity android:name=".activity.MemInfoActivity" />
         <activity android:name=".activity.BookingActivity" />
-        <activity android:name=".activity.chooseTableActivity"></activity>
     </application>
 
 </manifest>

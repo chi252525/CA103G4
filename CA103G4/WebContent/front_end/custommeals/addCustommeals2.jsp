@@ -456,7 +456,6 @@
 									   <div class="column-button">
 										   <button class="button confirm-button" type="submit" value="ADD">送出新增</button>
 										   <input type="hidden" name="action" value="insert">
-										   <input type="hidden" name="requestURL" value="/front_end/custommeals/addCustommeals2.jsp">
 									   </div>
 		</div>
 	</div>
