@@ -285,7 +285,7 @@ var myChart = new Chart(ctx, {
       borderWidth: 1,
       label: '竹風堂餐點評比',
       data: [ <c:forEach var="message" items="${map}"> '${message.value}',</c:forEach>]
-   
+    
  
     }]
   }

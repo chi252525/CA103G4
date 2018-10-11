@@ -39,7 +39,7 @@ public class CoucatShowImage  extends HttpServlet {
 				in.close();
 			} else {
 				//res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/res/img/ad_no_photo.png");
+				InputStream in = getServletContext().getResourceAsStream("/res/img/ad_nosmallpic.jpg");
 				byte[] buf = new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
