@@ -449,8 +449,8 @@ public class CustommealsServlet extends HttpServlet{
 					List<IngredientsVO> ingredientsList_byPost =idao.findIngtByCustomNo(custom_No);
 					//new一個新的食材搭配VO去新增
 					List<IngredientCombinationVO> ingtCombineList_new = new LinkedList<IngredientCombinationVO>();
-					IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
 					for(IngredientsVO ingtVO_byPost:ingredientsList_byPost) {
+						IngredientCombinationVO ingtVO_new = new IngredientCombinationVO();
 						ingtVO_new.setIngdt_Id(ingtVO_byPost.getingdt_Id());
 						ingtCombineList_new.add(ingtVO_new);
 					}
