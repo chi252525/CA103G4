@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg mainbar">
       
        <div class="title-box">
-        <a class="navbar-brand title" href="#">竹風堂</a>
+        <a class="navbar-brand title" href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp">竹風堂</a>
         </div> 
     <!-- 縮起來的3-lines  -->    
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
           </div>
 
           <ul class="nav navbar-nav pull-right" style="padding:8px;">
-                <a href="#" class="btn btn-sm  log-in"><i class="fa fa-user" aria-hidden="true"></i>登入</a>
+                <a href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp" class="btn btn-sm  log-in"><i class="fa fa-user" aria-hidden="true"></i>登入</a>
 <!--
                &nbsp;
                 <a href="#" class="btn btn-sm  register"><i class="fa fa-cog" aria-hidden="true"></i>註冊</a>
