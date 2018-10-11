@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg mainbar">
       
        <div class="title-box">
-        <a class="navbar-brand title" href="#">竹風堂</a>
+        <a class="navbar-brand title" href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp">竹風堂</a>
         </div> 
     <!-- 縮起來的3-lines  -->    
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +41,9 @@
                  <a class="nav-item nav-link p material nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-coffee main-icon" aria-hidden="true"></i><c class="icon-font">餐點項目管理</c>
                  </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/addMenu.jsp">新增經典餐點</a>
-                      <a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/Menu_management.jsp">經典餐點上下架</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/back_end/menu/addMenu.jsp">新增經典餐點</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/back_end/menu/Menu_management.jsp">經典餐點上下架</a>
+                      <a class="dropdown-item" href="<%=request.getContextPath()%>/back_end/menu/listAllMenu.jsp">所有經典餐點</a>
                     </div>
               </li>
               &nbsp; &nbsp;
@@ -73,7 +74,7 @@
           </div>
 
           <ul class="nav navbar-nav pull-right" style="padding:8px;">
-                <a href="#" class="btn btn-sm  log-in"><i class="fa fa-user" aria-hidden="true"></i>登入</a>
+                <a href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp" class="btn btn-sm  log-in"><i class="fa fa-user" aria-hidden="true"></i>登入</a>
 <!--
                &nbsp;
                 <a href="#" class="btn btn-sm  register"><i class="fa fa-cog" aria-hidden="true"></i>註冊</a>
