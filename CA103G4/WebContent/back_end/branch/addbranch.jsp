@@ -60,13 +60,13 @@
             <td class="td1"><label for="branch_Addr" class="col-form-label">分店地址</label></td>
             <td class="td2" ><input type="text" class="form-control-sm" id="branch_Addr" name="branch_Addr" value="${(insertbrVO==null)? '北園路325號':insertbrVO.branch_Addr}"></td>
             <td class="td3"><label for="branch_Del" class="col-form-label">外送範圍</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Del" name="branch_Del" value="${(insertbrVO==null)? '5':insertbrVO.branch_Del}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Del" name="branch_Del" value="${(insertbrVO==null)? '5.3':insertbrVO.branch_Del}"></td>
         </tr>
         <tr>
             <td class="td1"><label for="branch_Lan" class="col-form-label">分店經度</label></td>
             <td class="td2" ><input type="text" class="form-control-sm" id="branch_Lan" name="branch_Lan" value="${(insertbrVO==null)? '121.299019':insertbrVO.branch_Lan}"></td>
             <td class="td3"><label for="branch_Tdesk" class="col-form-label">桌位總數</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tdesk" name="branch_Tdesk" value="${(insertbrVO==null)? '2.2':insertbrVO.branch_Tdesk}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tdesk" name="branch_Tdesk" value="${(insertbrVO==null)? '25':insertbrVO.branch_Tdesk}"></td>
         </tr>
         <tr>
             <td class="td1"><label for="branch_Lat" class="col-form-label">分店緯度</label></td>
