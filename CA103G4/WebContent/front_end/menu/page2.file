@@ -2,7 +2,7 @@
 
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
-      <div class="row ml-auto">
+      <div class="row mr-auto">
         <div class="my-2 px-3 align-items-center">
           <div class="btn-group">
         <A href="<%=request.getRequestURI()%>?whichPage=1" class="btn btn-outline-primary">第一頁</A>&nbsp;

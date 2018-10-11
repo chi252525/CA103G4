@@ -28,6 +28,15 @@
 
 
 <style>
+
+body {
+	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
@@ -53,7 +62,7 @@
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:320px;
-	font-family: 'Noto Sans TC', sans-serif;
+/* 	font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
     font-size: 20;
   }
@@ -61,17 +70,17 @@
 /*     border: 2px solid rgba(255, 255, 255, 0.8); */
     border-radius: 15px;
     text-align: left;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
   th, td {
     padding: 5px;
     text-align: left;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
-  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-  body{background-image:url("images/woodbackground3.png");}
+/*   @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css); */
+/*   body{background-image:url("images/woodbackground3.png");} */
 
 </style>
 
@@ -145,7 +154,7 @@
 				              <p class="card-text" style="height:72px;">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro} ${menuVO.menu_Intro}</p>
 
 				            	  
-							  <form method="post" action="menu.do" name="form1">
+							  <form method="post" action="<%=request.getContextPath()%>/menu/menuServlet.do" name="form1">
 								  <div class="row">
 									  <div style="width:120px; margin-left:20px; margin-top:0px;">
 									  	<input type="hidden" name="menu_No" value="${menuVO.getMenu_No()}">
@@ -167,9 +176,18 @@
 				        
 				        </div>
 				</c:forEach>
-			<div class="col-md-12 mt-3">
-				<%@ include file="page2.file"%>  
-  			</div>
+				
+				
+				
+			<div class="container">
+				<div class="row">
+					<div style="margin-left:470px;"></div>
+					<div><%@ include file="page2.file" %></div>
+				</div>
+			</div>	
+<!-- 			<div class="col-md-12 mt-3"> -->
+<%-- 				<%@ include file="page2.file"%>   --%>
+<!--   			</div> -->
     	</div>
 	</div>
 </div>
@@ -230,6 +248,6 @@ $( this ).dialog( "close" );
 
 
 
-	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+<%-- 	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" /> --%>
 </body>
 </html>

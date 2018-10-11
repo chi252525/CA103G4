@@ -10,12 +10,34 @@
     pageContext.setAttribute("list",list);
 %>
 
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/menu/css/theme.css" />
+  
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
 
 <html>
 <head>
 <title>listAllMenu.jsp</title>
 
 <style>
+
+body {
+	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
@@ -113,13 +135,13 @@
 			<td><img src="/CA103G4/DBGifReader?menu_No=${menuVO.getMenu_No()}" style="max-width: 200px; max-height: 200px;"></td>
 			<td>${menuVO.getMenu_Status()}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menu/menuServlet.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="menu_No"  value="${menuVO.menu_No}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 <!-- 			<td> -->
-<!-- 			  <FORM METHOD="post" ACTION="menu.do" style="margin-bottom: 0px;"> -->
+<!-- 			  <FORM METHOD="post" ACTION="menuServlet.do" style="margin-bottom: 0px;"> -->
 <!-- 			     <input type="submit" value="刪除"> -->
 <!-- 			     從page1.file取得的參數，藉由hidden value傳到下個頁面，可以在刪除一筆資料後繼續停留在該頁面 -->
 <%-- 			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> --%>
@@ -130,9 +152,14 @@
 		
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+<div class="container">
+<div class="row">
+	<div style="margin-left:480px;"></div>
+	<div><%@ include file="page2.file" %></div>
+</div>
 </div>
 
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+
+<%-- <jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" /> --%>
 </body>
 </html>

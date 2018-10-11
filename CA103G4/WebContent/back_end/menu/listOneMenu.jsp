@@ -6,6 +6,10 @@
   MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); //MenuServlet.java(Controller), 存入req的menuVO物件
 %>
 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+
+
 <html>
 <head>
 <title>餐點資料 - listOneMenu.jsp</title>
@@ -35,7 +39,7 @@
 	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
-	margin-left:320px;
+	margin-left:220px;
 /* 	font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
     font-size: 20;

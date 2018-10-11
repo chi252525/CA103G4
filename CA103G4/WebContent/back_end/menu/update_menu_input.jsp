@@ -13,15 +13,28 @@
 
 <!--     Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/menu/css/theme.css" />
     <!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+	  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <title>資料修改 - update_menu_input.jsp</title>
 
 <style>
+  body {
+		font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+  }
+
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
@@ -42,7 +55,7 @@
 <style>
   table {
     
-	width: 960px;
+	width: 1280px;
 	background-color: rgba(255, 255, 255, 0.45);
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -114,7 +127,7 @@ $(document).ready(function (){
 <!-- 	</td></tr> -->
 <!-- </table> -->
 
-<h3>資料修改:</h3>
+<!-- <h3>資料修改</h3> -->
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -126,80 +139,34 @@ $(document).ready(function (){
 	</ul>
 </c:if>
 
-<!-- <FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data"> -->
-<!-- <table> -->
-<!-- 	<tr> -->
-<!-- 		<td>餐點編號:<font color=red><b>*</b></font></td> -->
-<%-- 		<td><%=menuVO.getMenu_No()%></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>餐點名稱:</td> -->
-<%-- 		<td><input type="TEXT" name="menu_Id" size="45"	value="<%=menuVO.getMenu_Id()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>餐點類型:</td> -->
-<%-- 		<td><input type="TEXT" name="menu_Type" size="45"	value="<%=menuVO.getMenu_Type()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>餐點價格:</td> -->
-<%-- 		<td><input type="TEXT" name="menu_Price" size="45"	value="<%=menuVO.getMenu_Price()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>餐點介紹:</td> -->
-<%-- 		<td><input type="textarea" col="50" row="5" name="menu_Intro" size="45"	value="<%=menuVO.getMenu_Intro()%>" /></td> --%>
-<!-- 	</tr> -->
-	
-<!-- 	<tr> -->
-<!-- 		<td>餐點圖片:</td> -->
-<!-- 		<td><input type="file" class="menu_Photo" name="menu_Photo" size="45"></td> -->
-<!-- 	</tr> -->
-	
-<!-- 	<tr> -->
-<!-- 		<td>餐點狀態:</td> -->
-<%-- 		<td><input type="number" name="menu_Status" max="1" min="0" size="3" value="<%=menuVO.getMenu_Status()%>" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td> -->
-<!-- 	        <p>ImgPreview</p> -->
-<!-- 	     	<img class="preview" style="max-width: 200px; max-height: 200px;"> -->
-<!-- 	        <div class="size"></div> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
-	
-<!-- </table> -->
-
-<!-- <br> -->
-<!-- <input type="hidden" name="action" value="update"> -->
-<%-- <input type="hidden" name="menu_No" value="<%=menuVO.getMenu_No()%>"> --%>
-<!-- <input type="submit" value="送出修改"></FORM> -->
 
 
 
-<div class="container" style="margin-top:50px; position:absulete; margin-left:680px;">
+<div class="container" style="margin-top:80px; position:absulete; margin-left:580px;">
 <div class="row" style="margin:0px auto;">
-<div class=col-6>
-<div class="card" style="padding:30px; border-radius:10px;">
-<FORM METHOD="post" ACTION="menu.do" name="form1" enctype="multipart/form-data">
+<div style="width:700px;">
+<div class="card" style="padding:30px; border-radius:10px; background-color:rgba(255,255,255,0.8);">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menu/menuServlet.do" name="form1" enctype="multipart/form-data">
 	<div class=card-title>
 	餐點編號&nbsp;<%=menuVO.getMenu_No()%>
 	</div>
 	<div class=card-title>
-	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="45"	value="<%=menuVO.getMenu_Id()%>" />
+	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="80"	value="<%=menuVO.getMenu_Id()%>" />
 	</div>
 	<div class=card-title>
-	餐點類型&nbsp;<input type="TEXT" name="menu_Type" size="45"	value="<%=menuVO.getMenu_Type()%>" />
+	餐點類型&nbsp;<input type="TEXT" name="menu_Type" size="80"	value="<%=menuVO.getMenu_Type()%>" />
 	</div>
 	<div class=card-title>
-	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="45"	value="<%=menuVO.getMenu_Price()%>" />
+	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="80"	value="<%=menuVO.getMenu_Price()%>" />
 	</div>
 	<div class=card-title>
-	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="45"	value="<%=menuVO.getMenu_Intro()%>" />
+	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="80"	value="<%=menuVO.getMenu_Intro()%>" />
 	</div>
 	<div class=card-title>
 	餐點狀態&nbsp;<input type="number" name="menu_Status" max="1" min="0" size="3" value="<%=menuVO.getMenu_Status()%>" />
 	</div>
 	<div class=card-title>
-	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="50">
+	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="80">
 	</div>
 	<div class=card-title>
 		<img class="preview" style="max-width: 200px; max-height: 200px;">
@@ -222,7 +189,7 @@ $(document).ready(function (){
 
 
 
-<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+<%-- <jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" /> --%>
 </body>
 
 
