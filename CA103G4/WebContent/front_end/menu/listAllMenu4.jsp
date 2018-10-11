@@ -16,7 +16,7 @@
 
 <html>
 <head>
-<title>listAllMenu2.jsp</title>
+<title>listAllMenu4.jsp</title>
 
 
 
@@ -211,11 +211,11 @@ body {
 
 								<form id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do" method="POST">
 									<div class="row">
-										<div style="width:100px; margin-left:40px; margin-top:5px;">
+										<div style="width:100px; margin-left:20px; margin-top:5px;">
 											數量 <input type="number" name="quantity" size="3" value=1 style="width: 40px">
 										</div>
-										<div style="width:80px;">
-											<input type="button" value="訂餐" class="btn btn-primary submit" style="background-color: #dc3545; border-color: #dc3545; margin-left: 0px;">
+										<div style="width:120px;">
+											<input type="button" value="加入購物車" class="btn btn-primary submit" style="background-color: #dc3545; border-color: #dc3545; margin-left: 0px;">
 										</div>
 										 
 											<input type="hidden" name="menuno" value="${menuVO.menu_No}">
@@ -224,6 +224,7 @@ body {
 	                						<input type="hidden" name="price" value="${menuVO.menu_Price}">
 	                						<input type="hidden" name="status" value="${menuVO.menu_Status}">
 	               							<input type="hidden" name="action" value="ADD">
+	               							<input type="hidden" name="requestURL" value="/front_end/menu/listAllMenu4.jsp">
                						</div>
                					</form>
 							</div>
@@ -233,8 +234,15 @@ body {
 				</c:if>
 				</c:forEach>
 
-				<div class="col-md-12 mt-3">
-					<%@ include file="page2.file"%>
+<!-- 				<div class="col-md-12 mt-3"> -->
+<%-- 					<%@ include file="page2.file"%> --%>
+<!-- 				</div> -->
+				
+				<div class="container">
+					<div class="row">
+						<div style="margin-left:480px;"></div>
+						<div><%@ include file="page2.file" %></div>
+					</div>
 				</div>
 			</div>
 		</div>

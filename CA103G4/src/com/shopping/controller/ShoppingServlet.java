@@ -101,7 +101,7 @@ public class ShoppingServlet extends HttpServlet {
 
 			session.setAttribute("shoppingcart", buylist);
 			session.setAttribute("shoppingcartCustom", buylistCustom);
-			String url = req.getContextPath() + "/front_end/menu/listAllMenu4.jsp";// send back
+			String url = req.getContextPath() + req.getAttribute("requestURL");// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
 //			rd.forward(req, res);
 			res.sendRedirect(url);
