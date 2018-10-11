@@ -72,7 +72,7 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 
 <style>
   table#table-1 {
-	background-color: rgba(255, 255, 255, 0.45);
+ 	background-color: rgba(255, 255, 255, 0.45); 
 /*     border: 2px solid black; */
 	border-radius: 15px;
     text-align: center;
@@ -89,31 +89,49 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 </style>
 
 <style>
+
+	html {
+		height: 100%;
+		font-family: 'PT Sans', Microsoft JhengHei, sans-serif;
+		font-size: 20px;
+	}
+	
+	body {
+		font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+	}
   table {
     
-	max-width: 1920px;
-	background-color: rgba(255, 255, 255, 0.45);
+/* 	max-width: 1920px; */
+ 	background-color: rgba(255, 255, 255, 0.45); 
 	margin-top: 5px;
 	margin-bottom: 5px;
-	margin-left:320px;
+/* 	margin-left:200px; */
 	font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
     font-size: 20;
+    
 
   }
   table, th, td {
-/*  border: 2px solid rgba(0, 0, 0, 1); 
+    border: 1px solid rgba(255, 255, 255, 0.5); 
     border-radius: 15px;
     text-align: left;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
   }
+  
   th, td {
     padding: 5px;
     text-align: left;
-    font-family: 'Noto Sans TC', sans-serif;
+/*     font-family: 'Noto Sans TC', sans-serif; */
     font-weight: 600;
+    padding: 15px;
   }
+ 
   @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 
@@ -135,98 +153,108 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 <img src="<%= request.getContextPath() %>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
 
-<!-- <h3>我的訂單紀錄</h3> -->
 
 
-<!-- <table> -->
-	
-<!-- 	<tr> -->
-<!-- 		<th>訂單編號</th> -->
-<!-- 		<th>訂單價格</th> -->
-<!-- 		<td>餐點編號</td> -->
-<!-- 		<td>餐點名稱</td> -->
-<!-- 		<td>自訂餐點編號</td> -->
-<!-- 		<td>自訂餐點名稱</td> -->
-<!-- 		<td>自訂餐點食材組合</td>		 -->
-<!-- 	</tr> -->
+
+
+		<div class="container" style="width:1680px; margin-top:80px;">
+				<div>
+					<div class="display-4">${memVO.mem_Name}的訂餐紀錄
+					</div>
+				</div>
+				<div>	
 		
-<%-- 	<c:forEach var="orderFormVO" items="${orderformlist}"> --%>
-
-<!-- 	<tr> -->
-<%-- 		<td>${orderFormVO.order_no}</td> --%>
-<%-- 		<td>${orderFormVO.order_price}</td> --%>
-	
-	
-<%-- 		<c:forEach var="orderinvoiceVO" items="${orderFormVO.getOrderInvoiceList()}"> --%>
-		
-<%-- 			<td>${orderinvoiceVO.menu_no}</td> --%>
-<%-- 			<td>${orderinvoiceVO.custom_no}</td> --%>
-
-	
-<!-- 		<tr> -->
-<%-- 			<td>${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}</td>  --%>
-<%-- 			<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</td> --%>
-	
-<%-- 			<c:forEach var="ingredientsVO" items="${orderinvoiceVO.getCustom_ingdt_List()}">	 --%>
-<%-- 				<td>${ingredientsVO.ingdt_Name}</td> --%>
-<%-- 			</c:forEach>	 --%>
-<!-- 		</tr> -->
-<%-- 		</c:forEach>	 --%>
-<!-- 	</tr>	 -->
-<%-- 	</c:forEach> --%>
-<!-- </table>	 -->
-	
-
-<div class="h-100 py-5" style="backgrond-color:rgba(0,0,0,0.3);">
-	<div class="container.fluid" style="width:1920px; margin-left:240px;">
-		<div class="row">
-			<div class="">
-			</div>
-				<c:forEach var="orderFormVO" items="${orderformlist}"><br>
+		<table>
+			<tr>
+				<th>訂單編號</th>
+				<th>訂單價格</th>
+				<td>餐點編號</td>
+				<td>餐點名稱</td>
+			</tr>
 				
-				        <div class="" style="width:360px;">
+			<c:forEach var="orderFormVO" items="${orderformlist}">
+		
+			<tr>
+				<td>${orderFormVO.order_no}</td>
+				<td>${orderFormVO.order_price}</td>
+			
+				<c:forEach var="orderinvoiceVO" items="${orderFormVO.getOrderInvoiceList()}">
+				
+					
+						<td>	
+						<a href="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do?action=getOne_For_Display&custom_No=${orderinvoiceVO.custom_no}"/>${orderinvoiceVO.custom_no}</td>
+						</td>
 
-				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px; margin-right:20px; border-radius:5px;">
+					<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</c:forEach>td>
 
-<!-- 					            <img class="card-img-top"  -->
-<%-- 					            	src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}" --%>
+					<tr>
+					${orderinvoiceVO.menu_no}
+					<td>${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}</td>
+					</tr>
+
+	
+			</tr>	
+				</c:forEach>	
+				
+			</c:forEach>
+		</table>	
+		</div>
+
+	</div>
+
+
+	
+
+<!-- <div class="h-100 py-5" style="backgrond-color:rgba(0,0,0,0.3);"> -->
+<!-- 	<div class="container.fluid" style="width:1920px; margin-left:240px;"> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class=""> -->
+<!-- 			</div> -->
+<%-- 				<c:forEach var="orderFormVO" items="${orderformlist}"><br> --%>
+				
+<!-- 				        <div class="" style="width:360px;"> -->
+
+<!-- 				          <div class="card" style="background-color:rgba(255,255,255,0.45); margin-bottom:20px; margin-right:20px; border-radius:5px;"> -->
+
+<!-- <!-- 					            <img class="card-img-top"  --> 
+<%-- <%-- 					            	src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}" --%> 
 					            
-<!-- 					            	alt="Card image cap" style="margin-top:20px;"> -->
+<!-- <!-- 					            	alt="Card image cap" style="margin-top:20px;"> --> 
 					            	
-					            <div class="card-body"">
-					           	  <h5 class="card-title">訂單編號&nbsp;&nbsp;${orderFormVO.order_no}</h5>
-					              <h5 class="card-title">訂單金額&nbsp;&nbsp;${orderFormVO.order_price}</h5>
-					              <c:forEach var="orderinvoiceVO" items="${orderFormVO.getOrderInvoiceList()}">
-					            	    <h5 class="card-title">餐點編號&nbsp;${orderinvoiceVO.menu_no}
-																			${orderinvoiceVO.custom_no}</h5>
-					            	    <h5 class="card-title">餐點名稱&nbsp;${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id}
-					            	    									${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</h5>
+<!-- 					            <div class="card-body""> -->
+<%-- 					           	  <h5 class="card-title">訂單編號&nbsp;&nbsp;${orderFormVO.order_no}</h5> --%>
+<%-- 					              <h5 class="card-title">訂單金額&nbsp;&nbsp;${orderFormVO.order_price}</h5> --%>
+<%-- 					              <c:forEach var="orderinvoiceVO" items="${orderFormVO.getOrderInvoiceList()}"> --%>
+<%-- 					            	    <h5 class="card-title">餐點編號&nbsp;${orderinvoiceVO.menu_no} --%>
+<%-- 																			${orderinvoiceVO.custom_no}</h5> --%>
+<%-- 					            	    <h5 class="card-title">餐點名稱&nbsp;${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id} --%>
+<%-- 					            	    									${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name}</h5> --%>
 					            	    			
-					            	    		<c:if test="${orderinvoiceVO.custom_no != null}">
-					            	    		<div style="background-color:rgba(255,255,245,0.45); border-radius:5px; padding:10px;">
+<%-- 					            	    		<c:if test="${orderinvoiceVO.custom_no != null}"> --%>
+<!-- 					            	    		<div style="background-color:rgba(255,255,245,0.45); border-radius:5px; padding:10px;"> -->
 					            	    		
-						            	  			<h5 class="card-title">食材搭配&nbsp;</h5>
-						            	  			<c:forEach var="ingredientsVO" items="${orderinvoiceVO.getCustom_ingdt_List()}">	
-						            	  			<p class="card-title">&nbsp;&nbsp;${ingredientsVO.ingdt_Name}</p>
+<!-- 						            	  			<h5 class="card-title">食材搭配&nbsp;</h5> -->
+<%-- 						            	  			<c:forEach var="ingredientsVO" items="${orderinvoiceVO.getCustom_ingdt_List()}">	 --%>
+<%-- 						            	  			<p class="card-title">&nbsp;&nbsp;${ingredientsVO.ingdt_Name}</p> --%>
 						            	  			 
 					            	  			
-													</c:forEach>	
-					            	 			 </div>
-					            	 			</c:if>
+<%-- 													</c:forEach>	 --%>
+<!-- 					            	 			 </div> -->
+<%-- 					            	 			</c:if> --%>
 					           
-					              </c:forEach>  
+<%-- 					              </c:forEach>   --%>
 					            	  
 					            	  
-					            </div>
-				          </div>
+<!-- 					            </div> -->
+<!-- 				          </div> -->
 				        
-				        </div>
-				</c:forEach>
-			<div class="col-md-12 mt-3">
-  			</div>
-    	</div>
-	</div>
-</div>
+<!-- 				        </div> -->
+<%-- 				</c:forEach> --%>
+<!-- 			<div class="col-md-12 mt-3"> -->
+<!--   			</div> -->
+<!--     	</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 	
 <%-- 	 <img src="<%=request.getContextPath()%>/ingredients/ingredientsshowimage.do?ingdt_Id${ingredientsVO.getIngdt_Id()}"> --%>
 	
