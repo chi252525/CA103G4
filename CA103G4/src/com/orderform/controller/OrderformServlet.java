@@ -99,11 +99,11 @@ public class OrderformServlet extends HttpServlet {
 			//看訂單類型，若是外送則收到外送地址
 			Integer ordertype = null;
 			String addres;
-			if (("delivery").equals((String)req.getAttribute("order_type"))) {
+			if (("delivery").equals(req.getParameter("eatIn&takeAway"))) {
 				ordertype = 2;
-				addres = (String) req.getAttribute("deliv_addres");	
+				addres = req.getParameter("deliv_addres");
 				req.getSession().setAttribute("deliv_addres", addres);
-			} else if(("takeaway").equals((String)req.getAttribute("order_type"))) {
+			} else if(("takeaway").equals(req.getParameter("eatIn&takeAway"))) {
 				ordertype = 1;
 				addres = null;
 				req.getSession().setAttribute("deliv_addres", null);
