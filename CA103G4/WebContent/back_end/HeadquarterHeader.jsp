@@ -30,7 +30,12 @@
             
                  
              <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p aboutUs nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file main-icon" aria-hidden="true"></i><c class="icon-font">關於我們資料編輯</c></a></li>
+                 <a id="xxx" class="nav-item nav-link p aboutUs nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file main-icon" aria-hidden="true"></i><c class="icon-font">關於我們資料編輯</c></a></li>
+             <script>
+	            	 $('#xxx').click(function(){
+	              		window.location.href = '<%=request.getContextPath()%>/front_end/menu/addMenu.jsp';
+	              	});
+             </script>
               &nbsp; &nbsp;
               <li class="nav-item dropdown b">
                  <a class="nav-item nav-link p material nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-coffee main-icon" aria-hidden="true"></i><c class="icon-font">餐點項目管理</c>
@@ -50,14 +55,20 @@
                  </li>
               &nbsp;&nbsp;
               <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p branch nav-link dropdown-toggle" href="<%=request.getContextPath()%>/back_end/branch/branch_mang.jsp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-university main-icon" aria-hidden="true"></i><c class="icon-font">分店管理</c></a></li>
+                 <a class="nav-item nav-link p branch nav-link dropdown-toggle" id="yyy" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-university main-icon" aria-hidden="true"></i><c class="icon-font">分店管理</c></a></li>
+              <script>
+	            	 $('#yyy').click(function(){
+	              		window.location.href = '<%=request.getContextPath()%>/back_end/branch/branch_mang.jsp';
+	              	});
+             </script>
               &nbsp;&nbsp;
               <li class="nav-item dropdown b">
-                 <a class="nav-item nav-link p activity nav-link dropdown-toggle" href="<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users main-icon" aria-hidden="true"></i><c class="icon-font">活動管理</c></a>
-                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    </div>
-                 </li>
-              
+                 <a class="nav-item nav-link p activity nav-link dropdown-toggle" id="zzz" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users main-icon" aria-hidden="true"></i><c class="icon-font">活動管理</c></a></li>
+              <script>
+	            	 $('#zzz').click(function(){
+	              		window.location.href = '<%=request.getContextPath()%>/back_end/activity/addCoupon.jsp';
+	              	});
+             </script>
             </ul> 
           </div>
 
