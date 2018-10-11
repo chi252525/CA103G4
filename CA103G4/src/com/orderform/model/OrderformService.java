@@ -47,4 +47,15 @@ public class OrderformService {
 		return dao.forOut();
 	}
 	
+	public OrderformVO updateForSta(String order_no, int order_status) {
+		OrderformVO oVO = new OrderformVO();
+		oVO.setOrder_no(order_no);
+		oVO.setOrder_status(order_status);
+		
+		dao.updateByOrdNo(oVO);
+		return null;
+	}
+	
+	
+	
 }

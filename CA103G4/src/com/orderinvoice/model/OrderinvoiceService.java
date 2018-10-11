@@ -44,8 +44,4 @@ private OrderinvoiceDAO_interface dao;
 	
 	
 	
-	
-	
-	
-	
 }

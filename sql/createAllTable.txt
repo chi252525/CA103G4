@@ -138,7 +138,7 @@ INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , 
 VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'eddie529','123456','金佑','ms1',to_date('1986-05-29','yyyy-mm-dd'),'eddie@gmail.com','0933444002','阿翰','326','桃園市','楊梅區','永美路50號','4432-3133-1111-2222','11/19',200,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo3.jpg')));
 
 INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS , MEM_PHOTO) 
-VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'ann321','123456','雅惠','ms2',to_date('1991-01-01','yyyy-mm-dd'),'aabbcc@gmail.com','0912345678','阿土','326','桃園市','楊梅區','四維路144巷50弄5號','4432-3133-1111-2222','03/25',500,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo4.jpg')));
+VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'ann321','123456','雅惠','ms2',to_date('1991-01-01','yyyy-mm-dd'),'aabbcc@gmail.com','0912345678','阿土','326','桃園市','楊梅區','四維路144巷50弄5號','4432-3133-1111-2222','03/25',500 , BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo4.jpg')));
 
 INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS , MEM_PHOTO) 
 VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'yui111','123456','秀娟','ms2',to_date('1988-04-27','yyyy-mm-dd'),'yui@gmail.com','0912345777','peter','122','台北市','信義區','信義路100號','4344-2222-1111-2222','06/25',1500,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo5.jpg')));
