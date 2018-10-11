@@ -20,8 +20,6 @@ import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
-import com.orderform.model.*;
-import com.orderform.smsservice.Send;
 import com.orderinvoice.model.OrderinvoiceVO;
 
 public class OrderinvoiceServlet extends HttpServlet {
@@ -38,7 +36,17 @@ public class OrderinvoiceServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-	
+		if ("updateForOut".equals(action)) {
+			
+			List<OrderinvoiceVO> list = new ArrayList<>();
+			
+			String[] ordnu = req.getParameterValues("out");
+			
+			for (int i =0; i < ordnu;)
+			
+			
+			
+		}
 		
 	}
 

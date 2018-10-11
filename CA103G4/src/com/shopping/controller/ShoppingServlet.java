@@ -109,18 +109,29 @@ public class ShoppingServlet extends HttpServlet {
 
 		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
-			if (buylist == null) {
+			if (buylist == null && buylistCustom == null) {
 				String url = "Cart.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
 			} else {
-				for (int i = 0; i < buylist.size(); i++) {
-					MenuVO menuVO = buylist.get(i);
-					Integer price = menuVO.getMenu_Price();
-					Integer quantity = menuVO.getMenu_quantity();
-					total += (price * quantity);
+				if (buylist != null && buylist.size() > 0) {
+					for (int i = 0; i < buylist.size(); i++) {
+						MenuVO menuVO = buylist.get(i);
+						Integer price = menuVO.getMenu_Price();
+						Integer quantity = menuVO.getMenu_quantity();
+						total += (price * quantity);
+					}
 				}
+				if (buylistCustom != null && buylistCustom.size() > 0) {
+					for (int i = 0; i < buylistCustom.size(); i++) {
+						CustommealsVO customVO = buylistCustom.get(i);
+						Integer price = customVO.getcustom_Price();
+						Integer quantity = customVO.getcustom_Quantity();
+						total += (price * quantity);
+					}
+				}
+				
 
 				String amount = String.valueOf(total);
 				req.setAttribute("amount", amount);
