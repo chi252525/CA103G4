@@ -443,6 +443,7 @@ a {
 	<%
 		}
 	%>
+	<!-- 如果購物車為空才顯示 -->
 	<c:if test="${empty shoppingcart}">
 		<!-- 	the hover effect example -->
 		<!-- 		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> -->
