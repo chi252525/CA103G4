@@ -177,11 +177,11 @@ public class MemServlet extends HttpServlet{
 				
 				//預設收件郵遞區號驗證
 				String mem_Repno = req.getParameter("mem_Repno");
-				String mem_RepnoReg = "^\\d{5}$";
+				String mem_RepnoReg = "^\\d{3}$";
 				if(mem_Repno.isEmpty()) {
 					
 				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
-					errorMsgs.add("僅能輸入數字(eg.33344)");
+					errorMsgs.add("僅能輸入數字(eg.320)");
 				}
 				
 				//預設收件人縣市
@@ -341,12 +341,15 @@ public class MemServlet extends HttpServlet{
 				
 				//密碼驗證
 				String mem_Pw = req.getParameter("mem_Pw").trim();
+				String mem_PwReg = "^[(a-zA-Z0-9_)]{1,15}$";
 				if(mem_Pw == null || mem_Pw.length() == 0) {
 					errorMsgs.add("尚未填寫密碼");
-				} 
+				} else if(!mem_Pw.trim().matches(mem_PwReg)) {
+					errorMsgs.add("密碼須為英文或數字並可接受底線");					
+				}
 				//姓名驗證
 				String mem_Name = req.getParameter("mem_Name");
-				String mem_NameReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				String mem_NameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]+$";
 				if (mem_Name == null || (mem_Name.trim()).length() == 0) {
 					errorMsgs.add("尚未填寫姓名");
 				}else if(!mem_Name.trim().matches(mem_NameReg)) {
@@ -373,15 +376,15 @@ public class MemServlet extends HttpServlet{
 				
 				//手機驗證
 				String mem_Phone = req.getParameter("mem_Phone");
-				String mem_PhoneReg = "^[(0-9)]+$";
+				String mem_PhoneReg = "^\\d{0,10}$";
 				if(mem_Phone == null || mem_Phone.trim().isEmpty()) {
 					errorMsgs.add("尚未填寫電話");			
 				}else if (!(mem_Phone.trim().matches(mem_PhoneReg))) {
-					errorMsgs.add("電話僅能輸入數字");
+					errorMsgs.add("電話僅能輸入數字且10碼內");
 				}
 				//預設收件人驗證
 				String mem_Receiver = req.getParameter("mem_Receiver");
-				String mem_ReceiverReg = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+				String mem_ReceiverReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]+$";
 				if(mem_Receiver.isEmpty()) {				
 				}
 				else if(!(mem_Receiver.trim().matches(mem_ReceiverReg))) {
@@ -389,12 +392,12 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				//預設收件人郵遞區號驗證
-				String mem_Repno = req.getParameter("mem_Repno").trim();
-				String mem_RepnoReg = "^[0-9]+$";
+				String mem_Repno = req.getParameter("mem_Repno");
+				String mem_RepnoReg = "^\\d{3}$";
 				if(mem_Repno.isEmpty()) {
 					
 				}else if(!(mem_Repno.trim().matches(mem_RepnoReg))) {
-					errorMsgs.add("郵遞區號僅能輸入數字");
+					errorMsgs.add("僅能輸入數字(eg.320)");
 				}
 				
 				//預設收件人地址縣市
@@ -405,12 +408,31 @@ public class MemServlet extends HttpServlet{
 				
 				//預設收件人地址
 				String mem_Readdr = req.getParameter("mem_Readdr");
+				String mem_ReaddrReq = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]+$";
+				
+				if(mem_Readdr.isEmpty()) {
+					
+				}else if(!mem_Readdr.trim().matches(mem_ReaddrReq)){
+					errorMsgs.add("地址僅接受中文、英文、數字");
+				}
 				
 				//預設收件人信用卡
 				String mem_Cardnum = req.getParameter("mem_Cardnum");
+				String mem_CardnumReq = "^\\d{4}-\\d{4}-\\d{4}-\\d{4}$";
+				if(mem_Cardnum.isEmpty()) {
+					
+				}else if(!mem_Cardnum.trim().matches(mem_CardnumReq)) {
+					errorMsgs.add("信用卡號須為16碼(eg.1234-1234-1234-1234)");
+				}
 				
 				//預設信用卡截止日
 				String mem_Carddue = req.getParameter("mem_Carddue");
+				String mem_CarddueReq = "^(0[1-9]|1[0-2])/\\d{2}$";
+				if(mem_Carddue.isEmpty()) {
+					
+				}else if(!mem_Carddue.trim().matches(mem_CarddueReq)) {
+					errorMsgs.add("信用卡截止日格式為MM/YY");
+				}
 				
 				//照片處理
 				Part part = req.getPart("mem_Photo");			
