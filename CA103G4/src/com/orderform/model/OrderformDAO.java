@@ -35,7 +35,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String UPDATE = "UPDATE orderform set order_status= ?, order_pstatus= ? where order_no= ?";
 	// s針對外送的SQL指令
 	private static final String UPDATE2 = "UPDATE orderform set deliv_no= ? where order_no= ?";
-	private static final String SELECT_DEL = "SELECT order_no,deliv_addres FROM orderform where deliv_no is null and order_type = 2"; // 下好了
+	private static final String SELECT_DEL = "SELECT order_no,deliv_addres FROM orderform where deliv_no is null and order_type = 2 and order_status = 2"; // 下好了
 																															// 寫方法
 																															// 進service
 																															// 給deliverey的

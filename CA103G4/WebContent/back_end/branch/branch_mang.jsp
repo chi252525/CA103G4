@@ -146,8 +146,8 @@
 
                                 </c:if>
                                 <!-- display for multi objects query -->
-                                <c:if test="${not empty list}">
-                                    <c:forEach var="brVO" items="${list}">
+                                <c:if test="${not empty brlist}">
+                                    <c:forEach var="brVO" items="${brlist}">
                                         <tr>
                                             <td>${brVO.branch_No}</td>
                                             <td>${brVO.branch_Name}</td>
