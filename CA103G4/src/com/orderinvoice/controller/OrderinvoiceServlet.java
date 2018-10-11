@@ -20,6 +20,7 @@ import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
 import com.menu.model.MenuVO;
+import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
 import com.orderinvoice.model.OrderinvoiceService;
 import com.orderinvoice.model.OrderinvoiceVO;
@@ -57,6 +58,11 @@ public class OrderinvoiceServlet extends HttpServlet {
 					orSvc.forUpdate(ordno, null, eatS[i]);
 				}
 				
+			}
+			
+			if (orSvc.getByOrder_no(ordno) == 0) {
+				OrderformService ordSvc = new OrderformService();
+				ordSvc.updateForSta(ordno,2);
 			}
 			
 			String url = req.getContextPath() + "/front_end/forout/forOut.jsp";

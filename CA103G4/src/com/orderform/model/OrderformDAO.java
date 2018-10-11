@@ -47,6 +47,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM ORDER BY MEM_NO";
 	private static final String SELECT_BY_STATUS=
 			"SELECT ORDER_NO, ORDER_TYPE, DEK_NO, ORDER_STATUS FROM ORDERFORM WHERE ORDER_STATUS = 1 ORDER BY ORDER_NO DESC";
+	private static final String UPDATE3 = "UPDATE orderform set order_status= ? where order_no= ?";
 	
 	
 	
@@ -780,5 +781,46 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public void updateByOrdNo(OrderformVO orderformVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE3);
+
+			pstmt.setInt(1, orderformVO.getOrder_status());
+			pstmt.setString(2, orderformVO.getOrder_no());
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	
 }
