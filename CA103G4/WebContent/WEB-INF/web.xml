@@ -429,6 +429,15 @@
 		<url-pattern>/schedule.do</url-pattern>
 	</servlet-mapping>	
 	
+	<servlet>
+    <servlet-name>DeskServlet</servlet-name>
+    <servlet-class>com.desk.controller.DeskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeskServlet</servlet-name>
+    <url-pattern>/desk.do</url-pattern>
+  </servlet-mapping>
+	
 	
 
 	

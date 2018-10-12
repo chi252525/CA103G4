@@ -43,6 +43,17 @@ public class CustommealsVO extends MenuVO  {
 		return custom_Quantity;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		CustommealsVO custommealsvo = (CustommealsVO)obj;
+		if(this.getcustom_No().equals(custommealsvo.getcustom_No())){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	public void setcustom_Quantity(Integer custom_Quantity) {
 		this.custom_Quantity = custom_Quantity;
 	}

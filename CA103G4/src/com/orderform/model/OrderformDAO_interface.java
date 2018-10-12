@@ -34,4 +34,6 @@ public interface OrderformDAO_interface {
 	
 	public List<OrderformVO> forOut();
 	
+	public void updateByOrdNo(OrderformVO orderformVO);
+	
 }

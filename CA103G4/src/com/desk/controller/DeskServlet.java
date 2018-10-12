@@ -1,16 +1,18 @@
-package com.reservation.controller;
+package com.desk.controller;
 
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.websocket.Session;
 
-import com.reservation.model.ResService;
-import com.reservation.model.ResVO;
+import com.desk.model.DeskService;
+import com.desk.model.DeskVO;
+import com.reservation.model.*;
 
-public class ResServlet extends HttpServlet {
+public class DeskServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
@@ -22,25 +24,90 @@ public class ResServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		String date = req.getParameter("date");
-		String zone = req.getParameter("zone");
+		System.out.println("action");
 		
-		if("pushSeat".equals(action)) {  //座位推播
-			System.out.println(date);
-			System.out.println(zone);
-			Map<String,Map<String,Set<String>>> date1 = (Map<String,Map<String,Set<String>>>)getServletContext().getAttribute("date1");
+		
+		if("addDesk".equals(action)) {  //座位推播
 			
-			String str = "";
-			try{
-				Iterator<String> objs = ((date1.get(date)).get(zone)).iterator();
-				while (objs.hasNext())	
-				str += (String)objs.next();
-	            PrintWriter out = res.getWriter();
-			    out.write(str);
-				System.out.println("pass 1");
-			}catch(NullPointerException e) {
-				e.printStackTrace(System.err); 
+				
+				List<String> errorMsgs = new LinkedList<>();
+				req.setAttribute("errorMsgs", errorMsgs);
+		   try {
+			   
+				String date = req.getParameter("date");
+				if(date == null || date.length() == 0) {
+					errorMsgs.add("請選擇日期");
+				}  
+				
+				String bgtime = req.getParameter("bgtime");
+				if(bgtime == null || bgtime.length() == 0) {
+					errorMsgs.add("請選擇開始時間");
+				}  
+				
+				String fntime = req.getParameter("fntime");
+				if(date == null || date.length() == 0) {
+					errorMsgs.add("結束時間尚未填寫，請先選擇開始時間");
+				}  
+				//-----------------------------------------------------
+				Timestamp res_timebg = java.sql.Timestamp.valueOf(date + " " + bgtime + ":00");
+				Timestamp res_timefn = java.sql.Timestamp.valueOf(date + " " + fntime + ":00");
+				Integer res_people = Integer.valueOf(req.getParameter("res_people"));
+				if(res_people == null || res_people == 0) {
+					errorMsgs.add("人數尚未填寫");
+				} 
+				
+				String branch_no = req.getParameter("branch_no");
+				if(branch_no == null || branch_no.length() == 0) {
+					errorMsgs.add("分店不可為空白請先選擇縣市欄位");
+				}  
+				
+				System.out.println("date:"+ date);
+				System.out.println("bgtime:"+ bgtime);
+				System.out.println("fntime:"+ fntime);
+				System.out.println("res_timebg:"+ res_timebg);
+				System.out.println("res_timefn:"+ res_timefn);
+				System.out.println("res_people:"+ res_people);
+				System.out.println("branch_no:"+ branch_no);
+				
+				ResVO resVO = new ResVO();
+				resVO.setMem_no("M000001");
+				resVO.setRes_timebg(res_timebg);
+				resVO.setRes_timefn(res_timefn);
+				resVO.setRes_people(res_people);
+				
+				DeskVO deskVO = new DeskVO();
+				deskVO.setBranch_no(branch_no);
+				
+				HttpSession session = req.getSession();
+				session.setAttribute("resVO", resVO);
+				session.setAttribute("deskVO", deskVO);
+				req.setAttribute("date", date);
+				req.setAttribute("bgtime", bgtime);
+				
+				RequestDispatcher selectSeats = req.getRequestDispatcher("/front_end/reservation/seat.jsp");
+				selectSeats.forward(req, res);
+				return;
+				
+			}catch(Exception e) {
+				errorMsgs.add("資料新增失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/reservation/reservation.jsp");
+				failuerView.forward(req, res);
 			}
+			
+		}
+		
+		if("Seats".equals(action)) {
+			String seat = req.getParameter("finalSeat");
+			System.out.println("controler get:" + seat);
+			HttpSession session = req.getSession();
+			DeskVO deskVO = (DeskVO)session.getAttribute("deskVO");
+			deskVO.setDek_id(seat);
+			deskVO.setDek_set(0);
+			deskVO.setDek_status(2);
+			ResVO resVO = (ResVO)session.getAttribute("resVO");
+			DeskService dskS = new DeskService();
+			dskS.desk_res(deskVO, resVO);
+			System.out.println("done!!");
 		}
 		
 		

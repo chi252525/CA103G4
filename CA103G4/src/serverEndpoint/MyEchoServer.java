@@ -20,9 +20,9 @@ import javax.websocket.CloseReason;
 @ServerEndpoint("/MyEchoServer/{myName}/{date}/{zone}")
 public class MyEchoServer implements ServletContextListener{
 	
-											  
+											  //(下面右)利用collectionS來排序、synchronized鎖定來補足Set的不足
 private static final Set<Session> onlinePeople = Collections.synchronizedSet(new HashSet<Session>());
-    
+    //(上面左)裡面放websockets 的session //Set 快、不重複、亂、被鎖定、不安全。
 //-----------------------------------------------------------------------------------------------------------------
 	
 private static final Map<String,Map<String,Set<String>>> date1 = Collections.synchronizedSortedMap(new TreeMap<String,Map<String,Set<String>>>());
@@ -30,7 +30,12 @@ private static final Map<String,Map<String,Set<String>>> date1 = Collections.syn
 private static final Map<String,Set<String>> zoneMS = Collections.synchronizedSortedMap(new TreeMap<String,Set<String>>());
 	
 private static final Set<String> seatS = Collections.synchronizedSet(new HashSet<String>());
+//private static Map<String,Map<String,Set<String>>> date1 = null;
+//private static Map<String,Set<String>> zoneMS = null;
+//private static Set<String> seatS = null;
 //---------------------------------------------------------------------------------------------------------------------
+	
+private static final Map<String,Set<String>> Mem_name = Collections.synchronizedSortedMap(new TreeMap<String,Set<String>>());
 	
 private static final Set<String> Mem_seats = Collections.synchronizedSet(new HashSet<String>());
 //----------------------------------------------------------------------------------------------------------------------
@@ -49,8 +54,8 @@ private static final Set<String> Mem_seats = Collections.synchronizedSet(new Has
 	}
 	
 	@OnOpen
-	public void onOpen(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession) throws IOException {  //websockets ��session 
-		onlinePeople.add(userSession); 	
+	public void onOpen(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession) throws IOException {  //websockets 的session 
+		onlinePeople.add(userSession); //線上人數	
 //		Mem_seats.clear();
 		System.out.println(userSession.getId() + ": 已連線");
 		System.out.println(myName + ": 已連線");
@@ -78,28 +83,30 @@ private static final Set<String> Mem_seats = Collections.synchronizedSet(new Has
 			date1.put(date, zoneMS);
 			zoneMS.put(zone, seatS);
 			seatS.add(seat+":");
+	//-----------------------------------		
+			Mem_name.put(myName, Mem_seats);
 			Mem_seats.add(seat+":");
 			
 			Iterator objs = ((date1.get(date)).get(zone)).iterator();
 			while (objs.hasNext())
 			System.out.println("1, Already input a new kV:" + objs.next());
 			
-			Iterator objs2 = Mem_seats.iterator();
+			Iterator objs2 = (Mem_name.get(myName)).iterator();
 			while (objs2.hasNext())
-			System.out.println("objs2, Already input a new kV:" + objs2.next());
+			System.out.println(myName + ": Already input a new kV:" + objs2.next());
 			
 		}else if(status == 2 || status == 3){
 
 			((date1.get(date)).get(zone)).remove(seat+":");
-			Mem_seats.remove(seat+":");
+			(Mem_name.get(myName)).remove(seat+":");
 			
 			Iterator objs = ((date1.get(date)).get(zone)).iterator();
 			while (objs.hasNext())
-			System.out.println("2�B3, Already remove a new kV:" + objs.next());
+			System.out.println("2、3, Already remove a new kV:" + objs.next());
 			
-			Iterator objs2 = Mem_seats.iterator();
+			Iterator objs2 = (Mem_name.get(myName)).iterator();
 			while (objs2.hasNext())
-			System.out.println("objs2, Already input a new kV:" + objs2.next());
+			System.out.println(myName + ": Already remove a new kV:" + objs2.next());
 		
 		}
 	}
@@ -113,7 +120,7 @@ private static final Set<String> Mem_seats = Collections.synchronizedSet(new Has
 	public void onClose(@PathParam("myName") String myName,@PathParam("date") String date,@PathParam("zone") String zone,Session userSession, CloseReason reason) {
 		String str = "";
 		onlinePeople.remove(userSession);
-		Iterator objs2 = Mem_seats.iterator();
+		Iterator objs2 = (Mem_name.get(myName)).iterator();
 		while (objs2.hasNext()) 
 		str += (String)objs2.next();
 		String [] tokens = str.split(":");
@@ -121,10 +128,10 @@ private static final Set<String> Mem_seats = Collections.synchronizedSet(new Has
 			((date1.get(date)).get(zone)).remove(token+":");
 			System.out.println("token remove:" + token+":");
 		}
-		Mem_seats.clear();
-		System.out.println(Mem_seats.isEmpty());
+		Mem_name.remove(myName);
+		System.out.println(Mem_name.containsKey(myName));
 		System.out.println(userSession.getId() + ": Disconnected: " + Integer.toString(reason.getCloseCode().getCode()));
-																		
+																		//get code 1000(正常關閉)
 	}
  
 }

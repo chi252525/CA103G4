@@ -1,6 +1,9 @@
 package com.desk.model;
 
 import java.util.*;
+
+import com.reservation.model.ResVO;
+
 import java.sql.*;
 
 
@@ -270,6 +273,12 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		System.out.println(aEmp.getDek_status()+ ",");
 		System.out.println("---------------------");
 		}
+	}
+
+	@Override
+	public void insertAutoGK(DeskVO deskVO, ResVO resVO) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

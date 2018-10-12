@@ -26,7 +26,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, null, ?, ?, 0, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO orderform (order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'), ?, ?, ?, null, ?, ?, 1, ?, ?)";
 	private static final String GET_MORE_STMT = "SELECT order_no,dek_no,mem_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where ";
 	private static final String GET_NOTOK_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_status= 1 and order_pstatus!= 2";
 	private static final String GET_ALL_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform order by order_no Desc";
@@ -47,6 +47,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			"SELECT ORDER_NO, MEM_NO, ORDER_PRICE FROM ORDERFORM ORDER BY MEM_NO";
 	private static final String SELECT_BY_STATUS=
 			"SELECT ORDER_NO, ORDER_TYPE, DEK_NO, ORDER_STATUS FROM ORDERFORM WHERE ORDER_STATUS = 1 ORDER BY ORDER_NO DESC";
+	private static final String UPDATE3 = "UPDATE orderform set order_status= ? where order_no= ?";
 	
 	
 	
@@ -780,5 +781,46 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public void updateByOrdNo(OrderformVO orderformVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE3);
+
+			pstmt.setInt(1, orderformVO.getOrder_status());
+			pstmt.setString(2, orderformVO.getOrder_no());
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	
 }

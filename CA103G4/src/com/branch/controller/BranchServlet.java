@@ -41,6 +41,7 @@ public class BranchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		System.out.println("action=" + action);
 		// ==================查單筆儲值紀錄=================
@@ -477,6 +478,25 @@ public class BranchServlet extends HttpServlet {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				req.getRequestDispatcher("/back_end/branch/branch_mang.jsp").forward(req, res);
 			}
+		}
+		
+		if("cityToBranch".equals(action)) {  
+			String city = req.getParameter("city");
+			System.out.println(city);
+			BranchService brhSvc = new BranchService();
+			List<BranchVO> listbrh = brhSvc.findBy_City(city);
+			System.out.println(listbrh);
+			PrintWriter out = res.getWriter();
+			for(BranchVO brhVO: listbrh) {
+			    out.write(brhVO.getBranch_No()+",");
+			    System.out.println(brhVO.getBranch_Name());
+			}	
+			 out.write(":");
+			for(BranchVO brhVO: listbrh) {
+				out.write(brhVO.getBranch_Name()+",");
+			    System.out.println(brhVO.getBranch_Name());
+			}
+			
 		}
 	}
 }
