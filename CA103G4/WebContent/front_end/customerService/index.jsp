@@ -192,7 +192,7 @@ body{
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><i class="fas fa-user-circle"></i><span>' +
+                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/back_end/img/drew.jpg" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><span>' +
                         jsonObj.username +
                         '</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
