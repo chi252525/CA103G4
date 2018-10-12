@@ -264,6 +264,6 @@ function onLoadBinaryFile2() {
         //            autoGrow_minHeight: 500,
     </script>
 
-	<jsp:include page="/back_end/HeadquarterFooter.jsp" flush="true" />
+	
 </body>
 </html>

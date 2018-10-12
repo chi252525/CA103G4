@@ -92,7 +92,7 @@ public class ScheduleServlet extends HttpServlet {
 		@SuppressWarnings("deprecation")
 		Calendar cal = new GregorianCalendar(2018, start_time.getMonth(), start_time.getDate(), start_time.getHours(),
 				start_time.getMinutes(), 0);
-		timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 3000 * 1000);
+		timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 30 * 1000);
 		System.out.println("開啟伺服器時間：" + time_format.format(start_time) + ";廣告排程器時間:" + cal.getTime());
 	}
 
