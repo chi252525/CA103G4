@@ -141,7 +141,7 @@ body{
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
-                        <input id="userName" class="text-field form-control" type="text" placeholder="ID" value="Nash" />
+                        <input id="userName" class="text-field form-control" type="text" placeholder="ID" value="${memVO.mem_Name }" style="width:100% !important;"/>
                     </div>
                     <div class="ml-auto">
                         <input type="button" id="connect" class="btn" value="連線" onclick="connect();" /> <input type="button" id="disconnect" class="btn" value="離線" onclick="disconnect();" /> <i class="fas fa-location-arrow ml-auto" onclick="sendMessage();"></i>
@@ -187,12 +187,12 @@ body{
                     // 					dialog.style.textAlign = "right";
                     $('#MessageList')
                         .append(
-                            '<div class=ChatMessageRight><i class="fas fa-user-circle"></i><div class= ChatBubbleRight>' +
+                            '<div class=ChatMessageRight><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;"><div class= ChatBubbleRight>' +
                             msg + '<br><sapn class=sysMsg>' + time + '</span></div></div>');
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><i class="fas fa-user-circle"></i><span>' +
+                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;"><span>' +
                         jsonObj.username +
                         '</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');

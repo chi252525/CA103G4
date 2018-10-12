@@ -127,8 +127,8 @@ body {
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp">餐點分享</a>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/activity/listAllActivity.jsp"">活動快訊</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">線上客服</a></li>
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/activity/listAllActivity.jsp">活動快訊</a></li>
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/customerService/index.jsp">線上客服</a></li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
