@@ -932,11 +932,11 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001','2');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001','3');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001','2');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001','2');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000001','3');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000008','2');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','3');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','2');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000008','2');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','3');
 
 
 --------------------------------------------------------
