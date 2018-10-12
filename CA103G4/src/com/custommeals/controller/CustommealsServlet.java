@@ -410,7 +410,7 @@ public class CustommealsServlet extends HttpServlet{
 				List<String> errorMsgs = new LinkedList<>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				System.out.println("insert_byPosted");
-//				try {
+//			try {
 					//取會員編號
 					String mem_No = req.getParameter("mem_No").trim();
 					if(mem_No == null || mem_No.length() == 0) {
@@ -432,7 +432,7 @@ public class CustommealsServlet extends HttpServlet{
 					custommealsVO.setcustom_Name(oneCusbyPost_CusVO.getcustom_Name());
 					custommealsVO.setcustom_Price(oneCusbyPost_CusVO.getcustom_Price());
 					custommealsVO.setcustom_Quantity(1);
-
+System.out.println("OK");
 
 					//同時也撈出一樣的食材搭配
 					IngredientsDAO_interface idao = new IngredientsDAO();
