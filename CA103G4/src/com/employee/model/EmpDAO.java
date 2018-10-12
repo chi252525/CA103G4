@@ -44,6 +44,9 @@ public class EmpDAO implements EmpDAO_interface{
 	private static final String GET_ONE_BY_BRANCHNO=
 			"select * from employee where branch_no =? order by emp_no";
 	
+	private static final String GET_OUT_BY_BRANCHNO=
+			"select * from employee where branch_no =? and emp_pos ='外送員'";
+	
 	@Override
 	public void insert(EmpVO empVO) {
 		
@@ -481,4 +484,60 @@ public class EmpDAO implements EmpDAO_interface{
 				
 		return listemp;
 	}
+	
+	 public List<EmpVO> findByBranchNo(String branch_No){
+		 EmpVO empVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			List<EmpVO> outemp = new ArrayList();
+			ResultSet rs = null;
+			try {
+				con= ds.getConnection();
+				pstmt = con.prepareStatement(GET_OUT_BY_BRANCHNO);
+				System.out.println("依分店查詢員工");
+				pstmt.setString(1, branch_No);
+				 rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					empVO = new EmpVO();
+					empVO.setEmp_No(rs.getString("emp_no"));
+					empVO.setEmp_Name(rs.getString("emp_name"));
+			    	empVO.setBranch_No(rs.getString("branch_no"));      	
+					empVO.setEmp_Status(rs.getString("emp_status"));
+					outemp.add(empVO);
+				}
+				
+				
+			} catch (SQLException se) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if ( rs !=null) {
+					try {
+						rs.close();
+					}catch(SQLException se) {
+						se.printStackTrace(System.err);
+					}				
+				}
+				if(pstmt!= null) {
+					try {
+						pstmt.close();
+					}catch(SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if(con!=null) {
+					try {
+						con.close();
+					}catch(SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+			}
+					
+			return outemp;
+	 }
+	
 }
