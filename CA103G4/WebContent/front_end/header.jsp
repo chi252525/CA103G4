@@ -39,7 +39,7 @@
 .lnr-alarm {
 	color: #FFF;
 	font-size: 23px;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
 .lnr-cart {
@@ -141,10 +141,10 @@ body {
 							<!-- 無登入狀態 點選人頭示意圖將導入Login.jsp -->
 
 								<a
-								class="nav-link dropdown-toggle" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
+								class="nav-link dropdown-toggle py-2" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
 								id="navbarDropdownMenuLink" role="button" ${(memVO.mem_Name == null )? '' : 'data-toggle=\"dropdown\"'}
 								aria-haspopup="true" aria-expanded="false" style="padding-top:${(memVO.mem_Name == null )? '': '3px'} "> 
-									${(memVO.mem_Name == null )? 'Log in':memVO.mem_Name}
+									${(memVO.mem_Name == null )? '登入':memVO.mem_Name}
 								
 							<!--有登入狀態圖示改為會員照片小圖 -->
 								<span class="lnr lnr-user" style="display: ${(memVO.mem_Name == null )? '': 'none'} "></span>

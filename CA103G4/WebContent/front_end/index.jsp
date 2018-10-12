@@ -48,11 +48,13 @@
 	font-size: 1.5em;
 	text-transform: uppercase;
 	font-weight: 600;
+	
 }
 
 .ml13 .letter {
 	display: inline-block;
 	line-height: 0.5em;
+	color:#fff;
 }
 .p-self{
 padding:11rem!important;

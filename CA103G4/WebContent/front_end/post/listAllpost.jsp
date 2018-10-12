@@ -55,6 +55,9 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/post/js/jquery.fly.js" />
+
 <style>
 html {
 	height: 100%;
@@ -111,7 +114,7 @@ body {
 			<div class=" d-flex mx-2">
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
-					<div class="card-header">查詢貼文</div>
+					<div class="card-header"><b>查詢貼文</b></div>
 					<div class="card-body py-1 px-0 ">
 
 						<div class="d-flex justify-content-end">
@@ -268,7 +271,7 @@ var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
 		
-    labels: [ <c:forEach var="message" items="${map}">'${message.key}星',</c:forEach>  ],   
+    labels: [ <c:forEach var="message" items="${map}"> '${message.key}星',</c:forEach>  ],   
 		 datasets: [{
       backgroundColor: [
         'rgba(255, 99, 132, 1)',
