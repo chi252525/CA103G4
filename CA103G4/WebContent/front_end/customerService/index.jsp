@@ -187,12 +187,12 @@ body{
                     // 					dialog.style.textAlign = "right";
                     $('#MessageList')
                         .append(
-                            '<div class=ChatMessageRight><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;"><div class= ChatBubbleRight>' +
+                            '<div class=ChatMessageRight><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><div class= ChatBubbleRight>' +
                             msg + '<br><sapn class=sysMsg>' + time + '</span></div></div>');
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:35px;width:35px;border-radius:50%;"><span>' +
+                        '<div class=ChatMessageLeft><i class="fas fa-user-circle"></i><span>' +
                         jsonObj.username +
                         '</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
