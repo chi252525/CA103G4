@@ -205,7 +205,7 @@ public class ActivityServlet extends HttpServlet {
 //				Send se = new Send();
 //				MemberDAO_interface mdao = new MemberDAO();
 //				List<MemberVO> memlist= mdao.getAll();
-//				
+//				System.out.println("gggg");
 //				for(MemberVO memVO:memlist){
 //					String[] tel = {memVO.getMem_Phone()};
 //					StringBuilder message = new StringBuilder()
@@ -220,8 +220,9 @@ public class ActivityServlet extends HttpServlet {
 //				 			.append("別錯過囉!");
 //				 			
 //				 	se.sendMessage(tel , message.toString());
-				 
+//				 
 //				}
+//				System.out.println("gggg");
 			
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back_end/activity/listAllActivity.jsp";

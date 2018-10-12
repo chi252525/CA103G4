@@ -152,15 +152,8 @@ pageContext.setAttribute("ByName",list);
         	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">
         	<li class="list-group-item py-0" style="background-color:rgba(253,253,253,0); border:0px;">未過期</li>
         	</c:if>
-     
- 
+
   </ul>
-     <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now and couponhistoryVO.coup_state == 0}">
-        	     <a href="#" class="btn btn-primary" ">可使用</a>
-         </c:if>
-      <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now or couponhistoryVO.coup_state != 0}">
-         	 <a href="#" class="btn btn-primary disabled" ">不可使用</a>
-         </c:if>
 
   </div>
 </div>

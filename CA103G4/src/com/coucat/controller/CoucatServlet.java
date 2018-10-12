@@ -54,7 +54,7 @@ public class CoucatServlet extends HttpServlet {
 				String coucat_Name = req.getParameter("coucat_Name");
 				System.out.println(coucat_Name);
 				if(coucat_Name == null || coucat_Name.trim().length() == 0) {
-					errorMsgs.add("標題：請勿空白。");
+					errorMsgs.add("優惠卷標題：請勿空白。");
 				}
 				String coucat_Cata= req.getParameter("coucat_Cata");
 				if(coucat_Cata==null) {
@@ -63,6 +63,9 @@ public class CoucatServlet extends HttpServlet {
 
 				byte[] coucat_Pic = null;
 				Part part = req.getPart("coucat_Pic");
+				if(part == null) {
+					errorMsgs.add("請上傳圖片");
+				}
 				try {
 					String filename = getFileName(part);
 					if (filename != null && part.getContentType() != null) {
@@ -97,25 +100,33 @@ public class CoucatServlet extends HttpServlet {
 				
 				/***************************時間的輸入驗證*****************************************/
 				
+
+				
 					java.sql.Timestamp coucat_Valid = new Timestamp(System.currentTimeMillis()); 
 		
-				    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+				    
 				    try {
+				    	if(req.getParameter("coucat_Valid").trim() == null) {
+							errorMsgs.add("請填入生效日期");
+						}
+				    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");	
 				    java.util.Date coucat_Validstr = dateFormat.parse(req.getParameter("coucat_Valid").trim());
+				    
 				    coucat_Valid = new java.sql.Timestamp(coucat_Validstr.getTime());
-				    }catch(ParseException e) {
-				    	e.printStackTrace();
+				    }catch(IllegalArgumentException e) {
+				    	errorMsgs.add("請輸入生效日期!");
 
 				    }
 				    
 				     java.sql.Timestamp coucat_Invalid = new Timestamp(System.currentTimeMillis()); 
 				    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
 				    try {
+				    	
 				    java.util.Date coucat_Invalidstr = dateFormat2.parse(req.getParameter("coucat_Invalid").trim());
-				    
+				   
 				     coucat_Valid = new java.sql.Timestamp(coucat_Invalidstr.getTime());
 				    }catch(ParseException e) {
-				    	e.printStackTrace();
+				    	errorMsgs.add("請輸入失效日期!");
 
 				    }
 
