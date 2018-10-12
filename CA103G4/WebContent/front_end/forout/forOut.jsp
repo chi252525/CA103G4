@@ -83,6 +83,16 @@ pageContext.setAttribute("forOut",list);
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostHeader.jsp" flush="true"/> 
 
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
 <div class="container">
 
 <table class="table table-hover">
@@ -179,7 +189,8 @@ pageContext.setAttribute("forOut",list);
 	      
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" class="btn" style="background-color: #FF7F50">確認出餐</button>
+	        <button type="submit" id="myButton" class="btn" style="background-color: #FF7F50">確認出餐</button>
+	        
 	        <input type="hidden" name="action" value="updateForOut"/>
 	        <input type="hidden" name="odNo" value="${orderformVO.order_no}"/>
 	      </div>
@@ -190,6 +201,16 @@ pageContext.setAttribute("forOut",list);
 	</div>
 </c:forEach>
 
+<%--  <script> -->
+// $(document).ready(function(){
+// 	$(#myButton).prop('disabled', true);
+// 	var check = $("[name=out]");
+// 	if (check.checked) {
+// 		$(#myButton).prop('disabled', false);
+// 	}
+// });
+<!-- </script> -->
+--%>
 
 </body>
 

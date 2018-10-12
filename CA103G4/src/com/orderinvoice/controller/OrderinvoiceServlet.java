@@ -42,10 +42,23 @@ public class OrderinvoiceServlet extends HttpServlet {
 	
 		if ("updateForOut".equals(action)) {
 			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			if ( req.getParameterValues("out") == null) {
+				errorMsgs.add("請選擇完成的餐點");
+			}
+			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/forout/forOut.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+			
 			
 			OrderinvoiceService orSvc = new OrderinvoiceService();
 			
-			String[] eatS = req.getParameterValues("out");
+			String[] eatS = req.getParameterValues("out");	
 			
 			String ordno = req.getParameter("odNo");
 			
