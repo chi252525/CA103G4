@@ -104,7 +104,7 @@
 								<div class="col">
 								</div>
 									<div class="col-1">
-									<a href="#" class="card-link">確認</a>
+									<a href="<%=request.getContextPath()%>/front_end/index.jsp" class="card-link">確認</a>
 									<!-- 連到哪要改一下 -->
 									</div>
 								<div class="col">
