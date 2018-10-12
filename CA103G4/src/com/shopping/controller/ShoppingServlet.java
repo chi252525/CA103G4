@@ -98,7 +98,7 @@ public class ShoppingServlet extends HttpServlet {
 					}
 				}
 
-			} else if ("insert".equals(action)) {// 客製餐點加入
+			} else if ("insert".equals(action)||"insert_byPosted".equals(action)) {// 客製餐點加入
 
 				if (custommealsVO != null) {
 					if (buylistCustom == null) {
@@ -107,12 +107,12 @@ public class ShoppingServlet extends HttpServlet {
 						System.out.println(buylistCustom.get(0).getcustom_Name());
 
 					} else {
-//					if (buylistCustom.contains(custommealsVO)) {
-//						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
-//						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
-//					} else {
+					if (buylistCustom.contains(custommealsVO)) {
+						CustommealsVO innerCustommealsVO = buylistCustom.get(buylistCustom.indexOf(custommealsVO));
+						innerCustommealsVO.setcustom_Quantity(innerCustommealsVO.getcustom_Quantity() + custommealsVO.getcustom_Quantity());
+					} else {
 						buylistCustom.add(custommealsVO);
-//					}
+					}
 					}
 				}
 			}
