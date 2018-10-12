@@ -166,7 +166,7 @@ pageContext.setAttribute("empfealist",empfealist);
                 	</c:if>
                 	
                 	<c:if test="${empauthfeaVO.fea_No == 'F008'}">
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/chat.png" width="17%">&nbsp;即時線上客服</a>
+                <a href="<%=request.getContextPath()%>/back_end/customerService/index.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/chat.png" width="17%">&nbsp;即時線上客服</a>
 					</c:if>
                         	
 <%--                		<c:if test="${empauthfeaVO.fea_No == 'F006'}"> --%>
