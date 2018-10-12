@@ -61,6 +61,8 @@ public class DeskServlet extends HttpServlet {
 					errorMsgs.add("分店不可為空白請先選擇縣市欄位");
 				}  
 				
+				String mem_no = req.getParameter("mem_no");
+				
 				System.out.println("date:"+ date);
 				System.out.println("bgtime:"+ bgtime);
 				System.out.println("fntime:"+ fntime);
@@ -68,9 +70,10 @@ public class DeskServlet extends HttpServlet {
 				System.out.println("res_timefn:"+ res_timefn);
 				System.out.println("res_people:"+ res_people);
 				System.out.println("branch_no:"+ branch_no);
+				System.out.println("mem_no="+mem_no);
 				
 				ResVO resVO = new ResVO();
-				resVO.setMem_no("M000001");
+				resVO.setMem_no(mem_no);
 				resVO.setRes_timebg(res_timebg);
 				resVO.setRes_timefn(res_timefn);
 				resVO.setRes_people(res_people);
@@ -97,6 +100,8 @@ public class DeskServlet extends HttpServlet {
 		}
 		
 		if("Seats".equals(action)) {
+			
+			
 			String seat = req.getParameter("finalSeat");
 			System.out.println("controler get:" + seat);
 			HttpSession session = req.getSession();
@@ -108,6 +113,10 @@ public class DeskServlet extends HttpServlet {
 			DeskService dskS = new DeskService();
 			dskS.desk_res(deskVO, resVO);
 			System.out.println("done!!");
+			
+			RequestDispatcher selectSeats = req.getRequestDispatcher("/front_end/index.jsp");
+			selectSeats.forward(req, res);
+			return;
 		}
 		
 		

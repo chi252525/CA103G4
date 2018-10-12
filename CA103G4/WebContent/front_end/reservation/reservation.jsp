@@ -135,6 +135,7 @@
                        
                       <div style="text-align:right;">
                       <input type="hidden" name="action" value="addDesk">
+                      <input type="hidden" name="mem_no" value="${memVO.mem_No}">
                       <button type="submit" class="btn btn-primary">確認送出</button>
                       </div>
                       
@@ -279,7 +280,7 @@
   
   
  
-<link rel="stylesheet" href="/EddyTest/res/css/res.css"> 
+<link rel="stylesheet" href="/CA103G4/front_end/reservation/css/res.css"> 
  <%@ include file="/front_end/footer.jsp" %> 
  <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
