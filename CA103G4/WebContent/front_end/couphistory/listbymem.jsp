@@ -84,9 +84,7 @@ pageContext.setAttribute("ByName",list);
 /*     background-color: #880000; */
   }
 
-   .tet{
-    margin-top: 5%;
-  }
+
 
   .pimg{
     margin: 5px;
@@ -106,89 +104,75 @@ pageContext.setAttribute("ByName",list);
 </style>
 
 </head>
-<body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
+<body class="w-100 " background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
 
-<div class="container tet">
+<div class="container mt-4">
   <h1>優惠券持有紀錄</h1>
-</div>
 
 <%-- 分頁 --%>
 <%@ include file="page1.file" %>
-
-<div class="all" style="margin-left:380px; margin-top:80px;">
-	<c:if test="${ByName != null}">
-	<c:forEach var="couponhistoryVO" items="${ByName}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-    <div class="d-flex flex-wrap amos">
-    <div class="d-flex flex-wrap item">
-      <div class="pimg">
-      
-      <img src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" style="width: 480px; height: 340px;">
-          
-      </div>
-      
-      <div class="textc" style="padding:20px;">
-      
-         <h3>
-         	優惠券名稱: ${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}
-         </h3>
-         
-         <h7>
-         
-         <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now or couponhistoryVO.coup_state != 0}">
-         	 <不可使用>
-         </c:if>
-         
-         <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now and couponhistoryVO.coup_state == 0}">
-        	 <可使用>
-         </c:if>
-         
-         </h7>
-         
-         <h4>
-         	
-        	<p>優惠券序號: ${couponhistoryVO.coup_sn}</p>
-        	
-        	
-        	<c:if test="${(\"CC1\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
-      			<p>優惠券類型: 訂單滿額折扣</p>
-      			<p>優惠券折扣:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Discount}</p>
+<div class="row">
+<c:if test="${ByName != null}">
+<c:forEach var="couponhistoryVO" items="${ByName}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<div class="col-4">
+<div class="card" style="width: 18rem;background-color:rgba(253,253,253,0.45);">
+  <img class="card-img-top" src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" alt="Card image cap">
+  <div class="card-body " >
+    <h5 class="card-title"><b>${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Name}</b></h5>
+    <ul class="list-group list-group-flush" >
+    <li class="list-group-item py-0"  style="background-color:rgba(253,253,253,0.1); border:0px;">序號: ${couponhistoryVO.coup_sn}</li>
+   <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">到期日:<fmt:formatDate value="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid}" pattern="yyyy-MM-dd"/></li>
+     
+     
+     
+     
+     	<c:if test="${(\"CC1\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1);border:0px;">類型: 新品上市</li>
         	</c:if>
         	<c:if test="${(\"CC2\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
-      			<p>優惠券類型: 固定金額發放</p>
-      			<p>折抵金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</p>
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">類型: 優惠折扣</li>
         	</c:if>
         	<c:if test="${(\"CC3\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
-      			<p>優惠券類型: 贈送定額竹幣</p>
-      			<p>發放點數:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Ereep}</p>
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">類型: 分店限定</li>
         	</c:if>
-        	
-  			<P>
-  			<c:if test="${couponhistoryVO.coup_state == 0}">
-      			<p>使用狀態:未使用</p>
+     
+     	<c:if test="${(\"CC1\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			 <li class="list-group-item py-0"  style="background-color:rgba(253,253,253,0.1); border:0px;">折扣:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Discount}</li>
         	</c:if>
-  			<c:if test="${couponhistoryVO.coup_state == 1}">
-      			<p>使用狀態:已使用</p>
+        	<c:if test="${(\"CC2\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</li>
         	</c:if>
-<%--   			<c:if test="${couponhistoryVO.coup_state == 2}"> --%>
-<%--        			<p>使用狀態:已過期</p> --%>
-<%--         	</c:if>  			 --%>
-  			</P>
+        	<c:if test="${(\"CC3\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">點數:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Ereep}</li>
+        	</c:if>
+     
+     	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">
+     	<li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">已過期</li>
+        	</c:if>
+        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">
+        	<li class="list-group-item py-0" style="background-color:rgba(253,253,253,0.1); border:0px;">未過期</li>
+        	</c:if>
+     
+ 
+  </ul>
+     <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now and couponhistoryVO.coup_state == 0}">
+        	     <a href="#" class="btn btn-primary" ">可使用</a>
+         </c:if>
+      <c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now or couponhistoryVO.coup_state != 0}">
+         	 <a href="#" class="btn btn-primary disabled" ">不可使用</a>
+         </c:if>
 
-        	<p>
-        	到期日:<fmt:formatDate value="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid}" pattern="yyyy-MM-dd"/>
-        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">-已過期
-        	</c:if>
-        	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid > now}">-未過期
-        	</c:if>
-        	</p>
-
-         </h4>
-      </div>
-    </div>
-    </div>
-    </c:forEach>
-    </c:if>
+  </div>
 </div>
+
+
+</div>
+    </c:forEach>
+ </c:if>
+
+</div>
+</div>
+
 
 <div class="dow">
 <%-- 分頁 --%>

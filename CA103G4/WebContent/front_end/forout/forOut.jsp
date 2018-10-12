@@ -99,7 +99,7 @@ pageContext.setAttribute("forOut",list);
 	<tr>
 		<th style="text-align: center">訂單編號</th>
 		<th style="text-align: center">訂單類型</th>
-		<th style="text-align: center">桌位流水號</th>
+		<th style="text-align: center">桌位</th>
 		<th style="text-align: center">出餐狀態</th>
 	</tr>
 <%-- 分頁 --%>
