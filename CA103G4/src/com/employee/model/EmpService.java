@@ -85,6 +85,10 @@ public class EmpService {
 		return dao.EmpVOfindByBranchNo(branch_No);
 	}
 	
+	//取得分店外送員
+	public List<EmpVO> getOutEmpByBranchNo(String branch_No) {
+		return dao.findByBranchNo(branch_No);
+	}
 	
 	
 }

@@ -2,12 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.delivery.model.*"%>
-<%
-  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
-  response.setHeader("Pragma","no-cache");        //HTTP 1.0
-  response.setDateHeader ("Expires", 0);
-%>
+<%@ page import="com.employee.model.*"%>
+<%-- <%
+//   response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+//   response.setHeader("Pragma","no-cache");        //HTTP 1.0
+//   response.setDateHeader ("Expires", 0);
+ %> --%>
 <%-- <jsp:useBean id="delSvc" scope="page" class="com.delivery.model.DeliveryService" /> --%>
+
+<%
+pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
+%>
+
+
 
 <%-- s分頁 --%>
 <jsp:useBean id="get_By_Key" scope="session" type="java.util.List<DeliveryVO>" />
@@ -84,13 +91,13 @@
 		
 	<td>
 	
-	<jsp:useBean id="empDao" scope="page" class="com.employee.model.EmpDAO" />
+	<jsp:useBean id="empSvc" scope="page" class="com.employee.model.EmpService" />
 
-	<c:if test="${(deSvc.out).size() != (empDao.all).size()}">
+	<c:if test="${(deSvc.out).size() != (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size()}">
 		<c:if test="${deliveryVO.emp_no == null}">
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
 				<select size="1" name="emp_no">
-					<c:forEach var="empVO" items="${empDao.all}">
+					<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}">
 						<c:if test="${!(deSvc.out).contains(empVO.emp_No)}">
 							<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
 						</c:if>
@@ -107,13 +114,13 @@
 		</c:if>
 	</c:if>
 	
-	<c:if test="${(deSvc.out).size() == (empDao.all).size() and deliveryVO.emp_no == null}">
+	<c:if test="${(deSvc.out).size() != (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size() and deliveryVO.emp_no == null}">
 		目前尚無可派送員工。
 	</c:if>
 	
 						
 		<c:if test="${deliveryVO.emp_no != null}">			
-					<c:forEach var="empVO" items="${empDao.all}">
+					<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}">
 					<c:if test="${deliveryVO.emp_no==empVO.emp_No}">
 					${empVO.emp_No}-${empVO.emp_Name}
 					</c:if>
