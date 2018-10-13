@@ -39,10 +39,7 @@ pageContext.setAttribute("ByName",list);
 <img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg" width="100%" height="" alt="">
 <head>
 <meta charset="UTF-8">
-<!-- font aewsome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
+
 <!-- Bootsraps-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -57,7 +54,7 @@ pageContext.setAttribute("ByName",list);
 <!-- address choosing -->
 <script src="<%=request.getContextPath()%>/front_end/member/js/selectaddress.js"></script>
 
-<title>listbymem</title>
+<title>我的優惠卷持有紀錄</title>
 
 <style type="text/css">
  .all{
@@ -107,7 +104,7 @@ pageContext.setAttribute("ByName",list);
 <body class="w-100 " background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
 
 <div class="container mt-4">
-  <h1>優惠券持有紀錄</h1>
+  <h1 style="color:#fff;">優惠券持有紀錄</h1>
 
 <%-- 分頁 --%>
 <%@ include file="page1.file" %>
@@ -162,6 +159,34 @@ pageContext.setAttribute("ByName",list);
 </div>
     </c:forEach>
  </c:if>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">通知</h4>
+      </div>
+      <div class="modal-body">
+	您還沒有優惠卷!快看看有哪些新活動優惠!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+             </div>
+    </div>
+  </div>
+</div>
+ <script>
+ $(function(){
+     $('#myModal').modal({
+     show:true,
+     backdrop:true
+     })
+ });
+        </script>
+
 
 </div>
 </div>
