@@ -387,6 +387,37 @@ a {
                                 			<input type="hidden" name="requestURL" value="/front_end/shoppingCart/Cart.jsp">
                                 <button type="button" class="btn btn-danger btn-sm btn-block mb-1" id="addtoCart${postVO.post_No}">加入購物車</button>
                             </form>
+                            
+                                <script>
+    //Java完美操縱javaScript , 加入餐點進購物車
+		$(function() {
+			$("#addtoCart${postVO.post_No}").click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					
+					  swal({
+							title : "商品已放置您的購物車",
+							html : "再選選其他餐點嘛",
+							type : "success"
+						});
+	                    setTimeout(function() {
+	                    	$("#addtoCartForm${postVO.post_No}").submit();
+	                    }, 1200);
+				
+				});
+			});
+		});
+		
+	</script>
+                            
+                            
+                            
+                            
+                            
+                            
                         </c:if>
                     </div>
                 </div>
@@ -613,30 +644,7 @@ a {
         %>
 
     </script>
-    <script>
-    //Java完美操縱javaScript , 加入餐點進購物車
-		$(function() {
-			$("#addtoCart${postVO.post_No}").click(function() {
-				swal({
-					title : "加入購物車",
-					html : "成功",
-					type : "success"
-				}).then(function() {
-					
-					  swal({
-							title : "商品已放置您的購物車",
-							html : "再選選其他餐點嘛",
-							type : "success"
-						});
-	                    setTimeout(function() {
-	                    	$("#addtoCartForm${postVO.post_No}").submit();
-	                    }, 1200);
-				
-				});
-			});
-		});
-		
-	</script>
+
     
     
     

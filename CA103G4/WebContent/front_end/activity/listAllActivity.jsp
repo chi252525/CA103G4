@@ -126,8 +126,7 @@ div.shavetext {
 		<div class="container ">
 	<div class="col-12 my-5"><P>測試用</P>
 	
-	  <div id="myID1" class="WebSocket"></div>
-	  	  <div id="myID2" class="WebSocket"></div>
+	  <div id="myID" class="WebSocket"></div>
     <span id="output" class="WebSocket"></span>
 	</div>
 	</div>
@@ -305,15 +304,13 @@ function connect() {
 	webSocket = new WebSocket(endPointURL);
 
 	webSocket.onmessage = function(event) {
-		var data = event.data;
-// 		if (event.data.indexOf('myID=') == 0) {
-	$("#myID1").html(event.act_Name);
-// 			document.getElementById("myID1").innerHTML = event.data;
-// 		}else {
-// 			var mySpan = document.getElementById("output");
-// 			mySpan.innerHTML = event.data;
-// 		}
-		
+		console.log(event.data);
+		var myObj='';
+		var x='';
+		myObj = event.data;
+		x = myObj.act_No;
+		document.getElementById("myID").innerHTML = x;
+
 		webSocket.onclose = function(event) {
 			var mySpan = document.getElementById("output");
 			mySpan.innerHTML = "WebSocket連線已關閉";

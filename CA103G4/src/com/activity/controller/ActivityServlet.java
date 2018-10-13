@@ -305,10 +305,35 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
+					
+					
+					/*********************如果是上架改下架就從客廳移除掉************************/
+					ActivityService actSvc =new ActivityService();
+					if(act_Status.equals("1")) {
+					ServletContext context = getServletContext();
+					ActivityVO oldactVO=actSvc.getOneActivity(act_No);
+					@SuppressWarnings("unchecked")
+					List<ActivityVO> actloadlist=(List<ActivityVO>)context.getAttribute("actloadlist");
+					Iterator<ActivityVO> actVOs=actloadlist.iterator();
+					System.out.println("RightNow_UpdateStat 裡的 actloadlist remove前"+actloadlist.size());
+					ActivityVO removeElem=null;
+					while (actVOs.hasNext()) {
+//						ActivityVO actVO=(ActivityVO) actVOs.next();
+						removeElem=oldactVO;
+						 if(removeElem.equals(actVOs.next())){
+							 actVOs.remove();
+				            }
+						
+					}
+					System.out.println("RightNow_UpdateStat 裡的 actloadlist remove後"+actloadlist.size());
+					}
+					
 					/*****************第二步：立即更動廣告狀態****************************/
-					ActivityService actSvc = new ActivityService();
 					ActivityVO activityVO=actSvc.getOneActivity(act_No);
 					actSvc.updateAct(act_No, Integer.valueOf(act_Status),activityVO);
+					
+					
+					
 					
 					/*****************第三步：更新完成，準備轉交**************************/
 					if(act_Status.equals("1")) {

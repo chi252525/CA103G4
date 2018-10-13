@@ -49,15 +49,13 @@ public class ActivityServer implements ServletContextListener{
 					System.out.println("************廣告排程檢查start**************");
 					@SuppressWarnings("unchecked")
 					List<ActivityVO> activityList = (List<ActivityVO>) context.getAttribute("actloadlist");
-					System.out.println("activityList"+activityList.size());
+					System.out.println("run() activityList"+activityList.size());
 					if (activityList.size() != 0) {
 							
-						ActivityVO removeElem= null;
-						Iterator actVOs = activityList.iterator();
+						Iterator<ActivityVO> actVOs = activityList.iterator();
 						while (actVOs.hasNext()) {
 							ActivityVO actVO=(ActivityVO) actVOs.next();
 							if (actVO.getAct_PreAddTime() != null && actVO.getAct_PreOffTime() != null) {
-//								System.out.println("進到for");
 								onTime = actVO.getAct_PreAddTime().getTime();
 								offTime = actVO.getAct_PreOffTime().getTime();
 	//
@@ -78,10 +76,6 @@ public class ActivityServer implements ServletContextListener{
 								} else if (((nowTime-1000) <= offTime && offTime <= nowTime)&&actVO.getAct_Status()==1) {
 									actSvc.updateAct(actVO.getAct_No(), 1, actVO);
 									System.out.println("*********已順利將" + actVO.getAct_No() + "下架了*************");
-									removeElem=actVO;
-									 if(removeElem.equals(actVOs.next())){
-										 actVOs.remove();
-							            }
 									
 
 								}
@@ -125,9 +119,10 @@ public class ActivityServer implements ServletContextListener{
 			for (Session aUserSession : allSessions) {
 				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.LONG);
 				String clock = df.format(new java.util.Date());
-				JSONObject obj = new JSONObject();
-				obj.put("act_Name", actVO.getAct_Name());
-				aUserSession.getAsyncRemote().sendObject(obj);
+				String objstr = "";
+				objstr= new JSONObject(actVO).toString();
+				
+				aUserSession.getAsyncRemote().sendText(objstr);
 				
 			}
 		}
