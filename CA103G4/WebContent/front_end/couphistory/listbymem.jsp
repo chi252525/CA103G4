@@ -111,7 +111,7 @@ pageContext.setAttribute("ByName",list);
 <div class="row">
 <c:if test="${ByName != null}">
 <c:forEach var="couponhistoryVO" items="${ByName}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-<div class="col-4">
+<div class="col-4 mb-2">
 <div class="card" style="width: 18rem;background-color:rgba(253,253,253,0.45);">
   <img class="card-img-top" src ="<%=request.getContextPath()%>/DBGifReader4?coucat_No=${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_No}" alt="Card image cap">
   <div class="card-body " >
