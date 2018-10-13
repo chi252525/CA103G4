@@ -183,18 +183,19 @@ body{
                 var id = jsonObj.username;
                 var msg = jsonObj.message + "\n";
                 var time = jsonObj.time;
+                var picEmp = jsonObj.picEmp;
+                var picMem = jsonObj.picMem;
                 if (inputusername.value.trim() == jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "right";
                     $('#MessageList')
                         .append(
-                            '<div class=ChatMessageRight><img class="nav-item " src=" <%=request.getContextPath()%>/empshow.do?emp_No=${(empVO == null)? '': empVO.emp_No} " class="drew" style="height:50px;width:50px;border-radius:50%;display:${(empVO == null )? 'none': ''}"><div class= ChatBubbleRight>' +
+                            '<div class=ChatMessageRight>' + picEmp + '<div class= ChatBubbleRight>' +
                             msg + '<br><sapn class=sysMsg>' + time + '</span></div></div>');
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/back_end/img/drew.jpg" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><span>' +
-                        jsonObj.username +
-                        '</span><div class= ChatBubbleLeft>' +
+                        '<div class=ChatMessageLeft>' + picMem + '<span>' +
+                        id +'</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
 
                 } else if (jsonObj.type == 'sysMsg') {
@@ -220,7 +221,8 @@ body{
                 "username": inputusername.value.trim(),
                 "message": inputmessage.value,
                 "type": 'userMsg',
-                'time': new Date().toLocaleString()
+                'time': new Date().toLocaleString(),
+                'picEmp': '<img class="nav-item " src="<%=request.getContextPath()%>/empshow.do?emp_No=${(empVO == null)? '': empVO.emp_No} " class="drew" style="height:50px;width:50px;border-radius:50%;display:${(empVO == null )? 'none': ''}">'
             };
 
             webSocket.send(JSON.stringify(jsonObj));
