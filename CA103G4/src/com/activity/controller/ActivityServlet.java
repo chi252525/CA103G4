@@ -186,8 +186,8 @@ public class ActivityServlet extends HttpServlet {
 				activityVO.setAct_PreOffTime(act_PreOffTime);
 				
 				
-//				activityVO.setAct_Start(act_Start);
-//				activityVO.setAct_End(act_End);
+				activityVO.setAct_Start(act_Start);
+				activityVO.setAct_End(act_End);
 				/*************************** 2.開始新增資料 ***************************************/
 				ActivityService actSvc = new ActivityService();
 				ActivityVO actVO=actSvc.addActivity(coucat_No,act_Cat,
@@ -202,27 +202,27 @@ public class ActivityServlet extends HttpServlet {
 				System.out.println("actloadlist size()"+actloadlist.size());;
 				
 				// 活動新增成功時發送簡訊給所有會員
-//				Send se = new Send();
-//				MemberDAO_interface mdao = new MemberDAO();
-//				List<MemberVO> memlist= mdao.getAll();
-//				System.out.println("gggg");
-//				for(MemberVO memVO:memlist){
-//					String[] tel = {memVO.getMem_Phone()};
-//					StringBuilder message = new StringBuilder()
-//							.append("親愛的會員")
-//							.append(memVO.getMem_Name().toString())
-//							.append("，您好:")
-//				 			.append("竹風堂最新活動，從")
-//				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
-//				 			.append("到")
-//				 			.append(activityVO.getAct_End().toString().substring(0, 16))
-//				 			.append(activityVO.getAct_Name().toString())
-//				 			.append("別錯過囉!");
-//				 			
-//				 	se.sendMessage(tel , message.toString());
-//				 
-//				}
-//				System.out.println("gggg");
+				Send se = new Send();
+				MemberDAO_interface mdao = new MemberDAO();
+				List<MemberVO> memlist= mdao.getAll();
+				System.out.println("gggg");
+				for(MemberVO memVO:memlist){
+					String[] tel = {memVO.getMem_Phone()};
+					StringBuilder message = new StringBuilder()
+							.append("親愛的會員")
+							.append(memVO.getMem_Name().toString())
+							.append("，您好:")
+				 			.append("竹風堂最新活動預告，從")
+				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
+				 			.append("到")
+				 			.append(activityVO.getAct_End().toString().substring(0, 16))
+				 			.append(activityVO.getAct_Name().toString())
+				 			.append("別錯過囉!");
+				 			
+				 	se.sendMessage(tel , message.toString());
+				 
+				}
+				System.out.println("gggg");
 			
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back_end/activity/listAllActivity.jsp";
@@ -313,6 +313,7 @@ public class ActivityServlet extends HttpServlet {
 					/*****************第三步：更新完成，準備轉交**************************/
 					if(act_Status.equals("1")) {
 						req.setAttribute("display", "display");
+						
 					}
 					
 					RequestDispatcher successView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
@@ -360,9 +361,10 @@ public class ActivityServlet extends HttpServlet {
 //				System.out.println("update in");
 				Timestamp act_PreAddTime = null ;
 				Timestamp act_PreOffTime = null ;
+				String act_No =null;
 				try {
 					String act_Status = req.getParameter("act_Status");
-					String act_No = req.getParameter("act_No");
+					act_No = req.getParameter("act_No");
 					System.out.println("act_No"+act_No);
 					if(act_No == null || act_No.trim().length() == 0) {
 						errorMsgs.add("未取得貼文");
@@ -461,6 +463,9 @@ public class ActivityServlet extends HttpServlet {
 //							errorMsgs.add("請修改上架時間：不得大於等於下架時間");
 //						}
 //					}
+				    
+				    
+				    
 					ActivityVO activityVO= new ActivityVO();
 					activityVO.setAct_No(act_No);
 					activityVO.setAct_Cat(act_Cat);
@@ -478,18 +483,47 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
-					//************************第二步：新增資料**************************
-					
+					/*********************先從客廳移掉舊的VO*************************/
 					ActivityService actSvc =new ActivityService();
-					actSvc.updateActivity(act_No,coucat_No,act_Cat,
+					ServletContext context = getServletContext();
+					ActivityVO oldactVO=actSvc.getOneActivity(act_No);
+					@SuppressWarnings("unchecked")
+					List<ActivityVO> actloadlist=(List<ActivityVO>)context.getAttribute("actloadlist");
+					Iterator<ActivityVO> actVOs=actloadlist.iterator();
+					System.out.println("update 裡的 actloadlist remove前"+actloadlist.size());
+					ActivityVO removeElem=null;
+					while (actVOs.hasNext()) {
+//						ActivityVO actVO=(ActivityVO) actVOs.next();
+						removeElem=oldactVO;
+						 if(removeElem.equals(actVOs.next())){
+							 actVOs.remove();
+				            }
+					
+						
+					}
+			
+				
+					context.setAttribute("actloadlist", actloadlist);
+					System.out.println("update 裡的 actloadlist remove後"+actloadlist.size());
+					//************************第二步：再修改資料**************************
+					ActivityVO actVO= actSvc.updateActivity(act_No,coucat_No,act_Cat,
 							act_Name,act_Carousel,act_Pic,act_Content,act_PreAddTime,
 							act_PreOffTime);
 					if(act_Status.equals("0")) {
 						req.setAttribute("display", "display");
 					}
 					
-					//************************第三步：新增完成，準備提交**************************
+					/***************************再把修改一筆的廣告加入context中***********************************************/
 					
+					actloadlist.add(actVO);
+					context.setAttribute("actloadlist", actloadlist);
+					System.out.println("actloadlist size()"+actloadlist.size());;
+					
+					//************************第三步：新增完成，準備提交**************************
+					//Bootstrap_modal
+					boolean openModal_forupdate=true;
+					System.out.println("openModal_forupdate"+openModal_forupdate);
+					req.setAttribute("openModal_forupdate",openModal_forupdate);
 					req.setAttribute("activityVO", activityVO); 
 					String url = "/back_end/activity/listAllActivity.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);

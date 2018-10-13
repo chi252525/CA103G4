@@ -419,15 +419,15 @@
 		<url-pattern>/empauth.do</url-pattern>
 	</servlet-mapping>	
 	
-		<servlet>
-		<servlet-name>ScheduleServlet</servlet-name>
-		<servlet-class>com.activity.controller.ScheduleServlet</servlet-class>
-		<load-on-startup>10</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ScheduleServlet</servlet-name>
-		<url-pattern>/schedule.do</url-pattern>
-	</servlet-mapping>	
+<!-- 		<servlet> -->
+<!-- 		<servlet-name>ScheduleServlet</servlet-name> -->
+<!-- 		<servlet-class>com.activity.controller.ScheduleServlet</servlet-class> -->
+<!-- 		<load-on-startup>10</load-on-startup> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>ScheduleServlet</servlet-name> -->
+<!-- 		<url-pattern>/schedule.do</url-pattern> -->
+<!-- 	</servlet-mapping>	 -->
 	
 	<servlet>
     <servlet-name>DeskServlet</servlet-name>
