@@ -35,10 +35,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
     <!-- font awesome -->
 
-    <!-- star 評分 套件-->
+    <!-- star 評分 套件 add by Ning-->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/post/css/starability-all.min.css" />
+<!-- sweet alert2 add by Ning-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+	type="text/javascript"></script>
 
-    <style>
+<style>
         th {
 	background-color: darkgoldenrod;
 }
@@ -343,7 +349,7 @@ a {
 %>
     <!--ads-->
     <div class="container">
-        <h3 class="col-md-8 col-12" style="margin-top: 100px;">最新自訂餐點推薦</h3>
+        <h3 class="col-md-8 col-12" style="margin-top: 100px;color:#fff;">最新自訂餐點推薦<span class="badge badge-pill badge-danger" style="font-size:18px;">New</span></h3>
 
         <div class="row">
             <c:forEach var="postVO" items="${list}">
@@ -374,11 +380,12 @@ a {
                                 &raquo;</button>
                         </FORM>
                         <c:if test='${memVO.mem_No!=null}'>
-                            <form method="post" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+                            <form method="post" id="addtoCartForm${postVO.post_No}" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
                                 <input type="hidden" name="action" value="insert_byPosted">
                                 <input type="hidden" name="custom_No" value="${postVO.custom_No}">
                                 <input type="hidden" id="mem_No" name="mem_No" value="${memVO.mem_No}" />
-                                <button type="submit" class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
+                                			<input type="hidden" name="requestURL" value="/front_end/shoppingCart/Cart.jsp">
+                                <button type="button" class="btn btn-danger btn-sm btn-block mb-1" id="addtoCart${postVO.post_No}">加入購物車</button>
                             </form>
                         </c:if>
                     </div>
@@ -606,6 +613,33 @@ a {
         %>
 
     </script>
+    <script>
+    //Java完美操縱javaScript , 加入餐點進購物車
+		$(function() {
+			$("#addtoCart${postVO.post_No}").click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					
+					  swal({
+							title : "商品已放置您的購物車",
+							html : "再選選其他餐點嘛",
+							type : "success"
+						});
+	                    setTimeout(function() {
+	                    	$("#addtoCartForm${postVO.post_No}").submit();
+	                    }, 1200);
+				
+				});
+			});
+		});
+		
+	</script>
+    
+    
+    
     <jsp:include page="/front_end/footer.jsp" flush="true" />
 </body>
 

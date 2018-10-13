@@ -260,7 +260,7 @@ div.shavetext {
 							alert("Oops!沒取到優惠券: "+ result.msg);
 							},
 						error : function() {
-								alert("Oops!沒取到優惠券");
+								alert("Oops!沒取到優惠券或您已取過該優惠卷");
 									}
 								})
 

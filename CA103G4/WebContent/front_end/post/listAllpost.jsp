@@ -55,8 +55,13 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/post/js/jquery.fly.js" />
+<!-- sweet alert2 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+	type="text/javascript"></script>
+
 
 <style>
 html {
@@ -230,7 +235,7 @@ body {
 						</p>
 
 						<!-- 查看單一貼文action -->
-						<FORM METHOD="post"
+						<FORM METHOD="post" 
 							ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 							style="margin-bottom: 0px;">
 							<input type="hidden" name="post_No" value="${postVO.post_No}" />
@@ -241,17 +246,48 @@ body {
 								&raquo;</button>
 						</FORM>
 						<c:if test='${memVO.mem_No!=null}'>
-					<form method="post" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+					<form method="post" id="addtoCartForm${postVO.post_No}" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do"> 
 				<input type="hidden" name ="action" value="insert_byPosted">
 				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
 				<input type="hidden" id="mem_No"	name="mem_No" value="${memVO.mem_No}" />
 				<input type="hidden" name="requestURL" value="/front_end/post/listAllpost.jsp">
-				<button type="submit"
-					class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
+				<button type="button"
+					class="btn btn-danger btn-sm btn-block mb-1" id="addtoCart${postVO.post_No}">加入購物車</button>
 				</form>
 				</c:if>
 					</div>
 				</div>
+				
+				
+				
+				<script>
+		
+		//Java完美操縱javaScript , 加入餐點進購物車
+		$(function() {
+			$("#addtoCart${postVO.post_No}").click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					
+					  swal({
+							title : "商品已放置您的購物車",
+							html : "再選選其他餐點嘛",
+							type : "success"
+						});
+	                    setTimeout(function() {
+	                    	$("#addtoCartForm${postVO.post_No}").submit();
+	                    }, 1200);
+				
+				});
+			});
+		});
+		
+	</script>
+				
+	
+				
 			</c:forEach>
 			<div class="col-12">
 				<%@ include file="pages/page2.file"%></div>
