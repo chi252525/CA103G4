@@ -20,7 +20,13 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
 
       <link rel="stylesheet" href="css/style.css">
-<!--       <link rel="stylesheet" href="css/reset.css" > -->
+
+<!-- sweet alert2 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+	type="text/javascript"></script>
 
   
 </head>
@@ -356,16 +362,16 @@
 								        <h4>組合區</h4>
 								      </div>
 									      <ul class="task-list2" id="combination"></ul>								  		
-									  <form method="post" id="sform" action="custommeals.do" name="shoppingForm" class="shoppingForm">
-<%-- 									  <form method="post" id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do"> --%>
+									  <form method="post" id="addtoCartForm${custommealsVO.custom_No}" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
 <div class="container">
 										
 	<div class="row">
 		<div style="width:60px;">
 		</div>
 		<div style="width:450px;">													
-										      <div> &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp; 	${memVO.mem_No}</div>
+										    <div> &nbsp;&nbsp;&nbsp;會員編號&nbsp;&nbsp;&nbsp; 	${memVO.mem_No}
                                                 <input class="form-control" type="hidden" name="mem_No" size="45" value="${memVO.mem_No}" /><br>
+                                            </div>
 											<div class="form-inline">
                                                 &nbsp;&nbsp;&nbsp;餐點名稱&nbsp;&nbsp;&nbsp;
                                                 <input class="form-control" type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;" required /><br>
@@ -442,14 +448,14 @@
 										        </tr>
 											</table>
 		</div>
-		<div style="width:150px;">						  
+		<div style="width:150px; margin-top:20px;">						  
 									   <div class="column-button">
 								        <button id="getPrice" type="button" class="button confirm-button confirmBtn btn btn-light">計算金額</button>
 								       </div>
 									  
 	
 									   <div class="column-button">
-										   <button id="insert" class="button confirm-button btn btn-light" type="submit" value="ADD" disabled="true">送出新增</button>
+										   <button id="addtoCart${custommealsVO.custom_No}" class="button confirm-button btn btn-light" type="button" value="ADD">加入餐點</button>
 										   <input type="hidden" name="action" value="insert">
 										   <input type="hidden" name="requestURL" value="/front_end/custommeals/addCustommeals2.jsp">
 									   </div>
@@ -568,10 +574,10 @@
 <!--   	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" -->
 <!-- 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
 <!-- 		crossorigin="anonymous"></script> -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
+<!-- 	<script -->
+<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" -->
+<!-- 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" -->
+<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -605,37 +611,33 @@
     </script>
     
     <script>
-			$(function() {
-				$("#dialog").dialog({
-					modal : true,
-					buttons : {
-						Ok : function() {
-							$(this).dialog("close");
-						}
-					}
+    
+	//Java完美操縱javaScript , 加入餐點進購物車
+		$(function() {
+			$("#addtoCart${custommealsVO.custom_No}").click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"			
+				}).then(function() {
+					
+	                    setTimeout(function() {
+	                    	$("#addtoCartForm${custommealsVO.custom_No}").submit();
+	                    }, 1200);
 				});
 			});
-			//Java完美操縱javaScript , 加入餐點進購物車
-		
-			$(function() {
-				$("#insert").click(function() {
-					swal({
-						title : "加入購物車",
-						html : "成功",
-						type : "success"
-					}).then(function() {
-						$("#sform").submit();
-					});
-				});
-			});
-		
-		
-		//開啟新增按鈕
-		$("#getPrice").click(function(){
-			alert('ok');
-			$("#insert").prop("disabled",false);
-// 			document.getElementById('insert').disabled=false;
 		});
+	
+	
+	
+		
+		
+		開啟新增按鈕
+// 		$("#getPrice").click(function(){
+// 			alert('ok');
+// 			$("#insert").prop("disabled",false);
+// 			document.getElementById('insert').disabled=false;
+// 		});
 		
     </script>
     
