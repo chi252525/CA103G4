@@ -1,9 +1,11 @@
 package android.com.member.controller;
 
+import android.com.main.ImageUtil;
 import android.com.member.model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 
@@ -43,20 +45,24 @@ public class AndroidMemberServlet extends HttpServlet {
 			// 查不到該會員回傳空字串，轉成Json格式字串為{}
 			writeText(res, memVO == null ? "" : gson.toJson(memVO));
 		}
-//		else if (action.equals("isUserIdExist")) {
-//			String userId = jsonObject.get("userId").getAsString();
-////			writeText(res, String.valueOf(memberDao.isUserIdExist(userId)));
-//		} else if (action.equals("add")) {
-//			EmpVO empVO = gson.fromJson(jsonObject.get("employee").getAsString(), EmpVO.class);
-//			writeText(res, String.valueOf(empDAO.add(empVO)));
-//		} else if (action.equals("findById")) {
-//			String userId = jsonObject.get("userId").getAsString();
-//			EmpVO empVO = empDAO.findById(userId);
-//			writeText(res, empVO == null ? "" : gson.toJson(empVO));
-//		} else if (action.equals("update")) {
-//			EmpVO empVO = gson.fromJson(jsonObject.get("employee").getAsString(), EmpVO.class);
-//			writeText(res, String.valueOf(empDAO.update(empVO)));
-//		}
+		// 圖片請求
+		else if ("getImage".equals(action)) {
+			OutputStream os = res.getOutputStream();
+			String pk = jsonObject.get("pk").getAsString();
+			int imageSize = jsonObject.get("imageSize").getAsInt();
+			byte[] image = memDAO.getImage(pk);
+			if (image != null) {
+				// 縮圖 in server side
+				image = ImageUtil.shrink(image, imageSize);
+				res.setContentType("image/jpeg");
+				res.setContentLength(image.length);
+			}
+			try {
+				os.write(image);
+			} catch (NullPointerException ne) {
+				System.out.println(pk+" : No Picture!");
+			}
+		}
 	}
 
 	@Override
