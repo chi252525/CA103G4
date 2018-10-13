@@ -154,7 +154,7 @@ pageContext.setAttribute("empfealist",empfealist);
                 	</c:if>
                 	
                 	<c:if test="${empauthfeaVO.fea_No == 'F003'}">		                
-                <a href="<%=request.getContextPath()%>/front_end/delivery/select_page.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/deliver.png" width="17%">&nbsp;外送管理</a>
+                <a href="<%=request.getContextPath()%>/back_end/delivery/select_page.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/deliver.png" width="17%">&nbsp;外送管理</a>
                 	</c:if>
                 	
                 	<c:if test="${empauthfeaVO.fea_No == 'F002'}">
