@@ -114,7 +114,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 		</c:if>
 	</c:if>
 	
-	<c:if test="${(deSvc.out).size() != (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size() and deliveryVO.emp_no == null}">
+	<c:if test="${(deSvc.out).size() == (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size() and deliveryVO.emp_no == null}">
 		目前尚無可派送員工。
 	</c:if>
 	

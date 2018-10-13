@@ -50,7 +50,7 @@ public class OrderinvoiceServlet extends HttpServlet {
 			}
 			
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/forout/forOut.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/forout/forOut.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -78,7 +78,7 @@ public class OrderinvoiceServlet extends HttpServlet {
 				ordSvc.updateForSta(ordno,2);
 			}
 			
-			String url = req.getContextPath() + "/front_end/forout/forOut.jsp";
+			String url = req.getContextPath() + "/back_end/forout/forOut.jsp";
 		 	res.sendRedirect(url);	
 	
 		}

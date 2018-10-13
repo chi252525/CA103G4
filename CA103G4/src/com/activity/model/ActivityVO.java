@@ -1,6 +1,8 @@
 package com.activity.model;
 import java.sql.*;
 
+import com.member.model.MemberVO;
+
 public class ActivityVO implements java.io.Serializable{
 	/**
 	 * 
@@ -97,7 +99,14 @@ public class ActivityVO implements java.io.Serializable{
 	public void setAct_Views(Integer act_Views) {
 		this.act_Views = act_Views;
 	}
-
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ActivityVO) {
+			ActivityVO actvo = (ActivityVO)obj;
+			return this.act_No.equals(actvo.act_No);
+		}
+		return super.equals(obj);
+	}
 	
 
 	

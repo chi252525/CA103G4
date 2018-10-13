@@ -119,9 +119,21 @@ div.shavetext {
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
 
-<body
+<body onLoad="connect();" onunload="disconnect();"
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
+	
+		<div class="container ">
+	<div class="col-12 my-5"><P>測試用</P>
+	
+	  <div id="myID1" class="WebSocket"></div>
+	  	  <div id="myID2" class="WebSocket"></div>
+    <span id="output" class="WebSocket"></span>
+	</div>
+	</div>
+	
+	
+	
 	<!--your html start==================================================================================-->
 	<script>$('.carousel').carousel()</script>
 	<div class="container ">
@@ -279,8 +291,40 @@ div.shavetext {
 			</div>
 		</c:forEach>
 
+<!-- 有會員上線時通知 -->
+<script>
+var MyPoint = "/ActivityServer";
+var host = window.location.host;
+var path = window.location.pathname;
+var webCtx = path.substring(0, path.indexOf('/', 1));
+var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+var webSocket;
+var myID;
+function connect() {
+	// 建立 websocket 物件
+	webSocket = new WebSocket(endPointURL);
 
-
+	webSocket.onmessage = function(event) {
+		var data = event.data;
+// 		if (event.data.indexOf('myID=') == 0) {
+	$("#myID1").html(event.act_Name);
+// 			document.getElementById("myID1").innerHTML = event.data;
+// 		}else {
+// 			var mySpan = document.getElementById("output");
+// 			mySpan.innerHTML = event.data;
+// 		}
+		
+		webSocket.onclose = function(event) {
+			var mySpan = document.getElementById("output");
+			mySpan.innerHTML = "WebSocket連線已關閉";
+		};
+		
+	}
+	
+	
+	
+	}
+</script>
 
 
 
