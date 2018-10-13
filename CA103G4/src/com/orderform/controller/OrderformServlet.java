@@ -19,6 +19,7 @@ import javax.websocket.Session;
 import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
+import com.member.model.MemberVO;
 import com.menu.model.MenuService;
 import com.menu.model.MenuVO;
 import com.orderform.model.*;
@@ -132,42 +133,56 @@ public class OrderformServlet extends HttpServlet {
 			Vector<CustommealsVO> customv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			customv = (Vector<CustommealsVO>) req.getSession().getAttribute("shoppingcartCustom");//取得送來的自訂餐點參數
-			String[] oinlist = new String[inv.size()];
-			String[] qinList = new String[inv.size()];
-			String[] costomOinlist = new String[customv.size()];
-			String[] costomQinList = new String[customv.size()];
-			
-			
-			for (int z = 0 ; z < inv.size() ; z++){
-                String eat = String.valueOf(inv.get(z).getMenu_No());
-                oinlist[z] = eat;
-                int quantity = inv.get(z).getMenu_quantity();
-                qinList[z] = String.valueOf(quantity);
-           }
-			
-			for (int z = 0 ; z < customv.size() ; z++){
-                String eat = String.valueOf(customv.get(z).getcustom_No());
-                costomOinlist[z] = eat;
-                int quantity = customv.get(z).getcustom_Quantity();
-                costomQinList[z] = String.valueOf(quantity);
-           }
 			
 			OrderinvoiceVO oin = null;
+			
+			String[] oinlist = null;
+			String[] qinList = null;
+			
+			if (inv != null) {
+				
+				oinlist = new String[inv.size()];
+				qinList = new String[inv.size()];
+			
+				for (int z = 0 ; z < inv.size() ; z++){
+	                String eat = String.valueOf(inv.get(z).getMenu_No());
+	                oinlist[z] = eat;
+	                int quantity = inv.get(z).getMenu_quantity();
+	                qinList[z] = String.valueOf(quantity);
+	           }
+				
+				for (int i = 0; i < oinlist.length; i++) {
+					oin = new OrderinvoiceVO();
+					oin.setMenu_no(oinlist[i]);
+					oin.setMenu_nu(qinList[i]);					
+					list.add(oin);
+				}
+			}
+			
+			String[] costomOinlist = null;
+			String[] costomQinList = null;
+			
+			
+			if (customv != null) {
 
-			
-			for (int i = 0; i < oinlist.length; i++) {
-				oin = new OrderinvoiceVO();
-				oin.setMenu_no(oinlist[i]);
-				oin.setMenu_nu(qinList[i]);					
-				list.add(oin);
+				costomOinlist = new String[customv.size()];
+				costomQinList = new String[customv.size()];
+				
+				for (int z = 0 ; z < customv.size() ; z++){
+	                String eat = String.valueOf(customv.get(z).getcustom_No());
+	                costomOinlist[z] = eat;
+	                int quantity = customv.get(z).getcustom_Quantity();
+	                costomQinList[z] = String.valueOf(quantity);
+	           }
+				
+				for (int i = 0; i < costomOinlist.length; i++) {
+					oin = new OrderinvoiceVO();
+					oin.setCustom_no(costomOinlist[i]);
+					oin.setCustom_nu(costomQinList[i]);
+					list.add(oin);
+				}
 			}
 			
-			for (int i = 0; i < costomOinlist.length; i++) {
-				oin = new OrderinvoiceVO();
-				oin.setCustom_no(costomOinlist[i]);
-				oin.setCustom_nu(costomQinList[i]);
-				list.add(oin);
-			}
 			
 			OrderformVO orderformVO = new OrderformVO();
 			orderformVO.setDek_no(dekno);
@@ -184,11 +199,17 @@ public class OrderformServlet extends HttpServlet {
 			req.getSession().setAttribute("ordNo",orderformVO.getOrder_no());
 			
 			iord = (String) req.getAttribute("ordNo");
-
-			//發送簡訊
-			Send se = new Send();
-			String[] tels ={"0933628324"};//測試用
-//			String[] tels ={tel};//上線用
+			
+			
+			
+			
+			
+			MemberVO memVO = (MemberVO) req.getSession().getAttribute("memVO");
+			String memtel = memVO.getMem_Phone();//會員的手機
+			//對會員發送簡訊
+			Send toMem = new Send();
+//			String[] tels ={memtel};//上線用
+			String[] tels ={"0933628324"};//上線用
 			
 			String message = null; 
 			if (ordertype == 1) {
@@ -205,8 +226,30 @@ public class OrderformServlet extends HttpServlet {
 						+ "\n取餐時間:"+req.getSession().getAttribute("time");	
 			}
 			
-		 	se.sendMessage(tels , message);
+			toMem.sendMessage(tels , message);
 
+			//有新的外送或外帶訂單
+			Send toEmp = new Send();
+//			String[] tels2 ={tel};//上線用
+			String[] tels2 ={"0933628324"};//上線用
+			String message2 = null; 
+			
+			if (ordertype == 1) {
+				//外帶
+				message2= "\t訂單資訊\n"
+						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
+						+ "\n取餐時間:"+req.getSession().getAttribute("time");			
+			} else if (ordertype == 2) {
+				//外送
+				message2= "\t訂單資訊\n"
+						+ "訂單編號:"+req.getSession().getAttribute("ordNo")
+						+ "\n取餐時間:"+req.getSession().getAttribute("time");	
+			}
+			
+			toEmp.sendMessage(tels2 , message2);
+			
+			
+			
 			//準備轉交
 //			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
