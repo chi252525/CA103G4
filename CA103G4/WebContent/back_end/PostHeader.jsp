@@ -158,7 +158,7 @@ pageContext.setAttribute("empfealist",empfealist);
                 	</c:if>
                 	
                 	<c:if test="${empauthfeaVO.fea_No == 'F002'}">
-                <a href="<%=request.getContextPath()%>/front_end/forout/forOut.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
+                <a href="<%=request.getContextPath()%>/back_end/forout/forOut.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1"><img src="/CA103G4/back_end/img/1631-steaming-bowl.png" width="17%">&nbsp;出餐管理</a>
                 	</c:if>
                 	
                 	<c:if test="${empauthfeaVO.fea_No == 'F005'}">
