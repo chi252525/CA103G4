@@ -45,9 +45,7 @@
     color: white;
     display: inline;
   }
-</style>
 
-<style>
   table {
     
 	width: 1280px;
