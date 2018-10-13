@@ -178,6 +178,8 @@ pageContext.setAttribute("ByName",list);
     </div>
   </div>
 </div>
+
+<c:if test="${ByName.size() == 0}">
  <script>
  $(function(){
      $('#myModal').modal({
@@ -185,8 +187,9 @@ pageContext.setAttribute("ByName",list);
      backdrop:true
      })
  });
-        </script>
+ </script>
 
+</c:if>
 
 </div>
 </div>
