@@ -340,8 +340,8 @@ function connect() {
         <img class="img-fluid" id="new_act"src="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">我知道了</button>
+      
       </div>
     </div>
   </div>
