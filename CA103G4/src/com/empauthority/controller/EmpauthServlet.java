@@ -46,8 +46,8 @@ public class EmpauthServlet extends HttpServlet {
 				
 
 				// 送出的empVOauth、empauthList 送給OneEmpAuth.jsp
-//				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/empAuth.jsp");
-				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/OneEmpAuth.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/empAuth.jsp");
+//				RequestDispatcher successView = req.getRequestDispatcher("/back_end/employee/OneEmpAuth.jsp");
 				successView.forward(req, res);
 				return;
 
