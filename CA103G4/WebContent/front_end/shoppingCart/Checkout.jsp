@@ -201,7 +201,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="popover" title="客製拉麵食材: " data-content="<%=stb%>">
+                                    <td width="200" data-toggle="popover" data-placement="bottom" title="客製拉麵食材: " data-content="<%=stb%>">
                                         <%=name%>
                                     </td>
                                     <td width="100">
