@@ -202,26 +202,26 @@ public class ActivityServlet extends HttpServlet {
 				System.out.println("actloadlist size()"+actloadlist.size());;
 				
 				// 活動新增成功時發送簡訊給所有會員
-				Send se = new Send();
-				MemberDAO_interface mdao = new MemberDAO();
-				List<MemberVO> memlist= mdao.getAll();
-				System.out.println("gggg");
-				for(MemberVO memVO:memlist){
-					String[] tel = {memVO.getMem_Phone()};
-					StringBuilder message = new StringBuilder()
-							.append("親愛的會員")
-							.append(memVO.getMem_Name().toString())
-							.append("，您好:")
-				 			.append("竹風堂最新活動預告，從")
-				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
-				 			.append("到")
-				 			.append(activityVO.getAct_End().toString().substring(0, 16))
-				 			.append(activityVO.getAct_Name().toString())
-				 			.append("別錯過囉!");
-				 			
-				 	se.sendMessage(tel , message.toString());
+//				Send se = new Send();
+//				MemberDAO_interface mdao = new MemberDAO();
+//				List<MemberVO> memlist= mdao.getAll();
+//				System.out.println("gggg");
+//				for(MemberVO memVO:memlist){
+//					String[] tel = {memVO.getMem_Phone()};
+//					StringBuilder message = new StringBuilder()
+//							.append("親愛的會員")
+//							.append(memVO.getMem_Name().toString())
+//							.append("，您好:")
+//				 			.append("竹風堂最新活動預告，從")
+//				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
+//				 			.append("到")
+//				 			.append(activityVO.getAct_End().toString().substring(0, 16))
+//				 			.append(activityVO.getAct_Name().toString())
+//				 			.append("別錯過囉!");
+//				 			
+//				 	se.sendMessage(tel , message.toString());
 				 
-				}
+//				}
 				System.out.println("gggg");
 			
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
@@ -305,10 +305,35 @@ public class ActivityServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
+					
+					
+					/*********************如果是上架改下架就從客廳移除掉************************/
+					ActivityService actSvc =new ActivityService();
+					if(act_Status.equals("1")) {
+					ServletContext context = getServletContext();
+					ActivityVO oldactVO=actSvc.getOneActivity(act_No);
+					@SuppressWarnings("unchecked")
+					List<ActivityVO> actloadlist=(List<ActivityVO>)context.getAttribute("actloadlist");
+					Iterator<ActivityVO> actVOs=actloadlist.iterator();
+					System.out.println("RightNow_UpdateStat 裡的 actloadlist remove前"+actloadlist.size());
+					ActivityVO removeElem=null;
+					while (actVOs.hasNext()) {
+//						ActivityVO actVO=(ActivityVO) actVOs.next();
+						removeElem=oldactVO;
+						 if(removeElem.equals(actVOs.next())){
+							 actVOs.remove();
+				            }
+						
+					}
+					System.out.println("RightNow_UpdateStat 裡的 actloadlist remove後"+actloadlist.size());
+					}
+					
 					/*****************第二步：立即更動廣告狀態****************************/
-					ActivityService actSvc = new ActivityService();
 					ActivityVO activityVO=actSvc.getOneActivity(act_No);
 					actSvc.updateAct(act_No, Integer.valueOf(act_Status),activityVO);
+					
+					
+					
 					
 					/*****************第三步：更新完成，準備轉交**************************/
 					if(act_Status.equals("1")) {
@@ -572,6 +597,36 @@ public class ActivityServlet extends HttpServlet {
 			
 			
 		}
+		
+		
+		if ("delete".equals(action)) {
+			System.out.println("delete開始");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				
+				String act_No = req.getParameter("act_No");
+			
+				/*************************** 2.開始刪除 貼文***************************************/
+				ActivityService actSvc= new ActivityService();
+				actSvc.deleteAct(act_No);
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/activity/listAllActivity.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 	}
 	
 	public String getFileNameFromPart(Part part) {

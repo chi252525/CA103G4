@@ -86,7 +86,7 @@
 
 
 <c:if test="${selDel.size() == 0}">
-目前尚未需要派送的訂單
+目前尚無需要派送的訂單
 </c:if>
 <div class="row justify-content-md-center">
 	<div class="col-md-auto">

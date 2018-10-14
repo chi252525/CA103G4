@@ -140,7 +140,7 @@
                             <th width="200">餐點</th>
                             <th width="100">價格</th>
                             <th width="100">數量</th>
-                            <th width="120">小記</th>
+                            <th width="120">總計</th>
                             <th width="100">備註</th>
                         </tr>
                         <%
@@ -201,7 +201,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="popover" title="客製拉麵食材: " data-content="<%=stb%>">
+                                    <td width="200" data-toggle="popover" data-placement="bottom" title="客製拉麵食材: " data-content="<%=stb%>">
                                         <%=name%>
                                     </td>
                                     <td width="100">
@@ -326,6 +326,9 @@
                                 </label>
                                 <label class="btn btn-secondary" onclick="cardShow()">
                                     <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
+                                </label>
+                                 <label class="btn btn-secondary" onclick="cardShow()">
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 竹幣
                                 </label>
                             </div><br>
 

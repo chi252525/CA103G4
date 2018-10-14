@@ -104,7 +104,7 @@ pageContext.setAttribute("ByName",list);
 <body class="w-100 " background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
 
 <div class="container mt-4">
-  <h1 style="color:#fff;">優惠券持有紀錄</h1>
+  <h1 style="color:#fff;">我的優惠券</h1>
 
 <%-- 分頁 --%>
 <%@ include file="page1.file" %>

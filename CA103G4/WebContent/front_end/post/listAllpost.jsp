@@ -307,22 +307,22 @@ var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
 		
-    labels: [ <c:forEach var="message" items="${map}"> '${message.key}星',</c:forEach>  ],   
+    labels: [ <c:forEach var="message" items="${map}">  '${message.key}星' ,</c:forEach>  ],   
 		 datasets: [{
       backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-         'rgba(255, 206, 86, 1)',
-          'rgba(255, 206, 86, 1)'
+        '#FFE74C',
+        '#FF5964',
+        '#FF7F11',
+         '#38618C',
+          '#35A7FF'
       ],
       borderColor: [
         'rgba(255,255,255,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 192, 1)'
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,0.5)',
       ],
       borderWidth: 1,
       label: '竹風堂餐點評比',
@@ -330,7 +330,17 @@ var myChart = new Chart(ctx, {
    
  
     }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true
+              }
+          }]
+      }
   }
+  
 });
 
 </script>

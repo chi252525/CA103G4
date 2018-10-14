@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.menu.model.*, com.custommeals.model.*, java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
+<%
+	@SuppressWarnings("unchecked")
+	Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
+	Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
+// 	System.out.println("購物車="+buylist.size());
+// 	System.out.println("自訂購物車="+buylistCustom.size());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,6 +83,15 @@ body {
 	background-size: cover;
 }
 
+#notice{
+	width:15px;
+	height:15px;
+	background-color:red;
+	color:white;
+	border-radius: 10px;
+	text-align: center;
+	font-size:10px;
+}
 </style>
 <!--Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
@@ -120,7 +138,7 @@ body {
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink">
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">經典餐點</a> 
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/reservation/reservation.jsp">線上預約訂位</a>
 							</li>
@@ -132,9 +150,12 @@ body {
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
-							<li class="nav-link imgicon"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
-									class="lnr lnr-cart"></span></a></li>
-							<li class="nav-link imgicon"><a href="gallery.html"></a><span
+							
+							<li class="nav-link imgicon" style="padding-right: 0px;width: 22px;"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
+									class="lnr lnr-cart"></span></a></li><c:if test="${not empty shoppingcart && empty shoppingcartCustom }"><b id="notice"><%=buylist.size() %></b></c:if>
+									<c:if test="${not empty shoppingcartCustom && empty shoppingcart}"><b id="notice"><%=buylistCustom.size() %></b></c:if>
+									<c:if test="${not empty shoppingcart && not empty shoppingcartCustom }"><b id="notice"><%=buylist.size() + buylistCustom.size()%></b></c:if>								
+							<li class="nav-link imgicon" style="padding-left: 30px;"><a href="gallery.html"></a><span
 								class="lnr lnr-alarm"></span></li>
 							<li class="nav-item dropdown imgicon">
 							

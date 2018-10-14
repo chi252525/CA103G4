@@ -190,7 +190,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			pstmt.setString(1, order_no);
 
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				// deliveryVO 也稱為 Domain objects
 				orderformVO = new OrderformVO();

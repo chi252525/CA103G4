@@ -1,0 +1,17 @@
+.background{
+          width: 700px;
+          height:800px;
+          border-radius: 5px;    
+        }
+      .centered-form .panel{
+            background: rgba(255, 228, 202, 0.8);
+            box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+        }
+      
+      .form-control:disabled{
+          background-color:#fffaf4;
+      }
+.form-control timefn{
+    border: none;
+}
+      

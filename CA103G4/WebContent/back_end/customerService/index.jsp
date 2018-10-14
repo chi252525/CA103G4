@@ -127,7 +127,7 @@ body{
 </head>
 
 <body id='chatbody' onload="connect();" onunload="disconnect();" style="">
-    <div id="ChatZone" class="col-12 col-md-4" style="height: 100%;">
+    <div id="ChatZone" class="col-12 col-md-12 float-right" style="height: 80%;">
         <nav class="navbar navbar-dark bg-dark ">
             <!-- Navbar content -->
             <h3 id='service' class="center">Customer Service</h3>
@@ -141,7 +141,7 @@ body{
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
-                        <input id="userName" class="text-field form-control" type="text" placeholder="ID" value="${empVO.emp_Name }" style="width:100% !important;"/>
+                        <input id="userName" class="text-field form-control" type="text"  value="${empVO.emp_Name}" readonly style="width:100% !important;"/>
                     </div>
                     <div class="ml-auto">
                         <input type="button" id="connect" class="btn" value="連線" onclick="connect();" /> <input type="button" id="disconnect" class="btn" value="離線" onclick="disconnect();" /> <i class="fas fa-location-arrow ml-auto" onclick="sendMessage();"></i>
@@ -237,7 +237,7 @@ body{
             //             document.getElementById('sendMessage').disabled = true;
             document.getElementById('connect').disabled = false;
             document.getElementById('disconnect').disabled = true;
-            document.getElementById('userName').readOnly = false;
+//             document.getElementById('userName').readOnly = true;
 
         }
 
