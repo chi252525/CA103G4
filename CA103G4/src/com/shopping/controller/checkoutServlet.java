@@ -130,7 +130,7 @@ public class checkoutServlet extends HttpServlet {
 					MemberService memsrv = new MemberService();
 					memsrv.updateMem_Bonus(memVO);//修改會員點數
 					List<MenuVO> buylist=  (Vector<MenuVO>)session.getAttribute("shoppingcart");//得到結帳購物車
-					buylist.clear();//清空
+					buylist.clear();//清空 
 				}
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("eatIntakeAway", eatIn_takeAway);// 剛寫的錯誤資料依然回傳
