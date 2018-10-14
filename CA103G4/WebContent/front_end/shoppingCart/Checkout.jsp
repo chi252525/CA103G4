@@ -319,7 +319,7 @@
                                     <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
                                 </label>
                                  <label class="btn btn-secondary" onclick="point()">
-                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 竹幣
+                                    <input type="radio" name="order_pstatus" value="3" autocomplete="off" checked> 竹幣
                                 </label>
                             </div><br>
                           	<!-- 點數購買 -->

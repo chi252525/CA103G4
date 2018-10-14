@@ -3,7 +3,7 @@
 <%@ page import="com.menu.model.*, com.custommeals.model.*, java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
-<%
+<%	//取得購物車狀況
 	@SuppressWarnings("unchecked")
 	Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 	Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");

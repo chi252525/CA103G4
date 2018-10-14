@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.model.MemberDAO;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
+import com.menu.model.MenuVO;
+
 /**
  * Servlet implementation class checkoutServlet
  */
@@ -31,7 +36,7 @@ public class checkoutServlet extends HttpServlet {
 		String branch_No = req.getParameter("branch_no"); // 取得分店編號
 		String ps = req.getParameter("ps");
 		String amount = req.getParameter("amount");
-		System.out.println("amount="+amount);
+		System.out.println("amount=" + amount);
 		if ("insert".equals(action)) {// 來自checkout.jsp的請求
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -42,11 +47,11 @@ public class checkoutServlet extends HttpServlet {
 				if ("請選擇".equals(branch_No)) {
 					errorMsgs.put("branch_no", "請選擇取餐分店");
 				}
-				
-				String address =null;
+
+				String address = null;
 				String county = null;
 				String town = null;
-				if ("delivery".equals(eatIn_takeAway)) {  //若是為外送在執行地址的判斷
+				if ("delivery".equals(eatIn_takeAway)) { // 若是為外送在執行地址的判斷
 					address = req.getParameter("deliv_addres");
 					String addressRegx = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]++$";
 
@@ -69,7 +74,7 @@ public class checkoutServlet extends HttpServlet {
 					errorMsgs.put("time", "請選擇取餐時間 ");
 				}
 
-				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1
+				String order_pstatus = req.getParameter("order_pstatus"); // 付款方式，信用卡:2, 現金:1 3.點數
 
 				String card_number = null;
 				String full_name = null;
@@ -118,6 +123,15 @@ public class checkoutServlet extends HttpServlet {
 						errorMsgs.put("cvc", "安全碼須為3個數字");
 					}
 				}
+				if ("3".equals(order_pstatus)) { // 點數執行block
+					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+					Double mem_Bonus_Double = Double.valueOf(memVO.getMem_Bonus());
+					memVO.setMem_Bonus((int) (mem_Bonus_Double - Double.valueOf(amount)));//扣點
+					MemberService memsrv = new MemberService();
+					memsrv.updateMem_Bonus(memVO);//修改會員點數
+					List<MenuVO> buylist=  (Vector<MenuVO>)session.getAttribute("shoppingcart");//得到結帳購物車
+					buylist.clear();//清空
+				}
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("eatIntakeAway", eatIn_takeAway);// 剛寫的錯誤資料依然回傳
 					req.setAttribute("branch_No", branch_No);
@@ -130,7 +144,7 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("name", full_name);
 					req.setAttribute("expiry", expiry);
 					req.setAttribute("cvc", cvc);
-					req.setAttribute("amount", amount);//總金額
+					req.setAttribute("amount", amount);// 總金額
 
 					req.setAttribute("order_pstatus", order_pstatus);// 回給錯誤頁面判斷是否顯示信用卡 1為顯示
 					RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
@@ -142,15 +156,15 @@ public class checkoutServlet extends HttpServlet {
 				/****************************
 				 * 3.新增完成,準備轉交(Send data to orderForm servlet)
 				 ***********/
-				req.setAttribute("card_number", card_number);//顯示卡片後四碼用
-				
-				req.setAttribute("branch_no", branch_No);//分店名稱
-				req.setAttribute("order_type", eatIn_takeAway);//外送或內用
-				req.setAttribute("deliv_addres", address);//地址
-				req.setAttribute("order_pstatus", order_pstatus); 
-				req.setAttribute("time", time);//取餐時間
-				req.setAttribute("ps", ps); //備註
-				req.setAttribute("amount", amount);//總金額
+				req.setAttribute("card_number", card_number);// 顯示卡片後四碼用
+
+				req.setAttribute("branch_no", branch_No);// 分店名稱
+				req.setAttribute("order_type", eatIn_takeAway);// 外送或內用
+				req.setAttribute("deliv_addres", address);// 地址
+				req.setAttribute("order_pstatus", order_pstatus);
+				req.setAttribute("time", time);// 取餐時間
+				req.setAttribute("ps", ps); // 備註
+				req.setAttribute("amount", amount);// 總金額
 				System.out.println("全數通過,要去新增訂單囉!");
 				req.getRequestDispatcher("/front_end/orderform/orderform.do").forward(req, res);
 				return;

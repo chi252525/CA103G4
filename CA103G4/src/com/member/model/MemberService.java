@@ -99,4 +99,11 @@ public class MemberService {
 		
 		return dao.findById(mem_Id);
 	}
+	
+	public void updateMem_Bonus(MemberVO memVO) {
+		
+		
+		dao.update3(memVO);
+		
+	}
 }
