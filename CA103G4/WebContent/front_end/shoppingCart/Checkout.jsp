@@ -140,7 +140,7 @@
                             <th width="200">餐點</th>
                             <th width="100">價格</th>
                             <th width="100">數量</th>
-                            <th width="120">小記</th>
+                            <th width="120">總計</th>
                             <th width="100">備註</th>
                         </tr>
                         <%

@@ -211,11 +211,12 @@ a {
     <%
 		if ((buylist != null && (buylist.size() > 0)) || (buylistCustom != null && (buylistCustom.size() > 0))) {
 	%>
-    <div id="div_shadow" class="py-5">
+    <div id="div_shadow" class="py-3">
         <div class=" container">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂購物車</h1>
+                    <p class="text-white">您選購的餐點如下:</p>
                 </div>
             </div>
         </div>
@@ -331,11 +332,11 @@ a {
     <div class=container>
         <div class="row">
             <div class="d-flex inline mx-auto">
-                <form name="checkoutForm" action="ShoppingServlet.do" method="POST" style="margin: 10px;">
-                    <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳" class="btn btn-warning">
-                </form>
                 <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
-                    <input style="font-weight: bolder;" type="submit" value="繼續選購" class="btn btn-warning">
+                    <input style="font-weight: bolder;" type="submit" value="&laquo;繼續選購" class="btn btn-warning">
+                </form>
+                 <form name="checkoutForm" action="ShoppingServlet.do" method="POST" style="margin: 10px;">
+                    <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳&raquo;" class="btn btn-warning">
                 </form>
             </div>
         </div>

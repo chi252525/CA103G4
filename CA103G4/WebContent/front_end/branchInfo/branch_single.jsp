@@ -288,10 +288,8 @@ style>.mapouter {
 			<!-- branch card -->
 			<div class="card col-12 col-md-6 center" >
 				<div class="card-body">
-					<h5 class="card-title">${brVO.branch_Name}</h5>
-					<p class="card-text">This is a wider card with supporting text
-						below as a natural lead-in to additional content. This content is
-						a little bit longer.</p>
+					<h5 class="card-title"><b>${brVO.branch_Name}</b></h5>
+					<img src="<%=request.getContextPath()%>/res/img/branch_photo.jpg" style="width:100%">
 					<p class="card-title text-muted">店家電話</p>
 					<p class="card-text">${brVO.branch_Tel}</p>
 					<p class="card-title text-muted">店家地址</p>

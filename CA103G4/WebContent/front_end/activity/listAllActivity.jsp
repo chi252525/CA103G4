@@ -304,11 +304,10 @@ function connect() {
 		console.log(event.data); 
 		var obj =JSON.parse(event.data);
 		console.log(obj.act_No); 
-		document.getElementById("myID").innerHTML = obj.act_No;
+// 		document.getElementById("myID").innerHTML = obj.act_No;
 		var new_act_No= obj.act_No;
-		
-	
-		
+		document.getElementById("new_act").src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No="+new_act_No;
+		$("#newnotify").modal({show: true});
 		webSocket.onclose = function(event) {
 			var mySpan = document.getElementById("output");
 			mySpan.innerHTML = "WebSocket連線已關閉";
@@ -337,8 +336,8 @@ function connect() {
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
-        <img class="img-fluid" src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=">
+        <p>竹風堂最新優惠活動，給懂得品嚐美食的您</p>
+        <img class="img-fluid" id="new_act"src="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
