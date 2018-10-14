@@ -140,7 +140,7 @@ body {
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">經典餐點</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/reservation/reservation.jsp">線上預約訂位</a>
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/protected_front/reservation/reservation.jsp">線上預約訂位</a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp">餐點分享</a>
