@@ -455,7 +455,7 @@
 									  
 	
 									   <div class="column-button">
-										   <button id="addtoCart${custommealsVO.custom_No}" class="button confirm-button btn btn-light" type="button" value="ADD">加入餐點</button>
+										   <button id="addtoCart${custommealsVO.custom_No}" class="button confirm-button btn btn-light" type="button" value="ADD" disabled="true">加入餐點</button>
 										   <input type="hidden" name="action" value="insert">
 										   <input type="hidden" name="requestURL" value="/front_end/custommeals/addCustommeals2.jsp">
 									   </div>
@@ -632,12 +632,12 @@
 	
 		
 		
-		開啟新增按鈕
-// 		$("#getPrice").click(function(){
-// 			alert('ok');
-// 			$("#insert").prop("disabled",false);
+		//開啟新增按鈕
+		$("#getPrice").click(function(){
+			alert('ok');
+			$("#addtoCart").prop("disabled",false);
 // 			document.getElementById('insert').disabled=false;
-// 		});
+		});
 		
     </script>
     
