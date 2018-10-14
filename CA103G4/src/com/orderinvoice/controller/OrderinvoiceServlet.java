@@ -76,6 +76,7 @@ public class OrderinvoiceServlet extends HttpServlet {
 			if (orSvc.getByOrder_no(ordno) == 0) {
 				OrderformService ordSvc = new OrderformService();
 				ordSvc.updateForSta(ordno,2);
+				req.getSession().setAttribute("OK",ordno);
 			}
 			
 			String url = req.getContextPath() + "/back_end/forout/forOut.jsp";

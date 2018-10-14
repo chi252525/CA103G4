@@ -146,7 +146,7 @@ pageContext.setAttribute("empfealist",empfealist);
             	<c:set var="flag" value="true"></c:set>
 			<c:forEach var="empauthfeaVO" items="${empfealist}">
 					<c:if test="${empauthfeaVO.fea_No == 'F001'}">			
-                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1;"><img src="/CA103G4/back_end/img/pen_.png" width="17%">&nbsp;訂單管理</a>
+                <a href="<%=request.getContextPath()%>/back_end/orderform/orderform.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1;"><img src="/CA103G4/back_end/img/pen_.png" width="17%">&nbsp;訂單管理</a>
                 	</c:if>  
                 	                	
                     <c:if test="${empauthfeaVO.fea_No == 'F004'}">       
