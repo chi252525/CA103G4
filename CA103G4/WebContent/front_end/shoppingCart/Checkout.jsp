@@ -73,7 +73,7 @@
    
    .errorMsg{
 	color:red;
-	font-style: oblique;
+/* 	font-style: oblique; */
 	font-weight: bold;
 	margin-left:50%;
 	
@@ -119,14 +119,13 @@
 </head>
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
-    <div id="div_shadow" class="py-5"">
+    <div id="div_shadow" class="py-5">
       <div class=" container">
         <div class="row">
             <div class="col-md-12">
 
-                <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-
-                    結帳</h1>
-                </a>
+                <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-結帳</h1>
+                
             </div>
         </div>
     </div>
@@ -142,15 +141,7 @@
                             <th width="100">數量</th>
                             <th width="120">總計</th>
                             <th width="100">備註</th>
-                        </tr>
-                        <%
-                    MemberService memSrv = new MemberService();
-                    MemberVO memVO = memSrv.getOne_Member("M000001");
-                    System.out.println(memVO);
-                    session.setAttribute("memVO", memVO);
-                    %>
-
-
+           
                         <%
                     @SuppressWarnings("unchecked")
                     Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
@@ -327,11 +318,23 @@
                                 <label class="btn btn-secondary" onclick="cardShow()">
                                     <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
                                 </label>
-                                 <label class="btn btn-secondary" onclick="cardShow()">
+                                 <label class="btn btn-secondary" onclick="point()">
                                     <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 竹幣
                                 </label>
                             </div><br>
-
+                          	<!-- 點數購買 -->
+                          	<div id="point" style="display:none;">
+                          	<!-- 點數不足提示 -->
+                          		<%MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+                          		session.setAttribute("amount2",(Double.parseDouble(amount)));//轉型
+                          		if((Double.parseDouble(amount)) > memVO.getMem_Bonus()){ %>
+								<div class="errorMsg col-md-4" style=" border-radius:6px;margin-left:100px;margin-top:20px; " >
+									<i class="fas fa-ban"></i>你的竹幣點數不足以支付這次的總花費。
+								</div>
+								<%} %>
+								
+							
+							</div>
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->
                                 <!-- credit card -->
@@ -449,10 +452,17 @@
 
         function cardShow() { //開啟信用卡輸入
             $('#card').show();
+            $('#point').hide();
         }
 
         function cash() { //隱藏信用卡輸入
             $('#card').hide();
+            $('#point').hide();
+        }
+        
+        function point(){//開啟點數
+        	 $('#point').show();
+        	 $('#card').hide();
         }
 
         function takeAway() { //隱藏地址輸入

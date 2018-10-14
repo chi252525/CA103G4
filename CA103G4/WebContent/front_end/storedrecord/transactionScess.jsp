@@ -137,7 +137,7 @@
             	<h1 style="color:white;">${errorMsgs.stor_failur }</h1>
             </c:if>
                 <p>
-                    <a href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" style="margin:25%;">去點餐</a>
+                    <a href="<%=request.getContextPath()%>/front_end/member/logout.do" style="margin:25%;text-decoration:none;font-size:30px;">請重新登入</a>
                 </p>
             </div>
         </div>

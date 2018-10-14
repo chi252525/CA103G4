@@ -8,7 +8,7 @@
 EmpVO empVO = (EmpVO)session.getAttribute("empVO");
 
 EmpauthorityService empauthsvc = new EmpauthorityService();
-List<EmpauthorityVO> empfealist = new ArrayList();
+List<EmpauthorityVO> empfealist = new ArrayList<EmpauthorityVO>();
 
 if(empVO!=null){
 empfealist = empauthsvc.oneEmpFealist(empVO.getEmp_No());

@@ -187,7 +187,7 @@ body {
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/logout.do" >登出</a>
 								</div>
 							</li>
-					
+							<c:if test="${not empty memVO}"><li style="color:white;">竹幣:<br><span style="color:#69ba02;">${memVO.mem_Bonus}點數</span></li></c:if>
 						</ul>
 					</div>
 				</nav>
