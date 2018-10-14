@@ -50,7 +50,7 @@ public class AndroidMemberServlet extends HttpServlet {
 			OutputStream os = res.getOutputStream();
 			String pk = jsonObject.get("pk").getAsString();
 			int imageSize = jsonObject.get("imageSize").getAsInt();
-			byte[] image = memDAO.getImage(pk);
+			byte[] image = memDAO.getImageByName(pk);
 			if (image != null) {
 				// 縮圖 in server side
 				image = ImageUtil.shrink(image, imageSize);

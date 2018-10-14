@@ -846,7 +846,7 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','01A',1,0);
+Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','01A',1,1);
 Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','02A',1,0);
 Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','03A',1,0);
 Insert into DESK (DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS) values ('D'||LPAD(to_char(desk_seq.NEXTVAL), 9, '0'),'0001','04A',1,0);
@@ -1426,7 +1426,7 @@ Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,I
 
 
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000003','M002','3',null,null,1);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000004',null,null,'C0000000004','5',1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000004','M001','2',null,null,1);
 
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000005',null,null,'C0000000002','4',1);
 
