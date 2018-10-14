@@ -84,6 +84,9 @@ public class ActivityService {
 		return dao.getAll();
 	}
 	
+	public void deleteAct(String act_No) {
+		dao.deleteAct( act_No);
+	}
 		
 	
 	

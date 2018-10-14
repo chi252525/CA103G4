@@ -19,6 +19,8 @@ public interface ActivityDAO_interface {
 	//查詢已上架的最新廣告
 	List<ActivityVO> findNewAct();
 	public List<ActivityVO> getAll(Map<String, String[]> map);
+	void deleteAct(String act_No);
+	
 }
 
 

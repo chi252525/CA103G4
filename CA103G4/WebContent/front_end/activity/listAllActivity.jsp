@@ -124,11 +124,6 @@ div.shavetext {
 	width="100%" height="">
 	
 		<div class="container ">
-	<div class="col-12 my-5"><P>測試用</P>
-	
-	  <div id="myID" class="WebSocket"></div>
-    <span id="output" class="WebSocket"></span>
-	</div>
 	</div>
 	
 	
@@ -188,6 +183,8 @@ div.shavetext {
 										<option value="AC3">分店限定</option>
 									</select>
 								</form>
+								  <div id="myID" class="WebSocket"></div>
+    <span id="output" class="WebSocket"></span>
 							</div>
 						</div>
 					</div>
@@ -304,13 +301,14 @@ function connect() {
 	webSocket = new WebSocket(endPointURL);
 
 	webSocket.onmessage = function(event) {
-		console.log(event.data);
-		var myObj='';
-		var x='';
-		myObj = event.data;
-		x = myObj.act_No;
-		document.getElementById("myID").innerHTML = x;
-
+		console.log(event.data); 
+		var obj =JSON.parse(event.data);
+		console.log(obj.act_No); 
+		document.getElementById("myID").innerHTML = obj.act_No;
+		var new_act_No= obj.act_No;
+		
+	
+		
 		webSocket.onclose = function(event) {
 			var mySpan = document.getElementById("output");
 			mySpan.innerHTML = "WebSocket連線已關閉";
@@ -318,12 +316,37 @@ function connect() {
 		
 	}
 	
+
+	
 	
 	
 	}
+	
+	
+	
+	
 </script>
 
-
+<div class="modal" tabindex="-1" role="dialog" id="newnotify">
+  <div class="modal-dialog" role="dialog" aria-hidden="true" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新活動通知!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+        <img class="img-fluid" src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No=">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 		<!-- page2的內容 -->
 		<div class="col-12  my-2">
