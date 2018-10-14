@@ -98,11 +98,11 @@
     left: 81%;
     top: 14%;
 }
-.D-blue-seat{
-    background-color:#66CDAA;
+.D-blue-seat{ 
+    background-color: blue;
 }
 .D-red-seat{
-    background-color:#F08080;
+    background-color: red;
 }
 .D-white-seat{
     background-color: aliceblue;

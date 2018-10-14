@@ -198,12 +198,12 @@ body {
 					<div class="col-md-4">
 
 						<div class="card" style="background-color: rgba(255, 255, 255, 0.45); margin-bottom: 20px;">
-							<a
-								href="menu.do?action=getOne_For_Display_Member&menu_No=${menuVO.menu_No}">
+<!-- 							<a -->
+<%-- 								href="menu.do?action=getOne_For_Display_Member&menu_No=${menuVO.menu_No}"> --%>
 								<img class="card-img-top"
 								src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"
 								alt="Card image cap" style="margin-top: 20px;">
-							</a>
+<!-- 							</a> -->
 							<div class="card-body">
 								<h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id} <br> </h5>
 								<h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>

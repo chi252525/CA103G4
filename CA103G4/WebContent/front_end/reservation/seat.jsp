@@ -203,19 +203,19 @@ width="100%" height="">
 			           <div class="seat D18" Id="D18">D18</div>
 			           
 			           <div class="D-blue">
-			           <div class="seat D-blue-seat" Id="D18">藍</div>
+			           <div class="seat D-blue-seat" >藍</div>
                        <text>藍色位子為<b>您已選位子</b>。</text>
                        </div>
                        <div class="D-red">
-			           <div class="seat D-red-seat" Id="D18">紅</div>
+			           <div class="seat D-red-seat" >紅</div>
 			           <text>紅色位子為<b>已被訂位子,不可選</b>。</text>
 			           </div>
 			           <div class="D-white">
-			           <div class="seat D-white-seat" Id="D18">白</div>
+			           <div class="seat D-white-seat">白</div>
 			           <text>白色位子<b>為開放位子，要搶要快喔!!!</b></text>
 			           </div>
 			         </div>
-			       	
+			       		
 					  <button href="#" class="cancel" onClick="disconnect();"><i class="fa fa-cog" aria-hidden="true" ></i>取消訂位</button>
 			          &nbsp; 
 			          <button id="seatSubmit" type="button" class="submitSeat"  onClick="successSubmit ();">確認送出 <i class="fas fa-utensils"></i></button>
@@ -239,7 +239,7 @@ width="100%" height="">
     var date = "${date}";
 	var unSpltString;
 	var Count = 0;
-    var mem_no = "${resVO.mem_no}";
+    var mem_no = "${memVO.mem_No}";
     var trigger;
     var seatSet  = new Set();
     var finalSeat="";
@@ -266,15 +266,15 @@ width="100%" height="">
 	    webSocket = new WebSocket(endPointURL);//觸發右邊@OnOpen
 		
 		webSocket.onopen = function(event) {
+			zeroPush();
 	    	console.log("(seat.jsp)員工編號:",mem_no);
 	    	console.log("(seat.jsp)日期:",date);
 	    	console.log("(seat.jsp)時段:",zone);
 			updateStatus("歡迎來到竹風堂,訂位系統已開啟!");
-
-				zeroPush();
+	
 				function zeroPush(){
 				    $.ajax({
-				  		url: "<%=request.getContextPath()%>/res/res.do", 
+				  		url: "<%=request.getContextPath()%>/res.do", 
 				  		data:{"action":"pushSeat", "date":date, "zone":zone},
 				  		success: function(result){
 				  			console.log("---------------")
@@ -285,7 +285,7 @@ width="100%" height="">
 					  		tokens.forEach(function(element) {
 					  			console.log(element);
 					  			if(element !== ""){
-					  			document.getElementById(element).style.backgroundColor = "#F08080";
+					  			document.getElementById(element).style.backgroundColor = "red";
 					  			}else{
 					  				//引開空字串
 					  			}
@@ -300,11 +300,11 @@ width="100%" height="">
 			
 	        var jsonObj = JSON.parse(event.data);
 			
-	        if(jsonObj.date === date && jsonObj.zone === zone && jsonObj.mem_no !== mem_no && jsonObj.seatChange === "#66CDAA"){ //1.不是當前使用者，被推播紅色 2.當事者已選擇變藍色
-	        	jsonObj.seatChange = "#F08080";
+	        if(jsonObj.date === date && jsonObj.zone === zone && jsonObj.mem_no !== mem_no && jsonObj.seatChange === "blue"){ //1.不是當前使用者，被推播紅色 2.當事者已選擇變藍色
+	        	jsonObj.seatChange = "red";
 	        	document.getElementById(jsonObj.seat).style.backgroundColor = jsonObj.seatChange;
 	        	
-	        }else if(jsonObj.date === date && jsonObj.zone === zone && jsonObj.mem_no !== mem_no && jsonObj.seatChange === "#F0F8FF"){ //1.所有非當事人被推波消息  2.當事人藍轉白色
+	        }else if(jsonObj.date === date && jsonObj.zone === zone && jsonObj.mem_no !== mem_no && jsonObj.seatChange == "aliceblue"){ //1.所有非當事人被推波消息  2.當事人藍轉白色
 
 			document.getElementById(jsonObj.seat).style.backgroundColor = jsonObj.seatChange;
 			alert(jsonObj.seat + "座位已經開放瞜，請盡快搶位")
@@ -342,15 +342,15 @@ width="100%" height="">
 				return;
 		    }else if(people == count){   // 2/3: 人數達上限
 		    	
-		    	 if (inputSeat.style.backgroundColor === "#F08080"){
+		    	 if (inputSeat.style.backgroundColor === "red"){
 			 	        alert ("人數已達上限,且此座位已被選");	
 			 	        
 			 	        
-			 	    }else if(inputSeat.style.backgroundColor === "#66CDAA"){ //當事人取消選取座位
-			 	    	inputSeat.style.backgroundColor = "#F0F8FF";
+			 	    }else if(inputSeat.style.backgroundColor === "blue"){ //當事人取消選取座位
+			 	    	inputSeat.style.backgroundColor = "aliceblue";
 			 	        alert("已取消此訂位");
 			 	        count--;
-			 	        var seatChange =(inputSeat.style.backgroundColor = "#F0F8FF");
+			 	        var seatChange =(inputSeat.style.backgroundColor = "aliceblue");
 			 	    	var seat = inputSeat.innerHTML.trim();
 			 	        var jsonObj = {"seat" : seat, "seatChange" : seatChange, "mem_no" : mem_no, "status" : 3, "date" : date, "zone" : zone};
 			 	        webSocket.send(JSON.stringify(jsonObj));
@@ -363,15 +363,15 @@ width="100%" height="">
 			 	    console.log("Selected Seat:" + count);
 		    	
 		    }else if(people > count){
-		    	if (inputSeat.style.backgroundColor === "#F08080"){
+		    	if (inputSeat.style.backgroundColor == "red"){
 		 	        alert ("此座位已被選");	
 		 	        
 		 	        
-		 	    }else if(inputSeat.style.backgroundColor === "#66CDAA"){ //當事人取消選取座位
-		 	    	inputSeat.style.backgroundColor = "#F0F8FF";
+		 	    }else if(inputSeat.style.backgroundColor == "blue"){ //當事人取消選取座位
+		 	    	inputSeat.style.backgroundColor = "aliceblue";
 		 	        alert("已取消此訂位");
 		 	        count--;
-		 	        var seatChange =(inputSeat.style.backgroundColor = "#F0F8FF");
+		 	        var seatChange =(inputSeat.style.backgroundColor = "aliceblue");
 		 	    	var seat = inputSeat.innerHTML.trim();
 		 	    	var seletedSeat = "";
 		 	    	seatSet.delete(seat + ":");
@@ -387,10 +387,10 @@ width="100%" height="">
 		 	        
 		 	        //推波給非當事人，位子開放
 		 	    }else{
-		 	    	inputSeat.style.backgroundColor = "#66CDAA"; //選取一般座位
+		 	    	inputSeat.style.backgroundColor = "blue"; //選取一般座位
 // 		 	    	alert("成功選取座位");
 		 	    	count++;
-		 	    	var seatChange =(inputSeat.style.backgroundColor = "#66CDAA"); 
+		 	    	var seatChange =(inputSeat.style.backgroundColor = "blue"); 
 		 	    	var seat = inputSeat.innerHTML.trim();
 		 	    	var seletedSeat = "";
 		 	    	seatSet.add(seat + ":");

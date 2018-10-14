@@ -280,6 +280,12 @@ public class DeskJDBCDAO implements DeskDAO_interface{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<DeskVO> getByBr(String branch_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 	
