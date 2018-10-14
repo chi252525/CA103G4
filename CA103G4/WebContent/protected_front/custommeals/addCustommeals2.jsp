@@ -374,7 +374,7 @@
                                             </div>
 											<div class="form-inline">
                                                 &nbsp;&nbsp;&nbsp;餐點名稱&nbsp;&nbsp;&nbsp;
-                                                <input class="form-control" type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;" required /><br>
+                                                <input id="mealName" class="form-control" type="text" name="custom_Name" size="45" style="margin-top:10px; width:250px;" required /><br>
 											</div>
 											<div class="form-inline">
                                                 &nbsp;&nbsp;&nbsp;餐點價格&nbsp;&nbsp;&nbsp;
@@ -457,7 +457,7 @@
 									   <div class="column-button">
 										   <button id="addtoCart${custommealsVO.custom_No}" class="button confirm-button btn btn-light" type="button" value="ADD" disabled="true">加入餐點</button>
 										   <input type="hidden" name="action" value="insert">
-										   <input type="hidden" name="requestURL" value="/front_end/custommeals/addCustommeals2.jsp">
+										   <input type="hidden" name="requestURL" value="/protected_front/custommeals/addCustommeals2.jsp">
 									   </div>
 		</div>
 	</div>
@@ -615,16 +615,20 @@
 	//Java完美操縱javaScript , 加入餐點進購物車
 		$(function() {
 			$("#addtoCart${custommealsVO.custom_No}").click(function() {
-				swal({
-					title : "加入購物車",
-					html : "成功",
-					type : "success"			
-				}).then(function() {
-					
-	                    setTimeout(function() {
-	                    	$("#addtoCartForm${custommealsVO.custom_No}").submit();
-	                    }, 1200);
-				});
+				if($('#mealName').val()==""){
+					alert('請輸入餐點名稱!');
+				}else{
+					swal({
+						title : "加入購物車",
+						html : "成功",
+						type : "success"			
+					}).then(function() {
+							
+		                    setTimeout(function() {
+		                    	$("#addtoCartForm${custommealsVO.custom_No}").submit();
+		                    }, 500);
+					});
+				}
 			});
 		});
 	
@@ -634,7 +638,7 @@
 		
 		//開啟新增按鈕
 		$("#getPrice").click(function(){
-			alert('ok');
+			alert('計價成功!');
 			$("#addtoCart").prop("disabled",false);
 // 			document.getElementById('insert').disabled=false;
 		});
