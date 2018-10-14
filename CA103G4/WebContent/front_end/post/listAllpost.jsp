@@ -55,6 +55,14 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
+<!-- sweet alert2 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+	type="text/javascript"></script>
+
+
 <style>
 html {
 	height: 100%;
@@ -111,7 +119,7 @@ body {
 			<div class=" d-flex mx-2">
 				<div class="card"
 					style="background-color: rgba(255, 255, 255, 0.45)">
-					<div class="card-header">查詢貼文</div>
+					<div class="card-header"><b>查詢貼文</b></div>
 					<div class="card-body py-1 px-0 ">
 
 						<div class="d-flex justify-content-end">
@@ -227,7 +235,7 @@ body {
 						</p>
 
 						<!-- 查看單一貼文action -->
-						<FORM METHOD="post"
+						<FORM METHOD="post" 
 							ACTION="<%=request.getContextPath()%>/post/postServlet.do"
 							style="margin-bottom: 0px;">
 							<input type="hidden" name="post_No" value="${postVO.post_No}" />
@@ -238,17 +246,48 @@ body {
 								&raquo;</button>
 						</FORM>
 						<c:if test='${memVO.mem_No!=null}'>
-					<form method="post" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+					<form method="post" id="addtoCartForm${postVO.post_No}" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do"> 
 				<input type="hidden" name ="action" value="insert_byPosted">
 				<input type="hidden" name ="custom_No" value="${postVO.custom_No}">
 				<input type="hidden" id="mem_No"	name="mem_No" value="${memVO.mem_No}" />
 				<input type="hidden" name="requestURL" value="/front_end/post/listAllpost.jsp">
-				<button type="submit"
-					class="btn btn-danger btn-sm btn-block mb-1">加入購物車</button>
+				<button type="button"
+					class="btn btn-danger btn-sm btn-block mb-1" id="addtoCart${postVO.post_No}">加入購物車</button>
 				</form>
 				</c:if>
 					</div>
 				</div>
+				
+				
+				
+				<script>
+		
+		//Java完美操縱javaScript , 加入餐點進購物車
+		$(function() {
+			$("#addtoCart${postVO.post_No}").click(function() {
+				swal({
+					title : "加入購物車",
+					html : "成功",
+					type : "success"
+				}).then(function() {
+					
+					  swal({
+							title : "商品已放置您的購物車",
+							html : "再選選其他餐點嘛",
+							type : "success"
+						});
+	                    setTimeout(function() {
+	                    	$("#addtoCartForm${postVO.post_No}").submit();
+	                    }, 1200);
+				
+				});
+			});
+		});
+		
+	</script>
+				
+	
+				
 			</c:forEach>
 			<div class="col-12">
 				<%@ include file="pages/page2.file"%></div>
@@ -268,22 +307,22 @@ var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
 		
-    labels: [ <c:forEach var="message" items="${map}">'${message.key}星',</c:forEach>  ],   
+    labels: [ <c:forEach var="message" items="${map}">  '${message.key}星' ,</c:forEach>  ],   
 		 datasets: [{
       backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-         'rgba(255, 206, 86, 1)',
-          'rgba(255, 206, 86, 1)'
+        '#FFE74C',
+        '#FF5964',
+        '#FF7F11',
+         '#38618C',
+          '#35A7FF'
       ],
       borderColor: [
         'rgba(255,255,255,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 192, 1)'
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,0.5)',
       ],
       borderWidth: 1,
       label: '竹風堂餐點評比',
@@ -291,7 +330,17 @@ var myChart = new Chart(ctx, {
    
  
     }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true
+              }
+          }]
+      }
   }
+  
 });
 
 </script>

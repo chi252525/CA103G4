@@ -30,8 +30,6 @@
 
 
 
-
-
 <!DOCTYPE html>
 <html>
 
@@ -147,21 +145,15 @@ body {
 						src="<%=request.getContextPath()%>/post/postshowimage.do?post_No=${postVO.post_No}"
 						class="img-fluid single-gallery-image img-responsive"
 						style="display: block; margin: auto;" alt="Responsive image">
-					
 					<div class="col-12 mt-2">
-			
 				</div>
 					
 					<p class="starability-result" data-rating="${postVO.post_Eva}"></p>
 					<c:forEach var="ingredientsVO" items="${tags}">
-		<span class="badge badge-pill badge-info"><b>${ingredientsVO.ingdt_Name}</b></span>&nbsp;
-				
-						
-			
+		<span class="badge badge-pill badge-info" style="font-size:18px;"><b>${ingredientsVO.ingdt_Name}</b></span>&nbsp;
 					</c:forEach>
 					<br>
-					<p>參考售價:NT.${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Price}</p>
-				
+					<p><b>參考售價:NT.${cusmealSvc.getOneCustommeals(postVO.custom_No).custom_Price}</b></p>
 					<p>${postVO.post_Cont}</p>
 					<p class="lnr lnr-eye " style="text-align: right;">${postVO.post_Views}</p>
 				</div>

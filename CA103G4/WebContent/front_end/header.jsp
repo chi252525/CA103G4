@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.menu.model.*, com.custommeals.model.*, java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
+<%
+	@SuppressWarnings("unchecked")
+	Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
+	Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
+	System.out.println("購物車="+buylist + buylistCustom);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +47,7 @@
 .lnr-alarm {
 	color: #FFF;
 	font-size: 23px;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
 .lnr-cart {
@@ -74,6 +82,15 @@ body {
 	background-size: cover;
 }
 
+#notice{
+	width:15px;
+	height:15px;
+	background-color:red;
+	color:white;
+	border-radius: 10px;
+	text-align: center;
+	font-size:10px;
+}
 </style>
 <!--Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
@@ -132,19 +149,22 @@ body {
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
-							<li class="nav-link imgicon"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
-									class="lnr lnr-cart"></span></a></li>
-							<li class="nav-link imgicon"><a href="gallery.html"></a><span
+							
+							<li class="nav-link imgicon" style="padding-right: 0px;width: 22px;"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
+									class="lnr lnr-cart"></span></a></li><c:if test="${not empty shoppingcart && empty shoppingcartCustom }"><b id="notice"><%=buylist.size() %></b></c:if>
+									<c:if test="${not empty shoppingcartCustom && empty shoppingcart}"><b id="notice"><%=buylistCustom.size() %></b></c:if>
+									<c:if test="${not empty shoppingcart && not empty shoppingcartCustom }"><b id="notice"><%=buylistCustom.size() + buylistCustom.size() %></b></c:if>								
+							<li class="nav-link imgicon" style="padding-left: 30px;"><a href="gallery.html"></a><span
 								class="lnr lnr-alarm"></span></li>
 							<li class="nav-item dropdown imgicon">
 							
 							<!-- 無登入狀態 點選人頭示意圖將導入Login.jsp -->
 
 								<a
-								class="nav-link dropdown-toggle" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
+								class="nav-link dropdown-toggle py-2" href="${(memVO.mem_Name == null )? '/CA103G4/front_end/member/login.jsp' : '#'}"
 								id="navbarDropdownMenuLink" role="button" ${(memVO.mem_Name == null )? '' : 'data-toggle=\"dropdown\"'}
 								aria-haspopup="true" aria-expanded="false" style="padding-top:${(memVO.mem_Name == null )? '': '3px'} "> 
-									${(memVO.mem_Name == null )? 'Log in':memVO.mem_Name}
+									${(memVO.mem_Name == null )? '登入':memVO.mem_Name}
 								
 							<!--有登入狀態圖示改為會員照片小圖 -->
 								<span class="lnr lnr-user" style="display: ${(memVO.mem_Name == null )? '': 'none'} "></span>

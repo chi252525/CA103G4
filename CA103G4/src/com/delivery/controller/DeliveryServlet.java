@@ -75,7 +75,7 @@ public class DeliveryServlet extends HttpServlet {
 					errorMsgs.add("請檢查派送單狀態的格式是否正確。");
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/delivery/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -104,20 +104,20 @@ public class DeliveryServlet extends HttpServlet {
 //				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back_end/delivery/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.getSession().setAttribute("get_By_Key", delVOList);
 
-				String url = "select_page.jsp";
+				String url = "/back_end/delivery/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/delivery/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -212,7 +212,7 @@ public class DeliveryServlet extends HttpServlet {
 
 				req.setAttribute("insert", delVO);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "select_page.jsp";
+				String url = "/back_end/delivery/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -241,7 +241,7 @@ public class DeliveryServlet extends HttpServlet {
 
 				String url = null;
 				if ("listAllDelivery".equals(action))
-					url = "select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
+					url = "/back_end/delivery/select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -269,7 +269,7 @@ public class DeliveryServlet extends HttpServlet {
 
 				String url = null;
 				if ("listNotOk".equals(action))
-					url = "select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
+					url = "/back_end/delivery/select_page.jsp"; // 成功轉交 dept/listEmps_ByDeptno.jsp
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -292,7 +292,7 @@ public class DeliveryServlet extends HttpServlet {
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("selDel", list); // 資料庫取出的set物件,存入request
 
-				String url = "choseord.jsp";
+				String url = "/back_end/delivery/choseord.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

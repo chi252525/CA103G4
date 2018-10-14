@@ -109,7 +109,7 @@ body {
 
 				<div class="col-md-6">
 
-					<div class="display-4">${memVO.mem_Name}的貼文</div>
+					<div class="display-4" style="color:#fff;">${memVO.mem_Name}的貼文</div>
 				</div>
 
 

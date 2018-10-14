@@ -127,7 +127,7 @@ body{
 </head>
 
 <body id='chatbody' onload="connect();" onunload="disconnect();" style="">
-    <div id="ChatZone" class="col-12 col-md-4" style="height: 100%;">
+    <div id="ChatZone" class="col-12 col-md-12 float-right" style="height: 80%;">
         <nav class="navbar navbar-dark bg-dark ">
             <!-- Navbar content -->
             <h3 id='service' class="center">Customer Service</h3>
@@ -141,7 +141,7 @@ body{
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
-                        <input id="userName" class="text-field form-control" type="text" placeholder="ID" value="${empVO.emp_Name }" style="width:100% !important;"/>
+                        <input id="userName" class="text-field form-control" type="text"  value="${empVO.emp_Name}" readonly style="width:100% !important;"/>
                     </div>
                     <div class="ml-auto">
                         <input type="button" id="connect" class="btn" value="連線" onclick="connect();" /> <input type="button" id="disconnect" class="btn" value="離線" onclick="disconnect();" /> <i class="fas fa-location-arrow ml-auto" onclick="sendMessage();"></i>
@@ -183,18 +183,19 @@ body{
                 var id = jsonObj.username;
                 var msg = jsonObj.message + "\n";
                 var time = jsonObj.time;
+                var picEmp = jsonObj.picEmp;
+                var picMem = jsonObj.picMem;
                 if (inputusername.value.trim() == jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "right";
                     $('#MessageList')
                         .append(
-                            '<div class=ChatMessageRight><img class="nav-item " src=" <%=request.getContextPath()%>/empshow.do?emp_No=${(empVO == null)? '': empVO.emp_No} " class="drew" style="height:50px;width:50px;border-radius:50%;display:${(empVO == null )? 'none': ''}"><div class= ChatBubbleRight>' +
+                            '<div class=ChatMessageRight>' + picEmp + '<div class= ChatBubbleRight>' +
                             msg + '<br><sapn class=sysMsg>' + time + '</span></div></div>');
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/back_end/img/drew.jpg" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><span>' +
-                        jsonObj.username +
-                        '</span><div class= ChatBubbleLeft>' +
+                        '<div class=ChatMessageLeft>' + picMem + '<span>' +
+                        id +'</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
 
                 } else if (jsonObj.type == 'sysMsg') {
@@ -220,7 +221,8 @@ body{
                 "username": inputusername.value.trim(),
                 "message": inputmessage.value,
                 "type": 'userMsg',
-                'time': new Date().toLocaleString()
+                'time': new Date().toLocaleString(),
+                'picEmp': '<img class="nav-item " src="<%=request.getContextPath()%>/empshow.do?emp_No=${(empVO == null)? '': empVO.emp_No} " class="drew" style="height:50px;width:50px;border-radius:50%;display:${(empVO == null )? 'none': ''}">'
             };
 
             webSocket.send(JSON.stringify(jsonObj));
@@ -235,7 +237,7 @@ body{
             //             document.getElementById('sendMessage').disabled = true;
             document.getElementById('connect').disabled = false;
             document.getElementById('disconnect').disabled = true;
-            document.getElementById('userName').readOnly = false;
+//             document.getElementById('userName').readOnly = true;
 
         }
 

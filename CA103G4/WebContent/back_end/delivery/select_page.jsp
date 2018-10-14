@@ -4,10 +4,16 @@
 <%@ page import="com.delivery.model.*"%>
 
 <%
+pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
+%>
+
+<%-- 
+<%
   response.setHeader("Cache-Control","no-store"); //HTTP 1.1
   response.setHeader("Pragma","no-cache");        //HTTP 1.0
   response.setDateHeader ("Expires", 0);
 %>
+--%>
 
 <!DOCTYPE html>
 <html>
@@ -71,7 +77,7 @@
 			 <span class="input-group-text">員工姓名</span>
 			 <select size="1" name="emp_no" class="form-control" id="exampleSelect1">
 	 			<option  value="">
-				<c:forEach var="empVO" items="${empSvc.all}">
+				<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}">
 				<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
 				</c:forEach>
 			</select>

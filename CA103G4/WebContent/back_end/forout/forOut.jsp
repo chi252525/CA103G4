@@ -99,7 +99,7 @@ pageContext.setAttribute("forOut",list);
 	<tr>
 		<th style="text-align: center">訂單編號</th>
 		<th style="text-align: center">訂單類型</th>
-		<th style="text-align: center">桌位流水號</th>
+		<th style="text-align: center">桌位</th>
 		<th style="text-align: center">出餐狀態</th>
 	</tr>
 <%-- 分頁 --%>
@@ -200,6 +200,44 @@ pageContext.setAttribute("forOut",list);
 	  </div>
 	</div>
 </c:forEach>
+
+
+
+<%--當某個訂單餐點出完時跑出提示--%>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">完成餐點</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+      <br>
+		訂單<%= session.getAttribute("OK") %>的餐點已經完成出餐<%-- 將此送進controll查詢單筆訂單(內用) --%>
+      </div>
+      <div class="modal-footer">
+
+      	<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/back_end/delivery/select_page.jsp" role="button">去外送</a>
+      	<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/back_end/orderform/orderform.jsp" role="button">查看訂單</a>
+  			    
+      </div>
+    </div>
+  </div>
+</div>
+
+<c:if test="<%= session.getAttribute(\"OK\") != null %>">
+<% session.removeAttribute("OK"); %>
+ <script>
+ $(function(){
+     $('#myModal').modal({
+     show:true,
+     backdrop:true
+     })
+ });
+ </script>
+
+</c:if>
+
 
 <%--  <script> -->
 // $(document).ready(function(){

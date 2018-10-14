@@ -43,6 +43,55 @@ public class MemberDAO implements MemberDAO_interface{
 	public static final String GET_ONE_BY_ID="SELECT * FROM MEMBER WHERE MEM_ID=?";
 //	public static final String COMPARE_ID = "SELECT MEM_ID FROM MEMBER WHERE MEM_ID LIKE ?";
 	public static final String GET_ONE_MEMBER_BY_MEMID_AND_MEMPW="SELECT * FROM MEMBER WHERE MEM_ID=? AND MEM_PW=?";
+	private static final String FIND_IMG = "SELECT MEM_PHOTO FROM MEMBER WHERE MEM_NO = ?";
+	
+	@Override
+	public byte[] getImage(String mem_No) {
+		
+		byte[] picture = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_IMG);
+			pstmt.setString(1, mem_No);
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				picture = rs.getBytes(1);
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return picture;
+	}
 	
 	@Override
 	public MemberVO isMember(String mem_Id, String mem_Pw) {

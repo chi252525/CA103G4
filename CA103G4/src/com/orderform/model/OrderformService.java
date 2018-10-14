@@ -37,8 +37,8 @@ public class OrderformService {
 		return dao.getOrderNoByMemNo(mem_No);
 	}
 
-	public OrderformVO getOneOrderform(String mem_No) {
-		// TODO Auto-generated method stub
+	public OrderformVO getOneOrderform(String order_no) {
+		dao.findByPrimaryKey(order_no);
 		return null;
 	}
 	
@@ -54,6 +54,10 @@ public class OrderformService {
 		
 		dao.updateByOrdNo(oVO);
 		return null;
+	}
+	
+	public List<OrderformVO> getAll(){
+		return dao.getAll();
 	}
 	
 	

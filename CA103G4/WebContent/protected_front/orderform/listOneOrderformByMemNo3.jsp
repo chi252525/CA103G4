@@ -107,33 +107,33 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
     
 /* 	max-width: 1920px; */
  	background-color: rgba(255, 255, 255, 0.45); 
-	margin-top: 50px;
-	margin-bottom: 150px;
- 	margin-left:220px;
+	
 	font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
-    font-size: 20;
+    font-size: 25px;
     
 
   }
   table, th, td {
 /*     border: 1px solid rgba(255, 255, 255, 0.5);  */
-    border-radius: 15px; 
+   
     text-align: center;      
     font-family: 'Noto Sans TC', sans-serif; 
-    font-weight: 600;
+    font-weight: 400;
+   
   }
   
   th, td {
-    padding: 5px;
+    padding: 10px;
     text-align: left;
-    font-family: 'Noto Sans TC', sans-serif; 
-    font-weight: 600; 
-       padding: 8px; 
+    font-family: 'Noto Sans TC',微軟正黑體, sans-serif; 
+    font-weight: 400; 
+    
+       
   }
   
   th {
-     color: white; 
+     
      font-weight: 800;
      text-align: center;
   }
@@ -163,14 +163,14 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 
 
 
-<div class="container" style="width:1680px; margin-top:80px; margin-bottom:60px;">
-	<div style="margin-bottom:30px;">
-		<div class="display-4">${memVO.mem_Name}的訂餐紀錄
+<div class="container" style="width:1680px; margin-top:50px; margin-bottom:60px;">
+	<div style="margin-bottom:10px;">
+		<div class="display-4" style="color:#fff;">${memVO.mem_Name}的訂餐紀錄
 		</div>
 	</div>
 	
 	<div>	
-		<table>
+		<table class="mx-auto">
 		
 			<tr style="background-color:rgba(178, 32, 46, 1);">
 				<th>訂單編號</th>
@@ -189,20 +189,20 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 					
 					<c:if test='${(orderinvoiceVO.custom_no!=null)}'>
 					<tr><td></td>
-					<td>客製</td>
+					<td>自訂餐點</td>
 						<td><a href="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do?action=getOne_For_Display&custom_No=${orderinvoiceVO.custom_no}"/>${orderinvoiceVO.custom_no}</a></td>
 						<td>${custommealsService.getOneCustommeals(orderinvoiceVO.custom_no).custom_Name} </td><td></td></tr></c:if>
 						
 						
 						
-						<c:if test='${orderinvoiceVO.menu_no!=null}'><tr><td></td><td>經典</td><td>${orderinvoiceVO.menu_no}</td><td>
+						<c:if test='${orderinvoiceVO.menu_no!=null}'><tr><td></td><td>經典餐點</td><td>${orderinvoiceVO.menu_no}</td><td>
 						${menuService.getOneMenu(orderinvoiceVO.menu_no).menu_Id} </td><td></td></tr></c:if>
 						
 					</c:forEach>
-					<tr style="background-color:rgba(255,255,255,0.2); padding:0; height:0px;"><td colspan="5"></td></tr>	
+					<tr style="background-color:rgba(255,255,255,0.2); padding:0; height:0px;"></tr>	
 					<td></td><td></td><td></td><td>Total</td>
-						<td>${orderFormVO.order_price}</td>
-			</tr>		
+						<td class="float-right"><b>${orderFormVO.order_price}</b>元</td>
+					
 			
 					</c:forEach>
 			

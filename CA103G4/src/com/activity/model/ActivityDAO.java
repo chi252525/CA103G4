@@ -55,6 +55,9 @@ public class ActivityDAO implements ActivityDAO_interface {
 
 	// 以欲上架時間最近的的活動排序取得全部front_end
 	private static final String GETALL = "SELECT * FROM ACTIVITY  ORDER BY act_PreAddTime DESC";
+	
+	private static final String DELETE_STMT = "DELETE FROM ACTIVITY WHERE ACT_NO = ?";
+	
 
 	@Override
 	public String insert(ActivityVO activityVO) {
@@ -694,6 +697,44 @@ public class ActivityDAO implements ActivityDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	
+	@Override
+	public void deleteAct(String act_No) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			System.out.println("進到post delete");
+			
+			con = ds.getConnection();
+	
+			pstmt = con.prepareStatement(DELETE_STMT);
+			pstmt.setString(1, act_No);
+			pstmt.executeUpdate();
+			
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 }

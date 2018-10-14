@@ -209,6 +209,11 @@ public class PostServlet extends HttpServlet {
 				if (custom_No == null || custom_No.trim().length() == 0) {
 					errorMsgs.add("餐點編號請勿空白");
 				}
+				String custom_Name = req.getParameter("custom_Name");
+				if (custom_Name == null || custom_Name.trim().length() == 0) {
+					errorMsgs.add("餐點編號請勿空白");
+				}
+				
 				String post_Cont = req.getParameter("post_Cont");
 				if (post_Cont == null || post_Cont.trim().length() == 0) {
 					errorMsgs.add("留言內容請勿空白");
@@ -241,10 +246,14 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_Cont(post_Cont);
 				postVO.setPost_Time(post_Time);
 				postVO.setPost_Photo(post_Photo);
-
+			
 				/*************************** 2.開始新增資料 ***************************************/
 				PostService postSvc = new PostService();
 				postVO = postSvc.addPost(mem_No, custom_No, post_Cont, post_Eva, post_Photo, post_Time);
+				
+				/* 同時修改餐點名稱 */
+				CustommealsService custoSvc = new CustommealsService();
+				custoSvc.updateNameOnly(custom_Name, custom_No);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front_end/post/listAllpost.jsp";
 

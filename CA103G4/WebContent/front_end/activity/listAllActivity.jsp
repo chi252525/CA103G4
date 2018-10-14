@@ -119,9 +119,15 @@ div.shavetext {
 </head>
 <jsp:include page="/front_end/header.jsp" flush="true" />
 
-<body
+<body onLoad="connect();" onunload="disconnect();"
 	background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png "
 	width="100%" height="">
+	
+		<div class="container ">
+	</div>
+	
+	
+	
 	<!--your html start==================================================================================-->
 	<script>$('.carousel').carousel()</script>
 	<div class="container ">
@@ -177,6 +183,8 @@ div.shavetext {
 										<option value="AC3">分店限定</option>
 									</select>
 								</form>
+								  <div id="myID" class="WebSocket"></div>
+    <span id="output" class="WebSocket"></span>
 							</div>
 						</div>
 					</div>
@@ -260,7 +268,7 @@ div.shavetext {
 							alert("Oops!沒取到優惠券: "+ result.msg);
 							},
 						error : function() {
-								alert("Oops!沒取到優惠券");
+								alert("Oops!沒取到優惠券或您已取過該優惠卷");
 									}
 								})
 
@@ -279,10 +287,65 @@ div.shavetext {
 			</div>
 		</c:forEach>
 
+<!-- 有會員上線時通知 -->
+<script>
+var MyPoint = "/ActivityServer";
+var host = window.location.host;
+var path = window.location.pathname;
+var webCtx = path.substring(0, path.indexOf('/', 1));
+var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+var webSocket;
+var myID;
+function connect() {
+	// 建立 websocket 物件
+	webSocket = new WebSocket(endPointURL);
 
+	webSocket.onmessage = function(event) {
+		console.log(event.data); 
+		var obj =JSON.parse(event.data);
+		console.log(obj.act_No); 
+// 		document.getElementById("myID").innerHTML = obj.act_No;
+		var new_act_No= obj.act_No;
+		document.getElementById("new_act").src="<%=request.getContextPath()%>/activity/activityshowimage.do?act_No="+new_act_No;
+		$("#newnotify").modal({show: true});
+		webSocket.onclose = function(event) {
+			var mySpan = document.getElementById("output");
+			mySpan.innerHTML = "WebSocket連線已關閉";
+		};
+		
+	}
+	
 
+	
+	
+	
+	}
+	
+	
+	
+	
+</script>
 
-
+<div class="modal" tabindex="-1" role="dialog" id="newnotify">
+  <div class="modal-dialog" role="dialog" aria-hidden="true" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新活動通知!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>竹風堂最新優惠活動，給懂得品嚐美食的您</p>
+        <img class="img-fluid" id="new_act"src="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 		<!-- page2的內容 -->
 		<div class="col-12  my-2">

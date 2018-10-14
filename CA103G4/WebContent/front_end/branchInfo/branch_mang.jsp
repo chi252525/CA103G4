@@ -38,7 +38,22 @@
 
     <!-- My <css></css> for transaction page-->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/branchInfo/branch_css.css">
+<style>
+td {
+	color: #fff;
+}
 
+.table-ning {
+	background-color: rgba(253, 253, 253, 0.45);
+	border-collapse: collapse;
+	/*自動斷行*/
+	word-wrap: break-word;
+	width:100%;
+}
+
+th{
+background-color:rgba(253, 253, 253, 0.5);}
+</style>
 </head>
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
@@ -83,15 +98,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12" style="">
-                        <table class="table datatable">
+                        <table class="table datatable table-ning">
                             <thead>
                                 <tr>
-                                    <th>#分店編號</th>
+                                    <th>#店號</th>
                                     <th>分店名稱</th>
-                                    <th>分店所在縣市</th>
-                                    <th>分店所在區域</th>
-                                    <th>分店所在地址</th>
+                                    <th>所在縣市</th>
+                                    <th>所在區域</th>
+                                    <th>所在地址</th>
                                     <th>分店電話</th>
+                                     <th></th>
+                                      <th></th>
                                 </tr>
                             </thead>
 

@@ -123,21 +123,40 @@ body{
 /*     background-image: url(ad_03.png); */
     opacity: 0.9;
 }
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+}
+
+.bg {
+    /* The image used */
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 </style>
 </head>
 
 <body id='chatbody' onload="connect();" onunload="disconnect();" style="">
-    <div id="ChatZone" class="col-12 col-md-4" style="height: 100%;">
+<div class="container-fulid">
+	<div class="d-flex flex-wrap">
+	  <div class="col-8 bg"></div>
+  <div >    <div id="ChatZone" class="col-12 float-right" style="height: 500px; width:500px;">
         <nav class="navbar navbar-dark bg-dark ">
-            <!-- Navbar content -->
-            <h3 id='service' class="center">Customer Service</h3>
+            <h3 id='service' class="center">竹風堂客服系統</h3>
         </nav>
-        <div id="ChatZone" class="" style="background-color: white; height: 100%;">
+        <div id="ChatZone" class="" style="background-color: white; height: 100%; width:500px;">
             <div id="MessageList" style="height: 100%;">
                 <!-- 	<textarea readonly name="" id="dialog" cols="48" rows="20"></textarea> -->
             </div>
             <div class="form-inline">
-                <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
+                <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="訊息.." onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
@@ -149,6 +168,9 @@ body{
                 </div>
             </div>
         </div>
+    </div></div>
+	</div>
+
     </div>
     <script>
         var point = "/CustomerService/" + $('#userName').val()+"/"+"E000000002";
@@ -183,18 +205,19 @@ body{
                 var id = jsonObj.username;
                 var msg = jsonObj.message + "\n";
                 var time = jsonObj.time;
+                var picMem = jsonObj.picMem;
+                var picEmp = jsonObj.picEmp;
                 if (inputusername.value.trim() == jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "right";
                     $('#MessageList')
                         .append(
-                            '<div class=ChatMessageRight><img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><div class= ChatBubbleRight>' +
+                            '<div class=ChatMessageRight>'+ picMem +'<div class= ChatBubbleRight>' +
                             msg + '<br><sapn class=sysMsg>' + time + '</span></div></div>');
                 } else if (inputusername.value.trim() != jsonObj.username && jsonObj.type == 'userMsg') {
                     // 					dialog.style.textAlign = "left";
                     $('#MessageList').append(
-                        '<div class=ChatMessageLeft><img class="nav-item " src="<%=request.getContextPath()%>/back_end/img/drew.jpg" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;"><span>' +
-                        jsonObj.username +
-                        '</span><div class= ChatBubbleLeft>' +
+                        '<div class=ChatMessageLeft>'+ picEmp +'<span>' +
+                        id +'</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
 
                 } else if (jsonObj.type == 'sysMsg') {
@@ -220,7 +243,8 @@ body{
                 "username": inputusername.value.trim(),
                 "message": inputmessage.value,
                 "type": 'userMsg',
-                'time': new Date().toLocaleString()
+                'time': new Date().toLocaleString(),
+                'picMem': '<img class="nav-item " src="<%=request.getContextPath()%>/front_end/member/member.do?mem_No=${(memVO.mem_No == null)?' ':memVO.mem_No}" style="display:${(memVO.mem_Name == null )? 'none': ''};height:50px;width:50px;border-radius:50%;">'
             };
 
             webSocket.send(JSON.stringify(jsonObj));
@@ -235,12 +259,12 @@ body{
             //             document.getElementById('sendMessage').disabled = true;
             document.getElementById('connect').disabled = false;
             document.getElementById('disconnect').disabled = true;
-            document.getElementById('userName').readOnly = false;
+//             document.getElementById('userName').readOnly = false;
 
         }
 
     </script>
-    <jsp:include page="/front_end/footer.jsp" flush="true" />
+
 </body>
 
 </html>
