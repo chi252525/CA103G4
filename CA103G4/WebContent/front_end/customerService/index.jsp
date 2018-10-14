@@ -127,7 +127,7 @@ body{
 </head>
 
 <body id='chatbody' onload="connect();" onunload="disconnect();" style="">
-    <div id="ChatZone" class="col-12 col-md-4" style="height: 100%;">
+    <div id="ChatZone" class="col-12 col-md-12" style="height: 100%;">
         <nav class="navbar navbar-dark bg-dark ">
             <!-- Navbar content -->
             <h3 id='service' class="center">Customer Service</h3>
@@ -137,7 +137,7 @@ body{
                 <!-- 	<textarea readonly name="" id="dialog" cols="48" rows="20"></textarea> -->
             </div>
             <div class="form-inline">
-                <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="°T®§" onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
+                <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="°T®§.." onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="°e¥X" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
@@ -237,7 +237,7 @@ body{
             //             document.getElementById('sendMessage').disabled = true;
             document.getElementById('connect').disabled = false;
             document.getElementById('disconnect').disabled = true;
-            document.getElementById('userName').readOnly = false;
+//             document.getElementById('userName').readOnly = false;
 
         }
 

@@ -56,6 +56,10 @@ public class OrderformService {
 		return null;
 	}
 	
+	public List<OrderformVO> getAll(){
+		return dao.getAll();
+	}
+	
 	
 	
 }

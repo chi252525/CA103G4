@@ -327,6 +327,9 @@
                                 <label class="btn btn-secondary" onclick="cardShow()">
                                     <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
                                 </label>
+                                 <label class="btn btn-secondary" onclick="cardShow()">
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 竹幣
+                                </label>
                             </div><br>
 
                             <c:if test="${order_pstatus ne 1}">

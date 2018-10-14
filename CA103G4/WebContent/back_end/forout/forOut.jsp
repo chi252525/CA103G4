@@ -201,6 +201,41 @@ pageContext.setAttribute("forOut",list);
 	</div>
 </c:forEach>
 
+
+
+<%--當某個訂單餐點出完時跑出提示--%>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+		訂單編號<%= session.getAttribute("OK") %>的餐點已經完成出餐
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">留在本頁</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">我要外送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<c:if test="<%= session.getAttribute(\"OK\") != null %>">
+<% session.removeAttribute("OK"); %>
+ <script>
+ $(function(){
+     $('#myModal').modal({
+     show:true,
+     backdrop:true
+     })
+ });
+ </script>
+
+</c:if>
+
+
 <%--  <script> -->
 // $(document).ready(function(){
 // 	$(#myButton).prop('disabled', true);
