@@ -49,4 +49,9 @@ private DeskDAO_interface dao;
 	public void desk_res(DeskVO deskVO, ResVO resVO) {		
 		dao.insertAutoGK(deskVO, resVO);
 	}
+	
+	public List<DeskVO> getByBrano(String branch_no) {
+		return dao.getByBr(branch_no);
+	}
+	
 }

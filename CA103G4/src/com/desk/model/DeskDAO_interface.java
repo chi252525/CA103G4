@@ -10,4 +10,5 @@ public interface DeskDAO_interface {
     public DeskVO findByPrimaryKey(String dek_no);
     public List<DeskVO> getAll();
     public void insertAutoGK(DeskVO deskVO, ResVO resVO);
+    public List<DeskVO> getByBr(String branch_no);
 }

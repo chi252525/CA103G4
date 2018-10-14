@@ -191,8 +191,6 @@ public class OrderformDAO implements OrderformDAO_interface {
 
 			rs = pstmt.executeQuery();
 			
-			System.out.println("到這");
-			
 			while (rs.next()) {
 				// deliveryVO 也稱為 Domain objects
 				orderformVO = new OrderformVO();

@@ -13,5 +13,6 @@ public interface MemberDAO_interface {
 //	public MemberVO compareMemId(String mem_Id);
 	public MemberVO isMember(String mem_Id, String mem_Pw);
 	public byte[] getImage(String mem_No);
+	public byte[] getImageByName(String mem_Name);
 }
 	

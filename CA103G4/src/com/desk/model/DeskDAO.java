@@ -34,6 +34,8 @@ public class DeskDAO implements DeskDAO_interface{
 		"select DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS from DESK where DEK_NO = ?";
 	private static final String UPDATE =
 		"UPDATE DESK set BRANCH_NO=?,DEK_ID=?,DEK_SET=?,DEK_STATUS=? where DEK_NO =?";
+	private static final String GET_FROM_BRANCH = 
+			"select DEK_NO,BRANCH_NO,DEK_ID,DEK_SET,DEK_STATUS from DESK where BRANCH_NO = ?";
 	
 	@Override
 	public void insert(DeskVO deskVO) {
@@ -302,6 +304,62 @@ public class DeskDAO implements DeskDAO_interface{
 			}
 		}
 		
+	}
+
+	@Override
+	public List<DeskVO> getByBr(String branch_no) {
+		List<DeskVO> list = new ArrayList<DeskVO>();
+		DeskVO deskVO = null;	
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_FROM_BRANCH);
+			pstmt.setString(1, branch_no);
+			rs = pstmt.executeQuery();
+		
+		    while(rs.next()) {
+		    	
+		    	deskVO = new DeskVO();				
+				deskVO.setDek_no(rs.getString("dek_no"));
+				deskVO.setBranch_no(rs.getString("branch_no"));
+				deskVO.setDek_id(rs.getString("dek_id"));
+				deskVO.setDek_set(rs.getInt("dek_set"));
+				deskVO.setDek_status(rs.getInt("dek_status"));
+				list.add(deskVO);
+		    }
+	
+
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 }

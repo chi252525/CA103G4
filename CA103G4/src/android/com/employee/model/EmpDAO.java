@@ -38,10 +38,57 @@ public class EmpDAO implements EmpDAO_interface{
 	private static final String FIND_BY_ID_PASWD =
 		"SELECT * FROM EMPLOYEE WHERE EMP_ACNUM = ? AND EMP_PSW = ?";
 	private static final String FIND_EMPNAME_BY_EMPNO =
-			"SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = ?";
+		"SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = ?";
+	private static final String FIND_IMG_BY_NAME = 
+		"SELECT EMP_PHOTO FROM EMPLOYEE WHERE EMP_NAME = ?";
 	
 	
-	
+	@Override
+	public byte[] getImageByName(String emp_Name) {
+		byte[] picture = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_IMG_BY_NAME);
+			pstmt.setString(1, emp_Name);
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				picture = rs.getBytes(1);
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return picture;
+	}
 	@Override
 	public String findEmpNameByPrimaryKey(String emp_no) {
 		String empName = null;
