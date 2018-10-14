@@ -84,8 +84,9 @@ public class DeskServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				session.setAttribute("resVO", resVO);
 				session.setAttribute("deskVO", deskVO);
-				req.setAttribute("date", date);
-				req.setAttribute("bgtime", bgtime);
+				session.setAttribute("date", date);
+				session.setAttribute("bgtime", bgtime);
+				session.setAttribute("fntime", fntime);
 				
 				RequestDispatcher selectSeats = req.getRequestDispatcher("/front_end/reservation/seat.jsp");
 				selectSeats.forward(req, res);
@@ -101,7 +102,10 @@ public class DeskServlet extends HttpServlet {
 		
 		if("Seats".equals(action)) {
 			
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			
+		try {
 			String seat = req.getParameter("finalSeat");
 			System.out.println("controler get:" + seat);
 			HttpSession session = req.getSession();
@@ -114,9 +118,14 @@ public class DeskServlet extends HttpServlet {
 			dskS.desk_res(deskVO, resVO);
 			System.out.println("done!!");
 			
-			RequestDispatcher selectSeats = req.getRequestDispatcher("/front_end/index.jsp");
+			RequestDispatcher selectSeats = req.getRequestDispatcher("/front_end/reservation/last.jsp");
 			selectSeats.forward(req, res);
 			return;
+			}catch(Exception e) {
+				errorMsgs.add("資料新增失敗"+e.getMessage());
+				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/reservation/reservation.jsp");
+				failuerView.forward(req, res);
+		  }
 		}
 		
 		

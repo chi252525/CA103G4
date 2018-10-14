@@ -3,7 +3,7 @@
 <%@ page import="com.menu.model.*, com.custommeals.model.*, java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
-<%
+<%	//取得購物車狀況
 	@SuppressWarnings("unchecked")
 	Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 	Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
@@ -140,7 +140,7 @@ body {
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">經典餐點</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/reservation/reservation.jsp">線上預約訂位</a>
+							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/protected_front/reservation/reservation.jsp">線上預約訂位</a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp">餐點分享</a>
@@ -187,7 +187,7 @@ body {
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/member/logout.do" >登出</a>
 								</div>
 							</li>
-					
+							<c:if test="${not empty memVO}"><li style="color:white;">竹幣:<br><span style="color:#69ba02;">${memVO.mem_Bonus}點數</span></li></c:if>
 						</ul>
 					</div>
 				</nav>

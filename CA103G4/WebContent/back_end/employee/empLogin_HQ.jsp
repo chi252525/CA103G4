@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>emplogin</title>
+	<title>emploginHQ</title>
 	        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <!-- linearicons CSS -->
@@ -36,7 +36,7 @@ body {
 </style>   
 </head>
 <body>
-<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
+<%-- <jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" /> --%>
 
 <div class="container col-3 rounded " style="margin-top:200px;padding-top: 10px" id="back" >
 <c:if test="${not empty errorMsgs}">
@@ -46,23 +46,23 @@ body {
 			</c:forEach>
 		</ul>
 </c:if>
-	<form action="emp.do" method="POST" enctype="multipart/form-data">
+	<form action="<%=request.getContextPath()%>/generalmanager.do" method="POST" enctype="multipart/form-data">
 
 		<div class="form-group">
-			<label for="emp_Acnum">員工帳號</label>
-			<input type="text" class="form-control form-control-sm" id="emp_Acnum" name="emp_Acnum" >
+			<label for="mger_Acnum">員工帳號</label>
+			<input type="text" class="form-control form-control-sm" id="mger_Acnum" name="mger_Acnum" >
 		</div>
 		<div class="form-group">
-			<label for="emp_Psw">員工密碼</label>
-			<input type="password" class="form-control form-control-sm" id="emp_Psw" name="emp_Psw" >
+			<label for="mger_Psw">員工密碼</label>
+			<input type="password" class="form-control form-control-sm" id="mger_Psw" name="mger_Psw" >
 		</div>
 
 		<div style="text-align: center;" >
-			<input type="hidden" name="action" value="login">	
+			<input type="hidden" name="action" value="loginHQ">	
 			<input type="submit" class="btn btn-warning" value="登入" style="margin-bottom:10px" >
 		</div>
 	</form>	
 </div>
-<jsp:include page="/back_end/HeadquarterFooter.jsp" />	
+<%-- <jsp:include page="/back_end/HeadquarterFooter.jsp" />	 --%>
 </body>
 </html>

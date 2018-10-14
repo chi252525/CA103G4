@@ -40,10 +40,49 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String GET_ALL_FROM_TYPEANDSTATUS_STMT = "SELECT order_no,dek_no,mem_no,branch_no,deliv_no,order_type,order_price,order_status,deliv_addres,order_pstatus FROM orderform where order_type=? and order_status=? order by dek_no";
 	private static final String GET_ONE_FROM_DEKNOANDSTATUS_STMT = "SELECT * FROM orderform where dek_no=? and order_status=?";
 	private static final String GET_ALL_FROM_DELIVNO_STMT = "SELECT * FROM orderform where deliv_no=? ";
+	private static final String UPDATE_ORDER_STATUS = "UPDATE orderform set order_status= ? where order_no= ?";
 	
 	
 	
 	
+	@Override
+	public void updateOrderStatus(String order_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_ORDER_STATUS);
+
+			pstmt.setInt(1, 2);
+			pstmt.setString(2, order_no);
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
 	@Override
 	public List<OrderformVO> findByDeliveryNo(String delivery_no) {
 		List<OrderformVO> list = new ArrayList<OrderformVO>();

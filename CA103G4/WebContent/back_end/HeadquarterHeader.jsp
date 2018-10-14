@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core %>
 <!DOCTYPE html>
 <html>
     <head>
          
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/css/headquarter.css">
     <!--     Latest compiled and minified CSS -->
@@ -74,7 +75,12 @@
           </div>
 
           <ul class="nav navbar-nav pull-right" style="padding:8px;">
-                <a href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp" class="btn btn-sm  log-in"><i class="fa fa-user" aria-hidden="true"></i>登入</a>
+<%--           		<c:if test="${mgerVO == null }"> --%>
+                <a href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp" class="btn btn-sm  log-in" ><i class="fa fa-user" aria-hidden="true"></i>登入</a>
+<%--                 </c:if> --%>
+<%--                 <c:if test="${mgerVO != null }"> --%>
+<%--                 <a href="<%=request.getContextPath()%>/back_end/employee/empLogin_HQ.jsp" class="btn btn-sm  log-in" ><i class="fa fa-user" aria-hidden="true"></i>登出</a> --%>
+<%-- 				</c:if> --%>
 <!--
                &nbsp;
                 <a href="#" class="btn btn-sm  register"><i class="fa fa-cog" aria-hidden="true"></i>註冊</a>
