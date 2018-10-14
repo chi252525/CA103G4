@@ -39,7 +39,7 @@ public class OrderformService {
 
 	public OrderformVO getOneOrderform(String order_no) {
 		dao.findByPrimaryKey(order_no);
-		return null;
+		return dao.findByPrimaryKey(order_no);
 	}
 	
 

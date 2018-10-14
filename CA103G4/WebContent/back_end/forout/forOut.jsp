@@ -212,12 +212,21 @@ pageContext.setAttribute("forOut",list);
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
-      <br>
 		訂單<%= session.getAttribute("OK") %>的餐點已經完成出餐<%-- 將此送進controll查詢單筆訂單(內用) --%>
+      <br>
+      <c:if test="<%= (int)session.getAttribute(\"TY\") == 0%>">
+      	訂單類型:內用
+      </c:if>
+      <c:if test="<%= (int)session.getAttribute(\"TY\") == 1%>">
+      	訂單類型:外帶
+      </c:if>
+      <c:if test="<%= (int)session.getAttribute(\"TY\") == 2%>">
+      	訂單類型:外送
+      </c:if>
       </div>
       <div class="modal-footer">
 
-      	<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/back_end/delivery/select_page.jsp" role="button">去外送</a>
+      	<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/back_end/delivery/select_page.jsp" role="button">查看外送</a>
       	<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/back_end/orderform/orderform.jsp" role="button">查看訂單</a>
   			    
       </div>
