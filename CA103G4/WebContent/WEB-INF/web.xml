@@ -280,7 +280,15 @@
   </servlet-mapping>
   
   
- 
+	<servlet>
+	  <servlet-name>GeneralmanagerServlet</servlet-name>
+	  <servlet-class>com.generalmanager.controller.GeneralmanagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>GeneralmanagerServlet</servlet-name>
+	  <url-pattern>/generalmanager.do</url-pattern>
+	</servlet-mapping>
+  
   
 
   
