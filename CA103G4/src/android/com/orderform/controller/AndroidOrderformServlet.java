@@ -81,7 +81,7 @@ public class AndroidOrderformServlet extends HttpServlet {
 			for(String str : updateStatusList) {
 				oidao.updateStatus(str);
 			}
-			writeText(res, gson.toJson("OK"));
+			writeText(res, gson.toJson(oidao.getOrderNo(updateStatusList.get(0))));
 		}
 		else if("getOrderByDelivNo".equals(action)) {
 			String delivNo = jsonObject.get("delivNo").getAsString();
@@ -90,11 +90,11 @@ public class AndroidOrderformServlet extends HttpServlet {
 			
 			writeText(res, gson.toJson(orderList));
 		}
-//		else if ("getDelivNo".equals(action)) {
-//			String deliv_no = jsonObject.get("deliv_no").getAsString();
-//			List<DeliveryVO> deliveryList = dao.getByDelivNo(deliv_no);
-//			writeText(res, gson.toJson(deliveryList));
-//		} 
+		else if ("updateOrderStatus".equals(action)) {
+			String orderNo = jsonObject.get("orderNo").getAsString();
+			dao.updateOrderStatus(orderNo);
+			writeText(res, gson.toJson(orderNo));
+		} 
 		
 		else {
 			writeText(res, "");

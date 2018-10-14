@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.*;
 
 public interface OrderinvoiceDAO_interface {
+	
+	public String getOrderNo(String invo_no);
 
 	public void insert(OrderinvoiceVO orderinvoiceVO, Connection con);
 	
