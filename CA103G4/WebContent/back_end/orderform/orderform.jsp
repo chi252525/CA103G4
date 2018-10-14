@@ -14,6 +14,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>orderform</title>
@@ -83,13 +84,13 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 
 	<%-- s以下是新增外送派送單 --%>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
-	<input type="submit" value="+新增外送單" class="btn btn-dark" value="Submit Button"> 
+	<input type="submit" value="營收分析" class="btn btn-dark" value="Submit Button"> 
 	<input type="hidden" name="action" value="selectOrd">
 	</FORM>
 	
 	<br>
 	<%-- 以下是複合查詢 --%>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" name="First"  class="form-inline" role="form">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" class="form-inline" role="form">
 		
 		<div class="form-row align-items-center">
 		
@@ -109,12 +110,12 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 			</div>
 			
 			<div class="input-group-prepend" style=" margin-right:70px;">
-	  			<span class="input-group-text">派送單狀態:</span>
-	  			<input type="text" name="deliv_status">
+	  			<span class="input-group-text">訂單成立時間:</span>
+	  			<input type="text" id="f_date1" name="hiredate">
 	  		</div>
 	  		
 			 <div class="input-group-prepend" style=" margin-right:30px;">
-				 <input type="hidden" name="action" value="get_By_Key"> 
+				 <input type="hidden" name="action" value="listEmps_ByCompositeQuery"> 
 				 <input type="submit" value="開始搜尋" class="btn btn-dark" value="Submit Button">
 			 </div>
 		</div>
@@ -163,12 +164,27 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostFooter.jsp" flush="true"/>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-
-
 </body>
+
+<link   rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css" />
+<script src="datetimepicker/jquery.js"></script>
+<script src="datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<script>
+ $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+ 	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       //step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: new Date(),              // value:   new Date(),
+		   //startDate:	        '2017/07/10',  // 起始日
+           maxDate:              new Date()  // 去除今日(不含)之後
+        });
+</script>
 
 </html>
