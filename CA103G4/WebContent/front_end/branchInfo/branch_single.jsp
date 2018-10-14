@@ -85,18 +85,12 @@ iframe {
 }
 
 <
-style>.mapouter {
+style >.mapouter {
 	text-align: right;
-	height: 280px;
-	width: 690px;
+
 }
 
-.gmap_canvas {
-	overflow: hidden;
-	background: none !important;
-	height: 280px;
-	width: 690px;
-}
+
 
 .card{
 	background-color:#ffefcc;
@@ -111,8 +105,7 @@ style>.mapouter {
 .gmap_canvas {
 	overflow: hidden;
 	background: none !important;
-	height: 299px;
-	width: 690px;
+
 }
 
 
@@ -286,7 +279,7 @@ style>.mapouter {
 		<!-- 						                            </div> -->
 		<c:if test="${not empty brVO}">
 			<!-- branch card -->
-			<div class="card col-12 col-md-6 center" >
+			<div class="card col-12 col-md-8 center" >
 				<div class="card-body">
 					<h5 class="card-title"><b>${brVO.branch_Name}</b></h5>
 					<img src="<%=request.getContextPath()%>/res/img/branch_photo.jpg" style="width:100%">
@@ -302,15 +295,15 @@ style>.mapouter {
 					<p class="card-text">${brVO.branch_Time}</p>
 				</div>
 				<!-- 			<img class="card-img-bottom" src=".../100px180/" alt="Card image cap"> -->
-
+				<div class="col-12">
 				<div class="mapouter center">
 					<div class="gmap_canvas">
-						<iframe width="690" height="250" id="gmap_canvas"
+						<iframe width="800px" height="300px" id="gmap_canvas"
 							src="https://maps.google.com/maps?q=${brVO.branch_Lat}%2C%20${brVO.branch_Lan}&t=&z=15&ie=UTF8&iwloc=&output=embed"
 							frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 						<!-- 						<a href="https://www.pureblack.de">homepage erstellen</a> -->
 					</div>
-					
+				</div>	
 				</div>
 			</div>
 		</c:if>

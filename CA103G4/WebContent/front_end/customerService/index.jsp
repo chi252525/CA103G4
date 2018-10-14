@@ -123,16 +123,35 @@ body{
 /*     background-image: url(ad_03.png); */
     opacity: 0.9;
 }
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+}
+
+.bg {
+    /* The image used */
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 </style>
 </head>
 
 <body id='chatbody' onload="connect();" onunload="disconnect();" style="">
-    <div id="ChatZone" class="col-12 col-md-12" style="height: 100%;">
+<div class="container-fulid">
+	<div class="d-flex flex-wrap">
+	  <div class="col-8 bg"></div>
+  <div >    <div id="ChatZone" class="col-12 float-right" style="height: 500px; width:500px;">
         <nav class="navbar navbar-dark bg-dark ">
-            <!-- Navbar content -->
-            <h3 id='service' class="center">Customer Service</h3>
+            <h3 id='service' class="center">竹風堂客服系統</h3>
         </nav>
-        <div id="ChatZone" class="" style="background-color: white; height: 100%;">
+        <div id="ChatZone" class="" style="background-color: white; height: 100%; width:500px;">
             <div id="MessageList" style="height: 100%;">
                 <!-- 	<textarea readonly name="" id="dialog" cols="48" rows="20"></textarea> -->
             </div>
@@ -149,6 +168,9 @@ body{
                 </div>
             </div>
         </div>
+    </div></div>
+	</div>
+
     </div>
     <script>
         var point = "/CustomerService/" + $('#userName').val()+"/"+"E000000002";
@@ -242,7 +264,7 @@ body{
         }
 
     </script>
-    <jsp:include page="/front_end/footer.jsp" flush="true" />
+
 </body>
 
 </html>
