@@ -7,7 +7,8 @@
 	@SuppressWarnings("unchecked")
 	Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
 	Vector<CustommealsVO> buylistCustom = (Vector<CustommealsVO>) session.getAttribute("shoppingcartCustom");
-	System.out.println("購物車="+buylist + buylistCustom);
+// 	System.out.println("購物車="+buylist.size());
+// 	System.out.println("自訂購物車="+buylistCustom.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -137,7 +138,7 @@ body {
 								<div class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink">
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp">經典餐點</a> 
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front_end/custommeals/addCustommeals2.jsp">客製化點餐</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/protected_front/custommeals/addCustommeals2.jsp">客製化點餐</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/front_end/reservation/reservation.jsp">線上預約訂位</a>
 							</li>
