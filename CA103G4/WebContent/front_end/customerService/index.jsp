@@ -2,16 +2,20 @@
 	pageEncoding="BIG5"%>
 <!DOCTYPE html>
 <html>
-<jsp:include page="/front_end/header.jsp" flush="true" />
-<img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg" width="100%" height="" alt="">
+
 
 <head>
     <meta charset="BIG5">
     <title>chat</title>
     <!--css-->
+      <!-- font aewsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="chatroom.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    
+    
     <style>
         #userName {
 	width: 50px;
@@ -56,10 +60,10 @@
 
 #MessageList {
 	overflow-y: auto;
+
 }
 
 #chatbody {
-	background-color: burlywood;
 	height: 650px;
 }
 
@@ -128,42 +132,45 @@ body, html {
     margin: 0;
     font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
 }
+.chatArea{
+position:fixed;
+top:100px;
+left:12%;
 
-.bg {
-    /* The image used */
-
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
+.nav-ning{
+border-radius:10px;
+}
+
+
 </style>
 </head>
 
-<body id='chatbody' onload="connect();" onunload="disconnect();" style="">
+<body id='chatbody' onload="connect();" onunload="disconnect();" background="<%=request.getContextPath()%>/res/img/branch_photo.jpeg">
+<jsp:include page="/front_end/header.jsp" flush="true" />
+
+<div class="col-12 my-5"></div>
 <div class="container-fulid">
-	<div class="d-flex flex-wrap">
-	  <div class="col-8 bg"></div>
-  <div >    <div id="ChatZone" class="col-12 float-right" style="height: 500px; width:500px;">
-        <nav class="navbar navbar-dark bg-dark ">
-            <h3 id='service' class="center">竹風堂客服系統</h3>
+
+  <div class="chatArea">    <div id="ChatZone" class="col-12 float-right" style="height: 500px; width:500px;">
+        <nav class="navbar navbar-dark bg-dark nav-ning ">
+            <h3 id='service' class="center">竹風堂客服中心</h3>
         </nav>
-        <div id="ChatZone" class="" style="background-color: white; height: 100%; width:500px;">
-            <div id="MessageList" style="height: 100%;">
+        <div id="ChatZone" class="" style=" height: 100%; width:500px;">
+            <div id="MessageList" style="height: 100%;background-color:rgba(255,255,255,0.9);" >
                 <!-- 	<textarea readonly name="" id="dialog" cols="48" rows="20"></textarea> -->
             </div>
             <div class="form-inline">
-                <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="訊息.." onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
+                <textarea id="message" rows="3" cols="46" style="background-color:rgba(255,255,255,0.9);" class="text-field form-control" type="text" placeholder="訊息.." onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
                         <input id="userName" class="text-field form-control" type="text" placeholder="ID" value="${memVO.mem_Name }" style="width:100% !important;"/>
                     </div>
                     <div class="ml-auto">
-                        <input type="button" id="connect" class="btn" value="連線" onclick="connect();" /> <input type="button" id="disconnect" class="btn" value="離線" onclick="disconnect();" /> <i class="fas fa-location-arrow ml-auto" onclick="sendMessage();"></i>
+                        <input type="button" id="connect" class="btn" value="連線" onclick="connect();" /> 
+                        <input type="button" id="disconnect" class="btn" value="離線" onclick="disconnect();" /> 
+                        <i class="fas fa-location-arrow ml-auto" onclick="sendMessage();"></i>
                     </div>
                 </div>
             </div>
@@ -171,7 +178,7 @@ body, html {
     </div></div>
 	</div>
 
-    </div>
+
     <script>
         var point = "/CustomerService/" + $('#userName').val()+"/"+"E000000002";
         var host = window.location.host; //localhost:8081
