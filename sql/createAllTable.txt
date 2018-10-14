@@ -1466,22 +1466,65 @@ INSERT INTO   COUCAT(
 COUCAT_NO,COUCAT_Name,COUCAT_CATA,
 COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
-'點紐西蘭牛肉拉麵折扣100元','CC2'
-,100,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000001.png')),'CS1');
+'【全台門市適用】線上訂餐外送滿千折百','CC2'
+,100,NULL,NULL,TO_TIMESTAMP('2018-10-01 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000001.png')),'CS0');
 
 INSERT INTO   COUCAT(
 COUCAT_NO,COUCAT_Name,COUCAT_CATA,
 COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
-'線上訂餐會員獨享! 訂餐外送滿千可折100元','CC2'
-,100,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000002.png')),'CS1');
+'中秋節當日限定兌換中冰紅茶一杯','CC2'
+,30,NULL,NULL,TO_TIMESTAMP('2018-09-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-30 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000002.png')),'CS0');
 
 INSERT INTO   COUCAT(
 COUCAT_NO,COUCAT_Name,COUCAT_CATA,
 COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
 VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
-'會員優惠凡點一碗拉麵折80元','CC2'
-,100,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS1');
+'地獄麻辣挑戰優惠折扣200元','CC2'
+,200,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
+
+
+INSERT INTO   COUCAT(
+COUCAT_NO,COUCAT_Name,COUCAT_CATA,
+COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
+'紐西蘭牛肉拉麵現折100元','CC1'
+,100,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
+
+
+
+INSERT INTO   COUCAT(
+COUCAT_NO,COUCAT_Name,COUCAT_CATA,
+COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
+'自由配加麵加湯乙次免費','CC2'
+,20,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
+
+
+INSERT INTO   COUCAT(
+COUCAT_NO,COUCAT_Name,COUCAT_CATA,
+COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
+'【信義店】味增叉燒拉麵折110元','CC3'
+,100,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
+
+
+
+
+
+INSERT INTO   COUCAT(
+COUCAT_NO,COUCAT_Name,COUCAT_CATA,
+COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
+'【綠島店】咖哩豬排烏龍麵現折60元','CC3'
+,60,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
+
+INSERT INTO   COUCAT(
+COUCAT_NO,COUCAT_Name,COUCAT_CATA,
+COUCAT_VALUE,COUCAT_DISCOUNT,COUCAT_FREEP,COUCAT_VALID,COUCAT_INVALID,COUCAT_AMO,COUCAT_PIC,COUCAT_STATUS)
+VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(COUCAT_seq.NEXTVAL), 6, '0'),
+'【西門店】明太子拌麵現折80元','CC3'
+,80,NULL,NULL,TO_TIMESTAMP('2018-10-12 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-20 09:00','YYYY-MM-DD hh24:mi'),100,BFILE_TO_BLOB (BFILENAME ('COUCAT_PIC_DIR','000003.png')),'CS0');
 
 
 --------------------------------------------------------
@@ -1500,8 +1543,8 @@ act_PreAddTime 	TIMESTAMP,
 act_PreOffTime TIMESTAMP,
 ACT_START TIMESTAMP,
 ACT_END TIMESTAMP,
-act_Status NUMBER(10) default 1,
-act_Views Number(38) default 0,
+act_Status NUMBER(10) DEFAULT 0,
+act_Views Number(38) default 1,
 
 CONSTRAINT ACTIVITY_FK FOREIGN KEY (COUCAT_NO)
 REFERENCES COUCAT (COUCAT_NO),
@@ -1514,35 +1557,6 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','新品上市期間限定~會員憑券點拉麵折扣100元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_01.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-1.jpg')),'新品上市期間限定~會員憑券點拉麵折扣100元'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
-
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_02.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-2.jpg')),'慶祝竹風堂拉麵開幕慶,活動期間內至各分店用餐(限內用)'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
-
-INSERT INTO ACTIVITY(
-ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
-ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
-VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
-'0'),
-to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC2','會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_03.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-3.jpg')),'會員好康快來搶!!會員憑優惠券消費現折80元(一人限購一碗)'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
 
 
 INSERT INTO ACTIVITY(
@@ -1551,9 +1565,59 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC1','拉麵的基本元素',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_04.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-4.jpg')),'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。到底拉麵是由哪些元素組成的呢?'
+'AC2','【全台門市優惠】10月慶祝竹風堂拉麵開幕慶，線上訂餐會員獨享! 訂餐外送滿千可折100元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_02.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-2.jpg')),'來來來～～～照過來～～～身為拉麵美食控的你或妳 ??
+絕不能錯過竹風堂創意拉麵！
+無論是愛吃濃郁湯頭的日式拉麵
+還是無肉不歡 超愛吃肉的你～
+
+各式各樣創新的拉麵 絕對可以滿足喜歡享受美食的你！
+
+我們從嚴格選購安心食材開始
+指定台灣安心豬的上等梅花肉
+選用美國Prime等級的上選牛梅花開發出最適合燒烤的原片牛肉
+好吃的肉品絕不用碎肉合成
+以及獨特研發的燒烤醬與青蔥醬
+除了食材的原味更增添了豐富的味蕾享受
+
+開幕活動
+凡消費滿1000元及送100元餐點折價卷
+(點一份主菜可使用一張以此累推.有效日期3個月活動結束後開始兌換 ）
+
+慶開幕期間凡購買餐滿1000元 
+再送奶香濃郁的白醬焗烤蝦一份(價值100元)'
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-31 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 09:00','YYYY-MM-DD hh24:mi'),1,898);
+
+
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002',
+'AC2','【全台門市優惠】明月不可不賞，拉麵不可不吃~中秋節凡憑優惠卷來店點玉子系列拉麵，即可兌換中冰紅茶一杯~只限當天~贈完為止',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_03.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-3.jpg')),'竹風堂拉麵全球同慶33周年，10月16日當天於竹風堂全省店「玉子系列拉麵」每碗100元，當日330碗，數量限定，售完為止。
+
+竹風堂拉麵源起於日本，進軍台灣、中國、香港、菲律賓、泰國、馬來西亞、印尼等亞洲國家，就連澳洲、美國、英國及法國都受到拉麵旋風影響，陸續開設多家店舖，創造出全球的拉麵熱潮。'
 ,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),1,563);
+
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003',
+'AC2','【全台門市優惠】地獄的麻辣!!地獄麻辣拉麵~辣到頭皮發麻直說嫑嫑的美味! 凡挑戰9級辣度~過關者即享優惠折扣200元!',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_04.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-4.jpg')),'日本在戰後，因為有許多勞工需要快速解飢，所以有很多人投入拉麵的創新研發，使拉麵口味種類變的多元，日本各地都發展出具當地特色的拉麵口味。
+說到竹風堂地獄麻辣拉麵大家應該都會想到「蒙古タンメン中本（蒙古湯麵中本）」。
+在日本經常登上報章媒體的這家店，在池袋、澀谷等繁華地區都有分店，全東京共有15家店鋪♪
+店內所有拉麵都標有0～10級的辣度，而所有口味中最辣且最知名的則是「北極ラーメン（北極拉麵）」，辣度足足有9級之多喔！！！
+雖然可怕但其實辣度可以自行更改，味噌湯底配上高麗菜、紅蘿蔔等豐富蔬菜，同時能夠感覺到湯的鮮甜，再搭配絞肉實在讓人一口接著一口停不下來。
+另外要請大家放心，並非所有拉麵都如此瘋狂。（笑）
+雖有最辣有著10級的辣度，但0級是就連小孩也能安心品嚐，10級辣度則建議最好不要輕易嘗試……'
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,65);
 
 
 INSERT INTO ACTIVITY(
@@ -1562,9 +1626,10 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC3','西門店限定二郎風蒜味拉麵',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-5.jpg')),'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+'AC1','【全台門市優惠】新品上市期間限定~會員憑券點紐西蘭牛肉拉麵現折100元~身為拉麵饕客的你~快來嚐鮮!',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_01.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-1.jpg')),'新品上市期間限定~會員憑券點拉麵折扣50元'
+,TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),1,30);
+
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
@@ -1572,11 +1637,48 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001',
-'AC3','永康公園店限定辣味噌拉麵',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-6.jpg')),'辛味噌拉麵是日本東北仙台及山形的代表拉麵，因為味噌是仙台的特產，因此當地本來就以味噌拉麵為特產，其後附上加入辣椒的味噌醬，而成為辛味噌拉麵。'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2017-09-20 09:00','YYYY-MM-DD hh24:mi'),1,0);
+'AC2','【全台門市優惠】客製化的自由~好吃的~獨特的~風味自由配!活動期間凡組合6種以上搭配任一湯頭，即享加麵加湯乙次免費!不加價!',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','ad_01.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-1.jpg')),'新品上市期間限定~會員憑券點拉麵折扣100元'
+,TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),1,150);
 
 
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','【10月份當店限定】台北信義店雙十節當日限定款~二郎風的味增叉燒拉麵折110元~慶雙十!',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-5.jpg')),'為什麼會有「二郎風」這個名字呢，其實是這種口味的拉麵是日本有一家叫「拉麵二郎」的拉麵店所發明，非常受到歡迎。二郎拉麵在許多書籍中被提及，包括<島耕作>漫畫, 並曾被稱為<拉麵の帝王>。除了本店以外，也有許多模仿者，稱為「二郎風拉麵」或「二郎啟發拉麵」在日本全國各地開店。通常二郎拉麵一上桌，客人都會驚歎：「好大碗阿！」'
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,68);
+
+
+
+
+
+
+
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','【10月份當店限定】綠島店壽星限定~凡點咖哩豬排烏龍麵現折60元',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-6.jpg')),'數十種香料融合了豚骨湯，創造出刺激卻不失醇厚的口味，配上烤炙叉燒，是味覺和口感的多重感動！'
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,234);
+
+INSERT INTO ACTIVITY(
+ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
+ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END,act_Status,act_Views)
+VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
+'0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001',
+'AC3','【10月份當店限定】台南西門店壽星限定~隱藏菜單!凡點明太子拌麵現折80元',NULL,BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','ad_pic-6.jpg')),'這幾年日本正流行一種沒有湯的麵，配料除了基本的選項之外，其他也都可以自由搭配喔!明太子是日式洋風口味，在吃的時候請先將全部的配料拌一拌再吃。'
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,230);
 
 COMMIT;
 
@@ -1586,7 +1688,7 @@ COMMIT;
 CREATE TABLE COUPON (
 COUP_SN VARCHAR2(20)  NOT NULL,
 COUCAT_NO VARCHAR2(15)  NOT NULL, 
-COUP_STATUS VARCHAR2(3)default 'CP1', 
+COUP_STATUS VARCHAR2(3)default 'CP0', 
 CONSTRAINT COUPON_FK FOREIGN KEY (COUCAT_NO) 
 REFERENCES COUCAT (COUCAT_NO),
 CONSTRAINT COUPONY_PK PRIMARY KEY (COUP_SN));
@@ -1735,7 +1837,7 @@ CREATE TABLE COUPONHISTORY (
 
 Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-00000000001', 'M000001', 'O000000001',0);
 Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-00000000002', 'M000002', 'O000000001',1);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-00000000003', 'M000001', 'O000000002',2);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,ORDER_NO,COUP_STATE) values ('M-00000000003', 'M000003', 'O000000002',2);
 
    
 COMMIT;
