@@ -79,6 +79,47 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	</ul>
 </c:if>
 
+<div class="container">
+
+	<%-- s以下是新增外送派送單 --%>
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do">
+	<input type="submit" value="+新增外送單" class="btn btn-dark" value="Submit Button"> 
+	<input type="hidden" name="action" value="selectOrd">
+	</FORM>
+	
+	<br>
+	<%-- 以下是複合查詢 --%>
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" name="First"  class="form-inline" role="form">
+		
+		<div class="form-row align-items-center">
+		
+			<div class="input-group-prepend" style=" margin-right:70px;">
+				 <span class="input-group-text">訂單編號:</span>
+				 <input type="text" name="deliv_no">
+			</div>
+			
+			<div class="input-group-prepend" style=" margin-right:70px;">
+			 <span class="input-group-text">員工姓名</span>
+			 <select size="1" name="emp_no" class="form-control" id="exampleSelect1">
+	 			<option  value="">
+				<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}">
+				<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name}
+				</c:forEach>
+			</select>
+			</div>
+			
+			<div class="input-group-prepend" style=" margin-right:70px;">
+	  			<span class="input-group-text">派送單狀態:</span>
+	  			<input type="text" name="deliv_status">
+	  		</div>
+	  		
+			 <div class="input-group-prepend" style=" margin-right:30px;">
+				 <input type="hidden" name="action" value="get_By_Key"> 
+				 <input type="submit" value="開始搜尋" class="btn btn-dark" value="Submit Button">
+			 </div>
+		</div>
+	</FORM>
+	<br>
 
 
 
@@ -89,6 +130,29 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%-- 從上面的div class="container"延伸下來，讓include也能排版 --%>
+</div>
 
 
 
