@@ -294,7 +294,6 @@ public class CustommealsServlet extends HttpServlet{
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				
-				
 				try {
 	//				無輸入OR長度超出範圍
 					String mem_No = req.getParameter("mem_No").trim();

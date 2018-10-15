@@ -617,7 +617,7 @@
 			$("#addtoCart${custommealsVO.custom_No}").click(function() {
 				if($('#mealName').val()==""){
 					alert('請輸入餐點名稱!');
-				}else if($('custom_Price').val()==0){
+				}else if($('#custom_Price').val()==0){
 					alert('請選取餐點!');
 					
 				}else{
