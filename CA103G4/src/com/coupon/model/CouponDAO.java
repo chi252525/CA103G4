@@ -34,6 +34,8 @@ public class CouponDAO implements CouponDAO_interface {
 		private static final String FINDBY_PRIMARY_KEY="SELECT * FROM COUPON WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO_NOT_SENDED = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=? AND COUP_STATUS=?";
+		
+		private static final String FINDCOUCAT_BY_COUPSN = "SELECT * FROM COUPON WHERE COUP_SN=? ";
 		@Override
 		public void insert(CouponVO couponVO, Integer coucat_Amo) {
 			Connection con = null;
@@ -309,6 +311,56 @@ public class CouponDAO implements CouponDAO_interface {
 				}
 			}
 			return list;
+		}
+
+
+
+		@Override
+		public CouponVO findCoucatByCoupSn(String coup_Sn) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			CouponVO couponVO=null;
+			try {
+				con = ds.getConnection();
+				System.out.println("Connecting to database successfully! (連線成功！)");
+				pstmt = con.prepareStatement(FINDCOUCAT_BY_COUPSN);
+				pstmt.setString(1, coup_Sn);
+				rs = pstmt.executeQuery();
+	  
+				while (rs.next()) {
+					couponVO=new CouponVO();
+					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
+					couponVO.setCoucat_No(rs.getString("coucat_No"));
+					couponVO.setCoup_Status(rs.getString("coup_Status"));
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return couponVO;
 		}
 		
 		

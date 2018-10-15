@@ -289,6 +289,14 @@
 	  <url-pattern>/generalmanager.do</url-pattern>
 	</servlet-mapping>
   
+    <servlet>
+		<servlet-name>LogoutHQEmp</servlet-name>
+		<servlet-class>com.generalmanager.controller.GeneralEmpLogout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutHQEmp</servlet-name>
+		<url-pattern>/HQemplogout.do</url-pattern>
+	</servlet-mapping>
   
 
   

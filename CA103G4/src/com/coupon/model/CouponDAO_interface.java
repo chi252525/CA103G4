@@ -11,4 +11,5 @@ public interface CouponDAO_interface {
 	List<CouponVO> findByCoucatNo(String coucat_No);  
 	CouponVO getOneCoupon(String coup_Sn);
 	List<CouponVO> findByCoucatNo_CP0(String coucat_No,String coucat_Status); 
+	CouponVO findCoucatByCoupSn(String coup_Sn);
 }

@@ -18,11 +18,11 @@ public class CouponTest {
 //	dao.updateStatus(cv2);
 	 
 	 //FINDBYCOUCAT_NO
-//	CouponVO cv3=dao.findByCoucatNo("20180908-000003");
-//	 System.out.println(cv3.getCoucat_No());
-//	 System.out.println(cv3.getCoup_Sn());
-//	 System.out.println(cv3.getCoup_Status());
-//	 System.out.println("=========================");
+	CouponVO cv3=dao.findCoucatByCoupSn("M-00000000013");
+	 System.out.println(cv3.getCoucat_No());
+	 System.out.println(cv3.getCoup_Sn());
+	 System.out.println(cv3.getCoup_Status());
+	 System.out.println("=========================");
 //	
 //	}
 	

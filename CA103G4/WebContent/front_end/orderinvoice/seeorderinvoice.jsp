@@ -73,16 +73,16 @@
 						</c:if>
 
 						<c:if test="<%= session.getAttribute(\"card_number\") != null %>">						
-						<p class="card-text h4">付款方式:信用卡</p>
+						<p class="card-text h4">付款方式:信用卡付款</p>
 						<p class="card-text h4">信用卡末四碼:<%= session.getAttribute("card_number")%></p>
 						</c:if>
 
 						<c:if test="<%= session.getAttribute(\"card_number\") == null && session.getAttribute(\"point\") == null%>">						
-						<p class="card-text h4">付款方式:現金</p>
+						<p class="card-text h4">付款方式:現金付款</p>
 						</c:if>
 
 						<c:if test="<%= session.getAttribute(\"point\") != null%>">						
-						<p class="card-text h4">付款方式:</p>
+						<p class="card-text h4">付款方式:竹幣付款</p>
 						</c:if>
 						
 						<p class="card-text h4">總金額:<%= session.getAttribute("amount")%></p>
@@ -104,7 +104,7 @@
 								<div class="col">
 								</div>
 									<div class="col-1">
-									<a href="<%=request.getContextPath()%>/front_end/index.jsp" class="card-link">確認</a>
+									<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/front_end/index.jsp" role="button">確認</a>
 									<!-- 連到哪要改一下 -->
 									</div>
 								<div class="col">

@@ -18,8 +18,10 @@ import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
+import com.employee.model.EmpVO;
 import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
+
 
 /**
  * Servlet implementation class DeliveryServlet
@@ -170,10 +172,10 @@ public class DeliveryServlet extends HttpServlet {
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			try {
-
-//			String branchno = req.getParameter("branch_no").trim();//綁定登入員工的分店編號
+			EmpVO empVO = (EmpVO) req.getSession().getAttribute("empVO");//綁定登入員工的分店編號
+			String branchno = empVO.getBranch_No();
 //			test
-				String branchno = "0001";
+//				String branchno = "0001";
 
 				OrderformVO ord = null;
 

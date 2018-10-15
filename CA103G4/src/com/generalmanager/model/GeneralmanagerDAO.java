@@ -150,13 +150,14 @@ public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 		try {
 			con=ds.getConnection();
 			pstmt= con.prepareStatement(FINDBYACNUM);
+			pstmt.setString(1, mger_Acnum);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				
 				mgerVO.setMger_Acnum(rs.getString("mger_Acnum"));
-				mgerVO.setMger_No("mger_No");
-				mgerVO.setMger_Psw("mger_Psw");				
+				mgerVO.setMger_No(rs.getString("mger_No"));
+				mgerVO.setMger_Psw(rs.getString("mger_Psw"));				
 			}
 			
 		} catch (SQLException e) {
