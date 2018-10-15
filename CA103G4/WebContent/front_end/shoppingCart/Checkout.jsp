@@ -325,13 +325,9 @@
                           	<!-- 點數購買 -->
                           	<div id="point" style="display:${order_pstatus ==3 ? '' : 'none'};">
                           	<!-- 點數不足提示 -->
-                          		
 								<div class="errorMsg col-md-4" style=" border-radius:6px;margin-left:100px;margin-top:20px; background-color: rgb(255,255,255,0.5);" >
 									${errorMsgs.point_insufficient}
 								</div>
-								
-								
-							
 							</div>
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->

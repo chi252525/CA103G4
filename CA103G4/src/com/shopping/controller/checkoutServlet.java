@@ -174,8 +174,14 @@ public class checkoutServlet extends HttpServlet {
 				}
 
 				List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");// 得到結帳購物車
-				buylist.clear();// 清空
-
+				List<MenuVO> buylistCustom = (Vector<MenuVO>) session.getAttribute("shoppingcartCustom");// 得到客製結帳購物車
+				
+				if (buylist != null)
+					buylist.clear();// 清空
+				
+				if (buylistCustom != null)
+					buylistCustom.clear();
+				
 				System.out.println("全數通過,要去新增訂單囉!");
 				req.getRequestDispatcher("/front_end/orderform/orderform.do").forward(req, res);
 				return;
