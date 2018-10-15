@@ -7,11 +7,12 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.generalmanager.model.GeneralmanagerService;
 import com.generalmanager.model.GeneralmanagerVO;
-
+@MultipartConfig(fileSizeThreshold=1024*1024)
 public class GeneralmanagerServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException {
@@ -22,7 +23,7 @@ public class GeneralmanagerServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+		System.out.println(action);
 		if("loginHQ".equals(action)) {
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
