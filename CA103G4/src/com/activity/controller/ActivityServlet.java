@@ -202,26 +202,26 @@ public class ActivityServlet extends HttpServlet {
 				System.out.println("actloadlist size()"+actloadlist.size());;
 				
 				// 活動新增成功時發送簡訊給所有會員
-//				Send se = new Send();
-//				MemberDAO_interface mdao = new MemberDAO();
-//				List<MemberVO> memlist= mdao.getAll();
-//				System.out.println("gggg");
-//				for(MemberVO memVO:memlist){
-//					String[] tel = {memVO.getMem_Phone()};
-//					StringBuilder message = new StringBuilder()
-//							.append("親愛的會員")
-//							.append(memVO.getMem_Name().toString())
-//							.append("，您好:")
-//				 			.append("竹風堂最新活動預告，從")
-//				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
-//				 			.append("到")
-//				 			.append(activityVO.getAct_End().toString().substring(0, 16))
-//				 			.append(activityVO.getAct_Name().toString())
-//				 			.append("別錯過囉!");
-//				 			
-//				 	se.sendMessage(tel , message.toString());
+				Send se = new Send();
+				MemberDAO_interface mdao = new MemberDAO();
+				List<MemberVO> memlist= mdao.getAll();
+				System.out.println("gggg");
+				for(MemberVO memVO:memlist){
+					String[] tel = {memVO.getMem_Phone()};
+					StringBuilder message = new StringBuilder()
+							.append("親愛的會員")
+							.append(memVO.getMem_Name().toString())
+							.append("，您好:")
+				 			.append("竹風堂最新活動預告，從")
+				 			.append(activityVO.getAct_Start().toString().substring(0, 16))
+				 			.append("到")
+				 			.append(activityVO.getAct_End().toString().substring(0, 16))
+				 			.append(activityVO.getAct_Name().toString())
+				 			.append("別錯過囉!");
+				 			
+				 	se.sendMessage(tel , message.toString());
 				 
-//				}
+				}
 				System.out.println("gggg");
 			
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/

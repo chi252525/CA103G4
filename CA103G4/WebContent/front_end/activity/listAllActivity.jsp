@@ -184,7 +184,7 @@ div.shavetext {
 									</select>
 								</form>
 								  <div id="myID" class="WebSocket"></div>
-    <span id="output" class="WebSocket"></span>
+    							<span id="output" class="WebSocket"></span>
 							</div>
 						</div>
 					</div>
