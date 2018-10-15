@@ -15,15 +15,19 @@ body{
 
 input{
 	width:200px;
-	border-radius: 0.5rem;
-	background-color:#FFD4D4;
+	border-radius: 0.9rem!important;
+	background-color:#fff7df;
+	height:15px;
+}
+td{
+	height:60px;
 }
 
 #city-list{
-	background-color:#FFD4D4;
+	background-color:#fff7df;
 }
 #sector-list{
-	background-color:#FFD4D4;
+	background-color:#fff7df;
 }
 .td1 {
 	width: 10%;
@@ -31,7 +35,7 @@ input{
 }
 
 .td2 {
-	width: 40%;
+	width: 30%;
 	text-align: center;
 }
 
@@ -54,7 +58,7 @@ input{
 }
 
 .td4 {
-	width: 40%;
+	width: 30%;
 	text-align: center;
 }
 
