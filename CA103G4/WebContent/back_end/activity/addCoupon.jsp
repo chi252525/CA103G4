@@ -84,7 +84,7 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label class="text-dark">優惠卷名稱</label>
-								 <input type="text"	class="form-control" placeholder="輸入優惠卷名稱:" name="coucat_Name">
+								 <input type="text"	id="coucat_Name" class="form-control" placeholder="輸入優惠卷名稱:" name="coucat_Name">
 							</div>
 									<div class="col-md-6">
 									<label class="text-dark">優惠卷種類</label> 
@@ -124,6 +124,7 @@
 								<div class="col-md-3">
 								<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-secondary" >新增</button></div>
+							<button type="button" class="btn btn-secondary mt-2" id="demo">+</button>
 								<div class="col-md-3"></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3">
@@ -141,9 +142,17 @@
 										<div class="card" id="preview_box2"></div>
 									</div>
 								</div>
-							
+						
 						</div>
+								<script>
 							
+							$("#demo").click(function(){
+								console.log("demo clicked")
+								$("#coucat_Name").val("【全台門市適用】結訓大解放! 點一碗拉麵即折100元優惠卷");
+								
+							})
+							
+							</script>
 					</div>
 				</form>
 			</div>

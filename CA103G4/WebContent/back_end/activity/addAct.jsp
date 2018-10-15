@@ -89,7 +89,7 @@
 							<div class="col-md-8">
 								<div class="form-group">
 									<label class="text-dark">廣告標題</label> <input type="text"
-										class="form-control" placeholder="輸入廣告標題" name="act_Name"
+										class="form-control" placeholder="輸入廣告標題" id="act_Name" name="act_Name"
 										required>
 								</div>
 								<div class="form-group">
@@ -140,7 +140,7 @@
 									<div class="col-12">
 										<!-- 編輯區塊 -->
 										<textarea name="act_Content">
-					            	<%=(actVO == null) ? "" : actVO.getAct_Content()%>
+					            	<%=(actVO == null) ? "慶祝資策會Java班CA103終於要結訓了，竹風堂拉麵將招待各位學員及老師們，點拉麵即折100元，相當於半價優惠!!" : actVO.getAct_Content()%>
 					            </textarea>
 										<!-- */編輯區塊 -->
 									</div>
@@ -162,13 +162,25 @@
 								</div>
 							</div>
 						</div>
+						<button type="button" class="btn btn-secondary mt-2" id="demo">+</button>
 						<input type="hidden" name="action" value="insert"> <input
 							type="hidden" name="emp_No" value="E000000002">
 						<button type="submit" class="btn btn-secondary">新增</button>
 						<a
 							href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp"
 							class="btn btn-dark ">放棄編輯</a>
+							
 					</form>
+					
+						<script>
+							
+							$("#demo").click(function(){
+								console.log("demo clicked")
+								$("#act_Name").val("【CA103限定】竹風堂中央店招待資策會CA103 JAVA班全體師生點拉麵折100元");
+								
+							})
+							
+							</script>
 				</div>
 			</div>
 		</div>

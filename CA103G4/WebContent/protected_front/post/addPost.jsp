@@ -41,6 +41,8 @@
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" -->
 <!-- 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
 <!-- 	crossorigin="anonymous"></script> -->
+<!--JS BS4-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -70,6 +72,7 @@ body {
 #myDIV {
 	height: 150px;
 	overflow: auto;
+	background-color:rgba(255,255,255,0.8);
 }
 
 #img_input2 {
@@ -88,11 +91,20 @@ body {
 }
 
 .postitem {
-	background-color: white;
+	background-color:rgba(255,255,255,0.8);
 	border-radius: 5px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+.card-header-ning,.card-ning{
+background-color:rgba(255,255,255,0.8);
+
+}
+.list-ning{
+background-color:rgba(255,255,255,0.8);
+}
+.text-w{
+color:#fff;}
 </style>
 </head>
 <body
@@ -117,12 +129,12 @@ body {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>分享餐點</h1>
+					<h1 class="text-w">分享餐點</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 my-4">
-					<div class="card">
+					<div class="card card-ning">
 
 						<%@ page import="com.custommeals.model.*"%>
 
@@ -131,14 +143,14 @@ body {
 	List<CustommealsVO> list = cusmealSvc.getMealByMemBuyed(memVO.getMem_No());
 	pageContext.setAttribute("list", list);
 %>
-						<div class="card-header text-primary p-3">我訂過的餐點</div>
+						<div class="card-header text-primary p-3 card-header-ning">我訂過的餐點</div>
 					</div>
 					<div class="card-body px-0 py-0" id="myDIV" onscroll="myFunction()">
 						<ul class="list-group">
 							<!-- 訂過的List -->
 							<c:forEach var="custommealsVO" items="${list}">
 								<li
-									class="list-group-item d-flex justify-content-between align-items-center">
+									class="list-group-item  d-flex justify-content-between align-items-center " style="background-color:rgba(255,255,255,0.45);">
 									${custommealsVO.custom_Name}
 									<button type="submit"
 										class="btn sharebtn btn-outline-info btn-xs ${custommealsVO.custom_No}">分享</button>
@@ -171,10 +183,10 @@ body {
 
 
 			<div class="row">
-				<div class="col-md-12">
-					<div class="card mb-3">
-						<div class="card-header text-primary">分享你最獨特的組合!</div>
-						<div class="card-body m-2">
+				<div class="col-md-12" >
+					<div class="card mb-3 " style="background-color:rgba(255,255,255,0.8);">
+						<div class="card-header list-ning text-primary">分享你最獨特的組合!</div>
+						<div class="card-body m-2" style="background-color:rgba(255,255,255,0);">
 							<form method="post"
 								action="<%=request.getContextPath()%>/post/postServlet.do"
 								name="insertform" enctype="multipart/form-data">
@@ -212,21 +224,25 @@ body {
 									</fieldset>
 								</div>
 								<!-- 編輯區塊 -->
-								<textarea name="post_Cont">
-					            	<%=(postVO == null) ? "我推薦此餐點!" : postVO.getPost_Cont()%>
+								<textarea name="post_Cont" id="textareaning">
+					            	<%=(postVO == null) ? "我推薦此餐點!湯頭就是很好喝的豚骨湯~~且叉燒肉很嫩又很少肥肉超喜歡~~麵很有嚼勁，吃起來很過癮~~ " : postVO.getPost_Cont()%>
 					            </textarea>
 								<!-- */編輯區塊 -->
 								<br> <input type="hidden" id="mem_No" name="mem_No"
 									value="${memVO.mem_No}" /> <input type="hidden" name="action"
 									value="insert">
 								<button type="submit" class="btn btn-success">確認分享</button>
+								
 								<a
 									href="<%=request.getContextPath()%>/front_end/post/listAllpost.jsp"
 									class="btn btn-dark ">放棄編輯</a>
 							</form>
+							
 						</div>
 					</div>
 				</div>
+				
+	
 			</div>
 		</div>
 

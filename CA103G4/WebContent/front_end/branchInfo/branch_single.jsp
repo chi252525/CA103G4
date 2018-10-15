@@ -282,7 +282,7 @@ style >.mapouter {
 			<div class="card col-12 col-md-8 center" >
 				<div class="card-body">
 					<h5 class="card-title"><b>${brVO.branch_Name}</b></h5>
-					<img src="<%=request.getContextPath()%>/res/img/branch_photo.jpg" style="width:100%">
+					<img src="<%=request.getContextPath()%>/res/img/all_branch.jpg" style="width:100%">
 					<p class="card-title text-muted">店家電話</p>
 					<p class="card-text">${brVO.branch_Tel}</p>
 					<p class="card-title text-muted">店家地址</p>
