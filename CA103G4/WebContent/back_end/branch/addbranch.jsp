@@ -84,7 +84,20 @@
     </table>
     </form>
 </div>    
+<a href="javascript:getinfo()" ><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" ></a>
+<script>
+function getinfo(){
+	$("#branch_Name").val("竹風堂中壢中央二店");
+	$("#branch_Tel").val("0933123456");
+	$("#branch_Time").val("週一至週五 10am ~ 10pm");
+	$("#branch_Addr").val("桃園市中壢區中大路300號");
+	$("#branch_Del").val("5.4");
+	$("#branch_Lan").val("121.192678");
+	$("#branch_Tdesk").val("20");
+	$("#branch_Lat").val("24.968109");
 
+}
+</script>
 <!--以下勿動-->
     <!-- Footer -->
 <jsp:include page="/back_end/HeadquarterFooter.jsp"></jsp:include>

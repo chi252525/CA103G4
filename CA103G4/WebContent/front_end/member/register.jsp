@@ -122,8 +122,6 @@ function getinfo(){
 	$("#mem_Cardnum").val("1111-1222-1111-1111");
 	$("#mem_Carddue").val("04/22");
 }
-
-
 </script>
 
 
