@@ -6,7 +6,7 @@
 
 <%
 	MenuService menuSvc = new MenuService();
-	List<MenuVO> list = menuSvc.getAll();
+	List<MenuVO> list = menuSvc.getAll_front();
 	pageContext.setAttribute("list", list);
 %>
 
@@ -147,14 +147,7 @@ body {
 
 
 	<jsp:include page="/front_end/header.jsp" flush="true"></jsp:include>
-	<img
-		src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg"
-		width="100%" height="" alt="banner">
-
-
-
-
-
+	<img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg" width="100%" height="" alt="banner">
 
 
 
@@ -193,17 +186,16 @@ body {
 				</div>
 				<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				
-				<c:if test="${menuVO.menu_Status == '1'}">
+<%-- 				<c:if test="${menuVO.menu_Status == '1'}"> --%>
 
 					<div class="col-md-4">
 
 						<div class="card" style="background-color: rgba(255, 255, 255, 0.45); margin-bottom: 20px;">
-<!-- 							<a -->
-<%-- 								href="menu.do?action=getOne_For_Display_Member&menu_No=${menuVO.menu_No}"> --%>
+
 								<img class="card-img-top"
 								src="<%=request.getContextPath()%>/menu/menushowimage.do?menu_No=${menuVO.getMenu_No()}"
 								alt="Card image cap" style="margin-top: 20px;">
-<!-- 							</a> -->
+
 							<div class="card-body">
 								<h5 class="card-title">${menuSvc.getOneMenu(menuVO.menu_No).menu_Id} ${menuVO.menu_Id} <br> </h5>
 								<h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>
@@ -231,7 +223,7 @@ body {
 						</div>
 
 					</div>
-				</c:if>
+<%-- 				</c:if> --%>
 				</c:forEach>
 
 <!-- 				<div class="col-md-12 mt-3"> -->
