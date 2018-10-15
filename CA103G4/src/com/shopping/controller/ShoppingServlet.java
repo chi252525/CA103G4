@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.coucat.model.CoucatService;
 import com.coupon.model.CouponService;
+import com.couponhistory.model.CouponhistoryService;
 import com.custommeals.model.CustommealsVO;
 import com.ingredients.model.IngredientsVO;
 import com.menu.model.MenuVO;
@@ -51,7 +52,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("Cart.jsp");
+				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -75,7 +76,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("Cart.jsp");
+				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -146,7 +147,7 @@ public class ShoppingServlet extends HttpServlet {
 		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
 			if (buylist == null && buylistCustom == null) {
-				String url = "Cart.jsp";
+				String url = "/protected_front/shoppingCart/Cart.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
@@ -170,7 +171,7 @@ public class ShoppingServlet extends HttpServlet {
 
 				String amount = String.valueOf(total);
 				req.setAttribute("amount", amount);
-				String url = "Checkout.jsp";
+				String url = "/protected_front/shoppingCart/Checkout.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
@@ -211,7 +212,6 @@ public class ShoppingServlet extends HttpServlet {
 //			} else {
 //				buylist.add(aMenuVO);
 //			}
-
 			session.setAttribute("shoppingcart", buylist);
 //			String url = "Cart.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);
@@ -282,7 +282,11 @@ public class ShoppingServlet extends HttpServlet {
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
+//			String Coupon_sn = req.getParameter("Coupon_sn");
 			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
+//			CouponhistoryService chsrvc = new CouponhistoryService();
+//			chsrvc.
+//			chsrvc.updateCouponRecord(coup_sn, mem_no, coup_state);
 //			res.setContentType("application/json");
 			System.out.println("折價後回前的amount=" + amount);
 			res.getWriter().print(amount);// 輸出前端

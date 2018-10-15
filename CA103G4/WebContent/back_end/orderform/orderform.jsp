@@ -98,7 +98,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 		
 			<div class="input-group-prepend" style=" margin-right:70px;">
 				 <span class="input-group-text">訂單編號:</span>
-				 <input type="text" name="deliv_no">
+				 <input type="text" name="order_no">
 			</div>
 			
 			<div class="input-group-prepend" style=" margin-right:70px;">
@@ -106,7 +106,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 			 <select size="1" name="emp_no" class="form-control" id="exampleSelect1">
 	 			<option  value="">
 				<c:forEach var="deskVO" items="${deSvc.getByBrano(empVO.branch_No)}">
-				<option value="${deskVO.dek_no}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${deskVO.dek_id}
+				<option value="${deskVO.dek_no}">${deskVO.dek_no}
 				</c:forEach>
 			</select>
 			</div>

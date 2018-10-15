@@ -11,5 +11,6 @@ public interface MenuDAO_interface {
 		public List<MenuVO> getAll();
 		List<MenuVO> getMealByMemBuyedClassic(String mem_No);
 		public void update2(MenuVO menuVO);
+		List<MenuVO> getAll_front();
 	
 }

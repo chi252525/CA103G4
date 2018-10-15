@@ -2,6 +2,7 @@ package com.orderform.model;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.custommeals.model.CustommealsVO;
 import com.orderinvoice.model.OrderinvoiceVO;
@@ -60,6 +61,14 @@ public class OrderformService {
 		return dao.getAll();
 	}
 	
+	public List<OrderformVO> update(String delivery_no) {
+		return dao.getByOk(delivery_no);
+		
+	}
+	
+	public List<OrderformVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
 	
 	
 }

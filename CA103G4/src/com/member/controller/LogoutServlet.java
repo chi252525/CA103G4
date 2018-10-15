@@ -8,7 +8,9 @@ public class LogoutServlet extends HttpServlet{
 		
 		try {
 			HttpSession session = req.getSession();
-			session.invalidate();
+			session.removeAttribute("memVO");
+			session.removeAttribute("mem_Id");
+			session.removeAttribute("memNo");
 			System.out.println("登出囉");
 			res.sendRedirect(req.getContextPath()+"/front_end/index.jsp");
 		}catch(Exception e) {

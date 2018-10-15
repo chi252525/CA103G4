@@ -1,10 +1,10 @@
 package com.coupon.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import com.activity.model.ActivityVO;
 
 public class CouponDAO implements CouponDAO_interface {
 	private static DataSource ds = null;
@@ -25,6 +23,7 @@ public class CouponDAO implements CouponDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
 		private static final String INSERT_STMT = 
 				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
 				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?,'CP0')";
@@ -34,6 +33,8 @@ public class CouponDAO implements CouponDAO_interface {
 		private static final String FINDBY_PRIMARY_KEY="SELECT * FROM COUPON WHERE COUP_SN=?";
 		private static final String FINDBYCOUCAT_NO_NOT_SENDED = 
 				"SELECT * FROM COUPON WHERE COUCAT_NO=? AND COUP_STATUS=?";
+		
+		private static final String FINDCOUCAT_BY_COUPSN = "SELECT * FROM COUPON WHERE COUP_SN=? ";
 		@Override
 		public void insert(CouponVO couponVO, Integer coucat_Amo) {
 			Connection con = null;
@@ -164,17 +165,17 @@ public class CouponDAO implements CouponDAO_interface {
 
 		@Override
 		public void insertbyGenaratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
-			PreparedStatement pstmt = null;
+			Statement pstmt = null;
 			
 			try {
-				
+				pstmt = con.createStatement();
 				for(int i=0;i<coucat_Amo;i++) {
-				pstmt = con.prepareStatement(INSERT_STMT);
-				pstmt.setString(1, coucat_No);
-				int rowCount =pstmt.executeUpdate();
-				System.out.println("新增 " + rowCount + " 筆資料");
-				
+					pstmt.addBatch("INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
+							+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'), '"+coucat_No+"','CP0')"); 
 				}
+
+				int[] updateCounts = pstmt.executeBatch();
+				System.out.println("新增 " + updateCounts.length + " 筆資料");
 				// Handle any SQL errors
 			} catch (SQLException se) {
 				try {
@@ -309,6 +310,56 @@ public class CouponDAO implements CouponDAO_interface {
 				}
 			}
 			return list;
+		}
+
+
+
+		@Override
+		public CouponVO findCoucatByCoupSn(String coup_Sn) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			CouponVO couponVO=null;
+			try {
+				con = ds.getConnection();
+				System.out.println("Connecting to database successfully! (連線成功！)");
+				pstmt = con.prepareStatement(FINDCOUCAT_BY_COUPSN);
+				pstmt.setString(1, coup_Sn);
+				rs = pstmt.executeQuery();
+	  
+				while (rs.next()) {
+					couponVO=new CouponVO();
+					couponVO.setCoup_Sn(rs.getString("coup_Sn"));
+					couponVO.setCoucat_No(rs.getString("coucat_No"));
+					couponVO.setCoup_Status(rs.getString("coup_Status"));
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return couponVO;
 		}
 		
 		

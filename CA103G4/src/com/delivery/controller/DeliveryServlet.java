@@ -18,8 +18,10 @@ import javax.websocket.Session;
 
 import com.delivery.model.DeliveryService;
 import com.delivery.model.DeliveryVO;
+import com.employee.model.EmpVO;
 import com.orderform.model.OrderformService;
 import com.orderform.model.OrderformVO;
+
 
 /**
  * Servlet implementation class DeliveryServlet
@@ -146,15 +148,27 @@ public class DeliveryServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 ***************************************/
 			DeliveryService delSvc = new DeliveryService();
 			delVO = delSvc.updateDelivery(emp, status, deliv);
+			
+			OrderformService ordSvc = new OrderformService();
+			
+			if ("3".equals(status)) {
+
+				ordSvc.update(deliv);
+
+			}
+			
 			deliv = dn;
 			emp = en;
 			status = ds;
 
-			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+			/*************************** 3.,準備轉交(Send the Success view) ***********/
 			req.setAttribute("update", delVO);
 			req.setAttribute("deliv", deliv);
 			req.setAttribute("emp", emp);
 			req.setAttribute("status", status);
+			
+			
+			
 
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
@@ -170,10 +184,10 @@ public class DeliveryServlet extends HttpServlet {
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			try {
-
-//			String branchno = req.getParameter("branch_no").trim();//綁定登入員工的分店編號
+			EmpVO empVO = (EmpVO) req.getSession().getAttribute("empVO");//綁定登入員工的分店編號
+			String branchno = empVO.getBranch_No();
 //			test
-				String branchno = "0001";
+//				String branchno = "0001";
 
 				OrderformVO ord = null;
 

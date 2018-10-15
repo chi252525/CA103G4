@@ -28,17 +28,36 @@ public class ResServlet extends HttpServlet {
 		if("pushSeat".equals(action)) {  //座位推播
 			System.out.println("controller" + date);
 			System.out.println("controller" + zone);
+//			Enumeration<String> ss = getServletContext().getAttributeNames();
+//			while(ss.hasMoreElements()) {
+//				System.out.println(ss.nextElement());
+//			}
+			
+//			if(getServletContext().getAttribute("date1")==null) {
+//				System.out.println("=======================================================NULL");
+//			}else {
+//				System.out.println("====================================================NOTNULL");
+//			}
 			Map<String,Map<String,Set<String>>> date1 = (Map<String,Map<String,Set<String>>>)getServletContext().getAttribute("date1");
 			
 			String str = "";
+			
 			try{
+				System.out.println("size:" + date1);
+				for(String i : date1.keySet()) {
+					for(String j : date1.get(i).keySet()) {
+						System.out.println("=============j：" + j);
+					}
+					System.out.println("=============i：" + i);
+				}
 				Iterator<String> objs = ((date1.get(date)).get(zone)).iterator();
-				while (objs.hasNext())
-				System.out.println("controller seat" + objs.next());
-				str += (String)objs.next();
-	            PrintWriter out = res.getWriter();
-			    out.write(str);
-				System.out.println("pass Controller");
+				while (objs.hasNext()) {
+//					System.out.println("controller seat" + objs.next());
+					str += (String)objs.next();
+		            PrintWriter out = res.getWriter();
+				    out.write(str);
+					System.out.println("pass Controller");
+				}
 			}catch(Exception e) {
 				e.printStackTrace(System.err); 
 			}

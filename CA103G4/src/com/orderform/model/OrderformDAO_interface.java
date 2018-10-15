@@ -36,4 +36,8 @@ public interface OrderformDAO_interface {
 	
 	public void updateByOrdNo(OrderformVO orderformVO);
 	
+	public List<OrderformVO> getByOk(String delivery_no);
+	
+	  public List<OrderformVO> getAll(Map<String, String[]> map);
+	
 }

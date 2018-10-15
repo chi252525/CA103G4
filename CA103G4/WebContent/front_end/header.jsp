@@ -151,7 +151,7 @@ body {
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>
 							
-							<li class="nav-link imgicon" style="padding-right: 0px;width: 22px;"><a href="<%=request.getContextPath()%>/front_end/shoppingCart/Cart.jsp"><span
+							<li class="nav-link imgicon" style="padding-right: 0px;width: 22px;"><a href="<%=request.getContextPath()%>/protected_front/shoppingCart/Cart.jsp"><span
 									class="lnr lnr-cart"></span></a></li><c:if test="${not empty shoppingcart && empty shoppingcartCustom }"><b id="notice"><%=buylist.size() %></b></c:if>
 									<c:if test="${not empty shoppingcartCustom && empty shoppingcart}"><b id="notice"><%=buylistCustom.size() %></b></c:if>
 									<c:if test="${not empty shoppingcart && not empty shoppingcartCustom }"><b id="notice"><%=buylist.size() + buylistCustom.size()%></b></c:if>								

@@ -3,8 +3,10 @@ package com.orderform.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -116,9 +118,16 @@ public class OrderformServlet extends HttpServlet {
 			
 			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
-			if (req.getAttribute("card_number") != null) {
-				orderpa = 2;
-				req.getSession().setAttribute("card_number",req.getAttribute("card_number"));
+			String card4 = null;
+			if (Integer.parseInt((String) req.getAttribute("order_pstatus")) == 2) {
+				orderpa = 3;
+				
+				card4 = ((String)req.getAttribute("card_number")).substring(15);
+				
+				req.getSession().setAttribute("card_number",card4);
+			} else if (Integer.parseInt((String) req.getAttribute("order_pstatus")) == 3) {
+				orderpa = 4;
+				req.getSession().setAttribute("point",req.getAttribute("order_pstatus"));
 			} else {
 				orderpa = 1;
 			} //信用卡表已付款2; 現金表1未付款
@@ -133,6 +142,8 @@ public class OrderformServlet extends HttpServlet {
 			Vector<CustommealsVO> customv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			customv = (Vector<CustommealsVO>) req.getSession().getAttribute("shoppingcartCustom");//取得送來的自訂餐點參數
+			System.out.println("inv" + inv);
+			System.out.println("customv" + customv);
 			
 			OrderinvoiceVO oin = null;
 			
@@ -338,12 +349,47 @@ public class OrderformServlet extends HttpServlet {
 		}
 		
 		
+		if ("listEmps_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				if (req.getParameter("whichPage") == null){
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				} 
+				
+				/***************************2.開始複合查詢***************************************/
+				OrderformService empSvc = new OrderformService();
+				List<OrderformVO> list  = empSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("listEmps_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/back_end/orderform/orderform.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back_end/orderform/orderform.jsp");
+				failureView.forward(req, res);
+			}
+		}
 		
 		
 		
-		
-		
-		
+
 	}
 
 }

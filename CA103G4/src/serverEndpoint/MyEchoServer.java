@@ -37,11 +37,13 @@ private static final Set<String> Mem_seats = Collections.synchronizedSet(new Has
 //----------------------------------------------------------------------------------------------------------------------
 	@Override
 	public void contextInitialized(ServletContextEvent sre) {
+		
 		 ServletContext context = sre.getServletContext();
-		 						 
 				 context.setAttribute("date1", date1);
+				 
 				 System.out.println("Context setAttribute done!");
 		
+
 	}
 	@Override
 	public void contextDestroyed(ServletContextEvent sre) {

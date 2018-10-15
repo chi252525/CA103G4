@@ -7,7 +7,7 @@ public class LogoutEmp extends HttpServlet {
 		
 		try {
 			HttpSession session = req.getSession();
-			session.invalidate();
+			session.removeAttribute("empVO");
 			System.out.println("登出囉");
 			res.sendRedirect(req.getContextPath()+"/back_end/back_index.jsp");
 		}catch(Exception e) {

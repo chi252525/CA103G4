@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,6 +15,8 @@ import javax.sql.DataSource;
 
 import com.delivery.model.DeliveryVO;
 import com.orderinvoice.model.*;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery2;
 
 public class OrderformDAO implements OrderformDAO_interface {
 	private static DataSource ds = null;
@@ -48,6 +51,11 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String SELECT_BY_STATUS=
 			"SELECT ORDER_NO, ORDER_TYPE, DEK_NO, ORDER_STATUS FROM ORDERFORM WHERE ORDER_STATUS = 1 ORDER BY ORDER_NO DESC";
 	private static final String UPDATE3 = "UPDATE orderform set order_status= ? where order_no= ?";
+
+	
+	private static final String UPDATE_TO_OK = "UPDATE orderform set order_status= 3, order_pstatus=2 where deliv_no= ? and order_pstatus=1";
+	private static final String UPDATE_TO_OK2 = "UPDATE orderform set order_status= 3, order_pstatus=3 where deliv_no= ? and order_pstatus=3";
+	private static final String UPDATE_TO_OK3 = "UPDATE orderform set order_status= 3, order_pstatus=4 where deliv_no= ? and order_pstatus=4";
 	
 	
 	
@@ -450,6 +458,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	// s綁定訂單主鍵，同時新增多筆訂單明細
 	@Override
 	public OrderformVO insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
+		System.out.println(list);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -821,6 +830,137 @@ public class OrderformDAO implements OrderformDAO_interface {
 		}
 
 	}
+
+	@Override
+	public List<OrderformVO> getByOk(String delivery_no) {
+		List<OrderformVO> list = new ArrayList<>();
+		OrderformVO orderformVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		System.out.println("有進來改變狀態");
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_TO_OK);
+			pstmt.setString(1, delivery_no);
+			pstmt.executeUpdate();
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			
+			
+			pstmt = con.prepareStatement(UPDATE_TO_OK2);
+			pstmt.setString(1, delivery_no);			
+			pstmt.executeUpdate();
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			
+			
+			pstmt = con.prepareStatement(UPDATE_TO_OK3);
+			pstmt.setString(1, delivery_no);			
+			pstmt.executeUpdate();
+			
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	@Override
+	public List<OrderformVO> getAll(Map<String, String[]> map) {
+		List<OrderformVO> list = new ArrayList<OrderformVO>();
+		OrderformVO empVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from emp2 "
+		          + jdbcUtil_CompositeQuery2.get_WhereCondition(map)
+		          + "order by empno";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				empVO = new EmpVO();
+				empVO.setEmpno(rs.getInt("empno"));
+				empVO.setEname(rs.getString("ename"));
+				empVO.setJob(rs.getString("job"));
+				empVO.setHiredate(rs.getDate("hiredate"));
+				empVO.setSal(rs.getDouble("sal"));
+				empVO.setComm(rs.getDouble("comm"));
+				empVO.setDeptno(rs.getInt("deptno"));
+				list.add(empVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	
 	
 	
 }
