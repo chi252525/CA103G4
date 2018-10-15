@@ -445,6 +445,8 @@
     <url-pattern>/res.do</url-pattern>
   </servlet-mapping>
 	
-
+  <listener>
+    <listener-class>serverEndpoint.MyEchoServer</listener-class>
+  </listener>
 	
 </web-app>
