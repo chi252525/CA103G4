@@ -218,10 +218,10 @@ div.shavetext {
 										<div class="d-flex ">
 											<div class="p-0">
 												活動期間
-												<fmt:formatDate value="${activityVO.act_Start}"
+												<fmt:formatDate value="${activityVO.act_PreAddTime}"
 													pattern="yyyy-MM-dd " />
 												~
-												<fmt:formatDate value="${activityVO.act_End}"
+												<fmt:formatDate value="${activityVO.act_PreOffTime}"
 													pattern="yyyy-MM-dd " />
 											</div>
 											<div class="p-0">.${activityVO.act_Views}&nbsp;Views</div>
