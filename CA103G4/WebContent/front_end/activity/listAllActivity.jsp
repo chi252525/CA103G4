@@ -265,11 +265,15 @@ div.shavetext {
 							if (result.status === 'success')
 							$(".${activityVO.act_No}").html(result.msg);
 							else
-							alert("Oops!沒取到優惠券: "+ result.msg);
+							alert("提示訊息 Oops!: "+ result.msg);
 							},
-						error : function() {
-								alert("Oops!沒取到優惠券或您已取過該優惠卷");
-									}
+						error : 
+							
+							function(XMLHttpRequest, textStatus, errorThrown){  
+					        alert(XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);}
+							
+							
+							
 								})
 
 								});

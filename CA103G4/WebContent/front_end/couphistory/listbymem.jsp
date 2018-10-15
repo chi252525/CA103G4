@@ -134,13 +134,13 @@ pageContext.setAttribute("ByName",list);
         	</c:if>
      
      	<c:if test="${(\"CC1\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
-      			 <li class="list-group-item py-0"  style="background-color:rgba(253,253,253,0); border:0px;">折扣:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Discount}</li>
+      			 <li class="list-group-item py-0"  style="background-color:rgba(253,253,253,0); border:0px;">金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</li>
         	</c:if>
         	<c:if test="${(\"CC2\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
       			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0); border:0px;">金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</li>
         	</c:if>
         	<c:if test="${(\"CC3\").equals(coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Cata)}">
-      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0); border:0px;">點數:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Ereep}</li>
+      			 <li class="list-group-item py-0" style="background-color:rgba(253,253,253,0); border:0px;">金額:${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Value}</li>
         	</c:if>
      
      	<c:if test="${coucatSvc.getOneCoucat(couponSvc.getOneCoupon(couponhistoryVO.coup_sn).coucat_No).coucat_Invalid < now}">

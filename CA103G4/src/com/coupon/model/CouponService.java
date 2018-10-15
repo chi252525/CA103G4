@@ -39,6 +39,12 @@ private CouponDAO_interface dao;
 		return dao.findByCoucatNo_CP0(coucat_No,coucat_Status);
 	}
 	
+	public CouponVO findCoucatByCoupSn(String coup_Sn) {
+		return dao.findCoucatByCoupSn(coup_Sn);
+	}
+	
+	
+	
 	
 	
 }
