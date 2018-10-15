@@ -60,6 +60,10 @@ public class OrderformService {
 		return dao.getAll();
 	}
 	
+	public List<OrderformVO> update(String delivery_no) {
+		return dao.getByOk(delivery_no);
+		
+	}
 	
 	
 }
