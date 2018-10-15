@@ -369,17 +369,25 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		return null;
 	}
 
-	@Override
-	public void update2(String mem_NO, Connection con) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void update2(String mem_NO, Connection con) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public void update2(String mem_NO, Integer stor_Point, Connection con) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void update3(MemberVO memVO) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 //	@Override
 //	public MemberVO compareMemId(String mem_Id) {
