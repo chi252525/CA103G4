@@ -148,15 +148,27 @@ public class DeliveryServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 ***************************************/
 			DeliveryService delSvc = new DeliveryService();
 			delVO = delSvc.updateDelivery(emp, status, deliv);
+			
+			OrderformService ordSvc = new OrderformService();
+			
+			if ("3".equals(status)) {
+
+				ordSvc.update(deliv);
+
+			}
+			
 			deliv = dn;
 			emp = en;
 			status = ds;
 
-			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+			/*************************** 3.,準備轉交(Send the Success view) ***********/
 			req.setAttribute("update", delVO);
 			req.setAttribute("deliv", deliv);
 			req.setAttribute("emp", emp);
 			req.setAttribute("status", status);
+			
+			
+			
 
 			String url = "/front_end/delivery/delivery.do?action=get_By_Key";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁

@@ -212,7 +212,6 @@ public class ShoppingServlet extends HttpServlet {
 //			} else {
 //				buylist.add(aMenuVO);
 //			}
-
 			session.setAttribute("shoppingcart", buylist);
 //			String url = "Cart.jsp";// send back
 //			RequestDispatcher rd = req.getRequestDispatcher(url);

@@ -1,10 +1,10 @@
 package com.coupon.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import com.activity.model.ActivityVO;
 
 public class CouponDAO implements CouponDAO_interface {
 	private static DataSource ds = null;
@@ -25,6 +23,7 @@ public class CouponDAO implements CouponDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
 		private static final String INSERT_STMT = 
 				"INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
 				+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),?,'CP0')";
@@ -166,17 +165,17 @@ public class CouponDAO implements CouponDAO_interface {
 
 		@Override
 		public void insertbyGenaratedKeys(Connection con,String coucat_No,Integer coucat_Amo) {
-			PreparedStatement pstmt = null;
+			Statement pstmt = null;
 			
 			try {
-				
+				pstmt = con.createStatement();
 				for(int i=0;i<coucat_Amo;i++) {
-				pstmt = con.prepareStatement(INSERT_STMT);
-				pstmt.setString(1, coucat_No);
-				int rowCount =pstmt.executeUpdate();
-				System.out.println("新增 " + rowCount + " 筆資料");
-				
+					pstmt.addBatch("INSERT INTO  COUPON (COUP_SN,COUCAT_NO,COUP_STATUS)"
+							+ "VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'), '"+coucat_No+"','CP0')"); 
 				}
+
+				int[] updateCounts = pstmt.executeBatch();
+				System.out.println("新增 " + updateCounts.length + " 筆資料");
 				// Handle any SQL errors
 			} catch (SQLException se) {
 				try {

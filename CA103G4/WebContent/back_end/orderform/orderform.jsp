@@ -106,7 +106,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 			 <select size="1" name="emp_no" class="form-control" id="exampleSelect1">
 	 			<option  value="">
 				<c:forEach var="deskVO" items="${deSvc.getByBrano(empVO.branch_No)}">
-				<option value="${deskVO.dek_no}">${deskVO.dek_id}
+				<option value="${deskVO.dek_no}">${deskVO.dek_no}
 				</c:forEach>
 			</select>
 			</div>
