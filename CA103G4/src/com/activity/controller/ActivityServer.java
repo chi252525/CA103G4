@@ -46,10 +46,10 @@ public class ActivityServer implements ServletContextListener{
 					long onTime = 0;// 排程器的預計上架時間
 					long offTime = 0;// 排程器的預計下架時間
 
-					System.out.println("************廣告排程檢查start**************");
+//					System.out.println("************廣告排程檢查start**************");
 					@SuppressWarnings("unchecked")
 					List<ActivityVO> activityList = (List<ActivityVO>) context.getAttribute("actloadlist");
-					System.out.println("run() activityList"+activityList.size());
+//					System.out.println("run() activityList"+activityList.size());
 					if (activityList.size() != 0) {
 							
 						Iterator<ActivityVO> actVOs = activityList.iterator();
@@ -108,7 +108,6 @@ public class ActivityServer implements ServletContextListener{
 		public void onOpen(Session userSession, EndpointConfig config)  {
 			allSessions.add(userSession);
 			System.out.println(userSession.getId() + ": 已連線");
-			userSession.getAsyncRemote().sendText("myID="+userSession.getId());
 		}
 		@OnClose
 	    public void onClose(Session userSession, CloseReason reason) {
