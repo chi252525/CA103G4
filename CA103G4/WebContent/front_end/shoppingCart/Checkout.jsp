@@ -309,36 +309,34 @@
                                 </div>
                             </div>
 
-
+							${order_pstatus}
                             <div class="btn-group btn-group-toggle col-12 col-md-8" data-toggle="buttons" style="padding-left: 5px;">
                                 <b>付款方式:</b>
-                                <label class="btn btn-secondary active" onclick="cash()">
-                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off"> 現金
+                                <label class="btn btn-secondary" onclick="cash()">
+                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off" ${order_pstatus ==1	 ? 'checked' : ''}> 現金
                                 </label>
                                 <label class="btn btn-secondary" onclick="cardShow()">
-                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" ${order_pstatus ==2 ? 'checked' : ''}> 信用卡
                                 </label>
                                  <label class="btn btn-secondary" onclick="point()">
-                                    <input type="radio" name="order_pstatus" value="3" autocomplete="off" checked> 竹幣
+                                    <input type="radio" name="order_pstatus" value="3" autocomplete="off" ${order_pstatus ==3 ? 'checked' : ''}> 竹幣
                                 </label>
                             </div><br>
                           	<!-- 點數購買 -->
-                          	<div id="point" style="display:none;">
+                          	<div id="point" style="display:${order_pstatus ==3 ? '' : 'none'};">
                           	<!-- 點數不足提示 -->
-                          		<%MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-                          		session.setAttribute("amount2",(Double.parseDouble(amount)));//轉型
-                          		if((Double.parseDouble(amount)) > memVO.getMem_Bonus()){ %>
+                          		
 								<div class="errorMsg col-md-4" style=" border-radius:6px;margin-left:100px;margin-top:20px; " >
-									<i class="fas fa-ban"></i>你的竹幣點數不足以支付這次的總花費。
+									${errorMsgs.point_insufficient}
 								</div>
-								<%} %>
+								
 								
 							
 							</div>
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->
                                 <!-- credit card -->
-                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
+                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;display:${order_pstatus ==2 ? '' : 'none'};">
                                     <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icons-cards.svg" type=""style="margin-top:5px;"></img>
                                     <div class="form-container active" style="margin: 10px;">
