@@ -101,7 +101,7 @@ pageContext.setAttribute("branlist",branlist);
             <td class="td2" >
                 <select class="form-control-sm" id="emp_Pos" name="emp_Pos">
                     <option value="請選擇">請選擇</option>
-                    <option value="經理">經理</option>
+                    <option value="店長">店長</option>
                     <option value="服務生">服務生</option>
                     <option value="外送員">外送員</option>
                     <option value="櫃台人員">外送員</option>
@@ -135,8 +135,16 @@ pageContext.setAttribute("branlist",branlist);
     </table>
 </Form>
 </div>    
-
+<a href="javascript:getinfo()" ><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" ></a>
 <!--以下勿動-->
+<script>
+function getinfo(){
+	$("#emp_Acnum").val("aaaa");
+	$("#emp_Psw").val("123456");
+	$("#emp_Name").val("小珠");
+	$("#emp_Tel").val("0933124555");
+}
+</script>
 <jsp:include page="/back_end/PostFooter.jsp"></jsp:include>		
 </body>
 </html>
