@@ -116,10 +116,10 @@ public class OrderformServlet extends HttpServlet {
 			
 			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
+			String card4 = null;
 			if (Integer.parseInt((String) req.getAttribute("order_pstatus")) == 2) {
 				orderpa = 3;
 				
-				String card4 = null;
 				card4 = ((String)req.getAttribute("card_number")).substring(15);
 				
 				req.getSession().setAttribute("card_number",card4);
@@ -140,6 +140,8 @@ public class OrderformServlet extends HttpServlet {
 			Vector<CustommealsVO> customv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			customv = (Vector<CustommealsVO>) req.getSession().getAttribute("shoppingcartCustom");//取得送來的自訂餐點參數
+			System.out.println("inv" + inv);
+			System.out.println("customv" + customv);
 			
 			OrderinvoiceVO oin = null;
 			

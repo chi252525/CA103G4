@@ -98,7 +98,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 		
 			<div class="input-group-prepend" style=" margin-right:70px;">
 				 <span class="input-group-text">訂單編號:</span>
-				 <input type="text" name="deliv_no">
+				 <input type="text" name="order_no">
 			</div>
 			
 			<div class="input-group-prepend" style=" margin-right:70px;">

@@ -281,7 +281,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	@Override
 	public void insert2(OrderinvoiceVO orderinvoiceVO, Connection con) {
 		PreparedStatement pstmt = null;
-		
+		System.out.println("明細");
 		try {
 
      		pstmt = con.prepareStatement(INSERT_STMT2);

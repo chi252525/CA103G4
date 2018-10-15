@@ -450,6 +450,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	// s綁定訂單主鍵，同時新增多筆訂單明細
 	@Override
 	public OrderformVO insertWithInvoice(OrderformVO orderformVO, List<OrderinvoiceVO> list) {
+		System.out.println(list);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
