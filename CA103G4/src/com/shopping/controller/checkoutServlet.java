@@ -123,10 +123,16 @@ public class checkoutServlet extends HttpServlet {
 						errorMsgs.put("cvc", "安全碼須為3個數字");
 					}
 				}
+
+				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+				Double mem_Bonus_Double = Double.valueOf(memVO.getMem_Bonus());// 點數double 型態
+				Double amount_Double = Double.valueOf(amount);// 總額 double型態
 				if ("3".equals(order_pstatus)) { // 點數不足錯誤 block
-					errorMsgs.put("point_insufficient", "<i class=\"fas fa-ban\"></i>你的竹幣點數不足以支付這次的總花費。");
+					if (mem_Bonus_Double < amount_Double) {
+						errorMsgs.put("point_insufficient", "<i class=\"fas fa-ban\"></i>你的竹幣點數不足以支付這次的總花費。");
+					}
 				}
-				
+
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("eatIntakeAway", eatIn_takeAway);// 剛寫的錯誤資料依然回傳
 					req.setAttribute("branch_No", branch_No);
@@ -160,15 +166,13 @@ public class checkoutServlet extends HttpServlet {
 				req.setAttribute("time", time);// 取餐時間
 				req.setAttribute("ps", ps); // 備註
 				req.setAttribute("amount", amount);// 總金額
-				
+
 				if ("3".equals(order_pstatus)) {
-					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-					Double mem_Bonus_Double = Double.valueOf(memVO.getMem_Bonus());
-					memVO.setMem_Bonus((int) (mem_Bonus_Double - Double.valueOf(amount)));// 扣點
+					memVO.setMem_Bonus((int) (mem_Bonus_Double - amount_Double));// 扣點
 					MemberService memsrv = new MemberService();
 					memsrv.updateMem_Bonus(memVO);// 修改會員點數
 				}
-				
+
 				List<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");// 得到結帳購物車
 				buylist.clear();// 清空
 
