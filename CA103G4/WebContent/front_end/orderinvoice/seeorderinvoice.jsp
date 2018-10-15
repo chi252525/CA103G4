@@ -40,7 +40,7 @@
 		height: 700px;
 		background-color: #AA7700;
 		margin: auto; 
-		margin-top: 25%;
+		
 	}
 	
   .tes{
@@ -59,7 +59,7 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 mt-3">
 				<div class="card ames">
 					<div class="card-body">
 						<h1 class="card-title">取餐資訊</h1>
