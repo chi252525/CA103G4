@@ -17,8 +17,8 @@
 <style>
         @font-face {
             font-family: 'Senty Golden Bell';
-            src: url(/CA103G4/back_end/fonts/SentyGoldenBell.woff2) format('woff2'),
-                url(/CA103G4/back_end/fonts/SentyGoldenBell.woff) format('woff');
+            src: url(/CA103G4/front_end/fonts/SentyGoldenBell.woff2) format('woff2'),
+                url(/CA103G4/front_end/fonts/SentyGoldenBell.woff) format('woff');
             font-weight: normal;
             font-style: normal;
         }
