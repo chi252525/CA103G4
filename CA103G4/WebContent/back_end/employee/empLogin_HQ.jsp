@@ -36,7 +36,7 @@ body {
 </style>   
 </head>
 <body>
-<%-- <jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" /> --%>
+<jsp:include page="/back_end/HeadquarterHeader.jsp" flush="true" />
 
 <div class="container col-3 rounded " style="margin-top:200px;padding-top: 10px" id="back" >
 <c:if test="${not empty errorMsgs}">
@@ -63,6 +63,6 @@ body {
 		</div>
 	</form>	
 </div>
-<%-- <jsp:include page="/back_end/HeadquarterFooter.jsp" />	 --%>
+<jsp:include page="/back_end/HeadquarterFooter.jsp" />	
 </body>
 </html>
