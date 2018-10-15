@@ -59,10 +59,10 @@ public class ActivityServer implements ServletContextListener{
 								onTime = actVO.getAct_PreAddTime().getTime();
 								offTime = actVO.getAct_PreOffTime().getTime();
 	//
-								System.out.println(actVO.getAct_No() +"狀態"+actVO.getAct_Status() +":執行時間：" + nowTime + "("
-										+ time_format.format(nowTime) + ")；預計上架時間："
-										+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
-										+ time_format.format(offTime) + ")");
+//								System.out.println(actVO.getAct_No() +"狀態"+actVO.getAct_Status() +":執行時間：" + nowTime + "("
+//										+ time_format.format(nowTime) + ")；預計上架時間："
+//										+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
+//										+ time_format.format(offTime) + ")");
 								// 上架
 							
 								if ( ((nowTime-1000) <= onTime && onTime <= nowTime) &&actVO.getAct_Status()==0) {

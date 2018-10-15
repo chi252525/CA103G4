@@ -157,7 +157,7 @@ pageContext.setAttribute("forOut",list);
 <%-- 背景 --%>
 <jsp:include page="/back_end/PostFooter.jsp" flush="true"/>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -212,8 +212,11 @@ pageContext.setAttribute("forOut",list);
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
+      	<c:if test="<%= session.getAttribute(\"OK\") != null %>">
 		訂單<%= session.getAttribute("OK") %>的餐點已經完成出餐<%-- 將此送進controll查詢單筆訂單(內用) --%>
+		</c:if>
       <br>
+    <c:if test="<%= session.getAttribute(\"TY\") != null%>">
       <c:if test="<%= (int)session.getAttribute(\"TY\") == 0%>">
       	訂單類型:內用
       </c:if>
@@ -223,6 +226,7 @@ pageContext.setAttribute("forOut",list);
       <c:if test="<%= (int)session.getAttribute(\"TY\") == 2%>">
       	訂單類型:外送
       </c:if>
+    </c:if>
       </div>
       <div class="modal-footer">
 

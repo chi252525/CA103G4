@@ -9,5 +9,6 @@ public interface GeneralmanagerDAO_interface {
 	public void delete(String mger_No);
 	public GeneralmanagerVO findByPrimaryKey(String mger_No);
 	public List<GeneralmanagerVO> getAll();
+	public GeneralmanagerVO findByAcnum(String mger_Acnum);
 
 }
