@@ -33,7 +33,7 @@
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <!--JS BS4-->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -241,6 +241,7 @@ div.shavetext {
 															class="btn btn-outline-primary btn-sm">More..</a>
 													</div>
 													<div class="col-4 mt-4">
+													<c:if test=""> </c:if>
 														<button class="button-ning"
 															id="${activityVO.act_No}">取得優惠卷</button>
 
@@ -267,13 +268,9 @@ div.shavetext {
 							else
 							alert("提示訊息 Oops!: "+ result.msg);
 							},
-						error : 
-							
-							function(XMLHttpRequest, textStatus, errorThrown){  
-					        alert(XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);}
-							
-							
-							
+						error : function() {
+								alert("提示訊息Oops!沒取到優惠券");
+									}
 								})
 
 								});

@@ -31,14 +31,14 @@ public class CouponVO implements java.io.Serializable{
 	public void setCoup_Status(String coup_Status) {
 		this.coup_Status = coup_Status;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof CouponVO) {
-			CouponVO cpvo = (CouponVO)obj;
-			return this.coup_Sn.equals(cpvo.coup_Sn);
-		}
-		return super.equals(obj);
-	}
-	
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj instanceof CouponVO) {
+//			CouponVO cpvo = (CouponVO)obj;
+//			return this.coup_Sn.equals(cpvo.coup_Sn);
+//		}
+//		return super.equals(obj);
+//	}
+//	
 
 }
