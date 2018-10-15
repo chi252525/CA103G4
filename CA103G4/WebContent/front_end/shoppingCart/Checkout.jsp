@@ -336,7 +336,7 @@
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->
                                 <!-- credit card -->
-                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;display:${order_pstatus ==2 ? '' : 'none'};">
+                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px; display: ${order_pstatus ==2 ? '' : 'none'};">
                                     <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icons-cards.svg" type=""style="margin-top:5px;"></img>
                                     <div class="form-container active" style="margin: 10px;">
