@@ -148,7 +148,7 @@ public class checkoutServlet extends HttpServlet {
 					req.setAttribute("amount", amount);// 總金額
 
 					req.setAttribute("order_pstatus", order_pstatus);// 回給錯誤頁面判斷是否顯示信用卡 1為顯示
-					RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/shoppingCart/Checkout.jsp");
 					failureView.forward(req, res);
 					return;// 中斷
 				}
@@ -189,7 +189,7 @@ public class checkoutServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("Checkout.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/protected_front/shoppingCart/Checkout.jsp");
 				failureView.forward(req, res);
 			}
 		}

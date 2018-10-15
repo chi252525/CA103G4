@@ -52,7 +52,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("Cart.jsp");
+				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -76,7 +76,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("Cart.jsp");
+				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -147,7 +147,7 @@ public class ShoppingServlet extends HttpServlet {
 		} else if ("CHECKOUT".equals(action)) {
 			double total = 0;
 			if (buylist == null && buylistCustom == null) {
-				String url = "Cart.jsp";
+				String url = "/protected_front/shoppingCart/Cart.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;
@@ -171,7 +171,7 @@ public class ShoppingServlet extends HttpServlet {
 
 				String amount = String.valueOf(total);
 				req.setAttribute("amount", amount);
-				String url = "Checkout.jsp";
+				String url = "/protected_front/shoppingCart/Checkout.jsp";
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 				return;

@@ -285,7 +285,7 @@ public class StoredrecordServlet extends HttpServlet {
 				String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "+stor_Point*1.18;
 				
 				new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);
-				req.getRequestDispatcher("/front_end/storedrecord/transactionScess.jsp").forward(req, res);
+				res.sendRedirect("/front_end/storedrecord/transactionScess.jsp");//prevent store again 
 				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
 				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");

@@ -335,7 +335,7 @@ a {
                 <form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/menu/listAllMenu4.jsp" method="POST" style="margin: 10px;">
                     <input style="font-weight: bolder;" type="submit" value="&laquo;繼續選購" class="btn btn-warning">
                 </form>
-                 <form name="checkoutForm" action="ShoppingServlet.do" method="POST" style="margin: 10px;">
+                 <form name="checkoutForm" action="<%=request.getContextPath() %>/front_end/shoppingCart/ShoppingServlet.do" method="POST" style="margin: 10px;">
                     <input type="hidden" name="action" value="CHECKOUT"> <input style="font-weight: bolder;" type="submit" value="付款結帳&raquo;" class="btn btn-warning">
                 </form>
             </div>
