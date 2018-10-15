@@ -2,6 +2,8 @@ package com.couponhistory.model;
 
 import java.io.Serializable;
 
+import com.activity.model.ActivityVO;
+
 public class CouponhistoryVO implements Serializable{
 	/**
 	 * 
@@ -43,4 +45,14 @@ public class CouponhistoryVO implements Serializable{
 	public void setCoup_state(Integer coup_state) {
 		this.coup_state = coup_state;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof CouponhistoryVO) {
+			CouponhistoryVO chvo = (CouponhistoryVO)obj;
+			return this.coup_sn.equals(chvo.coup_sn);
+		}
+		return super.equals(obj);
+	}
+	
 }

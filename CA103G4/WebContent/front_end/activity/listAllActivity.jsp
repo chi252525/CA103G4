@@ -218,10 +218,10 @@ div.shavetext {
 										<div class="d-flex ">
 											<div class="p-0">
 												活動期間
-												<fmt:formatDate value="${activityVO.act_Start}"
+												<fmt:formatDate value="${activityVO.act_PreAddTime}"
 													pattern="yyyy-MM-dd " />
 												~
-												<fmt:formatDate value="${activityVO.act_End}"
+												<fmt:formatDate value="${activityVO.act_PreOffTime}"
 													pattern="yyyy-MM-dd " />
 											</div>
 											<div class="p-0">.${activityVO.act_Views}&nbsp;Views</div>
@@ -340,8 +340,8 @@ function connect() {
         <img class="img-fluid" id="new_act"src="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">我知道了</button>
+      
       </div>
     </div>
   </div>

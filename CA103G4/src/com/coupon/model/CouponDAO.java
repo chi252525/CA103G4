@@ -167,6 +167,7 @@ public class CouponDAO implements CouponDAO_interface {
 			PreparedStatement pstmt = null;
 			
 			try {
+				
 				for(int i=0;i<coucat_Amo;i++) {
 				pstmt = con.prepareStatement(INSERT_STMT);
 				pstmt.setString(1, coucat_No);

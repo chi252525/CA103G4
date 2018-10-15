@@ -73,7 +73,7 @@
    
    .errorMsg{
 	color:red;
-	font-style: oblique;
+/* 	font-style: oblique; */
 	font-weight: bold;
 	margin-left:50%;
 	
@@ -119,14 +119,13 @@
 </head>
 
 <body class="shadow-lg w-100" background="<%=request.getContextPath()%>/front_end/img/woodbackground3.png" width="100%">
-    <div id="div_shadow" class="py-5"">
+    <div id="div_shadow" class="py-5">
       <div class=" container">
         <div class="row">
             <div class="col-md-12">
 
-                <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-
-                    結帳</h1>
-                </a>
+                <h1 class="d-flex justify-content-start" style="color: #dfbe9f;">竹風堂-結帳</h1>
+                
             </div>
         </div>
     </div>
@@ -142,15 +141,7 @@
                             <th width="100">數量</th>
                             <th width="120">總計</th>
                             <th width="100">備註</th>
-                        </tr>
-                        <%
-                    MemberService memSrv = new MemberService();
-                    MemberVO memVO = memSrv.getOne_Member("M000001");
-                    System.out.println(memVO);
-                    session.setAttribute("memVO", memVO);
-                    %>
-
-
+           
                         <%
                     @SuppressWarnings("unchecked")
                     Vector<MenuVO> buylist = (Vector<MenuVO>) session.getAttribute("shoppingcart");
@@ -318,24 +309,34 @@
                                 </div>
                             </div>
 
-
+							${order_pstatus}
                             <div class="btn-group btn-group-toggle col-12 col-md-8" data-toggle="buttons" style="padding-left: 5px;">
                                 <b>付款方式:</b>
-                                <label class="btn btn-secondary active" onclick="cash()">
-                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off"> 現金
+                                <label class="btn btn-secondary" onclick="cash()">
+                                    <input type="radio" name="order_pstatus" value="1" autocomplete="off" ${order_pstatus ==1	 ? 'checked' : ''}> 現金
                                 </label>
                                 <label class="btn btn-secondary" onclick="cardShow()">
-                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 信用卡
+                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" ${order_pstatus ==2 ? 'checked' : ''}> 信用卡
                                 </label>
-                                 <label class="btn btn-secondary" onclick="cardShow()">
-                                    <input type="radio" name="order_pstatus" value="2" autocomplete="off" checked> 竹幣
+                                 <label class="btn btn-secondary" onclick="point()">
+                                    <input type="radio" name="order_pstatus" value="3" autocomplete="off" ${order_pstatus ==3 ? 'checked' : ''}> 竹幣
                                 </label>
                             </div><br>
-
+                          	<!-- 點數購買 -->
+                          	<div id="point" style="display:${order_pstatus ==3 ? '' : 'none'};">
+                          	<!-- 點數不足提示 -->
+                          		
+								<div class="errorMsg col-md-4" style=" border-radius:6px;margin-left:100px;margin-top:20px; " >
+									${errorMsgs.point_insufficient}
+								</div>
+								
+								
+							
+							</div>
                             <c:if test="${order_pstatus ne 1}">
                                 <!-- 只要不為現金就是顯示信用卡 -->
                                 <!-- credit card -->
-                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px;">
+                                <div id="card" class="demo-container col-12 col-md-6" style="margin: 10px; display: ${order_pstatus ==2 ? '' : 'none'};">
                                     <div class="card-wrapper" style="margin-left: 0px; width: 350px;"></div>
                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/270939/icons-cards.svg" type=""style="margin-top:5px;"></img>
                                     <div class="form-container active" style="margin: 10px;">
@@ -449,10 +450,17 @@
 
         function cardShow() { //開啟信用卡輸入
             $('#card').show();
+            $('#point').hide();
         }
 
         function cash() { //隱藏信用卡輸入
             $('#card').hide();
+            $('#point').hide();
+        }
+        
+        function point(){//開啟點數
+        	 $('#point').show();
+        	 $('#card').hide();
         }
 
         function takeAway() { //隱藏地址輸入

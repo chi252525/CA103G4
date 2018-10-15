@@ -17,6 +17,6 @@ public interface MemberDAO_interface {
 //	public MemberVO compareMemId(String mem_Id);
 	public List<MemberVO> getCouponByMem(String mem_No);
 	public void update2(String mem_NO, Integer stor_Point, Connection con) throws SQLException;
-
+	public void update3(MemberVO memVO);
 }
 	

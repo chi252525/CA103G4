@@ -280,7 +280,23 @@
   </servlet-mapping>
   
   
- 
+	<servlet>
+	  <servlet-name>GeneralmanagerServlet</servlet-name>
+	  <servlet-class>com.generalmanager.controller.GeneralmanagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>GeneralmanagerServlet</servlet-name>
+	  <url-pattern>/generalmanager.do</url-pattern>
+	</servlet-mapping>
+  
+    <servlet>
+		<servlet-name>LogoutHQEmp</servlet-name>
+		<servlet-class>com.generalmanager.controller.GeneralEmpLogout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutHQEmp</servlet-name>
+		<url-pattern>/HQemplogout.do</url-pattern>
+	</servlet-mapping>
   
 
   
@@ -329,16 +345,6 @@
     <servlet-name>CouponhistoryServlet</servlet-name>
     <url-pattern>/couponhistory/CouponhistoryServlet.do</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ResServlet</servlet-name>
-    <servlet-class>com.reservation.controller.ResServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ResServlet</servlet-name>
-    <url-pattern>/back_end/res/res.do</url-pattern>
-  </servlet-mapping>
-  
   
   
   <servlet>
@@ -438,6 +444,14 @@
     <url-pattern>/desk.do</url-pattern>
   </servlet-mapping>
 	
+	<servlet>
+    <servlet-name>ResServlet</servlet-name>
+    <servlet-class>com.reservation.controller.ResServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResServlet</servlet-name>
+    <url-pattern>/res.do</url-pattern>
+  </servlet-mapping>
 	
 
 	

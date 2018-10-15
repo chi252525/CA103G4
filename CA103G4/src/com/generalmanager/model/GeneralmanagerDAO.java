@@ -3,15 +3,26 @@ package com.generalmanager.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 	
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static final String USER = "CHIAPAO";
-	private static final String PASSWORD = "CHIAPAO";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO GENERALMANAGER(MGER_NO,MGER_ACNUM,MGER_PSW) VALUES(?,?,?)";
@@ -19,21 +30,15 @@ public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 			"UPDATE GENERALMANAGER SET MGER_ACNUM=?,MGER_PSW=? WHERE MGER_NO =?";
 	private static final String DELET_STMT =
 			"DELETE FROM GENERALMANAGER WHERE  MGER_NO = ?";
-	static {
-		try {
-		Class.forName(DRIVER);
-		} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-	}
+	private static final String FINDBYACNUM=
+			"SELECT *FROM GENERALMANAGER WHERE MGER_ACNUM=?";
 	@Override
 	public void insert(GeneralmanagerVO mgerVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("連線成功");	
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, mgerVO.getMger_No());
@@ -73,7 +78,7 @@ public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, mgerVO.getMger_Acnum());
@@ -114,7 +119,7 @@ public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELET_STMT);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -134,6 +139,50 @@ public class GeneralmanagerDAO implements GeneralmanagerDAO_interface{
 	public List<GeneralmanagerVO> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public GeneralmanagerVO findByAcnum(String mger_Acnum) {
+		// TODO Auto-generated method stub
+		Connection con =null;
+		PreparedStatement pstmt=null;
+		GeneralmanagerVO mgerVO = new GeneralmanagerVO();
+		try {
+			con=ds.getConnection();
+			pstmt= con.prepareStatement(FINDBYACNUM);
+			pstmt.setString(1, mger_Acnum);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				mgerVO.setMger_Acnum(rs.getString("mger_Acnum"));
+				mgerVO.setMger_No(rs.getString("mger_No"));
+				mgerVO.setMger_Psw(rs.getString("mger_Psw"));				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return mgerVO;
 	}
 
 }

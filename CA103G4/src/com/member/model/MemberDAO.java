@@ -38,7 +38,7 @@ public class MemberDAO implements MemberDAO_interface {
 	public static final String GET_ONE_MEMBER = "SELECT * FROM MEMBER WHERE MEM_NO=?";
 	public static final String GET_ONE_BY_ID = "SELECT * FROM MEMBER WHERE MEM_ID=?";
 	public static final String UPDATE_STMT2 = "UPDATE MEMBER SET MEM_BONUS=? WHERE MEM_NO =?";
-
+	public static final String UPDATE_STMT3 = "UPDATE MEMBER SET MEM_BONUS=? WHERE MEM_NO =?";
 //	public static final String COMPARE_ID = "SELECT MEM_ID FROM MEMBER WHERE MEM_ID LIKE ?";
 
 	@Override
@@ -428,6 +428,44 @@ public class MemberDAO implements MemberDAO_interface {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void update3(MemberVO memVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT3);
+			System.out.println("修改連線成功");
+			pstmt.setInt(1, memVO.getMem_Bonus());
+			pstmt.setString(2, memVO.getMem_No());
+			int rowCount = pstmt.executeUpdate();
+			System.out.println("修改 " + rowCount + " 筆資料");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

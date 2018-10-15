@@ -8,6 +8,8 @@ public interface OrderformDAO_interface {
 	public void insert(OrderformVO orderformVO);
 
 	public void update(OrderformVO orderformVO);
+	
+	public void updateOrderStatus(String order_no);
 
 	public void delete(String order_no);
 

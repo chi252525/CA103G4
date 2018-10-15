@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.coucat.model.CoucatService;
 import com.coupon.model.CouponService;
+import com.couponhistory.model.CouponhistoryService;
 import com.custommeals.model.CustommealsVO;
 import com.ingredients.model.IngredientsVO;
 import com.menu.model.MenuVO;
@@ -282,7 +283,11 @@ public class ShoppingServlet extends HttpServlet {
 		} else if ("findMemCoupon".equals(action)) {
 			String amount = req.getParameter("amount");
 			String couponDiscount = req.getParameter("coucatValue");
+//			String Coupon_sn = req.getParameter("Coupon_sn");
 			amount = Double.toString(Double.parseDouble(amount) - Double.parseDouble(couponDiscount));
+//			CouponhistoryService chsrvc = new CouponhistoryService();
+//			chsrvc.
+//			chsrvc.updateCouponRecord(coup_sn, mem_no, coup_state);
 //			res.setContentType("application/json");
 			System.out.println("折價後回前的amount=" + amount);
 			res.getWriter().print(amount);// 輸出前端

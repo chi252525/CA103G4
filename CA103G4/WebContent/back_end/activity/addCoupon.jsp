@@ -19,7 +19,7 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -89,7 +89,7 @@
 									<div class="col-md-6">
 									<label class="text-dark">優惠卷種類</label> 
 										<select class="form-control" name="coucat_Cata">
-											<option value="CC1">點數優惠</option>
+											<option value="CC1">新品優惠</option>
 											<option value="CC2">現金折扣</option>
 											<option value="CC3">分店限定</option>
 										</select>

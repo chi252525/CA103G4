@@ -47,6 +47,8 @@ public class MenuDAO implements MenuDAO_interface {
 			"SELECT MENU_NO, MENU_ID, MENU_TYPE, MENU_PRICE, MENU_INTRO, MENU_PHOTO, MENU_STATUS FROM MENU WHERE MENU_NO=?";
 	private static final String SELECT_ALL_STMT=
 			"SELECT MENU_NO, MENU_ID, MENU_TYPE, MENU_PRICE, MENU_INTRO, MENU_PHOTO, MENU_STATUS FROM MENU ORDER BY MENU_NO";
+	private static final String SELECT_ALL_STMT_FRONT=
+			"SELECT MENU_NO, MENU_ID, MENU_TYPE, MENU_PRICE, MENU_INTRO, MENU_PHOTO, MENU_STATUS FROM MENU WHERE MENU_STATUS='1' ORDER BY MENU_NO";
 	
 	//依會員查他訂過的經典餐點
 	private static final String SELECT_MEAL_BY_MEMBUYED_CLASSIC="SELECT * FROM MENU LEFT JOIN ORDERINVOICE\r\n" + 
@@ -295,6 +297,63 @@ public class MenuDAO implements MenuDAO_interface {
 		}
 		return menuVOList;
 	}
+	
+	
+	@Override
+	public List<MenuVO> getAll_front() {
+		List<MenuVO> menuVOList = new ArrayList<>();
+		MenuVO menuVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(SELECT_ALL_STMT_FRONT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				menuVO = new MenuVO();
+				menuVO.setMenu_No(rs.getString("MENU_NO"));
+				menuVO.setMenu_Id(rs.getString("MENU_ID"));
+				menuVO.setMenu_Type(rs.getString("MENU_TYPE"));
+				menuVO.setMenu_Price(rs.getInt("MENU_PRICE"));
+				menuVO.setMenu_Intro(rs.getString("MENU_INTRO"));
+				menuVO.setMenu_Photo(rs.getBytes("MENU_PHOTO"));
+				menuVO.setMenu_Status(rs.getInt("MENU_STATUS"));	
+				menuVOList.add(menuVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " 
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return menuVOList;
+	}
+	
 	
 	private byte[] getPictureByteArray(String path) throws IOException {
 		File file = new File(path);
