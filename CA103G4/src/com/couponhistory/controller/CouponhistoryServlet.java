@@ -48,22 +48,33 @@ public class CouponhistoryServlet extends HttpServlet {
 				
 				/*******************取出某一類未發送的Coupon*********************/
 				List<CouponVO> couponlist = Csvc.getCouponByCata_Not_Sended(coucat_No,"CP0");
-				if(couponlist.size()==0) {
+				System.out.println(couponlist.size());
+				
+				
+				String oneCoupon_Sn=null;
+				
+				if(couponlist.size()==0||couponlist==null) {
 					errorMsgs.add("優惠卷已取完");
+				}else {
+					CouponVO oneCouponNotSendedVO = couponlist.get(0);//取出第一個
+					oneCoupon_Sn= oneCouponNotSendedVO.getCoup_Sn();
+					String oneCoupon_No= oneCouponNotSendedVO.getCoucat_No();//這個要發的優惠卷類別編號
+					
+					/**********************************************************/
+				 	CouponhistoryService couSvc = new CouponhistoryService();
+				 	List<CouponhistoryVO> couList = couSvc.getByMem(mem_No);
+				 	for(CouponhistoryVO vo:couList) {
+				 		CouponService coupSvc= new CouponService();
+				 		CouponVO coupon =coupSvc.findCoucatByCoupSn(vo.getCoup_sn());
+				 		if(coupon.getCoucat_No().equals(oneCoupon_No)){
+				 			errorMsgs.add("優惠卷已取過了!!");
+				 			break;
+				 		}
+				 	}
+					
 				}
 
-				CouponVO oneCouponNotSendedVO = couponlist.get(0);//取出第一個
-				String oneCoupon_Sn= oneCouponNotSendedVO.getCoup_Sn();
 				
-				/**********************************************************/
-			 	CouponhistoryService couSvc = new CouponhistoryService();
-			 	List<CouponhistoryVO> couList = couSvc.getByMem(mem_No);
-			 	for(CouponhistoryVO vo:couList) {
-			 		if(vo.getCoup_sn().equals(oneCoupon_Sn)){
-			 			errorMsgs.add("優惠卷已取過了!!");
-			 			break;
-			 		}
-			 	}
 			 	if(errorMsgs.isEmpty()) {
 					/*******************開始設定資料*********************/
 					CouponhistoryService chSvc= new CouponhistoryService();
