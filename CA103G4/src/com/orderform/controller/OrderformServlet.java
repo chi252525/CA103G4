@@ -117,8 +117,15 @@ public class OrderformServlet extends HttpServlet {
 			//看付款類，若是使用信用卡則預設為已支付，不是則否，並取得明細資訊//分店、信用卡末四碼、備註、時間、外送地址
 			Integer orderpa;
 			if (req.getAttribute("card_number") != null) {
-				orderpa = 2;
-				req.getSession().setAttribute("card_number",req.getAttribute("card_number"));
+				orderpa = 3;
+				
+				String card4 = null;
+				card4 = ((String)req.getAttribute("card_number")).substring(15);
+				
+				req.getSession().setAttribute("card_number",card4);
+			} else if (req.getParameter("order_pstatus") != null) {
+				orderpa = 4;
+				req.getSession().setAttribute("point",req.getParameter("order_pstatus"));
 			} else {
 				orderpa = 1;
 			} //信用卡表已付款2; 現金表1未付款
