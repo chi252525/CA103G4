@@ -1626,7 +1626,7 @@ to_char(sysdate,'yyyymmdd')||'-'||'000001',
 慶開幕期間凡購買餐滿1000元 
 再送奶香濃郁的白醬焗烤蝦一份(價值100元)'
 ,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-10-31 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 09:00','YYYY-MM-DD hh24:mi'),1,898);
+TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,898);
 
 
 
@@ -1639,8 +1639,8 @@ to_char(sysdate,'yyyymmdd')||'-'||'000002',
 'AC2','【全台門市優惠】明月不可不賞，拉麵不可不吃~中秋節凡憑優惠卷來店點玉子系列拉麵，即可兌換中冰紅茶一杯~只限當天~贈完為止',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0002.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0002.jpg')),'竹風堂拉麵全球同慶33周年，10月16日當天於竹風堂全省店「玉子系列拉麵」每碗100元，當日330碗，數量限定，售完為止。
 
 竹風堂拉麵源起於日本，進軍台灣、中國、香港、菲律賓、泰國、馬來西亞、印尼等亞洲國家，就連澳洲、美國、英國及法國都受到拉麵旋風影響，陸續開設多家店舖，創造出全球的拉麵熱潮。'
-,TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-09-17 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),1,563);
+,TO_TIMESTAMP('2018-09-01 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-09-01 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-09-20 09:00','YYYY-MM-DD hh24:mi'),1,563);
 
 
 INSERT INTO ACTIVITY(
@@ -1667,8 +1667,8 @@ VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000004',
 'AC1','【全台門市優惠】新品上市期間限定~會員憑券點紐西蘭牛肉拉麵現折100元~身為拉麵饕客的你~快來嚐鮮!',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0004.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0004.jpg')),'新品上市期間限定~會員憑券點拉麵折扣50元'
-,TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),1,30);
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,30);
 
 
 INSERT INTO ACTIVITY(
@@ -1678,8 +1678,8 @@ VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000005',
 'AC2','【全台門市優惠】客製化的自由~好吃的~獨特的~風味自由配!活動期間凡組合6種以上搭配任一湯頭，即享加麵加湯乙次免費!不加價!',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0005.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0005.jpg')),'新品上市期間限定~會員憑券點拉麵折扣100元'
-,TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-10-10 09:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-23 09:00','YYYY-MM-DD hh24:mi'),1,150);
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,150);
 
 
 
@@ -1707,8 +1707,8 @@ VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000007',
 'AC3','【10月份當店限定】綠島店壽星限定~凡點咖哩豬排烏龍麵現折60元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0007.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0007.jpg')),'數十種香料融合了豚骨湯，創造出刺激卻不失醇厚的口味，配上烤炙叉燒，是味覺和口感的多重感動！'
-,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),
-TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,234);
+,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
+TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,234);
 
 INSERT INTO ACTIVITY(
 ACT_NO,COUCAT_NO,ACT_CAT,ACT_NAME,
