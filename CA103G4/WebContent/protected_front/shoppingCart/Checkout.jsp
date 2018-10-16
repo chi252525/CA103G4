@@ -115,6 +115,15 @@
     list-style: none;
     opacity:0.8;
 }
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: white;
+    border-radius: .25rem;
+}
 </style>
 </head>
 
@@ -192,7 +201,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<div class=badge badge-pill badge-warning>客製拉麵食材: </div><span><%=stb%></span>" data-content="">
+                                    <td width="200" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<div>客製拉麵食材: </div><span><%=stb%></span>" data-content="">
                                         <%=name%>
                                     </td>
                                     <td width="100">
