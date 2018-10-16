@@ -119,9 +119,9 @@
 .tooltip-inner {
     max-width: 200px;
     padding: 3px 8px;
-    color: #000 !important;
+/*     color: #000 !important; */
     text-align: center;
-    background-color: rgba(181, 132, 28,1)  !important;
+/*     background-color: rgba(181, 132, 28,1)  !important; */
     border-radius: .25rem;
 }
 /* .tooltip .arrow { */
