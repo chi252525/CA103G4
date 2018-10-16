@@ -54,7 +54,7 @@
                         <div class="form-group col-md-4">
                               <label for="inputBranch">人數</label>
                               <select id="inputState" class="form-control" name="res_people">
-                                <option selected>請選擇...</option>
+                                <option value="" selected>請選擇...</option>
                                 <option value="1">1人</option>
                                 <option value="2">2人</option>
                                 <option value="3">3人</option>
@@ -129,9 +129,16 @@
 <!--                           <b>選擇座位 &nbsp; &#8595;</b>   -->
 <!--                       </div> -->
 <!--                       &nbsp; -->
-<!--                       <div style="width: 100px;height: 100px;padding-left: 30px"> -->
-<!--                       <img src="/CA103G4/front_end/img/cutie.png" width="180%" class="cutie"> -->
-<!--                       </div> -->
+                      <div style="width: 600px;height: 100px;padding-top: 60px;">
+							<c:if test="${not empty errorMsgs}">
+							<font style="color:red;" >請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color:red">${message}</li>
+								    </c:forEach>
+								</ul>
+							</c:if>
+                      </div>
                        
                       <div style="text-align:right;">
                       <input type="hidden" name="action" value="addDesk">
