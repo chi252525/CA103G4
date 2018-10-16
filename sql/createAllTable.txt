@@ -129,7 +129,7 @@ NOCYCLE
 NOCACHE;
     
 INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS , MEM_PHOTO) 
-VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'a','a','小俊','ms1',to_date('1991-01-29','yyyy-mm-dd'),'abow129@gmail.com','0965231002','阿土','326','桃園市','中壢區','中央路50號','4432-3133-1111-2222','04/25',500,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo1.jpg')));
+VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'a','a','小夫','ms1',to_date('1991-01-29','yyyy-mm-dd'),'abow129@gmail.com','0965231002','阿土','326','桃園市','中壢區','中央路50號','4432-3133-1111-2222','04/25',500,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo1.jpg')));
 
 INSERT INTO MEMBER(MEM_NO , MEM_ID , MEM_PW , MEM_NAME , MEM_GENDER , MEM_BIR , MEM_MAIL , MEM_PHONE , MEM_RECEIVER , MEM_REPNO, MEM_RECOUNTY , MEM_RETOWN ,MEM_READDR , MEM_CARDNUM , MEM_CARDDUE , MEM_BONUS , MEM_PHOTO) 
 VALUES('M'||LPAD(to_char(MEMBER_SEQ.NEXTVAL),6,'0'),'zack','123456','小寶','ms1',to_date('1986-11-21','yyyy-mm-dd'),'bow@gmail.com','0922231002','阿家','123','新北市','板橋區','三民二路50號','4432-3133-1111-3333','02/22',1200,BFILE_TO_BLOB (BFILENAME ('MEM_DIR','mem_photo2.jpg')));
@@ -602,18 +602,15 @@ NOCACHE;
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂信義店', '臺北市', '信義區','110台北市信義區松壽路28號' ,'25°02''08.2"N 121°34''05.1"E' ,'121.568083', '25.035611', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '022455678', 35);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂中央店一店', '桃園市', '中壢區','320桃園市中壢區五興路345' ,'25°02''08.2"N 121°34''05.1"E' ,'121.1914055', '24.9652044', '週一至週五 10am ~ 10pm', 5, '022455678', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂微風台北車站店', '臺北市', '中正區','100台北市中正區北平西路3號2樓' ,'25°02''52.0"N 121°31''02.6"E' ,'121.517309', '25.048003', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 0, '0223709222', 20);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂微風台北車站店', '臺北市', '中正區','100台北市中正區北平西路3號2樓' ,'25°02''52.0"N 121°31''02.6"E' ,'121.517309', '25.048003', '週一至週五 10am ~ 10pm', 0, '0223709222', 20);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂一風堂桃園高鐵店', '桃園市', '中壢區','320桃園市中壢區高鐵北路一段6號' ,'25°00''52.2"N 121°13''03.4"E' ,'121.217547', '25.014423', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 0, '032613220', 45);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂一風堂桃園高鐵店', '桃園市', '中壢區','320桃園市中壢區高鐵北路一段6號' ,'25°00''52.2"N 121°13''03.4"E' ,'121.217547', '25.014423', '週一至週五 10am ~ 10pm', 0, '032613220', 45);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
@@ -622,38 +619,31 @@ VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂中壢本店', '桃園市',
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台中秀泰文心店', '臺中市', '南屯區','408台中市南屯區文心南路289號' ,'24°07''47.7"N 120°38''45.9"E' ,'120.646201', '24.129860', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '0424725066', 40);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台中秀泰文心店', '臺中市', '南屯區','408台中市南屯區文心南路289號' ,'24°07''47.7"N 120°38''45.9"E' ,'120.646201', '24.129860', '週一至週五 10am ~ 10pm', 5, '0424725066', 40);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂嘉義秀泰店', '嘉義市', '西區','600嘉義市西區文化路299號2樓' ,'23°29''08.5"N 120°26''52.2"E' ,'120.447652', '23.485550', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '052376148', 35);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂嘉義秀泰店', '嘉義市', '西區','600嘉義市西區文化路299號2樓' ,'23°29''08.5"N 120°26''52.2"E' ,'120.447652', '23.485550', '週一至週五 10am ~ 10pm', 5, '052376148', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台南西門店', '臺南市', '中西區','700台南市中西區西門路一段658號2樓' ,'22°59''13.2"N 120°11''55.8"E' ,'120.197693', '22.986936', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '062141222', 30);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂台南西門店', '臺南市', '中西區','700台南市中西區西門路一段658號2樓' ,'22°59''13.2"N 120°11''55.8"E' ,'120.197693', '22.986936', '週一至週五 10am ~ 10pm', 5, '062141222', 30);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂漢神巨蛋店', '高雄市', '左營區','813高雄市左營區博愛二路777號' ,'22°40''12.1"N 120°18''08.3"E' ,'120.302254', '22.669959', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 7, '075227222', 60);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂漢神巨蛋店', '高雄市', '左營區','813高雄市左營區博愛二路777號' ,'22°40''12.1"N 120°18''08.3"E' ,'120.302254', '22.669959', '週一至週五 10am ~ 10pm', 7, '075227222', 60);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂大魯閣草衙道店', '高雄市', '前鎮區','806高雄市前鎮區中安路1號1樓' ,'22°34''57.5"N 120°19''51.9"E' ,'120.331062', '22.582724', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '077911733', 35);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂大魯閣草衙道店', '高雄市', '前鎮區','806高雄市前鎮區中安路1號1樓' ,'22°34''57.5"N 120°19''51.9"E' ,'120.331062', '22.582724', '週一至週五 10am ~ 10pm', 5, '077911733', 35);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂綠島店', '臺東縣', '綠島鄉','951台東縣綠島鄉漁港13號' ,'22°39''37.8"N 121°28''30.1"E' ,'121.474051', '22.661585', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '089671199', 15);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂綠島店', '臺東縣', '綠島鄉','951台東縣綠島鄉漁港13號' ,'22°39''37.8"N 121°28''30.1"E' ,'121.474051', '22.661585', '週一至週五 10am ~ 10pm', 5, '089671199', 15);
 
 INSERT INTO BRANCH 
 	(BRANCH_NO, BRANCH_NAME, BRANCH_CITY, BRANCH_DIST, BRANCH_ADDR, BRANCH_POS, BRANCH_LAN, BRANCH_LAT, BRANCH_TIME, BRANCH_DEL, BRANCH_TEL, BRANCH_TDESK)
-VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂墾丁店', '屏東縣', '恆春鎮','946屏東縣恆春鎮墾丁路342號' ,'21°56''46.5"N 120°47''40.1"E' ,'120.794509', '21.946147', '週日~週四 11:00 - 21:30
-週五、週六(假日前)11:00 - 22:00 (閉店前30分鐘為最後點餐)', 5, '088861165',55);
+VALUES (LPAD(BRANCH_NO_seq.NEXTVAL,4,'0'), '竹風堂墾丁店', '屏東縣', '恆春鎮','946屏東縣恆春鎮墾丁路342號' ,'21°56''46.5"N 120°47''40.1"E' ,'120.794509', '21.946147', '週一至週五 10am ~ 10pm', 5, '088861165',55);
 
 --------------------------------------------------------
 --  for Table FEATURE
@@ -706,17 +696,17 @@ NOCYCLE
 NOCACHE;
 
 
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a','a','王傑','1','經理','0912345678',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo1.jpg')));
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','a','a','胖虎','1','店長','0912345678',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo1.jpg')));
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ab','ab','天柱','1','客服人員','0966666666',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo2.jpg')));
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ac','ac','陳冠宏','1','櫃台人員','0987654321',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo3.jpg')));
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ad','ad','志勇','1','櫃台人員','0930165789',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo4.jpg')));
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ae','ae','小惠','2','服務生','0911223345',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo5.jpg')));
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ae','ae','靜香','2','服務生','0911223345',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo5.jpg')));
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','af','af','志元','1','服務生','0912345678',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo6.jpg')));
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ag','ag','柏叡','1','服務生','0966777222',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo7.jpg')));
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ah','ah','春嬌','2','外送員','0987654333',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo8.jpg')));
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ai','ai','志明','2','外送員','0955165789',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo9.jpg')));
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ah','ah','多啦美','2','外送員','0987654333',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo8.jpg')));
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0001','ai','ai','多啦A夢','2','外送員','0955165789',BFILE_TO_BLOB (BFILENAME ('EMP_DIR','emp_photo9.jpg')));
 
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','ba','ba','俊麟','1','經理','0933907656',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','ba','ba','俊麟','1','店長','0933907656',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','bb','bb','志年','1','客服人員','0911222333',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','bc','bc','逸婷','2','櫃台人員','0988987654',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','bd','bd','雅琪','2','櫃台人員','0955165789',null);
@@ -727,7 +717,7 @@ Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0002','bi','bi','中天','1','外送員','0933987445',null);
 
 
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','ca','ca','布萊恩','1','經理','0956230770',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','ca','ca','布萊恩','1','店長','0956230770',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','cb','cb','札克','1','客服人員','0922921002',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','cc','cc','艾迪','1','櫃台人員','0933444999',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','cd','cd','安妮','2','櫃台人員','0987987789',null);
@@ -737,14 +727,14 @@ Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','ch','ch','安娜','2','外送員','0988445665',null);
 Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0003','ci','ci','丹尼爾','1','外送員','0977654998',null);
 
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0004','da','da','凱爾','1','經理','0956236650',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0005','ea','ea','王麗','2','經理','0957546890',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0006','fa','fa','永慶','1','經理','0954658997',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0007','ga','ga','愛沙','2','經理','0911245666',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0008','ha','ha','佐助','1','經理','0955665887',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0009','ia','ia','費歐娜','2','經理','0987087087',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0010','ja','ja','馬力歐','1','經理','0978078078',null);
-Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0011','ka','ka','萊恩','1','經理','0966554554',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0004','da','da','凱爾','1','店長','0956236650',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0005','ea','ea','王麗','2','店長','0957546890',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0006','fa','fa','永慶','1','店長','0954658997',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0007','ga','ga','愛沙','2','店長','0911245666',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0008','ha','ha','佐助','1','店長','0955665887',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0009','ia','ia','費歐娜','2','店長','0987087087',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0010','ja','ja','馬力歐','1','店長','0978078078',null);
+Insert into EMPLOYEE (EMP_NO,BRANCH_NO,EMP_ACNUM,EMP_PSW,EMP_NAME,EMP_GENDER,EMP_POS,EMP_TEL,EMP_PHOTO) values ('E'||LPAD(to_char(employee_seq.NEXTVAL), 9, '0'),'0011','ka','ka','萊恩','1','店長','0966554554',null);
 
 --------------------------------------------------------
 --  for Table EMPAUTHORITY

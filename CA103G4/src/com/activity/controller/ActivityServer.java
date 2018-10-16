@@ -50,7 +50,7 @@ public class ActivityServer implements ServletContextListener{
 					@SuppressWarnings("unchecked")
 					List<ActivityVO> activityList = (List<ActivityVO>) context.getAttribute("actloadlist");
 					List<ActivityVO> removelist = new ArrayList<ActivityVO>();
-					System.out.println("run() activityList"+activityList.size());
+//					System.out.println("run() activityList"+activityList.size());
 					if (activityList.size() != 0) {
 							
 						Iterator<ActivityVO> actVOs = activityList.iterator();
@@ -60,10 +60,10 @@ public class ActivityServer implements ServletContextListener{
 								onTime = actVO.getAct_PreAddTime().getTime();
 								offTime = actVO.getAct_PreOffTime().getTime();
 	//
-								System.out.println(actVO.getAct_No() +"狀態"+actVO.getAct_Status() +":執行時間：" + nowTime + "("
-										+ time_format.format(nowTime) + ")；預計上架時間："
-										+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
-										+ time_format.format(offTime) + ")");
+//								System.out.println(actVO.getAct_No() +"狀態"+actVO.getAct_Status() +":執行時間：" + nowTime + "("
+//										+ time_format.format(nowTime) + ")；預計上架時間："
+//										+ onTime + "(" + time_format.format(onTime) + ")；預計下架時間：" + offTime + "("
+//										+ time_format.format(offTime) + ")");
 								// 上架
 							
 								if ( ((nowTime-1000) <= onTime && onTime <= nowTime) &&actVO.getAct_Status()==0) {
@@ -98,7 +98,7 @@ public class ActivityServer implements ServletContextListener{
 			@SuppressWarnings("deprecation")
 			Calendar cal = new GregorianCalendar(2018, start_time.getMonth(), start_time.getDate(), start_time.getHours(),
 					start_time.getMinutes(), 0);
-			timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 20 * 1000);
+			timer.scheduleAtFixedRate(task, cal.getTime(), 1 * 30 * 1000);
 			System.out.println("開啟伺服器時間：" + time_format.format(start_time) + ";廣告排程器時間:" + cal.getTime());
 		
 			

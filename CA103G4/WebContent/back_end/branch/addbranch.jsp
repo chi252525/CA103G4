@@ -41,9 +41,9 @@
     	</tr>
         <tr>
             <td class="td1" ><label for="branch_Name" class="col-form-label">分店名稱</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Name" name="branch_Name" value="${(insertbrVO==null)? '竹風堂':insertbrVO.branch_Name}"></td>
+            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Name" name="branch_Name" value="${(insertbrVO==null)? '':insertbrVO.branch_Name}"></td>
             <td class="td3"><label for="branch_Tel" class="col-form-label">分店電話</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tel" name="branch_Tel" value="${(insertbrVO==null)? '0955213002':insertbrVO.branch_Tel}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tel" name="branch_Tel" value="${(insertbrVO==null)? '':insertbrVO.branch_Tel}"></td>
         </tr>
      
         
@@ -54,23 +54,23 @@
                 <select style="display:inline" name="branch_Dist" class="nice-select" id="sector-list"></select>
             </td>
             <td class="td3"><label for="branch_Time" class="col-form-label">營業時間</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Time" name="branch_Time" value="${(insertbrVO==null)? '週一至週五 10:00~22:00':insertbrVO.branch_Time}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Time" name="branch_Time" value="${(insertbrVO==null)? '':insertbrVO.branch_Time}"></td>
         </tr>
         <tr>
             <td class="td1"><label for="branch_Addr" class="col-form-label">分店地址</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Addr" name="branch_Addr" value="${(insertbrVO==null)? '北園路325號':insertbrVO.branch_Addr}"></td>
+            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Addr" name="branch_Addr" value="${(insertbrVO==null)? '':insertbrVO.branch_Addr}"></td>
             <td class="td3"><label for="branch_Del" class="col-form-label">外送範圍</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Del" name="branch_Del" value="${(insertbrVO==null)? '5.3':insertbrVO.branch_Del}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Del" name="branch_Del" value="${(insertbrVO==null)? '':insertbrVO.branch_Del}"></td>
         </tr>
         <tr>
             <td class="td1"><label for="branch_Lan" class="col-form-label">分店經度</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Lan" name="branch_Lan" value="${(insertbrVO==null)? '121.299019':insertbrVO.branch_Lan}"></td>
+            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Lan" name="branch_Lan" value="${(insertbrVO==null)? '':insertbrVO.branch_Lan}"></td>
             <td class="td3"><label for="branch_Tdesk" class="col-form-label">桌位總數</label></td>
-            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tdesk" name="branch_Tdesk" value="${(insertbrVO==null)? '25':insertbrVO.branch_Tdesk}"></td>
+            <td class="td4"><input type="text" class="form-control-sm" id="branch_Tdesk" name="branch_Tdesk" value="${(insertbrVO==null)? '':insertbrVO.branch_Tdesk}"></td>
         </tr>
         <tr>
             <td class="td1"><label for="branch_Lat" class="col-form-label">分店緯度</label></td>
-            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Lat" name="branch_Lat" value="${(insertbrVO==null)? '25.000123':insertbrVO.branch_Lat}"></td>
+            <td class="td2" ><input type="text" class="form-control-sm" id="branch_Lat" name="branch_Lat" value="${(insertbrVO==null)? '':insertbrVO.branch_Lat}"></td>
             <td class="td3" colspan="2"></td>
           
         </tr>
@@ -84,7 +84,20 @@
     </table>
     </form>
 </div>    
+<a href="javascript:getinfo()" ><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" ></a>
+<script>
+function getinfo(){
+	$("#branch_Name").val("竹風堂中壢中央二店");
+	$("#branch_Tel").val("0933123456");
+	$("#branch_Time").val("週一至週五 10am ~ 10pm");
+	$("#branch_Addr").val("桃園市中壢區中大路300號");
+	$("#branch_Del").val("5.4");
+	$("#branch_Lan").val("121.192678");
+	$("#branch_Tdesk").val("20");
+	$("#branch_Lat").val("24.968109");
 
+}
+</script>
 <!--以下勿動-->
     <!-- Footer -->
 <jsp:include page="/back_end/HeadquarterFooter.jsp"></jsp:include>

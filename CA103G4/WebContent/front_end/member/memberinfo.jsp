@@ -66,15 +66,15 @@
             </td>
         </tr>
         <tr>
-            <td class="td1" ><label for="mem_Id" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control-sm" id="mem_Id" name="mem_Id" value="${mem_Id}" readonly="readonly"></td><td colspan="2" readonly="readonly">預設線上訂單收件人資料：(以下非必填)</td>
+            <td class="td1" ><label for="mem_Id" class="col-form-label">帳號</label></td><td class="td2" ><input type="text" class="form-control" id="mem_Id" name="mem_Id" value="${mem_Id}" readonly="readonly"></td><td colspan="2" readonly="readonly">預設線上訂單收件人資料：(以下非必填)</td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Pw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control-sm" id="mem_Pw" name="mem_Pw" value="<%=memVO.getMem_Pw()%>" readonly="readonly"></td>
-            <td class="td3"><label for="mem_Receiver" class="col-form-label">收件人</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Receiver" name="mem_Receiver" value="<%=(memVO.getMem_Receiver()==null)? "":memVO.getMem_Receiver()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Pw" class="col-form-label">密碼</label></td><td class="td2" ><input type="password" class="form-control" id="mem_Pw" name="mem_Pw" value="<%=memVO.getMem_Pw()%>" readonly="readonly"></td>
+            <td class="td3"><label for="mem_Receiver" class="col-form-label">收件人</label></td><td class="td4"><input type="text" class="form-control" id="mem_Receiver" name="mem_Receiver" value="<%=(memVO.getMem_Receiver()==null)? "":memVO.getMem_Receiver()%>" readonly="readonly"></td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Name" class="col-form-label">姓名</label></td><td class="td2" ><input type="text" class="form-control-sm" id="mem_Name" name="mem_Name" value="<%=memVO.getMem_Name()%>" readonly="readonly"></td>
-            <td class="td3"><label for="mem_Repno" class="col-form-label">郵遞區號</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Repno" name="mem_Repno" value="<%=(memVO.getMem_Repno()==null)? "":memVO.getMem_Repno()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Name" class="col-form-label">姓名</label></td><td class="td2" ><input type="text" class="form-control" id="mem_Name" name="mem_Name" value="<%=memVO.getMem_Name()%>" readonly="readonly"></td>
+            <td class="td3"><label for="mem_Repno" class="col-form-label">郵遞區號</label></td><td class="td4"><input type="text" class="form-control" id="mem_Repno" name="mem_Repno" value="<%=(memVO.getMem_Repno()==null)? "":memVO.getMem_Repno()%>" readonly="readonly"></td>
         </tr>
         <tr>
             <td class="td1">性別</td>
@@ -95,16 +95,16 @@
             </td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Bir" class="col-form-label">生日</label></td><td class="td2" ><input type="Date" class="form-control-sm" id="mem_Bir" name="mem_Bir" value="<fmt:formatDate value="<%=memVO.getMem_Bir()%>" pattern="yyyy-MM-dd"/>" readonly="readonly"></td>
-            <td class="td3"><label for="mem_Readdr" class="col-form-label">地址</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Readdr" name="mem_Readdr" value="<%=(memVO.getMem_Readdr()==null)? "":memVO.getMem_Readdr()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Bir" class="col-form-label">生日</label></td><td class="td2" ><input type="Date" class="form-control" id="mem_Bir" name="mem_Bir" value="<fmt:formatDate value="<%=memVO.getMem_Bir()%>" pattern="yyyy-MM-dd"/>" readonly="readonly"></td>
+            <td class="td3"><label for="mem_Readdr" class="col-form-label">地址</label></td><td class="td4"><input type="text" class="form-control" id="mem_Readdr" name="mem_Readdr" value="<%=(memVO.getMem_Readdr()==null)? "":memVO.getMem_Readdr()%>" readonly="readonly"></td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Mail" class="col-form-label">信箱</label></td><td class="td2" ><input type="email" class="form-control-sm" id="mem_Mail" name="mem_Mail" value="<%=memVO.getMem_Mail()%>" readonly="readonly"></td>
-            <td class="td3"><label for="mem_Cardnum" class="col-form-label">信用卡</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Cardnum" name="mem_Cardnum" value="<%=(memVO.getMem_Cardnum()==null)? "":memVO.getMem_Cardnum()%>" readonly="readonly"></td>
+            <td class="td1"><label for="mem_Mail" class="col-form-label">信箱</label></td><td class="td2" ><input type="email" class="form-control" id="mem_Mail" name="mem_Mail" value="<%=memVO.getMem_Mail()%>" readonly="readonly"></td>
+            <td class="td3"><label for="mem_Cardnum" class="col-form-label">信用卡</label></td><td class="td4"><input type="text" class="form-control" id="mem_Cardnum" name="mem_Cardnum" value="<%=(memVO.getMem_Cardnum()==null)? "":memVO.getMem_Cardnum()%>" readonly="readonly"></td>
         </tr>
         <tr>
-            <td class="td1"><label for="mem_Phone" class="col-form-label">電話</label></td><td class="td2" ><input type="text" class="form-control-sm" id="mem_Phone" name="mem_Phone" value="<%=memVO.getMem_Phone()%>" readonly="readonly"></td>
-            <td class="td3"><label for="mem_Carddue" class="col-form-label">截止日</label></td><td class="td4"><input type="text" class="form-control-sm" id="mem_Carddue" name="mem_Carddue" value="<%=(memVO.getMem_Carddue()==null)? "":memVO.getMem_Carddue()%>"readonly="readonly"></td>
+            <td class="td1"><label for="mem_Phone" class="col-form-label">電話</label></td><td class="td2" ><input type="text" class="form-control" id="mem_Phone" name="mem_Phone" value="<%=memVO.getMem_Phone()%>" readonly="readonly"></td>
+            <td class="td3"><label for="mem_Carddue" class="col-form-label">截止日</label></td><td class="td4"><input type="text" class="form-control" id="mem_Carddue" name="mem_Carddue" value="<%=(memVO.getMem_Carddue()==null)? "":memVO.getMem_Carddue()%>"readonly="readonly"></td>
         </tr>
         <tr>
             <td colspan="4" class="tdbtn">
