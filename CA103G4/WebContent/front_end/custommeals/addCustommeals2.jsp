@@ -362,7 +362,7 @@
 								        <h4>組合區</h4>
 								      </div>
 									      <ul class="task-list2" id="combination"></ul>								  		
-									  <form method="post" id="addtoCartForm${custommealsVO.custom_No}" action="<%=request.getContextPath()%>/front_end/custommeals/custommeals.do">
+									  <form method="post" id="addtoCartForm${custommealsVO.custom_No}" action="<%=request.getContextPath()%>/protected_front/custommeals/custommeals.do">
 <div class="container">
 										
 	<div class="row">

@@ -245,7 +245,7 @@
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="checkoutServlet.do">
+                    <form method="post" action="<%=request.getContextPath() %>/front_end/shoppingCart/checkoutServlet.do">
                         <%--送去orferform Serbvlet --%>
                         <input type="hidden" name="action" value="insert">
                         <%--                         <c:set var="action" value="insert" scope="session" /> --%>

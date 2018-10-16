@@ -37,6 +37,7 @@ public class checkoutServlet extends HttpServlet {
 		String ps = req.getParameter("ps");
 		String amount = req.getParameter("amount");
 		System.out.println("amount=" + amount);
+		
 		if ("insert".equals(action)) {// 來自checkout.jsp的請求
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);

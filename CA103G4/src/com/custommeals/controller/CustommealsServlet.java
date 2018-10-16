@@ -364,7 +364,7 @@ public class CustommealsServlet extends HttpServlet{
 //						System.out.println(ivo.getingdt_Name());
 //						System.out.println(ivo.getingdt_Price());
 //					}
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
+					RequestDispatcher successView = req.getRequestDispatcher("/protected_front/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/
@@ -465,7 +465,7 @@ System.out.println("OK");
 //					}
 					String requestURL=req.getParameter("requestURL");
 					req.setAttribute("requestURL",requestURL);
-					RequestDispatcher successView = req.getRequestDispatcher("/front_end/shoppingCart/ShoppingServlet.do");
+					RequestDispatcher successView = req.getRequestDispatcher("/protected_front/shoppingCart/ShoppingServlet.do");
 					successView.forward(req, res);
 					
 					/***************************其他可能的錯誤處理**********************************/

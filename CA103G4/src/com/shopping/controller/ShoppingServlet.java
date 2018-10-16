@@ -16,7 +16,7 @@ import com.custommeals.model.CustommealsVO;
 import com.ingredients.model.IngredientsVO;
 import com.menu.model.MenuVO;
 
-@WebServlet("/front_end/shoppingCart/ShoppingServlet.do")
+@WebServlet("/protected_front/shoppingCart/ShoppingServlet.do")
 public class ShoppingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
+				res.sendRedirect(req.getContextPath()+"/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -76,7 +76,7 @@ public class ShoppingServlet extends HttpServlet {
 				} else {
 					System.out.println("沒東西 !");
 				}
-				res.sendRedirect("/protected_front/shoppingCart/Cart.jsp");
+				res.sendRedirect(req.getContextPath()+"/protected_front/shoppingCart/Cart.jsp");
 				return;// 被免被下面的forward或redirect 導致exception
 //				} catch (Exception e) {
 //					
@@ -122,7 +122,12 @@ public class ShoppingServlet extends HttpServlet {
 				for (MenuVO x : buylist) {
 					System.out.println(x.getMenu_Id() + "有" + x.getMenu_quantity() + "碗");
 				}
+				
 			}
+			else {
+				System.out.println("沒東西 !");
+			}
+			System.out.println("目前客製購物車內容:");
 			if (buylistCustom != null) {
 				for (CustommealsVO x : buylistCustom) {
 					System.out.println(x.getcustom_Name() + "有" + x.getcustom_Quantity() + "碗");

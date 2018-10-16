@@ -1,4 +1,4 @@
-	package com.storedrecord.controller;
+package com.storedrecord.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -275,17 +275,24 @@ public class StoredrecordServlet extends HttpServlet {
 //					return;// 有錯誤,返回addStoredrecord
 //				}
 				// =============開始儲值(儲值成功)====================
-				StoredrecordService stsvc = new StoredrecordService();
-				stor_Status = 0;
-				StoredrecordVO storVO = stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);// 先新增一筆狀態為失敗的儲值紀錄
+				if (session.getAttribute("memVO") != null) {//會員物件不為空執行儲值
+					StoredrecordService stsvc = new StoredrecordService();
+					stor_Status = 0;// 預設儲值失敗
+					StoredrecordVO storVO = stsvc.addStoredrecord(mem_No, stor_Date, stor_Point, 0, stor_Status);// 先新增一筆狀態為失敗的儲值紀錄
 
-				stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
-				// ================改完，轉交===================
-				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-				String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "+stor_Point*1.18;
-				
-				new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);
-				res.sendRedirect("/front_end/storedrecord/transactionScess.jsp");//prevent store again 
+					stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
+					// ================改完，轉交===================
+					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+					String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "
+							+ stor_Point * 1.18;
+
+					new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);// 寄出確認信
+					res.sendRedirect(req.getContextPath() + "/front_end/storedrecord/transactionScess.jsp");// prevent
+																											// store
+																											// again
+				} else {
+					throw new Exception();
+				}
 				// =====================其他可能錯誤(儲值失敗)=========================
 			} catch (Exception e) {
 				errorMsgs.put("stor_failur", "儲值失敗,請聯絡管理員");
