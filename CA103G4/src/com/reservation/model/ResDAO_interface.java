@@ -11,6 +11,7 @@ public interface ResDAO_interface {
     public void delete(String res_no);
     public ResVO findByPrimaryKey(String res_no);
     public List<ResVO> getAll();
+    public List<ResVO> getAllByBGNO(String res_timebg);
     public void insert2(ResVO resVO, Connection con);
     
 }

@@ -47,6 +47,11 @@ public class ResService {
 	public ResVO getOneRes(String res_no) {
 		return dao.findByPrimaryKey(res_no);
 	}
+	   
+	public List<ResVO> getAllByBGNO(String res_timebg){
+		return dao.getAllByBGNO(res_timebg);
+		
+	}
 
 	public List<ResVO> getAll() {
 		return dao.getAll();
