@@ -387,6 +387,26 @@ public class OrderformServlet extends HttpServlet {
 			}
 		}
 		
+		
+		if ("ordOk".equals(action)) {
+			String ordNo = req.getParameter("ord_no");
+			//開始更改
+			OrderformService ordSvc = new OrderformService();
+			ordSvc.ordOk(ordNo);
+			//準備轉交
+			String url = "/back_end/orderform/orderform.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 

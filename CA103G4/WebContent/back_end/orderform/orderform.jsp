@@ -173,7 +173,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	<td>無需派送</td>
 	</c:if>
 	
-	<%-- 訂單	類型  --%>
+	<%-- 訂單類型  --%>
 	<c:if test="${ordVO.order_type == 0}">
 	<td>內用</td>
 	</c:if>
@@ -209,15 +209,27 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	<td>竹幣付款</td>
 	</c:if>
 	
+	<td>
 	<c:if test="${ordVO.order_status == 1}">
-	<td>處理中</td>
+	處理中
 	</c:if>
-	<c:if test="${ordVO.order_status == 2}">
-	<td>已出餐</td>
+	
+	
+	<c:if test="${ordVO.order_status == 2 and ordVO.order_type == 2}">
+	已出餐
 	</c:if>
+	<c:if test="${ordVO.order_status == 2 and ordVO.order_type != 2}">
+	<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do">
+	<input type="hidden" name="action" value="ordOk">
+	<input type="hidden" name="ord_no" value="${ordVO.order_no}">
+	<input type="submit" value="確認完成">
+	</form>	
+	</c:if>
+	
 	<c:if test="${ordVO.order_status == 3}">
-	<td>已完成</td>
+	已完成
 	</c:if>
+	</td>
 	
 	
 	</tr>
