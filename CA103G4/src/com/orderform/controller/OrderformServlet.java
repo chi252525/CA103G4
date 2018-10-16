@@ -143,8 +143,8 @@ public class OrderformServlet extends HttpServlet {
 			Vector<CustommealsVO> customv = new Vector<>();
 			inv = (Vector<MenuVO>) req.getSession().getAttribute("shoppingcart");//取得送來的餐點參數
 			customv = (Vector<CustommealsVO>) req.getSession().getAttribute("shoppingcartCustom");//取得送來的自訂餐點參數
-			System.out.println("inv" + inv);
-			System.out.println("customv" + customv);
+			System.out.println("inv = " + inv);
+			System.out.println("customv = " + customv);
 			
 			OrderinvoiceVO oin = null;
 			
