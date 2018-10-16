@@ -214,7 +214,7 @@
                                 <input class="card_data" placeholder="MM/YY" type="tel" name="expiry" style="margin: 5px;" value="${expiry}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.expiry}</div>
                             </div>
-                            <div clas確認s="form-inline">
+                            <div class="form-inline">
                                 <input class="card_data" placeholder="CVC" type="number" name="cvc" style="margin: 5px;" value="${cvc}">
                                 <div class='errorMsg' style="margin-left: 0px;">${errorMsgs.cvc}</div>
                             </div>
@@ -222,7 +222,7 @@
                                 <!--                     <a href="addNewtransaction.jsp" class="btn btn-light">上一步</a> -->
                             </div>
                         </div>
-
+						<button type="button" class="btn btn-sm" style="margin-top:5px;" onclick="magic()"><i class="far fa-plus-square"><b>神奇小按鈕</b></i></button>
                     </div>
 
 
@@ -266,6 +266,12 @@
                 form: document.querySelector('form'),
                 container: '.card-wrapper'
             });
+            
+            function magic(){
+            	$('.card_data').eq(0).val('4539 4201 1635 1760');
+            	$('.card_data').eq(1).val('Nash-Lin');
+            	$('.card_data').eq(2).val('05 / 22');
+            }
 
         </script>
 </body>

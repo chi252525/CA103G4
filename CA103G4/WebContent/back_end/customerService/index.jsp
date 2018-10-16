@@ -139,6 +139,13 @@ body{
             <div class="form-inline">
                 <textarea id="message" rows="3" cols="46" class="text-field form-control" type="text" placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"></textarea>
                 <!--                <input type="submit" id="sendMessage" class="btn btn-primary" value="送出" onclick="sendMessage();" />-->
+                <button type="button" class="badge badge-pill badge-warning" onclick="can1()">問候1</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can2()">問候2</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can3()">日期</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can4()">餐點</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can5()">稍等</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can6()">反應</button>
+                <button type="button" class="badge badge-pill badge-warning" onclick="can7()">迴避</button>
                 <div id="send" class="btn col-12 d-flex">
                     <div class="mr-auto">
                         <input id="userName" class="text-field form-control" type="text"  value="${empVO.emp_Name}" readonly style="width:100% !important;"/>
@@ -200,7 +207,7 @@ body{
 
                 } else if (jsonObj.type == 'sysMsg') {
                     $('#MessageList').append(
-                        '<div class=sysMsg>' + id+" "+ msg + '</div></div>');
+                        '<div class=sysMsg>客服人員 ' + id+" "+ msg + '</div></div>');
                     //     				alert(event.data);
                 }
                 document.getElementById('MessageList').scrollTop =  document.getElementById('MessageList').scrollHeight;	
@@ -240,7 +247,42 @@ body{
 //             document.getElementById('userName').readOnly = true;
 
         }
-
+		
+        function can1(){
+        	$('#message').val('竹風堂您好~');
+        	sendMessage();
+        }
+        
+        function can2(){
+        	$('#message').val('請問有什麼可以幫助您的嗎?');
+        	sendMessage();
+        }
+        
+        function can3(){
+        	$('#message').val('請問您的用餐日期是?');
+        	sendMessage();
+        }
+        
+        function can4(){
+        	$('#message').val('請問您所點選的餐點是?');
+        	sendMessage();
+        }
+        
+        function can5(){
+        	$('#message').val('好的, 請問您稍等一會。');
+        	sendMessage();
+        }
+        
+        function can6(){
+        	$('#message').val('好的, 關於您的提議我們會像主管反應的。');
+        	sendMessage();
+        }
+        
+        function can7(){
+        	$('#message').val('系統忙線中..請稍後再撥。');
+        	sendMessage();
+        }
+        
     </script>
     <jsp:include page="/back_end/PostFooter.jsp" flush="true" />
 </body>
