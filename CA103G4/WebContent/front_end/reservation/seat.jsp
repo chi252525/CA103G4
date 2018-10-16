@@ -216,7 +216,7 @@ width="100%" height="">
 			           </div>
 			         </div>
 			       		
-					  <button href="#" class="cancel" onClick="disconnect();"><i class="fa fa-cog" aria-hidden="true" ></i>取消訂位</button>
+					  <button href="<%=request.getContextPath()%>/front_end/index.jsp" class="cancel"  onClick="disconnect();"><i class="fa fa-cog" aria-hidden="true" ></i>取消訂位</button>
 			          &nbsp; 
 			          <button id="seatSubmit" type="button" class="submitSeat"  onClick="successSubmit ();">確認送出 <i class="fas fa-utensils"></i></button>
 			          <input type="hidden" name="action" value="Seats"> 
