@@ -11,8 +11,8 @@
 
 
 
-<%-- <%@ include file="/front_end/PostHeader.jsp" %> --%>
-<%@ include file="/back_end/HeadquarterHeader.jsp" %> 
+<%@ include file="/back_end/PostHeader.jsp" %>
+
 
      	<div >
      			<b>所有訂位紀錄 - listAllRes.jsp</b>
@@ -26,14 +26,15 @@
 	                                <thead>
 	                                    <tr>
 	                                        <th>訂位流水編號</th>
-	                                        <th>會員編號</th>
-	                                        <th>桌位流水編號</th>
-	                                        <th>訂位成立日期</th>
-	                                        <th>訂位日期時段起始時間</th>
-	                                        <th>訂位日期時段結束時間</th>
+	                                        <th>會員名稱</th>
+	                                        <th>手機號碼</th>
+	                                        <th>位子編號</th>
+	                                        <th>訂位紀錄成立日期</th>
+	                                        <th>用餐起始時間</th>
+	                                        <th>用餐結束時間</th>
 	                                        <th>用餐人數</th>
-	                                        <th>訂位使用狀態</th>           
-	                                        <th>修改</th>           
+	                                        <th>狀態</th>           
+	                                        <th>修改狀態</th>           
 	                                                   
 	                                    </tr>
 	                                </thead>
@@ -87,9 +88,9 @@
                           <%@ include file="page2.file" %>   
                      </div>
                 </div>
-             </div>
+             </div>r
 
 
-<%-- <%@ include file="/back_end/PostFooter.jsp" %>	 --%>
-<%@ include file="/back_end/HeadquarterFooter.jsp" %> 	
+<%@ include file="/back_end/PostFooter.jsp" %>	
+ 	
 	

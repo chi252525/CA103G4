@@ -522,6 +522,15 @@
 		$(function () {
   			$('[data-toggle="tooltip"]').tooltip()
 		})
+        
+        //address
+//         $('#city-list').change(function(){
+//         	$('#mem_Readdr').val($('#city-list').val());
+//         });
+        
+        $('#sector-list').change(function(){
+        	$('#mem_Readdr').val($('#city-list').val() + $('#sector-list').val());
+        });
     </script>
 </body>
 
