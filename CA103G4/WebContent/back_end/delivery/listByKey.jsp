@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%><%-- s分頁 --%>
 <%@ page import="com.delivery.model.*"%>
 <%@ page import="com.employee.model.*"%>
+<%@ page import="com.branch.model.*"%>
 <%-- <%
 //   response.setHeader("Cache-Control","no-store"); //HTTP 1.1
 //   response.setHeader("Pragma","no-cache");        //HTTP 1.0
@@ -18,6 +19,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 
 <%-- s分頁 --%>
 <jsp:useBean id="get_By_Key" scope="session" type="java.util.List<DeliveryVO>" />
+<jsp:useBean id="beSvc" scope="page" class="com.branch.model.BranchService" />
 
 
 <html>
@@ -77,7 +79,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 <table class="table table-hover">
 	<tr>
 		<th>派送單編號</th>
-		<th>分店編號</th>
+		<th>分店名稱</th>
 		<th>員工</th>
 		<th>派送單狀態</th>
 	</tr>
@@ -87,7 +89,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 <c:forEach var="deliveryVO" items="${get_By_Key}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <tr>
 	<td>${deliveryVO.deliv_no}</td>
-	<td>${deliveryVO.branch_no}</td>
+	<td>${beSvc.getBranch(deliveryVO.branch_no).branch_Name}</td>
 		
 	<td>
 	

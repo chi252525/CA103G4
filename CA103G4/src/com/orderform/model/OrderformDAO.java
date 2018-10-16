@@ -900,7 +900,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	@Override
 	public List<OrderformVO> getAll(Map<String, String[]> map) {
 		List<OrderformVO> list = new ArrayList<OrderformVO>();
-		OrderformVO empVO = null;
+		OrderformVO orderformVO = null;
 	
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -909,23 +909,27 @@ public class OrderformDAO implements OrderformDAO_interface {
 		try {
 			
 			con = ds.getConnection();
-			String finalSQL = "select * from emp2 "
+			String finalSQL = "select * from orderform "
 		          + jdbcUtil_CompositeQuery2.get_WhereCondition(map)
-		          + "order by empno";
+		          + "order by order_no";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
 	
 			while (rs.next()) {
-				empVO = new EmpVO();
-				empVO.setEmpno(rs.getInt("empno"));
-				empVO.setEname(rs.getString("ename"));
-				empVO.setJob(rs.getString("job"));
-				empVO.setHiredate(rs.getDate("hiredate"));
-				empVO.setSal(rs.getDouble("sal"));
-				empVO.setComm(rs.getDouble("comm"));
-				empVO.setDeptno(rs.getInt("deptno"));
-				list.add(empVO); // Store the row in the List
+				orderformVO = new OrderformVO();
+				orderformVO.setOrder_no(rs.getString("order_no"));
+				orderformVO.setBranch_no(rs.getString("dek_no"));
+				orderformVO.setMem_no(rs.getString("mem_no"));
+				orderformVO.setBranch_no(rs.getString("branch_no"));
+				orderformVO.setDeliv_no(rs.getString("deliv_no"));
+				orderformVO.setOrder_type(rs.getInt("order_type"));
+				orderformVO.setOrder_price(rs.getDouble("order_price"));
+				orderformVO.setOrder_status(rs.getInt("order_status"));
+				orderformVO.setDeliv_addres(rs.getString("deliv_addres"));
+				orderformVO.setOrder_pstatus(rs.getInt("order_pstatus"));
+				orderformVO.setOrder_date(rs.getDate("order_date"));
+				list.add(orderformVO); // Store the row in the List
 			}
 	
 			// Handle any SQL errors

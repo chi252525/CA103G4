@@ -14,12 +14,9 @@ public class jdbcUtil_CompositeQuery2 {
 	public static String get_aCondition_For_Oracle(String columnName, String value) {
 
 		String aCondition = null;
-
-		if ("empno".equals(columnName) || "sal".equals(columnName) || "comm".equals(columnName) || "deptno".equals(columnName)) // �Ω��L
-			aCondition = columnName + "=" + value;
-		else if ("ename".equals(columnName) || "job".equals(columnName)) // �Ω�varchar
+		if ("order_no".equals(columnName) || "dek_no".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("hiredate".equals(columnName))                          // �Ω�Oracle��date
+		else if ("order_date".equals(columnName))                          // 用於Oracle的date
 			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
 
 		return aCondition + " ";
@@ -40,7 +37,7 @@ public class jdbcUtil_CompositeQuery2 {
 				else
 					whereCondition.append(" and " + aCondition);
 
-				System.out.println("���e�X�d�߸�ƪ�����count = " + count);
+				System.out.println("有送出查詢資料的欄位數count = " + count);
 			}
 		}
 		
