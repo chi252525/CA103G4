@@ -192,7 +192,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="popover" data-placement="bottom" title="客製拉麵食材: " data-content="<%=stb%>">
+                                    <td width="200" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<div class=badge badge-pill badge-warning>客製拉麵食材: </div><span><%=stb%></span>" data-content="">
                                         <%=name%>
                                     </td>
                                     <td width="100">
@@ -509,7 +509,10 @@
         $(function () {
         	  $('[data-toggle="popover"]').popover()
         	})
-
+		//tooltip
+		$(function () {
+  			$('[data-toggle="tooltip"]').tooltip()
+		})
     </script>
 </body>
 
