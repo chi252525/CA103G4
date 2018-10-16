@@ -57,6 +57,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 	private static final String UPDATE_TO_OK2 = "UPDATE orderform set order_status= 3, order_pstatus=3 where deliv_no= ? and order_pstatus=3";
 	private static final String UPDATE_TO_OK3 = "UPDATE orderform set order_status= 3, order_pstatus=4 where deliv_no= ? and order_pstatus=4";
 	
+	private static final String UPDATEORD = "UPDATE orderform set order_status= 3, order_pstatus=2 where order_no=?";
 	
 	
 	@Override
@@ -911,7 +912,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			con = ds.getConnection();
 			String finalSQL = "select * from orderform "
 		          + jdbcUtil_CompositeQuery2.get_WhereCondition(map)
-		          + "order by order_no";
+		          + "order by order_no DESC";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
@@ -919,7 +920,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setBranch_no(rs.getString("dek_no"));
+				orderformVO.setDek_no(rs.getString("dek_no"));
 				orderformVO.setMem_no(rs.getString("mem_no"));
 				orderformVO.setBranch_no(rs.getString("branch_no"));
 				orderformVO.setDeliv_no(rs.getString("deliv_no"));
@@ -960,6 +961,44 @@ public class OrderformDAO implements OrderformDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void updateOk(String ord_no) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEORD);
+
+			pstmt.setString(1, ord_no);
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
 	}
 	
 	

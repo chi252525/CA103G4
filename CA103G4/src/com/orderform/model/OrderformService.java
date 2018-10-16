@@ -70,5 +70,9 @@ public class OrderformService {
 		return dao.getAll(map);
 	}
 	
+	public void ordOk(String ord_no) {
+		dao.updateOk(ord_no);
+	}
+	
 	
 }
