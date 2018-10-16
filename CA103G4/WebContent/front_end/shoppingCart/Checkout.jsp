@@ -115,6 +115,12 @@
     list-style: none;
     opacity:0.8;
 }
+
+	.popover-header {
+    color: blue;
+    background-color:blue !important;
+    font-size: 15px;
+}
 </style>
 </head>
 
@@ -192,7 +198,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="popover" data-placement="bottom" title="客製拉麵食材: " data-content="<%=stb%>">
+                                    <td width="200" data-toggle="tooltip" data-placement="bottom" data-html="true" title="??" >
                                         <%=name%>
                                     </td>
                                     <td width="100">
@@ -506,10 +512,14 @@
             
         }
         //popover
+//         $(function () {
+//         	  $('[data-toggle="popover"]').popover()
+//         	})
+		
+        //tooltip
         $(function () {
-        	  $('[data-toggle="popover"]').popover()
-        	})
-
+ 			 $('[data-toggle="tooltip"]').tooltip()
+			})
     </script>
 </body>
 

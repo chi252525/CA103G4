@@ -192,7 +192,7 @@
                             }
                             %>
                                 <tr>
-                                    <td width="200" data-toggle="popover" data-placement="bottom" title="客製拉麵食材: " data-content="<%=stb%>">
+                                    <td width="200" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<div class=badge badge-pill badge-warning>客製拉麵食材: </div><span><%=stb%></span>" data-content="">
                                         <%=name%>
                                     </td>
                                     <td width="100">
@@ -245,7 +245,7 @@
             <div class="col-md-12">
 
                 <fieldset>
-                    <form method="post" action="checkoutServlet.do">
+                    <form method="post" action="<%=request.getContextPath() %>/front_end/shoppingCart/checkoutServlet.do">
                         <%--送去orferform Serbvlet --%>
                         <input type="hidden" name="action" value="insert">
                         <%--                         <c:set var="action" value="insert" scope="session" /> --%>
@@ -509,7 +509,10 @@
         $(function () {
         	  $('[data-toggle="popover"]').popover()
         	})
-
+		//tooltip
+		$(function () {
+  			$('[data-toggle="tooltip"]').tooltip()
+		})
     </script>
 </body>
 

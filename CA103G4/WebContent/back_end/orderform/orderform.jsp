@@ -1,11 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.orderform.model.*"%>
   
 <%
 pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 %>
 
+<%-- <jsp:useBean id="listEmps_ByCompositeQuery" scope="request" type="java.util.List<OrderformVO>" /> --%>
+<jsp:useBean id="beSvc" scope="page" class="com.branch.model.BranchService" />
 
 <!DOCTYPE html>
 <html>
@@ -106,14 +109,14 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 			 <select size="1" name="dek_no" class="form-control" id="exampleSelect1">
 	 			<option  value="">
 				<c:forEach var="deskVO" items="${deSvc.getByBrano(empVO.branch_No)}">
-				<option value="${deskVO.dek_no}">${deskVO.dek_no}
+				<option value="${deskVO.dek_no}">${(deskVO.dek_no).substring(7)}
 				</c:forEach>
 			</select>
 			</div>
 			
 			<div class="input-group-prepend" style=" margin-right:70px;">
 	  			<span class="input-group-text">訂單成立時間:</span>
-	  			<input type="text" id="f_date1" name="order_date">
+	  			<input type="text" id="f_date1" name="hiredate">
 	  		</div>
 	  		
 			 <div class="input-group-prepend" style=" margin-right:30px;">
@@ -125,89 +128,113 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	<br>
 
 
-<!-- 	<table class="table table-hover"> -->
-<!-- 	<tr> -->
-<!-- 		<th>訂單編號</th> -->
-<!-- 		<th>桌位流水號</th> -->
-<!-- 		<th>會員編號</th> -->
-<!-- 		<th>分店編號</th> -->
-<!-- 		<th>派送單編號</th> -->
-<!-- 		<th>訂單類型</th> -->
-<!-- 		<th>訂單金額</th> -->
-<!-- 		<th>訂單狀態</th> -->
-<!-- 		<th>外送地址</th> -->
-<!-- 		<th>訂單成立時間</th> -->
-<!-- 		<th>付款狀態</th> -->
-<!-- 	</tr> -->
+	<table class="table table-hover">
+	<tr>
+		<th>訂單編號</th>
+		<th>桌號</th>
+		<th>會員編號</th>
+		<th>派送單編號</th>
+		<th>訂單類型</th>
+		<th>訂單金額</th>
+		<th>外送地址</th>
+		<th>訂單成立時間</th>
+		<th>付款狀態</th>
+		<th>訂單狀態</th>
+	</tr>
 	
-<%-- 	<c:forEach var="deliveryVO" items="${get_By_Key}"> --%>
-<!-- <tr> -->
-<%-- 	<td>${deliveryVO.deliv_no}</td> --%>
-<%-- 	<td>${deliveryVO.branch_no}</td> --%>
-		
-<!-- 	<td> -->
+	<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}">
+<tr>
+	<%-- 訂單  --%>
+	<td>${ordVO.order_no}</td>
 	
-<%-- 	<jsp:useBean id="empSvc" scope="page" class="com.employee.model.EmpService" /> --%>
+	<%-- 桌位  --%>
+	<c:if test="${ordVO.dek_no != null}">
+	<td>${(ordVO.dek_no).substring(7)}</td>
+	</c:if>
+	<c:if test="${ordVO.dek_no == null}">
+	<td>無</td>
+	</c:if>
 
-<%-- 	<c:if test="${(deSvc.out).size() != (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size()}"> --%>
-<%-- 		<c:if test="${deliveryVO.emp_no == null}"> --%>
-<%-- 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"> --%>
-<!-- 				<select size="1" name="emp_no"> -->
-<%-- 					<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}"> --%>
-<%-- 						<c:if test="${!(deSvc.out).contains(empVO.emp_No)}"> --%>
-<%-- 							<option value="${empVO.emp_No}" ${(deliveryVO.emp_no==empVO.emp_No)? 'selected':'' } >${empVO.emp_Name} --%>
-<%-- 						</c:if> --%>
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
-							
-<!-- 					<input type="hidden" name="action" value="update"> -->
-<%-- 					<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}"> --%>
-<%-- 					<input type="hidden" name="deliv_status"  value="${deliveryVO.deliv_status}"> --%>
-<!-- 					<input type="hidden" name="whichPage"> -->
-<%-- 					<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> --%>
-<!-- 					<input type="submit" value="指派外送員"> -->
-<!-- 			</form>	 -->
-<%-- 		</c:if> --%>
-<%-- 	</c:if> --%>
+	<c:if test="${ordVO.mem_no != null}">
+	<td>${ordVO.mem_no}</td>
+	</c:if>
+	<c:if test="${ordVO.mem_no == null}">
+	<td>無</td>
+	</c:if>
 	
-<%-- 	<c:if test="${(deSvc.out).size() == (empSvc.getOutEmpByBranchNo(empVO.branch_No)).size() and deliveryVO.emp_no == null}"> --%>
-<!-- 		目前尚無可派送員工。 -->
-<%-- 	</c:if> --%>
+	<%-- 外送單  --%>
+	<c:if test="${ordVO.deliv_no != null}">
+	<td>${ordVO.deliv_no}</td>
+	</c:if>
+	<c:if test="${ordVO.deliv_no == null and ordVO.order_type == 2}">
+	<td>尚未派送</td>
+	</c:if>
+	<c:if test="${ordVO.deliv_no == null and ordVO.order_type != 2}">
+	<td>無需派送</td>
+	</c:if>
 	
-						
-<%-- 		<c:if test="${deliveryVO.emp_no != null}">			 --%>
-<%-- 					<c:forEach var="empVO" items="${empSvc.getOutEmpByBranchNo(empVO.branch_No)}"> --%>
-<%-- 					<c:if test="${deliveryVO.emp_no==empVO.emp_No}"> --%>
-<%-- 					${empVO.emp_No}-${empVO.emp_Name} --%>
-<%-- 					</c:if> --%>
-<%-- 					</c:forEach> --%>
-<%-- 		</c:if> --%>
-<!-- 		</td> -->
-			
-<%-- <%-- 下面可以操控狀態，1為等待派送文字，2時為可以點擊確認的按鈕，點擊後會成為3，派送完成的字樣--%> --%>
-		
-<!-- 		<td> -->
-<%-- 			<c:if test="${deliveryVO.deliv_status == '1'}"> --%>
-<!-- 				 等待派送 -->
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${deliveryVO.deliv_status == '2'}"> --%>
-<%-- 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/delivery/delivery.do"> --%>
-<!-- 					<input type="hidden" name="action" value="update"> -->
-<%-- 					<input type="hidden" name="deliv_no"  value="${deliveryVO.deliv_no}"> --%>
-<%-- 					<input type="hidden" name="emp_no"  value="${deliveryVO.emp_no}"> --%>
-<%-- 					<input type="hidden" name="deliv_status"  value="${deliveryVO.deliv_status}"> --%>
-<!-- 					<input type="hidden" name="whichPage"> -->
-<%-- 					<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> --%>
-<!-- 					<input type="submit" value="確認完成"> -->
-<!-- 				</form>	 -->
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${deliveryVO.deliv_status == '3'}"> --%>
-<!-- 				 派送完成 -->
-<%-- 			</c:if> --%>
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<%-- </c:forEach> --%>
-<!-- 	</table> -->
+	<%-- 訂單類型  --%>
+	<c:if test="${ordVO.order_type == 0}">
+	<td>內用</td>
+	</c:if>
+	<c:if test="${ordVO.order_type == 1}">
+	<td>外帶</td>
+	</c:if>
+	<c:if test="${ordVO.order_type == 2}">
+	<td>外送</td>
+	</c:if>
+	
+	<td>${ordVO.order_price}元</td>
+	
+	<c:if test="${ordVO.deliv_addres != null}">
+	<td>${ordVO.deliv_addres}</td>
+	</c:if>
+	<c:if test="${ordVO.deliv_addres == null}">
+	<td>無外送地址</td>
+	</c:if>
+	
+	<td>${ordVO.order_date}</td>
+	
+	
+	<c:if test="${ordVO.order_pstatus == 1}">
+	<td>未付款</td>
+	</c:if>
+	<c:if test="${ordVO.order_pstatus == 2}">
+	<td>現金付款</td>
+	</c:if>
+	<c:if test="${ordVO.order_pstatus == 3}">
+	<td>信用卡付款</td>
+	</c:if>
+	<c:if test="${ordVO.order_pstatus == 4}">
+	<td>竹幣付款</td>
+	</c:if>
+	
+	<td>
+	<c:if test="${ordVO.order_status == 1}">
+	處理中
+	</c:if>
+	
+	
+	<c:if test="${ordVO.order_status == 2 and ordVO.order_type == 2}">
+	已出餐
+	</c:if>
+	<c:if test="${ordVO.order_status == 2 and ordVO.order_type != 2}">
+	<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do">
+	<input type="hidden" name="action" value="ordOk">
+	<input type="hidden" name="ord_no" value="${ordVO.order_no}">
+	<input type="submit" value="確認完成">
+	</form>	
+	</c:if>
+	
+	<c:if test="${ordVO.order_status == 3}">
+	已完成
+	</c:if>
+	</td>
+	
+	
+	</tr>
+</c:forEach>
+	</table>
 
 
 
@@ -255,7 +282,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 </body>
 
 <link   rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css" />
-<script src="datetimepicker/jquery.js"></script>
+<%-- <script src="datetimepicker/jquery.js"></script> --%>
 <script src="datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <script>

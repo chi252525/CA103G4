@@ -21,6 +21,7 @@ import javax.websocket.Session;
 import com.branch.model.BranchService;
 import com.custommeals.model.CustommealsService;
 import com.custommeals.model.CustommealsVO;
+import com.mailservice.MailService;
 import com.member.model.MemberVO;
 import com.menu.model.MenuService;
 import com.menu.model.MenuVO;
@@ -238,7 +239,7 @@ public class OrderformServlet extends HttpServlet {
 			}
 			
 			toMem.sendMessage(tels , message);
-
+			
 			//有新的外送或外帶訂單
 			Send toEmp = new Send();
 //			String[] tels2 ={tel};//上線用
@@ -258,8 +259,8 @@ public class OrderformServlet extends HttpServlet {
 			}
 			
 			toEmp.sendMessage(tels2 , message2);
-			
-			
+			//寄出認證信
+			new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", message);
 			
 			//準備轉交
 //			String url = "/front_end/orderinvoice/seeorderinvoice.jsp";
@@ -386,6 +387,26 @@ public class OrderformServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		if ("ordOk".equals(action)) {
+			String ordNo = req.getParameter("ord_no");
+			//開始更改
+			OrderformService ordSvc = new OrderformService();
+			ordSvc.ordOk(ordNo);
+			//準備轉交
+			String url = "/back_end/orderform/orderform.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 
 	}

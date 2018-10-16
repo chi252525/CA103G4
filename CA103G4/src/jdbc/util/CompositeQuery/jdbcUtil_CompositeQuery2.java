@@ -16,8 +16,8 @@ public class jdbcUtil_CompositeQuery2 {
 		String aCondition = null;
 		if ("order_no".equals(columnName) || "dek_no".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("order_date".equals(columnName))                          // 用於Oracle的date
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
+		else if ("hiredate".equals(columnName))                          // 用於Oracle的date
+			aCondition = "to_char(" + "order_date" + ",'yyyy-mm-dd')='" + value + "'";
 
 		return aCondition + " ";
 	}

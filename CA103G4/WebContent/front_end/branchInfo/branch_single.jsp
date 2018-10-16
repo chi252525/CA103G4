@@ -279,7 +279,7 @@ style >.mapouter {
 		<!-- 						                            </div> -->
 		<c:if test="${not empty brVO}">
 			<!-- branch card -->
-			<div class="card col-12 col-md-8 center" >
+			<div class="card col-12 col-md-8 center" style="background-color: rgb(255,255,255,0.9);">
 				<div class="card-body">
 					<h5 class="card-title"><b>${brVO.branch_Name}</b></h5>
 					<img src="<%=request.getContextPath()%>/res/img/all_branch.jpg" style="width:100%">
@@ -297,8 +297,8 @@ style >.mapouter {
 				<!-- 			<img class="card-img-bottom" src=".../100px180/" alt="Card image cap"> -->
 				<div class="col-12">
 				<div class="mapouter center">
-					<div class="gmap_canvas">
-						<iframe width="800px" height="300px" id="gmap_canvas"
+					<div class="gmap_canvas" style="margin-bottom: 50px;">
+						<iframe width="1200px" height="300px" id="gmap_canvas"
 							src="https://maps.google.com/maps?q=${brVO.branch_Lat}%2C%20${brVO.branch_Lan}&t=&z=15&ie=UTF8&iwloc=&output=embed"
 							frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 						<!-- 						<a href="https://www.pureblack.de">homepage erstellen</a> -->
@@ -406,9 +406,7 @@ style >.mapouter {
                 xhr.open("post", "<%=request.getContextPath()%>/back_end/branch/branch.do", true);
                 xhr.setRequestHeader("Content-Type",
                     "application/x-www-form-urlencoded");
-                xhr.send("action=delete&branch_No=
-                    " +
-                    document.getElementById("branch_No").value);
+                xhr.send("action=delete&branch_No=" +document.getElementById("branch_No").value);
             }
 
             function
@@ -416,8 +414,7 @@ style >.mapouter {
                 // 				console.log("0000");
                 $.ajax({
                     type: "post",
-                    url: "<%=request.getContextPath()%> /
-                    back_end / branch / branch.do ",
+                    url: "<%=request.getContextPath()%>/back_end / branch / branch.do ",
                     data: {
                         "action": "listAll"
                     },
@@ -441,7 +438,7 @@ style >.mapouter {
                                     "</td><td>" +
                                     result[i].branch_Tel +
                                     "</td><td><input type=\"button\" class=\"update btn btn-warning btn-sm\" value=\"修改\" style=\"display:none\"/></td>" +
-                                    "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");
+                                    "<td><input type=\"button\" class=\"del btn btn-danger btn-sm\" value=\"刪除\" style=\"display:none\"/></td>");               
                         }
                         document.getElementById("allbranch").disabled = true;
                     },

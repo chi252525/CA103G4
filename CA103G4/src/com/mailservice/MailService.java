@@ -44,6 +44,7 @@ public class MailService {
 		   message.setSubject(subject);
 		   //設定信中的內容 
 		   message.setText(messageText);
+		   
 
 		   Transport.send(message);
 		   System.out.println("傳送成功!");

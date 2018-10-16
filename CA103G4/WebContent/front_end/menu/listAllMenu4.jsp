@@ -201,7 +201,7 @@ body {
 								<h5 class="card-title">$${menuSvc.getOneMenu(menuVO.menu_No).menu_Price} ${menuVO.menu_Price}</h5>
 								<p class="card-text" style="height: 72px;">${menuSvc.getOneMenu(menuVO.menu_No).menu_Intro}	${menuVO.menu_Intro}</p>
 
-								<form id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do" method="POST">
+								<form id="menuform" name="shoppingForm" class="shoppingForm" action="<%=request.getContextPath()%>/protected_front/shoppingCart/ShoppingServlet.do" method="POST">
 									<div class="row">
 										<div style="width:100px; margin-left:20px; margin-top:5px;">
 											數量 <input type="number" name="quantity" size="3" value=1 style="width: 40px">
