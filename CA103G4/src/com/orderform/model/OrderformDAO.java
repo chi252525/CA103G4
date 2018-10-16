@@ -911,7 +911,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			con = ds.getConnection();
 			String finalSQL = "select * from orderform "
 		          + jdbcUtil_CompositeQuery2.get_WhereCondition(map)
-		          + "order by order_no";
+		          + "order by order_no DESC";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
@@ -919,7 +919,7 @@ public class OrderformDAO implements OrderformDAO_interface {
 			while (rs.next()) {
 				orderformVO = new OrderformVO();
 				orderformVO.setOrder_no(rs.getString("order_no"));
-				orderformVO.setBranch_no(rs.getString("dek_no"));
+				orderformVO.setDek_no(rs.getString("dek_no"));
 				orderformVO.setMem_no(rs.getString("mem_no"));
 				orderformVO.setBranch_no(rs.getString("branch_no"));
 				orderformVO.setDeliv_no(rs.getString("deliv_no"));
