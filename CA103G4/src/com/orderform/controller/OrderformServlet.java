@@ -402,12 +402,6 @@ public class OrderformServlet extends HttpServlet {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
 
 	}
 

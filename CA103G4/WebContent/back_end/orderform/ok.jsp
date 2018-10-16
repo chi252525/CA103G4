@@ -98,7 +98,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	
 	<%@ include file="pages/page1_ByCompositeQuery.file" %>
 
-	<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}">
+	<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <tr>
 	<%-- 訂單  --%>
 	<td>${ordVO.order_no}</td>

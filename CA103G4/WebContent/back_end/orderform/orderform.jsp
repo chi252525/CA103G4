@@ -97,7 +97,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	
 	<jsp:useBean id="deSvc" scope="page" class="com.desk.model.DeskService" />
 	<%-- 以下是複合查詢 --%>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" class="form-inline" role="form">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" class="form-inline" role="form" name="First">
 		
 		<div class="form-row align-items-center">
 		
@@ -165,5 +165,19 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
            maxDate:              new Date()  // 去除今日(不含)之後
         });
 </script>
+
+    <%
+    if (request.getAttribute("listEmps_ByCompositeQuery") == null) {
+	%>
+	<script>
+		function myFunction() {
+			document.getElementsByName("First")[0].submit();
+		}
+
+		$(document).ready(myFunction);
+	</script>
+	<%
+		}	
+	%>
 
 </html>
