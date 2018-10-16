@@ -350,7 +350,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
 4,
-BFILE_TO_BLOB (BFILENAME ('POST_DIR','0010.jpg')),
+BFILE_TO_BLOB (BFILENAME ('POST_DIR','0010.png')),
 SYSDATE,18,'PS1');
 
 
