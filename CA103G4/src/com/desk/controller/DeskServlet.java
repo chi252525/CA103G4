@@ -122,7 +122,7 @@ public class DeskServlet extends HttpServlet {
 			selectSeats.forward(req, res);
 			return;
 			}catch(Exception e) {
-				errorMsgs.add("資料新增失敗"+e.getMessage());
+//				errorMsgs.add("資料新增失敗"+e.getMessage());
 				RequestDispatcher failuerView = req.getRequestDispatcher("/front_end/reservation/reservation.jsp");
 				failuerView.forward(req, res);
 		  }
