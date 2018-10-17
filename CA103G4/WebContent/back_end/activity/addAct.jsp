@@ -140,7 +140,7 @@
 									<div class="col-12">
 										<!-- 編輯區塊 -->
 										<textarea name="act_Content">
-					            	<%=(actVO == null) ? "慶祝資策會Java班CA103終於要結訓了，竹風堂拉麵將招待各位學員及老師們，點拉麵即折100元，相當於半價優惠!!" : actVO.getAct_Content()%>
+					            	<%=(actVO == null) ? "結訓大優惠!凡點任何餐點即現折100元!" : actVO.getAct_Content()%>
 					            </textarea>
 										<!-- */編輯區塊 -->
 									</div>
@@ -162,13 +162,15 @@
 								</div>
 							</div>
 						</div>
-						<button type="button" class="btn btn-secondary mt-2" id="demo">+</button>
+						
+						
 						<input type="hidden" name="action" value="insert"> <input
 							type="hidden" name="emp_No" value="E000000002">
 						<button type="submit" class="btn btn-secondary">新增</button>
 						<a
 							href="<%=request.getContextPath()%>/back_end/activity/listAllActivity.jsp"
 							class="btn btn-dark ">放棄編輯</a>
+						<button type="button" class=" btn btn-default mt-2" id="demo"><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" style="width:100px;height:50%;"></button>
 							
 					</form>
 					
@@ -176,7 +178,7 @@
 							
 							$("#demo").click(function(){
 								console.log("demo clicked")
-								$("#act_Name").val("【CA103限定】竹風堂中央店招待資策會CA103 JAVA班全體師生點拉麵折100元");
+								$("#act_Name").val("【全台門市適用】竹風堂優惠點青蔥豚骨拉麵折100元");
 								
 							})
 							
