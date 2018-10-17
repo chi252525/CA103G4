@@ -32,6 +32,7 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status FROM orderinvoice order by invo_no DESC";
 	private static final String GET_ONE_STMT = "SELECT invo_no,order_no,menu_no,custom_no,invo_status,menu_nu,custom_nu FROM orderinvoice where order_no = ? and invo_status = 1";
 	private static final String GET_ALL_NU = "SELECT menu_nu,custom_nu FROM orderinvoice where order_no = ? and invo_status = 1";
+	private static final String GET_ALL = "SELECT order_no,menu_no,custom_no,menu_nu,custom_nu FROM orderinvoice where order_no = ?";
 	private static final String DELETE = "DELETE FROM orderinvoice where invo_no = ?";
 	private static final String UPDATE = "UPDATE orderinvoice set invo_status=? where invo_no = ? and order_no = ?";
 	private static final String GET_MEALINVOICE ="SELECT MENU_NO, CUSTOMMEALS_NO FROM ORDERINVOICE WHERE ORDER_NO=?";
@@ -442,6 +443,66 @@ public class OrderinvoiceDAO implements OrderinvoiceDAO_interface {
 			}
 		}
 		return all;
+	}
+	
+	@Override
+	public List<OrderinvoiceVO> getOne(String order_no) {
+		List<OrderinvoiceVO> list = new ArrayList<OrderinvoiceVO>();
+		OrderinvoiceVO orderinvoiceVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL);
+			
+			pstmt.setString(1, order_no);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// deliveryVO 也稱為 Domain objects
+				orderinvoiceVO = new OrderinvoiceVO();
+				orderinvoiceVO.setOrder_no(rs.getString("order_no"));
+				orderinvoiceVO.setMenu_no(rs.getString("menu_no"));
+				orderinvoiceVO.setCustom_no(rs.getString("custom_no"));
+				orderinvoiceVO.setMenu_nu(rs.getString("menu_nu"));
+				orderinvoiceVO.setCustom_nu(rs.getString("custom_nu"));
+				list.add(orderinvoiceVO);
+			}
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 	

@@ -3,11 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.reservation.model.*"%>
 
-<%-- <% --%>
-<!-- 	ResService resSvc = new ResService(); -->
-<!-- 	List<ResVO> list = resSvc.getAll(); -->
-<!-- 	pageContext.setAttribute("list",list); -->
-<!-- %> -->
+
 
 
 
@@ -18,13 +14,13 @@
      			<b>所有訂位紀錄 - listAllRes.jsp</b>
      			
      			 <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-5">
                             <label for="inputAddress">日期</label>
-                            <input type="text" class="form-control" placeholder="click me!" id="f_date1" name="date">
+                            <input type="text" class="form-control date" placeholder="click me!" id="f_date1" name="date">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-5 zone">
                               <label for="inputCity">時段</label>
-                              <select id="city-list" class="form-control" onchange="branchPush()">
+                              <select id="zone" class="form-control">
                                 	<option value="10:30" >10:30</option>
                                 	<option value="12:00" >12:00</option>
                                 	<option value="13:30" >13:30</option>
@@ -35,6 +31,9 @@
                                 	<option value="21:00" >21:00</option>                   
                               </select>
                         </div>
+                        <div class="form-group col-md-2 btnDiv">
+                        <button type="submit" class="btn searchRes" onclick="zeroPush();">確認送出</button>
+                        </div>
                   </div>
                   
      			<hr>
@@ -44,90 +43,124 @@
                     <div class="col-md-12 text-center">
                             <div class="container" >
                                 <table class="table table-striped">
-	                                <thead>
-	                                    <tr>
-	                                        <th>訂位流水編號</th>
-	                                        <th>會員名稱</th>
-	                                        <th>手機號碼</th>
-	                                        <th>位子編號</th>
-	                                        <th>訂位紀錄成立日期</th>
-	                                        <th>用餐起始時間</th>
-	                                        <th>用餐結束時間</th>
-	                                        <th>用餐人數</th>
-	                                        <th>狀態</th>           
-	                                        <th>修改狀態</th>           
-	                                                   
+	                                <thead id="mainName">
+	                                    
+<!-- 	                                        <th>訂位流水編號</th> -->
+<!-- 	                                        <th>會員名稱</th> -->
+<!-- 	                                        <th>手機號碼</th> -->
+<!-- 	                                        <th>位子編號</th> -->
+<!-- 	                                        <th>訂位紀錄成立日期</th> -->
+<!-- 	                                        <th>用餐起始時間</th> -->
+<!-- 	                                        <th>用餐結束時間</th> -->
+<!-- 	                                        <th>用餐人數</th> -->
+<!-- 	                                        <th>狀態</th>            -->
+<!-- 	                                        <th>修改狀態</th>            -->
+
+												              
+	                                    
+		                            </thead>
+	                                <tbody id="content"> 
+	      					     		<tr>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td></td>
+	                						<td>
+	                						<div class="dropdown">
+											  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											    狀態更改
+											  </button>
+											  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											    <a class="dropdown-item" href="#">Action</a>
+											    <a class="dropdown-item" href="#">Another action</a>
+											  </div>
+											</div>
+                                            </td>
+<!-- 		                                        <td> -->
+<%-- 				 								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/res/res.do" style="margin-bottom: 0px;"> --%>
+<!-- 												     <input type="submit" value="修改"> -->
+<%-- 												     <input type="hidden" name="res_no"  value="${resVO.res_no}"> --%>
+<!-- 												     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
+<!-- 												</td> -->
+											
 	                                    </tr>
-	                                </thead>
-                                <tbody> 
-					<%@ include file="page1.file" %> 
-					<c:forEach var="resVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">                       
-                                    <tr>    
-                	
-      					<c:set var="res_timefn">
-      							${resVO.res_timefn}
-      					</c:set>   
-      					<c:set var="res_timebg">
-      							${resVO.res_timefn}
-      					</c:set>
-      					     	
-                		
-                                        <td>${resVO.res_no}</td>
-                                        <td>${resVO.mem_no}</td>
-                                        <td>${resVO.dek_no}</td>
-                                        <td>${resVO.res_submit}</td>
-                                       <td> <% 
-				                             java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
-				                             String res_timebg = df.format(java.sql.Timestamp.valueOf((String)pageContext.getAttribute("res_timebg")));
-				
-				                             out.println(res_timebg);
-				                          %> </td>
-                                        <td> <% 
-				                             java.text.DateFormat fd = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
-				                             String res_timefn = fd.format(java.sql.Timestamp.valueOf((String)pageContext.getAttribute("res_timefn")));
-				
-				                             out.println(res_timefn);
-				                          %> </td>
-                                        <td>${resVO.res_people}</td>
-                                        <td>${resVO.res_status}</td>
-                                        
-                                        <td>
-										  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/res/res.do" style="margin-bottom: 0px;">
-										     <input type="submit" value="修改">
-										     <input type="hidden" name="res_no"  value="${resVO.res_no}">
-										     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-										</td>
-				
-                                    </tr>
-                                  
-                   </c:forEach> 
-                   
-                                </tbody>
+	                                  
+	                   
+	                                </tbody>
                               
                                           
                             </table>
-                          <%@ include file="page2.file" %>   
+
                      </div>
                 </div>
              </div>
 
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/reservation/css/listAllRes.css"> 
 <%@ include file="/back_end/PostFooter.jsp" %>	
 <script>
+	var date2;
+	var zone2;
+	$(function(){
+		$('.date').change(function(){
+			date2 = $(this).val();
+			console.log(date2);
+		});
+	});	
+	$(function(){
+		$('#zone').change(function(){
+			zone2 = $('#zone').val();
+			console.log(zone2);
+		});
+	});
 	function zeroPush(){
 	    $.ajax({
 	  		url: "<%=request.getContextPath()%>/res.do", 
 	  		data:{"action":"queryRes", "date2":date2, "zone2":zone2},
 	  		success: function(result){
-	  			console.log("===pass queryRes===")
+	  			console.log("===pass queryRes===");
+	  			console.log(result);
+	  			$("#mainName").empty();
+  				$("#mainName").append("<tr><th>訂位流水編號</th><th>會員名稱</th><th>手機號碼</th><th>位子編號</th><th>訂位紀錄成立日期</th><th>用餐起始時間</th><th>用餐結束時間</th><th>用餐人數</th><th>狀態</th><th>修改狀態</th></tr>")
 	  			var res_timebgList = JSON.parse(result);
 	  			for(var i=0; i < res_timebgList.length ;i++){
 	  				var	res_timebg = res_timebgList[i];
+	  				
 	  				console.log(res_timebg.res_no);
+	  				     var trString="";
+	  				     trString += "<tr>";
+// 	  				 for(var j = 0; j < res_timebg.length; j++){	
+                     $.each(res_timebg,function(k,field){	
+	  				     trString += "<td>";
+	  				     trString += field;
+	  				     trString += "</td>";
+	  				 });
+	  				     trString += "</tr>";
+	  		
+	  				     $("#content").append(trString);
+	  				
+// 	  				document.getElementById("#1").innerHTML = res_timebg.res_no;
+// 	  				document.getElementById("#2").innerHTML = res_timebg.mem_no;
+// 	  				document.getElementById("#3").innerHTML = res_timebg.dek_no;
+// 	  				document.getElementById("#4").innerHTML = res_timebg.res_submit;
+// 	  				document.getElementById("#5").innerHTML = res_timebg.res_timebg;
+// 	  				document.getElementById("#6").innerHTML = res_timebg.res_timefn;
+// 	  				document.getElementById("#7").innerHTML = res_timebg.res_people;
+// 	  				document.getElementById("#8").innerHTML = res_timebg.res_status;
+	  			   
 	  			}
 	  	}});
 	}
 </script>	
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {
            width:  300px;   /* width:  300px; */

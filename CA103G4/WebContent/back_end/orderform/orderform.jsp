@@ -11,6 +11,9 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 
 
 <jsp:useBean id="beSvc" scope="page" class="com.branch.model.BranchService" />
+<jsp:useBean id="dsSvc" scope="page" class="com.orderinvoice.model.OrderinvoiceService" />
+<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
+<jsp:useBean id="customSvc" scope="page" class="com.custommeals.model.CustommealsService"/>   
 
 <!DOCTYPE html>
 <html>
@@ -146,6 +149,44 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
  <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<c:if test="${listEmps_ByCompositeQuery != null}">
+<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}">
+
+<div class="modal fade" id="Ooo${ordVO.order_no}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">訂單明細</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      <c:forEach var="dsVO" items="${dsSvc.findOneByOrder(ordVO.order_no)}">
+		      <c:if test="${dsVO.menu_no != null}">
+			  	${menuSvc.getOneMenu(dsVO.menu_no).menu_Id}  ${dsVO.menu_nu}碗
+			  </c:if>
+		      <c:if test="${dsVO.custom_no != null}">
+			  	${customSvc.getOneCustommeals(dsVO.custom_no).custom_Name}  ${dsVO.custom_nu}碗
+			  </c:if>
+			   <br>
+		  </c:forEach>
+	      </div>
+	     <button type="button" class="btn" data-dismiss="modal" style="background-color: #A42D00">確認</button>
+	    </div>
+	  </div>
+	</div>
+
+</c:forEach>
+</c:if>
+
+
+
+
+
+
 
 </body>
 

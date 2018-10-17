@@ -24,7 +24,7 @@
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
-	border-radius: 15px;
+/* 	border-radius: 15px; */
     text-align: center;
   }
   table#table-1 h4 {
@@ -56,7 +56,7 @@
     text-align: center;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 600;
-    border-radius: 15px;
+/*     border-radius: 15px; */
   }
   th, td {
     padding: 5px;

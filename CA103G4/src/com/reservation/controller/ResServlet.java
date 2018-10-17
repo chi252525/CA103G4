@@ -70,9 +70,10 @@ public class ResServlet extends HttpServlet {
 		if("queryRes".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			System.out.println("enter controller  queryRes");
 			try {
 				String date2 = req.getParameter("date2");
+				System.out.println("queryRes1:" + date2);
 				if(date2 == null || (date2.trim()).length() == 0){
 					errorMsgs.add("請輸入日期");
 				}
@@ -84,6 +85,7 @@ public class ResServlet extends HttpServlet {
 				}
 				
 				String zone2 = req.getParameter("zone2");
+				System.out.println("queryRes2:" + zone2);
 				if(zone2 == null || (zone2.trim()).length() == 0){
 					errorMsgs.add("請輸入時段");
 				}
@@ -109,6 +111,7 @@ public class ResServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+				req.setAttribute("res_timebgList", res_timebgList);
 				
 				String jsonStr = new JSONArray(res_timebgList).toString();
 				PrintWriter out = res.getWriter();

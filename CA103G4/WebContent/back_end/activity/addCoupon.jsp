@@ -123,8 +123,10 @@
 								</div>
 								<div class="col-md-3">
 								<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-secondary" >新增</button></div>
-							<button type="button" class="btn btn-secondary mt-2" id="demo">+</button>
+							<button type="submit" class="btn btn-secondary" >新增</button>
+							<button type="button" class=" btn btn-default mt-2" id="demo"><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" style="width:100px;height:50%;"></button>
+	</div>
+												
 								<div class="col-md-3"></div>
 								<div class="col-md-3"></div>
 								<div class="col-md-3">
@@ -148,7 +150,7 @@
 							
 							$("#demo").click(function(){
 								console.log("demo clicked")
-								$("#coucat_Name").val("【全台門市適用】結訓大解放! 點一碗拉麵即折100元優惠卷");
+								$("#coucat_Name").val("青蔥豚骨拉麵折100元");
 								
 							})
 							
