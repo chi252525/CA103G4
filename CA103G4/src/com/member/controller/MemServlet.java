@@ -299,7 +299,7 @@ public class MemServlet extends HttpServlet{
 
 					jedis.set(memVOreg.getMem_No(), authCode);
 					
-					jedis.expire(memVOreg.getMem_No(), 180);
+					jedis.expire(memVOreg.getMem_No(), 600);
 							
 				/***************************4.信已寄出,準備轉交檢查頁面(Send the check view)************/
 					jedis.close();
