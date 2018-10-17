@@ -101,7 +101,12 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <tr>
 	<%-- 訂單  --%>
-	<td>${ordVO.order_no}</td>
+	
+	<td>
+	<button type="button" class="btn btncolor" data-toggle="modal" data-target="#Ooo${ordVO.order_no}">
+	${ordVO.order_no}
+	</button>
+	</td>
 	
 	<%-- 桌位  --%>
 	<c:if test="${ordVO.dek_no != null}">

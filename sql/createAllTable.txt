@@ -235,9 +235,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 如果覺得沒什麼味道可以加點桌上的番茄醋增味，
 比起伊比利豬我更偏好鴨胸，價格上算略高但也吃得出用心，
 缺點大概就是沒有碗公大的香菜可以加點。',
-5,
+2,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0001.jpg')),
-SYSDATE,12,'PS1');
+SYSDATE,123,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -247,9 +247,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '麵好吃，湯溫不燙
 但是今晚加點的肉增量（角煮）第一次吃到是冷的，與以往大不相同，
 詢問後告知是冷的沒錯，讓人感到意外',
-5,
+3,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0002.jpeg')),
-SYSDATE,17,'PS1');
+SYSDATE,175,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -264,9 +264,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 4. 吃麵
 5. 牛肉夾白飯吃
 6. 麵吃完白飯倒湯裡',
-5,
+4,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0003.jpeg')),
-SYSDATE,12,'PS1');
+SYSDATE,128,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -276,9 +276,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '沒想到週六晚上去還吃的到限定版，我點特製麵加大　麵有點像卷卷麵 
 很好吃，黑胡椒調味的舒肥叉燒也很讚！我的沾麵吃法是夾適量的麵 
 完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，值得',
-5,
+2,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0004.jpg')),
-sysdate,13,'PS1');
+sysdate,139,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -288,9 +288,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '鹽味拉麵
 使用大量的魚跟雞骨經過10個小時以上的微火熬煮，櫻花蝦跟干貝各種
 海鮮的清新香味層次分明的浮現，搭配精選的細麵，清香又豐潤的湯頭及麵條清爽的口感保證對味！',
-5,
+3,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0005.jpg')),
-sysdate,14,'PS1');
+sysdate,149,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -300,9 +300,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '麵吃完 沾汁還有8、9成滿，內場高湯加的太少 一喝超鹹...要求再加，
 東北新瀉的口味比較重鹹 上次點的特製清湯醬油 對我來說太Hard core了....
 這次晚上大老遠跑去值得了',
-5,
+4,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0006.jpg')),
-sysdate,16,'PS1');
+sysdate,169,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -311,7 +311,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 'C0000000007',
 '每次看著熬湯的鍋子在冒煙，發出徹徹徹聲，
 像是看著蒸汽小火車奔跑很療癒感謝招待',
-4,
+1,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0007.jpg')),
 SYSDATE,25,'PS1');
 
@@ -324,9 +324,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，
 也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
-4,
+3,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0008.jpg')),
-SYSDATE,23,'PS1');
+SYSDATE,239,'PS1');
 
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -337,9 +337,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，
 也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
-4,
+5,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0009.jpg')),
-SYSDATE,20,'PS1');
+SYSDATE,209,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -349,9 +349,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 '完全浸入沾汁再夾起來放回麵碗吃 這樣鹹香好吃，
 也試了不放回麵碗直接吃會過鹹，煮干醬油沾汁 魚乾味道略為不足
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
-4,
+5,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0010.png')),
-SYSDATE,18,'PS1');
+SYSDATE,189,'PS1');
 
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
@@ -364,7 +364,7 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
  醬油跟鹽味比較重，糖心蛋生熟度比上次好多了',
 4,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','0011.jpg')),
-SYSDATE,15,'PS1');
+SYSDATE,159,'PS1');
 
 INSERT INTO POST(POST_NO,MEM_NO,CUSTOM_NO,POST_CONT,
 POST_EVA,POST_PHOTO,POST_TIME,POST_VIEWS,POST_STATUS) 
@@ -372,9 +372,9 @@ VALUES(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(POST_seq.NEXTVAL), 6, '0')
 'M000002',
 'C0000000011',
 '「拉麵粉」「打擾了！ 本店專售歐美日韓服飾，全部貨品均以優惠價發售，歡迎選購，謝謝！」',
-4,
+1,
 BFILE_TO_BLOB (BFILENAME ('POST_DIR','post-non.jpg')),
-SYSDATE,12,'PS1');
+SYSDATE,123,'PS1');
 
 COMMIT;
 
@@ -405,7 +405,6 @@ MINVALUE 1
 CYCLE
 ORDER ;
 
-
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
 'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000001','想請問，調整後的沾汁是不是原本就有加一點辣度在裡面？
@@ -413,38 +412,110 @@ VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVA
 但是最近幾次吃都覺得有一點辣味');
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000001','看了好餓的一碗麵啊');
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000001','看了好餓的一碗麵啊');
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000001','只還有肉吃 就沒問題！');
-INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
-VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000003','請問中壢店也會有和牛嗎，感謝~~');
-INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
-VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000003','限量29碗吧，一碗留給我21:00下班後吧');
-INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
-VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000005','認真 衝一波');
-INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
-VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','希望煮干沾麵能再出現，這次等了好久阿~~~~~~');
-INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
-VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','剛剛經過貴店門前嚇到，長長的人龍！');
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000001','只還有肉吃 就沒問題！');
+
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000001','會變成常設的菜單嗎，之前去沒吃到很傷心~');
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000002','請問中壢店也會有和牛嗎，感謝~~');
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000002','看起來很好吃');
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000002','好吃嗎?聽說竹風堂的配料都很豐富');
 
 INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
 VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
-'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000004','中秋假期結束了 很久沒吃了');
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000002','這個要試試嗎?');
 
+
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000003','限量29碗吧，一碗留給我21:00下班後吧');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000003','請問是哪間分店XD');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000003','請問還可以應徵 正職人員嗎?');
+
+
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000004','認真 衝一波');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000004','希望煮干沾麵能再出現，這次等了好久阿~~~~~~');
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000004','剛剛經過貴店門前嚇到，長長的人龍！');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000005','會變成常設的菜單嗎，之前去沒吃到很傷心~');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000005','看起來很好吃');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000005','中秋假期結束了 很久沒吃了');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000006','這樣的配料真的OK嗎?');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000006','希望竹風堂可以座落於公館！');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000006','你好，你們的豚骨真的很厲害，濃厚卻沒有豬臭味，麵條也很用心，十分好吃。不知信義分店是什麼口味呢?台灣較少好吃的味噌拉麵，如果是味噌的話，就太棒了');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000007','你好，你們的豚骨真的很厲害，濃厚卻沒有豬臭味，麵條也很用心，十分好吃。不知信義分店是什麼口味呢?台灣較少好吃的味噌拉麵，如果是味噌的話，就太棒了');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000007','非常期待！');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000007','你好，你們的豚骨真的很厲害，濃厚卻沒有豬臭味，麵條也很用心，十分好吃。不知信義分店是什麼口味呢?台灣較少好吃的味噌拉麵，如果是味噌的話，就太棒了');
+
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000008','忙到忘記去了，我家旁邊而已....');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',to_char(sysdate,'yyyymmdd')||'-'||'000008','吃一下');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000003',to_char(sysdate,'yyyymmdd')||'-'||'000008','真的好吃 滿滿的日本味');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000004',to_char(sysdate,'yyyymmdd')||'-'||'000009','今天終於吃到了');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000005',to_char(sysdate,'yyyymmdd')||'-'||'000009','來了2.3次不是中午休息就是過了營業時間');
+
+INSERT INTO RPLY_MSG(RPLY_NO,MEM_NO,POST_NO,RPLY_CONT)
+VALUES (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPLY_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',to_char(sysdate,'yyyymmdd')||'-'||'000009','非常美味，這麼晚才發現你們真的好可惜，很快會再二訪');
 
 commit;
 --------------------------------------------------------
@@ -481,6 +552,18 @@ INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
 (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
+'M000001',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
+
+INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
+RPT_RSM,RPT_STATUS,RPT_TIME)
+VALUES 
+(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
+'M000002',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
+
+INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
+RPT_RSM,RPT_STATUS,RPT_TIME)
+VALUES 
+(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
 'M000003',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
 
 INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
@@ -493,29 +576,17 @@ INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
 (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
-'M000005',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
-
-INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
-RPT_RSM,RPT_STATUS,RPT_TIME)
-VALUES 
-(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
-'M000005',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
-
-INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
-RPT_RSM,RPT_STATUS,RPT_TIME)
-VALUES 
-(TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
 'M000005',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000007','RR1','RS0',sysdate);
 INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
 (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
-'M000002',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
+'M000001',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR1','RS0',sysdate);
 INSERT INTO REPORT_Msg(RPT_NO,MEM_NO,POST_NO,
 RPT_RSM,RPT_STATUS,RPT_TIME)
 VALUES 
 (TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||'-'||LPAD(to_char(RPT_MSG_seq.NEXTVAL), 2, '0'),
-'M000003',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR2','RS1',sysdate);
+'M000002',TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||'000008','RR2','RS1',sysdate);
 
 
 COMMIT;

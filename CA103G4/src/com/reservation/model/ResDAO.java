@@ -29,6 +29,8 @@ public class ResDAO implements ResDAO_interface{
 		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION order by RES_NO";
 	private static final String GET_ONE_STMT = 
 		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION where RES_NO =?";
+	private static final String GET_ONE_BGTIME = 
+			"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION where RES_TIMEBG =? order by RES_NO";
 	private static final String DELETE = 
 		"DELETE FROM RESERVATION where RES_NO = ?";
 	private static final String UPDATE =
@@ -324,6 +326,65 @@ public class ResDAO implements ResDAO_interface{
 			}			
 		}
 		
+	}
+	
+	@Override
+	public List<ResVO> getAllByBGNO(String res_timebg) {
+		List<ResVO> list = new ArrayList<ResVO>();
+		ResVO resVO = null;	
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_BGTIME);			
+			pstmt.setTimestamp(1, java.sql.Timestamp.valueOf(res_timebg));
+			rs = pstmt.executeQuery();
+		
+		    while(rs.next()) {
+		    	
+		    	resVO = new ResVO();
+		    	resVO.setRes_no(rs.getString("res_no"));
+		    	resVO.setMem_no(rs.getString("mem_no"));
+		    	resVO.setDek_no(rs.getString("dek_no"));
+		    	resVO.setRes_submit(rs.getTimestamp("res_submit"));
+		    	resVO.setRes_timebg(rs.getTimestamp("res_timebg"));
+		    	resVO.setRes_timefn(rs.getTimestamp("res_timefn"));
+				resVO.setRes_people(rs.getInt("res_people"));
+				resVO.setRes_status(rs.getInt("res_status"));
+				list.add(resVO);
+		    }
+	
+		
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 }
