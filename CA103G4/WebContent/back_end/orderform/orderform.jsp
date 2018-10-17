@@ -166,10 +166,10 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	      <div class="modal-body">
 	      <c:forEach var="dsVO" items="${dsSvc.findByOrder_no(ordVO.order_no)}">
 		      <c:if test="${dsVO.menu_no != null}">
-			  	${menuSvc.getOneMenu(dsVO.menu_no).menu_Id}
+			  	${menuSvc.getOneMenu(dsVO.menu_no).menu_Id}  ${dsVO.menu_nu}碗
 			  </c:if>
 		      <c:if test="${dsVO.custom_no != null}">
-			  	${customSvc.getOneCustommeals(dsVO.custom_no).custom_Name}
+			  	${customSvc.getOneCustommeals(dsVO.custom_no).custom_Name}  ${dsVO.custom_nu}碗
 			  </c:if>
 			   <br>
 		  </c:forEach>
