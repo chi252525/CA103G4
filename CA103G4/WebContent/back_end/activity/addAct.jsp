@@ -140,7 +140,7 @@
 									<div class="col-12">
 										<!-- 編輯區塊 -->
 										<textarea name="act_Content">
-					            	<%=(actVO == null) ? "慶祝資策會Java班CA103終於要結訓了，竹風堂拉麵將招待各位學員及老師們，點拉麵即折100元，相當於半價優惠!!" : actVO.getAct_Content()%>
+					            	<%=(actVO == null) ? "結訓大優惠!凡點任何餐點即現折100元!" : actVO.getAct_Content()%>
 					            </textarea>
 										<!-- */編輯區塊 -->
 									</div>
