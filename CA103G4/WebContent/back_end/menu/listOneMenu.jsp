@@ -12,7 +12,8 @@
 
 <html>
 <head>
-<title>餐點資料 - listOneMenu.jsp</title>
+<title>竹風堂後台管理系統</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 <style>
   table#table-1 {

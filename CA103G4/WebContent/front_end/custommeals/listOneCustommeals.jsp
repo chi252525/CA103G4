@@ -18,7 +18,8 @@
 <jsp:useBean id="ingredientsService" scope="page" class="com.ingredients.model.IngredientsService" />
 <html>
 <head>
-<title>餐點資料 - listOneCustommeals.jsp</title>
+<title>竹風堂後台管理系統</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 <style>
   table#table-1 {

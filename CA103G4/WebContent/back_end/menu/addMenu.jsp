@@ -32,7 +32,8 @@
 
 
 
-<title>資料新增 - addmenu.jsp</title>
+<title>竹風堂後台管理系統</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 <style>
 
