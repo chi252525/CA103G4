@@ -38,10 +38,9 @@ private OrderinvoiceDAO_interface dao;
 		return null;
 	}
 	
-	
-	
-	
-	
+	public List<OrderinvoiceVO> findOneByOrder(String order_no) {
+		return dao.getOne(order_no);
+	}
 	
 	
 }

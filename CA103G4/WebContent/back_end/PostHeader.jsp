@@ -187,7 +187,7 @@ pageContext.setAttribute("empfealist",empfealist);
 	                 
 	                <a href="research_page.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1" id="res1"><b>&#187;</b>&nbsp;線上預訂設定</a>
 	                
-	                <a href="listAllRes.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1" id="res2"><b>&#187;</b>&nbsp;訂位記錄管理</a>
+	                <a href="<%=request.getContextPath() %>/back_end/reservation/listAllRes.jsp" class="list-group-item list-group-item-action" style="background-color: #FAECD1" id="res2"><b>&#187;</b>&nbsp;訂位記錄管理</a>
 	                
 	                <a href="#" class="list-group-item list-group-item-action" style="background-color: #FAECD1" id="res3"><b>&#187;</b>&nbsp;現場座位管理</a>
 	                

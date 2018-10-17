@@ -164,7 +164,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      <c:forEach var="dsVO" items="${dsSvc.findByOrder_no(ordVO.order_no)}">
+	      <c:forEach var="dsVO" items="${dsSvc.findOneByOrder(ordVO.order_no)}">
 		      <c:if test="${dsVO.menu_no != null}">
 			  	${menuSvc.getOneMenu(dsVO.menu_no).menu_Id}  ${dsVO.menu_nu}碗
 			  </c:if>
