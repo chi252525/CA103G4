@@ -7,6 +7,7 @@
 <head>
     <meta charset="BIG5">
     <title>chat</title>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
     <!--css-->
       <!-- font aewsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" type="text/css">

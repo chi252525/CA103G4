@@ -46,7 +46,7 @@
 
 
 
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <title>顯示單一貼文</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"

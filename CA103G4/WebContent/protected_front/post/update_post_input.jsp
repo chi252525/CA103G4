@@ -18,6 +18,7 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>update_post_input</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"

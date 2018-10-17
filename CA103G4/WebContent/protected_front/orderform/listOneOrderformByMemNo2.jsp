@@ -69,7 +69,7 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
 <html>
 <head>
 <title>我的訂單</title>
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <style>
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);

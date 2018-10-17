@@ -15,7 +15,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" charset="UTF-8">
 
   <title>客製化點餐</title>
-  
+  <link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
   
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
 

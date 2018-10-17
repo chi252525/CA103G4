@@ -32,6 +32,7 @@
 <meta charset="UTF-8">
 
 <title>竹風堂活動瀏覽</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"

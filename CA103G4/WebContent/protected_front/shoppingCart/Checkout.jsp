@@ -6,6 +6,7 @@
 <%@ page import="com.ingredients.model.*"%>
 <html>
 <jsp:include page="/front_end/header.jsp" flush="true" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <!--background image-->
 <img src="<%=request.getContextPath()%>/front_end/img/top-banner1.jpg" width="100%" height="" alt="">
 <meta charset="utf-8">

@@ -3,6 +3,7 @@
 <head>
 
 <title>點餐.jsp</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/ShoppingCart.css">
 </head>

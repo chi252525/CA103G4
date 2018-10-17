@@ -26,6 +26,7 @@
 <!-- Site Title -->
 <title>所有貼文</title>
 <!-- Bootstrap CSS -->
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"

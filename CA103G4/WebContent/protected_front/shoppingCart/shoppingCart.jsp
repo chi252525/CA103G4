@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Untitled Document</title>
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
     <!-- font aewsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">

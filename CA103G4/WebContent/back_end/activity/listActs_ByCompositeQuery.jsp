@@ -14,7 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>ListActs_ByCompositeQuery</title>
+<title>竹風堂後台管理系統</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 <style>
 body {
 	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
