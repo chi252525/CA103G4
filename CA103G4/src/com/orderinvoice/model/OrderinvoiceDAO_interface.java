@@ -20,5 +20,5 @@ public interface OrderinvoiceDAO_interface {
 	
 	public int getByOrder_no(String order_no);
 	 
-	 
+	public List<OrderinvoiceVO> getOne(String order_no);
 }
