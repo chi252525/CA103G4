@@ -1992,6 +1992,226 @@ INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000001');
+
+
+
+
+
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO,COUP_STATUS)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
@@ -2012,6 +2232,216 @@ INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO,COUP_STATUS)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000002','CP1');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000002');
+
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
@@ -2408,6 +2838,211 @@ COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000003');
 
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000003');
+
 
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO,COUP_STATUS)
@@ -2599,6 +3234,215 @@ INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000004');
+
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
@@ -2822,6 +3666,211 @@ COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000005');
 
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000005');
+
 
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO,COUP_STATUS)
@@ -3007,6 +4056,211 @@ COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000006');
 
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000006');
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
@@ -3235,6 +4489,211 @@ COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000007');
 
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000007');
+
 
 
 INSERT INTO   COUPON(
@@ -3421,6 +4880,211 @@ COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000008');
 
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
+INSERT INTO   COUPON(
+COUP_SN,COUCAT_NO)
+VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
+to_char(sysdate,'yyyymmdd')||'-'||'000008');
 INSERT INTO   COUPON(
 COUP_SN,COUCAT_NO)
 VALUES('M'||'-'||LPAD(to_char(COUPON_seq.NEXTVAL), 11, '0'),
@@ -3458,39 +5122,39 @@ CREATE TABLE COUPONHISTORY (
   CONSTRAINT COUPONHISTORY_PK PRIMARY KEY(COUP_SN));
 
 INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000001', 'M000001',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000011', 'M000001',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000021', 'M000001',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000031', 'M000001',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000041', 'M000001',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000051', 'M000001',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000061', 'M000001',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000071', 'M000001',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000101', 'M000001',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000201', 'M000001',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000301', 'M000001',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000401', 'M000001',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000501', 'M000001',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000601', 'M000001',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000701', 'M000001',0);
    
 INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000002', 'M000002',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000012', 'M000002',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000022', 'M000002',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000032', 'M000002',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000042', 'M000002',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000052', 'M000002',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000062', 'M000002',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000072', 'M000002',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000102', 'M000002',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000202', 'M000002',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000302', 'M000002',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000402', 'M000002',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000502', 'M000002',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000602', 'M000002',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000702', 'M000002',0);
 
 INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000003', 'M000003',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000013', 'M000003',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000023', 'M000003',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000033', 'M000003',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000043', 'M000003',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000053', 'M000003',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000063', 'M000003',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000073', 'M000003',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000103', 'M000003',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000203', 'M000003',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000303', 'M000003',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000403', 'M000003',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000503', 'M000003',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000603', 'M000003',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000703', 'M000003',0);
 
 INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000004', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000014', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000024', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000034', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000044', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000054', 'M000004',0);
-INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000064', 'M000004',0);
-Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000074', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000104', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000204', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000304', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000404', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000504', 'M000004',0);
+INSERT INTO COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) VALUES ('M-00000000604', 'M000004',0);
+Insert into COUPONHISTORY (COUP_SN,MEM_NO,COUP_STATE) values ('M-00000000704', 'M000004',0);
 
 COMMIT;
