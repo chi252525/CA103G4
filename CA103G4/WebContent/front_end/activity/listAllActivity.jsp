@@ -231,8 +231,7 @@ div.shavetext {
 										<div class="row">
 											<h5 class="mb-1 text-dark my-1"></h5>
 											<hr>
-											<div class="col-12 mt-2 shavetext">${activityVO.act_Content}
-											</div>
+											<div class="col-12 mt-2 shavetext"></div>
 											<div class="col-12 ">
 												<div class="row">
 													<div class="col-8 mt-4">

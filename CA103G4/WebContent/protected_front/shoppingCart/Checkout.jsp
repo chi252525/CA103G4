@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.coma/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <!-- datatable-->
 
 
@@ -119,11 +119,15 @@
 .tooltip-inner {
     max-width: 200px;
     padding: 3px 8px;
-    color: #fff;
+/*     color: #000 !important; */
     text-align: center;
-    background-color: white;
+/*     background-color: rgba(181, 132, 28,1)  !important; */
     border-radius: .25rem;
 }
+/* .tooltip .arrow { */
+/*  border-bottom-color:#444 !important; */
+/*   border-top-color:#444 !important; */
+/*   } */
 </style>
 </head>
 
@@ -292,7 +296,8 @@
                                     <div class='errorMsg'>${errorMsgs.countytwon}</div>
                                 </div>
                                 <div class="form-group col-md-8" style="width: 80%; padding-left:0px;">
-                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="deliv_addres" style="width: 80%; margin-top: 10px;">
+                                    <b> 外送地址</b><input type="text" class="form-control-sm col-md-10" id="mem_Readdr" name="deliv_addres" style="width: 50%; margin-top: 10px;">
+                                    <button type="button" class="btn btn-sm" style="margin-top:5px;" onclick="mem_address()"><i class="far fa-plus-square"><b>同會員地址</b></i></button>
                                     <div class='errorMsg'>${errorMsgs.deliv_addres}</div>
                                 </div>
                             </div>
@@ -368,6 +373,7 @@
                             <p class="form-group col-12 col-md-8">
                                 <label for="textarea"><b>備註:</b></label>
                                 <textarea name="ps" id="textarea" class="form-control" cols="45" rows="4" style="resize: none; margin: auto;"></textarea>
+                                 <button type="button" class="btn btn-sm" style="margin-top:5px;" onclick="magic()"><i class="far fa-plus-square"><b>神奇小按鈕</b></i></button>
                             </p>
 
 
@@ -494,7 +500,7 @@
             //             alert('ajax startint !');
             $.ajax({
                 type: "post",
-                url: "<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do",
+                url: "<%=request.getContextPath()%>/protected_front/shoppingCart/ShoppingServlet.do",
                 data: {
                     "action": "findMemCoupon",
                     "amount": "<%=amount%>",
@@ -524,13 +530,25 @@
 		})
         
         //address
-//         $('#city-list').change(function(){
-//         	$('#mem_Readdr').val($('#city-list').val());
-//         });
+        $('#city-list').change(function(){
+        	$('#mem_Readdr').val($('#city-list').val());
+        });
         
         $('#sector-list').change(function(){
         	$('#mem_Readdr').val($('#city-list').val() + $('#sector-list').val());
         });
+        
+        //add mem address
+        function mem_address(){
+        	$('#mem_Readdr').val('${memVO.mem_Recounty}' + '${memVO.mem_Retown}' + '${memVO.mem_Readdr}');
+        	
+        }
+        
+        //神奇按鈕
+        function magic(){
+        	$('#textarea').val('麵要偏硬, 叉燒五分熟, 筍乾加辣椒然後湯要多加兩匙鹽巴 !');
+        	
+        }
     </script>
 </body>
 

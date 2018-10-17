@@ -8,6 +8,8 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 %>
 
 <%-- <jsp:useBean id="listEmps_ByCompositeQuery" scope="request" type="java.util.List<OrderformVO>" /> --%>
+
+
 <jsp:useBean id="beSvc" scope="page" class="com.branch.model.BranchService" />
 
 <!DOCTYPE html>
@@ -95,7 +97,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	
 	<jsp:useBean id="deSvc" scope="page" class="com.desk.model.DeskService" />
 	<%-- 以下是複合查詢 --%>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" class="form-inline" role="form">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do" class="form-inline" role="form" name="First">
 		
 		<div class="form-row align-items-center">
 		
@@ -127,149 +129,15 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 	</FORM>
 	<br>
 
-
-	<table class="table table-hover">
-	<tr>
-		<th>訂單編號</th>
-		<th>桌號</th>
-		<th>會員編號</th>
-		<th>派送單編號</th>
-		<th>訂單類型</th>
-		<th>訂單金額</th>
-		<th>外送地址</th>
-		<th>訂單成立時間</th>
-		<th>付款狀態</th>
-		<th>訂單狀態</th>
-	</tr>
-	
-	<c:forEach var="ordVO" items="${listEmps_ByCompositeQuery}">
-<tr>
-	<%-- 訂單  --%>
-	<td>${ordVO.order_no}</td>
-	
-	<%-- 桌位  --%>
-	<c:if test="${ordVO.dek_no != null}">
-	<td>${(ordVO.dek_no).substring(7)}</td>
-	</c:if>
-	<c:if test="${ordVO.dek_no == null}">
-	<td>無</td>
-	</c:if>
-
-	<c:if test="${ordVO.mem_no != null}">
-	<td>${ordVO.mem_no}</td>
-	</c:if>
-	<c:if test="${ordVO.mem_no == null}">
-	<td>無</td>
-	</c:if>
-	
-	<%-- 外送單  --%>
-	<c:if test="${ordVO.deliv_no != null}">
-	<td>${ordVO.deliv_no}</td>
-	</c:if>
-	<c:if test="${ordVO.deliv_no == null and ordVO.order_type == 2}">
-	<td>尚未派送</td>
-	</c:if>
-	<c:if test="${ordVO.deliv_no == null and ordVO.order_type != 2}">
-	<td>無需派送</td>
-	</c:if>
-	
-	<%-- 訂單類型  --%>
-	<c:if test="${ordVO.order_type == 0}">
-	<td>內用</td>
-	</c:if>
-	<c:if test="${ordVO.order_type == 1}">
-	<td>外帶</td>
-	</c:if>
-	<c:if test="${ordVO.order_type == 2}">
-	<td>外送</td>
-	</c:if>
-	
-	<td>${ordVO.order_price}元</td>
-	
-	<c:if test="${ordVO.deliv_addres != null}">
-	<td>${ordVO.deliv_addres}</td>
-	</c:if>
-	<c:if test="${ordVO.deliv_addres == null}">
-	<td>無外送地址</td>
-	</c:if>
-	
-	<td>${ordVO.order_date}</td>
-	
-	
-	<c:if test="${ordVO.order_pstatus == 1}">
-	<td>未付款</td>
-	</c:if>
-	<c:if test="${ordVO.order_pstatus == 2}">
-	<td>現金付款</td>
-	</c:if>
-	<c:if test="${ordVO.order_pstatus == 3}">
-	<td>信用卡付款</td>
-	</c:if>
-	<c:if test="${ordVO.order_pstatus == 4}">
-	<td>竹幣付款</td>
-	</c:if>
-	
-	<td>
-	<c:if test="${ordVO.order_status == 1}">
-	處理中
-	</c:if>
-	
-	
-	<c:if test="${ordVO.order_status == 2 and ordVO.order_type == 2}">
-	已出餐
-	</c:if>
-	<c:if test="${ordVO.order_status == 2 and ordVO.order_type != 2}">
-	<form METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/orderform/orderform.do">
-	<input type="hidden" name="action" value="ordOk">
-	<input type="hidden" name="ord_no" value="${ordVO.order_no}">
-	<input type="submit" value="確認完成">
-	</form>	
-	</c:if>
-	
-	<c:if test="${ordVO.order_status == 3}">
-	已完成
-	</c:if>
-	</td>
-	
-	
-	</tr>
-</c:forEach>
-	</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- 從上面的div class="container"延伸下來，讓include也能排版 --%>
 </div>
 
-
-
-
-
+<%
+ if (request.getAttribute("listEmps_ByCompositeQuery") != null) {
+%>
+	<jsp:include page="ok.jsp" />
+<%
+ }
+%>
 
 
 <%-- 背景 --%>
@@ -281,9 +149,9 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 
 </body>
 
-<link   rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css" />
-<%-- <script src="datetimepicker/jquery.js"></script> --%>
-<script src="datetimepicker/jquery.datetimepicker.full.js"></script>
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <script>
  $.datetimepicker.setLocale('zh');
@@ -297,5 +165,19 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
            maxDate:              new Date()  // 去除今日(不含)之後
         });
 </script>
+
+    <%
+    if (request.getAttribute("listEmps_ByCompositeQuery") == null) {
+	%>
+	<script>
+		function myFunction() {
+			document.getElementsByName("First")[0].submit();
+		}
+
+		$(document).ready(myFunction);
+	</script>
+	<%
+		}	
+	%>
 
 </html>

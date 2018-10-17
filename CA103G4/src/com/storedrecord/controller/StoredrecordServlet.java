@@ -197,7 +197,7 @@ public class StoredrecordServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-
+				Integer stor_Point = new Integer(req.getParameter("stor_Point"));
 				String mem_No = req.getParameter("mem_No");
 				String card_number = null;
 				String full_name = null;
@@ -225,7 +225,7 @@ public class StoredrecordServlet extends HttpServlet {
 				}
 
 				expiry = req.getParameter("expiry");// 取得卡片期限
-				String expiry_regx = "^0[1-9]||1[0-2]\\s/\\s\\d{2}$";
+				String expiry_regx = "^(0[1-9]||1[0-2])\\s/\\s\\d{2}$";
 
 				if (expiry == null || expiry.trim().length() == 0) {
 					errorMsgs.put("expiry", "請輸卡限");
@@ -245,21 +245,21 @@ public class StoredrecordServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					// 剛寫的錯誤資料依然回傳
-
+					req.setAttribute("stor_Point", stor_Point);
 					// credit card
 					req.setAttribute("card_number", card_number);
 					req.setAttribute("name", full_name);
 					req.setAttribute("expiry", expiry);
 					req.setAttribute("cvc", cvc);
 					req.setAttribute("mem_No", mem_No);
-
+					
 					RequestDispatcher failureView = req.getRequestDispatcher("addNewtransaction2.jsp");
 					failureView.forward(req, res);
 					return;// 中斷
 				}
 
 				Timestamp stor_Date = new Timestamp(System.currentTimeMillis());
-				Integer stor_Point = new Integer(req.getParameter("stor_Point"));
+				
 //				System.out.println("stor_Point="+req.getParameter("stor_Point"));
 				Integer stor_Status = null;
 
@@ -283,10 +283,11 @@ public class StoredrecordServlet extends HttpServlet {
 					stsvc.updateStoredrecord(storVO.getStor_No(), mem_No, stor_Date, stor_Point, 0, stor_Status);
 					// ================改完，轉交===================
 					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-					String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! 總計: "
+					String messageText = "恭喜 " + memVO.getMem_Name() + "儲值" + stor_Point + " 竹幣成功! \n總計: "
 							+ stor_Point * 1.18;
 
-					new MailService().sendMail(memVO.getMem_Mail(), "儲值訂單", messageText);// 寄出確認信
+					new MailService().sendMail(memVO.getMem_Mail(), "竹風堂儲值確認", messageText);// 寄出確認信
+					System.out.println("寄出儲值認證信 !");
 					res.sendRedirect(req.getContextPath() + "/front_end/storedrecord/transactionScess.jsp");// prevent
 																											// store
 																											// again

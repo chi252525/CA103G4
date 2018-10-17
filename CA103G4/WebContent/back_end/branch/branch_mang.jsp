@@ -271,7 +271,7 @@
                     document.getElementById("branch_No").value);
             }
 
-            function getAll2() {
+            function getAll2() {	
                 // 				console.log("0000");
                 $.ajax({
                     type: "post",

@@ -287,6 +287,12 @@ public class ResJNDIDAO implements ResDAO_interface{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<ResVO> getAllByBGNO(String res_timebg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

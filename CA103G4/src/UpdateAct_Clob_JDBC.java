@@ -104,7 +104,6 @@ public class UpdateAct_Clob_JDBC {
 		}
 	}
 	
-	// 使用資料流
 		public static Reader getLongStringStream(String path) throws IOException {
 			return new FileReader(path);
 

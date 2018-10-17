@@ -18,6 +18,8 @@ public class ResJDBCDAO implements ResDAO_interface{
 		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION order by RES_NO";
 	private static final String GET_ONE_STMT = 
 		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION where RES_NO =?";
+	private static final String GET_ONE_BGTIME = 
+		"select RES_NO,MEM_NO,DEK_NO,RES_SUBMIT,RES_TIMEBG,RES_TIMEFN,RES_PEOPLE,RES_STATUS from RESERVATION where RES_TIMEBG =? order by RES_NO";
 	private static final String DELETE = 
 		"DELETE FROM RESERVATION where RES_NO = ?";
 	private static final String UPDATE =
@@ -288,57 +290,136 @@ public class ResJDBCDAO implements ResDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public List<ResVO> getAllByBGNO(String res_timebg) {
+		List<ResVO> list = new ArrayList<ResVO>();
+		ResVO resVO = null;	
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_BGTIME);			
+			pstmt.setTimestamp(1, java.sql.Timestamp.valueOf(res_timebg));
+			rs = pstmt.executeQuery();
+		
+		    while(rs.next()) {
+		    	
+		    	resVO = new ResVO();
+		    	resVO.setRes_no(rs.getString("res_no"));
+		    	resVO.setMem_no(rs.getString("mem_no"));
+		    	resVO.setDek_no(rs.getString("dek_no"));
+		    	resVO.setRes_submit(rs.getTimestamp("res_submit"));
+		    	resVO.setRes_timebg(rs.getTimestamp("res_timebg"));
+		    	resVO.setRes_timefn(rs.getTimestamp("res_timefn"));
+				resVO.setRes_people(rs.getInt("res_people"));
+				resVO.setRes_status(rs.getInt("res_status"));
+				list.add(resVO);
+		    }
+	
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	
 	public static void main(String[] args){
 		ResJDBCDAO dao = new ResJDBCDAO();
 //		Format sfm1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		//新增
-		ResVO resVO1 = new ResVO();
-		resVO1.setMem_no("M000001");
-		resVO1.setDek_no("D000000001");
-		resVO1.setRes_timebg(java.sql.Timestamp.valueOf("2018-09-11 13:55"+":00"));
-		resVO1.setRes_timefn(java.sql.Timestamp.valueOf("2018-09-11 15:55"+":00"));
-		resVO1.setRes_people(50);
-		resVO1.setRes_status(1);
-		dao.insert(resVO1);
+		
+//		ResVO resVO1 = new ResVO();
+//		resVO1.setMem_no("M000001");
+//		resVO1.setDek_no("D000000001");
+//		resVO1.setRes_timebg(java.sql.Timestamp.valueOf("2018-09-11 13:55"+":00"));
+//		resVO1.setRes_timefn(java.sql.Timestamp.valueOf("2018-09-11 15:55"+":00"));
+//		resVO1.setRes_people(50);
+//		resVO1.setRes_status(1);
+//		dao.insert(resVO1);
 		
 		//修改
-		ResVO resVO2 = new ResVO();
-		resVO2.setMem_no("M000002");
-		resVO2.setDek_no("D000000002");
-		resVO2.setRes_timebg(java.sql.Timestamp.valueOf("2018-10-11 13:55"+":00"));
-		resVO2.setRes_timefn(java.sql.Timestamp.valueOf("2018-09-11 13:55"+":00"));
-		resVO2.setRes_people(60);
-		resVO2.setRes_status(2);
-		resVO2.setRes_no("R000000001");
-		dao.update(resVO2);	
-		System.out.println("SUCCESS");
+		
+//		ResVO resVO2 = new ResVO();
+//		resVO2.setMem_no("M000002");
+//		resVO2.setDek_no("D000000002");
+//		resVO2.setRes_timebg(java.sql.Timestamp.valueOf("2018-10-11 13:55"+":00"));
+//		resVO2.setRes_timefn(java.sql.Timestamp.valueOf("2018-09-11 13:55"+":00"));
+//		resVO2.setRes_people(60);
+//		resVO2.setRes_status(2);
+//		resVO2.setRes_no("R000000001");
+//		dao.update(resVO2);	
+//		System.out.println("SUCCESS");
 		
 		//刪除
-		ResVO resVO3 = dao.findByPrimaryKey("R000000001");
-		System.out.println(resVO3.getRes_no()+ ",");
-		System.out.println(resVO3.getMem_no()+ ",");
-		System.out.println(resVO3.getDek_no()+ ",");
-		System.out.println(resVO3.getRes_submit()+ ",");
-		System.out.println(resVO3.getRes_timebg()+ ",");
-		System.out.println(resVO3.getRes_timefn()+ ",");
-		System.out.println(resVO3.getRes_people()+ ",");
-		System.out.println(resVO3.getRes_status());
-		System.out.println("---------------------");
+		
+//		ResVO resVO3 = dao.findByPrimaryKey("R000000001");
+//		System.out.println(resVO3.getRes_no()+ ",");
+//		System.out.println(resVO3.getMem_no()+ ",");
+//		System.out.println(resVO3.getDek_no()+ ",");
+//		System.out.println(resVO3.getRes_submit()+ ",");
+//		System.out.println(resVO3.getRes_timebg()+ ",");
+//		System.out.println(resVO3.getRes_timefn()+ ",");
+//		System.out.println(resVO3.getRes_people()+ ",");
+//		System.out.println(resVO3.getRes_status());
+//		System.out.println("---------------------");
 				
 		//查詢
-		List<ResVO> list = dao.getAll();
-		for(ResVO aEmp : list) {
-		System.out.println(aEmp.getRes_no()+ ",");
-		System.out.println(aEmp.getMem_no()+ ",");
-		System.out.println(aEmp.getDek_no()+ ",");
-		System.out.println(aEmp.getRes_submit()+ ",");
-		System.out.println(aEmp.getRes_timebg()+ ",");
-		System.out.println(aEmp.getRes_timefn()+ ",");
-		System.out.println(aEmp.getRes_people()+ ",");
-		System.out.println(aEmp.getRes_status()+ ",");
 		
+//		List<ResVO> list = dao.getAll();
+//		for(ResVO aEmp : list) {
+//		System.out.println(aEmp.getRes_no()+ ",");
+//		System.out.println(aEmp.getMem_no()+ ",");
+//		System.out.println(aEmp.getDek_no()+ ",");
+//		System.out.println(aEmp.getRes_submit()+ ",");
+//		System.out.println(aEmp.getRes_timebg()+ ",");
+//		System.out.println(aEmp.getRes_timefn()+ ",");
+//		System.out.println(aEmp.getRes_people()+ ",");
+//		System.out.println(aEmp.getRes_status()+ ",");
+//		}
+		
+		//用起始時間查詢
+		
+		List<ResVO> list =  dao.getAllByBGNO("2018-09-01 11:55"+":00");
+		for(ResVO resVO : list) {
+		System.out.println(resVO.getRes_no()+ ",");
+		System.out.println(resVO.getMem_no()+ ",");
+		System.out.println(resVO.getDek_no()+ ",");
+		System.out.println(resVO.getRes_submit()+ ",");
+		System.out.println(resVO.getRes_timebg()+ ",");
+		System.out.println(resVO.getRes_timefn()+ ",");
+		System.out.println(resVO.getRes_people()+ ",");
+		System.out.println(resVO.getRes_status()+ ",");
 		}
+		
 	}
 
 	@Override

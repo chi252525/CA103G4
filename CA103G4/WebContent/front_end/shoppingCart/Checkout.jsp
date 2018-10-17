@@ -491,7 +491,7 @@
             //             alert('ajax startint !');
             $.ajax({
                 type: "post",
-                url: "<%=request.getContextPath()%>/front_end/shoppingCart/ShoppingServlet.do",
+                url: "<%=request.getContextPath()%>/protected_front/shoppingCart/ShoppingServlet.do",
                 data: {
                     "action": "findMemCoupon",
                     "amount": "<%=amount%>",

@@ -41,6 +41,7 @@ body {
 </head>
 
 <body>
+<jsp:include page="/back_end/PostHeader.jsp"></jsp:include>
 <form action="empauth.do" >
  <div class="container" id="back" style="text-align:center;">
       <div class="row" >
@@ -78,5 +79,6 @@ body {
       </div>
     </div>
  </form>
+ <jsp:include page="/back_end/PostFooter.jsp"></jsp:include>	
 </body>
 </html>

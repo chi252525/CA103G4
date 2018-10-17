@@ -7,6 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.websocket.Session;
 
+import org.json.JSONArray;
+
 import com.reservation.model.ResService;
 import com.reservation.model.ResVO;
 
@@ -61,6 +63,71 @@ public class ResServlet extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace(System.err); 
 			}
+		}
+		
+		
+		
+		if("queryRes".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				String date2 = req.getParameter("date2");
+				if(date2 == null || (date2.trim()).length() == 0){
+					errorMsgs.add("請輸入日期");
+				}
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back_end/reservation/listAllRes.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				String zone2 = req.getParameter("zone2");
+				if(zone2 == null || (zone2.trim()).length() == 0){
+					errorMsgs.add("請輸入時段");
+				}
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView =req
+							.getRequestDispatcher("/back_end/reservation/listAllRes.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				String res_timebg = (date2 + " " + zone2 + ":00");
+				
+				
+				ResService resSvc = new ResService();
+				List<ResVO> res_timebgList = resSvc.getAllByBGNO(res_timebg);
+				if(res_timebgList == null) {
+					errorMsgs.add("查無資料");
+				}
+				
+				if(!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView =req
+							.getRequestDispatcher("/back_end/reservation/listAllRes.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				String jsonStr = new JSONArray(res_timebgList).toString();
+				PrintWriter out = res.getWriter();
+			    out.write(jsonStr);
+				System.out.println("pass Controller Get List<ResVO>");
+				
+				
+//				req.setAttribute("resVO", resVO);
+//				String url ="/back_end/reservation/listAllRes.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+//				successView.forward(req, res);
+				
+			}catch(Exception e) {
+				errorMsgs.add("無法取得資料:"+ e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back_end/reservation/listAllRes.jsp");
+				failureView.forward(req, res);
+			}
+			
 		}
 		
 		
