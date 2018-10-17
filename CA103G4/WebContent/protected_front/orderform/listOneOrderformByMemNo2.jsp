@@ -74,7 +74,7 @@ for(int i = 0; i < orderformlist.size() ; i++ ){
   table#table-1 {
 	background-color: rgba(255, 255, 255, 0.45);
 /*     border: 2px solid black; */
-	border-radius: 15px;
+/* 	border-radius: 15px; */
     text-align: center;
   }
   table#table-1 h4 {

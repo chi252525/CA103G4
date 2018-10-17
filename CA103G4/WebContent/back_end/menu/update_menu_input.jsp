@@ -151,22 +151,22 @@ $(document).ready(function (){
 	餐點編號&nbsp;<%=menuVO.getMenu_No()%>
 	</div>
 	<div class=card-title>
-	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="80"	value="<%=menuVO.getMenu_Id()%>" />
+	餐點名稱&nbsp;<input type="TEXT" name="menu_Id" size="70"	value="<%=menuVO.getMenu_Id()%>" />
 	</div>
 	<div class=card-title>
-	餐點類型&nbsp;<input type="TEXT" name="menu_Type" size="80"	value="<%=menuVO.getMenu_Type()%>" />
+	餐點類型&nbsp;<input type="TEXT" name="menu_Type" size="70"	value="<%=menuVO.getMenu_Type()%>" />
 	</div>
 	<div class=card-title>
-	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="80"	value="<%=menuVO.getMenu_Price()%>" />
+	餐點價格&nbsp;<input type="TEXT" name="menu_Price" size="70"	value="<%=menuVO.getMenu_Price()%>" />
 	</div>
 	<div class=card-title>
-	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="80"	value="<%=menuVO.getMenu_Intro()%>" />
+	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="70"	value="<%=menuVO.getMenu_Intro()%>" />
 	</div>
 	<div class=card-title>
 	餐點狀態&nbsp;<input type="number" name="menu_Status" max="1" min="0" size="3" value="<%=menuVO.getMenu_Status()%>" />
 	</div>
 	<div class=card-title>
-	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="80">
+	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="70">
 	</div>
 	<div class=card-title>
 		<img class="preview" style="max-width: 200px; max-height: 200px;">
