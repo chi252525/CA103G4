@@ -1036,8 +1036,8 @@ NOCACHE;
 Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000008','3');
 Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','3');
 Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','3');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000008','3');
-Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','3');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000008','2');
+Insert into DELIVERY (DELIV_NO,BRANCH_NO,EMP_NO,DELIV_STATUS) values ('D'||'-'||LPAD(to_char(delivery_seq.NEXTVAL), 9, '0'),'0001','E000000009','2');
 
 
 --------------------------------------------------------
@@ -1493,8 +1493,8 @@ Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDE
 Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),'D000000001',null,'0001',null,0,900,1,null,1);
 Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000002','0001',null,2,400,1,'中壢市南祥路119號3樓',1);
 Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000001','0001',null,2,780,1,'桃園市同德十一路88號5樓',1);
-Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000002','0001',null,2,1300,1,'桃園市中壢區中和路102號',1);
-Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000003','0001',null,2,680,1,'桃園市桃園區寶慶路47號',1);
+Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000002','0001',null,2,1300,2,'桃園市中壢區中和路102號',1);
+Insert into ORDERFORM (ORDER_NO,DEK_NO,MEM_NO,BRANCH_NO,DELIV_NO,ORDER_TYPE,ORDER_PRICE,ORDER_STATUS,DELIV_ADDRES,ORDER_PSTATUS) values ('O'||LPAD(to_char(oredrform_seq.NEXTVAL), 9, '0'),null,'M000003','0001',null,2,680,2,'桃園市桃園區寶慶路47號',1);
 commit;
 
 --------------------------------------------------------
@@ -1527,6 +1527,7 @@ Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,I
 
 
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000003','M002','3',null,null,1);
+
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000004','M001','2',null,null,1);
 
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000005',null,null,'C0000000002','4',1);
@@ -1537,9 +1538,11 @@ Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,I
 Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000006','M003','1',null,null,1);
 
 
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000007','M001','3',null,null,1);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M003','2',null,null,1);
-Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M002','6',null,null,1);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000007','M001','3',null,null,2);
+
+
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M003','2',null,null,2);
+Insert into ORDERINVOICE (INVO_NO,ORDER_NO,MENU_NO,MENU_NU,CUSTOM_NO,CUSTOM_NU,INVO_STATUS) values ('IN'||LPAD(to_char(oredrinvoice_seq.NEXTVAL), 9, '0'),'O000000008','M002','6',null,null,2);
 
 --------------------------------------------------------
 --  for Table COUCAT
