@@ -1733,7 +1733,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000005',
-'AC2','【全台門市優惠】客製化的自由~好吃的~獨特的~風味自由配!活動期間凡組合搭配任一湯頭，即享現折80元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0005.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0005.jpg')),null
+'AC2','【全台門市優惠】客製化的自由~好吃的~獨特的~風味自由配!活動期間凡組合搭配任一湯頭，即享現折10元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0005.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0005.jpg')),null
 ,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,150);
 
@@ -1756,7 +1756,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000007',
-'AC2','【10月份活動】壽星限定~凡點咖哩豬排烏龍麵現折60元(限到店用餐)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0007.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0007.jpg')),'數十種香料融合了豚骨湯，創造出刺激卻不失醇厚的口味，配上烤炙叉燒，是味覺和口感的多重感動！'
+'AC2','【10月份活動】凡點咖哩豬排烏龍麵現折60元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0007.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0007.jpg')),'數十種香料融合了豚骨湯，創造出刺激卻不失醇厚的口味，配上烤炙叉燒，是味覺和口感的多重感動！'
 ,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,234);
 
@@ -1766,7 +1766,7 @@ ACT_CAROUSEL,ACT_Pic,ACT_CONTENT,act_PreAddTime,act_PreOffTime,ACT_START,ACT_END
 VALUES(to_char(sysdate,'yyyymm')||'-'||LPAD(to_char(ACTIVITY_seq.NEXTVAL), 4,
 '0'),
 to_char(sysdate,'yyyymmdd')||'-'||'000008',
-'AC2','【10月份活動】壽星限定~凡點櫻桃鴨胸蕎麥麵現折80元(限到店用餐)',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0008.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0008.jpg')),'這幾年日本正流行一種沒有湯的麵，配料除了基本的選項之外，其他也都可以自由搭配喔!明太子是日式洋風口味，在吃的時候請先將全部的配料拌一拌再吃。'
+'AC2','【10月份活動】凡點櫻桃鴨胸蕎麥麵現折80元',BFILE_TO_BLOB (BFILENAME ('AD_BIGPIC_DIR','0008.png')),BFILE_TO_BLOB (BFILENAME ('AD_PIC_DIR','0008.jpg')),'這幾年日本正流行一種沒有湯的麵，配料除了基本的選項之外，其他也都可以自由搭配喔!明太子是日式洋風口味，在吃的時候請先將全部的配料拌一拌再吃。'
 ,TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),
 TO_TIMESTAMP('2018-10-01 00:00','YYYY-MM-DD hh24:mi'),TO_TIMESTAMP('2018-10-31 00:00','YYYY-MM-DD hh24:mi'),1,230);
 
