@@ -648,6 +648,17 @@
 		
     </script>
     
+    
+    <a href="javascript:getinfo()" ><img  src="<%= request.getContextPath() %>/front_end/img/cutie.png" ></a>
+<script>
+function getinfo(){
+	$("#mealName").val("炸物大餐");
+
+}
+</script>
+    
+    
+    
     <script>
 //         jQuery(function($) {
 //         	var count = 0;

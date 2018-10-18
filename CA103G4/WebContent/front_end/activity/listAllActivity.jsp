@@ -181,7 +181,6 @@ div.shavetext {
 										<option disabled selected>--請選擇--</option>
 										<option value="AC1">新品上市</option>
 										<option value="AC2">優惠折扣</option>
-										<option value="AC3">分店限定</option>
 									</select>
 								</form>
 								  <div id="myID" class="WebSocket"></div>
