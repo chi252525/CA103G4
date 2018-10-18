@@ -25,7 +25,7 @@ pageContext.setAttribute("empVO",request.getSession().getAttribute("empVO"));
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
-<title>Delivery: Home</title>
+<title>竹風堂-外送管理</title>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 </head>

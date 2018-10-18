@@ -141,7 +141,7 @@
 									<div class="col-12">
 										<!-- 編輯區塊 -->
 										<textarea name="act_Content">
-					            	<%=(actVO == null) ? "結訓大優惠!凡點任何餐點即現折100元!" : actVO.getAct_Content()%>
+					            	<%=(actVO == null) ? "青蔥豚骨拉麵現折100元優惠!" : actVO.getAct_Content()%>
 					            </textarea>
 										<!-- */編輯區塊 -->
 									</div>

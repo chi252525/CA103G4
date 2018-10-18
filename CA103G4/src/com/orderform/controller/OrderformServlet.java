@@ -220,7 +220,7 @@ public class OrderformServlet extends HttpServlet {
 			// 對會員發送簡訊
 			Send toMem = new Send();
 //			String[] tels ={memtel};//上線用
-			String[] tels = { "0933628324" };// 上線用
+			String[] tels = { "0965-231002" };
 
 			String message = null;
 			if (ordertype == 1) {
@@ -239,7 +239,7 @@ public class OrderformServlet extends HttpServlet {
 			// 有新的外送或外帶訂單
 			Send toEmp = new Send();
 //			String[] tels2 ={tel};//上線用
-			String[] tels2 = { "0933628324" };// 上線用
+			String[] tels2 = { "0933628324" };
 			String message2 = null;
 
 			if (ordertype == 1) {

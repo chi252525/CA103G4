@@ -179,25 +179,27 @@ public class ResServlet extends HttpServlet {
 			Integer status = new Integer(req.getParameter("status"));
 			String  res_no = new String(req.getParameter("res_no"));
 
-
+            System.out.println("pass begin controlle");
 
 			ResVO resVO = new ResVO();
 			resVO.setRes_status(status);
-			resVO.setRes_no(res_no);;
+			resVO.setRes_no(res_no);
 			
-
+			String success = null;
 			ResService resSvc = new ResService();
 			resVO = resSvc.updateStatus(status, res_no);
-			
-			
+			if(resVO.getRes_status() == status) {
+			   success = "success";
+			}
+			System.out.println(success);
 			req.setAttribute("resVO", resVO);
 //			String url = "/555/684.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
 //			successView.forward(req, res);
 			
 			PrintWriter out = res.getWriter();
-		    out.write();
-
+		    out.write(success);
+		    System.out.println("pass end controlle");
 			
 
 		}
