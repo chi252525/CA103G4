@@ -134,37 +134,54 @@
 				    trString += res_timebg.Res_people;
 				    trString += "</td>";
 				    
- 				    trString += "<td>";
+ 				    trString += "<td class='test'>";
  				   if(res_timebg.Res_status == 0){
  					  trString += status0;  
+ 					
  				   }else if (res_timebg.Res_status == 1){
  					  trString += status1; 
+ 					 
  				   }else{
  					  trString += status2; 
+ 	
  				   }				    
 				    trString += "</td>";
 				    
  				    trString += "<td>";
  				    
-					trString += "<div class='dropdown'>";
-				    trString += "<a class='btn btn-warning dropdown-toggle' role='button'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-				    trString += selected;
-				    trString += "</a>";
-				    trString += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
-				    trString += status0;
-				    trString += "</a>";
-				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
-				    trString += status2;
-				    trString += "</a>";
-				    trString += "</div>";
-				    trString += "</div>";
+
+				    trString += "<select class='aa'>";
+				    trString += "<option value='0'>" + status0 + "</option>";
+				    trString += "<option value='2'>" + status2 + "</option>";
+				    trString += "</select>";
 				    
 				    trString += "</td>";
 	  				
  				    trString += "</tr>";
  				    $("#content").append(trString);
-	  			  
+			    	 $(".aa").change(function(){ 
+			    		 
+			        	 console.log($(this).val()); 
+	
+			        	 $.ajax({
+			     	  		url: "<%=request.getContextPath()%>/res.do", 
+			     	  		data:{"action":"updateStatus", "res_no":res_timebg.Res_no, "status":$(this).val()},
+			     	  		success: function(result){
+			     	  			console.log("pass ajax");
+			     	  		   if(result === 'success')	{
+// 			     	  			   $(this).parent().prev().text($(this).val());
+									if($(".aa").val() == 0){
+// 										$(".aa").prev($('.test').text(status0));
+										$(".aa").parent().prev().text(status0);
+									}else if($(".aa").val() == 2){
+// 										$(".aa").prev($('.test').text(status2));
+										$(".aa").parent().prev().text(status2);
+									}
+			     	  			
+			     	  		   }
+			     	  		}
+			        	 });
+			         });
 	  		    }
 			  }
 	  	});
@@ -172,15 +189,7 @@
 	
 	
 	
-	function changeStatus(e){
-		console.log(e.target.value);
-		console.log("0000000000");
-	}
-// 	$(function(){
-//         	 $("#aa").change(function(){ 
-//             	 console.log("00000"); 
-//              });
-// 	});
+
 </script>	
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
