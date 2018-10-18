@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
-<title>chose_order</title>
+<title>竹風堂-新增派送單</title>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 </head>

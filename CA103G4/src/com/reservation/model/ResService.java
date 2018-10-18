@@ -47,7 +47,7 @@ public class ResService {
 
 		resVO1.setRes_status(res_status);;
 		resVO1.setRes_no(res_no);;
-		dao.update(resVO1);
+		dao.updateStatus(resVO1);;
 		
 		return resVO1;
 	}

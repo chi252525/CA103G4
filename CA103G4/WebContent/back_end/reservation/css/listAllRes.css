@@ -1,10 +1,26 @@
 .dateCss{
-	padding-left:90px;
+	padding-left:80px;
 }
 .btnDiv{
-	padding-top:30px
+	padding-top:38px
 }
 .searchRes{
 	width:100px;
 	height:40px;
+	background-color:	#FA8072;
+}
+.aa{
+	border-radius:10px;
+	background-color:#F5DEB3;
+/* 	color:aliceblue; */
+	
+}
+.title-bor{
+	width:200px;
+	height:70px;
+	text-align:center;
+	
+}
+.res2end{
+	background-image: url( "/CA103G4/back_end/reservation/img/leaves-pattern.png" );
 }

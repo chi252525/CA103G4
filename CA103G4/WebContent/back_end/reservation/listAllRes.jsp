@@ -9,17 +9,18 @@
 
 <%@ include file="/back_end/PostHeader.jsp" %>
 
-
-     	  <div >
-     			<b>所有訂位紀錄 - listAllRes.jsp</b>
-     			
+		
+     	  <div>
+     	       <div class="title-bor">
+     			<h4><b><i class="fas fa-search-dollar"></i>&nbsp;訂位紀錄查詢&nbsp;:</b></h4>
+     		   </div>
      			 <div class="form-row dateCss">
                         <div class="form-group col-md-5">
-                            <label for="inputAddress">日期</label>
+                            <label for="inputAddress"><h5>日期&nbsp;<i class="far fa-calendar-alt"></i></h5></label>
                             <input type="text" class="form-control date" placeholder="click me!" id="f_date1" name="date">
                         </div>
                         <div class="form-group col-md-5 zone">
-                              <label for="inputCity">時段</label>
+                              <label for="inputCity"><h5>時段&nbsp;<i class="far fa-clock"></i></h5></label>
                               <select id="zone" class="form-control">
                                 	<option value="10:30" >10:30</option>
                                 	<option value="12:00" >12:00</option>
@@ -38,7 +39,7 @@
                   
      			<hr>
      	  </div>
-     		
+     		<hr>
               <div class="remove"  id="res2end">
                     <div class="col-md-12 text-center">
                             <div class="container" >
@@ -60,7 +61,7 @@
                      </div>
                 </div>
              </div>
-
+		</div>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/reservation/css/listAllRes.css"> 
 <%@ include file="/back_end/PostFooter.jsp" %>	
 <script>
@@ -97,7 +98,7 @@
 			        var status0 = "訂位已取消";
 			        var status1 = "訂位已確認(未到)";
 			        var status2 = "已報到";
-					var selected ="請選擇";
+					var selected ="請選擇...";
 			        
 					var trString="";
 	  				trString += "<tr>";
@@ -134,37 +135,55 @@
 				    trString += res_timebg.Res_people;
 				    trString += "</td>";
 				    
- 				    trString += "<td>";
+ 				    trString += "<td class='test'>";
  				   if(res_timebg.Res_status == 0){
  					  trString += status0;  
+ 					
  				   }else if (res_timebg.Res_status == 1){
  					  trString += status1; 
+ 					 
  				   }else{
  					  trString += status2; 
+ 	
  				   }				    
 				    trString += "</td>";
 				    
  				    trString += "<td>";
  				    
-					trString += "<div class='dropdown'>";
-				    trString += "<a class='btn btn-warning dropdown-toggle' role='button'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-				    trString += selected;
-				    trString += "</a>";
-				    trString += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
-				    trString += status0;
-				    trString += "</a>";
-				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
-				    trString += status2;
-				    trString += "</a>";
-				    trString += "</div>";
-				    trString += "</div>";
+
+				    trString += "<select class='aa'>";
+				    trString += "<option class='option' selected>" + selected + "</option>";
+				    trString += "<option class='option' value='0'>" + status0 + "</option>";
+				    trString += "<option class='option' value='2'>" + status2 + "</option>";
+				    trString += "</select>";
 				    
 				    trString += "</td>";
 	  				
  				    trString += "</tr>";
  				    $("#content").append(trString);
-	  			  
+			    	 $(".aa").change(function(e){ 
+			    		 
+			        	 console.log("hihi",$(this).parent().prev().text()); 
+	
+			        	 $.ajax({
+			     	  		url: "<%=request.getContextPath()%>/res.do", 
+			     	  		data:{"action":"updateStatus", "res_no":res_timebg.Res_no, "status":$(this).val()},
+			     	  		success: function(result){
+			     	  			console.log("pass ajax");
+			     	  		   if(result === 'success')	{
+// 			     	  			   $(this).parent().prev().text($(this).val());
+									if($(e.target).val() == 0){
+// 										$(".aa").prev($('.test').text(status0));
+										$(e.target).parent().prev().text(status0);
+									}else if($(e.target).val() == 2){
+// 										$(".aa").prev($('.test').text(status2));
+										$(e.target).parent().prev().text(status2);
+									}
+			     	  			
+			     	  		   }
+			     	  		}
+			        	 });
+			         });
 	  		    }
 			  }
 	  	});
@@ -172,15 +191,7 @@
 	
 	
 	
-	function changeStatus(e){
-		console.log(e.target.value);
-		console.log("0000000000");
-	}
-// 	$(function(){
-//         	 $("#aa").change(function(){ 
-//             	 console.log("00000"); 
-//              });
-// 	});
+
 </script>	
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
