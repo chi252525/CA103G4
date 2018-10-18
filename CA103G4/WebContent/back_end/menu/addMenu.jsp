@@ -32,7 +32,8 @@
 
 
 
-<title>資料新增 - addmenu.jsp</title>
+<title>竹風堂後台管理系統</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 <style>
 
@@ -168,7 +169,7 @@ $(document).ready(function (){
 	餐點介紹&nbsp;<input type="TEXT" name="menu_Intro" size="70"	value="<%=(menuVO==null)?"濃郁豚骨湯頭、青蔥與叉燒肉香味碰撞的完美組合。":menuVO.getMenu_Intro()%>" />
 	</div>
 	<div class=card-title>
-	餐點狀態&nbsp;<input type="TEXT" name="menu_Status" size="70"	value="<%=(menuVO==null)?"1":menuVO.getMenu_Status()%>" />
+	餐點狀態&nbsp;<input type="TEXT" name="menu_Status" size="70"	value="<%=(menuVO==null)?"0":menuVO.getMenu_Status()%>" />
 	</div>
 	<div class=card-title>
 	餐點照片&nbsp;<input type="file" class="menu_Photo" name="menu_Photo" size="70">

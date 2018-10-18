@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html >
     <head>
+    	<title>竹風堂-會員註冊</title>
+		<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
@@ -115,10 +117,10 @@ function getinfo(){
 	$("#mem_Name").val("大雄");
 	$("#mem_Bir").val("1990-01-22");
 	$("#mem_Mail").val("abow129@gmail.com");
-	$("#mem_Phone").val("0953260770");
+	$("#mem_Phone").val("0965231002");
 	$("#mem_Receiver").val("小胖");
-	$("#mem_Repno").val("320");
-	$("#mem_Readdr").val("桃園市中壢區建國路105號");
+	$("#mem_Repno").val("32022");
+	$("#mem_Readdr").val("中央西路二段281號1樓號");
 	$("#mem_Cardnum").val("1111-1222-1111-1111");
 	$("#mem_Carddue").val("04/22");
 }

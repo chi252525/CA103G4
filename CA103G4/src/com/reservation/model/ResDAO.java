@@ -35,7 +35,8 @@ public class ResDAO implements ResDAO_interface{
 		"DELETE FROM RESERVATION where RES_NO = ?";
 	private static final String UPDATE =
 		"UPDATE RESERVATION set MEM_NO=? ,DEK_NO=? ,RES_TIMEBG=? ,RES_TIMEFN=? ,RES_PEOPLE=? ,RES_STATUS=? where RES_NO = ?";
-	     
+	private static final String UPDATE_STATUS =
+			"UPDATE RESERVATION set RES_STATUS=? where RES_NO = ?";     
 	@Override
 	public void insert(ResVO resVO) {
 		
@@ -108,6 +109,48 @@ public class ResDAO implements ResDAO_interface{
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void updateStatus(ResVO resVO){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			
+			
+			pstmt.setInt(1, resVO.getRes_status());
+			pstmt.setString(2, resVO.getRes_no());
+			
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {

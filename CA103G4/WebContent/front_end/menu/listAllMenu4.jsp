@@ -16,7 +16,8 @@
 
 <html>
 <head>
-<title>listAllMenu4.jsp</title>
+<title>經典餐點</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 
 

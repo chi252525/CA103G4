@@ -42,7 +42,15 @@ public class ResService {
 
 		return resVO;
 	}
+	public ResVO  updateStatus(Integer res_status, String res_no) {
+		ResVO resVO1 = new ResVO();
 
+		resVO1.setRes_status(res_status);;
+		resVO1.setRes_no(res_no);;
+		dao.update(resVO1);
+		
+		return resVO1;
+	}
 	
 	public ResVO getOneRes(String res_no) {
 		return dao.findByPrimaryKey(res_no);
