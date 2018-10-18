@@ -45,44 +45,11 @@
                                 <table class="table table-striped">
 	                                <thead id="mainName">
 	                                    
-<!-- 	                                        <th>訂位流水編號</th> -->
-<!-- 	                                        <th>會員名稱</th> -->
-<!-- 	                                        <th>手機號碼</th> -->
-<!-- 	                                        <th>位子編號</th> -->
-<!-- 	                                        <th>訂位紀錄成立日期</th> -->
-<!-- 	                                        <th>用餐起始時間</th> -->
-<!-- 	                                        <th>用餐結束時間</th> -->
-<!-- 	                                        <th>用餐人數</th> -->
-<!-- 	                                        <th>狀態</th>            -->
-<!-- 	                                        <th>修改狀態</th>            -->
-
 												              
 	                                    
 		                            </thead>
 	                                <tbody id="content"> 
-<!-- 	      					     		<tr> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td></td> -->
-<!-- 	                						<td> -->
-	                						
-<!-- 											</div> -->
-<!--                                             </td> -->
-<!-- 		                                        <td> -->
-<%-- 				 								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/res/res.do" style="margin-bottom: 0px;"> --%>
-<!-- 												     <input type="submit" value="修改"> -->
-<%-- 												     <input type="hidden" name="res_no"  value="${resVO.res_no}"> --%>
-<!-- 												     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
-<!-- 												</td> -->
-											
-<!-- 	                                    </tr> -->
+
 	                                  
 	                   
 	                                </tbody>
@@ -126,7 +93,7 @@
 	  				var	res_timebg = eval("("+res_timebgList[i]+")");
 	  				console.log(res_timebg.deskId);
 
-// 				res_timebgList.forEach(function(item, index, array) {
+
 			        var status0 = "訂位已取消";
 			        var status1 = "訂位已確認(未到)";
 			        var status2 = "已報到";
@@ -134,7 +101,7 @@
 			        
 					var trString="";
 	  				trString += "<tr>";
-// 	  				for(var j = 0 ; j < res_timebg.length; j++){
+
 	  				trString += "<td>";
  				    trString += res_timebg.Res_no;
  				    trString += "</td>";
@@ -179,25 +146,15 @@
 				    
  				    trString += "<td>";
  				    
-// 				    trString += "<select>";
-// 				    trString += "<option value='volvo'>";
-// 				    trString += status0;
-// 				    trString += "</option>";
-// 				    trString += "<option value='volvo'>";
-// 				    trString += status2;
-// 				    trString += "</option>";
-// 				    trString += "</select>";
-					
-					//-------------------------
 					trString += "<div class='dropdown'>";
-				    trString += "<a class='btn btn-secondary dropdown-toggle' role='button'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+				    trString += "<a class='btn btn-warning dropdown-toggle' role='button'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
 				    trString += selected;
 				    trString += "</a>";
 				    trString += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-				    trString += "<a class='dropdown-item'>";
+				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
 				    trString += status0;
 				    trString += "</a>";
-				    trString += "<a class='dropdown-item'>";
+				    trString += "<a class='dropdown-item' onclick='changeStatus(e);'>";
 				    trString += status2;
 				    trString += "</a>";
 				    trString += "</div>";
@@ -207,21 +164,23 @@
 	  				
  				    trString += "</tr>";
  				    $("#content").append(trString);
-// 	  				document.getElementById("#1").innerHTML = res_timebg.res_no;
-// 	  				document.getElementById("#2").innerHTML = res_timebg.mem_no;
-// 	  				document.getElementById("#3").innerHTML = res_timebg.dek_no;
-// 	  				document.getElementById("#4").innerHTML = res_timebg.res_submit;
-// 	  				document.getElementById("#5").innerHTML = res_timebg.res_timebg;
-// 	  				document.getElementById("#6").innerHTML = res_timebg.res_timefn;
-// 	  				document.getElementById("#7").innerHTML = res_timebg.res_people;
-// 	  				document.getElementById("#8").innerHTML = res_timebg.res_status;
-					
-// 				  });
 	  			  
 	  		    }
 			  }
 	  	});
 	}
+	
+	
+	
+	function changeStatus(e){
+		console.log(e.target.value);
+		console.log("0000000000");
+	}
+// 	$(function(){
+//         	 $("#aa").change(function(){ 
+//             	 console.log("00000"); 
+//              });
+// 	});
 </script>	
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
