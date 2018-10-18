@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html >
     <head>
+    	<title>竹風堂-會員註冊</title>
+		<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->

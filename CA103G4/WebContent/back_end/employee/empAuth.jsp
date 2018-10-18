@@ -19,7 +19,8 @@ pageContext.setAttribute("listemp",listemp);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>empAuthor</title>
+    	<title>竹風堂-分店員工權限</title>
+		<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 
 <style type="text/css">
 #back {

@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>login</title>
+<title>竹風堂-會員登入</title>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <!-- linearicons CSS -->
@@ -26,7 +27,7 @@
 			width="100%" height="" alt="">
 
 <!--以下為login區塊-->
-<div class="container col-3 loginarea" style="padding-bottom:30px;">	
+<div class="container col-3 loginarea" style="padding-bottom:30px;">		
 
 				<c:if test="${not empty errorMsgs}">
 					<font style="color:red;" >請修正以下錯誤:</font>
