@@ -205,7 +205,7 @@ body{
                         id +'</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
 
-                } else if (jsonObj.type == 'sysMsg') {
+                } else if (jsonObj.type == 'sysMsg'&& inputusername.value.trim() == jsonObj.username) {
                     $('#MessageList').append(
                         '<div class=sysMsg>客服人員 ' + id+" "+ msg + '</div></div>');
                     //     				alert(event.data);
