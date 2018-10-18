@@ -13,6 +13,8 @@
 <html>
 
 <head>
+		<title>竹風堂-總公司分店管理</title>
+		<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" /> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- font aewsome -->

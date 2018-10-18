@@ -1,6 +1,8 @@
 package com.reservation.controller;
 
 import java.io.*;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.*;
@@ -9,6 +11,14 @@ import javax.websocket.Session;
 
 import org.json.JSONArray;
 
+import com.delivery.model.DeliveryService;
+import com.delivery.model.DeliveryVO;
+import com.desk.model.DeskService;
+import com.desk.model.DeskVO;
+import com.google.gson.JsonObject;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
+import com.orderform.model.OrderformService;
 import com.reservation.model.ResService;
 import com.reservation.model.ResVO;
 
@@ -21,7 +31,7 @@ public class ResServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
-
+		res.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		String date = req.getParameter("date");
@@ -97,7 +107,7 @@ public class ResServlet extends HttpServlet {
 				}
 				
 				String res_timebg = (date2 + " " + zone2 + ":00");
-				
+				System.out.println("conbined time " + res_timebg);
 				
 				ResService resSvc = new ResService();
 				List<ResVO> res_timebgList = resSvc.getAllByBGNO(res_timebg);
@@ -111,9 +121,39 @@ public class ResServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+				
+				MemberService memSvc = new MemberService();
+				DeskService dekSvc = new DeskService();
+				System.out.println("pass called service");
+				JSONArray jarr = new JSONArray();
+				for(int i=0;i<res_timebgList.size();i++) {
+					JsonObject jobj = new JsonObject();
+					jobj.addProperty("Res_no",res_timebgList.get(i).getRes_no());
+					jobj.addProperty("Mem_Name",memSvc.getOne_Member(res_timebgList.get(i).getMem_no()).getMem_Name());
+					jobj.addProperty("Mem_Phone",memSvc.getOne_Member(res_timebgList.get(i).getMem_no()).getMem_Phone());
+					jobj.addProperty("deskId",dekSvc.getOneDes(res_timebgList.get(i).getDek_no()).getDek_id());
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String Res_submit = df.format(res_timebgList.get(i).getRes_submit());
+					SimpleDateFormat fd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String Res_timebg = fd.format(res_timebgList.get(i).getRes_timebg());
+					String Res_timefn = fd.format(res_timebgList.get(i).getRes_timefn());
+					jobj.addProperty("Res_submit", Res_submit);
+					jobj.addProperty("Res_timebg", Res_timebg);
+					jobj.addProperty("Res_timefn", Res_timefn);
+					jobj.addProperty("Res_people",res_timebgList.get(i).getRes_people());
+					jobj.addProperty("Res_status",res_timebgList.get(i).getRes_status());
+					System.out.println("pass jason addproperties");
+					jarr.put(jobj);
+				}
+				System.out.println("hi" + jarr);
+//				List<MemberVO> memList = );
+				
+				
+//				List<DeskVO>  dekList = dekSvc.getOneDes(dek_no);
+				
 				req.setAttribute("res_timebgList", res_timebgList);
 				
-				String jsonStr = new JSONArray(res_timebgList).toString();
+				String jsonStr = jarr.toString();
 				PrintWriter out = res.getWriter();
 			    out.write(jsonStr);
 				System.out.println("pass Controller Get List<ResVO>");
@@ -131,6 +171,35 @@ public class ResServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 			
+		}
+		
+		if ("updateStatus".equals(action)) { 
+
+
+			Integer status = new Integer(req.getParameter("status"));
+			String  res_no = new String(req.getParameter("res_no"));
+
+
+
+			ResVO resVO = new ResVO();
+			resVO.setRes_status(status);
+			resVO.setRes_no(res_no);;
+			
+
+			ResService resSvc = new ResService();
+			resVO = resSvc.updateStatus(status, res_no);
+			
+			
+			req.setAttribute("resVO", resVO);
+//			String url = "/555/684.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+			
+			PrintWriter out = res.getWriter();
+		    out.write();
+
+			
+
 		}
 		
 		

@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>emploginHQ</title>
+	<title>竹風堂-總公司員工登入</title>
+	<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
 	        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <!-- linearicons CSS -->

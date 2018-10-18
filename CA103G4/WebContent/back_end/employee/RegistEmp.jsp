@@ -21,6 +21,8 @@ pageContext.setAttribute("branlist",branlist);
 
 <!DOCTYPE html>
 <html >
+	<title>竹風堂-分店員工新增</title>
+	<link rel="shortcut icon" href="<%=request.getContextPath()%>/res/img/icon.png" />
     <head>
 		<!-- Site Title -->
 		<title>Post</title> 
