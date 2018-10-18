@@ -115,8 +115,8 @@ background-color:rgba(253,253,253,0.8);
 					<hr>
 					<p class="font-italic ml-auto post-time">
 						活動日期:
-						<fmt:formatDate value="${activityVO.act_Start}"
-							pattern="yyyy年MM月dd日 " />到<fmt:formatDate value="${activityVO.act_End}"
+						<fmt:formatDate value="${activityVO.act_PreAddTime}"
+							pattern="yyyy年MM月dd日 " />到<fmt:formatDate value="${activityVO.act_PreOffTime}"
 							pattern="yyyy年MM月dd日 " />
 					</p>
 					<p></p>

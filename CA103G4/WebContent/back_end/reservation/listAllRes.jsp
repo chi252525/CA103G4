@@ -61,7 +61,7 @@
                      </div>
                 </div>
              </div>
-		</div>
+		
 <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/reservation/css/listAllRes.css"> 
 <%@ include file="/back_end/PostFooter.jsp" %>	
 <script>
