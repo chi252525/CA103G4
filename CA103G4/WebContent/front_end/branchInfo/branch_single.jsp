@@ -279,7 +279,7 @@ style >.mapouter {
 		<!-- 						                            </div> -->
 		<c:if test="${not empty brVO}">
 			<!-- branch card -->
-			<div class="card col-12 col-md-8 center" style="background-color: rgb(255,255,255,0.9);">
+			<div class="card col-12 col-md-8 center" style="background-color: rgb(255,255,255,0.75);">
 				<div class="card-body">
 					<h5 class="card-title"><b>${brVO.branch_Name}</b></h5>
 					<img src="<%=request.getContextPath()%>/res/img/all_branch.jpg" style="width:100%">
