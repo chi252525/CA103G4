@@ -13,7 +13,7 @@
      	  <div >
      			<b>所有訂位紀錄 - listAllRes.jsp</b>
      			
-     			 <div class="form-row">
+     			 <div class="form-row dateCss">
                         <div class="form-group col-md-5">
                             <label for="inputAddress">日期</label>
                             <input type="text" class="form-control date" placeholder="click me!" id="f_date1" name="date">
@@ -60,28 +60,21 @@
 	                                    
 		                            </thead>
 	                                <tbody id="content"> 
-	      					     		<tr>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td></td>
-	                						<td>
-	                						<div class="dropdown">
-											  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											    狀態更改
-											  </button>
-											  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											    <a class="dropdown-item" href="#">Action</a>
-											    <a class="dropdown-item" href="#">Another action</a>
-											  </div>
-											</div>
-                                            </td>
+<!-- 	      					     		<tr> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td></td> -->
+<!-- 	                						<td> -->
+	                						
+<!-- 											</div> -->
+<!--                                             </td> -->
 <!-- 		                                        <td> -->
 <%-- 				 								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/res/res.do" style="margin-bottom: 0px;"> --%>
 <!-- 												     <input type="submit" value="修改"> -->
@@ -89,7 +82,7 @@
 <!-- 												     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
 <!-- 												</td> -->
 											
-	                                    </tr>
+<!-- 	                                    </tr> -->
 	                                  
 	                   
 	                                </tbody>
@@ -129,21 +122,91 @@
   				$("#mainName").append("<tr><th>訂位流水編號</th><th>會員名稱</th><th>手機號碼</th><th>位子編號</th><th>訂位紀錄成立日期</th><th>用餐起始時間</th><th>用餐結束時間</th><th>用餐人數</th><th>狀態</th><th>修改狀態</th></tr>")
 	  			var res_timebgList = JSON.parse(result);
 	  			for(var i=0; i < res_timebgList.length ;i++){
-	  				var	res_timebg = res_timebgList[i];
 	  				
-	  				console.log(res_timebg.res_no);
-	  				     var trString="";
-	  				     trString += "<tr>";
-// 	  				 for(var j = 0; j < res_timebg.length; j++){	
-                     $.each(res_timebg,function(k,field){	
-	  				     trString += "<td>";
-	  				     trString += field;
-	  				     trString += "</td>";
-	  				 });
-	  				     trString += "</tr>";
-	  		
-	  				     $("#content").append(trString);
+	  				var	res_timebg = eval("("+res_timebgList[i]+")");
+	  				console.log(res_timebg.deskId);
+
+// 				res_timebgList.forEach(function(item, index, array) {
+			        var status0 = "訂位已取消";
+			        var status1 = "訂位已確認(未到)";
+			        var status2 = "已報到";
+					var selected ="請選擇";
+			        
+					var trString="";
+	  				trString += "<tr>";
+// 	  				for(var j = 0 ; j < res_timebg.length; j++){
+	  				trString += "<td>";
+ 				    trString += res_timebg.Res_no;
+ 				    trString += "</td>";
+ 				    
+ 				    trString += "<td>";
+				    trString += res_timebg.Mem_Name;
+				    trString += "</td>";
+				    
+				    trString += "<td>";
+ 				    trString += res_timebg.Mem_Phone;
+ 				    trString += "</td>";
+ 				    
+ 				    trString += "<td>";
+				    trString += res_timebg.deskId;
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+				    trString += res_timebg.Res_submit;
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+				    trString += res_timebg.Res_timebg;
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+				    trString += res_timebg.Res_timefn;
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+				    trString += res_timebg.Res_people;
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+ 				   if(res_timebg.Res_status == 0){
+ 					  trString += status0;  
+ 				   }else if (res_timebg.Res_status == 1){
+ 					  trString += status1; 
+ 				   }else{
+ 					  trString += status2; 
+ 				   }				    
+				    trString += "</td>";
+				    
+ 				    trString += "<td>";
+ 				    
+// 				    trString += "<select>";
+// 				    trString += "<option value='volvo'>";
+// 				    trString += status0;
+// 				    trString += "</option>";
+// 				    trString += "<option value='volvo'>";
+// 				    trString += status2;
+// 				    trString += "</option>";
+// 				    trString += "</select>";
+					
+					//-------------------------
+					trString += "<div class='dropdown'>";
+				    trString += "<a class='btn btn-secondary dropdown-toggle' role='button'  data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+				    trString += selected;
+				    trString += "</a>";
+				    trString += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
+				    trString += "<a class='dropdown-item'>";
+				    trString += status0;
+				    trString += "</a>";
+				    trString += "<a class='dropdown-item'>";
+				    trString += status2;
+				    trString += "</a>";
+				    trString += "</div>";
+				    trString += "</div>";
+				    
+				    trString += "</td>";
 	  				
+ 				    trString += "</tr>";
+ 				    $("#content").append(trString);
 // 	  				document.getElementById("#1").innerHTML = res_timebg.res_no;
 // 	  				document.getElementById("#2").innerHTML = res_timebg.mem_no;
 // 	  				document.getElementById("#3").innerHTML = res_timebg.dek_no;
@@ -152,9 +215,12 @@
 // 	  				document.getElementById("#6").innerHTML = res_timebg.res_timefn;
 // 	  				document.getElementById("#7").innerHTML = res_timebg.res_people;
 // 	  				document.getElementById("#8").innerHTML = res_timebg.res_status;
-	  			   
-	  			}
-	  	}});
+					
+// 				  });
+	  			  
+	  		    }
+			  }
+	  	});
 	}
 </script>	
 
