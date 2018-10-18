@@ -62,9 +62,9 @@ background-color:rgba(253, 253, 253, 0.5);}
 			<div class=" container">
             <div class="row">
                 <div class="col-md-12">
-                    <a id="a1" href="branch_mang.jsp">
+                    
                         <h1 class="d-flex justify-content-start">分店據點</h1>
-                    </a>
+                   
                 </div>
             </div>
         </div>
