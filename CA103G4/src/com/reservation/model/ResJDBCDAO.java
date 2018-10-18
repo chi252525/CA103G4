@@ -24,6 +24,8 @@ public class ResJDBCDAO implements ResDAO_interface{
 		"DELETE FROM RESERVATION where RES_NO = ?";
 	private static final String UPDATE =
 		"UPDATE RESERVATION set MEM_NO=? ,DEK_NO=? ,RES_TIMEBG=? ,RES_TIMEFN=? ,RES_PEOPLE=? ,RES_STATUS=? where RES_NO = ?";
+	private static final String UPDATE_STATUS =
+			"UPDATE RESERVATION set RES_STATUS=? where RES_NO = ?";
 	     
 	@Override
 	public void insert(ResVO resVO) {
@@ -93,6 +95,52 @@ public class ResJDBCDAO implements ResDAO_interface{
 			pstmt.setInt(5, resVO.getRes_people());
 			pstmt.setInt(6, resVO.getRes_status()); 
 			pstmt.setString(7, resVO.getRes_no());
+			
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void updateStatus(ResVO resVO){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			
+			
+			pstmt.setInt(1, resVO.getRes_status());
+			pstmt.setString(2, resVO.getRes_no());
 			
 			
 
@@ -408,18 +456,24 @@ public class ResJDBCDAO implements ResDAO_interface{
 		
 		//用起始時間查詢
 		
-		List<ResVO> list =  dao.getAllByBGNO("2018-09-01 11:55"+":00");
-		for(ResVO resVO : list) {
-		System.out.println(resVO.getRes_no()+ ",");
-		System.out.println(resVO.getMem_no()+ ",");
-		System.out.println(resVO.getDek_no()+ ",");
-		System.out.println(resVO.getRes_submit()+ ",");
-		System.out.println(resVO.getRes_timebg()+ ",");
-		System.out.println(resVO.getRes_timefn()+ ",");
-		System.out.println(resVO.getRes_people()+ ",");
-		System.out.println(resVO.getRes_status()+ ",");
-		}
+//		List<ResVO> list =  dao.getAllByBGNO("2018-09-01 11:55"+":00");
+//		for(ResVO resVO : list) {
+//		System.out.println(resVO.getRes_no()+ ",");
+//		System.out.println(resVO.getMem_no()+ ",");
+//		System.out.println(resVO.getDek_no()+ ",");
+//		System.out.println(resVO.getRes_submit()+ ",");
+//		System.out.println(resVO.getRes_timebg()+ ",");
+//		System.out.println(resVO.getRes_timefn()+ ",");
+//		System.out.println(resVO.getRes_people()+ ",");
+//		System.out.println(resVO.getRes_status()+ ",");
+//		}
 		
+		//修改狀態
+		ResVO resVO4 = new ResVO();
+		resVO4.setRes_status(1);
+		resVO4.setRes_no("R000000001");
+		dao.updateStatus(resVO4);	
+		System.out.println("SUCCESS");
 	}
 
 	@Override
@@ -427,6 +481,7 @@ public class ResJDBCDAO implements ResDAO_interface{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }
 

@@ -293,6 +293,12 @@ public class ResJNDIDAO implements ResDAO_interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void updateStatus(ResVO resVO) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 

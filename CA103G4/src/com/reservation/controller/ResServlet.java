@@ -11,11 +11,14 @@ import javax.websocket.Session;
 
 import org.json.JSONArray;
 
+import com.delivery.model.DeliveryService;
+import com.delivery.model.DeliveryVO;
 import com.desk.model.DeskService;
 import com.desk.model.DeskVO;
 import com.google.gson.JsonObject;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
+import com.orderform.model.OrderformService;
 import com.reservation.model.ResService;
 import com.reservation.model.ResVO;
 
@@ -168,6 +171,35 @@ public class ResServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 			
+		}
+		
+		if ("updateStatus".equals(action)) { 
+
+
+			Integer status = new Integer(req.getParameter("status"));
+			String  res_no = new String(req.getParameter("res_no"));
+
+
+
+			ResVO resVO = new ResVO();
+			resVO.setRes_status(status);
+			resVO.setRes_no(res_no);;
+			
+
+			ResService resSvc = new ResService();
+			resVO = resSvc.updateStatus(status, res_no);
+			
+			
+			req.setAttribute("resVO", resVO);
+//			String url = "/555/684.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+			
+			PrintWriter out = res.getWriter();
+		    out.write();
+
+			
+
 		}
 		
 		
