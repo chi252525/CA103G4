@@ -1117,13 +1117,13 @@ INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MEN
 VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'蛤蠣鮮蝦刀削麵','經典餐點',290,'鮮美的蛤蠣搭上鮮蝦，鹽味湯頭配上嚼勁十足的刀削麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-9.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'海陸雙拼大餐','經典餐點',320,'鮮蝦搭配紐西蘭牛肉，海陸味覺交疊的絕佳滋味。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-10.png')),'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'海陸雙拼大餐','經典餐點',320,'鮮蝦搭配紐西蘭牛肉，海陸味覺交疊的絕佳滋味。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-10.png')),'0');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
 VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'櫻桃鴨胸蕎麥麵','經典餐點',280,'札實的櫻桃鴨胸切片，搭配清爽的日式蕎麥麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-11.png')),'1');
 
 INSERT INTO MENU (MENU_NO,MENU_ID,MENU_TYPE,MENU_PRICE,MENU_INTRO,MENU_PHOTO,MENU_STATUS)
-VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'鹽味牛肉蔬菜麵','經典餐點',270,'玫瑰鹽調製的湯頭，他配紐西蘭牛肉及清爽有勁的蔬菜麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-12.png')),'1');
+VALUES(('M'||LPAD(to_char(MENU_seq.NEXTVAL),3,'0')),'鹽味牛肉蔬菜麵','經典餐點',270,'玫瑰鹽調製的湯頭，他配紐西蘭牛肉及清爽有勁的蔬菜麵。',BFILE_TO_BLOB (BFILENAME ('MENU_PHOTO_DIR','menu_photo-12.png')),'0');
 
 commit;
 
