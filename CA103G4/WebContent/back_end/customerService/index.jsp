@@ -205,9 +205,9 @@ body{
                         id +'</span><div class= ChatBubbleLeft>' +
                         msg + '<br><sapn class=sysMsg>' + time + '</div></div>');
 
-                } else if (jsonObj.type == 'sysMsg'&& inputusername.value.trim() == jsonObj.username) {
+                } else if (jsonObj.type == 'sysMsg') {
                     $('#MessageList').append(
-                        '<div class=sysMsg>客服人員 ' + id+" "+ msg + '</div></div>');
+                        '<div class=sysMsg> ' + id+" "+ msg + '</div></div>');
                     //     				alert(event.data);
                 }
                 document.getElementById('MessageList').scrollTop =  document.getElementById('MessageList').scrollHeight;	
