@@ -9,17 +9,18 @@
 
 <%@ include file="/back_end/PostHeader.jsp" %>
 
-
-     	  <div >
-     			<b>所有訂位紀錄 - listAllRes.jsp</b>
-     			
+		
+     	  <div>
+     	       <div class="title-bor">
+     			<h4><b><i class="fas fa-search-dollar"></i>&nbsp;訂位紀錄查詢&nbsp;:</b></h4>
+     		   </div>
      			 <div class="form-row dateCss">
                         <div class="form-group col-md-5">
-                            <label for="inputAddress">日期</label>
+                            <label for="inputAddress"><h5>日期&nbsp;<i class="far fa-calendar-alt"></i></h5></label>
                             <input type="text" class="form-control date" placeholder="click me!" id="f_date1" name="date">
                         </div>
                         <div class="form-group col-md-5 zone">
-                              <label for="inputCity">時段</label>
+                              <label for="inputCity"><h5>時段&nbsp;<i class="far fa-clock"></i></h5></label>
                               <select id="zone" class="form-control">
                                 	<option value="10:30" >10:30</option>
                                 	<option value="12:00" >12:00</option>
@@ -38,7 +39,7 @@
                   
      			<hr>
      	  </div>
-     		
+     		<hr>
               <div class="remove"  id="res2end">
                     <div class="col-md-12 text-center">
                             <div class="container" >
@@ -60,7 +61,7 @@
                      </div>
                 </div>
              </div>
-
+		</div>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/reservation/css/listAllRes.css"> 
 <%@ include file="/back_end/PostFooter.jsp" %>	
 <script>
@@ -97,7 +98,7 @@
 			        var status0 = "訂位已取消";
 			        var status1 = "訂位已確認(未到)";
 			        var status2 = "已報到";
-					var selected ="請選擇";
+					var selected ="請選擇...";
 			        
 					var trString="";
 	  				trString += "<tr>";
@@ -151,17 +152,18 @@
  				    
 
 				    trString += "<select class='aa'>";
-				    trString += "<option value='0'>" + status0 + "</option>";
-				    trString += "<option value='2'>" + status2 + "</option>";
+				    trString += "<option class='option' selected>" + selected + "</option>";
+				    trString += "<option class='option' value='0'>" + status0 + "</option>";
+				    trString += "<option class='option' value='2'>" + status2 + "</option>";
 				    trString += "</select>";
 				    
 				    trString += "</td>";
 	  				
  				    trString += "</tr>";
  				    $("#content").append(trString);
-			    	 $(".aa").change(function(){ 
+			    	 $(".aa").change(function(e){ 
 			    		 
-			        	 console.log($(this).val()); 
+			        	 console.log("hihi",$(this).parent().prev().text()); 
 	
 			        	 $.ajax({
 			     	  		url: "<%=request.getContextPath()%>/res.do", 
@@ -170,12 +172,12 @@
 			     	  			console.log("pass ajax");
 			     	  		   if(result === 'success')	{
 // 			     	  			   $(this).parent().prev().text($(this).val());
-									if($(".aa").val() == 0){
+									if($(e.target).val() == 0){
 // 										$(".aa").prev($('.test').text(status0));
-										$(".aa").parent().prev().text(status0);
-									}else if($(".aa").val() == 2){
+										$(e.target).parent().prev().text(status0);
+									}else if($(e.target).val() == 2){
 // 										$(".aa").prev($('.test').text(status2));
-										$(".aa").parent().prev().text(status2);
+										$(e.target).parent().prev().text(status2);
 									}
 			     	  			
 			     	  		   }
